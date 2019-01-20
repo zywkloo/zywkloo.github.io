@@ -1,12 +1,12 @@
 # Site settings
-title: Yiwei Zhang - Carleton U student
-description: "A blog about Yiwei ..."
+title: Let's know Yiwei
+description: "A blog about Yiwei Zhang."
 baseurl: "/muse.github.io/" # for test: remove string '/space-jekyll-template' to ''
 url: "https://zywkloo.github.io/muse.github.io/" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.githu.io'
 
 # User settings
-username: Yiwei
-user_title: Yiwei - Game Designer
+username: Yiwei Zhang
+user_title: A Game Designer
 email: yiweizhang4@cmail.carleton.ca
 twitter_username: zywkloo
 github_username:  zywkloo
@@ -51,7 +51,8 @@ links:
       key_trigger: g
     - title: facebook
       url: https://www.facebook.com/profile.php?id=100003493375555
-      key_trigger: t
+      new_tab: true
+      key_trigger: f
     - title: search
       url: ""
       key_trigger: s #WARNING: search only works with "s"
@@ -60,12 +61,13 @@ links:
 projects:
   - name: Survival Guide for B.C.S Freshmen. A mini game by Yiwei, written in Pygame
     url: https://github.com/zywkloo/Yiwei--Survival-Guide-for-B.C.S-Freshmen
+  - name: Mobile Game Wild Dunk
+    url: http://www.18183.com/qmdgl/
   - name: Peach Grove simulator
     url: https://github.com/VictorZyw/Salted-Fish
   - name: Insomnia-Dungeon
     url: https://github.com/zywkloo/Insomnia-Dungeon
-  - name: Mobile Game Wild Dunk
-    url: http://www.18183.com/qmdgl/
+
 
 
 # exclude my node related stuff
