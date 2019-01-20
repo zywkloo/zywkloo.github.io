@@ -1,6 +1,6 @@
 # Welcome to My Pages
 
-### [**This is a personal page about my projects and me.**](https://zywkloo.github.io/muse.github.io/). (Under Construction)
+### This is a personal page about my projects and me.[**CLICK HERE**](https://zywkloo.github.io/muse.github.io/)(Under Construction)
 
 ### Using Jekyll and thanks to victorvoid's [space theme](https://github.com/victorvoid/space-jekyll-template/).
 
