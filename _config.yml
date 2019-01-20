@@ -1,19 +1,18 @@
 # Site settings
-title: Lorem Ipsum - Web Developer
-description: "A blog about lorem ipsum ..."
-baseurl: "/space-jekyll-template" # for test: remove string '/space-jekyll-template' to ''
-url: "http://victorvoid.github.io/space-jekyll-template/" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.githu.io'
+title: Yiwei Zhang - Carleton U student
+description: "A blog about Yiwei ..."
+baseurl: '' # for test: remove string '/space-jekyll-template' to ''
+url: '' # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.githu.io'
 
 # User settings
-username: lorem ipsum
-user_title: Lorem Ipsum - FrontEnd
-email: lorem.lorem@ipsum.com
-twitter_username: loremipsum
-github_username:  loremipsum
-gplus_username:  loremipsum
-linkedin_public_url: loremipsum # Example: For public profile 'www.linkedin.com/in/john-smith', 'john-smith' is your linkedin_public_url
-disqus_username: loremipsum
-profile_picture: https://68.media.tumblr.com/93f384858e9273d5b980b418e2f2f4d5/tumblr_o5i2aybLJG1uapsfmo2_250.png
+username: Yiwei
+user_title: Yiwei - Game Designer
+email: yiweizhang4@cmail.carleton.ca
+twitter_username: zywkloo
+github_username:  zywkloo
+gplus_username:  zyw870315
+linkedin_public_url: yiwei-zhang-4aa93840
+profile_picture: https://media.licdn.com/dms/image/C5603AQEjFKdhD-diTg/profile-displayphoto-shrink_200_200/0?e=1553731200&v=beta&t=3SV34Vf1fLLOCdCpA6598Y2rMLiGSt28BdJKKYbsRMw #https://pbs.twimg.com/profile_images/896478190943600640/9WnAkHQb_400x400.jpg
 
 # Build settings
 markdown: kramdown
@@ -47,11 +46,11 @@ links:
       key_trigger: 5
   section_2:
     - title: github
-      url: http://www.github.com/victorvoid
+      url: http://www.github.com/zywkloo
       new_tab: true
       key_trigger: g
-    - title: twitter
-      url: http://www.twitter.com/victorvoid
+    - title: facebook
+      url: https://www.facebook.com/profile.php?id=100003493375555
       key_trigger: t
     - title: search
       url: ""
@@ -59,12 +58,15 @@ links:
 
 # projects in header index
 projects:
-  - name: fluany
-    url: https://github.com/fluany/fluany
-  - name: vim-frontend
-    url: https://github.com/victorvoid/vim-frontend
-  - name: generator-capybara
-    url: https://github.com/victorvoid/generator-capybara 
+  - name: Survival Guide for B.C.S Freshmen. A mini game by Yiwei, written in Pygame
+    url: https://github.com/zywkloo/Yiwei--Survival-Guide-for-B.C.S-Freshmen
+  - name: Peach Grove simulator
+    url: https://github.com/VictorZyw/Salted-Fish
+  - name: Insomnia-Dungeon
+    url: https://github.com/zywkloo/Insomnia-Dungeon
+  - name: Mobile Game Wild Dunk
+    url: http://www.18183.com/qmdgl/
+
 
 # exclude my node related stuff
 exclude: ['package.json', 'src', 'node_modules']
