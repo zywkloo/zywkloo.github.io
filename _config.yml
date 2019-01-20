@@ -1,8 +1,8 @@
 # Site settings
 title: Yiwei Zhang - Carleton U student
 description: "A blog about Yiwei ..."
-baseurl: '' # for test: remove string '/space-jekyll-template' to ''
-url: '' # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.githu.io'
+baseurl: "/muse.github.io/" # for test: remove string '/space-jekyll-template' to ''
+url: "https://zywkloo.github.io/muse.github.io/" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.githu.io'
 
 # User settings
 username: Yiwei
