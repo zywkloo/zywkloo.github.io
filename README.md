@@ -1,3 +1,3 @@
-## Welcome to Walkthrough Pages
+## Welcome to My Pages
 
- [**This is a walkthrough page of my personal game(Under Construction)**](https://zywkloo.github.io/muse.github.io/)
+ [**This is a Personal page of my projects and me.(Under Construction)**](https://zywkloo.github.io/muse.github.io/)
