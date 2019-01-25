@@ -50,7 +50,6 @@ links:
       key_trigger: a
     - title: /BCS+space/
       url: /space/
-      key_trigger:b 
     - title: search
       url: ""
       key_trigger: s #WARNING: search only works with "s"
