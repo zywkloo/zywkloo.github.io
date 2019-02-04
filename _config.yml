@@ -60,8 +60,8 @@ projects:
     url: https://github.com/zywkloo/Yiwei--Survival-Guide-for-B.C.S-Freshmen
   - name: Mobile Game Wild Dunk. Team project on Appstore(offline)
     url: http://www.18183.com/qmdgl/
-  - name: Peach Grove simulator. mini simulator in Java
-    url: https://github.com/VictorZyw/Salted-Fish
+  - name: Asteroid Shooting. C++ and OpenGL Game
+    url: https://github.com/zywkloo/AsteroidsShooting
   - name: Insomnia-Dungeon. mini game in Python for a game jam
     url: https://github.com/zywkloo/Insomnia-Dungeon
 
