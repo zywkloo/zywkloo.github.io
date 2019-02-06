@@ -12,7 +12,7 @@ twitter_username: zywkloo
 github_username:  zywkloo
 gplus_username: 116814196032329811422
 linkedin_public_url: yiwei-zhang-4aa93840
-profile_picture: https://media.licdn.com/dms/image/C5603AQEjFKdhD-diTg/profile-displayphoto-shrink_200_200/0?e=1553731200&v=beta&t=3SV34Vf1fLLOCdCpA6598Y2rMLiGSt28BdJKKYbsRMw #https://pbs.twimg.com/profile_images/896478190943600640/9WnAkHQb_400x400.jpg
+profile_picture: https://github.com/zywkloo/muse.github.io/raw/master/assets/img/sharding-gerenciamento-usuarios/Avatar.jpg
 
 # Build settings
 markdown: kramdown
@@ -56,8 +56,8 @@ links:
 
 # projects in header index
 projects:
-  - name: Survival Guide for B.C.S Freshmen. mini game written in Python
-    url: https://github.com/zywkloo/Yiwei--Survival-Guide-for-B.C.S-Freshmen
+  - name: Lyric Transposer. HTML5,jQuery and NodeJs.
+    url: http://149.248.57.174/lyrics.html
   - name: Mobile Game Wild Dunk. Team project on Appstore(offline)
     url: http://www.18183.com/qmdgl/
   - name: Asteroid Shooting. C++ and OpenGL Game
