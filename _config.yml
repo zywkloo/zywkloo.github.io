@@ -57,7 +57,7 @@ links:
 # projects in header index
 projects:
   - name: Lyric Transposer. HTML5,jQuery and NodeJs.
-    url: http://149.248.57.174/lyrics.html
+    url: http://149.248.57.174:3000/lyrics.html
   - name: Mobile Game Wild Dunk. Team project on Appstore(offline)
     url: http://www.18183.com/qmdgl/
   - name: Asteroid Shooting. C++ and OpenGL Game
