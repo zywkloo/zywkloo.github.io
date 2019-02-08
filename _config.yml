@@ -62,10 +62,10 @@ projects:
     url: http://www.18183.com/qmdgl/
   - name: Asteroid Shooting. C++ and OpenGL Game
     url: https://github.com/zywkloo/AsteroidsShooting
+  - name: MobileDevQuiz. App with Java and AndroidStudio
+    url: https://github.com/zywkloo/AndroidMidtermQuizApp
   - name: Insomnia-Dungeon. Mini game in Python for a game jam
     url: https://github.com/zywkloo/Insomnia-Dungeon
-  - name: MultiChoiceQuiz. App with Java and AndroidStudio
-    url: https://github.com/zywkloo/AndroidMidtermQuizApp
 
 
 # exclude my node related stuff
