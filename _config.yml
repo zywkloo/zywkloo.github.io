@@ -50,6 +50,7 @@ links:
       key_trigger: a
     - title: Space Walkthrough
       url: /space/
+      key_trigger: p
     - title: search
       url: ""
       key_trigger: s #WARNING: search only works with "s"
