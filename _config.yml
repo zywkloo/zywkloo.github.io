@@ -57,17 +57,17 @@ links:
 
 # projects in header index
 projects:
-  - name: HackerPizzaOrderSystem.cuHack19ChallengeWinner
+  - name: HackerPizzaOrderSystem.cuHack19 with AmazonConnect and Lambda.
     url: https://devpost.com/software/cuhackingamazonconnect
   - name: Lyric Transposer.jQuery,NodeJs.(Chrome)
     url: http://beijinger.style/
   - name: Mobile Game Wild Dunk(全民大灌篮) at Kaiqigu.com
     url: http://www.18183.com/qmdgl/
-  - name: Asteroid Shooting. C++ and OpenGL Game
+  - name: Asteroid Shooting. C++ and OpenGL Game.
     url: https://github.com/zywkloo/AsteroidsShooting
-  - name: MobileDevQuiz. App with Java and AndroidStudio
+  - name: MobileDevQuiz. App with Java and AndroidStudio.
     url: https://github.com/zywkloo/AndroidMidtermQuizApp
-  - name: Insomnia-Dungeon. Mini game in Python for a game jam
+  - name: Insomnia-Dungeon. Mini game in Python for a game jam.
     url: https://github.com/zywkloo/Insomnia-Dungeon
 
 
