@@ -69,6 +69,8 @@ projects:
     url: https://github.com/zywkloo/AndroidMidtermQuizApp
   - name: Insomnia-Dungeon. Mini game in Python for a game jam.
     url: https://github.com/zywkloo/Insomnia-Dungeon
+  - name: AI-Tank-Tournament. With Python3 and Pygame
+    url:https://github.com/zywkloo/Tank-Game-AI-Tournament
 
 
 # exclude my node related stuff
