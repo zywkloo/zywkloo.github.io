@@ -16,6 +16,7 @@ categories:
 ## I. Social login
 
 #1.1 Facebook login
+
 *Data and verification Flow
 
  _under_construction_
@@ -29,6 +30,7 @@ categories:
  _under_construction_
  
 #1.2 Google login
+
 *Data and verification Flow
 
  _under_construction_
@@ -44,6 +46,7 @@ categories:
 #2.1 [Spencer Carli](https://medium.com/@spencer_carli)'s solution in 2016 with Meteor 1.3 
 
 [Article Link](https://medium.com/differential/react-native-meteor-oauth-with-facebook-3d1346d7cdb7#.kr5f8jorz)
+
 
  _under_construction_
  
@@ -71,6 +74,7 @@ It called a method in Meteor module :Accounts.updateOrCreateUserFromExternalServ
     AsyncStorage.setItem(USER_TOKEN_KEY, ret.token)
     Data._tokenIdSaved = ret.token
     Meteor._userIdSaved = ret.id
+    
 
  _under_construction_
  
