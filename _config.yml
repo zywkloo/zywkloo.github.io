@@ -63,8 +63,6 @@ projects:
     url: http://beijinger.style/
   - name: Mobile Game Wild Dunk(全民大灌篮) at Kaiqigu.com
     url: https://www.youtube.com/watch?time_continue=6&v=ysmp5vK4R_c
-  - name: Asteroid Shooting. C++ and OpenGL Game.
-    url: https://github.com/zywkloo/AsteroidsShooting
   - name: MobileDevQuiz. App with Java and AndroidStudio.
     url: https://github.com/zywkloo/AndroidMidtermQuizApp
   - name: Insomnia-Dungeon. Mini game in Python for a game jam.
