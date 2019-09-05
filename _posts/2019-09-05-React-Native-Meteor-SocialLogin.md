@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "React-Native-Meteor:Investigations on Social Media Login&OAuth "
+title:  "React-Native-Meteor:Investigations on Social Media Login & OAuth"
 image: ''
 date:   2019-09-05 00:06:31
 tags:
