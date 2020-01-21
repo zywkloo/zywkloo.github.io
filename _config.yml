@@ -6,7 +6,7 @@ url: "https://zywkloo.github.io/muse.github.io/" # for test: remove string 'http
 
 # User settings
 username: Yiwei Zhang
-user_title: Game Designer
+user_title: Full Stack Developer & Game Designer
 email: yiweizhang4@cmail.carleton.ca
 twitter_username: zywkloo
 github_username:  zywkloo
@@ -61,15 +61,15 @@ projects:
     url: https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer
   - name: Hacker Pizza Order System.cuHacking19 with AWS.
     url: https://devpost.com/software/cuhackingamazonconnect
-  - name: GameAI-Tank-Tournament. With Python3 & Pygame
+  - name: GameAI-Tank-Tournament with Pygame.
     url: https://github.com/zywkloo/Tank-Game-AI-Tournament
-  - name: TutorOcean Android. Android App with React Native.
+  - name: TutorOcean Android app with React Native.
     url: https://play.google.com/store/apps/details?id=com.tutorocean
-  - name: TutorOcean iOS. iOS App with React Native.
+  - name: TutorOcean iOS app with React Native.
     url: https://apps.apple.com/app/apple-store/id1480876532
-  - name: Mobile Game Wild Dunk(全民大灌篮) at Kaiqigu.com
+  - name: Mobile Game Wild Dunk(全民大灌篮).
     url: https://www.youtube.com/watch?time_continue=6&v=ysmp5vK4R_c
-  - name: Insomnia-Dungeon. Mini game in Python for a game jam.
+  - name: Insomnia-Dungeon. Mini game in Pygame.
     url: https://github.com/zywkloo/Insomnia-Dungeon
    
 
