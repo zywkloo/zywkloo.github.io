@@ -57,18 +57,22 @@ links:
 
 # projects in header index
 projects:
+  - name: CSI:Murder on 2nd floor.cuHacking20 with Plotly.js.
+    url: https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer
   - name: Hacker Pizza Order System.cuHacking19 with AWS.
     url: https://devpost.com/software/cuhackingamazonconnect
-  - name: Lyric Transposer.jQuery,NodeJs.(Chrome)
-    url: http://beijinger.style/
+  - name: GameAI-Tank-Tournament. With Python3 and Pygame
+    url: https://github.com/zywkloo/Tank-Game-AI-Tournament
+  - name: TutorOcean Android. Android App with React Native.
+    url: https://play.google.com/store/apps/details?id=com.tutorocean
+  - name: TutorOcean iOS. iOS App with React Native.
+    url: https://apps.apple.com/app/apple-store/id1480876532
   - name: Mobile Game Wild Dunk(全民大灌篮) at Kaiqigu.com
     url: https://www.youtube.com/watch?time_continue=6&v=ysmp5vK4R_c
-  - name: MobileDevQuiz. App with Java and AndroidStudio.
-    url: https://github.com/zywkloo/AndroidMidtermQuizApp
   - name: Insomnia-Dungeon. Mini game in Python for a game jam.
     url: https://github.com/zywkloo/Insomnia-Dungeon
-  - name: AI-Tank-Tournament. With Python3 and Pygame
-    url: https://github.com/zywkloo/Tank-Game-AI-Tournament
+   
+
 
 
 # exclude my node related stuff
