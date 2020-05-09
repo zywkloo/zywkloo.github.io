@@ -59,9 +59,9 @@ links:
 projects:
   - name: Xchangerator: All-in-one iOS app for exchange rates
     url: https://xchangerator.com/
-  - name: CSI:Murder on 2nd floor.cuHacking20 with Plotly.js
+  - name: cuHacking20:CSI Murder on 2nd floor, w/ Plotly.js
     url: https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer
-  - name: Hacker Pizza Order System.cuHacking19 with AWS.
+  - name: cuHacking19:Hacker Pizza Order System, w/ AWS Connect.
     url: https://devpost.com/software/cuhackingamazonconnect
   - name: GameAI:Tank Tournament with Pygame.
     url: https://github.com/zywkloo/Tank-Game-AI-Tournament
