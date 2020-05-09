@@ -57,7 +57,9 @@ links:
 
 # projects in header index
 projects:
-  - name: CSI:Murder on 2nd floor.cuHacking20 with Plotly.js.
+  - name: Xchangerator: All-in-one iOS app for exchange rates
+    url: https://xchangerator.com/
+  - name: CSI:Murder on 2nd floor.cuHacking20 with Plotly.js
     url: https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer
   - name: Hacker Pizza Order System.cuHacking19 with AWS.
     url: https://devpost.com/software/cuhackingamazonconnect
