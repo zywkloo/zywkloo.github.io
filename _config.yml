@@ -63,14 +63,14 @@ projects:
     url: https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer
   - name: cuHacking19:Hacker Pizza Order System, w/ AWS Connect.
     url: https://devpost.com/software/cuhackingamazonconnect
-  - name: GameAI:Tank Tournament with Pygame.
-    url: https://github.com/zywkloo/Tank-Game-AI-Tournament
   - name: TutorOcean Android app with React Native.
     url: https://play.google.com/store/apps/details?id=com.tutorocean
   - name: TutorOcean iOS app with React Native.
     url: https://apps.apple.com/app/apple-store/id1480876532
   - name: Mobile Game Wild Dunk(全民大灌篮).
     url: https://www.youtube.com/watch?time_continue=6&v=ysmp5vK4R_c
+  - name: GameAI:Tank Tournament with Pygame.
+    url: https://github.com/zywkloo/Tank-Game-AI-Tournament
   - name: Insomnia-Dungeon. Mini game in Pygame.
     url: https://github.com/zywkloo/Insomnia-Dungeon
    
