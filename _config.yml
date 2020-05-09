@@ -57,7 +57,7 @@ links:
 
 # projects in header index
 projects:
-  - name: Xchangerator: All-in-one iOS app for exchange rates
+  - name: Xchangerator:All-in-one iOS app for exchange rates
     url: https://xchangerator.com
   - name: cuHacking20:CSI Murder on 2nd floor, w/ Plotly.js
     url: https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer
