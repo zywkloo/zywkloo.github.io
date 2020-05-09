@@ -1,13 +1,13 @@
 # Site settings
-title: Let's know Yiwei
+title: Yiwei Zhang, SwiftUI + React Native + Node.js
 description: "A blog about Yiwei Zhang."
 baseurl: "/zywkloo.github.io" # for test: remove string '/space-jekyll-template' to ''
 url: "https://zywkloo.github.io" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.githu.io'
 
 # User settings
 username: Yiwei Zhang
-user_title: Full Stack Developer & Game Designer
-email: yiweizhang4@cmail.carleton.ca
+user_title: SwiftUI + React Native + Node.js Developer
+email: zyw870315@gmail.com
 twitter_username: zywkloo
 github_username:  zywkloo
 gplus_username: 116814196032329811422
