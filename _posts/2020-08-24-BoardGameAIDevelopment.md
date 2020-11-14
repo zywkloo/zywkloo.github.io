@@ -20,7 +20,7 @@ In 1997, the game between Deep Blue and Kasparov brought artificial intelligence
 
 ## 1. **Contemporary A.I. and board games**
 
-1. A.I. development
+### 1. A.I. development
 
 Artificial intelligence, most known as A.I., dates from the summer of 1956 on the leafy campus of Dartmouth College (Vella, 2017), where artificial intelligence was essentially described as machines that can simulate human's learning or other features of intelligence. Now A.I. has been one of the hottest research fields in science and engineering, which also truly affects each person's life from communication, transportation, shopping, entertainment to basic living.
 
@@ -28,13 +28,13 @@ In decades of years, A.I. has developed so fast that Russell and Norvig (2010) p
 
 There has been live evidence of this statement right now: alpha Go developed by Google DeepMind group. With deep learning ability, this A.I. has made the threat into reality and shocked the whole world by defeating dozens of top human Go players with straight landslide wins (Going places; artificial intelligence, 2017).
 
-2. Board games and A.I.
+### 2. Board games and A.I.
 
 So far, five board games have been officially defined as mind sports by the 1st World Mind Sports Games: bridge, chess, draughts, Go and xiangqi (Chinese chess) (World Bridge Games Makes an Impressive Debut, 2008). Unlike A.I., board games have been fruits of human wisdom for thousands of years, but now these mind sports, especially chess and Go, may have become the top two board games affected by A.I.'s development heavily. For example, Kasparov and Greengard (2017) believe that after thousands of years of human dominance, the game is over now, and machines will be better than humans at chess forever.
 
 After the narrow 1-match win made by Deep Blue on chess 20 years ago, A.I. has made defeating human players not challenging, with a 3-0 clean win to Ke (Going places; artificial intelligence, 2017). A.I. is progressing so fast that humans cannot practice continuously; likewise, 24 hours every day without rest (Atkinson, 2017). Another reason is the hardware development provides more vital computation ability than ever. Correspondingly, the computation strategy made significant progress from the hardware- heavy brute force to the software-heavy machine learning algorithm, which also optimized the outcome's accuracy.
 
-3. Methodology
+### 3. Methodology
 
 After the algorithm comparison and research synthesis on the different implementations between Deep Blue and Alpha Go, including hardware dependencies and searching strategy, the insight may indicate a brighter future for human players and board game A.I.
 
@@ -42,7 +42,7 @@ It might be true that A.I. from now on would suppress the human players of board
 
 ## 2. **Algorithm: Deep Blue vs Alpha Go**
 
-1. Deep Blue's Algorithm
+### 1. Deep Blue's Algorithm
 
 On the whole, Deep Blue is a set of hardware dedicated to chess, and most of the logic is implemented with circuits in the form of "Chess Chips". There is a smaller amount of software responsible for scheduling and some high-level functions on the chess chip.
 
@@ -64,7 +64,7 @@ The search controller implements a minimum-window alpha-beta search algorithm, a
 
 Deep Blue's software patch is also specially designed to work with hardware. The software part is responsible for scheduling a search of up to 32 chess chips in parallel and is responsible for software evaluation of a large-scale planning situation. Deep Blue's software is also connected to the endgame database of "only five pieces left." Once an endgame with only five pieces left will directly search for the best move from this database. (Campbell et al., 2002).
 
-2. AlphaGo's Algorithm
+### 2. AlphaGo's Algorithm
 
 AlphaGo is a pure software program that can run on general-purpose hardware. It is said that some of the programs use TensorFlow (Miller, 2016).
 
@@ -78,7 +78,7 @@ In the entire algorithm, the concept of "winning" is the only input into the Go 
 
 ## 3. **An insight for board game and game A.I.**
 
-1. Technical metrics and computational mode
+### 1. Technical metrics and computational mode
 
 The Deep Blue II, which played against Kasparov in 1997 and won, is a 30-node R.S./ 6000 supercomputer, with 16 chess chips deployed on each node, a total of 480 chess chips concurrently (Campbell et al., 2002). Due to the embedding of a large number of dedicated chess logic and hardware implementation, Deep Blue does not have much reusability for IBM's subsequent artificial intelligence (such as Watson) (Ferrucci et al., 2010).
 
@@ -88,13 +88,13 @@ With powerful hardware and software improvement progress, some scientists and ma
 
 However, even if capable in a longer future, the most potential A.I. player is not created for replacements of players or competing for the championship against humans. DeepMind, the development group of AlphaGo, verifies that this machine will assist biological brains but not replace them in the end by helping people to find out new solutions to problems (Going places; artificial intelligence, 2017).
 
-2. The changes in chess and Go games under A.I. development
+### 2. The changes in chess and Go games under A.I. development
 
 In China, the training fees of senior Go players is one primary income source. However, when the A.I. online training shows up in recent years, more and more teenagers choose to be trained via the online platform.
 
 Frias and Trivino (2016) discuss the possibility of robots playing sports with humans or themselves in the future. Using four questions named Frias-Trivino test, they do not think robots can be a real player due to the lack of the understanding of rules, the will to develop skills, and the joy while playing (Frias & Trivino, 2016).
 
-3. The future of board game players with A.I.
+### 3. The future of board game players with A.I.
 
 Even for the top professional players, it looks tough to come through the sense of loss after being defeated by a strange and powerful enemy that is still growing and learning without rest and fear.
 
