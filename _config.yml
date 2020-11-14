@@ -46,7 +46,7 @@ links:
       key_trigger: 5
   section_2:
     - title: AI Ethics
-      url: /sharding/
+      url: /BoardGameAIDevelopment/
       key_trigger: a
     - title: Space Walkthrough
       url: /space/
@@ -57,11 +57,11 @@ links:
 
 # projects in header index
 projects:
-  - name: Xchangerator:All-in-one iOS app for exchange rates
+  - name: Xchangerator:an iOS app for exchange rates
     url: https://xchangerator.com
-  - name: cuHacking20:CSI Murder on 2nd floor, w/ Plotly.js
+  - name: cuHacking20:Murder on 2nd floor Winner, Plotly.js
     url: https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer
-  - name: cuHacking19:Hacker Pizza Order System, w/ AWS Connect.
+  - name: cuHacking19:Best AWS Connect Integration.
     url: https://devpost.com/software/cuhackingamazonconnect
   - name: TutorOcean Android app w/ React Native.
     url: https://play.google.com/store/apps/details?id=com.tutorocean
