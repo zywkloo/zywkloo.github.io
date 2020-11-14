@@ -20,7 +20,7 @@ In 1997, the game between Deep Blue and Kasparov brought artificial intelligence
 
 ## 1. **Contemporary A.I. and board games**
 
-1. A.I. development!
+1. A.I. development
 
 Artificial intelligence, most known as A.I., dates from the summer of 1956 on the leafy campus of Dartmouth College (Vella, 2017), where artificial intelligence was essentially described as machines that can simulate human's learning or other features of intelligence. Now A.I. has been one of the hottest research fields in science and engineering, which also truly affects each person's life from communication, transportation, shopping, entertainment to basic living.
 
@@ -28,7 +28,7 @@ In decades of years, A.I. has developed so fast that Russell and Norvig (2010) p
 
 There has been live evidence of this statement right now: alpha Go developed by Google DeepMind group. With deep learning ability, this A.I. has made the threat into reality and shocked the whole world by defeating dozens of top human Go players with straight landslide wins (Going places; artificial intelligence, 2017).
 
-2. Board games and A.I.!
+2. Board games and A.I.
 
 So far, five board games have been officially defined as mind sports by the 1st World Mind Sports Games: bridge, chess, draughts, Go and xiangqi (Chinese chess) (World Bridge Games Makes an Impressive Debut, 2008). Unlike A.I., board games have been fruits of human wisdom for thousands of years, but now these mind sports, especially chess and Go, may have become the top two board games affected by A.I.'s development heavily. For example, Kasparov and Greengard (2017) believe that after thousands of years of human dominance, the game is over now, and machines will be better than humans at chess forever.
 
@@ -112,7 +112,7 @@ According to the analysis above, we can see that the new generation A.I. like Al
 
 Also, there is no recent evidence showing that A.I. would be a threat to board game players. People would not recognize and admire A.I. equally as human players of board games since inhuman A.I. does not have the same structure and mental specialties as humans. Although professional players may lose to A.I., with the enlightenment of A.I., players would be aspired to work harder and learn new skills faster.
 
-### References
+### *References*
 
 Atkinson, P. (2017). 'The Robots are Coming!': Perennial problems with technological progress. The Design Journal, 20(sup1), S4120-S4131.
 
