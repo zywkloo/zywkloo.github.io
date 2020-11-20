@@ -16,57 +16,67 @@ categories:
 
 ## 1. NEVER use !== or != to compare JavaScript objects:
 
+Unless the you are sure every state is immutable or primitive data type, don't do this.
 ### Big NO NO :  
   ```
-	    //unless the you are sure every state is immutable or primitive data type
-	    for (let key of Object.keys(this.state)) {
-	      if (nextState[key] !== this.state[key]) {
-	        return true
-	      }
-	    }
+shouldComponentUpdate(nextProps, nextState) {
+	...
+	for (let key of Object.keys(this.state)) {
+		if (nextState[key] !== this.state[key]) {
+		return true
+		}
+	}
+	...
+	return false
+}
   ```
 
 ### Yes:
 ```
-		import { isEqual } from 'lodash' 
+import { isEqual } from 'lodash' 
 
-		//or other packages like 'Underscore', if you are not sure which to use, ask Matt.
-
-		for (let key of Object.keys(this.state)) {
-			if (!isEqual(nextState[key], this.state[key])) {
-				return true
-			 }
-		}
+shouldComponentUpdate(nextProps, nextState) {
+	...
+	for (let key of Object.keys(this.state)) {
+		if (!isEqual(nextState[key], this.state[key])) {
+			return true
+		 }
+	}
+	...
+}
 ```
+If you don't like 'lodash', use other packages like 'Underscore.js', 'Immutable.js'. if you are not sure which to use, ask your teammate or leader.
+
+Note: React officially recommend 'Immutable.js'.
+
 
 ## 2.  Better setState({}) only when necessary
+Technically re-setState the same value in states, won't re-render the native(non-virtual) DOM 
+(if I'm wrong, please correct me).
+But many states may be passed to the children as their props, which would be a problem. That leads to unnecessary re-rendering.
    
 ### No good:
   ```
-		//no checks  
-		this.setState({ userAudioMap })
-		
-		//Technically re-setState the same value in states, won't re-render the native(non-virtual) DOM 
-		//(if I'm wrong, plz correct Yiwei).
-		//But many states may be passed to the children as their props, which would be a problem 
-		//That leads to unnecessary re-rendering
+//no checks  
+this.setState({ userAudioMap })
    ```
 		   
 ### Better:    
   ```
-		import { isEqual } from 'lodash' 
+import { isEqual } from 'lodash' 
+...
 
-		!isEqual(userAudioMap, this.state.userAudioMap) && this.setState({ userAudioMap })
+!isEqual(userAudioMap, this.state.userAudioMap) && this.setState({ userAudioMap })
 ```
 
  _or_
   
 ```
-		import { isEqual } from 'lodash' 
-		// better readability
-		if(!isEqual(userAudioMap, this.state.userAudioMap)){
-			this.setState({ userAudioMap }) 
-		}
+import { isEqual } from 'lodash' 
+// better readability
+if(!isEqual(userAudioMap, this.state.userAudioMap)){
+	this.setState({ userAudioMap }) 
+}
  ```
 
 ## 3. Aware of state types when using React.PureComponent
