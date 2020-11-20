@@ -56,26 +56,25 @@ links:
       key_trigger: s #WARNING: search only works with "s"
 
 # projects in header index
+
 projects:
-  - name: Xchangerator: an iOS app for Exchange Rates
-    url: https://xchangerator.com
-  - name: cuHacking20 Winner: Plotly Data Visualiztion 
+  - name: Xchangerator - Exchange Rates w/ Express & SwiftUI
+    url: https://www.xchangerator.com
+  - name: cuHacking20 Winner - Plotly Data Visualiztion 
     url: https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer
-  - name: cuHacking19 Winner: AWS Connect Integration
+  - name: cuHacking19 Winner - AWS Connect Integration
     url: https://devpost.com/software/cuhackingamazonconnect
+  - name: Mobile Game Wild Dunk (全民大灌篮)
+    url: https://www.youtube.com/watch?time_continue=6&v=ysmp5vK4R_c
   - name: TutorOcean Android app w/ React Native
     url: https://play.google.com/store/apps/details?id=com.tutorocean
   - name: TutorOcean iOS app w/ React Native
     url: https://apps.apple.com/app/apple-store/id1480876532
-  - name: Mobile Game Wild Dunk (全民大灌篮)
-    url: https://www.youtube.com/watch?time_continue=6&v=ysmp5vK4R_c
   - name: GameAI:Tank Tournament w/ Pygame
     url: https://github.com/zywkloo/Tank-Game-AI-Tournament
   - name: Insomnia-Dungeon. Mini game w/ Pygame
     url: https://github.com/zywkloo/Insomnia-Dungeon
    
-
-
 
 # exclude my node related stuff
 exclude: ['package.json', 'src', 'node_modules']
