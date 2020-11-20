@@ -57,7 +57,7 @@ links:
 
 # projects in header index
 projects:
-  - name: Xchangerator: iOS app for Exchange Rates
+  - name: Xchangerator: an iOS app for Exchange Rates
     url: https://xchangerator.com
   - name: cuHacking20 Winner: Plotly Data Visualiztion 
     url: https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer
