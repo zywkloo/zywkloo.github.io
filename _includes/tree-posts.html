@@ -7,9 +7,9 @@
     <article role="article" class="post-item" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
         <div class="content">
             <a title="Open the post" href="{{ post.url | prepend: site.baseurl }}">
-                <h2 class="post-title" itemprop="name">{{ post.title}}</h2>
+                <h2 class="post-title" itemprop="name">{{post.title}}</h2>
+                <p class="date">{{ post.description }}</p>
             </a>
-            <div class="date">{{ post.description }}</div>
         </div>
     </article>
 
