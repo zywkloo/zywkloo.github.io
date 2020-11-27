@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Lessons taught when using React"
+title:  "Lessons Taught w/ React-Part 1:Improve the Performance"
 image: 'https://github.com/zywkloo/myLeetCodePractice/raw/master/pics/2019Git.png'
 date:   2020-11-20 00:06:31
 tags:
