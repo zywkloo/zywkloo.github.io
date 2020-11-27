@@ -11,22 +11,19 @@
     width 347px
     height 100%
     position fixed
-    background-color purple
+    background-color rgba(230, 252, 250, 1)
     overflow-y auto
     top 0
     +below(rem(960px))
         display none
- 
     h3
         color black
         position relative
-        margin rem(100px) 0
-        &:before
-            content ""
-            width 150px
-            height 20px
-            position absolute
-            bottom 0
+        margin rem(100px)
+        margin-top rem(100px)
+        margin-bottom rem(100px)
+        margin-right rem(200px)
+        margin-left rem(200px)
 .post-item
     text-align left
     padding rem(5px) rem(20px)
@@ -43,8 +40,10 @@
             border none
         .date
             color main
+            margin-bottom rem(100px)
         .post-title
-            color black
+            color rgba(255, 255, 200, 0.32)
+            text-transform uppercase
             position relative
             padding rem(5px)
             font-size rem(16px)
