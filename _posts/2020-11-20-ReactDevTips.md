@@ -7,14 +7,14 @@ tags:
 - React
 description: 'Lessons learnt when using React '
 categories:
-- Front end
+- Front End
 ---
 	
  by Yiwei
 
  Feel free to add more
 
-## 1. NEVER use !== or != to compare JavaScript objects:
+## 1. NEVER use `===`/`==` to compare Js objects, especially for states/props of unknown types/stuctures:
 
 Unless the you are sure every state is immutable or primitive data type, don't do this.
 ### Big NO NO :  
