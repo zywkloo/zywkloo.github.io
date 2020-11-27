@@ -1,23 +1,33 @@
 ---
 layout: post
-title:  "React-Native-Meteor : SNS Login & OAuth"
+title:  "React-Native-Meteor: FB/Google Login & OAuth"
 image: ''
 date:   2019-09-05 00:06:31
 tags:
 - React Native 
-- Dev
+- React
+- Front End
 description: 'Solutions with React-Native-Meteor Social Login'
 categories:
 - Mobile
+- Front End
 ---
 
 ### by Yiwei Zhang
 
 ## I. Social login
 
-1.1 Facebook login
-
 * Data and verification Flow
+
+||||
+----
+||||
+	
+
+
+## II. Social login
+
+1.1 Facebook login
 
  _under_construction_
  
@@ -31,9 +41,32 @@ categories:
  
 1.2 Google login
 
-* Data and verification Flow
+* Set up
 
- _under_construction_
+ For the React Native part, we use this package, https://github.com/react-native-google-signin/google-signin
+ 
+ cuz our RN version is `0.59.10`, run `yarn add react-native-google-signin` or `npm install react-native-google-signin`.
+ 
+* Flow
+ 
+ Here we created a `MeteorGoogleLoginManager` to handle everything with Google login on the Mobile (React Native) side, with the help of `MeteorCommunicationManager` Class we created previously for handling the communication with our Meteor Server.
+ 
+ ```
+ import { MeteorCommunicationManager } from './'
+ 
+ export default class MeteorGoogleLoginManager {
+  static configureGoogleSignIn() {
+    GoogleSignin.configure({
+      webClientId: ENV_CONFIG.google.webClientId,
+      offlineAccess: false
+    })
+  }
+  ...
+ }
+  
+  ```
+ 
+ 
  
 * Android
 
@@ -41,7 +74,7 @@ categories:
  
 * iOS
  
-## II. Meteor server login and second-time OAuth(or OAuth2
+## III. Meteor server login and second-time OAuth / OAuth2
 
 2.1 [Spencer Carli](https://medium.com/@spencer_carli)'s solution in 2016 with Meteor 1.3 
 
@@ -67,7 +100,7 @@ It called a method in Meteor module :Accounts.updateOrCreateUserFromExternalServ
  _under_construction_
  
 
-# III. React-Native-Meteor credential maintenance with Package AsyncStorage
+# IV. React-Native-Meteor credential maintenance with Package AsyncStorage
 
     const USER_TOKEN_KEY='reactnativemeteor_usertoken'
    
