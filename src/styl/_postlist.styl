@@ -11,23 +11,22 @@
     width 347px
     height 100%
     position fixed
-    background-color white
+    background-color purple
     overflow-y auto
     top 0
-    +below(rem(1450px))
+    +below(rem(960px))
         display none
  
     h3
-        color #c06a64
+        color black
         position relative
-        margin rem(10px) 0
+        margin rem(100px) 0
         &:before
             content ""
-            width 100px
-            height 4px
+            width 150px
+            height 20px
             position absolute
             bottom 0
-            background-color #c06a64
 .post-item
     text-align left
     padding rem(5px) rem(20px)
@@ -45,14 +44,14 @@
         .date
             color main
         .post-title
-            color main
+            color black
             position relative
             padding 0
             font-size rem(16px)
             margin 0
             text-align center
             &.selected
-                background main
+                background white
             &:hover
                 background-color rgba(199, 178, 136, 0.32)
             +above(cut)
