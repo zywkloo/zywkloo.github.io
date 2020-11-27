@@ -32,18 +32,15 @@ links:
     - title: home
       url: /
       key_trigger: 1
-    - title: my posts
-      url: /posts
-      key_trigger: 2
-    - title: series
+    - title: posts
       url: /series
-      key_trigger: 3
+      key_trigger: 2
     - title: tags
       url: /tags
-      key_trigger: 4
+      key_trigger: 3
     - title: about me
       url: /about
-      key_trigger: 5
+      key_trigger: 4
   section_2:
     - title: AI Ethics
       url: /BoardGameAIDevelopment/
