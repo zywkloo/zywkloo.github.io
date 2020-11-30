@@ -21,7 +21,7 @@ categories:
 
 This articel is not an orignal walkthrough, but as a summary of references, based on open-source project implementations and the others' great work.
 
-The target backend is using Meteor.Accounts for user login and authentication, including social login. However, it's not likely to call Meteor.Accounts API on React Native. So developers need to find a third party package or SDK to finish the FB login and Google login.  this package could be with the compatible with Front end React-Native-Meteor, which we heavily lean on, and the backend Meteor's Accounts at the same time. Unfortunately, there was none.
+The target backend is using Meteor.Accounts for user login and authentication, including social login. However, it's not likely to call Meteor.Accounts API on React Native. So developers need to find a third party package or SDK to finish the FB login and Google login. The desired package should be compatible with front end React-Native-Meteor, which this solution heavily leans on, and the back end Meteor's Accounts package at the same time. Unfortunately, there was none like this.
 
 Luckily, [Spencer Carli](https://medium.com/@spencer_carli) was able to implement the facebook login by writing our own facebook login handler. Then for google login, he basically followed his [Github project](https://github.com/spencercarli/meteor-accounts-google-oauth).
 
@@ -44,7 +44,6 @@ Luckily, [Spencer Carli](https://medium.com/@spencer_carli) was able to implemen
 [Github project](https://github.com/spencercarli/meteor-accounts-google-oauth)
 
 * 2.3 Use Accounts methods to stamp and upsert services
-
 
 ```
   Accounts.registerLoginHandler('facebookMobile', ({ options }) => {
