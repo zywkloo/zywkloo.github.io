@@ -39,12 +39,13 @@ On the React Native part the biggest pain is finding the correct dependency vers
 
 2.1 Facebook login back end
 
-Medium article: https://medium.com/differential/react-native-meteor-oauth-with-facebook-3d1346d7cdb7#.kr5f8jorz'
-Github project: https://github.com/spencercarli/react-native-meteor-accounts
+[Medium article](https://medium.com/differential/react-native-meteor-oauth-with-facebook-3d1346d7cdb7#.kr5f8jorz)
+
+[Github project](https://github.com/spencercarli/react-native-meteor-accounts)
  
 2.2 Google login back end
 
-Github project: https://github.com/spencercarli/meteor-accounts-google-oauth.
+[Github project](https://github.com/spencercarli/meteor-accounts-google-oauth)
 
 2.3 Use Accounts methods to stamp and upsert services
 
