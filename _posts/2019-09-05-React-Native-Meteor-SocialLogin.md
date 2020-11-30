@@ -19,9 +19,9 @@ categories:
 
 1.1 Disclaimer
 
-This articel is not a orignal walkthrough, but a summary of references, based on open-source project implementations and the others' great work.
+This articel is not an orignal walkthrough, but as a summary of references, based on open-source project implementations and the others' great work.
 
-Our backend is using Meteor.Accounts for user login and authentication, including social login. However, We can't call Meteor.Accounts API on React Native. So I need to find a third party package or SDK to finish the FB login and Google login.  this package could be with the compatible with Front end React-Native-Meteor, which we heavily lean on, and the backend Meteor's Accounts at the same time. Unfortunately, there was none.
+The target backend is using Meteor.Accounts for user login and authentication, including social login. However, we can't call Meteor.Accounts API on React Native. So I need to find a third party package or SDK to finish the FB login and Google login.  this package could be with the compatible with Front end React-Native-Meteor, which we heavily lean on, and the backend Meteor's Accounts at the same time. Unfortunately, there was none.
 
 Luckily, I found [Spencer Carli](https://medium.com/@spencer_carli)'s article  to finish the facebook login by writing our own facebook login handler. Then for google login , basically followed his [Github project](https://github.com/spencercarli/meteor-accounts-google-oauth).
 
