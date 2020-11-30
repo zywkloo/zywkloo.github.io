@@ -79,11 +79,11 @@ After FB/Google Auth succeeded, I dismantled the Meteor.Accounts packages source
  
  cuz our RN version is `0.59.10`, run `yarn add react-native-google-signin` or `npm install react-native-google-signin`.
  
-* Flow
+* Several critical stpes
  
  Here we created a `MeteorGoogleLoginManager` to handle everything with Google login on the Mobile (React Native) side, with the help of `MeteorCommunicationManager` Class we created previously for handling the communication with our Meteor Server.
  
- Step 1 configure service in order to get token from google/facebook auth services via  mobile SDK.
+ Step 1: configure service in order to get token from google/facebook auth services via  mobile SDK.
  ```
  import { MeteorCommunicationManager } from './'
  
@@ -98,7 +98,7 @@ After FB/Google Auth succeeded, I dismantled the Meteor.Accounts packages source
  }
  ```
   
-Last Step store the Id and Meteor generated token in AsyncStorage and local Metoer Object respectively
+Last Step: store the Id and Meteor generated token in AsyncStorage and local Metoer Object respectively
  
   ```
 
