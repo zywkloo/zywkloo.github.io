@@ -2,7 +2,7 @@
 layout: post
 title:  "React-Native-Meteor: FB/Google Login & OAuth"
 image: ''
-date:   2019-09-05 00:06:31
+date:   2020-09-05 00:06:31
 tags:
 - React Native 
 - React
@@ -17,9 +17,9 @@ categories:
 
 ## I. Intro
 
-1.1 
+1.1 Disclaimer
 
-This articel is not a orignal walkthrough, but a summary of references, based on pratical project experience and the other's great work.
+This articel is not a orignal walkthrough, but a summary of references, based on open-source project implementations and the others' great work.
 
 Our backend is using Meteor.Accounts for user login and authentication, including social login. However, We can't call Meteor.Accounts API on React Native. So I need to find a third party package or SDK to finish the FB login and Google login.  this package could be with the compatible with Front end React-Native-Meteor, which we heavily lean on, and the backend Meteor's Accounts at the same time. Unfortunately, there was none.
 
