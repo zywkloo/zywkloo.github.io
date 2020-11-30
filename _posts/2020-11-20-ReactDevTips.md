@@ -14,40 +14,41 @@ categories:
 
  Feel free to add more
 
-## 1. NEVER use `===`/`==` to compare Js objects, especially for states/props of unknown types/stuctures:
+## 1. Be careful with states/props checks of unknown types/structures in shouldComponentUpdate or hooks.
 
-Unless you are sure every state is immutable or a primitive data type, don't do this.
-### Big NO NO :  
-  ```
-shouldComponentUpdate(nextProps, nextState) {
-	...
-	for (let key of Object.keys(this.state)) {
-		if (nextState[key] !== this.state[key]) {
-		return true
-		}
-	}
-	...
-	return false
-}
-  ```
+It is recommended to pick the correct JavaScript package for states/props comparisons.
 
-### Yes:
+Many people prefer vanilla JavaScript methods, simply because they are faster. At least, cliché but true, don’t use === or == to compare states or props, even if you are CONFIDENT that the current data types of states/props used in this component are primitive enough. Next time, when someone in your team adds a new complex state value, the component would behave unlike what you expected.
+
+### Big No:
 ```
-import { isEqual } from 'lodash' 
-
 shouldComponentUpdate(nextProps, nextState) {
-	...
-	for (let key of Object.keys(this.state)) {
-		if (!isEqual(nextState[key], this.state[key])) {
-			return true
-		 }
-	}
-	...
+#.... some props checks
+    for (let key of Object.keys(this.state)) {
+        if (nextState[key] !== this.state[key]) return true
+    }
+#.... some other checks
+    return false
 }
 ```
-If you don't like 'lodash', use other packages like 'Underscore.js', 'Immutable.js'. if you are not sure which to use, ask your teammate or leader.
+### Maybe Yes:
+Here you can replace Object.keys(this.state) with a custom key set /array you designated like the keysToBeChecked below:
+```
+const keysToBeChecked = ['localAudioLv','localVideoLv' ,'RemoteVideoLv' ]
+import { isEqual } from ‘lodash’
+shouldComponentUpdate(nextProps, nextState) {
+#.... some props checks
+# here you can replace the Objects.keys(this.state) with the array `keysToBeChecked`
+    for (let key of Object.keys(this.state)) {
+        if (!isEqual(nextState[key], this.state[key])) return true
+    }
+#.... some other checks
+    return false
+}
+```
+If you don’t like Lodash.jsuse other packages like Underscore.js, Immutable.js. if you are not sure which to use, ask your teammate or leader.
+Note: Since Lodash.js is derived from Underscore.js , so in general, it’s a better option if you need not only a comparison. However, React officially to recommend Immutable.js.
 
-Note: React officially recommend 'Immutable.js'.
 
 
 ## 2.  Better setState({}) only when necessary
