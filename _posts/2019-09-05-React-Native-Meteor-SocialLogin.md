@@ -48,7 +48,6 @@ Github project: https://github.com/spencercarli/react-native-meteor-accounts
 
 Github project: https://github.com/spencercarli/meteor-accounts-google-oauth.
 
-
 2.3 Use Accounts methods to stamp and upsert services
 
 
@@ -99,10 +98,9 @@ After FB/Google Auth succeeded, I dismantled the Meteor.Accounts packages source
  }
  ```
   
-Last Step store the Id and 
+Last Step store the Id and Meteor generated token in AsyncStorage and local Metoer Object respectively
  
   ```
- 
 
     const USER_TOKEN_KEY='reactnativemeteor_usertoken'
    
