@@ -68,7 +68,14 @@ After FB/Google Auth succeeded, Meteor.Accounts package's source code came with 
 
 * 3.1 Set up
 
- For the React Native part, it's recommended to use this [package](https://github.com/react-native-google-signin/google-signin)
+ For the React Native part, it's recommended to use these packages:
+ ```
+  "react-native-google-signin": "^2.0.0",  // for RN 0.60+ , try @react-native-community/google-signin
+  "react-native-fbsdk": "^0.10.1",  //or RN 0.60+, try react-native-fbsdk 1.0+
+ ``` 
+
+  Google [react-native-google-signin](https://github.com/react-native-google-signin/google-signin)
+  Facebook [react-native-fbsdk](https://github.com/facebook/react-native-fbsdk)
   
 * 3.2 Several critical steps
  
