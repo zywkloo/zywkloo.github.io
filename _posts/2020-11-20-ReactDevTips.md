@@ -16,7 +16,7 @@ categories:
 
 ## 1. NEVER use `===`/`==` to compare Js objects, especially for states/props of unknown types/stuctures:
 
-Unless the you are sure every state is immutable or primitive data type, don't do this.
+Unless you are sure every state is immutable or a primitive data type, don't do this.
 ### Big NO NO :  
   ```
 shouldComponentUpdate(nextProps, nextState) {
