@@ -98,21 +98,21 @@ After FB/Google Auth succeeded, Meteor.Accounts package's source code came with 
   
  The Last Step: store the Id and Meteor generated token in AsyncStorage and local Metoer Object respectively.
  
-  ```
-
-const meteorAuthCallback = (err, ret, successCbk, failCbk) => {
-  if (!err && !!ret) {
-    //save user id and token
-    const Data = Meteor.getData()
-    AsyncStorage.setItem(USER_TOKEN_KEY, ret.token)
-    Data._tokenIdSaved = ret.token
-    Meteor._userIdSaved = ret.id
-    if (__DEV__) console.warn(`DEV:${JSON.stringify(ret)}`)
-    successCbk && successCbk(ret)
-  } else {
-    failCbk && failCbk(err)
-  }
-}
+   ```
+   //Same for google/facebook login
+   static meteorAuthCallback = (err, ret, successCbk, failCbk) => {
+     if (!err && !!ret) {
+       //save user id and token
+       const Data = Meteor.getData()
+       AsyncStorage.setItem(ENV_CONFIG.USER_TOKEN_KEY, ret.token)
+       Data._tokenIdSaved = ret.token
+       Meteor._userIdSaved = ret.id
+       successCbk && successCbk(ret)
+     } else {
+       AsyncStorage.removeItem(ENV_CONFIG.USER_TOKEN_KEY)
+       failCbk && failCbk(err)
+     }
+   }
     
 ```
  
