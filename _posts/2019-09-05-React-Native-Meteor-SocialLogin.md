@@ -100,11 +100,19 @@ After FB/Google Auth succeeded, Meteor.Accounts package's source code came with 
  
   ```
 
-    const USER_TOKEN_KEY='reactnativemeteor_usertoken'
-   
+const meteorAuthCallback = (err, ret, successCbk, failCbk) => {
+  if (!err && !!ret) {
+    //save user id and token
+    const Data = Meteor.getData()
     AsyncStorage.setItem(USER_TOKEN_KEY, ret.token)
     Data._tokenIdSaved = ret.token
     Meteor._userIdSaved = ret.id
+    if (__DEV__) console.warn(`DEV:${JSON.stringify(ret)}`)
+    successCbk && successCbk(ret)
+  } else {
+    failCbk && failCbk(err)
+  }
+}
     
 ```
  
