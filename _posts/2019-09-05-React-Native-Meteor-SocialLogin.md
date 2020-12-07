@@ -27,7 +27,7 @@ Meteor web tech stack is a very mature web full stack solution. In the Meteor la
 
 When it comes to mobile, the maturity might become a problem. As the combo of React-Native-Meteor is quite rare, the 3rd party package [`React-Native-Meteor`](https://www.npmjs.com/package/react-native-meteor), has not been updated for 2 years. On the other hand, It is still the best solution so far, if you don't want to build your own wheel.
 
-The target backend is using Meteor.Accounts for user login and authentication as the part of the mature solution, including social login. However, Meteor.Accounts APIs are not availabe on mobile (React Native). So developers need to find a third party package or SDK to finish the FB login and Google login. 
+The target backend is using `Meteor.Accounts` for user login and authentication as the part of the mature solution, including social login. However, Meteor.Accounts APIs are not availabe on mobile (React Native). So developers need to find a third party package or SDK to finish the FB login and Google login. 
 
 The desired package should be compatible with front end React-Native-Meteor, which this solution heavily leans on, and the back end Meteor's Accounts package at the same time. Unfortunately, there was none like this.
 
