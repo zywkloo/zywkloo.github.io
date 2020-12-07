@@ -21,6 +21,8 @@ categories:
 
 This articel is not a 100%-original walkthrough, but a derivative design and implementation, inspired by [Spencer Carli](https://medium.com/@spencer_carli) and some other open-source implementations.
 
+All code snippets shown in this article are from public open-source projects. The proprietary part would not be provided here.
+
 * 1.2 Tech Stack
 
 Meteor web tech stack is a very mature web full stack solution. In the Meteor land we're used to luxuries like automatically synced data, or being able to write database queries using the same syntax on the client and server. You maybe have not heard Meteor before, but the successor of Meteor, Apollo, is widely known for the popular GraphQL. It gives you a lot more control, but also requires you to write a lot of this logic yourself.
@@ -109,9 +111,9 @@ After Facebook/Google Auth succeeded, Meteor.Accounts package's source code came
  
  Step 1: configure service in order to get token from google/facebook auth services via  mobile SDK.
  ```
- import { MeteorCommunicationManager } from './'
+ import { YourMeteorCommunicationManager } from './'
  
- export default class MeteorGoogleLoginManager {
+ export default class YourMeteorGoogleLoginManager {
   static configureGoogleSignIn() {
     GoogleSignin.configure({
       webClientId: ENV_CONFIG.google.webClientId,
@@ -126,14 +128,14 @@ After Facebook/Google Auth succeeded, Meteor.Accounts package's source code came
  
    ```
    //Same for google/facebook login
-   static meteorAuthCallback = (err, ret, successCbk, failCbk) => {
-     if (!err && !!ret) {
+   static YourMeteorAuthCallback = (err, res, cbk, failCbk) => {
+     if (!err && !!res) {
        //save user id and token
        const Data = Meteor.getData()
-       AsyncStorage.setItem(ENV_CONFIG.USER_TOKEN_KEY, ret.token)
-       Data._tokenIdSaved = ret.token
-       Meteor._userIdSaved = ret.id
-       successCbk && successCbk(ret)
+       AsyncStorage.setItem(ENV_CONFIG.USER_TOKEN_KEY, res.token)
+       Data._tokenIdSaved = res.token
+       Meteor._userIdSaved = res.id
+       cbk && cbk(res)
      } else {
        AsyncStorage.removeItem(ENV_CONFIG.USER_TOKEN_KEY)
        failCbk && failCbk(err)
