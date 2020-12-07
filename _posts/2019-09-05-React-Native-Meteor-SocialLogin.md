@@ -19,15 +19,26 @@ categories:
 
 * 1.1 Disclaimer
 
-This articel is not an orignal walkthrough, but as a summary of references, based on open-source project implementations and the others' great work.
+This articel is not a 100%-original walkthrough, but a derivative design and implementation, inspired by [Spencer Carli] and some other open-source implementations.
 
-The target backend is using Meteor.Accounts for user login and authentication, including social login. However, it's not likely to call Meteor.Accounts API on React Native. So developers need to find a third party package or SDK to finish the FB login and Google login. The desired package should be compatible with front end React-Native-Meteor, which this solution heavily leans on, and the back end Meteor's Accounts package at the same time. Unfortunately, there was none like this.
+* 1.2 Tech Stack
+
+Meteor web tech stack is a very mature web full stack solution. In the Meteor land we're used to luxuries like automatically synced data, or being able to write database queries using the same syntax on the client and server. You maybe have not heard Meteor before, but the successor of Meteor, Apollo, is widely known for the popular GraphQL. It gives you a lot more control, but also requires you to write a lot of this logic yourself.
+
+When it comes to mobile, the maturity might become a problem. As the combo of React-Native-Meteor is quite rare, the 3rd party package [`React-Native-Meteor`](https://www.npmjs.com/package/react-native-meteor), has not been updated for 2 years. On the other hand, It is still the best solution so far, if you don't want to build your own wheel.
+
+The target backend is using Meteor.Accounts for user login and authentication as the part of the mature solution, including social login. However, Meteor.Accounts APIs are not availabe on mobile (React Native). So developers need to find a third party package or SDK to finish the FB login and Google login. 
+
+The desired package should be compatible with front end React-Native-Meteor, which this solution heavily leans on, and the back end Meteor's Accounts package at the same time. Unfortunately, there was none like this.
 
 Luckily, [Spencer Carli](https://medium.com/@spencer_carli) was able to implement the facebook login by writing our own facebook login handler. Then for google login, he basically followed his [Github project](https://github.com/spencercarli/meteor-accounts-google-oauth).
 
-* 1.2 Workd Flow: 
+* 1.3 Workd Flow: 
 
 Here is the workflow of this workflow, inspired by [Spencer Carli](https://medium.com/@spencer_carli), and integrated with the existing project.
+
+Spencer didn't provide the database CRUD details, because the database and web social login options may vary. And he used the default `LoginButton` component provided by Facebook SDK, we need to create our own custom social login components.
+
 
 > Legend: 
  > * Red circled: [Spencer Carli](https://medium.com/@spencer_carli)'s design.
@@ -53,7 +64,9 @@ Here [Spencer Carli](https://medium.com/@spencer_carli) elaborated his flow in t
 
 * 2.3 Use Accounts methods to stamp and upsert services
 
-After dismantling the source code the Meteor.Accounts, here is the implementation of Meteor Account token generation.
+Here, Spencer didn't provide the database CRUD details, because the database and web social login solutions may vary. In general, the `Meteor.Accounts` is one of the most widely used packages for social login with Meteor web solution. 
+
+After dismantling the source code of `Meteor.Accounts`, here is the implementation of Meteor server token generation.
 
 ```
   Accounts.registerLoginHandler('facebookMobile', ({ options }) => {
@@ -71,7 +84,7 @@ After dismantling the source code the Meteor.Accounts, here is the implementatio
   }
  ```
     
-After FB/Google Auth succeeded, Meteor.Accounts package's source code came with two methods to upsert the services.resume.loginTokens, in order to make the mobile users get consistent login info as web users.
+After Facebook/Google Auth succeeded, Meteor.Accounts package's source code came with two methods to upsert the services.resume.loginTokens, in order to make the mobile users get consistent login info as web users.
  
  
 # III.  Social Login Front End
@@ -83,7 +96,6 @@ After FB/Google Auth succeeded, Meteor.Accounts package's source code came with 
   "react-native-google-signin": "^2.0.0",  // for RN 0.60+ , try @react-native-community/google-signin
   "react-native-fbsdk": "^0.10.1",  //or RN 0.60+, try react-native-fbsdk 1.0+
  ``` 
-
   Google [react-native-google-signin](https://github.com/react-native-google-signin/google-signin)
   Facebook [react-native-fbsdk](https://github.com/facebook/react-native-fbsdk)
   
