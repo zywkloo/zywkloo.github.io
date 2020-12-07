@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "FB/Google Login & OAuth:A Solution w/ React-Native-Meteor"
+title:  "FB/Google Login:A Solution w/ React-Native-Meteor"
 image: ''
 date:   2020-09-05 00:06:31
 tags:
@@ -32,8 +32,9 @@ Here is the workflow of this workflow, inspired by [Spencer Carli](https://mediu
 > Legend: 
  > * Red circled: [Spencer Carli](https://medium.com/@spencer_carli)'s design.
  > * The Uncircled: original implementation.
+ 
 
-![](https://github.com/zywkloo/zywkloo.github.io/raw/master/assets/img/sharding-gerenciamento-usuarios/Meteor%20Auth%20flow.png)
+![React-Native-Meteor-SocialLogin](https://github.com/zywkloo/zywkloo.github.io/raw/master/assets/img/sharding-gerenciamento-usuarios/Meteor%20Auth%20flow.png)
 
 ## II. Social login Back End
 
