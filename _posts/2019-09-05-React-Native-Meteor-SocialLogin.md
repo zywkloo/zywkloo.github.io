@@ -31,7 +31,7 @@ When it comes to mobile, the maturity might become a problem. As the combo of Re
 
 The target backend is using `Meteor.Accounts` for user login and authentication as the part of the mature solution, including social login. However, Meteor.Accounts APIs are not availabe on mobile (React Native). So developers need to find a third party package or SDK to finish the FB login and Google login. 
 
-__The desired package__ should be compatible with front end __React-Native-Meteor__, which this solution heavily leans on, and the back end __Meteor.Accounts__ package at the same time. 
+If developers are looking for a 3rd party package to sovle this with serval `yarn` or `npm install`, they may want the __desired package__ to be compatible with front end __React-Native-Meteor__, which this solution heavily leans on, and the back end __Meteor.Accounts__ package at the same time. 
 
 Unfortunately, there was none like this.
 
@@ -39,11 +39,11 @@ Unfortunately, there was none like this.
 
 Thus, based on Spencer's great work, it's time for developers to refactor their own wheels.
 
-* 1.3 Workd Flow: 
+* 1.3 Work Flow: 
 
-Here is the workflow of this workflow, inspired by [Spencer Carli](https://medium.com/@spencer_carli), and integrated with the existing project.
+Here is the workflow, inspired by [Spencer Carli](https://medium.com/@spencer_carli).
 
-Spencer didn't provide the database CRUD details, because the database and web social login options may vary. And he used the default `LoginButton` component provided by Facebook SDK, we need to create our own custom social login components.
+Spencer didn't provide the database CRUD details, because the database and web social login solutions may vary. And he used the default `LoginButton` component provided by Facebook SDK, so we need to create our own custom social login components.
 
 
 > Legend: 
