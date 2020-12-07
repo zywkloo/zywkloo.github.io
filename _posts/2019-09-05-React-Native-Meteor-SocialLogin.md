@@ -34,7 +34,7 @@ Here is the workflow of this workflow, inspired by [Spencer Carli](https://mediu
  > * The Uncircled: original implementation.
  
 
-![React-Native-Meteor-SocialLogin](https://github.com/zywkloo/zywkloo.github.io/raw/master/assets/img/sharding-gerenciamento-usuarios/Meteor%20Auth%20flow.png)
+![React-Native-Meteor-SocialLogin](https://github.com/zywkloo/myLeetCodePractice/raw/master/pics/Meteor%20Auth%20flow.png)
 
 ## II. Social login Back End
 
