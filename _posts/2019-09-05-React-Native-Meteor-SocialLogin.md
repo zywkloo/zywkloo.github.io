@@ -19,7 +19,7 @@ categories:
 
 * 1.1 Disclaimer
 
-This articel is not a 100%-original walkthrough, but a derivative design and implementation, inspired by [Spencer Carli] and some other open-source implementations.
+This articel is not a 100%-original walkthrough, but a derivative design and implementation, inspired by [Spencer Carli](https://medium.com/@spencer_carli) and some other open-source implementations.
 
 * 1.2 Tech Stack
 
