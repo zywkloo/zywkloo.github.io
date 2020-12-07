@@ -35,7 +35,7 @@ If developers are looking for a 3rd party package to sovle this with serval `yar
 
 Unfortunately, there was none like this.
 
-[Spencer Carli](https://medium.com/@spencer_carli) was able to implement the facebook login by writing our own facebook login handler. Then for google login, he basically followed his [Github project](https://github.com/spencercarli/meteor-accounts-google-oauth).
+[Spencer Carli](https://medium.com/@spencer_carli) was able to implement the facebook login by writing his own facebook login handler. Then for google login, he basically followed his [Github project](https://github.com/spencercarli/meteor-accounts-google-oauth).
 
 Thus, based on Spencer's great work, it's time for developers to refactor their own wheels.
 
