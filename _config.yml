@@ -55,16 +55,16 @@ links:
 # projects in header index
 
 projects:
-  - name: Xchangerator - Exchange Rates w/ Express & SwiftUI
-    url: https://apps.apple.com/ca/app/xchangerator/id1501733877
+  - name: TutorOcean iOS App - AWS Lambda, API Gateway & SwiftUI
+    url: https://apps.apple.com/ca/app/tutorocean/id1480876532
   - name: cuHacking20 Winner - Plotly Data Visualiztion 
     url: https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer
   - name: cuHacking19 Winner - AWS Connect Integration
     url: https://devpost.com/software/cuhackingamazonconnect
+  - name: TutorOcean Android app - React Native and Meteor.js
+    url: https://play.google.com/store/apps/details?id=com.tutorocean
   - name: Mobile Game Wild Dunk (全民大灌篮)
     url: https://www.youtube.com/watch?time_continue=6&v=ysmp5vK4R_c
-  - name: TutorOcean Android app w/ React Native
-    url: https://play.google.com/store/apps/details?id=com.tutorocean
   - name: GameAI:Tank Tournament w/ Pygame
     url: https://github.com/zywkloo/Tank-Game-AI-Tournament
   - name: Insomnia-Dungeon. Mini game w/ Pygame
