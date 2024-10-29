@@ -50,8 +50,8 @@ Spencer didn't provide the database CRUD details, because the database and web s
  > * Red circled: [Spencer Carli](https://medium.com/@spencer_carli)'s design.
  > * The Uncircled: original implementation.
  
+![Meteor Auth flow](https://github.com/user-attachments/assets/0267e659-fc51-4293-8ef2-890ae24bab49)
 
-![React-Native-Meteor-SocialLogin](https://github.com/zywkloo/zywkloo.github.io/blob/master/assets/img/sharding-gerenciamento-usuarios/Meteor%20Auth%20flow.png)
 
 ## II. Social login Back End
 
