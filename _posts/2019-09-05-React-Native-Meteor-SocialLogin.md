@@ -23,7 +23,7 @@ This articel is not a 100%-original walkthrough, but a derivative design and imp
 
 All code snippets shown in this article are from public open-source projects. The proprietary part would not be provided here.
 
-* 1.2 Tech Stack
+* 1.2 Tech stack
 
 Meteor web tech stack is a very mature web full stack solution. In the Meteor land we're used to luxuries like automatically synced data, or being able to write database queries using the same syntax on the client and server. You maybe have not heard Meteor before, but the successor of Meteor, Apollo, is widely known for the popular GraphQL. It gives you a lot more control, but also requires you to write a lot of this logic yourself.
 
@@ -51,14 +51,14 @@ Spencer didn't provide the database CRUD details, because the database and web s
  > * The Uncircled: original implementation.
  
 
-![React-Native-Meteor-SocialLogin](https://github.com/zywkloo/myLeetCodePractice/raw/master/pics/Meteor%20Auth%20flow.png)
+![React-Native-Meteor-SocialLogin](https://github.com/zywkloo/zywkloo.github.io/blob/master/assets/img/sharding-gerenciamento-usuarios/Meteor%20Auth%20flow.png)
 
 ## II. Social login Back End
 
 
 * 2.1 Facebook login back end
 
-Here [Spencer Carli](https://medium.com/@spencer_carli) elaborated his flow in these two articles. It's not hard to follow and implement, so links are provided here for record.
+Here [Spencer Carli](https://medium.com/@spencer_carli) elaborated his flow in these two articles. It's not hard to follow and implement, so links are provided here for records.
 
 [Medium article](https://medium.com/differential/react-native-meteor-oauth-with-facebook-3d1346d7cdb7#.kr5f8jorz)
 
