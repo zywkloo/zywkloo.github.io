@@ -1,7 +1,7 @@
 ---
 title: 'Choosing the Right JavaScript Data Visualization Framework: Insights and Comparisons'
 description: 'A comprehensive guide comparing popular JavaScript data visualization frameworks to help you choose the right tool for your project'
-pubDate: 'Oct 25 2025'
+pubDate: 'Mar 01 2024'
 heroImage: '../../assets/javascript-data-visualization-hero.svg'
 tags: ['JavaScript', 'Data Visualization', 'Frontend', 'D3.js', 'Chart.js']
 ---

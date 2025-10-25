@@ -1,7 +1,7 @@
 ---
 title: 'Board Game AI Development: From Minimax to Modern Deep Learning'
 description: 'Exploring the evolution of artificial intelligence in board games, from classical algorithms to modern machine learning approaches'
-pubDate: 'Oct 25 2025'
+pubDate: 'Aug 01 2020'
 heroImage: '../../assets/board-game-ai-hero.svg'
 tags: ['AI', 'Machine Learning', 'Game Development', 'Python', 'Algorithms']
 ---

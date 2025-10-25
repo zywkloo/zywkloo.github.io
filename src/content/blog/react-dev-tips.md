@@ -1,7 +1,7 @@
 ---
 title: 'Essential React State Management: Common Pitfalls and Best Practices'
 description: 'Learn critical React state management patterns and avoid common mistakes that lead to bugs and performance issues'
-pubDate: 'Oct 25 2025'
+pubDate: 'Dec 01 2019'
 heroImage: '../../assets/react-dev-tips-hero.svg'
 tags: ['React', 'JavaScript', 'Frontend', 'State Management', 'Best Practices']
 ---
