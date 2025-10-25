@@ -22,12 +22,33 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			}
 			.hero-image {
 				width: 100%;
+				position: relative;
+				overflow: hidden;
+				border-radius: 12px;
+				box-shadow: var(--box-shadow);
 			}
 			.hero-image img {
 				display: block;
 				margin: 0 auto;
+				width: 100%;
+				height: auto;
+			}
+			.hero-overlay {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(
+					to bottom,
+					rgba(0, 0, 0, 0.3) 0%,
+					rgba(0, 0, 0, 0.1) 40%,
+					rgba(0, 0, 0, 0) 60%,
+					rgba(0, 0, 0, 0.1) 80%,
+					rgba(0, 0, 0, 0.3) 100%
+				);
+				pointer-events: none;
 				border-radius: 12px;
-				box-shadow: var(--box-shadow);
 			}
 			.prose {
 				width: 720px;
@@ -61,6 +82,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			<article>
 				<div class="hero-image">
 					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
+					<div class="hero-overlay"></div>
 				</div>
 				<div class="prose">
 					<div class="title">
