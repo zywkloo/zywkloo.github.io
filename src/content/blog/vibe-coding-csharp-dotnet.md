@@ -1,7 +1,7 @@
 ---
 title: 'Vibe Coding: Upgrading Legacy C#/C++ SDKs with AI Assistance'
 description: 'Master the art of upgrading stale C# .NET codebases with breaking SDK changes using AI coding assistants and modern workflow strategies.'
-pubDate: 'Jan 15 2025'
+pubDate: 'Oct 25 2025'
 heroImage: '../../assets/vibe-coding-hero.svg'
 tags: ['C#', '.NET', 'Legacy Code', 'AI', 'Developer Tools', 'Productivity', 'Cursor', 'Claude', 'SDK Migration']
 ---

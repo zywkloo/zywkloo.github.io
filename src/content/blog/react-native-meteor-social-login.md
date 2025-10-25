@@ -1,7 +1,7 @@
 ---
 title: 'Facebook/Google Login: A Solution with React-Native-Meteor'
 description: 'A comprehensive guide to implementing Facebook and Google OAuth authentication in React Native applications using Meteor'
-pubDate: 'Sep 05 2019'
+pubDate: 'Oct 25 2025'
 heroImage: '../../assets/react-native-meteor-hero.svg'
 tags: ['React Native', 'Meteor', 'OAuth', 'Authentication', 'Mobile Development']
 ---

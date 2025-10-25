@@ -1,7 +1,7 @@
 ---
 title: 'Retrieval Augmented Generation (RAG): The Power of Hybrid Search'
 description: 'An in-depth exploration of RAG, comparing vector and keyword retrieval, understanding hybrid search strategies, and why RAG is essential for modern LLM applications.'
-pubDate: 'Jan 10 2025'
+pubDate: 'Oct 25 2025'
 heroImage: '../../assets/rag-hero.svg'
 tags: ['AI', 'LLM', 'RAG', 'Information Retrieval', 'Vector Search', 'Keyword Search', 'Machine Learning']
 ---
