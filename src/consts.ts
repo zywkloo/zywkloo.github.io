@@ -1,9 +1,9 @@
 // Place any global data in this file.
 // You can import this data from anywhere in your site by using the `import` keyword.
 
-export const SITE_TITLE = 'Yiwei Zhang | Full Stack & Mobile Engineer';
+export const SITE_TITLE = 'Victor Zhang | Full Stack & Mobile Engineer | From Idea to App Store';
 export const SITE_DESCRIPTION = 'Full Stack and Mobile Engineer specializing in SwiftUI, React Native, React, and Node.js. Creating exceptional digital experiences.';
-export const SITE_AUTHOR = 'Yiwei Zhang';
+export const SITE_AUTHOR = 'Victor Zhang';
 export const SITE_URL = 'https://zywkloo.github.io';
 
 // Social links
