@@ -85,6 +85,15 @@ import { SITE_DESCRIPTION, SITE_TITLE, PROFILE_IMAGE } from '../consts';
 						</ul>
 					</div>
 					<div class="tech-category">
+						<h3>Desktop</h3>
+						<ul>
+							<li>C#</li>
+							<li>.NET 4.8</li>
+							<li>C++17</li>
+							<li>CMake</li>
+						</ul>
+					</div>
+					<div class="tech-category">
 						<h3>Tools</h3>
 						<ul>
 							<li>Git</li>
@@ -163,7 +172,13 @@ import { SITE_DESCRIPTION, SITE_TITLE, PROFILE_IMAGE } from '../consts';
 
 	@media (min-width: 768px) {
 		.tech-grid {
-			grid-template-columns: repeat(3, 1fr);
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.tech-grid {
+			grid-template-columns: repeat(4, 1fr);
 		}
 	}
 
