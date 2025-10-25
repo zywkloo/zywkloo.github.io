@@ -2,7 +2,9 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE, PROFILE_IMAGE, USER_TITLE, GITHUB_URL, TWITTER_URL, LINKEDIN_URL, EMAIL } from '../consts';
+
+const MEDIUM_URL = 'https://medium.com/@zywkloo';
 ---
 
 <!doctype html>
@@ -12,38 +14,533 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+		<main class="homepage">
+			<!-- Hero Section -->
+			<section class="hero">
+				<div class="hero-content">
+					<img src={PROFILE_IMAGE} alt="Victor Zhang" class="profile-image" />
+					<h1 class="hero-title">Hi, I'm <span class="highlight">Victor Zhang</span></h1>
+					<p class="hero-subtitle">{USER_TITLE}</p>
+					<p class="hero-description">
+						Crafting exceptional mobile apps with SwiftUI & React Native, and building powerful web applications with React & Node.js
+					</p>
+					<div class="hero-cta">
+						<a href="/blog" class="btn btn-primary">View My Blog</a>
+						<a href="/about" class="btn btn-secondary">Learn More</a>
+					</div>
+					<div class="hero-stats">
+						<div class="stat">
+							<div class="stat-number">9+</div>
+							<div class="stat-label">Years Experience</div>
+						</div>
+						<div class="stat">
+							<div class="stat-number">20+</div>
+							<div class="stat-label">Projects</div>
+						</div>
+						<div class="stat">
+							<div class="stat-number">2x</div>
+							<div class="stat-label">Hackathon Winner</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Expertise Section -->
+			<section class="expertise">
+				<div class="container">
+					<h2 class="section-title">What I Do</h2>
+					<div class="expertise-grid">
+						<div class="expertise-card">
+							<div class="expertise-icon">📱</div>
+							<h3>Mobile Development</h3>
+							<p>Native iOS with SwiftUI, cross-platform with React Native. Creating smooth, intuitive mobile experiences.</p>
+							<ul class="expertise-skills">
+								<li>SwiftUI</li>
+								<li>React Native</li>
+								<li>Firebase</li>
+								<li>Core Data</li>
+							</ul>
+						</div>
+						<div class="expertise-card">
+							<div class="expertise-icon">🌐</div>
+							<h3>Full Stack Development</h3>
+							<p>Building scalable web applications with modern JavaScript frameworks and robust backend services.</p>
+							<ul class="expertise-skills">
+								<li>React</li>
+								<li>Node.js</li>
+								<li>Express</li>
+								<li>MongoDB</li>
+							</ul>
+						</div>
+						<div class="expertise-card">
+							<div class="expertise-icon">🎮</div>
+							<h3>Game Design</h3>
+							<p>As design lead, achieved #1 in Sports and #9 in Games categories in China's App Store.</p>
+							<ul class="expertise-skills">
+								<li>Game Design</li>
+								<li>UI/UX</li>
+								<li>Product Strategy</li>
+								<li>User Research</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Projects Section -->
+			<section class="projects">
+				<div class="container">
+					<h2 class="section-title">Featured Projects</h2>
+				<div class="projects-grid">
+					<div class="project-card">
+						<div class="project-icon">🏥</div>
+						<h3>VitalMark Wellness</h3>
+						<p>HealthKit Integration & SwiftUI</p>
+						<a href="https://apps.apple.com/us/app/vitalmark-wellness-fitness/id6745228850" target="_blank" class="project-link">View on App Store →</a>
+					</div>
+					<div class="project-card">
+						<div class="project-icon">🤖</div>
+						<h3>Ninja AI Chat</h3>
+						<p>LLM Streaming & Multi-Model AI</p>
+						<a href="https://apps.apple.com/us/app/ninja-ai-chat-code-create/id6702030312" target="_blank" class="project-link">View on App Store →</a>
+					</div>
+					<div class="project-card">
+						<div class="project-icon">🎬</div>
+						<h3>ZZZ Movie Rec System</h3>
+						<p>ML-powered Movie Recommendations</p>
+						<a href="https://zzz-movie-rec-system.vercel.app/" target="_blank" class="project-link">View Project →</a>
+					</div>
+				</div>
+				</div>
+			</section>
+
+			<!-- Contact Section -->
+			<section class="contact">
+				<div class="container">
+					<h2 class="section-title">Let's Connect</h2>
+					<p class="contact-text">Interested in collaborating or just want to chat? I'd love to hear from you!</p>
+					<div class="contact-buttons">
+						<a href={`mailto:${EMAIL}`} class="btn btn-primary">Email Me</a>
+						<a href={GITHUB_URL} target="_blank" class="btn btn-secondary">GitHub</a>
+						<a href={TWITTER_URL} target="_blank" class="btn btn-secondary">Twitter</a>
+						<a href={LINKEDIN_URL} target="_blank" class="btn btn-secondary">LinkedIn</a>
+						<a href={MEDIUM_URL} target="_blank" class="btn btn-secondary">Medium</a>
+					</div>
+				</div>
+			</section>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.homepage {
+		min-height: 100vh;
+		max-width: 100%;
+		width: 100%;
+	}
+
+	/* Hero Section */
+	.hero {
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		position: relative;
+		overflow: hidden;
+		color: white;
+	}
+
+	.hero::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+		opacity: 0.3;
+	}
+
+	.hero-content {
+		position: relative;
+		z-index: 2;
+		text-align: center;
+		max-width: 800px;
+		padding: 2rem;
+	}
+
+	.profile-image {
+		width: 200px;
+		height: 200px;
+		border-radius: 50%;
+		border: 5px solid rgba(255, 255, 255, 0.3);
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+		margin-bottom: 2rem;
+		transition: transform 0.3s ease;
+	}
+
+	.profile-image:hover {
+		transform: scale(1.05);
+	}
+
+	.hero-title {
+		font-size: 3rem;
+		font-weight: 800;
+		margin-bottom: 1rem;
+		line-height: 1.2;
+	}
+
+	.highlight {
+		background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.hero-subtitle {
+		font-size: 1.5rem;
+		margin-bottom: 1rem;
+		opacity: 0.9;
+		font-weight: 500;
+	}
+
+	.hero-description {
+		font-size: 1.125rem;
+		margin-bottom: 2rem;
+		opacity: 0.8;
+		line-height: 1.6;
+	}
+
+	.hero-cta {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+		margin-bottom: 3rem;
+	}
+
+	.btn {
+		padding: 0.75rem 2rem;
+		border-radius: 50px;
+		text-decoration: none;
+		font-weight: 500;
+		transition: all 0.3s ease;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+	}
+
+	.btn-primary {
+		background: white;
+		color: #667eea;
+	}
+
+	.btn-primary:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+	}
+
+	.btn-secondary {
+		background: transparent;
+		color: white;
+		border: 2px solid white;
+	}
+
+	.btn-secondary:hover {
+		background: white;
+		color: #667eea;
+	}
+
+	.hero-stats {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	.stat {
+		background: rgba(255, 255, 255, 0.1);
+		backdrop-filter: blur(10px);
+		padding: 1.5rem;
+		border-radius: 1rem;
+		border: 1px solid rgba(255, 255, 255, 0.2);
+	}
+
+	.stat-number {
+		font-size: 2.25rem;
+		font-weight: 800;
+		margin-bottom: 0.25rem;
+	}
+
+	.stat-label {
+		font-size: 0.875rem;
+		opacity: 0.8;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	/* Section Styles */
+	section {
+		padding: 4rem 0;
+	}
+
+	section:nth-child(even) {
+		background: #f8f9fa;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+
+	.section-title {
+		text-align: center;
+		font-size: 2.25rem;
+		margin-bottom: 3rem;
+		position: relative;
+	}
+
+	.section-title::after {
+		content: '';
+		position: absolute;
+		bottom: -1rem;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 80px;
+		height: 4px;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		border-radius: 2px;
+	}
+
+	/* Expertise Section */
+	.expertise-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	@media (min-width: 768px) {
+		.expertise-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	.expertise-card {
+		background: white;
+		padding: 2rem;
+		border-radius: 1rem;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		transition: all 0.3s ease;
+		border: 1px solid rgba(0, 0, 0, 0.05);
+	}
+
+	.expertise-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+	}
+
+	.expertise-icon {
+		font-size: 3rem;
+		margin-bottom: 1rem;
+	}
+
+	.expertise-card h3 {
+		font-size: 1.25rem;
+		margin-bottom: 1rem;
+		color: #667eea;
+	}
+
+	.expertise-card p {
+		color: #718096;
+		margin-bottom: 1.5rem;
+		line-height: 1.6;
+	}
+
+	.expertise-skills {
+		list-style: none;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.expertise-skills li {
+		background: #f8f9fa;
+		padding: 0.25rem 0.75rem;
+		border-radius: 50px;
+		font-size: 0.875rem;
+		color: #667eea;
+		font-weight: 500;
+	}
+
+	/* Projects Section */
+	.projects-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+
+	@media (min-width: 768px) {
+		.projects-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.projects-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	.project-card {
+		background: white;
+		padding: 2rem;
+		border-radius: 1rem;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+		transition: all 0.3s ease;
+		border: 1px solid rgba(0, 0, 0, 0.05);
+	}
+
+	.project-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+	}
+
+	.project-icon {
+		font-size: 2.5rem;
+		margin-bottom: 1rem;
+	}
+
+	.project-card h3 {
+		font-size: 1.125rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.project-card p {
+		color: #718096;
+		margin-bottom: 1rem;
+	}
+
+	.project-link {
+		color: #667eea;
+		font-weight: 500;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+
+	.project-link:hover {
+		color: #5568d3;
+		transform: translateX(5px);
+	}
+
+	/* Contact Section */
+	.contact {
+		background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+		color: #f8f9fa;
+		position: relative;
+		overflow: hidden;
+		box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1), 0 5px 20px rgba(0, 0, 0, 0.1);
+		border-top: 2px solid rgba(102, 126, 234, 0.2);
+		border-bottom: 2px solid rgba(102, 126, 234, 0.2);
+	}
+
+	.contact::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: 
+			radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+			radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+		pointer-events: none;
+	}
+
+	.contact .container {
+		position: relative;
+		z-index: 1;
+	}
+
+	.contact .section-title {
+		color: #ffffff !important;
+		font-weight: 800;
+		text-shadow: 
+			2px 2px 8px rgba(0, 0, 0, 0.5),
+			0 0 20px rgba(102, 126, 234, 0.3);
+	}
+
+	.contact .section-title::after {
+		background: linear-gradient(90deg, #667eea, #764ba2);
+		box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+	}
+
+	.contact-text {
+		text-align: center;
+		font-size: 1.125rem;
+		margin-bottom: 2rem;
+		color: #4a5568;
+		font-weight: 500;
+	}
+
+	.contact-buttons {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.contact .btn-primary {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: #1e3a8a;
+		box-shadow: 
+			0 4px 15px rgba(102, 126, 234, 0.4),
+			0 2px 8px rgba(0, 0, 0, 0.2),
+			inset 0 1px 0 rgba(255, 255, 255, 0.2);
+		transition: all 0.3s ease;
+	}
+
+	.contact .btn-primary:hover {
+		background: linear-gradient(135deg, #5568d3 0%, #6947a0 100%);
+		color: #1e40af;
+		transform: translateY(-3px);
+		box-shadow: 
+			0 8px 25px rgba(102, 126, 234, 0.5),
+			0 4px 12px rgba(0, 0, 0, 0.3),
+			inset 0 1px 0 rgba(255, 255, 255, 0.3);
+	}
+
+	.contact .btn-secondary {
+		background: rgba(102, 126, 234, 0.15);
+		color: #1e3a8a;
+		border: 2px solid rgba(102, 126, 234, 0.4);
+		backdrop-filter: blur(10px);
+		box-shadow: 
+			0 4px 15px rgba(102, 126, 234, 0.2),
+			inset 0 1px 0 rgba(255, 255, 255, 0.1);
+		transition: all 0.3s ease;
+	}
+
+	.contact .btn-secondary:hover {
+		background: rgba(102, 126, 234, 0.3);
+		color: #1e40af;
+		border-color: #667eea;
+		box-shadow: 
+			0 6px 20px rgba(102, 126, 234, 0.4),
+			0 2px 8px rgba(0, 0, 0, 0.2),
+			inset 0 1px 0 rgba(255, 255, 255, 0.2);
+		transform: translateY(-2px);
+	}
+
+	@media (max-width: 768px) {
+		.hero-title {
+			font-size: 2rem;
+		}
+
+		.hero-stats {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
