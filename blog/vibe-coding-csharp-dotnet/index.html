@@ -1,273 +1,305 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Yiwei Zhang | Full Stack &#38; Mobile Engineer" href="https://zywkloo.github.io/rss.xml"><meta name="generator" content="Astro v5.15.1"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://zywkloo.github.io/blog/vibe-coding-csharp-dotnet/"><!-- Primary Meta Tags --><title>Vibe Coding: Mastering C# .NET Legacy Codebases with AI</title><meta name="title" content="Vibe Coding: Mastering C# .NET Legacy Codebases with AI"><meta name="description" content="Discover how to maintain productivity and flow when working with stale C# .NET codebases using cutting-edge AI coding assistants and optimal workflow strategies."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://zywkloo.github.io/blog/vibe-coding-csharp-dotnet/"><meta property="og:title" content="Vibe Coding: Mastering C# .NET Legacy Codebases with AI"><meta property="og:description" content="Discover how to maintain productivity and flow when working with stale C# .NET codebases using cutting-edge AI coding assistants and optimal workflow strategies."><meta property="og:image" content="https://zywkloo.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://zywkloo.github.io/blog/vibe-coding-csharp-dotnet/"><meta property="twitter:title" content="Vibe Coding: Mastering C# .NET Legacy Codebases with AI"><meta property="twitter:description" content="Discover how to maintain productivity and flow when working with stale C# .NET codebases using cutting-edge AI coding assistants and optimal workflow strategies."><meta property="twitter:image" content="https://zywkloo.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><link rel="stylesheet" href="/_astro/_slug_.CvghITTs.css">
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Yiwei Zhang | Full Stack &#38; Mobile Engineer" href="https://zywkloo.github.io/rss.xml"><meta name="generator" content="Astro v5.15.1"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://zywkloo.github.io/blog/vibe-coding-csharp-dotnet/"><!-- Primary Meta Tags --><title>Vibe Coding: Upgrading Legacy C#/C++ SDKs with AI Assistance</title><meta name="title" content="Vibe Coding: Upgrading Legacy C#/C++ SDKs with AI Assistance"><meta name="description" content="Master the art of upgrading stale C# .NET codebases with breaking SDK changes using AI coding assistants and modern workflow strategies."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://zywkloo.github.io/blog/vibe-coding-csharp-dotnet/"><meta property="og:title" content="Vibe Coding: Upgrading Legacy C#/C++ SDKs with AI Assistance"><meta property="og:description" content="Master the art of upgrading stale C# .NET codebases with breaking SDK changes using AI coding assistants and modern workflow strategies."><meta property="og:image" content="https://zywkloo.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://zywkloo.github.io/blog/vibe-coding-csharp-dotnet/"><meta property="twitter:title" content="Vibe Coding: Upgrading Legacy C#/C++ SDKs with AI Assistance"><meta property="twitter:description" content="Master the art of upgrading stale C# .NET codebases with breaking SDK changes using AI coding assistants and modern workflow strategies."><meta property="twitter:image" content="https://zywkloo.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><link rel="stylesheet" href="/_astro/_slug_.CvghITTs.css">
 <style>main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.hero-image[data-astro-cid-bvzihdzo]{width:100%;position:relative;overflow:hidden;border-radius:12px;box-shadow:var(--box-shadow)}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;margin:0 auto;width:100%;height:auto}.hero-overlay[data-astro-cid-bvzihdzo]{position:absolute;inset:0;background:linear-gradient(to bottom,#0000004d,#0000001a 40%,#0000,#0000001a,#0000004d);pointer-events:none;border-radius:12px}.prose[data-astro-cid-bvzihdzo]{width:720px;max-width:calc(100% - 2em);margin:auto;padding:1em;color:rgb(var(--gray-dark))}.title[data-astro-cid-bvzihdzo]{margin-bottom:1em;padding:1em 0;text-align:center;line-height:1}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0 0 .5em}.date[data-astro-cid-bvzihdzo]{margin-bottom:.5em;color:rgb(var(--gray))}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:italic}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Yiwei Zhang | Full Stack &amp; Mobile Engineer</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Home </a>  <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Blog </a>  <a href="/about" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> About </a>  </div> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://m.webtoo.ls/@astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Mastodon</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path></svg> </a> </div> </nav> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo> <img src="/_astro/vibe-coding-hero.J2Zvb72m_Z2voOnL.svg" alt data-astro-cid-bvzihdzo="true" loading="lazy" decoding="async" fetchpriority="auto" width="1020" height="510"> <div class="hero-overlay" data-astro-cid-bvzihdzo></div> </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2025-01-15T08:00:00.000Z"> Jan 15, 2025 </time>  </div> <h1 data-astro-cid-bvzihdzo>Vibe Coding: Mastering C# .NET Legacy Codebases with AI</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2 id="what-is-vibe-coding">What is Vibe Coding?</h2>
-<p>Vibe coding is a mindset and workflow philosophy focused on maintaining flow, maximizing productivity, and leveraging modern AI tools to transform challenging development scenarios—especially when dealing with legacy or stale codebases—into smooth, efficient experiences.</p>
-<p>When working with a stale C# .NET codebase, vibe coding means creating an environment where you can:</p>
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Yiwei Zhang | Full Stack &amp; Mobile Engineer</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Home </a>  <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Blog </a>  <a href="/about" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> About </a>  </div> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://m.webtoo.ls/@astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Mastodon</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path></svg> </a> </div> </nav> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo> <img src="/_astro/vibe-coding-hero.J2Zvb72m_Z2voOnL.svg" alt data-astro-cid-bvzihdzo="true" loading="lazy" decoding="async" fetchpriority="auto" width="1020" height="510"> <div class="hero-overlay" data-astro-cid-bvzihdzo></div> </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2025-01-15T08:00:00.000Z"> Jan 15, 2025 </time>  </div> <h1 data-astro-cid-bvzihdzo>Vibe Coding: Upgrading Legacy C#/C++ SDKs with AI Assistance</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2 id="the-challenge-upgrading-sdks-with-breaking-changes">The Challenge: Upgrading SDKs with Breaking Changes</h2>
+<p>Picture this: You’re working on a C# desktop application that interfaces with hardware through a C++ SDK wrapper. The SDK is stuck at version 1.0.6, but you need to upgrade to 1.2.2 to support new hardware features. The upgrade involves breaking changes across headers, wrapper classes, and API signatures. Sound familiar?</p>
+<p>This is the reality of working with mixed C#/C++ projects where SDK upgrades aren’t just about bumping version numbers—they require:</p>
 <ul>
-<li>Navigate complex, outdated architectures with confidence</li>
-<li>Leverage AI assistants to understand and modify legacy code efficiently</li>
-<li>Maintain developer happiness and productivity despite technical debt</li>
-<li>Combine multiple tools strategically for optimal outcomes</li>
+<li>Analyzing SDK documentation against your existing codebase</li>
+<li>Mapping deprecated functions to new implementations</li>
+<li>Modifying header files, wrapper classes, and managed code simultaneously</li>
+<li>Maintaining consistency across .h, .cpp, and .cs files</li>
+<li>Dealing with stale code patterns and technical debt</li>
 </ul>
-<h2 id="cursor-vs-claude-code-the-battle-of-ai-coding-assistants">Cursor vs. Claude Code: The Battle of AI Coding Assistants</h2>
-<p>Choosing the right AI coding assistant can make or break your vibe coding experience. Let’s compare the two most popular options for C# .NET development.</p>
-<h3 id="cursor-the-ide-native-powerhouse">Cursor: The IDE-Native Powerhouse</h3>
-<p><strong>What it is:</strong> An AI-powered code editor built on VS Code, designed to integrate AI assistance directly into your development workflow.</p>
-<p><strong>Strengths for C# .NET:</strong></p>
+<p>Traditional approaches involve painstaking manual comparison, cross-referencing documentation, and hoping you catch all the breaking changes. But there’s a better way: <strong>vibe coding</strong>.</p>
+<h2 id="what-is-vibe-coding">What is Vibe Coding?</h2>
+<p>Vibe coding is a mindset and workflow philosophy that leverages AI assistants to transform challenging SDK upgrades and legacy code maintenance into smooth, efficient experiences. It’s about maintaining flow, maximizing productivity, and using modern tools strategically to tackle complex scenarios that would otherwise drain your energy.</p>
+<p>When upgrading a stale SDK (like from 1.0.6 to 1.2.2) in a C#/C++ mixed project, vibe coding means:</p>
 <ul>
-<li><strong>Seamless Integration</strong>: AI assistance feels native to your editor</li>
-<li><strong>Fast Local Editing</strong>: Excellent for quick fixes and iterative modifications</li>
-<li><strong>Multiple Model Support</strong>: Access to GPT-4, GPT-5, Claude Sonnet, and more</li>
-<li><strong>Context Awareness</strong>: Understands your entire codebase and current file context</li>
-<li><strong>Instant Results</strong>: Real-time suggestions and modifications</li>
+<li>Using AI to read and analyze entire SDK documentation sets</li>
+<li>Generating comprehensive modification plans across multiple files</li>
+<li>Maintaining context consistency across .h, .cpp, and .cs modifications</li>
+<li>Leveraging multiple AI tools to handle different aspects of the upgrade</li>
+<li>Staying productive and focused despite the complexity</li>
 </ul>
-<p><strong>Best Use Cases:</strong></p>
+<h2 id="the-real-world-scenario-sdk-upgrade-challenges">The Real-World Scenario: SDK Upgrade Challenges</h2>
+<h3 id="challenge-1-documentation-analysis-at-scale">Challenge 1: Documentation Analysis at Scale</h3>
+<p>When upgrading from SDK 1.0.6 to 1.2.2, you’re not just dealing with incremental changes. Breaking changes might include:</p>
 <ul>
-<li>Daily code modifications and quick fixes</li>
-<li>Selecting and modifying specific code sections</li>
-<li>Iterative development and rapid prototyping</li>
-<li>When you need immediate feedback on your code</li>
+<li>Renamed functions and classes</li>
+<li>Changed parameter signatures</li>
+<li>Deprecated APIs that need replacement</li>
+<li>New dependencies and initialization requirements</li>
+<li>Modified error handling patterns</li>
 </ul>
-<p><strong>Weaknesses:</strong></p>
+<p><strong>Without AI:</strong> Days spent cross-referencing documentation, comparing header files, and manually tracking changes.</p>
+<p><strong>With Vibe Coding:</strong> Upload the SDK documentation and headers to Claude Code, ask it to analyze breaking changes, and generate a migration plan.</p>
+<h3 id="challenge-2-multi-file-consistency">Challenge 2: Multi-File Consistency</h3>
+<p>C++ SDK wrappers typically involve:</p>
 <ul>
-<li>May struggle with very large context windows</li>
-<li>Less suitable for extensive cross-file modifications</li>
-<li>IDE-dependent workflow</li>
+<li>C++ header files (.h) with native SDK bindings</li>
+<li>C++ implementation files (.cpp) with wrapper logic</li>
+<li>C# managed wrapper classes (.cs) exposing functionality to .NET</li>
+<li>Interop definitions and marshalling code</li>
 </ul>
-<h3 id="claude-code-the-comprehensive-ai-companion">Claude Code: The Comprehensive AI Companion</h3>
-<p><strong>What it is:</strong> Anthropic’s AI coding assistant designed for complex, multi-file software development tasks.</p>
-<p><strong>Strengths for C# .NET:</strong></p>
+<p>A single SDK function change might require modifications across all these layers.</p>
+<p><strong>The Problem:</strong> Different context strategies across AI tools can cause inconsistent modifications. A change in Cursor might be incompatible with changes made in Claude Code.</p>
+<p><strong>The Solution:</strong> Use the same AI model for the entire modification chain. Don’t switch tools mid-upgrade.</p>
+<h3 id="challenge-3-maintaining-context-across-long-sessions">Challenge 3: Maintaining Context Across Long Sessions</h3>
+<p>SDK upgrades are marathon sessions, not sprints. You need to:</p>
 <ul>
-<li><strong>Large Context Handling</strong>: Excels at understanding entire codebases</li>
-<li><strong>Deep Reasoning</strong>: Better at complex architectural decisions</li>
-<li><strong>Cross-File Modifications</strong>: Handles multi-file changes with better consistency</li>
-<li><strong>Detailed Explanations</strong>: Provides thorough reasoning for modifications</li>
-<li><strong>More Stable Continuity</strong>: Better context retention across long conversations</li>
+<li>Keep track of all modifications across hundreds of files</li>
+<li>Maintain awareness of cross-file dependencies</li>
+<li>Ensure that previous changes aren’t inadvertently reversed</li>
+<li>Document modifications for future reference</li>
 </ul>
-<p><strong>Best Use Cases:</strong></p>
+<p><strong>Traditional approach:</strong> Losing context, forgetting dependencies, and introducing regressions.</p>
+<p><strong>Vibe coding approach:</strong> Use Claude Code + Sonnet for large context windows and stable continuity throughout the entire upgrade process.</p>
+<h2 id="cursor-vs-claude-code-choosing-the-right-tool">Cursor vs. Claude Code: Choosing the Right Tool</h2>
+<h3 id="cursor-the-fast-local-editor">Cursor: The Fast Local Editor</h3>
+<p><strong>Best for:</strong> Quick fixes, small adjustments, and iterative fine-tuning during SDK upgrades.</p>
+<p><strong>Strengths:</strong></p>
 <ul>
-<li>Long document reading and modification planning</li>
-<li>SDK header file analysis and batch modifications</li>
-<li>Large-scale refactoring across multiple files (.h, .cpp, .cs)</li>
-<li>When you need detailed explanations of changes</li>
-<li>Complex architectural modifications</li>
+<li><strong>Seamless IDE Integration</strong>: AI assistance feels native to your editor</li>
+<li><strong>Fast Iteration</strong>: Make rapid adjustments and see immediate results</li>
+<li><strong>File-Level Context</strong>: Perfect for focused modifications within single files</li>
+<li><strong>Multiple Model Support</strong>: Switch between GPT-4, GPT-5, Claude Sonnet as needed</li>
 </ul>
-<p><strong>Weaknesses:</strong></p>
+<p><strong>In SDK Upgrade Context:</strong></p>
+<ul>
+<li>Fixing compilation errors after bulk modifications</li>
+<li>Adjusting wrapper method signatures</li>
+<li>Iterating on C# interop code</li>
+<li>Quick bug fixes discovered during testing</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+<li>Struggles with very large context windows</li>
+<li>Less effective for extensive cross-file modifications</li>
+<li>May lose context in long conversation threads</li>
+</ul>
+<h3 id="claude-code-the-comprehensive-upgrade-partner">Claude Code: The Comprehensive Upgrade Partner</h3>
+<p><strong>Best for:</strong> Large-scale SDK upgrades, comprehensive documentation analysis, and cross-file modifications.</p>
+<p><strong>Strengths:</strong></p>
+<ul>
+<li><strong>Large Context Handling</strong>: Can analyze entire SDK documentation sets</li>
+<li><strong>Deep Reasoning</strong>: Generates thoughtful migration plans</li>
+<li><strong>Cross-File Consistency</strong>: Handles .h, .cpp, and .cs modifications together</li>
+<li><strong>Stable Continuity</strong>: Maintains context across long sessions</li>
+<li><strong>Detailed Explanations</strong>: Provides rationale for each modification</li>
+</ul>
+<p><strong>In SDK Upgrade Context:</strong></p>
+<ul>
+<li>Reading SDK manuals and comparing versions</li>
+<li>Generating comprehensive modification plans</li>
+<li>Batch modifying multiple wrapper files</li>
+<li>Analyzing breaking changes across the entire codebase</li>
+<li>Generating migration reports and documentation</li>
+</ul>
+<p><strong>Limitations:</strong></p>
 <ul>
 <li>Official version can be expensive</li>
-<li>Less integrated with IDE workflow</li>
 <li>May feel slower for quick edits</li>
+<li>Less integrated with IDE workflow</li>
 </ul>
-<h3 id="practical-comparison-cursor--sonnet-vs-claude-code--sonnet">Practical Comparison: Cursor + Sonnet vs. Claude Code + Sonnet</h3>
-<p>Based on real-world experience with mixed C#/C++ codebases and SDK upgrades:</p>
+<h3 id="practical-comparison-for-sdk-upgrades">Practical Comparison for SDK Upgrades</h3>
+<p>Based on real-world experience upgrading C#/C++ mixed SDKs (1.0.6 → 1.2.2):</p>
 <p><strong>Cursor + Sonnet:</strong></p>
 <ul>
-<li>✅ <strong>Usable</strong> for daily modifications - no problem for routine work</li>
-<li>✅ Excellent for fast local editing and multiple fine-tuning iterations</li>
-<li>✅ Great for “select and modify” workflows</li>
-<li>⚠️ Less optimal for extensive cross-file modifications</li>
+<li>✅ <strong>Usable</strong> for daily modifications during SDK upgrades</li>
+<li>✅ Excellent for fixing compilation errors and fine-tuning</li>
+<li>✅ Great for quick adjustments to wrapper implementations</li>
+<li>⚠️ Less optimal for analyzing entire SDK documentation sets</li>
 </ul>
 <p><strong>Claude Code + Sonnet:</strong></p>
 <ul>
-<li>✅ <strong>Official combination</strong> - smoother and more stable</li>
-<li>✅ Better for large context, cross-file continuous modifications</li>
+<li>✅ <strong>Official combination</strong> - smoother and more stable for large upgrades</li>
+<li>✅ Superior for large context, cross-file continuous modifications</li>
 <li>✅ Ideal for reading SDK documentation and generating modification plans</li>
-<li>✅ Superior batch modification capabilities</li>
-<li>💰 Cost consideration for official version</li>
+<li>✅ Excellent batch modification capabilities across multiple file types</li>
+<li>💰 Official version cost consideration</li>
 </ul>
-<h3 id="recommendation-strategy">Recommendation Strategy</h3>
-<p>For a typical C#/C++ mixed project with SDK upgrades (e.g., upgrading from 1.0.6 to 1.2.2):</p>
+<h2 id="recommended-strategy-for-sdk-upgrades">Recommended Strategy for SDK Upgrades</h2>
+<h3 id="phase-1-analysis-claude-code--sonnet">Phase 1: Analysis (Claude Code + Sonnet)</h3>
+<p><strong>Activity:</strong> Deep dive into SDK documentation</p>
 <ol>
-<li>
-<p><strong>Long modifications</strong>: Use Claude Code + Sonnet</p>
-<ul>
-<li>Reading SDK headers/manuals</li>
-<li>Generating comprehensive modification plans</li>
-<li>Batch modifying multiple .h/.cpp/.cs files</li>
-</ul>
-</li>
-<li>
-<p><strong>Quick fixes/small regressions</strong>: Use Cursor</p>
-<ul>
-<li>Local editing and iteration</li>
-<li>Selecting and modifying specific sections</li>
-<li>Fast fine-tuning</li>
-</ul>
-</li>
+<li>Upload SDK headers from both versions (1.0.6 and 1.2.2)</li>
+<li>Ask Claude to identify all breaking changes</li>
+<li>Generate a comprehensive migration plan</li>
+<li>Map deprecated functions to new implementations</li>
 </ol>
-<p><strong>Critical Tip:</strong> Use the same model for the same modification chain. Don’t frequently switch models midway—different context strategies can cause previous modifications to be overturned by subsequent ones.</p>
-<h2 id="best-model-combinations-for-vibe-coding">Best Model Combinations for Vibe Coding</h2>
-<p>The art of vibe coding lies in strategically combining AI models to maximize productivity. Here are proven combinations for C# .NET development:</p>
+<p><strong>Why Claude Code:</strong> Large context window can process entire SDK documentation sets and maintain consistency.</p>
+<h3 id="phase-2-bulk-modifications-claude-code--sonnet">Phase 2: Bulk Modifications (Claude Code + Sonnet)</h3>
+<p><strong>Activity:</strong> Execute planned modifications</p>
+<ol>
+<li>Batch modify header files (.h) based on SDK changes</li>
+<li>Update wrapper implementations (.cpp) consistently</li>
+<li>Adjust C# managed wrappers (.cs) in parallel</li>
+<li>Ensure all layers stay synchronized</li>
+</ol>
+<p><strong>Why Claude Code:</strong> Cross-file modification capabilities ensure consistency across .h, .cpp, and .cs files.</p>
+<h3 id="phase-3-fine-tuning-cursor">Phase 3: Fine-Tuning (Cursor)</h3>
+<p><strong>Activity:</strong> Quick fixes and iterations</p>
+<ol>
+<li>Fix compilation errors discovered during testing</li>
+<li>Adjust interop signatures</li>
+<li>Fine-tune C# wrapper methods</li>
+<li>Iterate on error handling</li>
+</ol>
+<p><strong>Why Cursor:</strong> Fast, local editing for quick adjustments without losing momentum.</p>
+<h3 id="critical-rule-consistency-within-modification-chains">Critical Rule: Consistency Within Modification Chains</h3>
+<p><strong>Don’t switch AI tools mid-upgrade.</strong> Use the same model for the same modification chain. Different context strategies can cause previous modifications to be overturned by subsequent ones.</p>
+<p><strong>Example Workflow:</strong></p>
+<ul>
+<li>Start SDK upgrade planning with Claude Code + Sonnet</li>
+<li>Continue all bulk modifications with Claude Code + Sonnet</li>
+<li>Only switch to Cursor for quick fixes and fine-tuning</li>
+<li>Don’t alternate between Cursor and Claude Code for the same set of files</li>
+</ul>
+<h2 id="best-ai-model-combinations-for-sdk-upgrades">Best AI Model Combinations for SDK Upgrades</h2>
 <h3 id="essential-workflow-trae--codex">Essential Workflow: Trae + Codex</h3>
 <p><strong>Setup:</strong></p>
 <ul>
-<li>Trae running locally for timely questioning and modifications</li>
-<li>Project files uploaded to GitHub</li>
-<li>Codex running files from the cloud</li>
+<li>Trae running locally for interactive queries and modifications</li>
+<li>Project files synced to GitHub</li>
+<li>Codex running from the cloud for testing</li>
 </ul>
-<p><strong>Workflow:</strong></p>
+<p><strong>Why It Works:</strong></p>
 <ul>
-<li>Use Trae for interactive queries and immediate modifications</li>
-<li>Use Codex for execution and testing</li>
-<li>Parallel processing enables faster iteration</li>
+<li>Trae provides immediate responses for SDK-specific questions</li>
+<li>Codex handles execution and validation in parallel</li>
+<li>Enables faster iteration without context switching</li>
 </ul>
-<p><strong>Why it works:</strong> Combines local responsiveness with cloud-based execution power.</p>
-<h3 id="advanced-multiple-tools-simultaneously">Advanced: Multiple Tools Simultaneously</h3>
-<p>In extreme situations, open 3+ AI tools simultaneously:</p>
+<h3 id="advanced-multiple-tools-in-parallel">Advanced: Multiple Tools in Parallel</h3>
+<p>In complex SDK upgrades, run multiple AI tools simultaneously:</p>
 <p><strong>Configuration:</strong></p>
 <ul>
-<li>Pull Codex’s generation version count to 4</li>
-<li>Each tool running parallel generations</li>
+<li>Claude Code analyzing SDK documentation</li>
+<li>Cursor handling quick fixes</li>
+<li>Codex running multiple generation versions (set to 4)</li>
+<li>Each tool contributing different perspectives</li>
 </ul>
-<p><strong>Expected Output:</strong> For the same prompt or requirement, theoretically get at least 6 different results</p>
+<p><strong>Expected Output:</strong> For the same SDK function migration, get multiple implementation approaches to compare.</p>
 <p><strong>Benefits:</strong></p>
 <ul>
-<li>Explore multiple solution approaches simultaneously</li>
-<li>Compare different AI perspectives</li>
-<li>Select the best solution from a pool of options</li>
+<li>Explore different SDK integration patterns</li>
+<li>Compare AI-generated wrapper implementations</li>
+<li>Select the most robust solution from multiple options</li>
 </ul>
-<h3 id="model-combinations-breakdown">Model Combinations Breakdown</h3>
+<h3 id="model-specific-roles-in-sdk-upgrades">Model-Specific Roles in SDK Upgrades</h3>
 <p><strong>1. Trae International Edition (Claude 4.5 Sonnet)</strong></p>
 <ul>
-<li>Subscription required for full access</li>
-<li>Highly useful for complex reasoning</li>
-<li>Best for: Architecture decisions, multi-file modifications</li>
+<li>Subscription required</li>
+<li>Best for: SDK architecture analysis, breaking change identification</li>
+<li>Use when: You need deep reasoning about SDK design patterns</li>
 </ul>
 <p><strong>2. Qwen Code</strong></p>
 <ul>
-<li>2000 free credits daily (often unused fully)</li>
+<li>2000 free credits daily</li>
 <li>Embedded within Trae for collaborative use</li>
-<li>Equivalent to “multi-threaded operation”</li>
-<li>Best for: Parallel processing, code generation</li>
+<li>Best for: Parallel processing during bulk modifications</li>
+<li>Use when: Generating multiple SDK wrapper variations</li>
 </ul>
 <p><strong>3. OpenAI Codex</strong></p>
 <ul>
-<li>Recently updated with significant improvements</li>
-<li>Runs purely in the background</li>
-<li>Many credits available</li>
-<li>Has become a mainstay tool</li>
-<li>Best for: Background code generation, testing</li>
+<li>Recently improved significantly</li>
+<li>Runs in background</li>
+<li>Best for: SDK wrapper testing and validation</li>
+<li>Use when: You need to test SDK integration patterns</li>
 </ul>
-<p><strong>4. Qoder (Alternative)</strong></p>
+<p><strong>4. Qoder</strong></p>
 <ul>
-<li>Exceptional at generating detailed, professional README files</li>
-<li>Can serve as a “technical project manager”</li>
-<li>Best for: Documentation, project management</li>
+<li>Exceptional at generating documentation</li>
+<li>Best for: Creating SDK migration guides and README files</li>
+<li>Use when: Documenting SDK upgrade changes for the team</li>
 </ul>
 <p><strong>5. Claude Code (via Kimi or GLM)</strong></p>
 <ul>
-<li>Official version can be expensive</li>
-<li>Alternative versions available through Kimi/GLM</li>
-<li>Occasionally paired with DeepSeek</li>
-<li>Best for: Complex multi-file modifications when official Claude Code isn’t accessible</li>
+<li>Alternative to official version</li>
+<li>Best for: Complex SDK analysis when official Claude Code isn’t accessible</li>
+<li>Use when: Budget constraints require alternative access</li>
 </ul>
-<h2 id="ide-vs-cli-the-vibe-coding-environment-debate">IDE vs. CLI: The Vibe Coding Environment Debate</h2>
-<p>Your development environment significantly impacts your vibe coding experience. Let’s explore both approaches:</p>
-<h3 id="ide-centric-vibe-coding">IDE-Centric Vibe Coding</h3>
-<p><strong>Advantages:</strong></p>
-<ul>
-<li><strong>Rich Feature Set</strong>: Full debugging, IntelliSense, refactoring tools</li>
-<li><strong>Visual Feedback</strong>: See your entire project structure visually</li>
-<li><strong>Integration</strong>: AI assistants work seamlessly within familiar tools</li>
-<li><strong>Productivity Features</strong>: Code snippets, templates, extensions</li>
-<li><strong>Collaboration</strong>: Built-in Git integration, debugging sessions</li>
-</ul>
-<p><strong>Best For:</strong></p>
-<ul>
-<li>Large codebases requiring navigation</li>
-<li>Complex debugging scenarios</li>
-<li>Team collaboration</li>
-<li>When visual context is important</li>
-</ul>
-<p><strong>Tools:</strong> Visual Studio, VS Code (with extensions), Rider</p>
-<h3 id="cli-driven-vibe-coding">CLI-Driven Vibe Coding</h3>
-<p><strong>Advantages:</strong></p>
-<ul>
-<li><strong>Speed</strong>: Lightning-fast operations</li>
-<li><strong>Resource Efficiency</strong>: Lower overhead than full IDEs</li>
-<li><strong>Focus</strong>: Minimizes distractions</li>
-<li><strong>Scriptability</strong>: Automate repetitive tasks</li>
-<li><strong>Terminal Power</strong>: Combine with Unix tools</li>
-</ul>
-<p><strong>Best For:</strong></p>
-<ul>
-<li>Quick edits and deployments</li>
-<li>Remote development</li>
-<li>When maximum performance is needed</li>
-<li>Experienced developers comfortable with terminal workflows</li>
-</ul>
-<p><strong>Tools:</strong> vim, neovim, emacs (with AI plugins)</p>
-<h3 id="hybrid-approach-the-best-of-both-worlds">Hybrid Approach: The Best of Both Worlds</h3>
-<p>Many vibe coders adopt a hybrid approach:</p>
-<p><strong>Primary IDE</strong>: VS Code or Visual Studio for:</p>
-<ul>
-<li>Code exploration and understanding</li>
-<li>Debugging complex issues</li>
-<li>Large refactoring tasks</li>
-</ul>
-<p><strong>Terminal</strong>: For:</p>
-<ul>
-<li>Quick file operations</li>
-<li>Git workflows</li>
-<li>Testing and deployment scripts</li>
-<li>When speed is critical</li>
-</ul>
-<p><strong>AI Integration</strong>: Both environments:</p>
-<ul>
-<li>IDE for interactive AI assistance</li>
-<li>CLI for batch operations and automation</li>
-</ul>
-<h2 id="practical-vibe-coding-workflow-for-c-net">Practical Vibe Coding Workflow for C# .NET</h2>
-<p>Here’s a proven workflow for tackling stale codebases:</p>
-<h3 id="1-understanding-phase">1. Understanding Phase</h3>
-<p><strong>Tools:</strong> Claude Code + Sonnet, Cursor
-<strong>Activities:</strong></p>
-<ul>
-<li>Read SDK documentation and headers</li>
-<li>Explore codebase structure</li>
-<li>Identify key architectural patterns</li>
-<li>Generate questions and analysis</li>
-</ul>
-<h3 id="2-planning-phase">2. Planning Phase</h3>
-<p><strong>Tools:</strong> Claude Code + Sonnet
-<strong>Activities:</strong></p>
-<ul>
-<li>Generate modification plans</li>
+<h2 id="workflow-example-upgrading-sdk-106--122">Workflow Example: Upgrading SDK 1.0.6 → 1.2.2</h2>
+<h3 id="step-1-understanding-claude-code--sonnet">Step 1: Understanding (Claude Code + Sonnet)</h3>
+<p><strong>What to do:</strong></p>
+<ol>
+<li>Upload both SDK documentation sets</li>
+<li>Ask: “Analyze breaking changes between SDK 1.0.6 and 1.2.2”</li>
+<li>Review comprehensive list of changes</li>
+<li>Generate migration priority matrix</li>
+</ol>
+<p><strong>Expected output:</strong> Complete list of API changes, deprecations, and new features requiring wrapper updates.</p>
+<h3 id="step-2-planning-claude-code--sonnet">Step 2: Planning (Claude Code + Sonnet)</h3>
+<p><strong>What to do:</strong></p>
+<ol>
+<li>Upload your current wrapper code</li>
+<li>Ask: “Generate a modification plan for upgrading from SDK 1.0.6 to 1.2.2”</li>
 <li>Identify cross-file dependencies</li>
 <li>Plan batch modifications</li>
-<li>Consider edge cases</li>
-</ul>
-<h3 id="3-implementation-phase">3. Implementation Phase</h3>
-<p><strong>Primary:</strong> Claude Code + Sonnet for extensive changes
-<strong>Secondary:</strong> Cursor for quick fixes
-<strong>Activities:</strong></p>
-<ul>
-<li>Execute planned modifications</li>
-<li>Make quick adjustments</li>
-<li>Test incrementally</li>
-<li>Iterate based on feedback</li>
-</ul>
-<h3 id="4-validation-phase">4. Validation Phase</h3>
-<p><strong>Tools:</strong> Codex, multiple model comparison
-<strong>Activities:</strong></p>
-<ul>
-<li>Run tests and validation</li>
-<li>Compare multiple solution approaches</li>
-<li>Select best implementation</li>
-<li>Document changes</li>
-</ul>
-<h2 id="cultivating-the-vibe">Cultivating the Vibe</h2>
-<p>Success in vibe coding comes from:</p>
+</ol>
+<p><strong>Expected output:</strong> Detailed modification plan identifying which files need changes and how they relate.</p>
+<h3 id="step-3-implementation-claude-code--sonnet">Step 3: Implementation (Claude Code + Sonnet)</h3>
+<p><strong>What to do:</strong></p>
 <ol>
-<li><strong>Tool Mastery</strong>: Know your AI assistants inside and out</li>
-<li><strong>Workflow Optimization</strong>: Streamline repetitive tasks</li>
-<li><strong>Context Management</strong>: Maintain consistency within modification chains</li>
-<li><strong>Parallel Processing</strong>: Leverage multiple tools simultaneously</li>
-<li><strong>Iterative Approach</strong>: Make small, testable changes</li>
-<li><strong>Documentation</strong>: Generate professional READMEs and docs with Qoder</li>
+<li>Execute planned modifications in batches</li>
+<li>Start with header files, then wrappers, then C# code</li>
+<li>Maintain consistency across all layers</li>
+<li>Use Claude Code for entire modification chain</li>
+</ol>
+<p><strong>Expected output:</strong> Modified codebase with SDK 1.2.2 integration across all file types.</p>
+<h3 id="step-4-validation-cursor--codex">Step 4: Validation (Cursor + Codex)</h3>
+<p><strong>What to do:</strong></p>
+<ol>
+<li>Fix compilation errors with Cursor</li>
+<li>Test SDK integration with Codex</li>
+<li>Compare multiple implementation approaches</li>
+<li>Fine-tune interop code</li>
+</ol>
+<p><strong>Expected output:</strong> Working SDK 1.2.2 integration with all hardware features functional.</p>
+<h2 id="ide-vs-cli-for-sdk-upgrades">IDE vs. CLI for SDK Upgrades</h2>
+<h3 id="ide-centric-approach-recommended">IDE-Centric Approach (Recommended)</h3>
+<p><strong>Why it matters for SDK upgrades:</strong></p>
+<ul>
+<li>Visual Studio/Rider provides excellent IntelliSense for C++ wrapper debugging</li>
+<li>Full debugging capabilities for SDK interop issues</li>
+<li>Integrated Git for managing modification branches</li>
+<li>Project navigation helps understand wrapper architecture</li>
+</ul>
+<p><strong>Tools:</strong> Visual Studio 2022, Rider, VS Code with C++ extensions</p>
+<h3 id="cli-approach-for-terminal-power-users">CLI Approach (For Terminal Power Users)</h3>
+<p><strong>Useful for:</strong></p>
+<ul>
+<li>Bulk find-and-replace operations during SDK upgrades</li>
+<li>Git workflows for managing SDK upgrade branches</li>
+<li>Automated testing scripts</li>
+<li>Quick file operations</li>
+</ul>
+<p><strong>Tools:</strong> vim, neovim with LSP for C++ and C#</p>
+<h3 id="hybrid-approach-best-of-both-worlds">Hybrid Approach (Best of Both Worlds)</h3>
+<p><strong>Recommended workflow:</strong></p>
+<ul>
+<li><strong>Primary IDE:</strong> Visual Studio or Rider for SDK wrapper development</li>
+<li><strong>AI Integration:</strong> Cursor for quick fixes, Claude Code for bulk modifications</li>
+<li><strong>Terminal:</strong> Git operations, testing scripts, deployment</li>
+<li><strong>Both environments:</strong> Use AI tools in both for different tasks</li>
+</ul>
+<h2 id="critical-tips-for-sdk-upgrade-success">Critical Tips for SDK Upgrade Success</h2>
+<ol>
+<li><strong>Context Management</strong>: Use the same AI model for related modifications</li>
+<li><strong>Documentation First</strong>: Always analyze SDK documentation before modifying code</li>
+<li><strong>Batch Modifications</strong>: Group related changes and apply them together</li>
+<li><strong>Test Incrementally</strong>: Validate each SDK function migration before moving on</li>
+<li><strong>Version Control</strong>: Commit SDK upgrade stages for easy rollback</li>
+<li><strong>Document Changes</strong>: Use Qoder to generate SDK migration documentation</li>
 </ol>
 <h2 id="conclusion">Conclusion</h2>
-<p>Vibe coding transforms the challenge of working with stale C# .NET codebases into an opportunity to demonstrate mastery of modern development tools and AI assistants. By strategically combining Cursor, Claude Code, and other AI tools, choosing the right model combinations, and optimizing your workflow, you can maintain productivity, quality, and developer happiness even in the most challenging legacy code environments.</p>
-<p>The future of software development isn’t just about the code—it’s about the vibe you create while crafting it.</p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+<p>Upgrading stale SDKs in C#/C++ mixed projects doesn’t have to be a nightmare. With vibe coding and strategic use of AI assistants, you can transform breaking changes from a source of stress into a manageable, systematic process.</p>
+<p>The key is understanding which tool to use when:</p>
+<ul>
+<li><strong>Claude Code + Sonnet</strong> for analyzing SDK documentation and bulk modifications</li>
+<li><strong>Cursor</strong> for quick fixes and fine-tuning</li>
+<li><strong>Multiple tools</strong> for exploring different implementation approaches</li>
+</ul>
+<p>Remember: The same AI model for the same modification chain. Consistency is everything when upgrading SDKs across multiple file types.</p>
+<p>The future of SDK upgrades isn’t just about reading documentation faster—it’s about leveraging AI to maintain context, consistency, and productivity throughout the entire migration process.</p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 Victor Zhang. All rights reserved.
 <div class="social-links" data-astro-cid-sz7xmlte> <a href="https://medium.com/@zywkloo" target="_blank" title="Medium Blog" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Read Victor's Medium articles</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M13.54 12l6.23-6.23V5.24L15.89 2L9.23 8.66v-2.5L5.24 5.24v.96l3.99 3.99L5.24 14v2.23l4.04 2.72v-2.5l4.93-4.93z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://www.linkedin.com/in/yiweiz315/" target="_blank" title="LinkedIn" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Connect with Victor on LinkedIn</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="mailto:yiweizhangca@gmail.com" title="Email" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Email Victor</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://zzz-movie-rec-system.vercel.app/" target="_blank" title="Movie Rec System" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Movie Recommendation System</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://github.com/ZZZ-RecSys/ZZZ-MovieRecSystem" target="_blank" title="GitHub" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Visit Victor's GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path> </svg> </a> </div> </footer>  </body></html>
