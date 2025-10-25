@@ -73,6 +73,17 @@ const MEDIUM_URL = 'https://medium.com/@zywkloo';
 							</ul>
 						</div>
 						<div class="expertise-card">
+							<div class="expertise-icon">💻</div>
+							<h3>Desktop Development</h3>
+							<p>Building robust desktop applications using C# .NET and C++ with modern SDK integration.</p>
+							<ul class="expertise-skills">
+								<li>C#</li>
+								<li>.NET 4.8</li>
+								<li>C++17</li>
+								<li>CMake</li>
+							</ul>
+						</div>
+						<div class="expertise-card">
 							<div class="expertise-icon">🎮</div>
 							<h3>Game Design</h3>
 							<p>As design lead, achieved #1 in Sports and #9 in Games categories in China's App Store.</p>
@@ -341,7 +352,13 @@ const MEDIUM_URL = 'https://medium.com/@zywkloo';
 
 	@media (min-width: 768px) {
 		.expertise-grid {
-			grid-template-columns: repeat(3, 1fr);
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.expertise-grid {
+			grid-template-columns: repeat(4, 1fr);
 		}
 	}
 
