@@ -13,5 +13,5 @@ export const LINKEDIN_URL = 'https://linkedin.com/in/yiweiZ315';
 export const EMAIL = 'yiweizhangca@gmail.com';
 
 // Profile
-export const PROFILE_IMAGE = 'https://raw.githubusercontent.com/zywkloo/zywkloo.github.io/master/assets/img/sharding-gerenciamento-usuarios/Avatar.jpg';
+export const PROFILE_IMAGE = 'https://avatars.githubusercontent.com/u/18610590?s=400&u=bb73412244714c5465010503fee1c6381c8b46fe&v=4';
 export const USER_TITLE = 'Full Stack & Mobile Engineer';
