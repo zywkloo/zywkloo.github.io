@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Yiwei Zhang | Full Stack &#38; Mobile Engineer" href="https://zywkloo.github.io/rss.xml"><meta name="generator" content="Astro v5.15.1"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://zywkloo.github.io/blog/retrieval-augmented-generation-rag/"><!-- Primary Meta Tags --><title>Retrieval Augmented Generation (RAG): The Power of Hybrid Search</title><meta name="title" content="Retrieval Augmented Generation (RAG): The Power of Hybrid Search"><meta name="description" content="An in-depth exploration of RAG, comparing vector and keyword retrieval, understanding hybrid search strategies, and why RAG is essential for modern LLM applications."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://zywkloo.github.io/blog/retrieval-augmented-generation-rag/"><meta property="og:title" content="Retrieval Augmented Generation (RAG): The Power of Hybrid Search"><meta property="og:description" content="An in-depth exploration of RAG, comparing vector and keyword retrieval, understanding hybrid search strategies, and why RAG is essential for modern LLM applications."><meta property="og:image" content="https://zywkloo.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://zywkloo.github.io/blog/retrieval-augmented-generation-rag/"><meta property="twitter:title" content="Retrieval Augmented Generation (RAG): The Power of Hybrid Search"><meta property="twitter:description" content="An in-depth exploration of RAG, comparing vector and keyword retrieval, understanding hybrid search strategies, and why RAG is essential for modern LLM applications."><meta property="twitter:image" content="https://zywkloo.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><link rel="stylesheet" href="/_astro/_slug_.CvghITTs.css">
+<style>main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.hero-image[data-astro-cid-bvzihdzo]{width:100%;position:relative;overflow:hidden;border-radius:12px;box-shadow:var(--box-shadow)}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;margin:0 auto;width:100%;height:auto}.hero-overlay[data-astro-cid-bvzihdzo]{position:absolute;inset:0;background:linear-gradient(to bottom,#0000004d,#0000001a 40%,#0000,#0000001a,#0000004d);pointer-events:none;border-radius:12px}.prose[data-astro-cid-bvzihdzo]{width:720px;max-width:calc(100% - 2em);margin:auto;padding:1em;color:rgb(var(--gray-dark))}.title[data-astro-cid-bvzihdzo]{margin-bottom:1em;padding:1em 0;text-align:center;line-height:1}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0 0 .5em}.date[data-astro-cid-bvzihdzo]{margin-bottom:.5em;color:rgb(var(--gray))}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:italic}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Yiwei Zhang | Full Stack &amp; Mobile Engineer</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Home </a>  <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Blog </a>  <a href="/about" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> About </a>  </div> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://m.webtoo.ls/@astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Mastodon</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path></svg> </a> </div> </nav> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo> <img src="/_astro/rag-hero.DCZ0dyr7_Z2voOnL.svg" alt data-astro-cid-bvzihdzo="true" loading="lazy" decoding="async" fetchpriority="auto" width="1020" height="510"> <div class="hero-overlay" data-astro-cid-bvzihdzo></div> </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2025-01-10T08:00:00.000Z"> Jan 10, 2025 </time>  </div> <h1 data-astro-cid-bvzihdzo>Retrieval Augmented Generation (RAG): The Power of Hybrid Search</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2 id="what-is-rag">What is RAG?</h2>
+<p>Retrieval Augmented Generation (RAG) is a powerful paradigm that combines information retrieval systems with the generative capabilities of Large Language Models (LLMs). Instead of relying solely on the LLM’s internal knowledge, RAG retrieves relevant information from external knowledge bases and uses it as context for generating more accurate, grounded responses.</p>
+<h3 id="the-problem-rag-solves">The Problem RAG Solves</h3>
+<p>Traditional LLMs face several critical limitations:</p>
+<ul>
+<li><strong>Hallucinations</strong>: They may generate plausible-sounding but factually incorrect information</li>
+<li><strong>Outdated knowledge</strong>: Training data has a cutoff date, making them unaware of recent events</li>
+<li><strong>Lack of domain expertise</strong>: They struggle with specialized or proprietary information</li>
+<li><strong>No source attribution</strong>: Users can’t verify where information came from</li>
+</ul>
+<p>RAG addresses these issues by grounding LLM responses in external, retrievable, and verifiable data sources.</p>
+<h2 id="vector-retrieval-vs-keyword-retrieval-the-core-difference">Vector Retrieval vs. Keyword Retrieval: The Core Difference</h2>
+<p>Understanding the distinction between vector and keyword retrieval is fundamental to effective RAG implementation.</p>
+<h3 id="vector-retrieval-抓神---grasping-the-spirit">Vector Retrieval (抓神 - Grasping the Spirit)</h3>
+<p><strong>How it works:</strong></p>
+<ul>
+<li>Converts text into high-dimensional numerical vectors (embeddings)</li>
+<li>Understands semantic meaning and conceptual relationships</li>
+<li>Retrieves documents based on similarity in the embedding space</li>
+</ul>
+<p><strong>Example Scenario:</strong></p>
+<ul>
+<li><strong>Query</strong>: “Mysteries of the Universe”</li>
+<li><strong>Vector retrieval results</strong>: “Galaxy Evolution”, “What are Black Holes?”, “Cosmic Phenomena”</li>
+<li><strong>Why it works</strong>: These results capture the semantic intent even without exact keyword matches</li>
+</ul>
+<p><strong>Strengths:</strong></p>
+<ul>
+<li>Excellent at understanding user intent and context</li>
+<li>Handles synonyms and related concepts naturally</li>
+<li>Ideal for exploratory queries and broad topic searches</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+<li>Struggles with precise keywords and specific identifiers</li>
+<li>May fail with exact proper nouns like “GRPO-3080”</li>
+<li>Requires embedding models and vector databases</li>
+</ul>
+<h3 id="keyword-retrieval-抓形---grasping-the-form">Keyword Retrieval (抓形 - Grasping the Form)</h3>
+<p><strong>How it works:</strong></p>
+<ul>
+<li>Uses traditional information retrieval techniques (e.g., BM25)</li>
+<li>Scores documents based on Term Frequency (TF) and Inverse Document Frequency (IDF)</li>
+<li>The more a word appears in a document and the rarer it is across the corpus, the higher the relevance score</li>
+</ul>
+<p><strong>Example Scenario:</strong></p>
+<ul>
+<li><strong>Query</strong>: “GRPO-3080”</li>
+<li><strong>Keyword retrieval results</strong>: “Document: GRPO-3080 Specifications”</li>
+<li><strong>Why it works</strong>: Exact keyword matching provides precise targeting</li>
+</ul>
+<p><strong>Strengths:</strong></p>
+<ul>
+<li>Unparalleled precision for exact matches</li>
+<li>Highly effective with proper nouns, codes, and specific identifiers</li>
+<li>Works like a “surgical knife” for precise document location</li>
+<li>Fast and computationally efficient</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+<li>Completely lacks semantic understanding</li>
+<li>Cannot recognize that “汽车” (car) and “轿车” (sedan) are synonyms</li>
+<li>Misses semantically related content without exact keyword overlap</li>
+<li>“Ruthlessly ignores” conceptually relevant documents</li>
+</ul>
+<h3 id="the-fundamental-dichotomy">The Fundamental Dichotomy</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Aspect</th><th>Vector Retrieval</th><th>Keyword Retrieval</th></tr></thead><tbody><tr><td><strong>Core Philosophy</strong></td><td>Grasping the spirit (抓神)</td><td>Grasping the form (抓形)</td></tr><tr><td><strong>Strengths</strong></td><td>Semantic understanding, concept matching</td><td>Precision, exact matches</td></tr><tr><td><strong>Weaknesses</strong></td><td>Struggles with specific IDs/codes</td><td>Misses semantic relationships</td></tr><tr><td><strong>Best For</strong></td><td>Broad queries, exploratory search</td><td>Specific terms, proper nouns</td></tr><tr><td><strong>Example</strong></td><td>”Mysteries of the Universe” → Galaxy topics</td><td>”GRPO-3080” → Exact spec doc</td></tr></tbody></table>
+<h2 id="hybrid-search-achieving-112">Hybrid Search: Achieving 1+1>2</h2>
+<p>The solution to this dichotomy is <strong>Hybrid Search</strong> - combining the “spirit” of vector search with the “form” of keyword search.</p>
+<h3 id="how-hybrid-search-works">How Hybrid Search Works</h3>
+<ol>
+<li><strong>Parallel Execution</strong>: Run both vector search and keyword search simultaneously</li>
+<li><strong>Result Merging</strong>: Combine and re-rank results using fusion algorithms (e.g., RRF - Reciprocal Rank Fusion)</li>
+<li><strong>Comprehensive Coverage</strong>: Ensure both semantically relevant and keyword-exact matches are included</li>
+</ol>
+<h3 id="why-its-superior">Why It’s Superior</h3>
+<p>Hybrid search addresses the fundamental tension in information retrieval:</p>
+<ul>
+<li><strong>Users ask vague questions</strong>: Vector search handles semantic intent</li>
+<li><strong>Users need precise information</strong>: Keyword search delivers exact matches</li>
+<li><strong>Real-world scenarios are complex</strong>: Hybrid search accommodates both</li>
+</ul>
+<h3 id="implementation-strategies">Implementation Strategies</h3>
+<p><strong>RRF (Reciprocal Rank Fusion) Algorithm:</strong></p>
+<ul>
+<li>Assigns scores based on reciprocal ranks from each search method</li>
+<li>Combines rankings to produce a unified result set</li>
+<li>Ensures neither method dominates the final output</li>
+</ul>
+<p><strong>Weighted Approaches:</strong></p>
+<ul>
+<li>Adjust weights based on query type</li>
+<li>Knowledge queries → emphasize vector search</li>
+<li>Specific lookups → emphasize keyword search</li>
+</ul>
+<h2 id="popular-rag-implementation-pipelines">Popular RAG Implementation Pipelines</h2>
+<p>A standard RAG pipeline consists of several interconnected components:</p>
+<h3 id="1-document-ingestion--processing">1. Document Ingestion &#x26; Processing</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Raw Documents → Cleaning → Chunking → Metadata Extraction</span></span></code></pre>
+<ul>
+<li><strong>Chunking Strategy</strong>: Balance between too small (lose context) and too large (irrelevant content)</li>
+<li><strong>Metadata</strong>: Store document source, creation date, type, etc.</li>
+</ul>
+<h3 id="2-embedding-generation">2. Embedding Generation</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Text Chunks → Embedding Model → Vector Representations</span></span></code></pre>
+<ul>
+<li><strong>Popular Models</strong>: OpenAI text-embedding-ada-002, sentence-transformers, Cohere</li>
+<li><strong>Vector Dimensions</strong>: Typically 768-1536 dimensions</li>
+<li><strong>Semantic Quality</strong>: Determines retrieval effectiveness</li>
+</ul>
+<h3 id="3-vector-database-storage">3. Vector Database Storage</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Embeddings + Metadata → Vector Database (Pinecone, Weaviate, Milvus, Qdrant)</span></span></code></pre>
+<ul>
+<li><strong>Key Features</strong>: Fast similarity search, scalable storage, metadata filtering</li>
+<li><strong>Trade-offs</strong>: Cost, performance, deployment complexity</li>
+</ul>
+<h3 id="4-query-processing--retrieval">4. Query Processing &#x26; Retrieval</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>User Query → Embedding → Vector Search → Keyword Search → Hybrid Fusion → Top-K Results</span></span></code></pre>
+<ul>
+<li><strong>Top-K Selection</strong>: Retrieve 5-20 most relevant chunks</li>
+<li><strong>Diversity</strong>: Ensure results cover different aspects of the query</li>
+</ul>
+<h3 id="5-context-augmentation--generation">5. Context Augmentation &#x26; Generation</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Retrieved Chunks + System Prompt + User Query → LLM → Generated Response</span></span></code></pre>
+<ul>
+<li><strong>Prompt Engineering</strong>: Include retrieved context effectively</li>
+<li><strong>Citation</strong>: Reference source documents for transparency</li>
+</ul>
+<h2 id="why-rag-isnt-just-a-trend">Why RAG Isn’t Just a Trend</h2>
+<p>Some may perceive RAG as a passing trend, but several factors make it a cornerstone of practical LLM applications:</p>
+<h3 id="practical-necessity">Practical Necessity</h3>
+<ol>
+<li><strong>Factuality</strong>: Reduces hallucinations by grounding responses in verifiable data</li>
+<li><strong>Currency</strong>: Access to up-to-date information without LLM retraining</li>
+<li><strong>Domain Expertise</strong>: Enables LLMs to operate in specialized domains</li>
+<li><strong>Transparency</strong>: Source citations improve trust and explainability</li>
+<li><strong>Cost Efficiency</strong>: Cheaper to update knowledge bases than retrain LLMs</li>
+</ol>
+<h3 id="technical-maturity">Technical Maturity</h3>
+<ul>
+<li>Well-established retrieval algorithms (BM25, TF-IDF)</li>
+<li>Robust embedding models and vector databases</li>
+<li>Proven in production systems</li>
+<li>Active development and optimization</li>
+</ul>
+<h3 id="real-world-impact">Real-World Impact</h3>
+<p>From customer support chatbots to legal document analysis, RAG enables LLMs to be reliable, knowledgeable, and adaptable partners in professional applications.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>RAG represents the bridge between LLMs’ linguistic capabilities and the need for accurate, current, domain-specific information. By understanding the complementary strengths of vector and keyword retrieval, and implementing effective hybrid search strategies, we can build RAG systems that truly achieve 1+1>2 - combining semantic understanding with precise targeting to deliver comprehensive, accurate responses.</p>
+<p>The future of LLM applications lies not in larger models alone, but in smarter retrieval and augmentation strategies. RAG is here to stay.</p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 Victor Zhang. All rights reserved.
+<div class="social-links" data-astro-cid-sz7xmlte> <a href="https://medium.com/@zywkloo" target="_blank" title="Medium Blog" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Read Victor's Medium articles</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M13.54 12l6.23-6.23V5.24L15.89 2L9.23 8.66v-2.5L5.24 5.24v.96l3.99 3.99L5.24 14v2.23l4.04 2.72v-2.5l4.93-4.93z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://www.linkedin.com/in/yiweiz315/" target="_blank" title="LinkedIn" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Connect with Victor on LinkedIn</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="mailto:yiweizhangca@gmail.com" title="Email" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Email Victor</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://zzz-movie-rec-system.vercel.app/" target="_blank" title="Movie Rec System" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Movie Recommendation System</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://github.com/ZZZ-RecSys/ZZZ-MovieRecSystem" target="_blank" title="GitHub" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Visit Victor's GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path> </svg> </a> </div> </footer>  </body></html>

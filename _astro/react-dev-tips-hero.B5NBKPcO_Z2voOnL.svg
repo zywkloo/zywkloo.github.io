@@ -1,0 +1,42 @@
+<svg width="1020" height="510" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#61dafb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#282c34;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="lightGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bgGradient)" />
+
+  <!-- React atom symbol -->
+  <circle cx="510" cy="200" r="120" fill="none" stroke="#61dafb" stroke-width="8" opacity="0.3"/>
+  <circle cx="450" cy="180" r="40" fill="#61dafb" opacity="0.8"/>
+  <circle cx="510" cy="260" r="40" fill="#61dafb" opacity="0.8"/>
+  <circle cx="570" cy="180" r="40" fill="#61dafb" opacity="0.8"/>
+  
+  <!-- Connection lines -->
+  <line x1="490" y1="200" x2="450" y2="180" stroke="#61dafb" stroke-width="6" opacity="0.5"/>
+  <line x1="490" y1="210" x2="510" y2="260" stroke="#61dafb" stroke-width="6" opacity="0.5"/>
+  <line x1="530" y1="210" x2="570" y2="180" stroke="#61dafb" stroke-width="6" opacity="0.5"/>
+  <line x1="530" y1="200" x2="510" y2="260" stroke="#61dafb" stroke-width="6" opacity="0.5"/>
+
+  <!-- Light bulb idea -->
+  <circle cx="800" cy="200" r="50" fill="url(#lightGradient)" opacity="0.9"/>
+  <path d="M800 170 L790 160 L810 160 Z" fill="#ffd700"/>
+  <path d="M800 250 L780 270 L820 270 Z" fill="#fff" opacity="0.6"/>
+
+  <!-- Tips/Code snippets -->
+  <rect x="100" y="150" width="200" height="120" rx="10" fill="#2c3e50" opacity="0.8"/>
+  <text x="200" y="190" font-family="Courier, monospace" font-size="18" fill="#61dafb" text-anchor="middle">&lt;Component /&gt;</text>
+  <text x="200" y="220" font-family="Courier, monospace" font-size="18" fill="#61dafb" text-anchor="middle">useState()</text>
+  <text x="200" y="250" font-family="Courier, monospace" font-size="18" fill="#61dafb" text-anchor="middle">useEffect()</text>
+
+  <!-- Title Text -->
+  <text x="510" y="400" font-family="Inter, sans-serif" font-size="60" fill="#ecf0f1" text-anchor="middle" font-weight="bold">React Dev Tips</text>
+  <text x="510" y="460" font-family="Inter, sans-serif" font-size="30" fill="#ecf0f1" text-anchor="middle" opacity="0.9">Essential Patterns &amp; Best Practices</text>
+</svg>
+

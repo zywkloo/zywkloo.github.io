@@ -64,7 +64,7 @@
   </g>
   
   <!-- Simplified Title -->
-  <text x="510" y="470" font-family="Inter, sans-serif" font-size="56" font-weight="bold" fill="white" text-anchor="middle">JavaScript Data Visualization</text>
+  <text x="510" y="430" font-family="Inter, sans-serif" font-size="56" font-weight="bold" fill="white" text-anchor="middle">JavaScript Data Visualization</text>
   
   <!-- Decorative elements -->
   <circle cx="80" cy="80" r="3" fill="white" opacity="0.6"/>

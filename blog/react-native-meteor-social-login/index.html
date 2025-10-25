@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Yiwei Zhang | Full Stack &#38; Mobile Engineer" href="https://zywkloo.github.io/rss.xml"><meta name="generator" content="Astro v5.15.1"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://zywkloo.github.io/blog/react-native-meteor-social-login/"><!-- Primary Meta Tags --><title>Facebook/Google Login: A Solution with React-Native-Meteor</title><meta name="title" content="Facebook/Google Login: A Solution with React-Native-Meteor"><meta name="description" content="A comprehensive guide to implementing Facebook and Google OAuth authentication in React Native applications using Meteor"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://zywkloo.github.io/blog/react-native-meteor-social-login/"><meta property="og:title" content="Facebook/Google Login: A Solution with React-Native-Meteor"><meta property="og:description" content="A comprehensive guide to implementing Facebook and Google OAuth authentication in React Native applications using Meteor"><meta property="og:image" content="https://zywkloo.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://zywkloo.github.io/blog/react-native-meteor-social-login/"><meta property="twitter:title" content="Facebook/Google Login: A Solution with React-Native-Meteor"><meta property="twitter:description" content="A comprehensive guide to implementing Facebook and Google OAuth authentication in React Native applications using Meteor"><meta property="twitter:image" content="https://zywkloo.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><link rel="stylesheet" href="/_astro/_slug_.CvghITTs.css">
+<style>main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.hero-image[data-astro-cid-bvzihdzo]{width:100%;position:relative;overflow:hidden;border-radius:12px;box-shadow:var(--box-shadow)}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;margin:0 auto;width:100%;height:auto}.hero-overlay[data-astro-cid-bvzihdzo]{position:absolute;inset:0;background:linear-gradient(to bottom,#0000004d,#0000001a 40%,#0000,#0000001a,#0000004d);pointer-events:none;border-radius:12px}.prose[data-astro-cid-bvzihdzo]{width:720px;max-width:calc(100% - 2em);margin:auto;padding:1em;color:rgb(var(--gray-dark))}.title[data-astro-cid-bvzihdzo]{margin-bottom:1em;padding:1em 0;text-align:center;line-height:1}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0 0 .5em}.date[data-astro-cid-bvzihdzo]{margin-bottom:.5em;color:rgb(var(--gray))}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:italic}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Yiwei Zhang | Full Stack &amp; Mobile Engineer</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Home </a>  <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Blog </a>  <a href="/about" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> About </a>  </div> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://m.webtoo.ls/@astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Mastodon</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path></svg> </a> </div> </nav> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo> <img src="/_astro/react-native-meteor-hero.BQdZtaXD_Z2voOnL.svg" alt data-astro-cid-bvzihdzo="true" loading="lazy" decoding="async" fetchpriority="auto" width="1020" height="510"> <div class="hero-overlay" data-astro-cid-bvzihdzo></div> </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2019-09-05T07:00:00.000Z"> Sep 5, 2019 </time>  </div> <h1 data-astro-cid-bvzihdzo>Facebook/Google Login: A Solution with React-Native-Meteor</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2 id="introduction">Introduction</h2>
+<h3 id="disclaimer">Disclaimer</h3>
+<p>This article is not a 100%-original walkthrough but a derivative design and implementation inspired by Spencer Carli and other open-source implementations.</p>
+<p>All code snippets shown in this article are from public open-source projects. The proprietary part will not be provided here.</p>
+<h3 id="tech-stack-understanding-meteorjs">Tech Stack: Understanding Meteor.js</h3>
+<p>The Meteor web tech stack is a mature web full-stack solution. In the Meteor land, we’re used to luxuries like automatically synced data or being able to write database queries using the same syntax on the client and server. You may not have heard of Meteor before, but its successor, Apollo, is widely known for the popular GraphQL. It gives you more control but also requires writing more logic yourself.</p>
+<p>When it comes to mobile, the maturity might become a problem. As the combo of React-Native-Meteor is quite rare, the 3rd party package React-Native-Meteor has not been updated for 2 years. On the other hand, it’s still the best solution so far if you don’t want to build your own wheel.</p>
+<p>The target backend uses Meteor.Accounts for user login and authentication as part of the mature solution, including social login. However, Meteor.Accounts APIs are not available on mobile (React Native). So, developers need to find a third-party package or SDK to finish the FB login and Google login.</p>
+<p>If developers are looking for a 3rd party package to solve this with yarn or npm install, they may want the desired package to be compatible with the frontend React-Native-Meteor and the backend Meteor.Accounts package at the same time.</p>
+<p>Unfortunately, there was none like this.</p>
+<p>Spencer Carli was able to implement the Facebook login by writing his own Facebook login handler. Then, for Google login, he basically followed his GitHub project.</p>
+<p>Thus, based on Spencer’s great work, it’s time for developers to refactor their own wheels.</p>
+<h3 id="the-challenge-meteor-in-mobile-environment">The Challenge: Meteor in Mobile Environment</h3>
+<p><strong>The Problem:</strong></p>
+<ul>
+<li>Meteor.Accounts social login APIs don’t work on React Native</li>
+<li>No existing npm package provides both React-Native-Meteor compatibility AND Meteor.Accounts backend integration</li>
+<li>The official React-Native-Meteor package hasn’t been updated in 2 years</li>
+<li>Developers must bridge the gap between native SDKs and Meteor’s authentication system</li>
+</ul>
+<p><strong>Why It Matters:</strong></p>
+<ul>
+<li>Unified authentication across web and mobile is crucial for user experience</li>
+<li>Manual token management without proper integration leads to security issues</li>
+<li>Building custom solutions from scratch is time-consuming and error-prone</li>
+</ul>
+<h2 id="workflow-overview">Workflow Overview</h2>
+<p>Here is the workflow, inspired by Spencer Carli.</p>
+<p>Spencer didn’t provide the database CRUD details because the database and web social login solutions may vary. He used the default LoginButton component provided by the Facebook SDK, so we need to create our own custom social login components.</p>
+<p><strong>The Authentication Flow:</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>User Action (Mobile App)</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>Native SDK Login (Facebook/Google)</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>Token Retrieval from SDK</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>Send Token to Meteor Server</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>Meteor Login Handler Processes Token</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>Generate Meteor-Stamped Token</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>Store Token &#x26; User ID Locally</span></span>
+<span class="line"><span>    ↓</span></span>
+<span class="line"><span>User Authenticated</span></span></code></pre>
+<p>Legend:</p>
+<ul>
+<li><strong>Red circled</strong>: Spencer Carli’s design</li>
+<li><strong>Uncircled</strong>: Original implementation</li>
+</ul>
+<h2 id="social-login-backend">Social Login Backend</h2>
+<h3 id="facebook-login-backend">Facebook Login Backend</h3>
+<p>Here, Spencer Carli elaborated his flow in these two articles. It’s not hard to follow and implement, so links are provided here for records.</p>
+<p><strong>Medium article</strong>: <a href="https://medium.com/@spencercarli">Spencer Carli’s Facebook Login Implementation</a></p>
+<p><strong>Github project</strong>: <a href="https://github.com/spencercarli">React Native Meteor Facebook Login</a></p>
+<h3 id="google-login-backend">Google Login Backend</h3>
+<p><strong>Github project</strong>: <a href="https://github.com/spencercarli">React Native Meteor Google Login</a></p>
+<h3 id="using-accounts-methods-to-stamp-and-upsert-services">Using Accounts Methods to Stamp and Upsert Services</h3>
+<p>Here, Spencer didn’t provide the database CRUD details because the database and web social login solutions may vary. In general, Meteor.Accounts is one of the most widely used packages for social login with the Meteor web solution.</p>
+<p>After dismantling the source code of Meteor.Accounts, here is the implementation of Meteor server token generation:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">Accounts.</span><span style="color:#B392F0">registerLoginHandler</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'facebookMobile'</span><span style="color:#E1E4E8">, ({ </span><span style="color:#FFAB70">options</span><span style="color:#E1E4E8"> }) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">  //*** Auth part</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> stampedToken</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Accounts.</span><span style="color:#B392F0">_generateStampedLoginToken</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> hashStampedToken</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Accounts.</span><span style="color:#B392F0">_hashStampedToken</span><span style="color:#E1E4E8">(stampedToken)</span></span>
+<span class="line"><span style="color:#E1E4E8">  Meteor.users.</span><span style="color:#B392F0">update</span><span style="color:#E1E4E8">(userId, {</span></span>
+<span class="line"><span style="color:#E1E4E8">    $push: { </span><span style="color:#9ECBFF">'services.resume.loginTokens'</span><span style="color:#E1E4E8">: hashStampedToken }</span></span>
+<span class="line"><span style="color:#E1E4E8">  })</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    _id: userId,</span></span>
+<span class="line"><span style="color:#E1E4E8">    userId: userId,</span></span>
+<span class="line"><span style="color:#E1E4E8">    token: stampedToken.token</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">})</span></span></code></pre>
+<p>After Facebook/Google Auth succeeded, the Meteor.Accounts package’s source code came with two methods to upsert the services.resume.loginTokens, in order to make the mobile users get consistent login info as web users.</p>
+<h2 id="social-login-frontend">Social Login Frontend</h2>
+<h3 id="set-up">Set Up</h3>
+<p>For the React Native part, it’s recommended to use these packages:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#79B8FF">  "react-native-google-signin"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"^2.0.0"</span><span style="color:#E1E4E8">,  </span><span style="color:#6A737D">// for RN 0.60+, try @react-native-community/google-signin</span></span>
+<span class="line"><span style="color:#79B8FF">  "react-native-fbsdk"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"^0.10.1"</span><span style="color:#6A737D">  // or RN 0.60+, try react-native-fbsdk 1.0+</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><strong>Google</strong>: <a href="https://github.com/react-native-google-signin/google-signin">react-native-google-signin</a><br>
+<strong>Facebook</strong>: <a href="https://github.com/facebook/react-native-fbsdk">react-native-fbsdk</a></p>
+<h3 id="critical-implementation-steps">Critical Implementation Steps</h3>
+<p>Here, Spencer created a MeteorGoogleLoginManager to handle everything with Google login on the Mobile (React Native) side, with the help of the MeteorCommunicationManager Class created previously for handling the communication with our Meteor Server.</p>
+<h4 id="step-1-configure-the-service">Step 1: Configure the Service</h4>
+<p>Configure the service to get the token from Google/Facebook auth services via the mobile SDK.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { YourMeteorCommunicationManager } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> './'</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> default</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> YourMeteorGoogleLoginManager</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  static</span><span style="color:#B392F0"> configureGoogleSignIn</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    GoogleSignin.</span><span style="color:#B392F0">configure</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">      webClientId: </span><span style="color:#79B8FF">ENV_CONFIG</span><span style="color:#E1E4E8">.google.webClientId,</span></span>
+<span class="line"><span style="color:#E1E4E8">      offlineAccess: </span><span style="color:#79B8FF">false</span></span>
+<span class="line"><span style="color:#E1E4E8">    })</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#6A737D">  // ... other methods</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="step-2-implement-native-sdk-login">Step 2: Implement Native SDK Login</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#E1E4E8">static async </span><span style="color:#B392F0">loginWithGoogle</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    await</span><span style="color:#E1E4E8"> GoogleSignin.</span><span style="color:#B392F0">hasPlayServices</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> userInfo</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#E1E4E8"> GoogleSignin.</span><span style="color:#B392F0">signIn</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#E1E4E8"> { </span><span style="color:#79B8FF">idToken</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">accessToken</span><span style="color:#E1E4E8"> } </span><span style="color:#F97583">=</span><span style="color:#F97583"> await</span><span style="color:#E1E4E8"> GoogleSignin.</span><span style="color:#B392F0">getTokens</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#6A737D">    // Send tokens to Meteor server</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#F97583"> await</span><span style="color:#E1E4E8"> MeteorCommunicationManager.</span><span style="color:#B392F0">callMethod</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#9ECBFF">      'loginWithGoogleMobile'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      { idToken, accessToken }</span></span>
+<span class="line"><span style="color:#E1E4E8">    )</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (error) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    console.</span><span style="color:#B392F0">error</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'Google login error:'</span><span style="color:#E1E4E8">, error)</span></span>
+<span class="line"><span style="color:#F97583">    throw</span><span style="color:#E1E4E8"> error</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="step-3-handle-server-response">Step 3: Handle Server Response</h4>
+<p>The last step: Store the ID and Meteor-generated token in AsyncStorage and the local Meteor object, respectively.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#6A737D">// Same for Google/Facebook login</span></span>
+<span class="line"><span style="color:#E1E4E8">static </span><span style="color:#B392F0">YourMeteorAuthCallback</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">err</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">res</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">cbk</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">failCbk</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">err </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#F97583"> !!</span><span style="color:#E1E4E8">res) {</span></span>
+<span class="line"><span style="color:#6A737D">    // Save user ID and token</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> Data</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Meteor.</span><span style="color:#B392F0">getData</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    AsyncStorage.</span><span style="color:#B392F0">setItem</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">ENV_CONFIG</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">USER_TOKEN_KEY</span><span style="color:#E1E4E8">, res.token)</span></span>
+<span class="line"><span style="color:#E1E4E8">    Data._tokenIdSaved </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> res.token</span></span>
+<span class="line"><span style="color:#E1E4E8">    Meteor._userIdSaved </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> res.id</span></span>
+<span class="line"><span style="color:#E1E4E8">    cbk </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#B392F0"> cbk</span><span style="color:#E1E4E8">(res)</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    AsyncStorage.</span><span style="color:#B392F0">removeItem</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">ENV_CONFIG</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">USER_TOKEN_KEY</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    failCbk </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#B392F0"> failCbk</span><span style="color:#E1E4E8">(err)</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="implementation-considerations">Implementation Considerations</h2>
+<h3 id="token-storage">Token Storage</h3>
+<ul>
+<li>Store Meteor tokens securely using AsyncStorage</li>
+<li>Keep tokens synchronized with Meteor’s local collection</li>
+<li>Implement token refresh logic for long-lived sessions</li>
+</ul>
+<h3 id="error-handling">Error Handling</h3>
+<ul>
+<li>Handle network failures gracefully</li>
+<li>Implement retry logic for failed authentication attempts</li>
+<li>Provide clear error messages to users</li>
+</ul>
+<h3 id="platform-differences">Platform Differences</h3>
+<ul>
+<li>iOS requires URL scheme configuration</li>
+<li>Android requires Google Services compatibility check</li>
+<li>Handle platform-specific OAuth flows</li>
+</ul>
+<h2 id="security-best-practices">Security Best Practices</h2>
+<ol>
+<li><strong>Never commit credentials</strong> to version control</li>
+<li><strong>Use environment variables</strong> for API keys and secrets</li>
+<li><strong>Validate tokens</strong> on the server side</li>
+<li><strong>Implement proper session management</strong></li>
+<li><strong>Use HTTPS</strong> for all OAuth communications</li>
+</ol>
+<h2 id="testing-strategy">Testing Strategy</h2>
+<ol>
+<li>Test login flows on both iOS and Android devices</li>
+<li>Verify token persistence across app restarts</li>
+<li>Test error scenarios (network failures, user cancellation)</li>
+<li>Validate token refresh mechanisms</li>
+<li>Ensure proper logout functionality</li>
+</ol>
+<h2 id="conclusion">Conclusion</h2>
+<p>Implementing social authentication with React Native and Meteor requires bridging the gap between native SDKs and Meteor’s authentication system. While challenging, the approach pioneered by Spencer Carli provides a solid foundation for developers who need this functionality.</p>
+<p>The key to success is understanding:</p>
+<ul>
+<li>How Meteor.Accounts works internally</li>
+<li>How to properly bridge native authentication with Meteor’s token system</li>
+<li>How to maintain security while providing a seamless user experience</li>
+</ul>
+<p>By following this approach, developers can achieve unified authentication across web and mobile platforms while leveraging Meteor’s robust backend infrastructure.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><strong>Spencer Carli’s solution</strong> (2016, Meteor 1.3): <a href="https://medium.com/@spencercarli">Article Link</a></li>
+<li><strong>mgscreativa’s solution</strong> (2016, Meteor 1.5.1): <a href="https://medium.com/@mgscreativa">Article Link</a></li>
+<li><strong>Official module</strong> with the newest Meteor version: <a href="https://github.com/meteor/meteor/tree/devel/packages/accounts-base">Meteor Accounts Package</a></li>
+</ul>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 Victor Zhang. All rights reserved.
+<div class="social-links" data-astro-cid-sz7xmlte> <a href="https://medium.com/@zywkloo" target="_blank" title="Medium Blog" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Read Victor's Medium articles</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M13.54 12l6.23-6.23V5.24L15.89 2L9.23 8.66v-2.5L5.24 5.24v.96l3.99 3.99L5.24 14v2.23l4.04 2.72v-2.5l4.93-4.93z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://www.linkedin.com/in/yiweiz315/" target="_blank" title="LinkedIn" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Connect with Victor on LinkedIn</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="mailto:yiweizhangca@gmail.com" title="Email" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Email Victor</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://zzz-movie-rec-system.vercel.app/" target="_blank" title="Movie Rec System" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Movie Recommendation System</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://github.com/ZZZ-RecSys/ZZZ-MovieRecSystem" target="_blank" title="GitHub" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Visit Victor's GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path> </svg> </a> </div> </footer>  </body></html>

@@ -1,0 +1,40 @@
+<svg width="1020" height="510" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#61dafb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0088cc;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="mobileGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ecf0f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#bdc3c7;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bgGradient)" />
+
+  <!-- Mobile device -->
+  <rect x="300" y="100" width="200" height="350" rx="25" fill="url(#mobileGradient)" stroke="#2c3e50" stroke-width="3"/>
+  <rect x="320" y="120" width="160" height="290" fill="#2c3e50" rx="5"/>
+  
+  <!-- Mobile screen content -->
+  <circle cx="400" cy="200" r="30" fill="#667eea"/>
+  <text x="400" y="260" font-family="Arial, sans-serif" font-size="24" fill="#ecf0f1" text-anchor="middle">Login</text>
+  <rect x="350" y="290" width="100" height="40" rx="5" fill="#667eea"/>
+  <text x="400" y="315" font-family="Arial, sans-serif" font-size="18" fill="#ecf0f1" text-anchor="middle">Sign In</text>
+
+  <!-- Meteor/Node elements -->
+  <rect x="680" y="150" width="100" height="100" rx="10" fill="#de5c4f" opacity="0.8"/>
+  <text x="730" y="210" font-family="Arial, sans-serif" font-size="30" fill="#ecf0f1" text-anchor="middle" font-weight="bold">M</text>
+  
+  <rect x="780" y="200" width="100" height="100" rx="10" fill="#41b883" opacity="0.8"/>
+  <text x="830" y="260" font-family="Arial, sans-serif" font-size="30" fill="#ecf0f1" text-anchor="middle" font-weight="bold">N</text>
+
+  <!-- Connection lines -->
+  <path d="M500 250 L680 200" stroke="#ecf0f1" stroke-width="3" opacity="0.6" stroke-dasharray="5,5"/>
+  <path d="M500 280 L780 250" stroke="#ecf0f1" stroke-width="3" opacity="0.6" stroke-dasharray="5,5"/>
+
+  <!-- Title Text -->
+  <text x="510" y="420" font-family="Inter, sans-serif" font-size="48" fill="#ecf0f1" text-anchor="middle" font-weight="bold">React Native</text>
+  <text x="510" y="470" font-family="Inter, sans-serif" font-size="28" fill="#ecf0f1" text-anchor="middle" opacity="0.9">Meteor Social Login</text>
+</svg>
+
