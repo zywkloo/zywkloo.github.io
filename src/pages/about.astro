@@ -1,63 +1,220 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE, PROFILE_IMAGE } from '../consts';
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title="About Me | Victor Zhang" description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main class="about-page">
+			<div class="container">
+				<img src={PROFILE_IMAGE} alt="Victor Zhang" class="about-profile-image" />
+				
+				<h1>About Me</h1>
+				
+				<p>
+					I'm a passionate Full Stack and Mobile Engineer with 9+ years of experience creating innovative digital solutions. 
+					My journey spans from designing top-ranked mobile games to building complex web applications and winning hackathons.
+				</p>
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+				<h2>Recent Experience</h2>
+				<div class="experience-item">
+					<h3>Software Lead - VitalMark @ Medico Supplies, Inc.</h3>
+					<p class="experience-date">Mar 2025 - Present</p>
+					<ul>
+						<li>Led the architecture design and development of the VitalMark iOS app with SwiftUI and UIKit for real-time BLE health data visualization.</li>
+					</ul>
+				</div>
+				<div class="experience-item">
+					<h3>Full Stack Engineer @ Medico Supplies, Inc.</h3>
+					<p class="experience-date">2025 - Oct 2025</p>
+					<ul>
+						<li>Improved .NET desktop app performance by addressing memory leaks in C#.</li>
+						<li>Developed and maintained the marketing web app using React and TypeScript.</li>
+					</ul>
+				</div>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+				<h2>Education</h2>
+				<ul>
+					<li>📖 Master of Data Science, UBC, Vancouver, Canada</li>
+					<li>🍁 B.Sc. in Computer Science, Carleton University, Ottawa, Canada</li>
+					<li>🏙️ B.Eng. in Urban Planning, Peking University, Beijing, China</li>
+					<li>🥇 Carleton University Medal in Computer Science, 2020 Fall</li>
+				</ul>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+				<h2>Background</h2>
+				<ul>
+					<li>💻 5 years in mobile development (2020-2025), 3 years in full-stack development (2022-2025)</li>
+					<li>🎮 Game Design Lead - Achieved #1 in Sports and #9 in Games in China's App Store on May 3, 2015</li>
+					<li>🌱 Team lead of CuHacking 2019 & 2020 winners (InGenius / Martello Sponsor Awards)</li>
+					<li>📺 Live Coding Streamer on twitch.tv/zywkloo, streaming LeetCode contests and gaming weekly</li>
+				</ul>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+				<h2>Key Achievements</h2>
+				<ul>
+					<li>🥇 2x Hackathon Winner (CuHacking 2019 & 2020)</li>
+					<li>🎮 Game Design Lead - #1 Sports App in China</li>
+					<li>📺 Live Coding Streamer on Twitch</li>
+					<li>🏆 Carleton University Medal in Computer Science</li>
+				</ul>
+
+				<h2>Technologies I Work With</h2>
+				<div class="tech-grid">
+					<div class="tech-category">
+						<h3>Mobile</h3>
+						<ul>
+							<li>SwiftUI</li>
+							<li>React Native</li>
+							<li>Firebase</li>
+							<li>Core Data</li>
+						</ul>
+					</div>
+					<div class="tech-category">
+						<h3>Web</h3>
+						<ul>
+							<li>React</li>
+							<li>Node.js</li>
+							<li>Express</li>
+							<li>MongoDB</li>
+						</ul>
+					</div>
+					<div class="tech-category">
+						<h3>Tools</h3>
+						<ul>
+							<li>Git</li>
+							<li>Docker</li>
+							<li>AWS</li>
+							<li>CI/CD</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.about-page {
+		padding: 4rem 0;
+	}
+
+	.container {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+
+	.about-profile-image {
+		width: 200px;
+		height: 200px;
+		border-radius: 50%;
+		margin: 0 auto 2rem;
+		display: block;
+		border: 5px solid #667eea;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+	}
+
+	h1 {
+		font-size: 2.5rem;
+		margin-bottom: 2rem;
+		color: #667eea;
+		text-align: center;
+	}
+
+	h2 {
+		font-size: 1.875rem;
+		margin-top: 3rem;
+		margin-bottom: 1rem;
+		color: #667eea;
+	}
+
+	p {
+		font-size: 1.125rem;
+		line-height: 1.8;
+		margin-bottom: 1.5rem;
+		color: #2d3748;
+	}
+
+	ul {
+		font-size: 1.125rem;
+		line-height: 1.8;
+		margin-bottom: 2rem;
+		padding-left: 2rem;
+	}
+
+	ul li {
+		margin-bottom: 0.5rem;
+		color: #2d3748;
+	}
+
+	.tech-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+
+	@media (min-width: 768px) {
+		.tech-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	.tech-category {
+		background: #f8f9fa;
+		padding: 1.5rem;
+		border-radius: 0.5rem;
+	}
+
+	.tech-category h3 {
+		font-size: 1.25rem;
+		margin-bottom: 1rem;
+		color: #667eea;
+	}
+
+	.tech-category ul {
+		list-style: none;
+		padding: 0;
+	}
+
+	.tech-category li {
+		padding: 0.5rem 0;
+		border-bottom: 1px solid #e2e8f0;
+	}
+
+	.tech-category li:last-child {
+		border-bottom: none;
+	}
+
+	.experience-item {
+		margin-bottom: 2rem;
+		padding: 1.5rem;
+		background: #f8f9fa;
+		border-radius: 0.5rem;
+		border-left: 4px solid #667eea;
+	}
+
+	.experience-item h3 {
+		font-size: 1.25rem;
+		margin-bottom: 0.5rem;
+		color: #667eea;
+	}
+
+	.experience-date {
+		font-size: 0.875rem;
+		color: #718096;
+		margin-bottom: 1rem;
+		font-style: italic;
+	}
+
+	.experience-item ul {
+		margin-bottom: 0;
+	}
+</style>
