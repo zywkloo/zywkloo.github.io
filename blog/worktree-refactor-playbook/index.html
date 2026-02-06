@@ -51,6 +51,14 @@
 <li>Validate logging, metrics, and rollback safety</li>
 </ul>
 <h2 id="use-different-worktrees-by-risk-and-parallelism">Use different worktrees by risk and parallelism</h2>
+<h3 id="git-worktree-vs-claude-code-worktree-clarification">Git worktree vs. Claude Code worktree (clarification)</h3>
+<p>Quick clarification: <strong>git worktree</strong> is the underlying git feature. A <strong>Claude Code worktree</strong> is just a Claude Code session opened in a directory that happens to be a git worktree. There is no separate “Claude worktree” mechanism.</p>
+<ul>
+<li>Git creates and manages worktrees (<code>git worktree add/list/remove</code>)</li>
+<li>Claude Code (or any editor/agent) simply opens a specific worktree folder</li>
+<li>If a tool says it “creates worktrees,” it’s automating git commands, not inventing a new concept</li>
+</ul>
+<p>Keep the model straight: <strong>Git worktrees are the filesystem layout; Claude Code worktrees are the AI sessions you attach to each layout.</strong></p>
 <h3 id="mainline-safe-incremental-refactor-default">A) Mainline-safe incremental refactor (default)</h3>
 <p>Worktree strategy: one branch, small commits.</p>
 <p>Use this when you can keep tests green after each step. Merge or rebase frequently to avoid long-lived drift.</p>
