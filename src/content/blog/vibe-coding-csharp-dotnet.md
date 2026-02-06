@@ -52,6 +52,18 @@ git worktree list
 
 Workflow tip: let different models produce plans in the planning worktree, then cherry-pick or merge only the chosen approach into the implementation worktree.
 
+## Cursor Auto Worktrees vs Manual Worktree Practice
+
+Cursor Auto Worktrees make it effortless to keep multiple branches and contexts alive. The tool spins up and manages worktrees for you, so switching tasks is just a directory hop with no mental reset. It is a strong default when you want zero ceremony and fast context preservation.
+
+Manual worktree practice is still worth knowing because it gives you complete control over naming, branch strategy, and directory layout. The best manual setup is simple and consistent:
+- Use a stable naming convention (`../project-plan`, `../project-impl`, `../project-hotfix`)
+- Keep one worktree per active change-set
+- Assign a single model to each worktree to avoid plan drift
+- Clean up finished worktrees to reduce clutter
+
+Personally, I prefer visual worktree management like Cursor. The Roo Code extension also includes a visual worktree manager and is worth trying if you want a quick overview of active contexts.
+
 ## Workflow Example: SDK 1.0.6 -> 1.2.2
 
 1. Analyze: compare headers and docs, produce a breaking-change map
