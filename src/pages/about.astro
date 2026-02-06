@@ -22,22 +22,51 @@ import { SITE_DESCRIPTION, SITE_TITLE, PROFILE_IMAGE } from '../consts';
 					Full-Stack Software Developer with 6 years of SDE experience building end-to-end web and mobile applications using React, React Native, Node.js, Python, and FastAPI. Deep hands-on experience with AI/ML pipelines, LLMs, NLP, and vector databases (PGVector, TF-IDF/SVD embeddings, Universal Sentence Encoder). Proven ability to architect cloud infrastructure, lead CI/CD pipelines with Docker and GitHub Actions, and ship production systems autonomously at fast-paced startups. Also 4 years of mobile game design experience from concept to App Store launches.
 				</p>
 
+				<h2>Planning &amp; Tooling</h2>
+				<p>
+					For planning, I currently get the best results from Claude Code + Opus. I use ChatGPT Codex 5.2 primarily for implementation - strong at coding, less reliable than Opus or Gemini 3 for large-context planning. For cost-sensitive daily chores, Cursor Auto Mode is often sufficient.
+				</p>
+				<p>Worktree workflow I use during planning:</p>
+				<pre><code>git fetch
+git worktree add ../zywkloo-plan -b codex/plan
+git worktree add ../zywkloo-impl -b codex/impl</code></pre>
+				<p>Use one worktree for planning and model comparisons, and another for implementation. When decisions are made, merge or cherry-pick into your main branch.</p>
+
 				<h2>Recent Experience</h2>
 				<div class="experience-item">
-					<h3>Mobile Development Lead - VitalMark @ Medico Supplies, Inc.</h3>
-					<p class="experience-date">Sept 2025 - Present</p>
+					<h3>3D Full Stack Developer &amp; Mobile Developer - Medico Supplies INC.</h3>
+					<p class="experience-date">Sep 2025 - Present</p>
 					<ul>
-						<li>- Led the architecture design and development of the VitalMark product line: iOS app with SwiftUI and UIKit for real-time BLE health data visualization and web app for Kickstarter project marketing</li>
+						<li>- Architected and built a health analytics backend using Python, FastAPI, Redis, and async task queues for long-session physiological data processing</li>
+						<li>- Developed a React Native app with TypeScript and local persistence, including native Swift/Kotlin modules for BLE data parsing and sync</li>
+						<li>- Delivered a Windows desktop 3D scanning application with C#/.NET and C++ interop, optimizing mesh pipelines for clinical-grade accuracy</li>
 					</ul>
 				</div>
 				<div class="experience-item">
-					<h3>Full Stack Engineer @ Medico Supplies, Inc.</h3>
-					<p class="experience-date">Mar 2025 - Sept 2025</p>
+					<h3>Senior Frontend Developer - NinjaTech AI</h3>
+					<p class="experience-date">Oct 2024 - Jan 2025</p>
 					<ul>
-						<li>- Improved .NET desktop app performance by addressing memory leaks in C#</li>
-						<li>- Developed and maintained the marketing web app using React and TypeScript</li>
+						<li>- Built React web features with RTK Query, Tailwind CSS, and media state management for AI-assisted workflows</li>
+						<li>- Developed a React Native app with Expo Router, Zod validation, and efficient mixed-content streaming for smooth mobile UX</li>
 					</ul>
 				</div>
+
+				<h2>Key Achievements</h2>
+				<ul>
+					<li>🎯 Founding React Native Developer - boosted a Canada-based ed-tech startup to release its first mobile app and supported its first private-equity fundraising round in early 2023</li>
+					<li>🎮 Game Design Lead - #1 Sports App in China on May 3, 2015, as founding mobile game designer guiding a startup from pre-seed funding to IPO</li>
+					<li>🥇 2x Hackathon Winner (CuHacking 2019 &amp; 2020)</li>
+					<li>🏆 Carleton University Medal in Computer Science</li>
+				</ul>
+
+				<h2>Background</h2>
+				<ul>
+					<li>💻 6 years of SDE experience across web, mobile, and backend systems</li>
+					<li>🎯 Founding/Senior React Native Developer experience with tech startups across US, Canada and China</li>
+					<li>🎮 4 years in mobile game design from idea to App Store</li>
+					<li>📺 Live Coding Streamer on twitch.tv/zywkloo, streaming coding contests and gaming</li>
+					<li>💡 Passionate about building scalable applications and mentoring developers</li>
+				</ul>
 
 				<h2>Education</h2>
 				<ul>
@@ -47,24 +76,7 @@ import { SITE_DESCRIPTION, SITE_TITLE, PROFILE_IMAGE } from '../consts';
 					<li>🥇 Carleton University Medal in Computer Science, 2020 Fall</li>
 				</ul>
 
-		<h2>Key Achievements</h2>
-		<ul>
-			<li>🎯 Founding React Native Developer - boosted a Canada-based ed-tech startup to release its first mobile app and supported its first private-equity fundraising round in early 2023</li>
-			<li>🎮 Game Design Lead - #1 Sports App in China on May 3, 2015, as founding mobile game designer guiding a startup from pre-seed funding to IPO</li>
-			<li>🥇 2x Hackathon Winner (CuHacking 2019 & 2020)</li>
-			<li>🏆 Carleton University Medal in Computer Science</li>
-		</ul>
-
-		<h2>Background</h2>
-		<ul>
-			<li>💻 6 years of SDE experience across web, mobile, and backend systems</li>
-			<li>🎯 Founding/Senior React Native Developer experience with tech startups across US, Canada and China</li>
-			<li>🎮 4 years in mobile game design from idea to App Store</li>
-			<li>📺 Live Coding Streamer on twitch.tv/zywkloo, streaming coding contests and gaming</li>
-			<li>💡 Passionate about building scalable applications and mentoring developers</li>
-		</ul>
-
-			<h2>Technologies I Work With</h2>
+				<h2>Technologies I Work With</h2>
 				<div class="tech-grid">
 					<div class="tech-category">
 						<h3>Mobile</h3>
@@ -105,6 +117,7 @@ import { SITE_DESCRIPTION, SITE_TITLE, PROFILE_IMAGE } from '../consts';
 				</div>
 			</div>
 		</main>
+
 		<Footer />
 	</body>
 </html>
