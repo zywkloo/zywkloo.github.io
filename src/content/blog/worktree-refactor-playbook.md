@@ -90,6 +90,16 @@ Key things to know:
 
 **The rule of thumb:** if you're going to switch branches more than twice in an hour, or if you need two versions of the code visible at the same time, use a worktree. If it's a simple feature branch you'll merge and delete, a regular branch is fine.
 
+### Git worktree vs. Claude Code worktree (clarification)
+
+This is where people get tripped up: **git worktree** is a core git feature. **Claude Code "worktree"** isn’t a separate mechanism — it’s just a Claude Code session pointed at a folder that happens to be a git worktree. In other words:
+
+- Git creates and manages worktrees (`git worktree add/list/remove`)
+- Claude Code (or any editor/agent) simply opens a specific worktree directory
+- If a tool says it “creates worktrees,” it’s just automating the git commands for you
+
+So the clean mental model is: **Git worktrees are the filesystem layout; Claude Code worktrees are the AI sessions you attach to each layout.** Keep those separate and the workflow makes sense.
+
 ### The AI coding angle
 
 Here's why this matters specifically for vibe coding: when you have Claude Code or Cursor working in a session, **switching branches kills the context**. The AI was building up understanding of the files in your working directory. If you stash and switch to `main` to check something, then switch back, the AI's mental model might not survive the disruption.
