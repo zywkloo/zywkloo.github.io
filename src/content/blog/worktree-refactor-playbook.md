@@ -6,7 +6,7 @@ heroImage: '../../assets/worktree-refactor-hero.svg'
 tags: ['Vibe Coding', 'Git', 'Worktrees', 'Claude', 'AI Tools', 'Engineering']
 ---
 
-## 目录
+## Content
 
 - [Why this playbook exists](#why-this-playbook-exists)
 - [Claude Code common workflow (official guidance)](#claude-code-common-workflow-official-guidance)
@@ -84,11 +84,36 @@ Key facts:
 | Scenario | Use branch | Use worktree |
 |---|---|---|
 | Quick feature, no context switching needed | Yes | Overkill |
-| Need to compare `main` vs refactor side-by-side | Painful | Yes |
-| Long-running AI-assisted task | Risky to switch | Yes |
-| Throwaway experiment / spike | Manual cleanup | Yes — `git worktree remove` |
-| Hotfix `main` while refactor is messy | Stash-switch | Yes — keep `wt-main` clean |
-| Multi-module parallel work | Branches ok | Worktrees if you cross-reference |
+| Need to reference `main` while refactoring | Stash-switch is painful | Yes — keep both open |
+| Running an AI agent on a long task | Risky to switch mid-session | Yes — separate folder, separate session |
+| Throwaway experiment / spike | Sure, but cleanup is manual | Yes — `git worktree remove` and it's gone |
+| Comparing old vs. new behavior side by side | Awkward with one folder | Yes — two VS Code windows |
+| CI broke main, need a hotfix while deep in a refactor | Stash everything, fix, pop | Yes — hotfix in `wt-main`, don't touch refactor |
+| Multiple team members, each on a module | Branches are fine | Worktrees if they need cross-reference |
+
+**The rule of thumb:** if you're going to switch branches more than twice in an hour, or if you need two versions of the code visible at the same time, use a worktree. If it's a simple feature branch you'll merge and delete, a regular branch is fine.
+
+### Git worktree vs. Claude Code worktree (clarification)
+
+This is where people get tripped up: **git worktree** is a core git feature. **Claude Code "worktree"** isn’t a separate mechanism — it’s just a Claude Code session pointed at a folder that happens to be a git worktree. In other words:
+
+- Git creates and manages worktrees (`git worktree add/list/remove`)
+- Claude Code (or any editor/agent) simply opens a specific worktree directory
+- If a tool says it “creates worktrees,” it’s just automating the git commands for you
+
+So the clean mental model is: **Git worktrees are the filesystem layout; Claude Code worktrees are the AI sessions you attach to each layout.** Keep those separate and the workflow makes sense.
+
+### The AI coding angle
+
+Here's why this matters specifically for vibe coding: when you have Claude Code or Cursor working in a session, **switching branches kills the context**. The AI was building up understanding of the files in your working directory. If you stash and switch to `main` to check something, then switch back, the AI's mental model might not survive the disruption.
+
+With worktrees, you never switch. Main is always *over there*. Your refactor is always *right here*. Your spike is in a third folder. Each can have its own terminal, its own AI session, its own flow state. That's the real reason worktrees pair so well with AI-assisted development.
+
+## The four phases of vibe coding (and which model to use)
+
+Here's where it gets interesting. Most people just pick one model and go. But each phase of a refactor has different needs:
+
+### Phase 1: Understanding — "What even is this code doing?"
 
 **Rule of thumb:** if you need two versions of the code visible at once, use a worktree.
 
