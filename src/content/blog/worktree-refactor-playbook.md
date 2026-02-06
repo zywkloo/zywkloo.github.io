@@ -1,158 +1,262 @@
 ---
-title: 'Refactor Playbook: Models, Risk, and Git Worktrees'
-description: 'A practical guide to choosing models and worktree setups when refactoring code, based on risk and ambiguity.'
-pubDate: 'Feb 5 2025'
-heroImage: '../../assets/blog-placeholder-1.jpg'
-tags: ['Refactoring', 'Git', 'Worktrees', 'Planning', 'AI Tools', 'Engineering']
+title: 'Vibe Coding with Git Worktrees: A Playbook Most Devs Are Missing'
+description: 'Most people vibe-code with one model in one branch. Here is how to use multiple models, git worktrees, and a phased workflow to ship refactors without breaking everything.'
+pubDate: 'Feb 5 2026'
+heroImage: '../../assets/worktree-refactor-hero.svg'
+tags: ['Vibe Coding', 'Git', 'Worktrees', 'Claude', 'AI Tools', 'Engineering']
 ---
 
-## Why this matters
+## The problem nobody talks about
 
-Refactors fail when the plan is fuzzy, the risk is high, and the work happens in one long-lived branch. A good refactor balances three forces: ambiguity, mechanical churn, and the cost of being wrong. The right model and the right worktree setup help you control all three.
+So you're vibe coding. You fire up Claude or Cursor, describe what you want, and let the AI rip through your codebase. It works great for greenfield stuff — new features, small scripts, quick prototypes.
 
-This is a practical playbook you can apply in real repos, not just toy projects.
+But then you try to **refactor something real**. A messy auth module. A tangled state management layer. A migration from one ORM to another. And suddenly your one-shot vibe coding session turns into a disaster: half the tests are broken, you lost track of what changed, and you're not even sure which version of the code is the "good" one anymore.
 
-## Use different models by phase
+Here's the thing most devs don't realize: **vibe coding has phases**, and each phase works best with a different model, a different branch strategy, and a different level of caution. If you're using the same model and the same branch for everything — understanding, planning, execution, verification — you're leaving a ton of value on the table.
 
-### 1) Recon and scoping (high ambiguity)
+This playbook is how I actually do it. No theory, just what works.
 
-Use your strongest reasoning model.
+## Wait, what are git worktrees?
 
-Goals:
-- Map the current architecture and dependencies
-- Identify invariants and critical paths
-- Find gaps in tests and observability
-- Define stopping points where the code is still shippable
+If you've never used git worktrees, here's the 30-second version: they let you have **multiple branches checked out at the same time** in different folders. No stashing, no branch switching, no "wait let me save my work first."
 
-Switch away once you have a written plan, a file list, and a change sequence.
+```bash
+# Create a worktree for your spike experiment
+git worktree add ../my-spike spike-branch
 
-### 2) API and design decisions (tradeoffs)
+# Create one for your actual refactor
+git worktree add ../my-refactor refactor-branch
 
-Use the strong model again.
+# Your main branch stays untouched in the original folder
+```
 
-Goals:
-- Define new boundaries, interfaces, and data flow
-- Decide what to delete, wrap, or temporarily adapt
-- Produce a migration checklist with small steps
+You can literally have `main`, a throwaway spike, and your real refactor open in three different VS Code windows simultaneously. That's the superpower. And it pairs incredibly well with AI-assisted coding because you can have **different Claude sessions working on different worktrees** without stepping on each other.
 
-Output you want: a mini design doc and a migration checklist.
+## Git branch vs. git worktree — what's actually different?
 
-### 3) Mechanical edits (repetitive change)
+A lot of people hear "worktree" and think it's just a fancy way to say "branch." It's not. They solve different problems, and understanding the mechanism helps you pick the right one.
 
-Use a faster or cheaper coding model.
+### How branches work
 
-Goals:
-- Rename or move files
-- Update imports and wiring
-- Apply codemods
-- Expand boilerplate and update call sites
+A **branch** is just a pointer to a commit. When you `git switch feature-x`, git rewrites your working directory to match that commit. Your whole folder changes in place.
 
-Rule of thumb: if the change is deterministic and tool-assisted, do not spend your strongest model here.
+```
+my-project/          ← one folder, one branch at a time
+  ├── src/
+  ├── package.json
+  └── .git/          ← all branches live here as refs
+```
 
-### 4) Debugging and test failures (high uncertainty)
+The limitation: you can only have **one branch checked out at a time** per folder. Want to look at `main` while working on `feature-x`? You have to stash, switch, look, switch back, pop. It's annoying, and it breaks your flow — especially when you have an AI coding agent mid-session that loses context when you switch.
 
-Use the strong model again.
+### How worktrees work
 
-Goals:
-- Diagnose subtle runtime regressions
-- Trace concurrency, state, or caching bugs
-- Propose minimal fixes that preserve behavior
+A **worktree** creates a separate working directory that shares the same `.git` data. Each worktree checks out a different branch independently.
 
-### 5) Review and hardening (quality gate)
+```
+my-project/              ← main branch (original)
+  ├── src/
+  ├── package.json
+  └── .git/              ← the single source of truth
 
-Use the strong model for a final pass.
+../my-spike/             ← spike branch (worktree)
+  ├── src/
+  ├── package.json
+  └── .git  (file)       ← just a pointer back to my-project/.git
 
-Goals:
-- Check compatibility, performance, and error handling
-- Separate must-do fixes from nice-to-haves
-- Validate logging, metrics, and rollback safety
+../my-refactor/          ← refactor branch (worktree)
+  ├── src/
+  ├── package.json
+  └── .git  (file)       ← same pointer
+```
 
-## Use different worktrees by risk and parallelism
+Key things to know:
+- All worktrees share the same git history, remotes, and object store — no duplicated `.git` blobs
+- Each worktree has its own working directory and index (staging area), so changes don't collide
+- You **cannot** check out the same branch in two worktrees simultaneously (git protects you from this)
+- Commits made in any worktree are visible to all others immediately
 
-### A) Mainline-safe incremental refactor (default)
+### When to use which
 
-Worktree strategy: one branch, small commits.
+| Scenario | Use branch | Use worktree |
+|---|---|---|
+| Quick feature, no context switching needed | Yes | Overkill |
+| Need to reference `main` while refactoring | Stash-switch is painful | Yes — keep both open |
+| Running an AI agent on a long task | Risky to switch mid-session | Yes — separate folder, separate session |
+| Throwaway experiment / spike | Sure, but cleanup is manual | Yes — `git worktree remove` and it's gone |
+| Comparing old vs. new behavior side by side | Awkward with one folder | Yes — two VS Code windows |
+| CI broke main, need a hotfix while deep in a refactor | Stash everything, fix, pop | Yes — hotfix in `wt-main`, don't touch refactor |
+| Multiple team members, each on a module | Branches are fine | Worktrees if they need cross-reference |
 
-Use this when you can keep tests green after each step. Merge or rebase frequently to avoid long-lived drift.
+**The rule of thumb:** if you're going to switch branches more than twice in an hour, or if you need two versions of the code visible at the same time, use a worktree. If it's a simple feature branch you'll merge and delete, a regular branch is fine.
 
-### B) Big surgery with high churn
+### The AI coding angle
 
-Worktree strategy: two worktrees.
+Here's why this matters specifically for vibe coding: when you have Claude Code or Cursor working in a session, **switching branches kills the context**. The AI was building up understanding of the files in your working directory. If you stash and switch to `main` to check something, then switch back, the AI's mental model might not survive the disruption.
 
-- `wt-main`: tracks `main` for hotfixes and behavior checks
-- `wt-refactor`: your long-running refactor branch
+With worktrees, you never switch. Main is always *over there*. Your refactor is always *right here*. Your spike is in a third folder. Each can have its own terminal, its own AI session, its own flow state. That's the real reason worktrees pair so well with AI-assisted development.
 
-Use this when you expect days of broken builds or massive file moves.
+## The four phases of vibe coding (and which model to use)
 
-### C) Spike vs production implementation
+Here's where it gets interesting. Most people just pick one model and go. But each phase of a refactor has different needs:
 
-Worktree strategy: three worktrees.
+### Phase 1: Understanding — "What even is this code doing?"
 
-- `wt-main`: baseline
-- `wt-spike`: experimental proof
-- `wt-impl`: clean implementation after the spike
+**Use your strongest model.** (Opus, o1, etc.)
 
-Use this when you are unsure the approach is correct and want to test quickly without polluting the real branch.
+This is where you're mapping the codebase, understanding dependencies, and figuring out what's actually going on. You need deep reasoning here, not speed.
 
-### D) Multi-track refactor
+What to ask:
+- "Walk me through the architecture of this module and its dependencies"
+- "What are the invariants this code relies on? What breaks if I change X?"
+- "Where are the gaps in test coverage?"
+- "What's the riskiest part to touch?"
 
-Worktree strategy: multiple worktrees per subsystem.
+**You're done with this phase when** you have a written plan, a file list, and a rough sequence of changes. Don't skip this. The number one reason AI-assisted refactors go sideways is jumping straight to "just rewrite it."
 
-- `wt-auth-refactor`, `wt-storage-refactor`, `wt-ui-refactor`
-- Merge into an integration branch once each stream is stable
+### Phase 2: Planning — "How should I restructure this?"
 
-Use this when modules can be refactored independently and multiple people are working in parallel.
+**Strong model again.**
 
-## A simple decision matrix
+Now you're making design decisions: new interfaces, what to delete vs. wrap, data flow changes. This is tradeoff territory and you want the model that's best at reasoning about consequences.
 
-- Unclear architecture: strong model + `wt-spike`
-- Clear plan, lots of edits: fast model + `wt-refactor`
-- Build will be broken for a while: keep a clean `wt-main`
-- Flaky regressions: strong model, keep changes small
-- Sweeping renames and moves: fast model for the move, strong model for dependency edges
+What you want out of this phase:
+- A mini design doc (even just bullet points in a markdown file)
+- A migration checklist with small, atomic steps
+- Clear boundaries between "must change" and "nice to have"
 
-## A concrete workflow that works
+### Phase 3: Execution — "Okay, time to actually move code around"
 
-1) Baseline mapping (strong model)
+**Switch to a faster/cheaper model.** (Sonnet, Haiku, GPT-4o-mini, etc.)
 
-- Document modules, dependencies, and pain points
-- Define the refactor target and a step plan
-- List invariants and tests to add first
+This is the mechanical part: renaming files, updating imports, applying codemods, expanding boilerplate, wiring up new interfaces. The changes are deterministic and repetitive. You don't need your strongest model burning tokens on `find-and-replace` work.
 
-2) Add safety rails (fast model, reviewed by strong model)
+This is also where **worktrees shine**. You can have:
+- Your `main` branch open to quickly verify "what did the old code do here?"
+- Your refactor branch where the AI is cranking through changes
+- Optionally a spike branch if you tried something experimental earlier
 
-- Add or strengthen tests
-- Add feature flags or adapters if needed
+### Phase 4: Verification — "Did I break anything?"
 
-3) Spike in a separate worktree (strong model)
+**Back to the strong model.**
 
-- Prove the new boundaries compile and integrate
+Subtle runtime regressions, state bugs, concurrency issues, weird edge cases — this is where you need deep reasoning again. The fast model is great at *making* changes, but the strong model is better at *catching* what went wrong.
+
+What to ask:
+- "Here's my diff. What behavioral changes might I have missed?"
+- "These 3 tests are failing. What's the root cause?"
+- "Is this change backwards compatible with the existing API consumers?"
+
+## Worktree strategies: pick one that fits your situation
+
+Not every refactor needs three worktrees. Here's how to decide:
+
+### Strategy A: Just one branch (low risk)
+
+When to use it: the refactor is straightforward, tests stay green after each step, you can merge frequently.
+
+This is your default. Don't overcomplicate things if you don't need to.
+
+### Strategy B: Two worktrees (medium risk)
+
+```
+wt-main     →  tracks main, for hotfixes and behavior checks
+wt-refactor →  your long-running refactor branch
+```
+
+When to use it: you expect the build to be broken for a while, or you need to frequently compare old vs. new behavior side by side.
+
+### Strategy C: Three worktrees — spike + implementation (high uncertainty)
+
+```
+wt-main  →  baseline
+wt-spike →  throwaway experiment to prove the approach works
+wt-impl  →  clean implementation after you've validated the spike
+```
+
+When to use it: you're not sure the approach is even correct. The spike lets you test fast without polluting your real branch. If the spike fails, you just delete it. Zero cost.
+
+**This is the one most people should be using more often.** Spikes are underrated. They let you vibe-code fearlessly because there's no consequence to failure.
+
+### Strategy D: Multi-track (team or multi-module)
+
+```
+wt-auth-refactor
+wt-storage-refactor
+wt-ui-refactor
+→ merge into integration branch when each is stable
+```
+
+When to use it: modules can be refactored independently. Great for teams, but also works solo if your codebase has clean module boundaries.
+
+## The decision cheat sheet
+
+Not sure what to do? Here's the quick version:
+
+| Situation | Model | Worktree strategy |
+|---|---|---|
+| "I don't understand this code yet" | Strong (Opus) | Read-only on main |
+| "I have a plan, lots of files to change" | Fast (Sonnet/Haiku) | wt-refactor |
+| "Not sure if this approach works" | Strong for spike, fast for impl | wt-spike + wt-impl |
+| "Build will be broken for days" | Mix | Keep clean wt-main |
+| "Flaky regressions after changes" | Strong | Keep changes small |
+| "Massive renames and file moves" | Fast for moves, strong for edges | wt-refactor |
+
+## A workflow you can actually copy-paste
+
+Here's the concrete playbook I follow for non-trivial refactors. The diagram below shows the full flow — which model to use at each step, and which worktree you're working in:
+
+![The 6-Step Refactor Workflow — showing model selection and worktree usage for each phase](/images/worktree-workflow-diagram.svg)
+
+Let's break each step down:
+
+**Step 1: Map the territory** (strong model, on `main`)
+- Document modules, dependencies, pain points
+- Define the refactor target and step plan
+- Identify invariants and tests to add first
+- You're just reading here — don't change anything yet
+
+**Step 2: Add safety nets** (fast model writes, strong model reviews)
+- Add or strengthen tests before touching anything
+- Set up feature flags or adapters if needed
+- The fast model can crank out test boilerplate; the strong model checks if you're actually testing the right things
+
+**Step 3: Spike it** (strong model, `wt-spike` worktree)
+- Prove the new approach compiles and integrates
 - Validate naming and folder structure
-- Throw away the spike if it is wrong
+- If the spike is wrong, delete the worktree and try again — zero cost
 
-4) Implementation refactor (fast model)
-
+**Step 4: Execute the refactor** (fast model, `wt-refactor` worktree)
 - Codemods, file moves, import updates
 - Commit in small, logical chunks
+- Reference `wt-main` whenever you need to check old behavior
 
-5) Stabilize (strong model)
-
+**Step 5: Stabilize** (strong model, still on `wt-refactor`)
 - Fix runtime regressions and edge cases
 - Review for API compatibility and behavior parity
 
-6) Final cleanup (fast model)
+**Step 6: Clean up and merge** (fast model)
+- Remove dead code and temporary adapters
+- Format, lint, update docs
+- Merge `wt-refactor` into `main`, delete the worktrees
 
-- Remove dead code and adapters
-- Format, lint, and update docs
+## The do's and don'ts
 
-## Do and don’t rules
+**Do:**
+- Keep a worktree on `main` so you can reproduce bugs fast
+- Isolate experiments in a spike worktree — they're free to throw away
+- Keep change sets small and cohesive
+- Use the strong model for *thinking* and the fast model for *doing*
+- Switch models deliberately, not randomly
 
-- Do keep a worktree on `main` to reproduce bugs fast
-- Do isolate experimental ideas in a spike worktree
-- Do keep change sets small and cohesive
-- Don’t run multiple high-churn refactor branches without an integration plan
-- Don’t let the strongest model do purely mechanical edits
+**Don't:**
+- Run multiple high-churn refactor branches without an integration plan
+- Use your most expensive model for mechanical find-and-replace work
+- Skip the understanding phase because you're excited to start coding
+- Let a spike branch silently become your production branch (clean-room it)
 
-## Closing thought
+## TL;DR
 
-Refactors are a risk-management exercise. The model and the worktree layout are your two biggest levers. Use them deliberately and you will refactor faster, with fewer surprises.
+Vibe coding is powerful, but it's not one-size-fits-all. The devs who ship clean refactors aren't just picking the "best" model — they're **matching the right model to the right phase**, and using git worktrees to keep their experiments isolated from their production work.
+
+The combo of strong model for thinking + fast model for doing + worktrees for isolation is the closest thing I've found to a refactoring cheat code. Give it a try on your next non-trivial refactor and see how it feels.
