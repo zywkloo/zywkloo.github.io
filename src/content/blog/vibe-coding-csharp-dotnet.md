@@ -33,7 +33,7 @@ Typical breaking changes include:
 ## Tooling Strategy (My Current Take)
 
 This is the split that works best for me right now:
-- Planning: Claude Code + Opus is the best so far for large-context planning
+- Understanding and planning: Claude Code + Opus is the best so far for large-context planning
 - Implementation: ChatGPT Codex 5.2 is strong at coding, but not elite at large-context planning compared to Opus and Gemini 3
 - Budget: Cursor Auto Mode is enough for daily chores and quick fixes
 
