@@ -62,7 +62,8 @@ For your "Choosing the Right JavaScript Data Visualization Framework" article:
 ## Need Help?
 
 The blog posts I created already show examples:
-- `board-game-ai-development.md`
-- `react-dev-tips.md`
+- `worktree-refactor-playbook.md`
+- `retrieval-augmented-generation-rag.md`
+- `vibe-coding-csharp-dotnet.md`
 
 Use them as templates for your new posts!
