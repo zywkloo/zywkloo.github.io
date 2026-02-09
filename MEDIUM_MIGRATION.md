@@ -62,7 +62,6 @@ For your "Choosing the Right JavaScript Data Visualization Framework" article:
 ## Need Help?
 
 The blog posts I created already show examples:
-- `react-native-meteor-social-login.md`
 - `board-game-ai-development.md`
 - `react-dev-tips.md`
 
