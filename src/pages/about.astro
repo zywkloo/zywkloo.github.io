@@ -2,7 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE, PROFILE_IMAGE } from '../consts';
+import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 ---
 
 <!doctype html>
@@ -19,25 +19,73 @@ import { SITE_DESCRIPTION, SITE_TITLE, PROFILE_IMAGE } from '../consts';
 				<h1>About Me</h1>
 				
 				<p>
-					Full-Stack Software Developer with 6 years of SDE experience building end-to-end web and mobile applications using SwiftUI, React, React Native, Node.js, Python, and FastAPI. Deep hands-on experience with AI/ML pipelines, RAG, and vector databases (PGVector, TF-IDF/SVD embeddings). Proven ability to architect mobile apps, cloud infrastructure, and CI/CD pipelines from end to end. Over the years, I have shipped production mobile and web apps at fast-paced startups across the US, Canada, and China, from pre-seed to IPO. Also 4 years of mobile game design experience from concept to App Store launches.
+					<strong>Mobile Engineer</strong> with 6 years of experience shipping production apps and platform capabilities across the US, Canada, and China.
+				</p>
+
+				<p>
+					I specialize in building <strong>end-to-end, data-driven mobile systems</strong>—from <strong>real-time ingestion and synchronization</strong> (for example, BLE streaming via CoreBluetooth, local persistence, and cloud sync) to <strong>backend services and telemetry pipelines</strong>. My work is grounded in <strong>data-flow correctness, concurrency, and reliability</strong> under real-world constraints such as unstable networks and long-running sessions.
+				</p>
+
+				<p>
+					I typically reason about systems in layers: <strong>data flow and IO</strong>; <strong>control policies</strong> such as caching strategies (TTL, invalidation), retry and exponential backoff under unreliable connectivity, and authentication / authorization; <strong>state management</strong>; and <strong>rendering</strong>. This helps me design <strong>scalable, resilient applications</strong> while keeping the UI responsive and maintainable.
+				</p>
+
+				<p>
+					I’m comfortable going deep on <strong>iOS native</strong> when <strong>system-level understanding</strong> is required, and I also work effectively in <strong>React Native</strong> when cross-platform leverage makes more sense. Beyond the client, I build <strong>backend services</strong> (FastAPI, Redis) and the <strong>operational data paths</strong> that modern mobile products depend on.
 				</p>
 
 				<h2>Vibe Coding Workflow</h2>
 				<p>
-					For planning, I currently get the best results from Claude Code + Opus. I use ChatGPT Codex primarily for implementation—strong at coding, less reliable than Opus or Gemini 3 for large-context planning. For cost-sensitive daily chores, Cursor Auto Mode is often sufficient. Please check my <a href="https://zywkloo.github.io/blog/worktree-refactor-playbook/">Playbook with Vibe coding</a>.
+					I follow an AI-assisted engineering workflow that separates framing, planning, execution, and validation. For complex changes, I use multiple Git worktrees to explore alternative approaches in isolation, compare tradeoffs, and converge on a clear implementation path. This allows me to move quickly while maintaining strong control over system design, code quality, and reliability.
 				</p>
+				<pre class="workflow-diagram">
+        +---------+
+        |  Frame  |
+        | (scope) |
+        +----+----+
+             |
+             v
+     +-------+-------+
+     |     Plan      |
+     | (multi-       |
+     |  worktrees)   |
+     +---+-----+-----+
+         |     |
+         v     v
+   [Option A] [Option B]
+         \     /
+          \   /
+           v v
+      +----+----+
+      | Execute |
+      | (focus) |
+      +----+----+
+           |
+           v
+      +----+----+
+      | Validate|
+      | (tests, |
+      |  checks)|
+      +----+----+
+           |
+           v
+      +----+----+
+      | Capture |
+      | (learn) |
+      +---------+
+				</pre>
 				<h2>Recent Experience</h2>
 				<div class="experience-item">
-					<h3>3D Full Stack Developer &amp; Mobile Developer - Medico Supplies INC.</h3>
+					<h3>Mobile Engineer &amp; Platform Developer - Medico Supplies INC.</h3>
 					<p class="experience-date">Mar 2025 - Present</p>
 					<ul>
-						<li>- Architected and built a health analytics backend using Python, FastAPI, Redis, and async task queues for long-session physiological data processing</li>
-						<li>- Developed a React Native app with TypeScript and local persistence, including native Swift/Kotlin modules for BLE data parsing and sync</li>
+						<li>- Architected and built a health analytics backend using Python, FastAPI, Redis, and async task queues for long-session physiological data processing, reliable live mobile ingestion, telemetry pipelines, and scalable caching policies</li>
+						<li>- Developed a React Native app with TypeScript and local persistence, while owning native Swift/Kotlin modules for BLE parsing, sync, concurrency-sensitive device workflows, and mobile system integration</li>
 						<li>- Delivered a Windows desktop 3D scanning application with C#/.NET and C++ interop, optimizing mesh pipelines for clinical-grade accuracy</li>
 					</ul>
 				</div>
 				<div class="experience-item">
-					<h3>Senior Frontend Developer - NinjaTech AI</h3>
+					<h3>Senior Mobile / Frontend Engineer - NinjaTech AI</h3>
 					<p class="experience-date">Oct 2024 - Jan 2025</p>
 					<ul>
 						<li>- Contributed to MyNinja.ai Agentic App powered by fine-tuned Llama LLM across web and mobile — developed React.js features with RTK Query for CRUD, Tailwind CSS styling, and AI-generated image state management.</li>
@@ -47,7 +95,7 @@ import { SITE_DESCRIPTION, SITE_TITLE, PROFILE_IMAGE } from '../consts';
 
 				<h2>Key Achievements</h2>
 				<ul>
-					<li>🎯 Founding React Native Developer - boosted a Canada-based ed-tech startup to release its first mobile app and supported its first private-equity fundraising round in early 2023</li>
+					<li>🎯 Founding mobile engineer on a Canada-based ed-tech startup app launch, contributing iOS-native depth while also shipping React Native features that supported fundraising in early 2023</li>
 					<li>🎮 Game Design Lead - #1 Sports App in China on May 3, 2015, as founding mobile game designer guiding a startup from pre-seed funding to IPO</li>
 					<li>🥇 2x Hackathon Winner (CuHacking 2019 &amp; 2020)</li>
 					<li>🏆 Carleton University Medal in Computer Science</li>
@@ -55,8 +103,8 @@ import { SITE_DESCRIPTION, SITE_TITLE, PROFILE_IMAGE } from '../consts';
 
 				<h2>Background</h2>
 				<ul>
-					<li>💻 6 years of SDE experience across web, mobile, and backend systems</li>
-					<li>🎯 Founding/Senior React Native Developer experience with tech startups across US, Canada and China</li>
+					<li>💻 6 years of SDE experience centered on mobile products, backend services, and system design for reliability at scale</li>
+					<li>🎯 iOS-native and cross-platform mobile delivery experience with startups across the US, Canada, and China</li>
 					<li>🎮 4 years in mobile game design from idea to App Store</li>
 					<li>📺 Live Coding Streamer on twitch.tv/zywkloo, streaming coding contests and gaming</li>
 					<li>💡 Passionate about building scalable applications and mentoring developers</li>
@@ -70,42 +118,77 @@ import { SITE_DESCRIPTION, SITE_TITLE, PROFILE_IMAGE } from '../consts';
 					<li>🥇 Carleton University Medal in Computer Science, 2020 Fall</li>
 				</ul>
 
+				<h2>How I Decompose Mobile Systems</h2>
+				<p>
+					I usually break mobile systems into a few practical layers so I can reason clearly about performance, consistency, reliability, and scalability end to end.
+				</p>
+				<div class="design-grid">
+					<div class="design-card">
+						<h3>1. Data Plane</h3>
+						<p>Execution paths that move data through the system: BLE streams, API calls, parsing, persistence, uploads, downloads, and live pipelines.</p>
+					</div>
+					<div class="design-card">
+						<h3>2. Control Policies</h3>
+						<p>Rules that shape behavior: caching and invalidation, retry and backoff, auth, feature flags, rate limits, and sync strategy.</p>
+					</div>
+					<div class="design-card">
+						<h3>3. State Management</h3>
+						<p>How raw data becomes consistent UI state through ViewModels, observable streams, and single sources of truth.</p>
+					</div>
+					<div class="design-card">
+						<h3>4. Rendering</h3>
+						<p>The presentation layer where SwiftUI, UIKit, or React Native turn state into responsive, smooth user experiences.</p>
+					</div>
+					<div class="design-card">
+						<h3>5. Orchestration</h3>
+						<p>Workflow coordination across the stack: connect, ingest, store, sync, notify, and recover without tangling responsibilities.</p>
+					</div>
+					<div class="design-card">
+						<h3>6. Infrastructure</h3>
+						<p>The SDKs and services underneath the product: CoreBluetooth, URLSession, Firebase, AWS, databases, queues, and platform tooling.</p>
+					</div>
+					<div class="design-card">
+						<h3>7. Observability</h3>
+						<p>Production visibility through logging, metrics, analytics, telemetry, and feedback loops that keep systems measurable and trustworthy.</p>
+					</div>
+				</div>
+
 				<h2>Technologies I Work With</h2>
 				<div class="tech-grid">
 					<div class="tech-category">
 						<h3>Mobile</h3>
 						<ul>
-							<li>SwiftUI</li>
+							<li>Swift / SwiftUI</li>
+							<li>UIKit</li>
 							<li>React Native</li>
-							<li>Firebase</li>
 							<li>Core Data</li>
 						</ul>
 					</div>
 					<div class="tech-category">
-						<h3>Web</h3>
+						<h3>Backend</h3>
+						<ul>
+							<li>Python / FastAPI</li>
+							<li>Node.js / Express</li>
+							<li>Redis / Queues</li>
+							<li>Postgres / MongoDB</li>
+						</ul>
+					</div>
+					<div class="tech-category">
+						<h3>Frontend / Desktop</h3>
 						<ul>
 							<li>React</li>
-							<li>Node.js</li>
-							<li>Express</li>
-							<li>MongoDB</li>
+							<li>Next.js</li>
+							<li>macOS (SwiftUI)</li>
+							<li>Windows (.NET / C#)</li>
 						</ul>
 					</div>
 					<div class="tech-category">
-						<h3>Desktop</h3>
+						<h3>Systems / Tools</h3>
 						<ul>
-							<li>C#</li>
-							<li>.NET Framework</li>
-							<li>C++</li>
-							<li>CMake</li>
-						</ul>
-					</div>
-					<div class="tech-category">
-						<h3>Tools</h3>
-						<ul>
-							<li>Git</li>
-							<li>Docker</li>
-							<li>AWS</li>
-							<li>CI/CD</li>
+							<li>C# / .NET</li>
+							<li>C++ / CMake</li>
+							<li>Docker / AWS</li>
+							<li>Git / CI/CD</li>
 						</ul>
 					</div>
 				</div>
@@ -168,6 +251,50 @@ import { SITE_DESCRIPTION, SITE_TITLE, PROFILE_IMAGE } from '../consts';
 	ul li {
 		margin-bottom: 0.5rem;
 		color: #2d3748;
+	}
+
+	.workflow-diagram {
+		background: #111827;
+		color: #e2e8f0;
+		padding: 1.5rem;
+		border-radius: 0.75rem;
+		overflow-x: auto;
+		font-size: 0.95rem;
+		line-height: 1.35;
+		margin: 1rem 0 2.5rem;
+		border: 1px solid #2d3748;
+	}
+
+	.design-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1rem;
+		margin: 1.5rem 0 2.5rem;
+	}
+
+	.design-card {
+		background: #f8f9fa;
+		padding: 1.25rem;
+		border-radius: 0.75rem;
+		border-left: 4px solid #667eea;
+	}
+
+	.design-card h3 {
+		font-size: 1.1rem;
+		margin-bottom: 0.75rem;
+		color: #667eea;
+	}
+
+	.design-card p {
+		font-size: 1rem;
+		line-height: 1.7;
+		margin-bottom: 0;
+	}
+
+	@media (min-width: 768px) {
+		.design-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
 	}
 
 	.tech-grid {
