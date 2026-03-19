@@ -19,36 +19,18 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 				<h1>About Me</h1>
 				
 				<p>
-					<strong>Mobile Engineer</strong> with 6 years of experience shipping production apps and platform capabilities across the US, Canada, and China.
-				</p>
-
-				<p>
-					I specialize in building <strong>end-to-end, data-driven mobile systems</strong>—from <strong>real-time ingestion and synchronization</strong> (for example, BLE streaming via CoreBluetooth, local persistence, and cloud sync) to <strong>backend services and telemetry pipelines</strong>. My work is grounded in <strong>data-flow correctness, concurrency, and reliability</strong> under real-world constraints such as unstable networks and long-running sessions.
-				</p>
-
-				<p>
-					I typically reason about systems in layers: <strong>data flow and IO</strong>; <strong>control policies</strong> such as caching strategies (TTL, invalidation), retry and exponential backoff under unreliable connectivity, and authentication / authorization; <strong>state management</strong>; and <strong>rendering</strong>. This helps me design <strong>scalable, resilient applications</strong> while keeping the UI responsive and maintainable.
-				</p>
-
-				<p>
-					I’m comfortable going deep on <strong>iOS native</strong> when <strong>system-level understanding</strong> is required, and I also work effectively in <strong>React Native</strong> when cross-platform leverage makes more sense. Beyond the client, I build <strong>backend services</strong> (FastAPI, Redis) and the <strong>operational data paths</strong> that modern mobile products depend on.
+					Mobile Engineer with 6 years of experience building data-driven mobile systems across iOS and React Native. I focus on end-to-end data flow—from real-time ingestion and synchronization (e.g., BLE via CoreBluetooth) to backend services and telemetry pipelines—ensuring correctness, concurrency, and reliability under real-world conditions. I design control policies such as caching (TTL, invalidation), retry/backoff, and auth, and structure systems across data flow, state, and rendering to deliver scalable, resilient, and responsive applications.
 				</p>
 
 				<h2>Vibe Coding Workflow</h2>
-				<p>
-					I follow an AI-assisted engineering workflow that separates framing, planning, execution, and validation. For complex changes, I use multiple Git worktrees to explore alternative approaches in isolation, compare tradeoffs, and converge on a clear implementation path. This allows me to move quickly while maintaining strong control over system design, code quality, and reliability.
-				</p>
 				<pre class="workflow-diagram">
-        +---------+
-        |  Frame  |
-        | (scope) |
+        +---------+    # Clarify goals, scope
+        |  Frame  |    # Identify constraints
         +----+----+
              |
              v
-     +-------+-------+
-     |     Plan      |
-     | (multi-       |
-     |  worktrees)   |
+     +-------+-------+    # Explore alternatives
+     |     Plan      |    # Compare tradeoffs (worktrees)
      +---+-----+-----+
          |     |
          v     v
@@ -56,22 +38,18 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
          \     /
           \   /
            v v
-      +----+----+
-      | Execute |
-      | (focus) |
-      +----+----+
-           |
-           v
-      +----+----+
-      | Validate|
-      | (tests, |
-      |  checks)|
+      +----+----+    # Focused implementation
+      | Execute |    # Small, incremental steps
       +----+----+
            |
            v
+      +----+----+    # Build, test, edge cases
+      | Validate|    # Verify correctness & stability
       +----+----+
-      | Capture |
-      | (learn) |
+           |
+           v
+      +----+----+    # Record decisions, tradeoffs
+      | Capture |    # Enable future iteration
       +---------+
 				</pre>
 				<h2>Recent Experience</h2>
