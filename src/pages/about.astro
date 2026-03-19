@@ -23,20 +23,14 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 				</p>
 
 				<h2>Vibe Coding Workflow</h2>
-				<p>
-					I follow an AI-assisted engineering workflow that separates framing, planning, execution, and validation. For complex changes, I use multiple Git worktrees to explore alternative approaches in isolation, compare tradeoffs, and converge on a clear implementation path. This allows me to move quickly while maintaining strong control over system design, code quality, and reliability.
-				</p>
 				<pre class="workflow-diagram">
-        +---------+
-        |  Frame  |
-        | (scope) |
+        +---------+    # Clarify goals, scope
+        |  Frame  |    # Identify constraints
         +----+----+
              |
              v
-     +-------+-------+
-     |     Plan      |
-     | (multi-       |
-     |  worktrees)   |
+     +-------+-------+    # Explore alternatives
+     |     Plan      |    # Compare tradeoffs (worktrees)
      +---+-----+-----+
          |     |
          v     v
@@ -44,22 +38,18 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
          \     /
           \   /
            v v
-      +----+----+
-      | Execute |
-      | (focus) |
-      +----+----+
-           |
-           v
-      +----+----+
-      | Validate|
-      | (tests, |
-      |  checks)|
+      +----+----+    # Focused implementation
+      | Execute |    # Small, incremental steps
       +----+----+
            |
            v
+      +----+----+    # Build, test, edge cases
+      | Validate|    # Verify correctness & stability
       +----+----+
-      | Capture |
-      | (learn) |
+           |
+           v
+      +----+----+    # Record decisions, tradeoffs
+      | Capture |    # Enable future iteration
       +---------+
 				</pre>
 				<h2>Recent Experience</h2>
