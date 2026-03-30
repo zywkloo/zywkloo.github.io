@@ -35,111 +35,113 @@ If these patterns are not managed early, design debt compounds fast.
 
 ## A Practical Maintenance Playbook
 
+![Domain semantics maintenance loop](/images/domain-semantics-maintenance-loop.svg)
+
 1. **Identify the High-Risk Concepts**
 
-Do not model everything heavily. Model what is expensive to misunderstand.
+   Do not model everything heavily. Model what is expensive to misunderstand.
 
-Typical examples:
+   Typical examples:
 
-- money
-- balance
-- status
-- identity
-- effective date
-- settlement
-- availability
+   - money
+   - balance
+   - status
+   - identity
+   - effective date
+   - settlement
+   - availability
 
-These concepts deserve explicit definitions and ownership.
+   These concepts deserve explicit definitions and ownership.
 
 2. **Separate Facts From Projections**
 
-Keep this boundary explicit:
+   Keep this boundary explicit:
 
-- facts: authoritative records
-- projections: feed rows, summaries, analytics views
+   - facts: authoritative records
+   - projections: feed rows, summaries, analytics views
 
-The key question:
+   The key questions are:
 
-- what is source of truth?
-- what is derived interpretation?
+   - what is source of truth?
+   - what is derived interpretation?
 
-Most semantic disagreements are projection disagreements.
+   Most semantic disagreements are projection disagreements.
 
 3. **Encode Invariants in Runtime Checks**
 
-If a rule matters, it should be enforceable in code.
+   If a rule matters, it should be enforceable in code.
 
-Examples:
+   Examples:
 
-- money stored in integer minor units
-- immutable creation timestamps
-- legal status and metadata combinations
-- clear inclusion rules for available balance
+   - money stored in integer minor units
+   - immutable creation timestamps
+   - legal status and metadata combinations
+   - clear inclusion rules for available balance
 
-Important rules should fail loudly when violated.
+   Important rules should fail loudly when violated.
 
 4. **Make Transitions Explicit**
 
-State should not behave like a free-form string.
+   State should not behave like a free-form string.
 
-Define legal movement:
+   Define legal movement:
 
-- pending -> settled
-- pending -> failed
-- settled -> reversed
+   - pending -> settled
+   - pending -> failed
+   - settled -> reversed
 
-Illegal transitions should be unrepresentable or rejected.
+   Illegal transitions should be unrepresentable or rejected.
 
 5. **Centralize Interpretation Logic**
 
-Storage centralization is not enough. Interpretation centralization matters.
+   Storage centralization is not enough. Interpretation centralization matters.
 
-Centralize:
+   Centralize:
 
-- projection rules
-- summary calculations
-- lifecycle policies
-- time interpretation rules
+   - projection rules
+   - summary calculations
+   - lifecycle policies
+   - time interpretation rules
 
-The more often semantic logic is copy-pasted, the faster it forks.
+   The more often semantic logic is copy-pasted, the faster it forks.
 
 6. **Test Meaning, Not Only Mechanics**
 
-High-value semantic tests:
+   High-value semantic tests:
 
-- invariant tests
-- transition tests
-- cross-view consistency tests
-- replay and retry tests
-- fixture-based scenario tests
+   - invariant tests
+   - transition tests
+   - cross-view consistency tests
+   - replay and retry tests
+   - fixture-based scenario tests
 
-These tests protect interpretation, not just implementation details.
+   These tests protect interpretation, not just implementation details.
 
 7. **Treat Semantic Change as Migration**
 
-When meaning changes, treat it as a system migration, not a local edit.
+   When meaning changes, treat it as a system migration, not a local edit.
 
-Minimum checklist:
+   Minimum checklist:
 
-- short decision note
-- clear old vs new semantic rule
-- impacted services and projections
-- rollout boundary and compatibility window
-- migration or backfill plan if history is affected
+   - short decision note
+   - clear old vs new semantic rule
+   - impacted services and projections
+   - rollout boundary and compatibility window
+   - migration or backfill plan if history is affected
 
-This is how teams avoid "multiple truths at once."
+   This is how teams avoid "multiple truths at once."
 
 8. **Assign Ownership for Meaning**
 
-Without ownership, semantics become negotiable by accident.
+   Without ownership, semantics become negotiable by accident.
 
-Important ownership questions:
+   Important ownership questions:
 
-- who defines critical terms like available balance?
-- who reviews lifecycle-rule changes?
-- who checks cross-surface semantic consistency?
+   - who defines critical terms like available balance?
+   - who reviews lifecycle-rule changes?
+   - who checks cross-surface semantic consistency?
 
-Clear ownership prevents slow semantic drift.
+   Clear ownership prevents slow semantic drift.
 
 ## DDD + DDIA in Practice
 
