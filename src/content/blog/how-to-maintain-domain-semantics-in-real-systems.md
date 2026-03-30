@@ -35,7 +35,7 @@ If these patterns are not managed early, design debt compounds fast.
 
 ## A Practical Maintenance Playbook
 
-### 1) Identify the High-Risk Concepts
+1. **Identify the High-Risk Concepts**
 
 Do not model everything heavily. Model what is expensive to misunderstand.
 
@@ -51,7 +51,7 @@ Typical examples:
 
 These concepts deserve explicit definitions and ownership.
 
-### 2) Separate Facts From Projections
+2. **Separate Facts From Projections**
 
 Keep this boundary explicit:
 
@@ -65,7 +65,7 @@ The key question:
 
 Most semantic disagreements are projection disagreements.
 
-### 3) Encode Invariants in Runtime Checks
+3. **Encode Invariants in Runtime Checks**
 
 If a rule matters, it should be enforceable in code.
 
@@ -78,7 +78,7 @@ Examples:
 
 Important rules should fail loudly when violated.
 
-### 4) Make Transitions Explicit
+4. **Make Transitions Explicit**
 
 State should not behave like a free-form string.
 
@@ -90,7 +90,7 @@ Define legal movement:
 
 Illegal transitions should be unrepresentable or rejected.
 
-### 5) Centralize Interpretation Logic
+5. **Centralize Interpretation Logic**
 
 Storage centralization is not enough. Interpretation centralization matters.
 
@@ -103,7 +103,7 @@ Centralize:
 
 The more often semantic logic is copy-pasted, the faster it forks.
 
-### 6) Test Meaning, Not Only Mechanics
+6. **Test Meaning, Not Only Mechanics**
 
 High-value semantic tests:
 
@@ -115,7 +115,7 @@ High-value semantic tests:
 
 These tests protect interpretation, not just implementation details.
 
-### 7) Treat Semantic Change as Migration
+7. **Treat Semantic Change as Migration**
 
 When meaning changes, treat it as a system migration, not a local edit.
 
@@ -129,7 +129,7 @@ Minimum checklist:
 
 This is how teams avoid "multiple truths at once."
 
-### 8) Assign Ownership for Meaning
+8. **Assign Ownership for Meaning**
 
 Without ownership, semantics become negotiable by accident.
 

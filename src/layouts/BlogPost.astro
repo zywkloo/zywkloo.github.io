@@ -74,11 +74,27 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			}
 			.prose :global(ul),
 			.prose :global(ol) {
-				margin: 0 0 1.2em 1.2em;
-				padding-left: 1em;
+				margin: 0 0 1.35em 0.4em;
+				padding-left: 1.6em;
+			}
+			.prose :global(ul) {
+				list-style: disc outside;
+			}
+			.prose :global(ol) {
+				list-style: decimal outside;
 			}
 			.prose :global(li) {
-				margin-bottom: 0.4em;
+				margin-bottom: 0.5em;
+				padding-left: 0.25em;
+			}
+			.prose :global(li)::marker {
+				color: var(--accent-dark);
+				font-weight: 700;
+			}
+			.prose :global(img) {
+				margin: 1.4em 0;
+				border-radius: 12px;
+				box-shadow: var(--box-shadow);
 			}
 			.prose :global(blockquote) {
 				margin: 1.2em 0;
