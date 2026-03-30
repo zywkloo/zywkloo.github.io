@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="800" viewBox="0 0 1600 800" role="img" aria-labelledby="title desc">
+  <title id="title">From Structure to Semantics hero image</title>
+  <desc id="desc">A futuristic diagram showing EIT-TCF as a lens for executable semantics, with six semantic dimensions around a central core.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#071326"/>
+      <stop offset="55%" stop-color="#10294a"/>
+      <stop offset="100%" stop-color="#160f2d"/>
+    </linearGradient>
+    <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#54f2ff" stop-opacity="0.95"/>
+      <stop offset="55%" stop-color="#5e8fff" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#5e8fff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cyanRing" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6ef2ff"/>
+      <stop offset="100%" stop-color="#4b83ff"/>
+    </linearGradient>
+    <linearGradient id="violetRing" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9366ff"/>
+      <stop offset="100%" stop-color="#52e0ff"/>
+    </linearGradient>
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="cardGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="800" fill="url(#bg)"/>
+
+  <g opacity="0.16" stroke="#71cfff" stroke-width="1">
+    <path d="M0 110h1600M0 210h1600M0 310h1600M0 410h1600M0 510h1600M0 610h1600M0 710h1600"/>
+    <path d="M120 0v800M260 0v800M400 0v800M540 0v800M680 0v800M820 0v800M960 0v800M1100 0v800M1240 0v800M1380 0v800"/>
+  </g>
+
+  <text x="800" y="90" text-anchor="middle" font-size="68" font-weight="700" fill="#d9fbff" font-family="Atkinson, Arial, sans-serif">
+    FROM STRUCTURE TO SEMANTICS
+  </text>
+  <text x="800" y="142" text-anchor="middle" font-size="28" fill="#b5d9ff" font-family="Atkinson, Arial, sans-serif">
+    Using EIT-TCF for Executable Semantics
+  </text>
+
+  <g transform="translate(800 425)">
+    <circle r="210" fill="url(#coreGlow)"/>
+    <circle r="172" fill="none" stroke="url(#cyanRing)" stroke-width="24" filter="url(#softGlow)"/>
+    <circle r="132" fill="#102342" stroke="url(#violetRing)" stroke-width="3"/>
+    <text x="0" y="-18" text-anchor="middle" font-size="48" font-weight="700" fill="#e9fbff" font-family="Atkinson, Arial, sans-serif">EIT-TCF</text>
+    <text x="0" y="24" text-anchor="middle" font-size="28" fill="#d5efff" font-family="Atkinson, Arial, sans-serif">Executable</text>
+    <text x="0" y="58" text-anchor="middle" font-size="28" fill="#d5efff" font-family="Atkinson, Arial, sans-serif">Semantics</text>
+  </g>
+
+  <g stroke="#71dbff" stroke-width="5" opacity="0.9">
+    <path d="M800 215 L800 278" fill="none"/>
+    <path d="M970 300 L1032 264" fill="none"/>
+    <path d="M970 548 L1034 584" fill="none"/>
+    <path d="M800 634 L800 575" fill="none"/>
+    <path d="M630 548 L566 584" fill="none"/>
+    <path d="M630 300 L566 264" fill="none"/>
+  </g>
+
+  <g font-family="Atkinson, Arial, sans-serif" text-anchor="middle">
+    <g transform="translate(800 200)" filter="url(#cardGlow)">
+      <rect x="-120" y="-36" width="240" height="72" rx="18" fill="#122d54" stroke="#63e6ff" stroke-width="2"/>
+      <text y="11" font-size="30" font-weight="700" fill="#e7fbff">Entity</text>
+    </g>
+    <g transform="translate(1090 250)" filter="url(#cardGlow)">
+      <rect x="-145" y="-36" width="290" height="72" rx="18" fill="#173157" stroke="#69e8ff" stroke-width="2"/>
+      <text y="11" font-size="30" font-weight="700" fill="#e7fbff">Invariant</text>
+    </g>
+    <g transform="translate(1090 600)" filter="url(#cardGlow)">
+      <rect x="-154" y="-36" width="308" height="72" rx="18" fill="#1d2e57" stroke="#79deff" stroke-width="2"/>
+      <text y="11" font-size="30" font-weight="700" fill="#e7fbff">Transition</text>
+    </g>
+    <g transform="translate(800 650)" filter="url(#cardGlow)">
+      <rect x="-108" y="-36" width="216" height="72" rx="18" fill="#163159" stroke="#7fe2ff" stroke-width="2"/>
+      <text y="11" font-size="30" font-weight="700" fill="#e7fbff">Time</text>
+    </g>
+    <g transform="translate(510 600)" filter="url(#cardGlow)">
+      <rect x="-162" y="-36" width="324" height="72" rx="18" fill="#182d55" stroke="#7edfff" stroke-width="2"/>
+      <text y="11" font-size="30" font-weight="700" fill="#e7fbff">Consistency</text>
+    </g>
+    <g transform="translate(510 250)" filter="url(#cardGlow)">
+      <rect x="-122" y="-36" width="244" height="72" rx="18" fill="#142b51" stroke="#70ddff" stroke-width="2"/>
+      <text y="11" font-size="30" font-weight="700" fill="#e7fbff">Failure</text>
+    </g>
+  </g>
+
+  <g font-family="Atkinson, Arial, sans-serif" fill="#bcdfff" font-size="22">
+    <text x="800" y="742" text-anchor="middle">
+      Define meaning first. Encode invariants, transitions, time, consistency, and failure into the system.
+    </text>
+  </g>
+</svg>

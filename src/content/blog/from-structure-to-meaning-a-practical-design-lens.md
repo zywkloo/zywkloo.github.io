@@ -2,7 +2,7 @@
 title: 'From Structure to Semantics: Using EIT-TCF for Executable Semantics'
 description: 'A practical way to use entity, invariant, transition, time, consistency, and failure to turn domain meaning into executable design.'
 pubDate: 'Mar 28 2026'
-heroImage: '../../assets/domain-semantics-hero.jpg'
+heroImage: '../../assets/eit-tcf-executable-semantics-hero.svg'
 ---
 
 Most engineers learn design through structure.
