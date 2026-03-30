@@ -2,6 +2,7 @@
 title: 'From Structure to Semantics: Using EIT-TCF for Executable Semantics'
 description: 'A practical way to use entity, invariant, transition, time, consistency, and failure to turn domain meaning into executable design.'
 pubDate: 'Mar 28 2026'
+heroImage: '../../assets/domain-semantics-hero.jpg'
 ---
 
 Most engineers learn design through structure.
@@ -24,163 +25,161 @@ The harder questions sit one level deeper:
 
 That is the layer I care about most in design: semantics.
 
-More specifically, semantics should not remain trapped in docs, discussions, or team memory. They should become executable in code, projections, tests, and failure handling.
+The core thesis is simple:
 
-## Structure Organizes Code. Semantics Protect Meaning.
+- structure organizes code
+- semantics protect correctness
+- semantics should become executable
 
-A system can be beautifully structured and still be wrong.
+## Why Structure Is Not Enough
 
-You can still ship bugs like:
+A system can be well-structured and still wrong.
 
-- a pending transaction showing up as available balance
-- duplicate records after a retry
-- a summary card disagreeing with the underlying list
-- stale data overwriting fresher state
-- illegal state transitions because status is just a string
+Common failures:
 
-These are not really structural failures.
+- a pending transaction appears as available balance
+- retries create duplicate records
+- summary totals disagree with the feed
+- stale data overwrites fresher state
+- illegal status transitions are representable
 
-They are semantic failures.
+These are semantic failures, not folder-structure failures.
 
-The issue is not where the code lives. The issue is that the system never made its business meaning explicit enough to defend itself.
+## EIT-TCF at a Glance
 
-Structure tells you where code goes.
+EIT-TCF is a practical lens for semantic design:
 
-Semantics tell you what the system is allowed to mean.
+- `Entity`: what the system is modeling
+- `Invariant`: what must never be wrong
+- `Transition`: how state is allowed to change
+- `Time`: which clock drives behavior
+- `Consistency`: what must agree, and when
+- `Failure`: how meaning survives retries and partial failure
 
-## A Practical Design Lens
+It is not a formal framework. It is a checklist for turning domain meaning into enforceable system behavior.
 
-When I look at a feature or system, I usually want six things to be clear:
-
-- Entity
-- Invariant
-- Transition
-- Time
-- Consistency
-- Failure
-
-Not as a formal framework. Just as a practical checklist for turning business meaning into something the system can actually enforce.
+![EIT-TCF semantic design lens](/images/eit-tcf-lens-diagram.svg)
 
 ### Entity
 
-What is the thing we are modeling?
+Define identity and facts first.
 
-What gives it identity? Which fields are facts, and which are derived views?
+- What makes this record the same record over time?
+- Which fields are authoritative facts?
+- Which fields are only derived views?
 
-If that is vague, everything downstream becomes unstable.
+If this stays fuzzy, everything downstream drifts.
 
 ### Invariant
 
-What must never be wrong?
+Define non-negotiable rules early.
 
-Money stored in integer minor units. Immutable creation timestamps. Pending records excluded from available balance. Summaries following the same rules as the underlying data.
+- money in integer minor units
+- immutable creation timestamps
+- pending records excluded from spendable balance
+- summaries derived with the same rules as details
 
-If these rules are only implicit, the system will eventually violate them.
+If invariants are implicit, bugs will rewrite them.
 
 ### Transition
 
-How is change allowed?
+Model legal state movement explicitly.
 
-A strong system does not treat state as free text. It defines legal movement.
+- pending -> settled
+- pending -> failed
+- settled -> reversed
 
-Pending can become settled. Settled may become reversed. Some transitions should not exist at all.
+Not every transition should be representable.
 
 ### Time
 
-Which timestamp matters?
+Pick the right clock for each decision.
 
-Created time, processed time, settled time, displayed time: these are not interchangeable.
+- created time
+- processed time
+- settled time
+- display time
 
-If the system does not define which one drives ordering, grouping, or reconciliation, inconsistency is only a matter of time.
+If these are mixed casually, ordering and reconciliation become unstable.
 
 ### Consistency
 
-What must agree, and when?
+Choose agreement boundaries on purpose.
 
-Not everything needs strong consistency. But the system should be explicit about where temporary divergence is acceptable and where it is not.
+- what must be strongly consistent
+- what can be eventually consistent
+- what may diverge briefly, but never semantically
+
+The key is intentionality, not ideology.
 
 ### Failure
 
-How does the model behave when reality gets messy?
+Design for production reality, not happy paths.
 
-Retries, duplicate requests, stale caches, out-of-order events, partial failures, replayed messages: this is not edge-case territory. This is production.
+- retries
+- duplicates
+- out-of-order events
+- stale caches
+- partial writes
 
-A design is incomplete until meaning survives failure.
+A design is incomplete until meaning survives these cases.
 
-## The Real Goal: Make Semantics Executable
+## Make Semantics Executable
 
-Good design should not stop at describing semantics.
+The real goal is to encode semantics into code and pipeline behavior.
 
-It should make them executable.
+Practical patterns:
 
-That means correctness lives in code, data flow, and tests, not just in docs or team memory.
-
-In practice, that often means:
-
-- value objects for concepts like money, status, and identity
+- value objects for money, identity, status
 - validators for invariants
-- explicit state transition rules
-- projections derived from a clear source of truth
-- idempotency rules for retries
-- fixtures and tests that preserve interpretation across refactors
-- versioning rules for evolving contracts safely
+- explicit transition tables or guards
+- projections from a clear source of truth
+- idempotency keys and replay-safe handlers
+- golden fixtures that lock interpretation across surfaces
 
-The goal is simple:
+![Semantics as code pipeline](/images/semantics-as-code-pipeline.svg)
 
-Make valid states easier to represent, and invalid states harder to construct.
+The objective is straightforward:
 
-## Why DDD and DDIA Still Matter
+- valid states are easy to represent
+- invalid states are hard to construct
 
-*Domain-Driven Design* forces you to take business meaning seriously. It pushes important concepts out of vague language and into explicit models.
+## Where DDD and DDIA Help
 
-*Designing Data-Intensive Applications* reminds you that meaning does not stay still. Data gets retried, replayed, cached, delayed, reordered, and projected. If the semantics are not durable, the system becomes structurally clean but behaviorally inconsistent.
+Both books are useful, but for different reasons.
 
-One clarifies the model. The other stress-tests it against reality.
+- *Domain-Driven Design* sharpens business meaning and boundaries.
+- *Designing Data-Intensive Applications* stress-tests that meaning under retries, replication, delay, and reordering.
 
-Together, they push design toward a better question:
+Together they answer one practical question:
 
-Not "How should I structure this?"
+What must remain true when the system is under real operational stress?
 
-But "What must remain true when this system is under delay, drift, and failure?"
+## Example: Transaction Feed
 
-## A Simple Example
+Even a simple feed carries real semantic design:
 
-Take something as ordinary as a transaction feed.
+- `amount` in minor units, not floating point
+- `availableBalance` excludes pending funds
+- `thirtyDaySpending` includes settled outflows only
+- `runningBalance` depends on a defined ordering rule
+- retries must not duplicate ledger effects
+- display ordering and accounting ordering may differ
 
-It already contains a lot of semantic design:
-
-- `amount` should be integer minor units
-- `availableBalance` probably excludes pending records
-- `thirtyDaySpending` may include only settled outflows
-- `runningBalance` depends on ordering assumptions
-- retries should not create duplicates
-- list ordering and accounting ordering may not be the same
-- `pending` should not quietly behave like `final`
-
-Those are not mostly UI decisions.
-
-They are domain decisions.
-
-And they shape everything else: model design, selectors, service contracts, storage choices, tests, and recovery behavior.
-
-That is why good engineering design is often less about drawing cleaner boxes and more about protecting meaning.
+These are domain commitments. Architecture should enforce them, not weaken them.
 
 ## Final Thought
 
-Structure matters.
+EIT-TCF is useful because it turns semantic design into executable decisions.
 
-But structure is only the container.
+It helps teams move from:
 
-The deeper design work is deciding what the system means, what it must never mean, and how that meaning survives real-world failure.
+- "How should we structure this?"
 
-That is why I keep coming back to the same idea:
+to:
 
-Domain semantics should become executable.
+- "What must this system mean, and how do we enforce it?"
 
-That is what makes EIT-TCF useful. It is not just a checklist for analysis. It is a way to identify the semantics that should be encoded, tested, and preserved across the system.
-
-Not just in the model, but across the whole pipeline.
-
-Because structure can be refactored.
+Structure can be refactored.
 
 Broken meaning is much harder to repair.
