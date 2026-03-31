@@ -31,6 +31,12 @@ This article is not really about presenting a brand new framework. It is about e
 - *Domain-Driven Design*
 - *Designing Data-Intensive Applications*
 
+When I say *Domain-Driven Design* here, I mean primarily Eric Evans' original book. Later DDD writing made some of the implementation-side lessons easier to apply, but the source of the core framing for me is still Evans.
+
+| Domain-Driven Design | Designing Data-Intensive Applications |
+| --- | --- |
+| [![Domain-Driven Design cover](https://domainlanguage.com/wp-content/uploads/2016/05/Evans_2004_book_cover-234x300.jpg)](https://www.domainlanguage.com/ddd/blue-book/) | [![Designing Data-Intensive Applications cover](https://www.oreilly.com/covers/urn%3Aorm%3Abook%3A9781491903063/400w/)](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/) |
+
 ## Why These Two Books Matter Together
 
 The books solve different problems.
@@ -59,7 +65,7 @@ The most important lessons I take from *Domain-Driven Design* are:
 - invariants should live close to the model that owns them
 - not every noun needs to become a first-class concept, but the expensive ones do
 
-DDD changed how I look at domain objects.
+Primarily from Eric Evans, DDD changed how I look at domain objects.
 
 I stopped seeing them as containers for fields and started seeing them as carriers of meaning. Identity, lifecycle, and rule ownership became design questions, not just naming questions.
 
@@ -158,7 +164,7 @@ The goal is executable semantics.
 
 If I had to compress the relationship into one sentence, it would be this:
 
-- DDD tells me what the domain needs to mean.
+- Eric Evans' DDD tells me what the domain needs to mean.
 - DDIA tells me what can go wrong when that meaning is implemented in a real system.
 
 TEC-FIT is my shorthand for holding both at the same time.

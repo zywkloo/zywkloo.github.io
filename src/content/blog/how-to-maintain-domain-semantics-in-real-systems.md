@@ -1,219 +1,292 @@
 ---
 title: 'Keeping Domain Semantics Intact in a Transaction App'
-description: 'A practical look at how a transaction-heavy financial app can preserve domain meaning across models, selectors, UI states, tests, and design tokens.'
+description: 'A practical framework for maintaining domain semantics in a transaction app across contracts, validators, policies, projections, UI states, and regression boundaries.'
 pubDate: 'Mar 29 2026'
 heroImage: '../../assets/domain-semantics-hero.jpg'
 ---
 
-When people talk about financial apps, they usually talk about features:
+Transaction apps look simple from the outside:
 
-- account summary
-- transaction feed
-- detail screen
-- filters
-- loading and error states
+- a summary card
+- a feed
+- a detail view
+- a filter bar
 
-But the hard part is not really the surface area.
+But semantic drift usually starts long before the UI looks obviously wrong.
 
-The hard part is semantic integrity.
+It starts when different parts of the app quietly answer the same business question differently:
 
-In a transaction-heavy financial app, small ambiguities quickly become product bugs:
+- What counts as available balance?
+- What does pending mean?
+- Which transactions belong in spending totals?
+- Which timestamp drives ordering?
+- Which colors or badges imply finality?
 
-- Does pending money count as available?
-- Is a transfer spending, movement, or both?
-- Which date drives the 30-day window?
-- Can the summary card and detail screen disagree temporarily?
-- Is a color token just visual, or does it carry state meaning?
+So the real question is not just "how do we model transactions?"
 
-This article is about that practical layer: how to maintain domain semantics in a transaction app so the system keeps one interpretation of the truth across data, UI, and interaction.
+It is:
 
-## The Semantic Surface of the App
+How do we maintain one interpretation of a transaction across data, behavior, UI, and change over time?
 
-Even a compact transaction app already contains multiple semantic surfaces:
+## The Right Unit of Analysis: Dimensions, Not Screens
 
-- the transaction model
-- the account summary
-- the paginated feed
-- the transaction detail screen
-- category filters
-- design tokens and status colors
+When people analyze a transaction app screen by screen, the write-up often turns into a feature demo.
 
-If those surfaces do not share the same meaning, the app may still compile and still be wrong.
+That misses the important part.
 
-## Start with the Transaction Model
+A stronger way to think about semantic maintenance is by layer.
 
-In this app, the core transaction model already tells us which concepts need protection:
+For a transaction-heavy financial app, I would group the problem into three sections:
 
-- `id`
-- `type`
-- `category`
-- `amount`
-- `currency`
-- `date`
-- `status`
-- `runningBalance`
-- `notes`
-- `tags`
+1. **Domain rules**
+   contract, validator, decider, policy
+2. **View semantics**
+   projection, interaction semantics, design system enforcement
+3. **Operational integrity**
+   regression boundaries and governance
 
-Some of these are just descriptive.
+![Domain semantics maintenance loop](/images/domain-semantics-maintenance-loop.svg)
 
-Some are semantic anchors:
+## 1. Domain Rules
 
-- `amount` is stored in integer minor units
-- `status` distinguishes pending from settled
-- `runningBalance` is a derived accounting value
-- `type` and `category` shape downstream interpretation
+This is the layer that decides what the app is allowed to mean before it ever renders a screen.
 
-That is the first maintenance rule in practice:
+### Contract: What Is the System Allowed to Represent?
 
-not all fields are equally important, but the high-risk ones must be interpreted consistently everywhere.
+The contract layer defines the vocabulary of the app.
 
-## The Summary Header Is a Semantic Projection
+For a transaction entity, that usually includes:
 
-The summary header looks simple:
+- identity
+- type
+- category
+- amount
+- currency
+- status
+- timestamps
+- derived fields such as running balance
+
+The contract should answer questions like:
+
+- Is `amount` stored in integer minor units?
+- Are `type` and `category` both needed, and do they mean different things?
+- Is `runningBalance` authoritative or derived?
+- Are notes and tags user-entered metadata or business data?
+
+In a small transaction app, this may live in TypeScript types and service interfaces. In a larger system, it usually becomes an API contract, persistence schema, and shared domain vocabulary.
+
+The important part is not where it lives. The important part is that everyone is speaking the same language.
+
+### Validator: What Must Never Be Wrong?
+
+Once the contract exists, the next layer is validation.
+
+This is where semantic rules stop being descriptive and become enforceable.
+
+Typical examples in a transaction app:
+
+- amounts must use integer minor units
+- status must come from a restricted set
+- pending records should not carry final-only fields
+- currency and formatting rules must be compatible
+- category values must belong to an approved vocabulary
+
+These are not "nice to have" checks.
+
+They are what prevent the model from silently absorbing semantic nonsense.
+
+In practice, validators can live in:
+
+- model constructors
+- service adapters
+- selectors
+- backend request handlers
+- import pipelines
+
+The exact location is less important than the discipline: important invariants should fail loudly instead of relying on team memory.
+
+### Decider: How Is Change Allowed?
+
+A lot of semantic drift is really state-transition drift.
+
+That is why I like to separate the decider dimension from the validator dimension.
+
+Validators say:
+
+- this state is invalid
+
+Deciders say:
+
+- this change is not allowed
+
+In a transaction app, that shows up as questions like:
+
+- Can pending become settled?
+- Can settled become reversed?
+- Can a transaction change category after ingestion?
+- Can a retry create a second transaction, or should it reconcile with an existing one?
+
+If these rules are not explicit, they end up scattered across reducers, service code, and UI conditionals.
+
+A decider can be a reducer rule, a domain service, a transition table, or a backend workflow. The form is flexible. The point is that lifecycle decisions should be centralized enough to reason about.
+
+### Policy: Which Interpretation Wins?
+
+Policy is where a lot of business semantics actually lives.
+
+A policy is not just a validation rule. It is a decision rule applied repeatedly.
+
+For transaction apps, policy questions include:
+
+- Does available balance exclude pending funds?
+- Does 30-day spending include only settled outflows?
+- Does a transfer count as spending, movement, or neither?
+- Which date defines recency: created, posted, or settled?
+- What does the app do with stale local data on launch?
+
+These are not screen decisions.
+
+They are cross-cutting policies that multiple parts of the app must obey.
+
+One of the easiest ways for semantics to decay is letting each screen or selector rediscover policy independently.
+
+## 2. View Semantics
+
+Once the domain rules are defined, the next question is whether the app expresses them consistently across its views.
+
+### Projection: How Do Derived Views Stay Honest?
+
+A transaction app is full of projections:
 
 - available balance
 - 30-day spending
+- filtered feeds
+- detail views
+- analytics summaries
+- badge states
 
-But those numbers are not raw fields. They are semantic projections.
+The key discipline here is separating facts from projections.
 
-That distinction matters.
+Facts are the underlying records.
 
-In the app, `availableBalance` is derived by excluding pending transactions from spendable funds. That is not just a calculation detail. It is a product decision about what "available" means.
+Projections are interpretations of those records for a particular purpose.
 
-Likewise, `thirtyDaySpending` excludes pending transactions and only counts settled outflows in the 30-day window. Again, that is semantics, not formatting.
+The moment a projection is mistaken for source of truth, semantics start to fork.
 
-If another screen computed those numbers differently, the app would have two balances and two spending totals pretending to be one.
+That is why selectors and summary logic matter so much. They are not just performance helpers. They are projection boundaries.
 
-## The Feed Is Not the Source of Truth
+A good projection layer should make it easy to answer:
 
-A transaction feed is a view, not the model itself.
+- where does this number come from?
+- which rules were applied?
+- should the detail screen and summary card always agree?
 
-That means the feed has to preserve meaning while still being optimized for readability:
+### Interaction and UI Semantics: What Does the User Actually Learn?
 
-- relative dates for scanning
-- status labels for quick interpretation
-- signed amounts for inflow vs outflow
-- category icons for fast recognition
+Semantic maintenance is not just backend logic.
 
-In the row component, even the text treatment carries semantic weight:
+It also includes how meaning is expressed in the interface.
 
-- pending is visually separated from settled
-- positive amounts and negative amounts are styled differently
-- date and status are grouped as one compact interpretation layer
+A feed row, for example, is not just decoration. It encodes business interpretation through:
 
-The lesson is simple:
+- signed amount formatting
+- relative or absolute time labels
+- pending versus settled badge language
+- category iconography
+- empty, loading, and error states
 
-presentation is not separate from semantics. It is one of the places semantics are communicated and therefore one of the places they can drift.
+The detail screen carries the same responsibility. It should deepen the user’s understanding of the record, not reinterpret it.
 
-## The Detail Screen Has to Agree with the Feed
+A strong question to ask is:
 
-The detail screen is where semantic inconsistencies become obvious.
+What would a user believe after looking at this screen?
 
-If the feed says one thing and the detail screen says another, users do not experience that as a distributed systems problem. They experience it as mistrust.
+If the answer differs from what the domain model intends, that is a semantic bug even if the data is technically correct.
 
-That is why the detail screen matters so much in financial software. It has to carry the same meaning as the feed, only with more explicit context:
+### Design System Enforcement: Can the UI Drift Semantically?
 
-- full date instead of relative date
-- running balance after the transaction
-- type, category, status, notes, and tags
+This belongs in the same section as UI semantics because design systems are one of the main ways interaction meaning gets enforced consistently.
 
-This is a good example of semantic continuity:
+In a transaction app, the design system is not just typography and spacing. It is also a semantic control surface.
 
-the detail screen should deepen the meaning of the record, not reinterpret it.
+That can include:
 
-## Filters Are Also Semantic
+- semantic color tokens like `positive`, `negative`, `pending`
+- status badges with consistent language and contrast
+- custom UI elements such as transaction rows, amount labels, and state chips
+- component contracts for loading, error, and empty states
 
-Even something as ordinary as a category filter contains semantic choices.
+The point is not to build a huge component library too early.
 
-The filter in this app is client-side and instant, which is good for responsiveness. But the more important point is that it works on the same transaction set and the same category model as the rest of the app.
+The point is to notice which UI meanings need system-level enforcement instead of discipline alone.
 
-That keeps the meaning stable:
+A useful maturity ladder looks like this:
 
-- the category list and the feed agree on category values
-- the filtered list is a projection, not a different dataset
-- summary and feed behavior can be reasoned about against the same base records
+- token file
+- shared semantic components
+- lint or review rules for new hard-coded states
+- visual regression coverage for critical surfaces
 
-When filters silently change the meaning of totals or list membership, semantic drift starts to creep in.
+Without that, semantic meaning can drift visually even when the underlying data logic stays correct.
 
-## Time Semantics Are Everywhere
+## 3. Operational Integrity
 
-Time handling in financial software is rarely "just a date field."
+The last section is about keeping semantic meaning stable as the app evolves.
 
-In this app, time affects at least three things:
+### Regression and Governance: How Does the Meaning Stay Stable?
 
-- feed ordering
-- relative date display
-- the 30-day spending window
+The last dimension is not code structure. It is maintenance discipline.
 
-That means the app needs one stable interpretation of time even though the UI renders it in multiple ways.
+A transaction app should usually protect semantics through several layers of verification:
 
-A relative label like "2 days ago" is only a presentation layer. The semantic source is still the underlying ISO timestamp.
+- unit tests for pure projection rules
+- contract tests around service boundaries
+- integration tests for feed, summary, filter, error, and retry coordination
+- visual regression tests for status, amount, and balance presentation
+- decision logs when semantics change
 
-The same goes for windowed spending totals. If one part of the app uses transaction creation time while another uses settlement time, the app will drift even if both screens look reasonable in isolation.
+This is also where ownership matters.
 
-## Design Tokens Are Part of Semantic Maintenance
+When a semantic rule changes, someone should be able to answer:
 
-This is where design system thinking becomes surprisingly important.
+- what changed?
+- which screens and services are affected?
+- what historical behavior remains valid?
+- how will regressions be detected?
 
-The token file in the app does not just define colors. It defines semantic visual roles:
+That is what keeps "multiple truths at once" from creeping in.
 
-- `positive`
-- `negative`
-- `pending`
-- `textPrimary`
-- `textSecondary`
-- `bgSecondary`
+## What This Looks Like in a Small App
 
-That matters because visual language is part of meaning.
+Even in a compact transaction app, you can already see these dimensions:
 
-If pending is orange in one place, neutral in another, and error-red in a third, the UI stops having a coherent semantic system. The same is true for positive and negative monetary states.
+- domain rules in the transaction model, service interface, and semantic calculation choices
+- view semantics in selectors, rows, badges, detail screens, and design tokens
+- operational integrity in tests, review discipline, and future change control
 
-So yes, design tokens can absolutely be part of semantic maintenance. They help ensure the same domain state is expressed consistently across components.
+That is why I do not think of semantic maintenance as one special domain layer.
 
-## Tests Protect Interpretation
-
-One of the strongest practical moves in this app is testing selectors that encode semantic rules.
-
-Those tests do not just check arithmetic. They protect interpretation.
-
-Examples:
-
-- pending transactions are excluded from available balance
-- only settled withdrawals count toward 30-day spending
-- category filters return the correct semantic subset
-
-This is exactly the kind of test that keeps a financial app honest over time. It is less about whether a function runs and more about whether the app still means the same thing after refactors.
-
-## What I Would Extend in a Real Production Version
-
-If this app were connected to a real backend, the next semantic safeguards I would add are:
-
-- explicit idempotency handling for retried transaction fetches or writes
-- clearer distinction between event time and settlement time
-- versioned projections for summary calculations
-- domain-level status transitions beyond just pending and settled
-- stronger ownership of semantic rules shared across mobile, backend, and analytics
-
-The point is not to over-engineer a small demo.
-
-The point is to notice where semantic drift would happen first once the app grows.
+I think of it as alignment across dimensions.
 
 ## Final Thought
 
-Maintaining domain semantics in a financial app is not one design decision.
+If a transaction app is trustworthy, it is usually because multiple layers are agreeing on meaning at the same time.
 
-It is a chain of aligned decisions:
+That trust does not come only from a good model.
 
-- the model means one thing
-- selectors derive one interpretation
-- the feed communicates that interpretation clearly
-- the detail screen confirms it
-- tokens reinforce it visually
-- tests keep it stable over time
+It comes from:
 
-That is what semantic maintenance looks like in practice.
+- a clear contract
+- strong validators
+- explicit deciders
+- stable policies
+- honest projections
+- consistent UI semantics
+- design-system enforcement
+- regression boundaries that keep interpretation from drifting
 
-Not abstract theory.
+That is the practical work of maintaining domain semantics.
 
-A product that keeps telling the same truth across every layer.
+Not describing the domain once.
+
+Keeping the whole system honest over time.
