@@ -1,6 +1,6 @@
 ---
-title: 'Keeping Domain Semantics Intact in a Crypto Transaction App'
-description: 'A practical look at how a crypto transaction app can preserve domain meaning across models, selectors, UI states, tests, and design tokens.'
+title: 'Keeping Domain Semantics Intact in a Transaction App'
+description: 'A practical look at how a transaction-heavy financial app can preserve domain meaning across models, selectors, UI states, tests, and design tokens.'
 pubDate: 'Mar 29 2026'
 heroImage: '../../assets/domain-semantics-hero.jpg'
 ---
@@ -17,7 +17,7 @@ But the hard part is not really the surface area.
 
 The hard part is semantic integrity.
 
-In a crypto transaction app, small ambiguities quickly become product bugs:
+In a transaction-heavy financial app, small ambiguities quickly become product bugs:
 
 - Does pending money count as available?
 - Is a transfer spending, movement, or both?
@@ -25,7 +25,7 @@ In a crypto transaction app, small ambiguities quickly become product bugs:
 - Can the summary card and detail screen disagree temporarily?
 - Is a color token just visual, or does it carry state meaning?
 
-This article is about that practical layer: how to maintain domain semantics in a crypto transaction app so the system keeps one interpretation of the truth across data, UI, and interaction.
+This article is about that practical layer: how to maintain domain semantics in a transaction app so the system keeps one interpretation of the truth across data, UI, and interaction.
 
 ## The Semantic Surface of the App
 
