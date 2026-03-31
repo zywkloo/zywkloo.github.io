@@ -8,17 +8,25 @@ pubDate: 'Mar 28 2026'
 heroImage: '../../assets/eit-tcf-executable-semantics-hero.svg'
 ---
 
-Most engineers first learn design through structure.
+> "...and brought them unto Adam to see what he would call them... and whatsoever Adam called every living creature, that was the name thereof."
+>
+> Genesis 2:19 (KJV)
 
-We learn layers, modules, service boundaries, patterns, and deployment shapes. Those are useful. They help organize code and teams.
+<img src="/images/creature-divider-editorial.svg" alt="" class="opening-divider" />
 
-But the question that stayed with me over time was different:
+A lot of engineers begin taking system design seriously as they grow into senior roles.
 
-- What is this system actually allowed to represent?
-- What must remain true even when data is delayed, retried, or partially wrong?
-- Which states should be impossible, not just discouraged?
+At first, that usually means learning structure: layers, boundaries, decomposition, service responsibilities, data flow, and architecture patterns. Those things matter. They are part of how we learn to handle larger systems.
 
-That question is what eventually led me to a simple lens I now use a lot:
+But after a while, structure stops being the whole story.
+
+A system can be cleanly layered, well-factored, and still semantically wrong. A status can mean different things in different parts of the product. A derived view can drift from the underlying facts. A retry path can quietly violate a business rule that the architecture diagram never made visible.
+
+That is the shift this essay is about.
+
+Moving from structure to semantics means realizing that senior design is not only about how a system is organized. It is also about what the system is allowed to mean.
+
+That is what eventually led me to a simple lens I now use a lot:
 
 - `Entity`
 - `Invariant`
