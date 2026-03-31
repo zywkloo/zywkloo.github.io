@@ -21,8 +21,16 @@ const MEDIUM_URL = 'https://medium.com/@zywkloo';
 					<img src={PROFILE_IMAGE} alt="Victor Zhang" class="profile-image" />
 					<h1 class="hero-title">Hi, I'm <span class="highlight">Victor Zhang</span></h1>
 					<p class="hero-subtitle">{USER_TITLE}</p>
+					<p class="hero-subtitle hero-subtitle-secondary">Building end-to-end data systems, from IoT to cloud</p>
 					<p class="hero-description">
-						Mobile Engineer with 6 years of experience building data-driven mobile systems across iOS and React Native. I focus on end-to-end data flow—from real-time ingestion and synchronization (e.g., BLE via CoreBluetooth) to backend services and telemetry pipelines—ensuring correctness, concurrency, and reliability under real-world conditions. I design control policies such as caching (TTL, invalidation), retry/backoff, and auth, and structure systems across data flow, state, and rendering to deliver scalable, resilient, and responsive applications.
+						I build mobile products where data has to move cleanly from device to backend and back again. My work spans iOS, React Native, BLE sync, backend data pipelines, and telemetry, with a strong focus on correctness, resilience, and the control policies that keep real systems stable.
+					</p>
+					<p class="hero-description hero-description-secondary">
+						I also spent 5 years as a lead mobile product designer. One of the products I worked on, a basketball game, reached No. 9 in Games and No. 1 in Sports on the Apple App Store (China) on May 3, 2015, where I led core gameplay and monetization design.
+					</p>
+					<p class="hero-verse">
+						<span class="hero-verse-text">"Let all things be done decently and in order."</span>
+						<span class="hero-verse-source">1 Corinthians 14:40 (KJV)</span>
 					</p>
 					<div class="hero-cta">
 						<a href="/blog" class="btn btn-primary">View My Blog</a>
@@ -86,7 +94,7 @@ const MEDIUM_URL = 'https://medium.com/@zywkloo';
 						<div class="expertise-card">
 							<div class="expertise-icon">🎮</div>
 							<h3>Game Design</h3>
-							<p>As design lead, achieved #1 in Sports categories in China's App Store on May 3, 2015.</p>
+							<p>Spearheaded core gameplay, engagement loops, and monetization design for a basketball game that reached No. 9 in Games and No. 1 in Sports on the Apple App Store (China).</p>
 							<ul class="expertise-skills">
 								<li>Game Design</li>
 								<li>UI/UX</li>
@@ -231,16 +239,53 @@ const MEDIUM_URL = 'https://medium.com/@zywkloo';
 
 	.hero-subtitle {
 		font-size: 1.5rem;
-		margin-bottom: 1rem;
+		margin-bottom: 0.35rem;
 		opacity: 0.9;
 		font-weight: 500;
 	}
 
+	.hero-subtitle-secondary {
+		font-size: 1.05rem;
+		letter-spacing: 0.03em;
+		text-transform: none;
+		opacity: 0.82;
+		margin-bottom: 1.25rem;
+	}
+
 	.hero-description {
 		font-size: 1.125rem;
-		margin-bottom: 2rem;
+		margin-bottom: 1rem;
 		opacity: 0.8;
 		line-height: 1.6;
+	}
+
+	.hero-description-secondary {
+		max-width: 760px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 1.35rem;
+		opacity: 0.76;
+	}
+
+	.hero-verse {
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+		margin: 0 0 2rem;
+		font-size: 0.95rem;
+		line-height: 1.5;
+		opacity: 0.9;
+	}
+
+	.hero-verse-text {
+		font-style: italic;
+	}
+
+	.hero-verse-source {
+		font-size: 0.8rem;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		opacity: 0.78;
 	}
 
 	.hero-cta {
