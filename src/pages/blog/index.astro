@@ -58,12 +58,28 @@ const posts = (await getCollection('blog')).sort(
 				color: rgb(var(--black));
 				line-height: 1;
 			}
-			.date {
+			.meta {
 				margin: 0;
 				color: rgb(var(--gray));
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.45rem;
+				align-items: center;
+				font-size: 0.95rem;
+			}
+			.meta-separator {
+				opacity: 0.6;
+			}
+			.meta-stats {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.45rem;
+			}
+			.views {
+				font-variant-numeric: tabular-nums;
 			}
 			ul li a:hover h4,
-			ul li a:hover .date {
+			ul li a:hover .meta {
 				color: rgb(var(--accent));
 			}
 			ul a:hover img {
@@ -99,8 +115,14 @@ const posts = (await getCollection('blog')).sort(
 										<Image width={720} height={360} src={post.data.heroImage} alt="" />
 									)}
 									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
+									<p class="meta">
 										<FormattedDate date={post.data.pubDate} />
+										<span class="meta-stats" data-post-card-stats hidden>
+											<span class="meta-separator">·</span>
+											<span class="views" data-post-card-view data-slug={post.id}>
+												<span data-post-card-view-value>--</span> views
+											</span>
+										</span>
 									</p>
 								</a>
 							</li>
@@ -109,6 +131,44 @@ const posts = (await getCollection('blog')).sort(
 				</ul>
 			</section>
 		</main>
+		<script>
+			import { fetchViewCounts, hasPostStatsConfig } from '../../lib/post-stats';
+
+			const formatViews = (count: number) => new Intl.NumberFormat('en-US').format(count);
+
+			const viewNodes = Array.from(document.querySelectorAll<HTMLElement>('[data-post-card-view]'));
+
+			if (!hasPostStatsConfig()) {
+				viewNodes.forEach((node) => {
+					node.closest('[data-post-card-stats]')?.setAttribute('hidden', '');
+				});
+			} else {
+				const slugs = viewNodes
+					.map((node) => node.dataset.slug)
+					.filter((slug) => typeof slug === 'string');
+
+				void fetchViewCounts(slugs).then((counts) => {
+					if (!counts) {
+						viewNodes.forEach((node) => {
+							node.closest('[data-post-card-stats]')?.setAttribute('hidden', '');
+						});
+						return;
+					}
+
+					viewNodes.forEach((node) => {
+						const slug = node.dataset.slug;
+						const valueNode = node.querySelector('[data-post-card-view-value]');
+						if (!slug || !valueNode) {
+							node.closest('[data-post-card-stats]')?.setAttribute('hidden', '');
+							return;
+						}
+
+						valueNode.textContent = formatViews(counts.get(slug) ?? 0);
+						node.closest('[data-post-card-stats]')?.removeAttribute('hidden');
+					});
+				});
+			}
+		</script>
 		<Footer />
 	</body>
 </html>

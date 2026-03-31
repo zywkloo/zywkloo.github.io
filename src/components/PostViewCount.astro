@@ -1,0 +1,75 @@
+---
+interface Props {
+	slug: string;
+}
+
+const { slug } = Astro.props;
+---
+
+<div class="post-view-count" data-post-view-count data-slug={slug} hidden>
+	<span class="post-view-count__value" data-post-view-value>--</span>
+	<span class="post-view-count__label">views</span>
+</div>
+
+<style>
+	.post-view-count {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		margin-top: 0.55rem;
+		color: rgb(var(--gray));
+		font-size: 0.95rem;
+	}
+
+	.post-view-count__value {
+		font-weight: 700;
+		color: rgb(var(--gray-dark));
+	}
+</style>
+
+<script>
+	import {
+		fetchViewCount,
+		hasPostStatsConfig,
+		markViewRecorded,
+		recordView,
+		shouldRecordView,
+	} from '../lib/post-stats';
+
+	const formatViews = (count: number) => new Intl.NumberFormat('en-US').format(count);
+
+	const updateNode = async (node: HTMLElement) => {
+		const slug = node.dataset.slug;
+		const valueNode = node.querySelector<HTMLElement>('[data-post-view-value]');
+
+		if (!slug || !valueNode || !hasPostStatsConfig()) {
+			node.hidden = true;
+			return;
+		}
+
+		let nextCount = null;
+
+		if (shouldRecordView(slug)) {
+			nextCount = await recordView(slug);
+			if (nextCount !== null) {
+				markViewRecorded(slug);
+			}
+		}
+
+		if (nextCount === null) {
+			nextCount = await fetchViewCount(slug);
+		}
+
+		if (nextCount === null) {
+			node.hidden = true;
+			return;
+		}
+
+		valueNode.textContent = formatViews(nextCount);
+		node.hidden = false;
+	};
+
+	document.querySelectorAll<HTMLElement>('[data-post-view-count]').forEach((node) => {
+		void updateNode(node);
+	});
+</script>
