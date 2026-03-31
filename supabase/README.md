@@ -1,6 +1,6 @@
 # Blog Post Stats Setup
 
-This blog uses Supabase directly from the browser for post view counts.
+This blog uses Supabase directly from the browser for post views and likes.
 
 ## 1. Add local environment variables
 
@@ -25,7 +25,9 @@ That script creates:
 
 - `post_stats`
 - `post_view_events`
+- `post_like_events`
 - `record_post_view(...)`
+- `record_post_like(...)`
 
 ## 3. Start the site
 
@@ -37,6 +39,7 @@ Post pages will:
 
 - record one view per browser per day
 - show live view counts beneath the publish date
+- support one like per browser per post
 
 The blog index will:
 

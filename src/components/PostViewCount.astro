@@ -7,8 +7,16 @@ const { slug } = Astro.props;
 ---
 
 <div class="post-view-count" data-post-view-count data-slug={slug} hidden>
-	<span class="post-view-count__value" data-post-view-value>--</span>
-	<span class="post-view-count__label">views</span>
+	<span class="post-view-count__metric">
+		<span class="post-view-count__value" data-post-view-value>--</span>
+		<span class="post-view-count__label">views</span>
+	</span>
+	<span class="post-view-count__separator">·</span>
+	<button class="post-like-button" type="button" data-post-like-button>
+		<span class="post-like-button__icon" data-post-like-icon>♡</span>
+		<span class="post-like-button__label" data-post-like-label>Like</span>
+		<span class="post-like-button__count" data-post-like-value>--</span>
+	</button>
 </div>
 
 <style>
@@ -20,52 +28,143 @@ const { slug } = Astro.props;
 		color: rgb(var(--gray));
 		font-size: 0.95rem;
 	}
+	.post-view-count__metric {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
 
 	.post-view-count__value {
 		font-weight: 700;
 		color: rgb(var(--gray-dark));
+	}
+	.post-view-count__separator {
+		opacity: 0.6;
+	}
+	.post-like-button {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		border: 1px solid rgba(var(--gray), 0.28);
+		border-radius: 999px;
+		background: transparent;
+		color: rgb(var(--gray-dark));
+		padding: 0.18rem 0.62rem;
+		font-size: 0.85rem;
+		line-height: 1.2;
+		cursor: pointer;
+		transition: 0.18s ease;
+	}
+	.post-like-button:hover:not(:disabled) {
+		border-color: rgba(var(--accent), 0.5);
+		background: rgba(var(--accent), 0.08);
+	}
+	.post-like-button:disabled {
+		cursor: default;
+		opacity: 0.9;
+	}
+	.post-like-button.is-liked {
+		background: rgba(var(--accent), 0.1);
+		border-color: rgba(var(--accent), 0.5);
+		color: var(--accent-dark);
+	}
+	.post-like-button__count {
+		font-weight: 700;
+		font-variant-numeric: tabular-nums;
 	}
 </style>
 
 <script>
 	import {
 		fetchViewCount,
+		fetchLikeCount,
 		hasPostStatsConfig,
+		hasLikedPost,
+		markLikedPost,
 		markViewRecorded,
+		recordLike,
 		recordView,
 		shouldRecordView,
 	} from '../lib/post-stats';
 
 	const formatViews = (count: number) => new Intl.NumberFormat('en-US').format(count);
+	const formatLikes = (count: number) => new Intl.NumberFormat('en-US').format(count);
+
+	const setLikedState = (button: HTMLButtonElement, liked: boolean) => {
+		const iconNode = button.querySelector<HTMLElement>('[data-post-like-icon]');
+		const labelNode = button.querySelector<HTMLElement>('[data-post-like-label]');
+		button.classList.toggle('is-liked', liked);
+		button.disabled = liked;
+		if (iconNode) {
+			iconNode.textContent = liked ? '♥' : '♡';
+		}
+		if (labelNode) {
+			labelNode.textContent = liked ? 'Liked' : 'Like';
+		}
+	};
 
 	const updateNode = async (node: HTMLElement) => {
 		const slug = node.dataset.slug;
 		const valueNode = node.querySelector<HTMLElement>('[data-post-view-value]');
+		const likeValueNode = node.querySelector<HTMLElement>('[data-post-like-value]');
+		const likeButton = node.querySelector<HTMLButtonElement>('[data-post-like-button]');
 
-		if (!slug || !valueNode || !hasPostStatsConfig()) {
+		if (!slug || !valueNode || !likeValueNode || !likeButton || !hasPostStatsConfig()) {
 			node.hidden = true;
 			return;
 		}
 
-		let nextCount = null;
+		let nextViewCount = null;
+		let nextLikeCount = await fetchLikeCount(slug);
 
 		if (shouldRecordView(slug)) {
-			nextCount = await recordView(slug);
-			if (nextCount !== null) {
+			nextViewCount = await recordView(slug);
+			if (nextViewCount !== null) {
 				markViewRecorded(slug);
 			}
 		}
 
-		if (nextCount === null) {
-			nextCount = await fetchViewCount(slug);
+		if (nextViewCount === null) {
+			nextViewCount = await fetchViewCount(slug);
 		}
 
-		if (nextCount === null) {
+		if (nextViewCount === null && nextLikeCount === null) {
 			node.hidden = true;
 			return;
 		}
 
-		valueNode.textContent = formatViews(nextCount);
+		if (nextViewCount === null) {
+			nextViewCount = 0;
+		}
+		if (nextLikeCount === null) {
+			nextLikeCount = 0;
+		}
+
+		valueNode.textContent = formatViews(nextViewCount);
+		likeValueNode.textContent = formatLikes(nextLikeCount);
+
+		const alreadyLiked = hasLikedPost(slug);
+		setLikedState(likeButton, alreadyLiked);
+		if (!alreadyLiked) {
+			likeButton.addEventListener('click', async () => {
+				if (hasLikedPost(slug)) {
+					setLikedState(likeButton, true);
+					return;
+				}
+
+				likeButton.disabled = true;
+				const recordedLikes = await recordLike(slug);
+				if (recordedLikes === null) {
+					likeButton.disabled = false;
+					return;
+				}
+
+				likeValueNode.textContent = formatLikes(recordedLikes);
+				markLikedPost(slug);
+				setLikedState(likeButton, true);
+			});
+		}
+
 		node.hidden = false;
 	};
 

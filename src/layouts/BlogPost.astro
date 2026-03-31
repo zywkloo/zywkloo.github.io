@@ -104,6 +104,27 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 				border-radius: 12px;
 				box-shadow: var(--box-shadow);
 			}
+			.prose :global(table) {
+				width: 100%;
+				table-layout: fixed;
+				border-collapse: collapse;
+				margin: 1.25em 0 1.75em;
+			}
+			.prose :global(table th),
+			.prose :global(table td) {
+				width: 50%;
+				padding: 0.6rem;
+				vertical-align: top;
+				text-align: center;
+			}
+			.prose :global(table td img) {
+				width: 100%;
+				height: 420px;
+				object-fit: contain;
+				object-position: center;
+				margin: 0;
+				background: rgb(var(--gray-light));
+			}
 			.prose :global(blockquote) {
 				margin: 1.2em 0;
 				font-size: 1.05em;
@@ -151,6 +172,9 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 				}
 				.prose :global(h3) {
 					font-size: 1.15em;
+				}
+				.prose :global(table td img) {
+					height: 280px;
 				}
 			}
 		</style>

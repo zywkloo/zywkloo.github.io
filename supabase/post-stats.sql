@@ -13,8 +13,16 @@ create table if not exists public.post_view_events (
 	primary key (slug, visitor_id, viewed_on)
 );
 
+create table if not exists public.post_like_events (
+	slug text not null,
+	visitor_id text not null,
+	created_at timestamptz not null default timezone('utc', now()),
+	primary key (slug, visitor_id)
+);
+
 alter table public.post_stats enable row level security;
 alter table public.post_view_events enable row level security;
+alter table public.post_like_events enable row level security;
 
 grant usage on schema public to anon, authenticated;
 grant select on public.post_stats to anon, authenticated;
@@ -72,3 +80,50 @@ end;
 $$;
 
 grant execute on function public.record_post_view(text, text) to anon, authenticated;
+
+create or replace function public.record_post_like(p_slug text, p_visitor_id text)
+returns bigint
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+	inserted_rows integer;
+	current_likes bigint;
+begin
+	if coalesce(length(trim(p_slug)), 0) = 0 then
+		raise exception 'p_slug must not be empty';
+	end if;
+
+	if coalesce(length(trim(p_visitor_id)), 0) = 0 then
+		raise exception 'p_visitor_id must not be empty';
+	end if;
+
+	insert into public.post_like_events (slug, visitor_id)
+	values (trim(p_slug), trim(p_visitor_id))
+	on conflict do nothing;
+
+	get diagnostics inserted_rows = row_count;
+
+	insert into public.post_stats (slug, view_count, like_count, updated_at)
+	values (
+		trim(p_slug),
+		0,
+		case when inserted_rows > 0 then 1 else 0 end,
+		timezone('utc', now())
+	)
+	on conflict (slug) do update
+	set
+		like_count = public.post_stats.like_count + case when inserted_rows > 0 then 1 else 0 end,
+		updated_at = timezone('utc', now());
+
+	select like_count
+	into current_likes
+	from public.post_stats
+	where slug = trim(p_slug);
+
+	return current_likes;
+end;
+$$;
+
+grant execute on function public.record_post_like(text, text) to anon, authenticated;
