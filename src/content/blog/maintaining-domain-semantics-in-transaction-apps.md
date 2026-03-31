@@ -8,15 +8,25 @@ pubDate: 'Mar 29 2026'
 heroImage: '../../assets/domain-semantics-hero.jpg'
 ---
 
-Semantic discussions can get abstract very quickly.
+> "In the beginning was the Word..."
+> 
+> John 1:1 (KJV)
 
-That is why I like using a transaction app as a concrete example.
+<img src="/images/thorn-divider-editorial.svg" alt="" class="opening-divider" />
 
-It is familiar enough to feel simple, but it carries exactly the kind of semantic pressure that exposes whether a system is coherent. The same transaction has to keep its meaning across balances, feeds, detail views, filters, state badges, design tokens, and the policies behind derived summaries.
+Software starts with words too: types, schemas, status fields, and domain definitions.
 
-That makes it a useful case for a more general question:
+But words alone do not keep a system coherent.
 
-How do we keep one interpretation of a business concept intact as it moves through data models, UI behavior, collaboration boundaries, and ongoing change?
+A concept that looks precise in a model can drift once it passes through selectors, summaries, filters, badges, retries, and design decisions. The name stays the same, while the behavior slowly forks.
+
+That is where semantic drift begins.
+
+This is why semantics are hard to explain in the abstract. On paper, everyone agrees that concepts should be well-defined and consistent. In a real product, that consistency has to survive data pipelines, UI behavior, derived views, design systems, retries, and ongoing change.
+
+So rather than talk about semantics as a purely theoretical concern, it is more useful to look at a concrete case.
+
+A transaction app is a good example because it looks simple on the surface, but carries exactly the kind of pressure that exposes semantic weakness early. The same transaction has to keep its meaning across balances, feeds, detail views, filters, badges, and summaries.
 
 In a transaction app, semantic drift usually starts long before the UI looks obviously wrong. It starts when different parts of the product quietly answer the same business question differently:
 
