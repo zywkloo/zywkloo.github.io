@@ -151,17 +151,36 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 				line-height: 1;
 				text-transform: uppercase;
 			}
+			.meta-row {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.6rem;
+				flex-wrap: wrap;
+				margin-bottom: 0.6rem;
+			}
+			.meta-row :global(.post-view-count) {
+				margin-top: 0;
+				font-size: 0.82rem;
+			}
 			.title h1 {
 				margin: 0 0 0.5em 0;
 				font-size: 2.1em;
 				line-height: 1.2;
 			}
 			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
+				margin: 0;
+				color: rgba(var(--gray), 0.9);
+				font-size: 0.76rem;
+				font-weight: 500;
+				letter-spacing: 0.01em;
+				line-height: 1.25;
 			}
 			.last-updated-on {
-				font-style: italic;
+				margin-top: 0.18rem;
+				font-size: 0.68rem;
+				font-style: normal;
+				opacity: 0.82;
 			}
 			@media (max-width: 720px) {
 				.title h1 {
@@ -191,17 +210,19 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 				<div class="prose">
 					<div class="title">
 						{series && <div class="series">{series}</div>}
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
+						<div class="meta-row">
+							<div class="date">
+								<FormattedDate date={pubDate} />
+								{
+									updatedDate && (
+										<div class="last-updated-on">
+											Last updated on <FormattedDate date={updatedDate} />
+										</div>
+									)
+								}
+							</div>
+							{slug && <PostViewCount slug={slug} />}
 						</div>
-						{slug && <PostViewCount slug={slug} />}
 						<h1>{title}</h1>
 						<hr />
 					</div>
