@@ -35,7 +35,7 @@ When I say *Domain-Driven Design* here, I mean primarily Eric Evans' original bo
 
 | Domain-Driven Design | Designing Data-Intensive Applications |
 | --- | --- |
-| [![Domain-Driven Design cover](https://domainlanguage.com/wp-content/uploads/2016/05/Evans_2004_book_cover-234x300.jpg)](https://www.domainlanguage.com/ddd/blue-book/) | [![Designing Data-Intensive Applications cover](https://www.oreilly.com/covers/urn%3Aorm%3Abook%3A9781491903063/400w/)](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/) |
+| [![Domain-Driven Design cover](../../assets/ddd-evans-cover.jpg)](https://www.domainlanguage.com/ddd/blue-book/) | [![Designing Data-Intensive Applications cover](../../assets/ddia-kleppmann-cover.jpg)](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/) |
 
 ## Why These Two Books Matter Together
 
