@@ -1,20 +1,24 @@
 ---
 title: 'Keeping Domain Semantics Intact in a Transaction App'
 description: 'A practical framework for maintaining domain semantics in a transaction app across contracts, validators, policies, projections, UI states, and regression boundaries.'
+series: 'Semantic Systems 02'
+category: 'Semantic Systems'
+tags: ['domain semantics', 'transaction apps', 'design systems', 'ui semantics']
 pubDate: 'Mar 29 2026'
 heroImage: '../../assets/domain-semantics-hero.jpg'
 ---
 
-Transaction apps look simple from the outside:
+Semantic discussions can get abstract very quickly.
 
-- a summary card
-- a feed
-- a detail view
-- a filter bar
+That is why I like using a transaction app as a concrete example.
 
-But semantic drift usually starts long before the UI looks obviously wrong.
+It is familiar enough to feel simple, but it carries exactly the kind of semantic pressure that exposes whether a system is coherent. The same transaction has to keep its meaning across balances, feeds, detail views, filters, state badges, design tokens, and the policies behind derived summaries.
 
-It starts when different parts of the app quietly answer the same business question differently:
+That makes it a useful case for a more general question:
+
+How do we keep one interpretation of a business concept intact as it moves through data models, UI behavior, collaboration boundaries, and ongoing change?
+
+In a transaction app, semantic drift usually starts long before the UI looks obviously wrong. It starts when different parts of the product quietly answer the same business question differently:
 
 - What counts as available balance?
 - What does pending mean?
@@ -22,9 +26,9 @@ It starts when different parts of the app quietly answer the same business quest
 - Which timestamp drives ordering?
 - Which colors or badges imply finality?
 
-So the real question is not just "how do we model transactions?"
+So the point of this article is not to walk through one demo screen by screen.
 
-It is:
+It is to use a transaction app as a practical case for a broader engineering problem:
 
 How do we maintain one interpretation of a transaction across data, behavior, UI, and change over time?
 

@@ -1,6 +1,9 @@
 ---
 title: 'From Structure to Semantics: Using TEC-FIT for Executable Semantics'
 description: 'How TEC-FIT emerges from the core ideas of Domain-Driven Design and Designing Data-Intensive Applications.'
+series: 'Semantic Systems 01'
+category: 'Semantic Systems'
+tags: ['domain semantics', 'ddd', 'ddia', 'system design']
 pubDate: 'Mar 28 2026'
 heroImage: '../../assets/eit-tcf-executable-semantics-hero.svg'
 ---
@@ -35,7 +38,7 @@ When I say *Domain-Driven Design* here, I mean primarily Eric Evans' original bo
 
 | Domain-Driven Design | Designing Data-Intensive Applications |
 | --- | --- |
-| [![Domain-Driven Design cover](../../assets/ddd-evans-cover.jpg)](https://www.domainlanguage.com/ddd/blue-book/) | [![Designing Data-Intensive Applications cover](../../assets/ddia-kleppmann-cover.jpg)](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/) |
+| ![Domain-Driven Design cover](../../assets/ddd-evans-cover.jpg) | ![Designing Data-Intensive Applications cover](../../assets/ddia-kleppmann-cover.jpg) |
 
 ## Why These Two Books Matter Together
 
