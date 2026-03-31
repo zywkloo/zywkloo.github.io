@@ -1,185 +1,183 @@
 ---
 title: 'From Structure to Semantics: Using EIT-TCF for Executable Semantics'
-description: 'A practical way to use entity, invariant, transition, time, consistency, and failure to turn domain meaning into executable design.'
+description: 'How EIT-TCF emerges from the core ideas of Domain-Driven Design and Designing Data-Intensive Applications.'
 pubDate: 'Mar 28 2026'
 heroImage: '../../assets/eit-tcf-executable-semantics-hero.svg'
 ---
 
-Most engineers learn design through structure.
+Most engineers first learn design through structure.
 
-We talk about layers, patterns, and boundaries:
+We learn layers, modules, service boundaries, patterns, and deployment shapes. Those are useful. They help organize code and teams.
 
-- MVVM or Clean Architecture
-- repository and service layers
-- monoliths, microservices, and event-driven systems
-
-These are useful tools. They help us organize complexity.
-
-But they are not usually what determines whether a system is correct.
-
-The harder questions sit one level deeper:
+But the question that stayed with me over time was different:
 
 - What is this system actually allowed to represent?
-- What states are valid, invalid, or impossible?
-- What must stay true under retries, delay, and failure?
+- What must remain true even when data is delayed, retried, or partially wrong?
+- Which states should be impossible, not just discouraged?
 
-That is the layer I care about most in design: semantics.
+That question is what eventually led me to a simple lens I now use a lot:
 
-The core thesis is simple:
+- `Entity`
+- `Invariant`
+- `Transition`
+- `Time`
+- `Consistency`
+- `Failure`
 
-- structure organizes code
-- semantics protect correctness
-- semantics should become executable
+I call it `EIT-TCF`.
 
-## Why Structure Is Not Enough
+This article is not really about presenting a brand new framework. It is about explaining where that lens came from. For me, it emerged from the overlap between two books that shaped how I think about design:
 
-A system can be well-structured and still wrong.
+- *Domain-Driven Design*
+- *Designing Data-Intensive Applications*
 
-Common failures:
+## Why These Two Books Matter Together
 
-- a pending transaction appears as available balance
-- retries create duplicate records
-- summary totals disagree with the feed
-- stale data overwrites fresher state
-- illegal status transitions are representable
+The books solve different problems.
 
-These are semantic failures, not folder-structure failures.
+- *Domain-Driven Design* helps answer: what does the business mean?
+- *Designing Data-Intensive Applications* helps answer: what happens to that meaning when data moves through a real system?
 
-## EIT-TCF at a Glance
+That distinction matters.
 
-EIT-TCF is a practical lens for semantic design:
+DDD pushes you to sharpen concepts such as identity, lifecycle, rules, and boundaries. DDIA pushes you to think about retries, reordering, replication, caching, projections, and time.
 
-- `Entity`: what the system is modeling
-- `Invariant`: what must never be wrong
-- `Transition`: how state is allowed to change
-- `Time`: which clock drives behavior
-- `Consistency`: what must agree, and when
-- `Failure`: how meaning survives retries and partial failure
+One gives you semantic precision.
 
-It is not a formal framework. It is a checklist for turning domain meaning into enforceable system behavior.
+The other gives you operational realism.
 
-![EIT-TCF semantic design lens](/images/eit-tcf-lens-diagram.svg)
+Put together, they force a more demanding design question:
 
-### Entity
+How do we preserve meaning under real system behavior?
 
-Define identity and facts first.
+## What I Take from DDD
 
-- What makes this record the same record over time?
-- Which fields are authoritative facts?
-- Which fields are only derived views?
+The most important lessons I take from *Domain-Driven Design* are:
 
-If this stays fuzzy, everything downstream drifts.
+- business language should be precise enough to model
+- important concepts deserve explicit boundaries
+- invariants should live close to the model that owns them
+- not every noun needs to become a first-class concept, but the expensive ones do
 
-### Invariant
+DDD changed how I look at domain objects.
 
-Define non-negotiable rules early.
+I stopped seeing them as containers for fields and started seeing them as carriers of meaning. Identity, lifecycle, and rule ownership became design questions, not just naming questions.
 
-- money in integer minor units
-- immutable creation timestamps
-- pending records excluded from spendable balance
-- summaries derived with the same rules as details
+That shift is where `Entity`, `Invariant`, and much of `Transition` come from in EIT-TCF.
 
-If invariants are implicit, bugs will rewrite them.
+## What I Take from DDIA
 
-### Transition
+The biggest lesson I take from *Designing Data-Intensive Applications* is that meaning is fragile once data starts moving.
 
-Model legal state movement explicitly.
-
-- pending -> settled
-- pending -> failed
-- settled -> reversed
-
-Not every transition should be representable.
-
-### Time
-
-Pick the right clock for each decision.
-
-- created time
-- processed time
-- settled time
-- display time
-
-If these are mixed casually, ordering and reconciliation become unstable.
-
-### Consistency
-
-Choose agreement boundaries on purpose.
-
-- what must be strongly consistent
-- what can be eventually consistent
-- what may diverge briefly, but never semantically
-
-The key is intentionality, not ideology.
-
-### Failure
-
-Design for production reality, not happy paths.
+The book keeps pulling attention back to things teams often postpone:
 
 - retries
 - duplicates
-- out-of-order events
-- stale caches
-- partial writes
+- projections
+- caches
+- ordering
+- replication
+- event time versus processing time
+- strong versus eventual consistency
 
-A design is incomplete until meaning survives these cases.
+DDIA is valuable because it refuses to let a design stay idealized.
 
-## Make Semantics Executable
+A model may look coherent on a whiteboard and still break in production because timestamps were underspecified, projections drifted, retries were not idempotent, or stale data overwrote fresher state.
 
-The real goal is to encode semantics into code and pipeline behavior.
+That is where `Time`, `Consistency`, and `Failure` in EIT-TCF come from, and it is also where `Transition` becomes more than a state machine on paper.
 
-Practical patterns:
+## How EIT-TCF Emerged
 
-- value objects for money, identity, status
+I did not derive EIT-TCF from one single chapter or diagram. It emerged because the same design questions kept recurring across both books.
+
+The mapping now looks fairly natural:
+
+1. `Entity`
+   DDD asks what the core thing is, what gives it identity, and which data is part of its meaning.
+
+2. `Invariant`
+   DDD asks what must never be violated and which part of the model owns that responsibility.
+
+3. `Transition`
+   DDD makes lifecycle explicit; DDIA reminds you that transitions are stressed by async behavior, retries, and delayed updates.
+
+4. `Time`
+   DDIA makes it impossible to stay vague about timestamps, ordering, windows, and late-arriving events.
+
+5. `Consistency`
+   DDIA forces you to decide what must agree, when, and across which projections or storage boundaries.
+
+6. `Failure`
+   DDIA treats failure as normal system behavior, while DDD makes you ask what those failures mean for the domain.
+
+That is why EIT-TCF feels practical to me. It captures the semantic pressure points that repeatedly show up when business meaning meets real systems.
+
+![EIT-TCF semantic design lens](/images/eit-tcf-lens-diagram.svg)
+
+## Why This Lens Helps
+
+EIT-TCF is useful because it turns abstract design quality into concrete questions.
+
+Instead of saying:
+
+- use clean architecture
+- split this into services
+- add a repository
+
+it pushes the conversation toward:
+
+- What is the entity?
+- What must never be wrong?
+- How is state allowed to change?
+- Which notion of time matters here?
+- What must stay consistent?
+- How does the model behave under retries, duplication, and failure?
+
+That is a better starting point because structure can serve those answers instead of substituting for them.
+
+## From Theory to Executable Semantics
+
+Once the semantic questions are explicit, the next step is to encode them.
+
+That usually means:
+
+- value objects for important concepts
 - validators for invariants
-- explicit transition tables or guards
-- projections from a clear source of truth
-- idempotency keys and replay-safe handlers
-- golden fixtures that lock interpretation across surfaces
+- transition guards for lifecycle rules
+- well-defined projections
+- idempotent handlers
+- tests that protect interpretation, not just implementation
+
+In other words, the goal is not just semantics.
+
+The goal is executable semantics.
 
 ![Semantics as code pipeline](/images/semantics-as-code-pipeline.svg)
 
-The objective is straightforward:
+## What the Two Books Ultimately Contribute
 
-- valid states are easy to represent
-- invalid states are hard to construct
+If I had to compress the relationship into one sentence, it would be this:
 
-## Where DDD and DDIA Help
+- DDD tells me what the domain needs to mean.
+- DDIA tells me what can go wrong when that meaning is implemented in a real system.
 
-Both books are useful, but for different reasons.
+EIT-TCF is my shorthand for holding both at the same time.
 
-- *Domain-Driven Design* sharpens business meaning and boundaries.
-- *Designing Data-Intensive Applications* stress-tests that meaning under retries, replication, delay, and reordering.
-
-Together they answer one practical question:
-
-What must remain true when the system is under real operational stress?
-
-## Example: Transaction Feed
-
-Even a simple feed carries real semantic design:
-
-- `amount` in minor units, not floating point
-- `availableBalance` excludes pending funds
-- `thirtyDaySpending` includes settled outflows only
-- `runningBalance` depends on a defined ordering rule
-- retries must not duplicate ledger effects
-- display ordering and accounting ordering may differ
-
-These are domain commitments. Architecture should enforce them, not weaken them.
+It is not a replacement for those books. It is a distilled design habit I took from reading them closely and applying them repeatedly.
 
 ## Final Thought
 
-EIT-TCF is useful because it turns semantic design into executable decisions.
+I still care about structure. Everyone should.
 
-It helps teams move from:
+But structure is not where correctness begins.
 
-- "How should we structure this?"
+Correctness begins when the system is clear about meaning:
 
-to:
+- what it is modeling
+- what must never be wrong
+- how change is allowed
+- how time, consistency, and failure affect interpretation
 
-- "What must this system mean, and how do we enforce it?"
+That is why EIT-TCF exists for me.
 
-Structure can be refactored.
-
-Broken meaning is much harder to repair.
+It is the point where lessons from DDD and DDIA become a practical checklist for semantic design.
