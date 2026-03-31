@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
-  <title id="title">EIT-TCF semantic design lens</title>
+  <title id="title">TEC-FIT semantic design lens</title>
   <desc id="desc">A radial diagram showing Entity, Invariant, Transition, Time, Consistency, and Failure around executable semantics.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
@@ -29,7 +29,7 @@
   <g transform="translate(600,350)">
     <circle r="175" fill="none" stroke="url(#ring)" stroke-width="26" filter="url(#softGlow)"/>
     <circle r="130" fill="#0f2241" stroke="#65e0ff" stroke-width="2"/>
-    <text x="0" y="-14" font-size="40" text-anchor="middle" fill="#d8f8ff" font-family="Atkinson, Arial, sans-serif" font-weight="700">EIT-TCF</text>
+    <text x="0" y="-14" font-size="40" text-anchor="middle" fill="#d8f8ff" font-family="Atkinson, Arial, sans-serif" font-weight="700">TEC-FIT</text>
     <text x="0" y="22" font-size="28" text-anchor="middle" fill="#b8defa" font-family="Atkinson, Arial, sans-serif">Executable</text>
     <text x="0" y="56" font-size="28" text-anchor="middle" fill="#b8defa" font-family="Atkinson, Arial, sans-serif">Semantics</text>
   </g>
@@ -76,6 +76,6 @@
   </g>
 
   <text x="600" y="42" text-anchor="middle" fill="#cfe8ff" font-size="34" font-family="Atkinson, Arial, sans-serif" font-weight="700">
-    EIT-TCF Lens for Semantic Design
+    TEC-FIT Lens for Semantic Design
   </text>
 </svg>

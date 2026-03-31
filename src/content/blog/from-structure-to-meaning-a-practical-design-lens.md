@@ -1,6 +1,6 @@
 ---
-title: 'From Structure to Semantics: Using EIT-TCF for Executable Semantics'
-description: 'How EIT-TCF emerges from the core ideas of Domain-Driven Design and Designing Data-Intensive Applications.'
+title: 'From Structure to Semantics: Using TEC-FIT for Executable Semantics'
+description: 'How TEC-FIT emerges from the core ideas of Domain-Driven Design and Designing Data-Intensive Applications.'
 pubDate: 'Mar 28 2026'
 heroImage: '../../assets/eit-tcf-executable-semantics-hero.svg'
 ---
@@ -24,7 +24,7 @@ That question is what eventually led me to a simple lens I now use a lot:
 - `Consistency`
 - `Failure`
 
-I call it `EIT-TCF`.
+I call it `TEC-FIT`.
 
 This article is not really about presenting a brand new framework. It is about explaining where that lens came from. For me, it emerged from the overlap between two books that shaped how I think about design:
 
@@ -63,7 +63,7 @@ DDD changed how I look at domain objects.
 
 I stopped seeing them as containers for fields and started seeing them as carriers of meaning. Identity, lifecycle, and rule ownership became design questions, not just naming questions.
 
-That shift is where `Entity`, `Invariant`, and much of `Transition` come from in EIT-TCF.
+That shift is where `Entity`, `Invariant`, and much of `Transition` come from in TEC-FIT.
 
 ## What I Take from DDIA
 
@@ -84,11 +84,11 @@ DDIA is valuable because it refuses to let a design stay idealized.
 
 A model may look coherent on a whiteboard and still break in production because timestamps were underspecified, projections drifted, retries were not idempotent, or stale data overwrote fresher state.
 
-That is where `Time`, `Consistency`, and `Failure` in EIT-TCF come from, and it is also where `Transition` becomes more than a state machine on paper.
+That is where `Time`, `Consistency`, and `Failure` in TEC-FIT come from, and it is also where `Transition` becomes more than a state machine on paper.
 
-## How EIT-TCF Emerged
+## How TEC-FIT Emerged
 
-I did not derive EIT-TCF from one single chapter or diagram. It emerged because the same design questions kept recurring across both books.
+I did not derive TEC-FIT from one single chapter or diagram. It emerged because the same design questions kept recurring across both books.
 
 The mapping now looks fairly natural:
 
@@ -110,13 +110,13 @@ The mapping now looks fairly natural:
 6. `Failure`
    DDIA treats failure as normal system behavior, while DDD makes you ask what those failures mean for the domain.
 
-That is why EIT-TCF feels practical to me. It captures the semantic pressure points that repeatedly show up when business meaning meets real systems.
+That is why TEC-FIT feels practical to me. It captures the semantic pressure points that repeatedly show up when business meaning meets real systems.
 
-![EIT-TCF semantic design lens](/images/eit-tcf-lens-diagram.svg)
+![TEC-FIT semantic design lens](/images/eit-tcf-lens-diagram.svg)
 
 ## Why This Lens Helps
 
-EIT-TCF is useful because it turns abstract design quality into concrete questions.
+TEC-FIT is useful because it turns abstract design quality into concrete questions.
 
 Instead of saying:
 
@@ -161,7 +161,7 @@ If I had to compress the relationship into one sentence, it would be this:
 - DDD tells me what the domain needs to mean.
 - DDIA tells me what can go wrong when that meaning is implemented in a real system.
 
-EIT-TCF is my shorthand for holding both at the same time.
+TEC-FIT is my shorthand for holding both at the same time.
 
 It is not a replacement for those books. It is a distilled design habit I took from reading them closely and applying them repeatedly.
 
@@ -178,6 +178,6 @@ Correctness begins when the system is clear about meaning:
 - how change is allowed
 - how time, consistency, and failure affect interpretation
 
-That is why EIT-TCF exists for me.
+That is why TEC-FIT exists for me.
 
 It is the point where lessons from DDD and DDIA become a practical checklist for semantic design.

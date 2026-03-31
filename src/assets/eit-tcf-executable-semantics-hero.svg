@@ -1,34 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="800" viewBox="0 0 1600 800" role="img" aria-labelledby="title desc">
   <title id="title">From Structure to Semantics hero image</title>
-  <desc id="desc">A futuristic diagram showing EIT-TCF as a lens for executable semantics, with six semantic dimensions around a central core.</desc>
+  <desc id="desc">A polished conceptual hero showing TEC-FIT as a semantic design lens connecting theory, executable rules, and real system behavior.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#071326"/>
-      <stop offset="55%" stop-color="#10294a"/>
-      <stop offset="100%" stop-color="#160f2d"/>
+      <stop offset="0%" stop-color="#07111f"/>
+      <stop offset="45%" stop-color="#0d2340"/>
+      <stop offset="100%" stop-color="#1a1633"/>
     </linearGradient>
-    <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#54f2ff" stop-opacity="0.95"/>
-      <stop offset="55%" stop-color="#5e8fff" stop-opacity="0.45"/>
-      <stop offset="100%" stop-color="#5e8fff" stop-opacity="0"/>
+    <radialGradient id="glow" cx="50%" cy="48%" r="42%">
+      <stop offset="0%" stop-color="#64efff" stop-opacity="0.95"/>
+      <stop offset="38%" stop-color="#5b94ff" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#5b94ff" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="cyanRing" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#6ef2ff"/>
-      <stop offset="100%" stop-color="#4b83ff"/>
+    <linearGradient id="ringA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#78f1ff"/>
+      <stop offset="100%" stop-color="#5787ff"/>
     </linearGradient>
-    <linearGradient id="violetRing" x1="0" y1="1" x2="1" y2="0">
-      <stop offset="0%" stop-color="#9366ff"/>
-      <stop offset="100%" stop-color="#52e0ff"/>
+    <linearGradient id="ringB" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9a72ff"/>
+      <stop offset="100%" stop-color="#54ddff"/>
     </linearGradient>
-    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="14" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <filter id="cardGlow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#71eaff"/>
+      <stop offset="100%" stop-color="#ff9f6d"/>
+    </linearGradient>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
       <feMerge>
         <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
@@ -38,66 +35,83 @@
 
   <rect width="1600" height="800" fill="url(#bg)"/>
 
-  <g opacity="0.16" stroke="#71cfff" stroke-width="1">
+  <g opacity="0.12" stroke="#73cfff" stroke-width="1">
     <path d="M0 110h1600M0 210h1600M0 310h1600M0 410h1600M0 510h1600M0 610h1600M0 710h1600"/>
-    <path d="M120 0v800M260 0v800M400 0v800M540 0v800M680 0v800M820 0v800M960 0v800M1100 0v800M1240 0v800M1380 0v800"/>
+    <path d="M110 0v800M250 0v800M390 0v800M530 0v800M670 0v800M810 0v800M950 0v800M1090 0v800M1230 0v800M1370 0v800"/>
   </g>
 
-  <text x="800" y="90" text-anchor="middle" font-size="68" font-weight="700" fill="#d9fbff" font-family="Atkinson, Arial, sans-serif">
+  <g opacity="0.16" stroke="#72dbff" stroke-width="2" fill="none">
+    <path d="M220 630 C360 560, 460 520, 625 470"/>
+    <path d="M260 190 C390 250, 500 300, 640 344"/>
+    <path d="M1360 196 C1220 250, 1110 302, 960 344"/>
+    <path d="M1378 620 C1226 560, 1120 518, 975 468"/>
+  </g>
+
+  <text x="800" y="98" text-anchor="middle" font-size="64" font-weight="700" fill="#e6fbff" font-family="Atkinson, Arial, sans-serif">
     FROM STRUCTURE TO SEMANTICS
   </text>
-  <text x="800" y="142" text-anchor="middle" font-size="28" fill="#b5d9ff" font-family="Atkinson, Arial, sans-serif">
-    Using EIT-TCF for Executable Semantics
+  <text x="800" y="144" text-anchor="middle" font-size="26" fill="#bcdcff" font-family="Atkinson, Arial, sans-serif">
+    Using TEC-FIT for Executable Semantics
   </text>
 
-  <g transform="translate(800 425)">
-    <circle r="210" fill="url(#coreGlow)"/>
-    <circle r="172" fill="none" stroke="url(#cyanRing)" stroke-width="24" filter="url(#softGlow)"/>
-    <circle r="132" fill="#102342" stroke="url(#violetRing)" stroke-width="3"/>
-    <text x="0" y="-18" text-anchor="middle" font-size="48" font-weight="700" fill="#e9fbff" font-family="Atkinson, Arial, sans-serif">EIT-TCF</text>
-    <text x="0" y="24" text-anchor="middle" font-size="28" fill="#d5efff" font-family="Atkinson, Arial, sans-serif">Executable</text>
-    <text x="0" y="58" text-anchor="middle" font-size="28" fill="#d5efff" font-family="Atkinson, Arial, sans-serif">Semantics</text>
+  <g transform="translate(800 412)">
+    <circle r="225" fill="url(#glow)"/>
+    <circle r="168" fill="none" stroke="url(#ringA)" stroke-width="24" filter="url(#softGlow)"/>
+    <circle r="126" fill="#102240" stroke="url(#ringB)" stroke-width="3"/>
+    <text x="0" y="-14" text-anchor="middle" font-size="52" font-weight="700" fill="#ebfbff" font-family="Atkinson, Arial, sans-serif">TEC-FIT</text>
+    <text x="0" y="28" text-anchor="middle" font-size="27" fill="#d2eeff" font-family="Atkinson, Arial, sans-serif">semantic design lens</text>
+    <text x="0" y="62" text-anchor="middle" font-size="23" fill="#b6d9fb" font-family="Atkinson, Arial, sans-serif">theory -> executable rules -> system behavior</text>
   </g>
 
-  <g stroke="#71dbff" stroke-width="5" opacity="0.9">
-    <path d="M800 215 L800 278" fill="none"/>
-    <path d="M970 300 L1032 264" fill="none"/>
-    <path d="M970 548 L1034 584" fill="none"/>
-    <path d="M800 634 L800 575" fill="none"/>
-    <path d="M630 548 L566 584" fill="none"/>
-    <path d="M630 300 L566 264" fill="none"/>
+  <g font-family="Atkinson, Arial, sans-serif" fill="#dff7ff">
+    <text x="238" y="182" font-size="22" font-weight="700">From DDD</text>
+    <text x="238" y="214" font-size="18" fill="#b9ddfa">entity boundaries</text>
+    <text x="238" y="242" font-size="18" fill="#b9ddfa">invariants</text>
+    <text x="238" y="270" font-size="18" fill="#b9ddfa">state transitions</text>
+
+    <text x="1188" y="182" font-size="22" font-weight="700" text-anchor="end">From DDIA</text>
+    <text x="1188" y="214" font-size="18" fill="#ffd6c0" text-anchor="end">time semantics</text>
+    <text x="1188" y="242" font-size="18" fill="#ffd6c0" text-anchor="end">consistency boundaries</text>
+    <text x="1188" y="270" font-size="18" fill="#ffd6c0" text-anchor="end">failure behavior</text>
+  </g>
+
+  <g stroke="url(#line)" stroke-width="3" fill="none" opacity="0.9">
+    <path d="M340 248 C450 284, 545 312, 664 352"/>
+    <path d="M1260 248 C1148 284, 1054 312, 934 352"/>
   </g>
 
   <g font-family="Atkinson, Arial, sans-serif" text-anchor="middle">
-    <g transform="translate(800 200)" filter="url(#cardGlow)">
-      <rect x="-120" y="-36" width="240" height="72" rx="18" fill="#122d54" stroke="#63e6ff" stroke-width="2"/>
-      <text y="11" font-size="30" font-weight="700" fill="#e7fbff">Entity</text>
+    <g transform="translate(800 228)">
+      <rect x="-102" y="-28" width="204" height="56" rx="16" fill="#153055" stroke="#66e2ff" stroke-width="2"/>
+      <text y="9" font-size="24" font-weight="700" fill="#ebfbff">Entity</text>
     </g>
-    <g transform="translate(1090 250)" filter="url(#cardGlow)">
-      <rect x="-145" y="-36" width="290" height="72" rx="18" fill="#173157" stroke="#69e8ff" stroke-width="2"/>
-      <text y="11" font-size="30" font-weight="700" fill="#e7fbff">Invariant</text>
+    <g transform="translate(1056 318)">
+      <rect x="-120" y="-28" width="240" height="56" rx="16" fill="#18335a" stroke="#72e3ff" stroke-width="2"/>
+      <text y="9" font-size="24" font-weight="700" fill="#ebfbff">Invariant</text>
     </g>
-    <g transform="translate(1090 600)" filter="url(#cardGlow)">
-      <rect x="-154" y="-36" width="308" height="72" rx="18" fill="#1d2e57" stroke="#79deff" stroke-width="2"/>
-      <text y="11" font-size="30" font-weight="700" fill="#e7fbff">Transition</text>
+    <g transform="translate(1056 510)">
+      <rect x="-130" y="-28" width="260" height="56" rx="16" fill="#223059" stroke="#8de7ff" stroke-width="2"/>
+      <text y="9" font-size="24" font-weight="700" fill="#ebfbff">Transition</text>
     </g>
-    <g transform="translate(800 650)" filter="url(#cardGlow)">
-      <rect x="-108" y="-36" width="216" height="72" rx="18" fill="#163159" stroke="#7fe2ff" stroke-width="2"/>
-      <text y="11" font-size="30" font-weight="700" fill="#e7fbff">Time</text>
+    <g transform="translate(800 602)">
+      <rect x="-84" y="-28" width="168" height="56" rx="16" fill="#233056" stroke="#8ee0ff" stroke-width="2"/>
+      <text y="9" font-size="24" font-weight="700" fill="#ebfbff">Time</text>
     </g>
-    <g transform="translate(510 600)" filter="url(#cardGlow)">
-      <rect x="-162" y="-36" width="324" height="72" rx="18" fill="#182d55" stroke="#7edfff" stroke-width="2"/>
-      <text y="11" font-size="30" font-weight="700" fill="#e7fbff">Consistency</text>
+    <g transform="translate(544 510)">
+      <rect x="-140" y="-28" width="280" height="56" rx="16" fill="#1f2f54" stroke="#8ae1ff" stroke-width="2"/>
+      <text y="9" font-size="24" font-weight="700" fill="#ebfbff">Consistency</text>
     </g>
-    <g transform="translate(510 250)" filter="url(#cardGlow)">
-      <rect x="-122" y="-36" width="244" height="72" rx="18" fill="#142b51" stroke="#70ddff" stroke-width="2"/>
-      <text y="11" font-size="30" font-weight="700" fill="#e7fbff">Failure</text>
+    <g transform="translate(544 318)">
+      <rect x="-102" y="-28" width="204" height="56" rx="16" fill="#183053" stroke="#6fe1ff" stroke-width="2"/>
+      <text y="9" font-size="24" font-weight="700" fill="#ebfbff">Failure</text>
     </g>
   </g>
 
-  <g font-family="Atkinson, Arial, sans-serif" fill="#bcdfff" font-size="22">
-    <text x="800" y="742" text-anchor="middle">
-      Define meaning first. Encode invariants, transitions, time, consistency, and failure into the system.
-    </text>
+  <g font-family="Atkinson, Arial, sans-serif" fill="#c7e5ff">
+    <text x="220" y="640" font-size="22" font-weight="700">Core move</text>
+    <text x="220" y="672" font-size="19">make business meaning explicit enough to encode</text>
+
+    <text x="1380" y="640" font-size="22" font-weight="700" text-anchor="end" fill="#ffd7c0">Result</text>
+    <text x="1380" y="672" font-size="19" text-anchor="end" fill="#ffd7c0">correctness survives retries, delay, and drift</text>
   </g>
 </svg>
