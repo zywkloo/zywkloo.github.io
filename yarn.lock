@@ -666,6 +666,61 @@
   resolved "https://registry.npmjs.org/@shikijs/vscode-textmate/-/vscode-textmate-10.0.2.tgz"
   integrity sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==
 
+"@supabase/auth-js@2.101.0":
+  version "2.101.0"
+  resolved "https://registry.yarnpkg.com/@supabase/auth-js/-/auth-js-2.101.0.tgz#48a72a529f7e35a668716fe06e8f721fe8b99f08"
+  integrity sha512-00v22bzJ1LvLPQFZ8OKV5Qb1z2UkglyADQPh3PWcvUvHgAL86FdQrtMu6FewjU0CeROMpWQ4F/ExYhKKK45D0Q==
+  dependencies:
+    tslib "2.8.1"
+
+"@supabase/functions-js@2.101.0":
+  version "2.101.0"
+  resolved "https://registry.yarnpkg.com/@supabase/functions-js/-/functions-js-2.101.0.tgz#f37cb7cf4aaf9defdc6f5f4b03cd84d0373b74bf"
+  integrity sha512-oEdCj5GmIGQwjII1fcbb/+hvUF94ZQmeFmFRoToz5Gbf2T8KPTX4vtanUmED+ekTB9Tyfap1IXFUx7klQprIaw==
+  dependencies:
+    tslib "2.8.1"
+
+"@supabase/phoenix@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@supabase/phoenix/-/phoenix-0.4.0.tgz#1a2d84658fbd34b6f33a22660efe7def38905d40"
+  integrity sha512-RHSx8bHS02xwfHdAbX5Lpbo6PXbgyf7lTaXTlwtFDPwOIw64NnVRwFAXGojHhjtVYI+PEPNSWwkL90f4agN3bw==
+
+"@supabase/postgrest-js@2.101.0":
+  version "2.101.0"
+  resolved "https://registry.yarnpkg.com/@supabase/postgrest-js/-/postgrest-js-2.101.0.tgz#12e4f30cbac1cf76a1f5ee1c379bbea93804a3dd"
+  integrity sha512-CJVsIdzRkEwH5F1NAwVq/Ewh0T/LpEpYro5hQKhfRqtZ6ghUnH0TCaA4PgyCCSWjESTqAuocBmX4ajlVK/1BPg==
+  dependencies:
+    tslib "2.8.1"
+
+"@supabase/realtime-js@2.101.0":
+  version "2.101.0"
+  resolved "https://registry.yarnpkg.com/@supabase/realtime-js/-/realtime-js-2.101.0.tgz#b3d36bb06ea1fc421330a789ab107f2e761904d4"
+  integrity sha512-Y2sSZhP8QtIukIJEAUPavP5LPmAKVwyuZqdAua68ECFoqiFxNZFCaxglzaeEaSg22rba9TN83n+tnP5gnQuQrg==
+  dependencies:
+    "@supabase/phoenix" "^0.4.0"
+    "@types/ws" "^8.18.1"
+    tslib "2.8.1"
+    ws "^8.18.2"
+
+"@supabase/storage-js@2.101.0":
+  version "2.101.0"
+  resolved "https://registry.yarnpkg.com/@supabase/storage-js/-/storage-js-2.101.0.tgz#962e17c2b84e132098ae8f0e626d41d82dc9cc55"
+  integrity sha512-bFw/kBR4bfOGc2L6DjD+mC+dDsEurvQXg+QVcbFg0uDFiSREfUjjwSUtz+pkLFuu75Uy1/KzHzB2L+WpoJ9fCA==
+  dependencies:
+    iceberg-js "^0.8.1"
+    tslib "2.8.1"
+
+"@supabase/supabase-js@^2.101.0":
+  version "2.101.0"
+  resolved "https://registry.yarnpkg.com/@supabase/supabase-js/-/supabase-js-2.101.0.tgz#c860623b4cdc54cc0da504611ab8b4dce2b68eb9"
+  integrity sha512-SIFrI4Fqny+dlUNkzXQjLP6HOxTPjmEPjZc1C4MCL/naeBKNJc+h/ExxkOtGcY8nDt6BZmVSB7Hb4PSzVEUWKg==
+  dependencies:
+    "@supabase/auth-js" "2.101.0"
+    "@supabase/functions-js" "2.101.0"
+    "@supabase/postgrest-js" "2.101.0"
+    "@supabase/realtime-js" "2.101.0"
+    "@supabase/storage-js" "2.101.0"
+
 "@swc/helpers@^0.5.12":
   version "0.5.17"
   resolved "https://registry.npmjs.org/@swc/helpers/-/helpers-0.5.17.tgz"
@@ -872,6 +927,13 @@
   version "2.0.11"
   resolved "https://registry.npmjs.org/@types/unist/-/unist-2.0.11.tgz"
   integrity sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA==
+
+"@types/ws@^8.18.1":
+  version "8.18.1"
+  resolved "https://registry.yarnpkg.com/@types/ws/-/ws-8.18.1.tgz#48464e4bf2ddfd17db13d845467f6070ffea4aa9"
+  integrity sha512-ThVF6DCVhA8kUGy+aazFQ4kXQ7E1Ty7A3ypFOe0IcJV8O/M511G99AW24irKrW56Wt44yG9+ij8FaqoBGkuBXg==
+  dependencies:
+    "@types/node" "*"
 
 "@ungap/structured-clone@^1.0.0":
   version "1.3.0"
@@ -1454,18 +1516,18 @@ graceful-fs@^4.2.4:
   integrity sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==
 
 h3@^1.15.4:
-  version "1.15.4"
-  resolved "https://registry.npmjs.org/h3/-/h3-1.15.4.tgz"
-  integrity sha512-z5cFQWDffyOe4vQ9xIqNfCZdV4p//vy6fBnr8Q1AWnVZ0teurKMG66rLj++TKwKPUP3u7iMUvrvKaEUiQw2QWQ==
+  version "1.15.10"
+  resolved "https://registry.yarnpkg.com/h3/-/h3-1.15.10.tgz#defe650df7b70cf585d2020c4146fb580cfb0d42"
+  integrity sha512-YzJeWSkDZxAhvmp8dexjRK5hxziRO7I9m0N53WhvYL5NiWfkUkzssVzY9jvGu0HBoLFW6+duYmNSn6MaZBCCtg==
   dependencies:
     cookie-es "^1.2.2"
     crossws "^0.3.5"
     defu "^6.1.4"
     destr "^2.0.5"
     iron-webcrypto "^1.2.1"
-    node-mock-http "^1.0.2"
+    node-mock-http "^1.0.4"
     radix3 "^1.1.2"
-    ufo "^1.6.1"
+    ufo "^1.6.3"
     uncrypto "^0.1.3"
 
 hast-util-from-html@^2.0.0, hast-util-from-html@^2.0.3:
@@ -1642,6 +1704,11 @@ http-cache-semantics@^4.2.0:
   version "4.2.0"
   resolved "https://registry.npmjs.org/http-cache-semantics/-/http-cache-semantics-4.2.0.tgz"
   integrity sha512-dTxcvPXqPvXBQpq5dUr6mEMJX4oIEFv6bwom3FDwKRDsuIjjJGANqhBuoAn9c1RQJIdAKav33ED65E2ys+87QQ==
+
+iceberg-js@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/iceberg-js/-/iceberg-js-0.8.1.tgz#47d893468293a010385e1c70123f29d0fc1d9912"
+  integrity sha512-1dhVQZXhcHje7798IVM+xoo/1ZdVfzOMIc8/rgVSijRK38EDqOJoGula9N/8ZI5RD8QTxNQtK/Gozpr+qUqRRA==
 
 import-meta-resolve@^4.2.0:
   version "4.2.0"
@@ -2441,10 +2508,10 @@ node-fetch-native@^1.6.4, node-fetch-native@^1.6.7:
   resolved "https://registry.npmjs.org/node-fetch-native/-/node-fetch-native-1.6.7.tgz"
   integrity sha512-g9yhqoedzIUm0nTnTqAQvueMPVOuIY16bqgAJJC8XOOubYFNwz6IER9qs0Gq2Xd0+CecCKFjtdDTMA4u4xG06Q==
 
-node-mock-http@^1.0.2:
-  version "1.0.3"
-  resolved "https://registry.npmjs.org/node-mock-http/-/node-mock-http-1.0.3.tgz"
-  integrity sha512-jN8dK25fsfnMrVsEhluUTPkBFY+6ybu7jSB1n+ri/vOGjJxU8J9CZhpSGkHXSkFjtUhbmoncG/YG9ta5Ludqog==
+node-mock-http@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/node-mock-http/-/node-mock-http-1.0.4.tgz#21f2ab4ce2fe4fbe8a660d7c5195a1db85e042a4"
+  integrity sha512-8DY+kFsDkNXy1sJglUfuODx1/opAGJGyrTuFqEoN90oRc2Vk0ZbD4K2qmKXBBEhZQzdKHIVfEJpDU8Ak2NJEvQ==
 
 normalize-path@^3.0.0:
   version "3.0.0"
@@ -3034,9 +3101,9 @@ tsconfck@^3.1.6:
   resolved "https://registry.npmjs.org/tsconfck/-/tsconfck-3.1.6.tgz"
   integrity sha512-ks6Vjr/jEw0P1gmOVwutM3B7fWxoWBL2KRDb1JfqGVawBmO5UsvmWOQFGHBPl5yxYz4eERr19E6L7NMv+Fej4w==
 
-tslib@^2.4.0, tslib@^2.8.0:
+tslib@2.8.1, tslib@^2.4.0, tslib@^2.8.0:
   version "2.8.1"
-  resolved "https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.8.1.tgz#612efe4ed235d567e8aba5f2a5fab70280ade83f"
   integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
 
 type-fest@^4.21.0:
@@ -3048,6 +3115,11 @@ ufo@^1.5.4, ufo@^1.6.1:
   version "1.6.1"
   resolved "https://registry.npmjs.org/ufo/-/ufo-1.6.1.tgz"
   integrity sha512-9a4/uxlTWJ4+a5i0ooc1rU7C7YOw3wT+UGqdeNNHWnOF9qcMBgLRS+4IYUqbczewFx4mLEig6gawh7X6mFlEkA==
+
+ufo@^1.6.3:
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/ufo/-/ufo-1.6.3.tgz#799666e4e88c122a9659805e30b9dc071c3aed4f"
+  integrity sha512-yDJTmhydvl5lJzBmy/hyOAA0d+aqCBuwl818haVdYCRrWV84o7YyeVm4QlVHStqNrrJSTb6jKuFAVqAFsr+K3Q==
 
 ultrahtml@^1.6.0:
   version "1.6.0"
@@ -3260,6 +3332,11 @@ wrap-ansi@^9.0.0:
     ansi-styles "^6.2.1"
     string-width "^7.0.0"
     strip-ansi "^7.1.0"
+
+ws@^8.18.2:
+  version "8.20.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.20.0.tgz#4cd9532358eba60bc863aad1623dfb045a4d4af8"
+  integrity sha512-sAt8BhgNbzCtgGbt2OxmpuryO63ZoDk/sqaB/znQm94T4fCEsy/yV+7CdC1kJhOU9lboAEU7R3kquuycDoibVA==
 
 xxhash-wasm@^1.1.0:
   version "1.1.0"
