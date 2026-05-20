@@ -1,8 +1,8 @@
 // Place any global data in this file.
 // You can import this data from anywhere in your site by using the `import` keyword.
 
-export const SITE_TITLE = 'Victor Zhang | Mobile Engineer | Apps from Device to Cloud';
-export const SITE_DESCRIPTION = 'Mobile engineer focused on reliable, data-heavy product systems across iOS, React Native, device sync, backend flows, and telemetry.';
+export const SITE_TITLE = 'Victor Zhang | Mobile & Systems Engineer | Apps from Device to Cloud';
+export const SITE_DESCRIPTION = 'Mobile and systems engineer building reliable, data-heavy product systems across iOS, React Native, device sync, backend flows, and telemetry.';
 export const SITE_AUTHOR = 'Victor Zhang';
 export const SITE_URL = 'https://zywkloo.github.io';
 
@@ -14,4 +14,4 @@ export const EMAIL = 'yiweizhangca@gmail.com';
 
 // Profile
 export const PROFILE_IMAGE = 'https://avatars.githubusercontent.com/u/18610590?s=400&u=bb73412244714c5465010503fee1c6381c8b46fe&v=4';
-export const USER_TITLE = 'Mobile Engineer';
+export const USER_TITLE = 'Mobile & Systems Engineer';
