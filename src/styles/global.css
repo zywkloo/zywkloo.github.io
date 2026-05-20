@@ -7,16 +7,16 @@
 
 :root {
 	/* ── Theme accent (swap the 5 lines below to retheme the entire site) ── */
-	--accent: #111827;
-	--accent-dark: #030712;
-	--accent-bright: #4b5563;
-	--accent-soft: #f3f4f6;
-	--accent-rgb: 17, 24, 39;
+	--accent: #4338ca;
+	--accent-dark: #312e81;
+	--accent-bright: #6366f1;
+	--accent-soft: #eef0ff;
+	--accent-rgb: 67, 56, 202;
 
 	/* Buttons / glows that live on dark surfaces (contact section, etc.) */
-	--on-dark-accent: #ffffff;
-	--on-dark-accent-text: #0b0d12;
-	--on-dark-glow: rgba(255, 255, 255, 0.06);
+	--on-dark-accent: #a5b4fc;
+	--on-dark-accent-text: #1e1b4b;
+	--on-dark-glow: rgba(99, 102, 241, 0.18);
 	/* ── End theme accent ── */
 
 	--black: 17, 24, 39;
