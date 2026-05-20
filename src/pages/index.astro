@@ -474,7 +474,7 @@ const MEDIUM_URL = 'https://medium.com/@zywkloo';
 	/* Contact */
 	.contact {
 		background:
-			radial-gradient(620px 320px at 80% 0%, rgba(20, 184, 166, 0.16) 0%, transparent 60%),
+			radial-gradient(620px 320px at 80% 0%, var(--on-dark-glow) 0%, transparent 60%),
 			var(--surface-deep);
 		color: rgba(255, 255, 255, 0.86);
 		position: relative;
@@ -483,7 +483,7 @@ const MEDIUM_URL = 'https://medium.com/@zywkloo';
 		color: #fff;
 	}
 	.contact .section-title::after {
-		background: var(--accent-bright);
+		background: var(--on-dark-accent);
 	}
 	.contact-text {
 		text-align: center;
@@ -499,13 +499,13 @@ const MEDIUM_URL = 'https://medium.com/@zywkloo';
 		flex-wrap: wrap;
 	}
 	.contact .btn-primary {
-		background: var(--accent-bright);
-		color: #06201c;
-		box-shadow: 0 14px 34px rgba(20, 184, 166, 0.32);
+		background: var(--on-dark-accent);
+		color: var(--on-dark-accent-text);
+		box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
 	}
 	.contact .btn-primary:hover {
-		background: #2dd4bf;
-		color: #06201c;
+		background: #f4f4f5;
+		color: var(--on-dark-accent-text);
 		transform: translateY(-2px);
 	}
 	.contact .btn-secondary {
