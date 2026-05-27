@@ -239,6 +239,16 @@ For a solo developer, there is another limit: **review bandwidth**.
 
 Eight agents can produce eight branches, but you are still the person who has to read the diffs, understand the tradeoffs, run the app, and decide what lands. **Two high-quality parallel branches are often better than eight half-reviewed ones.**
 
+### The prerequisite: you actually want parallel work
+
+This entire workflow has one assumption baked in: **you have multiple independent tasks you want to run at the same time.**
+
+If you are working on one thing sequentially — fixing a single bug, finishing a feature before starting the next — you do not need worktrees. You do not need task contracts. Just work on your branch the normal way. A single agent with a clear prompt is faster and lower overhead for sequential work.
+
+Worktrees and `.worktree-task.md` pay for themselves when you want to run two or more independent tasks in parallel: one agent extends an API while another writes tests, or one handles a refactor while another catches up on docs. That is when isolation, boundary contracts, and review gating start earning their setup cost.
+
+**Before reaching for the harness, ask: do I have two or more independent tasks I want running at the same time?** If yes — the harness helps. If no — just write the code.
+
 ## Budget-aware orchestration
 
 Multi-agent coding has **three budgets**:
