@@ -106,6 +106,7 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 			}
 			.prose :global(table) {
 				width: 100%;
+				table-layout: fixed;
 				border-collapse: collapse;
 				margin: 1.25em 0 1.75em;
 				display: block;
@@ -121,6 +122,12 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 				text-align: left;
 				border: 1px solid var(--line);
 				word-break: break-word;
+			}
+			/* first column: fixed label width; all other columns split the rest equally */
+			.prose :global(table th:first-child),
+			.prose :global(table td:first-child) {
+				width: 160px;
+				min-width: 120px;
 			}
 			.prose :global(table th) {
 				background: var(--surface-muted);
