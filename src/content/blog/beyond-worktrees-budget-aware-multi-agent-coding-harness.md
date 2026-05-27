@@ -1,9 +1,9 @@
 ---
 title: 'Beyond Worktrees: A Budget-Aware Multi-Agent Coding Harness for Solo Developers'
-description: 'Parallel coding agents are no longer the hard part. The hard part is boundaries: which agent owns which files, when work can run in parallel, and how a solo developer keeps token spend and review load under control.'
+description: 'A lightweight, budget-aware workflow for solo developers who need clean agent handoffs, file boundaries, and git-native worktree isolation without adopting a heavy orchestration platform.'
 pubDate: 'May 26 2026'
 heroImage: '../../assets/budget-aware-agent-harness-hero.svg'
-tags: ['AI Tools', 'Codex', 'Claude Code', 'Git', 'Worktrees', 'Engineering']
+tags: ['AI Tools', 'Codex', 'Claude Code', 'Git', 'Worktrees', 'Solo Dev', 'Engineering']
 ---
 
 ## Contents
@@ -23,6 +23,22 @@ tags: ['AI Tools', 'Codex', 'Claude Code', 'Git', 'Worktrees', 'Engineering']
 Git worktrees are no longer a secret trick.
 
 Most serious AI coding workflows eventually discover the same pattern: one agent per branch, one branch per worktree, one terminal or editor window per task. It works because `git worktree` gives each agent its own working directory and index. They can read the same repository history without stepping on the same checkout.
+
+But solo developers hit a different ceiling than large teams.
+
+We do not have unlimited token budgets, dedicated agent infrastructure, or a reviewer pool waiting for ten AI-generated branches. We are usually orchestrating a few paid tools, a local machine, one editor, one terminal, and our own finite attention.
+
+So the real workflow problem is not just parallelism. It is handoff.
+
+When Claude plans and Codex executes, what exactly gets handed off? When one agent finishes, how does another agent know what was changed, what was off-limits, and how to verify the result? When you come back two hours later, how do you know whether a branch is safe to review or still half-baked?
+
+That is the problem this workflow is designed around:
+
+- solo developer constraints
+- budget-aware model use
+- explicit agent handoff
+- file and task boundaries
+- lightweight tooling that stays close to Git
 
 I already wrote the basic version of that playbook in [Vibe Coding with Git Worktrees](/blog/worktree-refactor-playbook/). This article is the next layer.
 
