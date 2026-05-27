@@ -1,6 +1,6 @@
 ---
-title: 'Worktree Craft: A Budget-Aware Multi-Agent Coding Harness for Solo Developers'
-description: 'Worktree Craft (wtcraft) is a lightweight, budget-aware harness for solo developers who need clean agent handoffs, file boundaries, and git-native worktree isolation without adopting a heavy orchestration platform.'
+title: 'wtcraft — Budget-Aware Multi-Agent Coding Harness'
+description: 'wtcraft is a lightweight, git-native harness for solo developers orchestrating multiple coding agents on a limited budget. Clean agent handoffs, file boundaries, and task contracts — without a heavy platform.'
 pubDate: 'May 26 2026'
 heroImage: '../../assets/budget-aware-agent-harness-hero.svg'
 tags: ['AI Tools', 'Codex', 'Claude Code', 'Git', 'Worktrees', 'Solo Dev', 'Engineering']
@@ -22,8 +22,9 @@ tags: ['AI Tools', 'Codex', 'Claude Code', 'Git', 'Worktrees', 'Solo Dev', 'Engi
 
 **Keywords:** `Solo Dev` · `Budget-Aware` · `Agent Handoff` · `Boundaries` · `Lightweight`
 
-> **This article introduces [wtcraft](https://github.com/zywkloo/wtcraft)** — a real, installable package, not a thought experiment.
-> The repo is live. Try it: `npx wtcraft init`
+> **[wtcraft](https://github.com/zywkloo/wtcraft) — Budget-Aware Multi-Agent Coding Harness**
+>
+> A real, installable package — not a thought experiment. Try it: `npx wtcraft init`
 
 Git worktrees are no longer a secret trick.
 
