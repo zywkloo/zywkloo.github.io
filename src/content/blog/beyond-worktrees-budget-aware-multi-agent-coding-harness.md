@@ -1,5 +1,5 @@
 ---
-title: 'wtcraft — Budget-Aware Multi-Agent Coding Harness'
+title: 'wtcraft — Budget-Aware Multi-Agent Harness'
 description: 'wtcraft is a lightweight, git-native harness for solo developers orchestrating multiple coding agents on a limited budget. Clean agent handoffs, file boundaries, and task contracts — without a heavy platform.'
 pubDate: 'May 26 2026'
 heroImage: '../../assets/budget-aware-agent-harness-hero.svg'
@@ -22,7 +22,7 @@ tags: ['AI Tools', 'Codex', 'Claude Code', 'Git', 'Worktrees', 'Solo Dev', 'Engi
 
 **Keywords:** `Solo Dev` · `Budget-Aware` · `Agent Handoff` · `Boundaries` · `Lightweight`
 
-> **[wtcraft](https://github.com/zywkloo/wtcraft) — Budget-Aware Multi-Agent Coding Harness**
+> **[wtcraft](https://github.com/zywkloo/wtcraft) — Budget-Aware Multi-Agent Harness**
 >
 > A real, installable package — not a thought experiment. Try it: `npx wtcraft init`
 
