@@ -1,6 +1,6 @@
 ---
-title: 'Beyond Worktrees: A Budget-Aware Multi-Agent Coding Harness for Solo Developers'
-description: 'A lightweight, budget-aware workflow for solo developers who need clean agent handoffs, file boundaries, and git-native worktree isolation without adopting a heavy orchestration platform.'
+title: 'Worktree Craft: A Budget-Aware Multi-Agent Coding Harness for Solo Developers'
+description: 'Worktree Craft (wtcraft) is a lightweight, budget-aware harness for solo developers who need clean agent handoffs, file boundaries, and git-native worktree isolation without adopting a heavy orchestration platform.'
 pubDate: 'May 26 2026'
 heroImage: '../../assets/budget-aware-agent-harness-hero.svg'
 tags: ['AI Tools', 'Codex', 'Claude Code', 'Git', 'Worktrees', 'Solo Dev', 'Engineering']
