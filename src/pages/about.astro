@@ -35,35 +35,35 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 				</p>
 
 				<h2>Vibe Coding Workflow</h2>
-				<pre class="workflow-diagram">
-        +---------+    # Clarify goals, scope
-        |  Frame  |    # Identify constraints
-        +----+----+
-             |
-             v
-     +-------+-------+    # Explore alternatives
-     |     Plan      |    # Compare tradeoffs (worktrees)
-     +---+-----+-----+
-         |     |
-         v     v
-   [Option A] [Option B]
-         \     /
-          \   /
-           v v
-      +----+----+    # Focused implementation
-      | Execute |    # Small, incremental steps
-      +----+----+
-           |
-           v
-      +----+----+    # Build, test, edge cases
-      | Validate|    # Verify correctness & stability
-      +----+----+
-           |
-           v
-      +----+----+    # Record decisions, tradeoffs
-      | Capture |    # Enable future iteration
-      +---------+
-				</pre>
+				<section class="agent-harness-card" aria-labelledby="agent-harness-title">
+					<div>
+						<p class="eyebrow">Solo dev agent harness</p>
+						<h3 id="agent-harness-title">Budget-aware orchestration, not agent sprawl.</h3>
+						<p>
+							I use git-native worktrees and task contracts to coordinate Claude, Codex, and other coding agents without losing handoff context. The key idea is lightweight: plan with a strong model, execute inside explicit file boundaries, verify deterministically, then review fewer, higher-quality branches.
+						</p>
+						<div class="harness-links">
+							<a href="/blog/beyond-worktrees-budget-aware-multi-agent-coding-harness/">Read the workflow</a>
+							<a href="https://github.com/zywkloo/wtcraft">View wtcraft</a>
+						</div>
+					</div>
+					<div class="handoff-diagram" aria-label="Planner to contract to executor workflow">
+						<div class="diagram-node">
+							<span>Planner</span>
+							<small>Claude</small>
+						</div>
+						<div class="diagram-arrow">handoff</div>
+						<div class="diagram-node diagram-node-contract">
+							<span>Task Contract</span>
+							<small>Scope / Off-limits / Verify</small>
+						</div>
+						<div class="diagram-arrow">bounded work</div>
+						<div class="diagram-node">
+							<span>Executor</span>
+							<small>Codex</small>
+						</div>
+					</div>
+				</section>
 				<h2>Recent Experience</h2>
 				<div class="experience-item">
 					<h3>Mobile Engineer &amp; Platform Developer - Medico Supplies INC.</h3>
@@ -251,17 +251,96 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 		color: rgb(var(--gray-dark));
 	}
 
-	.workflow-diagram {
-		background: var(--surface-deep);
-		color: #d7e6df;
-		padding: 1.5rem;
-		border-radius: var(--radius);
-		overflow-x: auto;
-		font-size: 0.92rem;
-		line-height: 1.4;
+	.agent-harness-card {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.35rem;
 		margin: 1.25rem 0 2.5rem;
-		border: 1px solid rgba(255, 255, 255, 0.08);
+		padding: clamp(1.35rem, 3vw, 1.8rem);
+		border: 1px solid var(--line);
+		border-left: 3px solid var(--accent);
+		border-radius: var(--radius);
+		background:
+			linear-gradient(135deg, rgba(var(--accent-rgb), 0.08), rgba(255, 255, 255, 0.88)),
+			var(--surface-raised);
 		box-shadow: var(--shadow-md);
+	}
+
+	.agent-harness-card h3 {
+		font-size: clamp(1.25rem, 3vw, 1.55rem);
+		margin: 0.35rem 0 0.75rem;
+		color: rgb(var(--black));
+	}
+
+	.agent-harness-card p {
+		margin-bottom: 0;
+	}
+
+	.harness-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-top: 1.2rem;
+	}
+
+	.harness-links a {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.55rem 0.9rem;
+		border-radius: 999px;
+		background: var(--surface-raised);
+		border: 1px solid rgba(var(--accent-rgb), 0.18);
+		box-shadow: var(--shadow-sm);
+		font-size: 0.9rem;
+		font-weight: 700;
+	}
+
+	.handoff-diagram {
+		display: grid;
+		gap: 0.65rem;
+		padding: 1rem;
+		border-radius: calc(var(--radius) - 4px);
+		background: var(--surface-deep);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+	}
+
+	.diagram-node {
+		padding: 0.85rem 0.95rem;
+		border-radius: 10px;
+		background: rgba(255, 255, 255, 0.06);
+		border: 1px solid rgba(255, 255, 255, 0.09);
+	}
+
+	.diagram-node span,
+	.diagram-node small {
+		display: block;
+	}
+
+	.diagram-node span {
+		color: #f8fafc;
+		font-weight: 700;
+	}
+
+	.diagram-node small {
+		margin-top: 0.2rem;
+		color: #a5b4fc;
+		font-size: 0.78rem;
+		letter-spacing: 0.02em;
+	}
+
+	.diagram-node-contract {
+		background: rgba(var(--accent-rgb), 0.22);
+		border-color: rgba(165, 180, 252, 0.34);
+	}
+
+	.diagram-arrow {
+		color: #cbd5e1;
+		font-size: 0.76rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		text-align: center;
 	}
 
 	.design-grid {
@@ -301,6 +380,11 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 	@media (min-width: 768px) {
 		.design-grid {
 			grid-template-columns: repeat(2, 1fr);
+		}
+
+		.agent-harness-card {
+			grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
+			align-items: center;
 		}
 	}
 
