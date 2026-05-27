@@ -65,7 +65,9 @@ The goal is not maximum parallelism. The goal is clean boundaries.
 
 The ecosystem is moving fast, and the direction is obvious: **coding agents are becoming parallel by default**.
 
-Here is how the major tools stack up — and where the gaps are:
+There are two distinct levels to compare: **agent platforms and orchestrators** (where you run agents) and **agent task formats** (how you tell each agent exactly what to do).
+
+### Agent platforms and orchestrators
 
 | Tool | What it does | Strength | Gap | Why wtcraft |
 |------|-------------|----------|-----|-------------|
@@ -77,7 +79,35 @@ Here is how the major tools stack up — and where the gaps are:
 
 ![Claude Code App — Engineering skill bundle, showing role-personalized skills including /architecture, /code-review, /debug, /deploy-checklist, /documentation, /incident-response](/images/claude-code-app-skills.png)
 
-*Claude Code App's Engineering skill bundle: role-personalized workflows out of the box. My `/wtplan` and `/wtfinish` commands complement these — wtcraft supplies the **durable task contract** that survives across sessions and agents.*
+*Claude Code App's Engineering skill bundle: role-personalized workflows out of the box. `/wtplan` and `/wtfinish` complement these — wtcraft supplies the **durable task contract** that survives across sessions and agents.*
+
+### Agent task formats and skill conventions
+
+Platforms tell you *where* agents run. But most agents also define their own file format to guide execution per task or per skill. Each solves part of the problem — none covers all six properties a real task contract needs.
+
+| Tool | Format | What it defines | Gap vs `.worktree-task.md` |
+|------|--------|----------------|---------------------------|
+| **[Devin](https://medium.com/@nitinmatani22/devin-ai-skills-the-skill-md-files-that-teach-an-ai-agent-your-entire-app-1c619dad0501)** | `SKILL.md` | Recurring workflow instructions for a specific agent | Describes a *skill pattern*, not a task execution unit. No Scope, Off-limits, Verification, or status lifecycle. |
+| **[Sweep AI](https://docs.sweep.dev/custom-prompts)** | `SKILL.md` variant | YAML + markdown to guide Sweep's PR-generation agent | Same as Devin — an instruction file for the agent, not a bounded task contract. |
+| **[GitHub Copilot Workspace](https://github.com/githubnext/copilot-workspace-user-manual/blob/main/overview.md)** | Ephemeral session plan | Structured plan (file list + steps) inside the Workspace UI | Session-only — not readable by other agents once the session ends. No Off-limits, no Verification, disappears on close. |
+| **[SWE-agent](https://swe-agent.com/latest/config/config/)** | `config/*.yaml` | Configures agent *behaviour* globally (tools, max steps, cost limit) | Configures the agent itself, not individual tasks. No per-task scope or boundary constraints. |
+| **[OpenDevin / All-Hands](https://github.com/All-Hands-AI/OpenHands)** | Free-text prompt | Natural language task description | No contract layer at all — prompt in, code out. |
+| **[Claude Code SubAgents](https://code.claude.com/docs/en/sub-agents)** | `.claude/agents/*.md` | Reusable sub-agent definitions (name, description, tools) | Agent *definitions*, not task *specs*. No Scope, Off-limits, Verification, or worktree binding. |
+| **[`.worktree-task.md`](https://github.com/zywkloo/wtcraft)** | Structured markdown | Task contract per worktree branch | All six properties — see below. |
+
+**The six properties no single tool has covered together:**
+
+| Tool | Repo-native | Scope | Off-limits | Verification | Status lifecycle | Worktree-native |
+|------|:-----------:|:-----:|:----------:|:------------:|:----------------:|:---------------:|
+| Devin SKILL.md | ✓ | ✗ | ✗ | ✗ | ✗ | ✗ |
+| Sweep SKILL.md | ✓ | ✗ | ✗ | ✗ | ✗ | ✗ |
+| Copilot Workspace | ✗ | partial | ✗ | ✗ | ✗ | ✗ |
+| SWE-agent config | ✓ | ✗ | ✗ | ✗ | ✗ | ✗ |
+| OpenDevin | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ |
+| Claude SubAgents | ✓ | ✗ | ✗ | ✗ | ✗ | ✗ |
+| **`.worktree-task.md`** | **✓** | **✓** | **✓** | **✓** | **✓** | **✓** |
+
+Every existing format either defines *how an agent behaves* (SKILL.md, SubAgents) or *what to build* (Copilot Workspace, SWE-bench inputs) — **none defines exactly which files an agent may touch, which it must not, and how to verify it is done**, in a worktree-native, agent-agnostic task contract.
 
 None of these fully answer the question I care about most:
 
