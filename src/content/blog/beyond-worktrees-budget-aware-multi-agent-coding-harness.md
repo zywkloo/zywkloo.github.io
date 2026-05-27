@@ -119,7 +119,11 @@ None of these fully answer the question I care about most:
 
 > **What is this agent allowed to change, and how do I prove it stayed inside the boundary?**
 
-That is the layer I call the **harness**.
+That layer has a name: **harness engineering**.
+
+[Martin Fowler defined it](https://martinfowler.com/articles/harness-engineering.html) as the infrastructure and orchestration layer that wraps a model — tooling, state management, error recovery, and boundary enforcement. [OpenAI's engineering team](https://openai.com/index/harness-engineering/) and [Stripe's Minions project](https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents) both validated it in production at scale (1,300+ AI PRs per week at Stripe). Fowler's article describes *what* harness engineering is. Stripe and OpenAI describe *how they built it* at enterprise scale.
+
+**wtcraft is a solo-developer implementation of the same idea** — lightweight, git-native, and designed for one developer with a limited budget rather than a team with a dedicated agent platform.
 
 ## The missing layer: task contracts
 
