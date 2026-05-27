@@ -12,6 +12,7 @@
 <li><a href="#tldr">TL;DR</a></li>
 </ul>
 <h2 id="why-this-exists">Why this exists</h2>
+<p><strong>Keywords:</strong> <code>Solo Dev</code> · <code>Budget-Aware</code> · <code>Agent Handoff</code> · <code>Boundaries</code> · <code>Lightweight</code></p>
 <p>Git worktrees are no longer a secret trick.</p>
 <p>Most serious AI coding workflows eventually discover the same pattern: one agent per branch, one branch per worktree, one terminal or editor window per task. It works because <code>git worktree</code> gives each agent its own working directory and index. They can read the same repository history without stepping on the same checkout.</p>
 <p>But solo developers hit a different ceiling than large teams.</p>
@@ -43,6 +44,16 @@
 <p><a href="https://openai.com/index/introducing-the-codex-app/">OpenAI’s Codex app</a> is explicitly designed to manage multiple agents at once, run work in parallel, and collaborate over long-running tasks. It is powerful, but it is also a dedicated desktop surface. That is great if you want an agent command center. It is less ideal if your preferred workflow is still “CLI plus VS Code” or “CLI plus any editor.”</p>
 <p><a href="https://platform.openai.com/docs/codex/overview">Codex cloud</a> provisions a sandboxed cloud container per task. That is convenient for many repo-level changes, but cloud sandboxes are not always enough for local/mobile/native workflows. Some builds need local simulators, device state, private toolchains, local credentials, or project-specific machine setup.</p>
 <p><a href="https://code.claude.com/docs/en/worktrees">Claude Code worktrees</a> are closer to the workflow I want. Claude Code supports parallel sessions isolated in git worktrees, and its docs describe <code>--worktree</code> and subagent <code>isolation: worktree</code>. That is a strong primitive.</p>
+<p>But Claude Code worktrees are still a primitive, not the full harness.</p>
+<p><code>claude --worktree</code> answers “where should this Claude session work?” Subagent <code>isolation: worktree</code> answers “how can Claude safely dispatch a subagent into an isolated checkout?” Both are valuable. The tradeoff is that they still leave several solo-developer problems unsolved:</p>
+<ul>
+<li><strong>Token budget:</strong> parallel Claude sessions or subagents can each rehydrate similar repo context. That is fine for a team with generous budgets, but expensive for a solo developer juggling first-tier subscriptions.</li>
+<li><strong>Agent handoff:</strong> the plan often lives in the Claude session summary, not in a durable task contract that Codex, Cursor, or a future Claude session can read later.</li>
+<li><strong>File boundaries:</strong> worktree isolation prevents same-directory stomping, but it does not define Scope, Off-limits, or Verification by itself.</li>
+<li><strong>Review fanout:</strong> launching many isolated workers is easy; reviewing and merging their output is still one human’s job.</li>
+<li><strong>Agent portability:</strong> Claude-native worktrees are great inside Claude Code, but the handoff format should remain useful when the executor is Codex CLI, a VS Code extension, or another agent.</li>
+</ul>
+<p>So my workflow treats Claude Code’s worktree support as an excellent execution primitive, then adds a repo-native contract layer on top.</p>
 <p><a href="https://github.com/raine/workmux">workmux</a> is also very close in spirit. It combines git worktrees with tmux windows for low-friction parallel development. Tools like this solve session orchestration: create the worktree, open the terminal, run the agent, keep things visible.</p>
 <p>But none of these fully answer the question I care about most:</p>
 <blockquote>
