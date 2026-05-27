@@ -1,0 +1,58 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#10151F"/>
+  <path d="M0 0H1200V630H0V0Z" fill="url(#bg)"/>
+  <path d="M124 462C219 377 305 348 382 375C459 402 535 445 621 417C707 389 728 295 824 264C920 233 1027 288 1110 210" stroke="#7DD3FC" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+  <path d="M124 506C226 427 320 400 407 424C494 448 570 502 661 467C752 432 775 323 869 292C963 261 1034 314 1110 255" stroke="#A7F3D0" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <g filter="url(#shadow)">
+    <rect x="120" y="96" width="248" height="154" rx="18" fill="#172033" stroke="#334155"/>
+    <text x="148" y="145" fill="#E5E7EB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="700">planner</text>
+    <text x="148" y="184" fill="#94A3B8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17">CLAUDE.md</text>
+    <text x="148" y="215" fill="#94A3B8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17">plan -> contract</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="476" y="96" width="248" height="154" rx="18" fill="#172033" stroke="#334155"/>
+    <text x="504" y="145" fill="#E5E7EB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="700">contract</text>
+    <text x="504" y="184" fill="#94A3B8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17">.worktree-task.md</text>
+    <text x="504" y="215" fill="#94A3B8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17">scope / off-limits</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="832" y="96" width="248" height="154" rx="18" fill="#172033" stroke="#334155"/>
+    <text x="860" y="145" fill="#E5E7EB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="700">executor</text>
+    <text x="860" y="184" fill="#94A3B8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17">AGENTS.md</text>
+    <text x="860" y="215" fill="#94A3B8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17">verify -> PR</text>
+  </g>
+  <path d="M381 173H463" stroke="#F8FAFC" stroke-width="3" stroke-linecap="round"/>
+  <path d="M454 161L466 173L454 185" stroke="#F8FAFC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M737 173H819" stroke="#F8FAFC" stroke-width="3" stroke-linecap="round"/>
+  <path d="M810 161L822 173L810 185" stroke="#F8FAFC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <g opacity="0.95">
+    <rect x="155" y="334" width="174" height="72" rx="12" fill="#0F766E"/>
+    <text x="187" y="378" fill="#ECFEFF" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" font-weight="700">T1 base</text>
+    <path d="M329 370H405" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
+    <path d="M396 358L408 370L396 382" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g opacity="0.95">
+    <rect x="428" y="292" width="168" height="66" rx="12" fill="#1D4ED8"/>
+    <text x="474" y="333" fill="#EFF6FF" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="21" font-weight="700">UI</text>
+    <rect x="428" y="382" width="168" height="66" rx="12" fill="#1D4ED8"/>
+    <text x="462" y="423" fill="#EFF6FF" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="21" font-weight="700">client</text>
+    <rect x="428" y="472" width="168" height="66" rx="12" fill="#1D4ED8"/>
+    <text x="468" y="513" fill="#EFF6FF" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="21" font-weight="700">tests</text>
+  </g>
+  <path d="M408 370C420 370 420 325 428 325" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
+  <path d="M408 370C420 370 420 415 428 415" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
+  <path d="M408 370C420 370 420 505 428 505" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
+  <text x="700" y="378" fill="#E2E8F0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="34" font-weight="800">Beyond Worktrees</text>
+  <text x="700" y="424" fill="#CBD5E1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="21">budget-aware multi-agent coding</text>
+  <text x="700" y="460" fill="#94A3B8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19">git-native isolation + task contracts</text>
+  <defs>
+    <linearGradient id="bg" x1="139" y1="58" x2="1114" y2="626" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#182235"/>
+      <stop offset="0.48" stop-color="#111827"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+    <filter id="shadow" x="100" y="76" width="1000" height="194" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#020617" flood-opacity="0.42"/>
+    </filter>
+  </defs>
+</svg>

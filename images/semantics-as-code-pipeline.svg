@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+  <title id="title">Semantics as code pipeline</title>
+  <desc id="desc">Flow diagram from facts through semantic core to projections and reliability outcomes.</desc>
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1a31"/>
+      <stop offset="100%" stop-color="#102748"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#27cfff"/>
+      <stop offset="100%" stop-color="#4f8dff"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff9f5a"/>
+      <stop offset="100%" stop-color="#ff6d57"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="640" fill="url(#bg2)"/>
+
+  <g font-family="Atkinson, Arial, sans-serif" fill="#dff5ff">
+    <text x="600" y="54" text-anchor="middle" font-size="34" font-weight="700">Semantics as Code Pipeline</text>
+    <text x="600" y="88" text-anchor="middle" font-size="20" fill="#b5d9f4">Facts - Semantic Core - Projections - Reliability</text>
+  </g>
+
+  <g font-family="Atkinson, Arial, sans-serif">
+    <rect x="80" y="150" width="300" height="350" rx="20" fill="#122a4d" stroke="#5cd9ff" stroke-width="2"/>
+    <text x="230" y="192" text-anchor="middle" font-size="28" fill="#d6f5ff" font-weight="700">Facts</text>
+    <text x="120" y="238" font-size="20" fill="#c3e8ff">- Domain events</text>
+    <text x="120" y="274" font-size="20" fill="#c3e8ff">- Ledger records</text>
+    <text x="120" y="310" font-size="20" fill="#c3e8ff">- Timestamps</text>
+    <text x="120" y="346" font-size="20" fill="#c3e8ff">- Idempotency keys</text>
+    <text x="120" y="382" font-size="20" fill="#c3e8ff">- Versioned contracts</text>
+  </g>
+
+  <g font-family="Atkinson, Arial, sans-serif">
+    <rect x="450" y="120" width="300" height="410" rx="20" fill="#183560" stroke="#7de4ff" stroke-width="3"/>
+    <text x="600" y="164" text-anchor="middle" font-size="30" fill="#edfbff" font-weight="700">Semantic Core</text>
+    <text x="490" y="214" font-size="20" fill="#d3efff">- Value objects</text>
+    <text x="490" y="250" font-size="20" fill="#d3efff">- Invariant validators</text>
+    <text x="490" y="286" font-size="20" fill="#d3efff">- Transition guards</text>
+    <text x="490" y="322" font-size="20" fill="#d3efff">- Time policy</text>
+    <text x="490" y="358" font-size="20" fill="#d3efff">- Consistency boundary</text>
+    <text x="490" y="394" font-size="20" fill="#d3efff">- Failure handling rules</text>
+    <rect x="490" y="430" width="220" height="58" rx="12" fill="#0f2444" stroke="#85dcff" stroke-width="2"/>
+    <text x="600" y="466" text-anchor="middle" font-size="22" fill="#dbf6ff" font-weight="700">Executable Semantics</text>
+  </g>
+
+  <g font-family="Atkinson, Arial, sans-serif">
+    <rect x="820" y="150" width="300" height="350" rx="20" fill="#3a2536" stroke="#ff9f6d" stroke-width="2"/>
+    <text x="970" y="192" text-anchor="middle" font-size="28" fill="#ffe8dc" font-weight="700">Projections</text>
+    <text x="860" y="238" font-size="20" fill="#ffd9c8">- App UI feed</text>
+    <text x="860" y="274" font-size="20" fill="#ffd9c8">- Balance summary</text>
+    <text x="860" y="310" font-size="20" fill="#ffd9c8">- Detail screens</text>
+    <text x="860" y="346" font-size="20" fill="#ffd9c8">- Analytics views</text>
+    <text x="860" y="382" font-size="20" fill="#ffd9c8">- External integrations</text>
+  </g>
+
+  <g stroke-width="8" fill="none">
+    <path d="M392 320 L436 320" stroke="url(#blue)"/>
+    <path d="M762 320 L806 320" stroke="url(#orange)"/>
+    <polygon points="436,320 422,312 422,328" fill="#4f8dff"/>
+    <polygon points="806,320 792,312 792,328" fill="#ff7c59"/>
+  </g>
+
+  <g font-family="Atkinson, Arial, sans-serif">
+    <text x="600" y="586" text-anchor="middle" font-size="22" fill="#d9f5ff">
+      Same semantics across views -> fewer semantic drifts under retries, delay, and failure
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Domain semantics maintenance loop</title>
+  <desc id="desc">A loop diagram showing define, encode, project, test, migrate, and own as a continuous process for maintaining domain semantics.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#08152c"/>
+      <stop offset="100%" stop-color="#17263d"/>
+    </linearGradient>
+    <linearGradient id="loop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4adfff"/>
+      <stop offset="100%" stop-color="#ff9b69"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <text x="600" y="72" text-anchor="middle" font-family="Atkinson, Arial, sans-serif" font-size="36" font-weight="700" fill="#e8fbff">
+    Keeping Domain Semantics Intact
+  </text>
+  <text x="600" y="108" text-anchor="middle" font-family="Atkinson, Arial, sans-serif" font-size="20" fill="#bfdcf3">
+    Treat semantic stability as an operating loop, not a one-time modeling step
+  </text>
+
+  <g transform="translate(600 380)" filter="url(#glow)">
+    <circle r="210" fill="none" stroke="url(#loop)" stroke-width="26" stroke-dasharray="180 80 150 80 170 80 150 80 170 80 150 80"/>
+    <circle r="118" fill="#132743" stroke="#6de5ff" stroke-width="2"/>
+    <text x="0" y="-18" text-anchor="middle" font-family="Atkinson, Arial, sans-serif" font-size="38" font-weight="700" fill="#ebfbff">Semantic</text>
+    <text x="0" y="24" text-anchor="middle" font-family="Atkinson, Arial, sans-serif" font-size="38" font-weight="700" fill="#ebfbff">Discipline</text>
+  </g>
+
+  <g font-family="Atkinson, Arial, sans-serif" text-anchor="middle">
+    <g transform="translate(600 160)">
+      <rect x="-120" y="-32" width="240" height="64" rx="16" fill="#163154" stroke="#5ce0ff" stroke-width="2"/>
+      <text y="9" font-size="28" font-weight="700" fill="#effbff">Define</text>
+    </g>
+    <g transform="translate(860 252)">
+      <rect x="-120" y="-32" width="240" height="64" rx="16" fill="#1f3152" stroke="#72dfff" stroke-width="2"/>
+      <text y="9" font-size="28" font-weight="700" fill="#effbff">Encode</text>
+    </g>
+    <g transform="translate(860 510)">
+      <rect x="-120" y="-32" width="240" height="64" rx="16" fill="#2f2a45" stroke="#ffa475" stroke-width="2"/>
+      <text y="9" font-size="28" font-weight="700" fill="#fff0e6">Project</text>
+    </g>
+    <g transform="translate(600 600)">
+      <rect x="-120" y="-32" width="240" height="64" rx="16" fill="#332741" stroke="#ffaf82" stroke-width="2"/>
+      <text y="9" font-size="28" font-weight="700" fill="#fff0e6">Test</text>
+    </g>
+    <g transform="translate(340 510)">
+      <rect x="-120" y="-32" width="240" height="64" rx="16" fill="#27395e" stroke="#77dfff" stroke-width="2"/>
+      <text y="9" font-size="28" font-weight="700" fill="#effbff">Migrate</text>
+    </g>
+    <g transform="translate(340 252)">
+      <rect x="-120" y="-32" width="240" height="64" rx="16" fill="#17304f" stroke="#5ce0ff" stroke-width="2"/>
+      <text y="9" font-size="28" font-weight="700" fill="#effbff">Own</text>
+    </g>
+  </g>
+</svg>

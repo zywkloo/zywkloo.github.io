@@ -1,0 +1,72 @@
+<svg width="960" height="96" viewBox="0 0 960 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="thornFade" x1="48" y1="48" x2="912" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#24314A" stop-opacity="0"/>
+      <stop offset="0.18" stop-color="#24314A" stop-opacity="0.92"/>
+      <stop offset="0.82" stop-color="#24314A" stop-opacity="0.92"/>
+      <stop offset="1" stop-color="#24314A" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soften" x="0" y="0" width="960" height="96" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="0.18"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#soften)" stroke="url(#thornFade)" stroke-linecap="round" stroke-linejoin="round">
+    <path
+      d="M52 50
+         C118 44 168 44 236 49
+         C288 53 334 55 382 48
+         C430 41 468 36 512 46
+         C557 56 600 58 654 49
+         C709 40 770 41 838 47
+         C866 50 890 50 908 49"
+      stroke-width="2.6"/>
+
+    <path d="M138 46 L125 31" stroke-width="1.8"/>
+    <path d="M140 47 L151 33" stroke-width="1.5"/>
+
+    <path d="M214 49 L202 63" stroke-width="1.6"/>
+    <path d="M217 48 L224 32" stroke-width="1.4"/>
+
+    <path d="M306 53 L292 37" stroke-width="1.7"/>
+    <path d="M312 54 L323 68" stroke-width="1.5"/>
+
+    <path d="M392 47 L381 28" stroke-width="1.7"/>
+    <path d="M398 46 L410 35" stroke-width="1.4"/>
+
+    <path d="M479 40 L468 24" stroke-width="1.6"/>
+    <path d="M489 40 L498 26" stroke-width="1.5"/>
+
+    <path d="M540 52 L532 71" stroke-width="1.6"/>
+    <path d="M548 53 L561 67" stroke-width="1.4"/>
+
+    <path d="M624 53 L610 38" stroke-width="1.7"/>
+    <path d="M631 52 L640 33" stroke-width="1.4"/>
+
+    <path d="M714 44 L703 25" stroke-width="1.7"/>
+    <path d="M720 44 L735 32" stroke-width="1.4"/>
+
+    <path d="M804 45 L792 62" stroke-width="1.6"/>
+    <path d="M810 45 L822 30" stroke-width="1.4"/>
+
+    <path d="M858 48 L848 63" stroke-width="1.4"/>
+
+    <path
+      d="M458 47
+         C470 44 480 39 487 31
+         C492 25 499 20 507 19
+         C515 18 522 20 528 26
+         C534 31 542 35 554 37"
+      stroke-width="1.1"
+      opacity="0.55"/>
+
+    <path
+      d="M444 50
+         C456 55 468 61 476 68
+         C482 73 490 77 499 77
+         C509 77 517 73 523 66
+         C529 60 538 54 552 50"
+      stroke-width="1"
+      opacity="0.45"/>
+  </g>
+</svg>

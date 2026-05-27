@@ -1,0 +1,54 @@
+<svg width="960" height="96" viewBox="0 0 960 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="creatureFade" x1="42" y1="48" x2="918" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#24314A" stop-opacity="0"/>
+      <stop offset="0.16" stop-color="#24314A" stop-opacity="0.92"/>
+      <stop offset="0.84" stop-color="#24314A" stop-opacity="0.92"/>
+      <stop offset="1" stop-color="#24314A" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <g stroke="url(#creatureFade)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path
+      d="M46 49
+         C120 44 178 44 248 49
+         C307 53 356 55 405 49
+         C450 43 492 39 540 46
+         C590 53 636 56 698 49
+         C770 41 838 43 914 48"
+      stroke-width="2.5"/>
+
+    <path d="M166 47 L153 33" stroke-width="1.4" opacity="0.6"/>
+    <path d="M278 52 L290 66" stroke-width="1.3" opacity="0.55"/>
+    <path d="M390 48 L379 31" stroke-width="1.3" opacity="0.55"/>
+    <path d="M566 49 L580 33" stroke-width="1.3" opacity="0.55"/>
+    <path d="M690 52 L678 66" stroke-width="1.2" opacity="0.5"/>
+    <path d="M818 46 L830 31" stroke-width="1.2" opacity="0.5"/>
+
+    <g transform="translate(210 20)" opacity="0.92">
+      <path d="M2 34 C8 29 16 29 21 33 C24 29 30 28 35 30 C39 32 42 36 42 41 C42 47 38 50 34 52 C30 54 24 55 18 55 C12 55 7 53 4 50 C1 47 0 44 0 40 C0 38 1 36 2 34 Z" stroke-width="1.5"/>
+      <path d="M34 31 C38 26 40 22 41 17" stroke-width="1.2"/>
+      <path d="M22 55 L21 66" stroke-width="1.2"/>
+      <path d="M28 55 L29 66" stroke-width="1.2"/>
+      <circle cx="30" cy="38" r="1.4" fill="#24314A" stroke="none"/>
+    </g>
+
+    <g transform="translate(452 16)" opacity="0.92">
+      <path d="M0 36 C7 32 14 33 21 36 C25 31 31 28 37 28 C42 28 46 30 48 35 C49 38 48 42 45 45 C41 49 36 50 32 50 C24 51 15 49 9 46 C5 44 2 41 0 36 Z" stroke-width="1.45"/>
+      <path d="M48 35 L60 30 L52 39" stroke-width="1.2"/>
+      <path d="M11 47 L7 58" stroke-width="1.15"/>
+      <path d="M21 49 L20 60" stroke-width="1.15"/>
+      <path d="M31 49 L33 60" stroke-width="1.15"/>
+      <circle cx="37" cy="36" r="1.3" fill="#24314A" stroke="none"/>
+    </g>
+
+    <g transform="translate(690 18)" opacity="0.92">
+      <path d="M0 42 C6 34 14 30 23 30 C30 30 37 33 43 39 C49 39 53 41 56 45 C59 49 59 53 57 57 C54 61 49 63 43 63 C39 66 34 69 28 70 C21 71 14 69 9 65 C4 61 1 55 1 49 C1 46 1 44 0 42 Z" stroke-width="1.5"/>
+      <path d="M19 30 L15 18" stroke-width="1.2"/>
+      <path d="M27 30 L31 19" stroke-width="1.2"/>
+      <path d="M17 69 L15 82" stroke-width="1.15"/>
+      <path d="M35 68 L37 82" stroke-width="1.15"/>
+      <circle cx="41" cy="46" r="1.35" fill="#24314A" stroke="none"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Victor Zhang | Mobile &#38; Systems Engineer | Apps from Device to Cloud" href="https://zywkloo.github.io/rss.xml"><meta name="generator" content="Astro v5.15.1"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://zywkloo.github.io/blog/beyond-worktrees-budget-aware-multi-agent-coding-harness/"><!-- Primary Meta Tags --><title>Beyond Worktrees: A Budget-Aware Multi-Agent Coding Harness for Solo Developers</title><meta name="title" content="Beyond Worktrees: A Budget-Aware Multi-Agent Coding Harness for Solo Developers"><meta name="description" content="Parallel coding agents are no longer the hard part. The hard part is boundaries: which agent owns which files, when work can run in parallel, and how a solo developer keeps token spend and review load under control."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://zywkloo.github.io/blog/beyond-worktrees-budget-aware-multi-agent-coding-harness/"><meta property="og:title" content="Beyond Worktrees: A Budget-Aware Multi-Agent Coding Harness for Solo Developers"><meta property="og:description" content="Parallel coding agents are no longer the hard part. The hard part is boundaries: which agent owns which files, when work can run in parallel, and how a solo developer keeps token spend and review load under control."><meta property="og:image" content="https://zywkloo.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://zywkloo.github.io/blog/beyond-worktrees-budget-aware-multi-agent-coding-harness/"><meta property="twitter:title" content="Beyond Worktrees: A Budget-Aware Multi-Agent Coding Harness for Solo Developers"><meta property="twitter:description" content="Parallel coding agents are no longer the hard part. The hard part is boundaries: which agent owns which files, when work can run in parallel, and how a solo developer keeps token spend and review load under control."><meta property="twitter:image" content="https://zywkloo.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><link rel="stylesheet" href="/_astro/_slug_.DQfmsL1M.css">
+<link rel="stylesheet" href="/_astro/_slug_.DZJ4udGy.css"></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Victor Zhang | Mobile &amp; Systems Engineer | Apps from Device to Cloud</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Home </a>  <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Blog </a>  <a href="/about" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> About </a>  </div> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://m.webtoo.ls/@astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Mastodon</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path></svg> </a> </div> </nav> </header>   <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo> <img src="/_astro/budget-aware-agent-harness-hero.B552bThX_Z2voOnL.svg" alt data-astro-cid-bvzihdzo="true" loading="lazy" decoding="async" fetchpriority="auto" width="1020" height="510"> <div class="hero-overlay" data-astro-cid-bvzihdzo></div> </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo>  <div class="meta-row" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2026-05-26T07:00:00.000Z"> May 26, 2026 </time>  </div> <div class="post-view-count" data-post-view-count data-slug="beyond-worktrees-budget-aware-multi-agent-coding-harness" hidden data-astro-cid-hcz7kujg> <span class="post-view-count__metric" data-astro-cid-hcz7kujg> <span class="post-view-count__value" data-post-view-value data-astro-cid-hcz7kujg>--</span> <span class="post-view-count__label" data-astro-cid-hcz7kujg>views</span> </span> <span class="post-view-count__separator" data-astro-cid-hcz7kujg>·</span> <button class="post-like-button" type="button" data-post-like-button data-astro-cid-hcz7kujg> <span class="post-like-button__icon" data-post-like-icon data-astro-cid-hcz7kujg>♡</span> <span class="post-like-button__label" data-post-like-label data-astro-cid-hcz7kujg>Like</span> <span class="post-like-button__count" data-post-like-value data-astro-cid-hcz7kujg>--</span> </button> </div>  <script type="module" src="/_astro/PostViewCount.astro_astro_type_script_index_0_lang.ClL0nZFe.js"></script> </div> <h1 data-astro-cid-bvzihdzo>Beyond Worktrees: A Budget-Aware Multi-Agent Coding Harness for Solo Developers</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#why-this-exists">Why this exists</a></li>
+<li><a href="#the-current-tool-landscape">The current tool landscape</a></li>
+<li><a href="#the-missing-layer-task-contracts">The missing layer: task contracts</a></li>
+<li><a href="#my-workflow-claude-plans-codex-executes">My workflow: Claude plans, Codex executes</a></li>
+<li><a href="#dag-not-task-queue">DAG, not task queue</a></li>
+<li><a href="#budget-aware-orchestration">Budget-aware orchestration</a></li>
+<li><a href="#where-wtcraft-fits">Where wtcraft fits</a></li>
+<li><a href="#the-workflow-in-one-screen">The workflow in one screen</a></li>
+<li><a href="#tldr">TL;DR</a></li>
+</ul>
+<h2 id="why-this-exists">Why this exists</h2>
+<p>Git worktrees are no longer a secret trick.</p>
+<p>Most serious AI coding workflows eventually discover the same pattern: one agent per branch, one branch per worktree, one terminal or editor window per task. It works because <code>git worktree</code> gives each agent its own working directory and index. They can read the same repository history without stepping on the same checkout.</p>
+<p>I already wrote the basic version of that playbook in <a href="/blog/worktree-refactor-playbook/">Vibe Coding with Git Worktrees</a>. This article is the next layer.</p>
+<p>The real problem is no longer “can I run multiple agents?” The answer is yes. The real problem is:</p>
+<ul>
+<li>which agent should plan?</li>
+<li>which agent should execute?</li>
+<li>which files may each agent touch?</li>
+<li>which files are off-limits?</li>
+<li>which tasks can run in parallel?</li>
+<li>when should a solo developer stop spawning agents because review load is now the bottleneck?</li>
+</ul>
+<p>That is why I started building <a href="https://github.com/zywkloo/wtcraft">wtcraft</a>: a small, git-native harness for bounded multi-agent coding.</p>
+<p>The goal is not maximum parallelism. The goal is clean boundaries.</p>
+<h2 id="the-current-tool-landscape">The current tool landscape</h2>
+<p>The ecosystem is moving fast, and the direction is obvious: coding agents are becoming parallel by default.</p>
+<p><a href="https://openai.com/index/introducing-the-codex-app/">OpenAI’s Codex app</a> is explicitly designed to manage multiple agents at once, run work in parallel, and collaborate over long-running tasks. It is powerful, but it is also a dedicated desktop surface. That is great if you want an agent command center. It is less ideal if your preferred workflow is still “CLI plus VS Code” or “CLI plus any editor.”</p>
+<p><a href="https://platform.openai.com/docs/codex/overview">Codex cloud</a> provisions a sandboxed cloud container per task. That is convenient for many repo-level changes, but cloud sandboxes are not always enough for local/mobile/native workflows. Some builds need local simulators, device state, private toolchains, local credentials, or project-specific machine setup.</p>
+<p><a href="https://code.claude.com/docs/en/worktrees">Claude Code worktrees</a> are closer to the workflow I want. Claude Code supports parallel sessions isolated in git worktrees, and its docs describe <code>--worktree</code> and subagent <code>isolation: worktree</code>. That is a strong primitive.</p>
+<p><a href="https://github.com/raine/workmux">workmux</a> is also very close in spirit. It combines git worktrees with tmux windows for low-friction parallel development. Tools like this solve session orchestration: create the worktree, open the terminal, run the agent, keep things visible.</p>
+<p>But none of these fully answer the question I care about most:</p>
+<blockquote>
+<p>What is this agent allowed to change, and how do I prove it stayed inside the boundary?</p>
+</blockquote>
+<p>That is the layer I call the harness.</p>
+<h2 id="the-missing-layer-task-contracts">The missing layer: task contracts</h2>
+<p>A worktree isolates a filesystem checkout. It does not isolate intent.</p>
+<p>If two agents both decide to “clean up the store,” “fix the shared schema,” or “touch the index barrel while I am here,” you still have a problem. The worktree prevented file-level stomping in the same directory, but it did not prevent design drift, overlapping ownership, or review chaos.</p>
+<p>So every non-trivial worktree task needs a contract.</p>
+<p>In my workflow, that contract is <code>.worktree-task.md</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="md"><code><span class="line"><span style="color:#79B8FF;font-weight:bold">---</span></span>
+<span class="line"><span style="color:#E1E4E8">branch: feat/example-task</span></span>
+<span class="line"><span style="color:#E1E4E8">agent: codex</span></span>
+<span class="line"><span style="color:#E1E4E8">status: ready</span></span>
+<span class="line"><span style="color:#E1E4E8">created: 2026-05-26</span></span>
+<span class="line"><span style="color:#E1E4E8">priority: medium</span></span>
+<span class="line"><span style="color:#E1E4E8">base: develop</span></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">## Scope</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> src/example.ts</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> src/example.test.ts</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">## Steps</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> [ ] [</span><span style="color:#DBEDFF;text-decoration:underline">D</span><span style="color:#E1E4E8">] Read files listed in Scope and Context.</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> [ ] [</span><span style="color:#DBEDFF;text-decoration:underline">A</span><span style="color:#E1E4E8">] Implement only the requested change.</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> [ ] [</span><span style="color:#DBEDFF;text-decoration:underline">D</span><span style="color:#E1E4E8">] Run verification checks and capture outcomes.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">## Off-limits</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> pnpm-lock.yaml</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> contracts/</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> CLAUDE.md</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> AGENTS.md</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">## Context</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">This task should follow the existing parser pattern in </span><span style="color:#79B8FF">`src/parser.ts`</span><span style="color:#E1E4E8">.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF;font-weight:bold">## Verification</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> [ ] pnpm tsc --noEmit</span></span>
+<span class="line"><span style="color:#FFAB70">-</span><span style="color:#E1E4E8"> [ ] pnpm test src/example.test.ts</span></span></code></pre>
+<p>This file is not product documentation. It is local execution metadata for one worktree.</p>
+<p><code>Scope</code> says what the agent may touch. <code>Off-limits</code> says what it must not touch. <code>Verification</code> defines done. <code>Context</code> is the minimum information needed to avoid wasting tokens rediscovering the same facts.</p>
+<p>The tags are useful too:</p>
+<ul>
+<li><code>[D]</code> means deterministic: read files, run tests, check diffs.</li>
+<li><code>[A]</code> means agentic: reason, generate code, interpret errors.</li>
+</ul>
+<p>The distinction matters because deterministic steps are the ground truth. If <code>pnpm tsc --noEmit</code> fails twice, the answer is not “try vibes harder.” The answer is stop, report the failure, and re-plan.</p>
+<h2 id="my-workflow-claude-plans-codex-executes">My workflow: Claude plans, Codex executes</h2>
+<p>The workflow I use is intentionally boring:</p>
+<ul>
+<li>Git provides the sandbox.</li>
+<li>Claude Code acts as planner and conductor.</li>
+<li>Codex CLI or extension acts as executor.</li>
+<li><code>.worktree-task.md</code> acts as the task contract.</li>
+<li><code>CLAUDE.md</code> and <code>AGENTS.md</code> only route agents to the right local harness docs.</li>
+</ul>
+<p>I like Claude Code as the planning layer because it is strong at repo exploration, decomposition, and instruction writing. I like Codex as the execution layer because it can work tightly inside a bounded task and is easy to run from CLI/editor workflows.</p>
+<p>But the model names are not the real point. GPT-5.5, Claude, Codex, Cursor, or another coding agent can all fit into this pattern. The point is capability and cost tiering:</p>
+<ul>
+<li>use the strongest model for understanding and planning</li>
+<li>use a cheaper or faster agent for bounded implementation</li>
+<li>return to a stronger model for review and debugging</li>
+<li>do not spend premium tokens on repetitive mechanical edits</li>
+</ul>
+<p>This matters for solo developers. Many of us are not running enterprise agent infrastructure. We are using first-tier paid plans, local machines, and whatever time we have after the rest of life gets its share.</p>
+<p>The harness is how you make that constraint productive instead of frustrating.</p>
+<h2 id="dag-not-task-queue">DAG, not task queue</h2>
+<p>When I say “DAG,” I do not mean the workflow needs to feel academic.</p>
+<p>I just mean: do not treat tasks as a simple queue, and do not open eight agents at once because the tool lets you.</p>
+<p>Take a feature like “offline file sync.” A naive split might be:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>T1: shared types and constants</span></span>
+<span class="line"><span>T2: BLE transfer client</span></span>
+<span class="line"><span>T3: UI status component</span></span>
+<span class="line"><span>T4: tests and docs</span></span></code></pre>
+<p><code>T2</code>, <code>T3</code>, and <code>T4</code> probably depend on the types and constants from <code>T1</code>. So the safe shape is:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>T1 first</span></span>
+<span class="line"><span>then T2 / T3 / T4 in parallel if they do not touch the same files</span></span></code></pre>
+<p>The rule is simple:</p>
+<blockquote>
+<p>Merge the shared foundation first. Parallelize file-disjoint tasks after that. Serialize anything that touches the same important file.</p>
+</blockquote>
+<p>This is the difference between useful parallelism and self-inflicted merge work.</p>
+<p>For a solo developer, there is another limit: review bandwidth.</p>
+<p>Eight agents can produce eight branches, but you are still the person who has to read the diffs, understand the tradeoffs, run the app, and decide what lands. Two high-quality parallel branches are often better than eight half-reviewed ones.</p>
+<h2 id="budget-aware-orchestration">Budget-aware orchestration</h2>
+<p>Multi-agent coding has three budgets:</p>
+<ul>
+<li>token budget</li>
+<li>context budget</li>
+<li>review budget</li>
+</ul>
+<p>Token budget is obvious. Expensive models should spend their time where their reasoning matters.</p>
+<p>Context budget is easier to miss. A long-running agent accumulates assumptions. If every task gets the whole repo history, all architecture docs, and a huge prompt, you pay for context that may not help the task.</p>
+<p>Review budget is the quiet killer. When agents run faster than you can review, your project does not become faster. It becomes messier.</p>
+<p>The harness controls all three:</p>
+<ul>
+<li>durable project knowledge goes in repo docs, not repeated chat prompts</li>
+<li>task-specific knowledge goes in <code>.worktree-task.md</code></li>
+<li>file ownership is written down before execution</li>
+<li>verification commands are deterministic</li>
+<li>failed verification has a retry limit</li>
+<li>work that shares files is serialized</li>
+</ul>
+<p>This is why I prefer the phrase “budget-aware multi-agent coding” over “parallel agents.”</p>
+<p>Parallelism is just a capability. Budget-aware orchestration is a workflow.</p>
+<h2 id="where-wtcraft-fits">Where wtcraft fits</h2>
+<p><a href="https://github.com/zywkloo/wtcraft">wtcraft</a> is the small CLI I started extracting from this workflow.</p>
+<p>It is not trying to replace Codex, Claude Code, workmux, tmux, VS Code, or GitHub. It sits one layer lower:</p>
+<ul>
+<li>scaffold <code>.agent-harness/</code> docs</li>
+<li>create <code>.worktree-task.md</code> templates</li>
+<li>optionally add tiny routing stubs to <code>CLAUDE.md</code> and <code>AGENTS.md</code></li>
+<li>create worktrees</li>
+<li>show task status</li>
+<li>check changed files against Scope and Off-limits</li>
+<li>run Verification commands</li>
+</ul>
+<p>The important design choice is non-invasiveness.</p>
+<p><code>wtcraft init</code> does not overwrite your <code>CLAUDE.md</code> or <code>AGENTS.md</code>. If you want integration, you opt in:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">wtcraft</span><span style="color:#9ECBFF"> init</span><span style="color:#79B8FF"> --patch-agent-files</span></span></code></pre>
+<p>That appends a small managed routing block. Your existing project instructions remain yours.</p>
+<p>The package is intentionally plain:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">wtcraft</span><span style="color:#9ECBFF"> init</span></span>
+<span class="line"><span style="color:#B392F0">wtcraft</span><span style="color:#9ECBFF"> new</span><span style="color:#9ECBFF"> feat/my-task</span></span>
+<span class="line"><span style="color:#B392F0">wtcraft</span><span style="color:#9ECBFF"> status</span></span>
+<span class="line"><span style="color:#B392F0">wtcraft</span><span style="color:#9ECBFF"> check</span><span style="color:#9ECBFF"> feat/my-task</span></span>
+<span class="line"><span style="color:#B392F0">wtcraft</span><span style="color:#9ECBFF"> verify</span><span style="color:#9ECBFF"> feat/my-task</span></span></code></pre>
+<p>The early version is just shell scripts, templates, CI, and smoke tests. That is enough to prove the workflow before turning it into an npm package.</p>
+<h2 id="the-workflow-in-one-screen">The workflow in one screen</h2>
+<p>Here is the mental model I keep coming back to:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Human developer</span></span>
+<span class="line"><span>  |</span></span>
+<span class="line"><span>  | defines intent and reviews merge risk</span></span>
+<span class="line"><span>  v</span></span>
+<span class="line"><span>Planner agent</span></span>
+<span class="line"><span>  |</span></span>
+<span class="line"><span>  | explores repo, writes task contract</span></span>
+<span class="line"><span>  v</span></span>
+<span class="line"><span>git worktree + .worktree-task.md</span></span>
+<span class="line"><span>  |</span></span>
+<span class="line"><span>  | bounded execution</span></span>
+<span class="line"><span>  v</span></span>
+<span class="line"><span>Executor agent</span></span>
+<span class="line"><span>  |</span></span>
+<span class="line"><span>  | edits only Scope, avoids Off-limits</span></span>
+<span class="line"><span>  v</span></span>
+<span class="line"><span>Verifier</span></span>
+<span class="line"><span>  |</span></span>
+<span class="line"><span>  | runs deterministic checks</span></span>
+<span class="line"><span>  v</span></span>
+<span class="line"><span>Human review + merge</span></span></code></pre>
+<p>The small detail that makes the whole system work is the contract in the middle.</p>
+<p>Without it, “multi-agent coding” turns into a room full of very fast interns all touching the same whiteboard.</p>
+<p>With it, a solo developer can start to feel like a small engineering team:</p>
+<ul>
+<li>one agent maps the terrain</li>
+<li>one agent executes the bounded task</li>
+<li>another reviews the edge cases</li>
+<li>Git keeps each lane isolated</li>
+<li>the task contract keeps the lanes honest</li>
+</ul>
+<h2 id="tldr">TL;DR</h2>
+<p>Git worktrees solve checkout isolation. They do not solve task ownership.</p>
+<p>Codex app, Codex cloud, Claude Code worktree isolation, and tools like workmux all make parallel agent work more practical. But for solo developers, the missing piece is a lightweight harness: a way to decide what can run in parallel, what must be serialized, and what each agent is allowed to touch.</p>
+<p>My answer is:</p>
+<ul>
+<li>Git-native worktrees for isolation</li>
+<li><code>.worktree-task.md</code> for task contracts</li>
+<li>Claude or another strong model for planning</li>
+<li>Codex or another fast agent for bounded execution</li>
+<li>deterministic verification before merge</li>
+<li>fewer, higher-quality parallel branches</li>
+</ul>
+<p>That is what <a href="https://github.com/zywkloo/wtcraft">wtcraft</a> is trying to package: not another agent, but a small set of rails for using the agents you already have.</p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2026 Victor Zhang. All rights reserved.
+<div class="social-links" data-astro-cid-sz7xmlte> <a href="https://medium.com/@zywkloo" target="_blank" title="Medium Blog" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Read Victor's Medium articles</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M13.54 12l6.23-6.23V5.24L15.89 2L9.23 8.66v-2.5L5.24 5.24v.96l3.99 3.99L5.24 14v2.23l4.04 2.72v-2.5l4.93-4.93z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://www.linkedin.com/in/yiweiz315/" target="_blank" title="LinkedIn" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Connect with Victor on LinkedIn</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="mailto:yiweizhangca@gmail.com" title="Email" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Email Victor</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://zzz-movie-rec-system.vercel.app/" target="_blank" title="Movie Rec System" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Movie Recommendation System</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://github.com/ZZZ-RecSys/ZZZ-MovieRecSystem" target="_blank" title="GitHub" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Visit Victor's GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path> </svg> </a> </div> </footer>  </body></html>
