@@ -362,3 +362,20 @@ My answer is:
 - **fewer, higher-quality parallel branches**
 
 That is what **[wtcraft](https://github.com/zywkloo/wtcraft)** is trying to package: not another agent, but a small set of rails for using the agents you already have.
+
+## Further reading
+
+**Harness engineering — the concept:**
+
+- [Martin Fowler — "Harness engineering for coding agent users"](https://martinfowler.com/articles/harness-engineering.html) — the authoritative definition of the harness layer: the infrastructure, tooling, and boundary enforcement that wraps a model. wtcraft is an operational implementation of what Fowler describes.
+
+**Production-scale implementations:**
+
+- [OpenAI — "Harness engineering: leveraging Codex in an agent-first world"](https://openai.com/index/harness-engineering/) — 1M+ lines of production code, 1,500+ PRs over 5 months with a team of 3–7 engineers. Covers context engineering, architectural constraints, and entropy management.
+- [Stripe — "Minions: one-shot, end-to-end coding agents"](https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents) — 1,300+ AI PRs per week across hundreds of millions of lines of regulated payments code. The `[D]` / `[A]` step-tagging pattern and the two-round CI cap come directly from this work.
+
+**Related tools referenced in this post:**
+
+- [Claude Code worktrees](https://code.claude.com/docs/en/worktrees) · [Claude Code SubAgents](https://code.claude.com/docs/en/sub-agents) · [Claude Code Advanced Patterns (PDF)](https://resources.anthropic.com/hubfs/Claude%20Code%20Advanced%20Patterns_%20Subagents,%20MCP,%20and%20Scaling%20to%20Real%20Codebases.pdf)
+- [Codex App](https://openai.com/index/introducing-the-codex-app/) · [Codex Cloud](https://platform.openai.com/docs/codex/overview)
+- [workmux](https://github.com/raine/workmux) · [Devin SKILL.md](https://medium.com/@nitinmatani22/devin-ai-skills-the-skill-md-files-that-teach-an-ai-agent-your-entire-app-1c619dad0501) · [GitHub Copilot Workspace](https://github.com/githubnext/copilot-workspace-user-manual/blob/main/overview.md) · [SWE-agent](https://swe-agent.com/latest/config/config/) · [OpenDevin / All-Hands](https://github.com/All-Hands-AI/OpenHands)
