@@ -105,10 +105,13 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 				box-shadow: var(--box-shadow);
 			}
 			.prose :global(table) {
-				width: 100%;
+				/* bleed beyond prose padding so columns get more breathing room */
+				width: calc(100% + 2em);
+				margin-left: -1em;
 				table-layout: fixed;
 				border-collapse: collapse;
-				margin: 1.25em 0 1.75em;
+				margin-top: 1.25em;
+				margin-bottom: 1.75em;
 				display: block;
 				overflow-x: auto;
 				-webkit-overflow-scrolling: touch;
@@ -126,8 +129,8 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 			/* first column: fixed label width; all other columns split the rest equally */
 			.prose :global(table th:first-child),
 			.prose :global(table td:first-child) {
-				width: 160px;
-				min-width: 120px;
+				width: 140px;
+				min-width: 110px;
 			}
 			.prose :global(table th) {
 				background: var(--surface-muted);
@@ -226,6 +229,18 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 				}
 				.prose :global(table td img) {
 					height: 280px;
+				}
+				/* on small screens revert to full-width flush with container */
+				.prose :global(table) {
+					width: 100%;
+					margin-left: 0;
+				}
+			}
+			/* on wide screens break into page margins for more column space */
+			@media (min-width: 1000px) {
+				.prose :global(table) {
+					width: calc(100% + 10rem);
+					margin-left: -5rem;
 				}
 			}
 		</style>
