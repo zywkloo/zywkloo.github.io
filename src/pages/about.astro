@@ -44,7 +44,7 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 						</p>
 						<div class="harness-links">
 							<a href="/blog/beyond-worktrees-budget-aware-multi-agent-coding-harness/">Read the workflow</a>
-							<a href="https://github.com/zywkloo/wtcraft">View wtcraft</a>
+							<a class="wtcraft-link" href="https://github.com/zywkloo/wtcraft">View <span>wtcraft</span></a>
 						</div>
 					</div>
 					<div class="handoff-diagram" aria-label="Planner to contract to executor workflow">
@@ -293,6 +293,26 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 		box-shadow: var(--shadow-sm);
 		font-size: 0.9rem;
 		font-weight: 700;
+	}
+
+	.harness-links .wtcraft-link {
+		background: var(--accent);
+		color: #fff;
+		border-color: transparent;
+		box-shadow: var(--shadow-accent);
+	}
+
+	.harness-links .wtcraft-link:hover {
+		background: var(--accent-dark);
+		color: #fff;
+		transform: translateY(-1px);
+	}
+
+	.wtcraft-link span {
+		margin-left: 0.28rem;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 1.05em;
+		letter-spacing: 0.01em;
 	}
 
 	.handoff-diagram {
