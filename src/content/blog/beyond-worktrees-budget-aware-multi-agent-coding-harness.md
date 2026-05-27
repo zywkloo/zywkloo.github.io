@@ -2,7 +2,7 @@
 title: 'wtcraft — Budget-Aware Multi-Agent Harness'
 description: 'wtcraft is a lightweight, git-native harness for solo developers orchestrating multiple coding agents on a limited budget. Clean agent handoffs, file boundaries, and task contracts — without a heavy platform.'
 pubDate: 'May 26 2026'
-heroImage: '../../assets/budget-aware-agent-harness-hero.svg'
+heroImage: '../../assets/wtcraft-hero.png'
 tags: ['AI Tools', 'Codex', 'Claude Code', 'Git', 'Worktrees', 'Solo Dev', 'Engineering']
 ---
 
