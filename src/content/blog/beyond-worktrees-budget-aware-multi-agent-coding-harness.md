@@ -24,7 +24,13 @@ tags: ['AI Tools', 'Codex', 'Claude Code', 'Git', 'Worktrees', 'Solo Dev', 'Engi
 
 > **[wtcraft](https://github.com/zywkloo/wtcraft) — Budget-Aware Multi-Agent Harness**
 >
-> A real, installable package — not a thought experiment. Try it: `npx wtcraft init`
+> A real, installable package — not a thought experiment.
+>
+> ```bash
+> npm install -g wtcraft      # Node / npm
+> pipx install wtcraft        # Python / pipx  (recommended)
+> brew install wtcraft        # Homebrew
+> ```
 
 Git worktrees are no longer a secret trick.
 
