@@ -8,9 +8,11 @@ export const SITE_URL = 'https://zywkloo.github.io';
 
 // Social links
 export const GITHUB_URL = 'https://github.com/zywkloo';
-export const TWITTER_URL = 'https://twitter.com/zywkloo';
 export const LINKEDIN_URL = 'https://linkedin.com/in/yiweiZ315';
 export const EMAIL = 'yiweizhangca@gmail.com';
+
+// Featured project
+export const WTCRAFT_URL = 'https://github.com/zywkloo/wtcraft';
 
 // Profile
 export const PROFILE_IMAGE = 'https://avatars.githubusercontent.com/u/18610590?s=400&u=bb73412244714c5465010503fee1c6381c8b46fe&v=4';
