@@ -69,6 +69,8 @@ The goal is not maximum parallelism. The goal is clean boundaries.
 
 ## The current tool landscape
 
+![wtcraft sits at the intersection of agent apps, worktrees, and skill templates — supplying the missing contract layer](../../assets/budget-aware-agent-harness-hero.svg)
+
 The ecosystem is moving fast, and the direction is obvious: **coding agents are becoming parallel by default**.
 
 There are two distinct levels to compare: **agent platforms and orchestrators** (where you run agents) and **agent task formats** (how you tell each agent exactly what to do).

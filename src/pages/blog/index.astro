@@ -40,15 +40,19 @@ const posts = (await getCollection('blog')).sort(
 				margin-bottom: 1rem;
 				text-align: center;
 			}
-			ul li:first-child img {
-				width: 100%;
-			}
 			ul li:first-child .title {
 				font-size: 2.369rem;
 			}
 			ul li img {
 				margin-bottom: 0.5rem;
 				border-radius: 12px;
+				width: 100%;
+				height: 220px;
+				object-fit: cover;
+				object-position: center;
+			}
+			ul li:first-child img {
+				height: 380px;
 			}
 			ul li a {
 				display: block;
