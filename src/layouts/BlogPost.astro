@@ -105,16 +105,11 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 				box-shadow: var(--box-shadow);
 			}
 			.prose :global(table) {
-				/* bleed beyond prose padding so columns get more breathing room */
-				width: calc(100% + 2em);
-				margin-left: -1em;
+				width: 100%;
 				table-layout: fixed;
 				border-collapse: collapse;
 				margin-top: 1.25em;
 				margin-bottom: 1.75em;
-				display: block;
-				overflow-x: auto;
-				-webkit-overflow-scrolling: touch;
 				font-size: 0.88rem;
 				line-height: 1.5;
 			}
@@ -125,6 +120,7 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 				text-align: left;
 				border: 1px solid var(--line);
 				word-break: break-word;
+				overflow-wrap: anywhere;
 			}
 			/* first column: fixed label width; all other columns split the rest equally */
 			.prose :global(table th:first-child),
@@ -230,10 +226,13 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 				.prose :global(table td img) {
 					height: 280px;
 				}
-				/* on small screens revert to full-width flush with container */
 				.prose :global(table) {
-					width: 100%;
-					margin-left: 0;
+					font-size: 0.8rem;
+				}
+				.prose :global(table th:first-child),
+				.prose :global(table td:first-child) {
+					width: 92px;
+					min-width: 92px;
 				}
 			}
 			/* on wide screens break into page margins for more column space */
