@@ -186,9 +186,12 @@ pre {
 	padding: 1.5em;
 	border-radius: var(--radius);
 	box-shadow: var(--shadow-sm);
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
 }
 pre > code {
 	all: unset;
+	white-space: pre;
 }
 
 blockquote {
