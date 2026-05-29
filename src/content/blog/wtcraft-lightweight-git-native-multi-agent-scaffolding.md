@@ -1,5 +1,6 @@
 ---
 title: 'TokenChef (Part 3): wtcraft — A Lightweight, Git-Native Scaffolding for Bounded Multi-Agent Coding'
+series: 'TokenChef'
 description: 'How do you actually enforce boundaries on autonomous agents? Explore Harness Engineering, the competitive landscape of task contracts, and how the wtcraft CLI implements bounded sandboxes locally.'
 pubDate: 'May 29 2026'
 heroImage: '../../assets/wtcraft-scaffolding-hero.png'

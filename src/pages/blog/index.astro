@@ -64,6 +64,29 @@ const posts = (await getCollection('blog')).sort(
 				color: rgb(var(--black));
 				line-height: 1;
 			}
+			.series-badge-container {
+				margin-top: 0.75rem;
+				margin-bottom: 0.35rem;
+			}
+			.series-badge {
+				display: inline-block;
+				padding: 0.15rem 0.55rem;
+				font-size: 0.72rem;
+				font-weight: 700;
+				border-radius: 9999px;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+			}
+			.series-badge.tokenchef {
+				background-color: rgba(239, 68, 68, 0.08);
+				color: #ef4444;
+				border: 1px solid rgba(239, 68, 68, 0.18);
+			}
+			.series-badge.metalsolo {
+				background-color: rgba(139, 92, 246, 0.08);
+				color: #8b5cf6;
+				border: 1px solid rgba(139, 92, 246, 0.18);
+			}
 			.meta {
 				margin: 0;
 				color: rgb(var(--gray));
@@ -130,6 +153,13 @@ const posts = (await getCollection('blog')).sort(
 								<a href={`/blog/${post.id}/`}>
 									{post.data.heroImage && (
 										<Image width={720} height={360} src={post.data.heroImage} alt="" />
+									)}
+									{post.data.series && (
+										<div class="series-badge-container">
+											<span class={`series-badge ${post.data.series.toLowerCase()}`}>
+												{post.data.series === 'TokenChef' ? '👨‍🍳 TokenChef' : '🎸 MetalSolo'}
+											</span>
+										</div>
 									)}
 									<h4 class="title">{post.data.title}</h4>
 									<p class="meta">
