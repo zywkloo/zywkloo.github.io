@@ -442,8 +442,8 @@ Even if you are working purely on **2D vector inking** or calligraphy grading ap
 
 - **Beyond Bounding Boxes**: Instead of simplistic pixel-matching overlays (which fail when stroke widths differ or user inputs are translated), treat the dynamic stroke as a 2D Point Cloud.
   **超越包围盒与像素比对**：放弃死板的像素重合比对（这种方式在笔迹宽度不同或手写发生平移时极易失效），将动态的书写轨迹视作一个 2D 点云。
-- **Color Coding Progress**: Standard geometric distance algorithms struggle with symmetric shapes (like a horizontal calligraphy stroke). By synthetic color coding (e.g., mapping writing time $t \in [0, 1]$ into a color channel), we can enforce stroke-order constraints. The evaluation engine can easily tell if a stroke was drawn backwards!
-  **将书写进度编码为“颜色梯度”**：标准的几何距离算法在处理对称形状（例如横画或竖画）时同样面临“滑动歧义”。通过合成的进度通道编码（例如将书写时间 $t \in [0, 1]$ 映射为点云的特殊通道），我们可以强制加入笔顺约束。评估引擎便能瞬间识破倒下笔、倒笔画等不规范行为！
+- **Color Coding Progress**: Standard geometric distance algorithms struggle with symmetric shapes (like a horizontal calligraphy stroke). By synthetic color coding (e.g., mapping writing time t ∈ [0, 1] into a color channel), we can enforce stroke-order constraints. The evaluation engine can easily tell if a stroke was drawn backwards!
+  **将书写进度编码为“颜色梯度”**：标准的几何距离算法在处理对称形状（例如横画或竖画）时同样面临“滑动歧义”。通过合成的进度通道编码（例如将书写时间 t ∈ [0, 1] 映射为点云的特殊通道），我们可以强制加入笔顺约束。评估引擎便能瞬间识破倒下笔、倒笔画等不规范行为！
 
 Math is universal. The same equations aligning 3D dental scans can guide the serene movement of a digital brush.
 

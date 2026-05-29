@@ -76,8 +76,8 @@ By reading four consecutive touch points ($p_0, p_1, p_2, p_3$), we can calculat
 
 ### A. The Catmull-Rom Equation / A. Catmull-Rom 插值方程
 
-Between any two touch points $p_1$ and $p_2$, given the preceding point $p_0$ and the succeeding point $p_3$, we interpolate intermediate points at parameter $t \in [0, 1]$ using the following cubic formula:
-在任意两个触点 $p_1$ 和 $p_2$ 之间，给定前置点 $p_0$ 和后置点 $p_3$，我们可以在参数 $t \in [0, 1]$ 下通过以下三次多项式方程计算出平滑的插值点：
+Between any two touch points $p_1$ and $p_2$, given the preceding point $p_0$ and the succeeding point $p_3$, we interpolate intermediate points at parameter t ∈ [0, 1] using the following cubic formula:
+在任意两个触点 $p_1$ 和 $p_2$ 之间，给定前置点 $p_0$ 和后置点 $p_3$，我们可以在参数 t ∈ [0, 1] 下通过以下三次多项式方程计算出平滑的插值点：
 
 $$p(t) = 0.5 \times \left( 2p_1 + (-p_0 + p_2)t + (2p_0 - 5p_1 + 4p_2 - p_3)t^2 + (-p_0 + 3p_1 - 3p_2 + p_3)t^3 \right)$$
 
