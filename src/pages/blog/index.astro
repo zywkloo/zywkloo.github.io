@@ -52,7 +52,9 @@ const posts = (await getCollection('blog')).sort(
 				object-position: center;
 			}
 			ul li:first-child img {
-				height: 380px;
+				height: auto;
+				max-height: 520px;
+				object-position: top;
 			}
 			ul li a {
 				display: block;
