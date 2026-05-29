@@ -377,27 +377,40 @@
 <p>The early version is just shell scripts, templates, CI, and smoke tests. That is enough to <strong>prove the workflow</strong> before turning it into an npm package.</p>
 <h2 id="the-workflow-in-one-screen">The workflow in one screen</h2>
 <p>Here is the mental model I keep coming back to:</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Human developer</span></span>
-<span class="line"><span>  |</span></span>
-<span class="line"><span>  | defines intent and reviews merge risk</span></span>
-<span class="line"><span>  v</span></span>
-<span class="line"><span>Planner agent</span></span>
-<span class="line"><span>  |</span></span>
-<span class="line"><span>  | explores repo, writes task contract</span></span>
-<span class="line"><span>  v</span></span>
-<span class="line"><span>git worktree + .worktree-task.md</span></span>
-<span class="line"><span>  |</span></span>
-<span class="line"><span>  | bounded execution</span></span>
-<span class="line"><span>  v</span></span>
-<span class="line"><span>Executor agent</span></span>
-<span class="line"><span>  |</span></span>
-<span class="line"><span>  | edits only Scope, avoids Off-limits</span></span>
-<span class="line"><span>  v</span></span>
-<span class="line"><span>Verifier</span></span>
-<span class="line"><span>  |</span></span>
-<span class="line"><span>  | runs deterministic checks</span></span>
-<span class="line"><span>  v</span></span>
-<span class="line"><span>Human review + merge</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>             [ Human Developer ]</span></span>
+<span class="line"><span>                      │</span></span>
+<span class="line"><span>                      ▼  (Strategic Intent + Requirement Input)</span></span>
+<span class="line"><span>┌─────────────────────────────────────────────────────────────┐</span></span>
+<span class="line"><span>│    Orchestrator (e.g., Gemini 3.5 Flash)                    │ ◄── Fast, Low-latency, Cross-Repository</span></span>
+<span class="line"><span>└─────────────────────┬───────────────────────────────────────┘</span></span>
+<span class="line"><span>                      │  (Subtask &#x26; Context)</span></span>
+<span class="line"><span>                      ▼</span></span>
+<span class="line"><span>┌─────────────────────────────────────────────────────────────┐</span></span>
+<span class="line"><span>│    Planner (e.g., Claude 3.5 Opus / GPT-5.5)                │ ◄── High-Reasoning Strategic Architect</span></span>
+<span class="line"><span>└─────────────────────┬───────────────────────────────────────┘      ▲</span></span>
+<span class="line"><span>                      │  (Writes .worktree-task.md Contract)         │</span></span>
+<span class="line"><span>                      ▼                                              │</span></span>
+<span class="line"><span>┌─────────────────────────────────────────────────────────────┐      │ (Re-plan / Loopback)</span></span>
+<span class="line"><span>│    Executor (e.g., ChatGPT 5.3-codex / Claude Sonnet)       │ ◄── Precision Coder in Sandboxed Worktree</span></span>
+<span class="line"><span>└─────────────────────┬───────────────────────────────────────┘      │</span></span>
+<span class="line"><span>                      │  (Reads task, writes code in sandbox)        │</span></span>
+<span class="line"><span>                      ▼                                              │</span></span>
+<span class="line"><span>             [ Human Developer ] (Pushes, creates PR)                │</span></span>
+<span class="line"><span>                      │                                              │</span></span>
+<span class="line"><span>                      ▼                                              │</span></span>
+<span class="line"><span>┌─────────────────────────────────────────────────────────────┐      │</span></span>
+<span class="line"><span>│    Verifier (e.g., Claude Opus / GPT-5.5 / Gemini Pro)      │ ◄── Agentic Code Review (Upcoming)</span></span>
+<span class="line"><span>└─────────────────────┬───────────────────────────────────────┘      │</span></span>
+<span class="line"><span>                      │                                              │</span></span>
+<span class="line"><span>                      ▼                                              │</span></span>
+<span class="line"><span>             [ Human Developer ] ────────────────────────────────────┘</span></span>
+<span class="line"><span>             (Approve OR Retry / Re-plan)</span></span>
+<span class="line"><span>                      │</span></span>
+<span class="line"><span>                      │ (If Approved -> Merge)</span></span>
+<span class="line"><span>                      ▼</span></span>
+<span class="line"><span>┌─────────────────────────────────────────────────────────────┐</span></span>
+<span class="line"><span>│    Finisher (e.g., Gemini 3.5 Flash / Claude Haiku)         │ ◄── Local Worktree Cleanup</span></span>
+<span class="line"><span>└─────────────────────────────────────────────────────────────┘</span></span></code></pre>
 <p>The small detail that makes the whole system work is the contract in the middle.</p>
 <p>Without it, “multi-agent coding” turns into a room full of very fast interns all touching the same whiteboard.</p>
 <p>With it, a solo developer can start to feel like a small engineering team:</p>

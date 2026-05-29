@@ -313,27 +313,40 @@ The early version is just shell scripts, templates, CI, and smoke tests. That is
 Here is the mental model I keep coming back to:
 
 ```text
-Human developer
-  |
-  | defines intent and reviews merge risk
-  v
-Planner agent
-  |
-  | explores repo, writes task contract
-  v
-git worktree + .worktree-task.md
-  |
-  | bounded execution
-  v
-Executor agent
-  |
-  | edits only Scope, avoids Off-limits
-  v
-Verifier
-  |
-  | runs deterministic checks
-  v
-Human review + merge
+             [ Human Developer ]
+                      │
+                      ▼  (Strategic Intent + Requirement Input)
+┌─────────────────────────────────────────────────────────────┐
+│    Orchestrator (e.g., Gemini 3.5 Flash)                    │ ◄── Fast, Low-latency, Cross-Repository
+└─────────────────────┬───────────────────────────────────────┘
+                      │  (Subtask & Context)
+                      ▼
+┌─────────────────────────────────────────────────────────────┐
+│    Planner (e.g., Claude 3.5 Opus / GPT-5.5)                │ ◄── High-Reasoning Strategic Architect
+└─────────────────────┬───────────────────────────────────────┘      ▲
+                      │  (Writes .worktree-task.md Contract)         │
+                      ▼                                              │
+┌─────────────────────────────────────────────────────────────┐      │ (Re-plan / Loopback)
+│    Executor (e.g., ChatGPT 5.3-codex / Claude Sonnet)       │ ◄── Precision Coder in Sandboxed Worktree
+└─────────────────────┬───────────────────────────────────────┘      │
+                      │  (Reads task, writes code in sandbox)        │
+                      ▼                                              │
+             [ Human Developer ] (Pushes, creates PR)                │
+                      │                                              │
+                      ▼                                              │
+┌─────────────────────────────────────────────────────────────┐      │
+│    Verifier (e.g., Claude Opus / GPT-5.5 / Gemini Pro)      │ ◄── Agentic Code Review (Upcoming)
+└─────────────────────┬───────────────────────────────────────┘      │
+                      │                                              │
+                      ▼                                              │
+             [ Human Developer ] ────────────────────────────────────┘
+             (Approve OR Retry / Re-plan)
+                      │
+                      │ (If Approved -> Merge)
+                      ▼
+┌─────────────────────────────────────────────────────────────┐
+│    Finisher (e.g., Gemini 3.5 Flash / Claude Haiku)         │ ◄── Local Worktree Cleanup
+└─────────────────────────────────────────────────────────────┘
 ```
 
 The small detail that makes the whole system work is the contract in the middle.
