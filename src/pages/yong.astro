@@ -1,0 +1,411 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<BaseHead title="永字八法 | EightStrokes Calligraphy" description="永字八法 (EightStrokes) — 每日一练，笔尖修禅。指尖落笔即得评分，一键分享书法佳作。" />
+	</head>
+	<body>
+		<Header />
+		<main class="yong-page">
+			<div class="hero-container">
+				<div class="hero-content">
+					<div class="app-tag">🎉 App Store 新鲜上架</div>
+					<h1>永字八法 / EightStrokes</h1>
+					<p class="subtitle">每日一练，笔尖修禅。随时随地用指尖开启你的书法修行。</p>
+					<p class="tagline">Draw with your finger, get instant scores, and share your calligraphy masterpiece.</p>
+					
+					<div class="cta-group">
+						<a href="#features" class="btn btn-primary">探索核心特色</a>
+						<a href="#support" class="btn btn-secondary">技术支持与反馈</a>
+					</div>
+				</div>
+				
+				<div class="hero-preview">
+					<img src="/images/yong-preview.png" alt="永字八法 iPad 样机预览" class="framed-mockup" />
+				</div>
+			</div>
+
+			<section id="features" class="features-section">
+				<h2>核心特色 / Core Features</h2>
+				<div class="features-grid">
+					<div class="feature-card">
+						<div class="feature-icon">✨</div>
+						<h3>指尖即墨 / Fingertip Ink</h3>
+						<p>无需纸墨，指尖即笔。屏幕上会呈现如宣纸般晕染浸润的优美笔迹，完美还原汉字横折撇捺的骨骼与神韵。</p>
+						<small>No ink or paper required. Draw naturally with just your finger or stylus.</small>
+					</div>
+
+					<div class="feature-card">
+						<div class="feature-icon">📅</div>
+						<h3>每日一练 / Daily Habit</h3>
+						<p>每天一分钟的静心练习，经典的“永”字八笔成型。在忙碌的日常中寻得片刻宁静，磨练专注力与写字法度。</p>
+						<small>Practice the legendary "Yong" character. One minute a day to build focus.</small>
+					</div>
+
+					<div class="feature-card">
+						<div class="feature-icon">🤖</div>
+						<h3>智能评分 / On-Device Grading</h3>
+						<p>应用内置智能评分引擎，从笔顺、间架平衡度、笔画平滑度等多个维度为您实时打分，您的每一次进步都清晰可见。</p>
+						<small>Instant interactive ratings based on local alignment and form analysis.</small>
+					</div>
+
+					<div class="feature-card">
+						<div class="feature-icon">✉️</div>
+						<h3>雅致分享 / Elegant Sharing</h3>
+						<p>对自己的高分作品感到骄傲？一键生成古典、精美的书法打分卡片，轻松分享到朋友圈或以笔会友。</p>
+						<small>Generate premium, minimalist scorecards of your calligraphy in one tap.</small>
+					</div>
+				</div>
+			</section>
+
+			<section id="support" class="support-section">
+				<div class="section-container">
+					<h2>技术支持与反馈 / Support & Feedback</h2>
+					<p>在使用 <strong>永字八法 (EightStrokes)</strong> 的过程中，如果您有任何疑问、发现 Bug、或者有任何功能性的建议，欢迎通过以下渠道与我们取得联系：</p>
+					
+					<div class="contact-methods">
+						<div class="contact-card">
+							<h4>✉️ 电子邮件 / Email</h4>
+							<p><a href="mailto:support@goldenarc.digital">support@goldenarc.digital</a></p>
+							<small>我们通常会在 24 小时内回复您的问题。</small>
+						</div>
+						
+						<div class="contact-card">
+							<h4>🐙 GitHub Feedback</h4>
+							<p><a href="https://github.com/zywkloo/8trokes/issues" target="_blank">提交 Issue 反馈</a></p>
+							<small>欢迎技术同仁共同交流与提交改进代码。</small>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="privacy" class="privacy-section">
+				<div class="section-container">
+					<h2>隐私政策 / Privacy Policy</h2>
+					<p class="update-date">最后更新日期：2026年5月29日</p>
+					
+					<div class="privacy-content">
+						<h3>1. 个人数据收集说明 / No Personal Data Collection</h3>
+						<p><strong>永字八法 (EightStrokes)</strong> 极其尊重您的个人隐私。我们<strong>不会收集、存储、分享或上传</strong>您的任何个人信息、手写笔迹数据、打分结果或设备标识符。</p>
+						<p class="english-law">We do not collect, store, share, or upload any of your personal information, drawing strokes, scorecards, or device identifiers.</p>
+
+						<h3>2. 端侧处理保证 / 100% On-Device Processing</h3>
+						<p>应用内所有的轨迹演算、图形网格生成以及智能评分等级计算，均<strong>完全在您的本地设备上进行（On-Device Processing）</strong>。评分模型（包括规则引擎与 CoreML 技术）全部离线运行，无需联网，保证您的书写修行绝对私密安全。</p>
+						<p class="english-law">All calculations, brush tessellation, and stroke evaluation are computed entirely offline and locally on your device.</p>
+
+						<h3>3. 第三方SDK与广告 / No Third-party SDKs or Ads</h3>
+						<p>本应用<strong>不包含任何第三方广告 SDK 或数据分析追踪工具</strong>，我们致力于为您提供纯净无干扰的书写修身空间。</p>
+						<p class="english-law">The application does not integrate any advertising SDKs or tracking tools.</p>
+
+						<h3>4. 隐私政策的更新 / Updates</h3>
+						<p>我们可能会不时更新本隐私政策。若有任何重大更改，我们将通过应用内公告或此网页及时告知您。</p>
+
+						<h3>5. 联系我们 / Contact Us</h3>
+						<p>如果您对我们的隐私政策有任何问题，欢迎随时发信联络我们：<a href="mailto:privacy@goldenarc.digital">privacy@goldenarc.digital</a>。</p>
+					</div>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.yong-page {
+		width: min(1140px, 100%);
+		margin: 0 auto;
+		padding: 3rem 1.25rem;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+		color: #2c2927;
+	}
+
+	/* Hero Section */
+	.hero-container {
+		display: grid;
+		grid-template-columns: 1.1fr 0.9fr;
+		gap: 3.5rem;
+		align-items: center;
+		padding: 2rem 0 4rem 0;
+	}
+
+	@media (max-width: 900px) {
+		.hero-container {
+			grid-template-columns: 1fr;
+			gap: 2.5rem;
+			text-align: center;
+		}
+		
+		.cta-group {
+			justify-content: center;
+		}
+	}
+
+	.app-tag {
+		display: inline-block;
+		padding: 0.35rem 0.85rem;
+		background: rgba(139, 115, 85, 0.1);
+		color: #8b7355;
+		border-radius: 99px;
+		font-size: 0.85rem;
+		font-weight: 600;
+		margin-bottom: 1.25rem;
+	}
+
+	.hero-content h1 {
+		font-size: 3rem;
+		font-weight: 800;
+		line-height: 1.15;
+		letter-spacing: -0.02em;
+		margin: 0 0 1rem 0;
+		color: #1a1716;
+	}
+
+	.subtitle {
+		font-size: 1.35rem;
+		font-weight: 500;
+		line-height: 1.5;
+		color: #5c5652;
+		margin-bottom: 0.5rem;
+	}
+
+	.tagline {
+		font-size: 1.05rem;
+		line-height: 1.5;
+		color: #8b837e;
+		margin-bottom: 2.5rem;
+	}
+
+	.cta-group {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.btn {
+		display: inline-block;
+		padding: 0.85rem 1.6rem;
+		font-size: 0.95rem;
+		font-weight: 600;
+		border-radius: 99px;
+		text-decoration: none;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.btn:hover {
+		transform: translateY(-2px);
+	}
+
+	.btn-primary {
+		background: #8b7355;
+		color: #ffffff;
+		box-shadow: 0 4px 14px rgba(139, 115, 85, 0.25);
+	}
+
+	.btn-primary:hover {
+		background: #735f46;
+		box-shadow: 0 6px 20px rgba(139, 115, 85, 0.35);
+	}
+
+	.btn-secondary {
+		background: rgba(139, 115, 85, 0.06);
+		color: #8b7355;
+		border: 1px solid rgba(139, 115, 85, 0.2);
+	}
+
+	.btn-secondary:hover {
+		background: rgba(139, 115, 85, 0.12);
+	}
+
+	.framed-mockup {
+		width: 100%;
+		max-width: 440px;
+		height: auto;
+		border-radius: 24px;
+		box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+		display: block;
+		margin: 0 auto;
+	}
+
+	/* Features Section */
+	.features-section {
+		padding: 5rem 0;
+		border-top: 1px solid rgba(139, 115, 85, 0.15);
+	}
+
+	.features-section h2 {
+		font-size: 2rem;
+		font-weight: 700;
+		text-align: center;
+		margin-bottom: 3.5rem;
+		color: #1a1716;
+	}
+
+	.features-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 2rem;
+	}
+
+	.feature-card {
+		padding: 2.25rem 1.75rem;
+		background: #fafaf7;
+		border: 1px solid rgba(139, 115, 85, 0.1);
+		border-radius: 20px;
+		transition: box-shadow 0.3s ease, border-color 0.3s ease;
+	}
+
+	.feature-card:hover {
+		box-shadow: 0 10px 30px rgba(139, 115, 85, 0.06);
+		border-color: rgba(139, 115, 85, 0.25);
+	}
+
+	.feature-icon {
+		font-size: 2rem;
+		margin-bottom: 1.25rem;
+	}
+
+	.feature-card h3 {
+		font-size: 1.25rem;
+		font-weight: 700;
+		margin-bottom: 0.75rem;
+		color: #1a1716;
+	}
+
+	.feature-card p {
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: #5c5652;
+		margin-bottom: 1rem;
+	}
+
+	.feature-card small {
+		display: block;
+		font-size: 0.82rem;
+		line-height: 1.4;
+		color: #9c938e;
+	}
+
+	/* Support & Privacy Common */
+	.support-section, .privacy-section {
+		padding: 5rem 0;
+		border-top: 1px solid rgba(139, 115, 85, 0.15);
+	}
+
+	.section-container {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.section-container h2 {
+		font-size: 2rem;
+		font-weight: 700;
+		margin-bottom: 1.5rem;
+		color: #1a1716;
+	}
+
+	.section-container p {
+		font-size: 1.05rem;
+		line-height: 1.65;
+		color: #5c5652;
+		margin-bottom: 2rem;
+	}
+
+	/* Support Grid */
+	.contact-methods {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+
+	@media (max-width: 600px) {
+		.contact-methods {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+	}
+
+	.contact-card {
+		padding: 1.75rem;
+		background: #ffffff;
+		border: 1px solid rgba(139, 115, 85, 0.15);
+		border-radius: 16px;
+	}
+
+	.contact-card h4 {
+		font-size: 1.1rem;
+		font-weight: 700;
+		margin-bottom: 0.75rem;
+		color: #1a1716;
+	}
+
+	.contact-card p {
+		font-size: 1.15rem;
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+	}
+
+	.contact-card p a {
+		color: #8b7355;
+		text-decoration: underline;
+	}
+
+	.contact-card small {
+		display: block;
+		font-size: 0.85rem;
+		color: #8b837e;
+	}
+
+	/* Privacy Style */
+	.update-date {
+		font-size: 0.9rem !important;
+		color: #8b837e !important;
+		margin-bottom: 2.5rem !important;
+	}
+
+	.privacy-content {
+		background: #fafaf7;
+		padding: 2.5rem;
+		border-radius: 20px;
+		border: 1px solid rgba(139, 115, 85, 0.1);
+	}
+
+	@media (max-width: 600px) {
+		.privacy-content {
+			padding: 1.5rem;
+		}
+	}
+
+	.privacy-content h3 {
+		font-size: 1.25rem;
+		font-weight: 700;
+		margin-top: 2rem;
+		margin-bottom: 0.75rem;
+		color: #1a1716;
+		border-bottom: 1px solid rgba(139, 115, 85, 0.15);
+		padding-bottom: 0.5rem;
+	}
+
+	.privacy-content h3:first-of-type {
+		margin-top: 0;
+	}
+
+	.privacy-content p {
+		font-size: 0.98rem;
+		line-height: 1.6;
+		color: #4a4542;
+		margin-bottom: 0.75rem;
+	}
+
+	.english-law {
+		font-size: 0.88rem !important;
+		color: #8b837e !important;
+		line-height: 1.5 !important;
+		margin-bottom: 1.5rem !important;
+	}
+</style>
