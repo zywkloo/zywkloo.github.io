@@ -2,7 +2,7 @@
 title: "MetalSolo (Part 3): Colored ICP Point Cloud Registration in 3D Scanning / MetalSolo（第三篇）：3D 扫描中的 Colored ICP 点云配准算法"
 series: 'MetalSolo'
 description: "How to solve the sliding ambiguity in 3D reconstruction using multi-scale Colored ICP, custom Metal rendering pipelines, and volumetric SLAM fusion."
-pubDate: "May 29 2026"
+pubDate: "May 1 2026"
 heroImage: "../../assets/colored-icp-hero.png"
 tags: ["3D Scanning", "Computer Vision", "Metal", "Open3D", "Geometry", "Bilingual"]
 ---

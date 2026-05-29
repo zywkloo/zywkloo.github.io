@@ -2,7 +2,7 @@
 title: "MetalSolo (Part 2): Sacred Geometry of Stylus Input & Ink Engine Math / MetalSolo（第二篇）：触控笔输入与笔迹引擎的几何数学公式"
 series: 'MetalSolo'
 description: "Why triangles and Bezier curves are the foundation of vector ink, detailing our Catmull-Rom smoothing algorithms, variable-width tessellation math, and dynamic end-cap rendering."
-pubDate: "May 29 2026"
+pubDate: "Apr 20 2026"
 heroImage: "../../assets/Yong8principles.png"
 tags: ["Geometry", "Math", "Metal", "iOS Development", "Bilingual", "Computer Graphics"]
 ---
