@@ -13,7 +13,7 @@ tags: ['AI Tools', 'Harness Engineering', 'Git', 'Worktrees', 'wtcraft', 'Codex'
 </div>
 
 <blockquote style="background-color: rgba(36, 41, 46, 0.05); border-left: 4px solid #24292e; padding: 12px 16px; margin-bottom: 24px; border-radius: 0 8px 8px 0;">
-  <strong>📦 Series: Git-Native Multi-Agent Coding</strong>
+  <strong>👨‍🍳 Series: TokenChef (Git-Native Multi-Agent Coding)</strong>
   <ul style="margin-top: 8px; margin-bottom: 0; padding-left: 20px;">
     <li><strong>Part 1</strong>: <a href="/blog/worktree-refactor-playbook/">Vibe Coding with Git Worktrees: A Playbook Most Devs Are Missing</a></li>
     <li><strong>Part 2</strong>: <a href="/blog/chief-token-orchestrator-manage-layered-agent-team/">Chief Token Orchestrator: Manage Claude, Codex, and Gemini as a Structured Software Team</a></li>
