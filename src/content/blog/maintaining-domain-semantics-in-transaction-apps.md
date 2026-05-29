@@ -1,8 +1,8 @@
 ---
 title: 'Keeping Domain Semantics Intact in a Transaction App'
 description: 'A practical framework for maintaining domain semantics in a transaction app across contracts, validators, policies, projections, UI states, and regression boundaries.'
-series: 'Semantic Systems 02'
-category: 'Semantic Systems'
+series: 'Clean Architecture 02'
+category: 'Clean Architecture'
 tags: ['domain semantics', 'transaction apps', 'design systems', 'ui semantics']
 pubDate: 'Mar 29 2026'
 heroImage: '../../assets/domain-semantics-hero.jpg'

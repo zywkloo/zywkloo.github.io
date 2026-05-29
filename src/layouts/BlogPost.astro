@@ -199,10 +199,10 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 				background: rgba(139, 92, 246, 0.08);
 				color: #8b5cf6;
 			}
-			.series.semanticsystems {
-				border-color: rgba(16, 185, 129, 0.18);
-				background: rgba(16, 185, 129, 0.08);
-				color: #10b981;
+			.series.cleanarchitecture {
+				border-color: rgba(14, 165, 233, 0.18);
+				background: rgba(14, 165, 233, 0.08);
+				color: #0ea5e9;
 			}
 			.meta-row {
 				display: flex;
@@ -275,13 +275,13 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 							<div class={`series ${
 								series === 'TokenChef' ? 'tokenchef' :
 								series === 'MetalSolo' ? 'metalsolo' :
-								series.startsWith('Semantic Systems') ? 'semanticsystems' :
+								series.startsWith('Clean Architecture') ? 'cleanarchitecture' :
 								''
 							}`}>
 								{
 									series === 'TokenChef' ? '👨‍🍳 TokenChef' :
 									series === 'MetalSolo' ? '🎸 MetalSolo' :
-									series.startsWith('Semantic Systems') ? `📐 Semantic Systems (Part ${series.split(' ').pop()})` :
+									series.startsWith('Clean Architecture') ? `🧼 Clean Architecture (Part ${series.split(' ').pop()})` :
 									series
 								}
 							</div>

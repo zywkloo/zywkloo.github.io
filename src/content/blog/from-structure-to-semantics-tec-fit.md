@@ -1,8 +1,8 @@
 ---
 title: 'From Structure to Semantics: Using TEC-FIT for Executable Semantics'
 description: 'How TEC-FIT emerges from the core ideas of Domain-Driven Design and Designing Data-Intensive Applications.'
-series: 'Semantic Systems 01'
-category: 'Semantic Systems'
+series: 'Clean Architecture 01'
+category: 'Clean Architecture'
 tags: ['domain semantics', 'ddd', 'ddia', 'system design']
 pubDate: 'Mar 28 2026'
 heroImage: '../../assets/eit-tcf-executable-semantics-hero.svg'
