@@ -31,6 +31,39 @@ import { SITE_DESCRIPTION } from '../consts';
 				</div>
 			</div>
 
+			<section class="demo-section">
+				<h2>极速手感与智能反馈 / Fluid Touch & Smart Feedback</h2>
+				<p class="demo-subtitle">在 iPad 屏幕上，用最简单的动作，体验极低延迟的矢量书法演算。</p>
+				
+				<div class="demo-grid">
+					<div class="demo-card">
+						<div class="video-container">
+							<video autoplay loop muted playsinline class="demo-video">
+								<source src="/videos/yong-demo-1.mp4" type="video/mp4" />
+								Your browser does not support the video tag.
+							</video>
+						</div>
+						<div class="demo-info">
+							<h4>指尖即墨 · 实时渲染</h4>
+							<p>依托低延迟渲染引擎，无缝捕捉压感与轨迹，完美呈现水墨晕染与笔锋顿挫。</p>
+						</div>
+					</div>
+
+					<div class="demo-card">
+						<div class="video-container">
+							<video autoplay loop muted playsinline class="demo-video">
+								<source src="/videos/yong-demo-2.mp4" type="video/mp4" />
+								Your browser does not support the video tag.
+							</video>
+						</div>
+						<div class="demo-info">
+							<h4>端侧智能评测打分</h4>
+							<p>规则与 ML 引擎多维度精准考量笔顺、结构与平滑度，给出即时、细致的书写评分反馈。</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
 			<section id="features" class="features-section">
 				<h2>核心特色 / Core Features</h2>
 				<div class="features-grid">
@@ -229,6 +262,86 @@ import { SITE_DESCRIPTION } from '../consts';
 		box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
 		display: block;
 		margin: 0 auto;
+	}
+
+	/* Demo Videos Section */
+	.demo-section {
+		padding: 5rem 0;
+		border-top: 1px solid rgba(139, 115, 85, 0.15);
+	}
+
+	.demo-section h2 {
+		font-size: 2rem;
+		font-weight: 700;
+		text-align: center;
+		margin-bottom: 0.5rem;
+		color: #1a1716;
+	}
+
+	.demo-subtitle {
+		text-align: center;
+		font-size: 1.1rem;
+		color: #8b837e;
+		margin-bottom: 3.5rem !important;
+	}
+
+	.demo-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2.5rem;
+	}
+
+	@media (max-width: 768px) {
+		.demo-grid {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+	}
+
+	.demo-card {
+		background: #fafaf7;
+		border: 1px solid rgba(139, 115, 85, 0.1);
+		border-radius: 24px;
+		overflow: hidden;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.demo-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 35px rgba(139, 115, 85, 0.08);
+	}
+
+	.video-container {
+		width: 100%;
+		aspect-ratio: 16 / 12;
+		overflow: hidden;
+		background: #000;
+		border-bottom: 1px solid rgba(139, 115, 85, 0.1);
+	}
+
+	.demo-video {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.demo-info {
+		padding: 1.75rem;
+	}
+
+	.demo-info h4 {
+		font-size: 1.2rem;
+		font-weight: 700;
+		margin-bottom: 0.5rem;
+		color: #1a1716;
+	}
+
+	.demo-info p {
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: #5c5652;
+		margin: 0;
 	}
 
 	/* Features Section */
