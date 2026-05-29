@@ -199,7 +199,7 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 				background: rgba(139, 92, 246, 0.08);
 				color: #8b5cf6;
 			}
-			.series.cleanarchitecture {
+			.series.cleansemantics {
 				border-color: rgba(14, 165, 233, 0.18);
 				background: rgba(14, 165, 233, 0.08);
 				color: #0ea5e9;
@@ -275,13 +275,13 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 							<div class={`series ${
 								series === 'TokenChef' ? 'tokenchef' :
 								series === 'MetalSolo' ? 'metalsolo' :
-								series.startsWith('Clean Architecture') ? 'cleanarchitecture' :
+								series.startsWith('Clean Semantics') ? 'cleansemantics' :
 								''
 							}`}>
 								{
 									series === 'TokenChef' ? '👨‍🍳 TokenChef' :
 									series === 'MetalSolo' ? '🎸 MetalSolo' :
-									series.startsWith('Clean Architecture') ? `🧼 Clean Architecture (Part ${series.split(' ').pop()})` :
+									series.startsWith('Clean Semantics') ? `✨ Clean Semantics (Part ${series.split(' ').pop()})` :
 									series
 								}
 							</div>
