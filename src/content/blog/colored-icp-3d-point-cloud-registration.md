@@ -28,58 +28,214 @@ Below is the standard data-flow architecture of a state-of-the-art 3D scanner us
 
 下面是采用外置专用深度传感器结合自定义 GPU 渲染的先进 3D 扫描系统的标准数据流架构：
 
-```mermaid
-graph TD
-    %% Nodes
-    Sensor["External Depth Sensor<br>(Structure/TrueDepth 30fps)"]
-    RGB["iPhone RGB Camera<br>(Color Stream 30fps)"]
-    Sync["Frame Synchronizer<br>(Depth + Color Registration)"]
+<svg viewBox="0 0 820 620" width="100%" height="100%" style="background-color: #0b0f19; border-radius: 12px; border: 1px solid #1e293b; padding: 20px; font-family: system-ui, -apple-system, sans-serif; margin-bottom: 24px;" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="grad-sensor" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899" />
+      <stop offset="100%" stop-color="#f43f5e" />
+    </linearGradient>
+    <linearGradient id="grad-frontend" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+    <linearGradient id="grad-rendering" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+    <linearGradient id="grad-backend" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
     
-    subgraph FrontEnd ["Real-time Tracking & Fusion (Front-end)"]
-        Tracker["STTracker SLAM<br>(6-DoF Pose Tracking)"]
-        Mapper["STMapper Volumetric Fusion<br>(TSDF Volume Update)"]
-        Mesh["STMesh Generation<br>(Real-time Marching Cubes)"]
-    end
-    
-    subgraph MetalRender ["Custom Metal Rendering Pipeline (13 Shaders)"]
-        Overlay["DepthOverlay.metal<br>(Intrinsics Backprojection)"]
-        MeshBlue["MeshBlue.metal<br>(Dynamic Mesh Visualizer)"]
-        Xray["Xray.metal<br>(Normal + Alpha Preview)"]
-        MTKView["MTKView Render Target<br>(120Hz User Feedback)"]
-    end
-    
-    subgraph BackEnd ["Post-Processing & Optimization (Back-end)"]
-        Subsample["Voxel Downsampling<br>(Open3D o3d_cpp)"]
-        ICP["Multi-Scale Colored ICP<br>(1.8m → 0.3m → 0.05m)"]
-        PoseGraph["PoseGraph Optimization<br>(Levenberg-Marquardt)"]
-        Output["High-Precision Export<br>(OBJ / Encrypted Binary)"]
-    end
+    <!-- Shadow and Glow Filters -->
+    <filter id="glow-sensor" x="-10%" y="-10%" w="120%" h="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#ec4899" flood-opacity="0.3"/>
+    </filter>
+    <filter id="glow-frontend" x="-10%" y="-10%" w="120%" h="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#06b6d4" flood-opacity="0.3"/>
+    </filter>
+    <filter id="glow-rendering" x="-10%" y="-10%" w="120%" h="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#6366f1" flood-opacity="0.3"/>
+    </filter>
+    <filter id="glow-backend" x="-10%" y="-10%" w="120%" h="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#10b981" flood-opacity="0.3"/>
+    </filter>
 
-    %% Flows
-    Sensor --> Sync
-    RGB --> Sync
-    Sync --> Tracker
-    Sync --> Mapper
-    Tracker -->|Camera Pose| Mapper
-    Tracker -->|Real-time matrix| Overlay
-    Mapper -->|Dynamic raw mesh| Mesh
-    Mesh -->|Direct buffer upload| MeshBlue
-    Mesh -->|Direct buffer upload| Xray
-    Overlay --> MTKView
-    MeshBlue --> MTKView
-    Xray --> MTKView
+    <!-- Arrow Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#94a3b8" />
+    </marker>
+  </defs>
+
+  <!-- Titles -->
+  <text x="20" y="30" fill="#f8fafc" font-size="16" font-weight="bold" letter-spacing="0.5">3D SCANNING DATA FLOW ARCHITECTURE / 3D 扫描数据流架构图</text>
+
+  <!-- Group: Inputs -->
+  <g transform="translate(10, 60)">
+    <rect x="0" y="0" width="220" height="230" rx="12" fill="none" stroke="#334155" stroke-dasharray="4 4" stroke-width="1.5" />
+    <text x="15" y="25" fill="#94a3b8" font-size="11" font-weight="bold" letter-spacing="1">INPUTS / 输入层</text>
     
-    Mesh -->|Stitch trigger| Subsample
-    Subsample --> ICP
-    ICP --> PoseGraph
-    PoseGraph --> Output
+    <!-- Depth Sensor -->
+    <g transform="translate(15, 40)">
+      <rect width="190" height="50" rx="8" fill="url(#grad-sensor)" filter="url(#glow-sensor)" />
+      <text x="95" y="22" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">External Depth Sensor</text>
+      <text x="95" y="36" fill="#ffe4e6" font-size="9" text-anchor="middle">Structure / TrueDepth (30fps)</text>
+    </g>
     
-    %% Styling
-    style Sensor fill:#f9f,stroke:#333,stroke-width:2px
-    style RGB fill:#f9f,stroke:#333,stroke-width:2px
-    style MTKView fill:#85C1E9,stroke:#333,stroke-width:2px
-    style Output fill:#2ecc71,stroke:#333,stroke-width:2px
-```
+    <!-- RGB Camera -->
+    <g transform="translate(15, 105)">
+      <rect width="190" height="50" rx="8" fill="url(#grad-sensor)" filter="url(#glow-sensor)" />
+      <text x="95" y="22" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">iPhone RGB Camera</text>
+      <text x="95" y="36" fill="#ffe4e6" font-size="9" text-anchor="middle">Color Stream (30fps)</text>
+    </g>
+
+    <!-- Frame Sync -->
+    <g transform="translate(15, 170)">
+      <rect width="190" height="50" rx="8" fill="url(#grad-sensor)" filter="url(#glow-sensor)" />
+      <text x="95" y="22" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">Frame Synchronizer</text>
+      <text x="95" y="36" fill="#ffe4e6" font-size="9" text-anchor="middle">Depth + Color Registration</text>
+    </g>
+  </g>
+
+  <!-- Group: Front-end SLAM -->
+  <g transform="translate(265, 60)">
+    <rect x="0" y="0" width="230" height="230" rx="12" fill="none" stroke="#334155" stroke-dasharray="4 4" stroke-width="1.5" />
+    <text x="15" y="25" fill="#94a3b8" font-size="11" font-weight="bold" letter-spacing="1">REAL-TIME SLAM / 实时跟踪与融合</text>
+    
+    <!-- STTracker -->
+    <g transform="translate(20, 40)">
+      <rect width="190" height="50" rx="8" fill="url(#grad-frontend)" filter="url(#glow-frontend)" />
+      <text x="95" y="22" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">STTracker SLAM</text>
+      <text x="95" y="36" fill="#e0f2fe" font-size="9" text-anchor="middle">6-DoF Pose Tracking</text>
+    </g>
+    
+    <!-- STMapper -->
+    <g transform="translate(20, 105)">
+      <rect width="190" height="50" rx="8" fill="url(#grad-frontend)" filter="url(#glow-frontend)" />
+      <text x="95" y="22" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">STMapper Volumetric Fusion</text>
+      <text x="95" y="36" fill="#e0f2fe" font-size="9" text-anchor="middle">TSDF Volume Integration</text>
+    </g>
+
+    <!-- STMesh -->
+    <g transform="translate(20, 170)">
+      <rect width="190" height="50" rx="8" fill="url(#grad-frontend)" filter="url(#glow-frontend)" />
+      <text x="95" y="22" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">STMesh Generation</text>
+      <text x="95" y="36" fill="#e0f2fe" font-size="9" text-anchor="middle">Real-time Marching Cubes</text>
+    </g>
+  </g>
+
+  <!-- Group: Metal Renderer -->
+  <g transform="translate(530, 60)">
+    <rect x="0" y="0" width="240" height="230" rx="12" fill="none" stroke="#334155" stroke-dasharray="4 4" stroke-width="1.5" />
+    <text x="15" y="25" fill="#94a3b8" font-size="11" font-weight="bold" letter-spacing="1">GPU PIPELINE / Metal 渲染</text>
+    
+    <!-- DepthOverlay -->
+    <g transform="translate(25, 40)">
+      <rect width="190" height="50" rx="8" fill="url(#grad-rendering)" filter="url(#glow-rendering)" />
+      <text x="95" y="22" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">DepthOverlay.metal</text>
+      <text x="95" y="36" fill="#e0e7ff" font-size="9" text-anchor="middle">Intrinsics Backprojection</text>
+    </g>
+    
+    <!-- MeshBlue / Xray -->
+    <g transform="translate(25, 105)">
+      <rect width="190" height="50" rx="8" fill="url(#grad-rendering)" filter="url(#glow-rendering)" />
+      <text x="95" y="22" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">MeshBlue.metal / Xray.metal</text>
+      <text x="95" y="36" fill="#e0e7ff" font-size="9" text-anchor="middle">Normal + Alpha Preview</text>
+    </g>
+
+    <!-- MTKView -->
+    <g transform="translate(25, 170)">
+      <rect width="190" height="50" rx="8" fill="url(#grad-rendering)" filter="url(#glow-rendering)" />
+      <text x="95" y="22" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">MTKView Render Target</text>
+      <text x="95" y="36" fill="#e0e7ff" font-size="9" text-anchor="middle">120Hz Live Feedback</text>
+    </g>
+  </g>
+
+  <!-- Group: Back-end Refinement -->
+  <g transform="translate(10, 320)">
+    <rect x="0" y="0" width="760" height="230" rx="12" fill="none" stroke="#334155" stroke-dasharray="4 4" stroke-width="1.5" />
+    <text x="15" y="25" fill="#94a3b8" font-size="11" font-weight="bold" letter-spacing="1">POST-PROCESSING & OPTIMIZATION / 后期处理与全局优化 (离线细化)</text>
+    
+    <!-- Step 1 -->
+    <g transform="translate(20, 50)">
+      <rect width="210" height="60" rx="8" fill="url(#grad-backend)" filter="url(#glow-backend)" />
+      <text x="105" y="24" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">1. Voxel Downsampling</text>
+      <text x="105" y="40" fill="#ffffff" font-size="10" text-anchor="middle">Open3D voxel grid filter</text>
+      <text x="105" y="52" fill="#d1fae5" font-size="8" text-anchor="middle">Remove noise & compress size</text>
+    </g>
+    
+    <!-- Step 2 -->
+    <g transform="translate(270, 50)">
+      <rect width="210" height="60" rx="8" fill="url(#grad-backend)" filter="url(#glow-backend)" />
+      <text x="105" y="24" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">2. Multi-Scale Colored ICP</text>
+      <text x="105" y="40" fill="#ffffff" font-size="10" text-anchor="middle">Photometric + Geometric</text>
+      <text x="105" y="52" fill="#d1fae5" font-size="8" text-anchor="middle">1.8m → 0.3m → 0.05m convergence</text>
+    </g>
+
+    <!-- Step 3 -->
+    <g transform="translate(20, 140)">
+      <rect width="210" height="60" rx="8" fill="url(#grad-backend)" filter="url(#glow-backend)" />
+      <text x="105" y="24" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">3. PoseGraph Optimization</text>
+      <text x="105" y="40" fill="#ffffff" font-size="10" text-anchor="middle">Levenberg-Marquardt Solver</text>
+      <text x="105" y="52" fill="#d1fae5" font-size="8" text-anchor="middle">Distribute loop-closure errors</text>
+    </g>
+
+    <!-- Step 4 -->
+    <g transform="translate(270, 140)">
+      <rect width="210" height="60" rx="8" fill="url(#grad-backend)" filter="url(#glow-backend)" />
+      <text x="105" y="24" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">4. High-Precision Export</text>
+      <text x="105" y="40" fill="#ffffff" font-size="10" text-anchor="middle">OBJ / Encrypted Binary</text>
+      <text x="105" y="52" fill="#d1fae5" font-size="8" text-anchor="middle">Clinical grade 3D mesh model</text>
+    </g>
+
+    <!-- Info Box -->
+    <g transform="translate(515, 50)">
+      <rect width="220" height="150" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1" />
+      <text x="15" y="25" fill="#f8fafc" font-size="11" font-weight="bold">Why this architecture works:</text>
+      <text x="15" y="50" fill="#94a3b8" font-size="9" font-weight="500">1. Tracking loop runs strictly at 30Hz</text>
+      <text x="25" y="65" fill="#64748b" font-size="8.5">minimizing drift in camera trajectory.</text>
+      <text x="15" y="85" fill="#94a3b8" font-size="9" font-weight="500">2. Metal shaders run on direct buffers</text>
+      <text x="25" y="100" fill="#64748b" font-size="8.5">yielding 0-copy, zero-latency graphics.</text>
+      <text x="15" y="120" fill="#94a3b8" font-size="9" font-weight="500">3. Colored ICP acts as offline refiner</text>
+      <text x="25" y="135" fill="#64748b" font-size="8.5">eliminating geometric sliding ambiguity.</text>
+    </g>
+  </g>
+
+  <!-- Connectors (Paths with Arrow Markers) -->
+  
+  <!-- Depth & RGB to Sync -->
+  <path d="M 215 125 L 235 125 L 235 230 L 215 230" fill="none" stroke="#64748b" stroke-width="1.5" />
+  <path d="M 215 190 L 235 190 L 235 230 L 215 230" fill="none" stroke="#64748b" stroke-width="1.5" />
+  
+  <!-- Sync to Tracker & Mapper -->
+  <path d="M 215 255 L 245 255 L 245 125 L 285 125" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)" />
+  <path d="M 215 255 L 245 255 L 245 190 L 285 190" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)" />
+  
+  <!-- Tracker & Mapper to Mesh -->
+  <path d="M 380 150 L 380 165" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)" />
+  <path d="M 380 215 L 380 230" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)" />
+  
+  <!-- Tracker Pose to Overlay -->
+  <path d="M 475 125 L 555 125" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)" />
+
+  <!-- Mesh to Render Shaders -->
+  <path d="M 475 255 L 515 255 L 515 190 L 555 190" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)" />
+  <path d="M 475 255 L 515 255 L 515 255 L 555 255" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)" />
+
+  <!-- Shaders to MTKView -->
+  <path d="M 745 125 L 765 125 L 765 240 L 745 240" fill="none" stroke="#64748b" stroke-width="1.5" />
+  <path d="M 745 190 L 765 190 L 765 240 L 745 240" fill="none" stroke="#64748b" stroke-width="1.5" />
+  <path d="M 745 255 L 765 255 L 765 240 L 745 240" fill="none" stroke="#64748b" stroke-width="1.5" />
+
+  <!-- Mesh to Back-end Stitch Trigger -->
+  <path d="M 380 290 L 380 305 L 115 305 L 115 370" fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrow)" />
+
+  <!-- Back-end sequence -->
+  <path d="M 240 400 L 280 400" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)" />
+  <path d="M 380 430 L 380 445 L 115 445 L 115 460" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)" />
+  <path d="M 240 490 L 280 490" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)" />
+</svg>
 
 ### Why Metal is Crucial for 3D Scanning Feedback / 为什么 Metal 渲染对于 3D 扫描反馈至关重要
 
