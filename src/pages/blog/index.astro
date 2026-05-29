@@ -87,6 +87,11 @@ const posts = (await getCollection('blog')).sort(
 				color: #8b5cf6;
 				border: 1px solid rgba(139, 92, 246, 0.18);
 			}
+			.series-badge.semanticsystems {
+				background-color: rgba(16, 185, 129, 0.08);
+				color: #10b981;
+				border: 1px solid rgba(16, 185, 129, 0.18);
+			}
 			.meta {
 				margin: 0;
 				color: rgb(var(--gray));
@@ -156,8 +161,18 @@ const posts = (await getCollection('blog')).sort(
 									)}
 									{post.data.series && (
 										<div class="series-badge-container">
-											<span class={`series-badge ${post.data.series.toLowerCase()}`}>
-												{post.data.series === 'TokenChef' ? '👨‍🍳 TokenChef' : '🎸 MetalSolo'}
+											<span class={`series-badge ${
+												post.data.series === 'TokenChef' ? 'tokenchef' :
+												post.data.series === 'MetalSolo' ? 'metalsolo' :
+												post.data.series.startsWith('Semantic Systems') ? 'semanticsystems' :
+												post.data.series.toLowerCase()
+											}`}>
+												{
+													post.data.series === 'TokenChef' ? '👨‍🍳 TokenChef' :
+													post.data.series === 'MetalSolo' ? '🎸 MetalSolo' :
+													post.data.series.startsWith('Semantic Systems') ? `📐 Semantic Systems (Part ${post.data.series.split(' ').pop()})` :
+													post.data.series
+												}
 											</span>
 										</div>
 									)}
