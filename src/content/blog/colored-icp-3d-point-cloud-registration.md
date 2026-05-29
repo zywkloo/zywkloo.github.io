@@ -59,16 +59,16 @@ Below is the standard data-flow architecture of a state-of-the-art 3D scanner us
     </linearGradient>
     
     <!-- Shadow and Glow Filters -->
-    <filter id="glow-sensor" x="-10%" y="-10%" w="120%" h="120%">
+    <filter id="glow-sensor" x="-10%" y="-10%" width="120%" height="120%">
       <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#ec4899" flood-opacity="0.3"/>
     </filter>
-    <filter id="glow-frontend" x="-10%" y="-10%" w="120%" h="120%">
+    <filter id="glow-frontend" x="-10%" y="-10%" width="120%" height="120%">
       <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#06b6d4" flood-opacity="0.3"/>
     </filter>
-    <filter id="glow-rendering" x="-10%" y="-10%" w="120%" h="120%">
+    <filter id="glow-rendering" x="-10%" y="-10%" width="120%" height="120%">
       <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#6366f1" flood-opacity="0.3"/>
     </filter>
-    <filter id="glow-backend" x="-10%" y="-10%" w="120%" h="120%">
+    <filter id="glow-backend" x="-10%" y="-10%" width="120%" height="120%">
       <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#10b981" flood-opacity="0.3"/>
     </filter>
 
@@ -440,11 +440,11 @@ Even if you are working purely on **2D vector inking** or calligraphy grading ap
 
 即使你是在开发纯粹的 **2D 矢量笔迹**或书法打分应用（例如比对用户落笔与大师字帖模板的重合度），3D 点云配准的底层思想依然具有深远的启示意义：
 
-- **Beyond Bounding Boxes**: Instead of simplistic pixel-matching overlays (which fail when stroke widths differ or user inputs are translated), treat the dynamic stroke as a 2D Point Cloud.
-  **超越包围盒与像素比对**：放弃死板的像素重合比对（这种方式在笔迹宽度不同或手写发生平移时极易失效），将动态的书写轨迹视作一个 2D 点云。
-- **Color Coding Progress**: Standard geometric distance algorithms struggle with symmetric shapes (like a horizontal calligraphy stroke). By synthetic color coding (e.g., mapping writing time t ∈ [0, 1] into a color channel), we can enforce stroke-order constraints. The evaluation engine can easily tell if a stroke was drawn backwards!
-  **将书写进度编码为“颜色梯度”**：标准的几何距离算法在处理对称形状（例如横画或竖画）时同样面临“滑动歧义”。通过合成的进度通道编码（例如将书写时间 t ∈ [0, 1] 映射为点云的特殊通道），我们可以强制加入笔顺约束。评估引擎便能瞬间识破倒下笔、倒笔画等不规范行为！
+- **Beyond Bounding Boxes**: Instead of simplistic pixel-matching overlays (which fail when stroke widths differ or user inputs are translated), treating a dynamic trajectory as an unstructured 2D Point Cloud opens up robust alignment possibilities.
+  **超越包围盒与像素比对**：放弃死板的像素重合比对（这种方式在笔迹宽度不同或手写发生平移时极易失效），将动态轨迹视作无结构性的 2D 点云，能大幅提高比对算法的鲁棒性。
+- **Color Coding Progress**: Standard geometric distance algorithms struggle with symmetric shapes (like a straight horizontal line). By synthetic color coding (e.g., mapping writing time t ∈ [0, 1] into a color channel), we can enforce temporal constraints. The registration solver can easily detect stroke-order deviations or even backward strokes.
+  **将书写进度编码为“颜色梯度”**：标准的几何距离算法在处理对称形状（如一条笔直的横画）时同样面临“滑动歧义”。通过引入合成的进度通道编码（例如将书写时间 t ∈ [0, 1] 映射为点云的特殊属性维度），我们可以强制加入时序约束，从而轻松识别出笔画写反、笔顺错误等行为。
 
-Math is universal. The same equations aligning 3D dental scans can guide the serene movement of a digital brush.
+At its core, whether we are aligning dense 3D point clouds in scanning applications or matching 2D vector curves, we are solving the same fundamental mathematical challenge: registering unstructured spatial data under logical constraints. Escaping traditional pixel grids and thinking in terms of multi-dimensional feature alignment gives engineers a far wider horizon for designing next-generation graphics and vision algorithms.
 
-数学无界。用于对齐 3D 牙科扫描的精妙方程，同样可以照亮数字画布上那笔行云流水的墨色。
+归根结底，无论是对齐 3D 扫描中的稠密点云，还是比对 2D 矢量曲线，其底层都在面对同一个数学本质：如何在特定物理与逻辑约束下，实现无结构空间数据的精准配准。跳出传统的像素网格束缚，转向多维特征通道对齐的视角，能为工程师设计下一代图形与视觉算法打开更宽广的边界。
