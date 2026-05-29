@@ -328,10 +328,10 @@ All four bugs share one trait: they are **physically correct but logically wrong
 
 | Gotcha | Root cause / 根本原因 | Stage / 触发阶段 | Silent? / 静默? |
 | --- | --- | --- | --- |
-| Orientation re-init | `if/else` branching destroys view identity, double-allocates Metal renderer | Layout / 布局 | ✅ |
-| ZStack compositing | SwiftUI doesn't guarantee logical→physical sublayer order when UIViewRepresentable is mixed in | Compositing / 合成 | ✅ |
-| Premultiplied alpha | Invalid RGB > A in clearColor — CA compositor gets undefined-behavior input | CA compositor / CA 合成器 | ✅ |
-| Blend state disabled | Default pipeline factors `.one / .zero` ignore alpha on every draw call | Render pipeline / 渲染管线 | ✅ |
+| Orientation re-init | `if/else` branching destroys view identity, double-allocates Metal renderer | Layout / 布局 | Semi-silent / 半静默 (Console warning / 控制台警告) |
+| ZStack compositing | SwiftUI doesn't guarantee logical→physical sublayer order when UIViewRepresentable is mixed in | Compositing / 合成 | ✅ (Fully silent / 完全静默) |
+| Premultiplied alpha | Invalid RGB > A in clearColor — CA compositor gets undefined-behavior input | CA compositor / CA 合成器 | ✅ (Fully silent / 完全静默) |
+| Blend state disabled | Default pipeline factors `.one / .zero` ignore alpha on every draw call | Render pipeline / 渲染管线 | ✅ (Fully silent / 完全静默) |
 
 In [Part 2](/blog/metal-geometry-math-part2/), we dive deep into the vector ink geometry: how raw Pencil inputs are smoothed using Catmull-Rom splines, and the exact math behind generating variable-width triangle strips for smooth rendering.
 [第二篇](/blog/metal-geometry-math-part2/)进入几何部分：剖析我们如何将原始 Pencil 触点转换为平滑的 Catmull-Rom 样条，以及如何通过数学公式生成可变宽度的三角带。
