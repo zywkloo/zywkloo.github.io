@@ -306,10 +306,10 @@ These are four *independent* causes. Fixing one doesn't fix the others. If `isOp
 
 ---
 
-## Three Weeks Later / 三周后
+## One Intense Night Later / 熬过一个通宵之后
 
-Four bugs. Zero warnings. Zero crashes between them.
-四个 bug，零警告，彼此之间零崩溃。
+Four bugs. Zero compile warnings. Zero crashes between them. All solved in one intense, sleepless night of relentless debugging.
+四个 bug，零编译警告，彼此之间零崩溃。全都在一宿没睡、死磕到底的极限 Debug 战役中被彻底搞定。
 
 After fixing all of them, the ink engine worked. The paper texture showed through. The trace reference floated on top. Rotations were smooth and silent. I submitted to the App Store.
 全修好之后，墨水引擎跑起来了。宣纸纹理透了出来，描红视图浮在最上方，旋转平滑无声。我提交了 App Store。
