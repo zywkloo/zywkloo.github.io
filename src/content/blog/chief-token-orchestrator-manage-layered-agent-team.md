@@ -1,7 +1,7 @@
 ---
 title: 'Chief Token Orchestrator (Part 2): Manage Claude, Codex, and Gemini as a Structured Software Team'
 description: 'Spawning parallel agents is easy. Spawning them without hitting token limits, context pollution, or review bottlenecks is hard. Discover why you need a structured, layered team architecture.'
-pubDate: 'May 26 2026'
+pubDate: 'May 28 2026'
 heroImage: '../../assets/chief-orchestrator-hero.png'
 tags: ['AI Tools', 'Agent Architecture', 'Claude Code', 'Codex', 'Gemini', 'Solo Dev', 'Engineering']
 ---
