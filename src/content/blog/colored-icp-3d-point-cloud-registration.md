@@ -26,9 +26,9 @@ tags: ["3D Scanning", "Computer Vision", "Metal", "Open3D", "Geometry", "Bilingu
   <em>Jaesik Park, Qian-Yi Zhou, and Vladlen Koltun, "Colored Point Cloud Registration Revisited," ICCV 2017</em>。本文仅作学术探讨与算法科普，不包含任何商业私有源码、受保护的专利技术或商业机密。
 </blockquote>
 
-When building a high-precision 3D scanning application for mobile devices, the holy grail is real-time, millimeter-accurate reconstruction. Whether you are scanning industrial components, orthopedic casts, or dental impressions, the fundamental problem is the same: **how to align a continuous stream of noisy, unstructured 3D depth frames into a single, cohesive, globally consistent mesh.**
+When building a high-precision 3D scanning application for mobile devices, the holy grail is real-time, millimeter-accurate reconstruction. Whether you are scanning complex mechanical parts, clay models, or consumer products, the fundamental problem is the same: **how to align a continuous stream of noisy, unstructured 3D depth frames into a single, cohesive, globally consistent mesh.**
 
-在为移动设备构建高精度 3D 扫描应用时，核心终极目标是实现实时的毫米级精密重建。无论是在扫描工业零件、矫形支具，还是牙科印模，其面临的底层科学问题是相同的：**如何将连续不断的、充满噪声且无结构性的 3D 深度帧流，精准对齐并融合成一个单一、紧密、全局一致的 3D 网格模型。**
+在为移动设备构建高精度 3D 扫描应用时，核心终极目标是实现实时的毫米级精密重建。无论是在扫描复杂的机械零件、泥塑模型，还是日常消费品，其面临的底层科学问题是相同的：**如何将连续不断的、充满噪声且无结构性的 3D 深度帧流，精准对齐并融合成一个单一、紧密、全局一致的 3D 网格模型。**
 
 In this deep-dive article, we explore the architecture of a professional-grade 3D scanning pipeline, dissect the mathematical formulation of the **Colored Iterative Closest Point (ICP)** algorithm, and show how a custom GPU-accelerated Metal pipeline achieves instantaneous feedback.
 
@@ -184,7 +184,7 @@ Below is the standard data-flow architecture of a state-of-the-art 3D scanner us
       <rect width="210" height="60" rx="8" fill="url(#grad-backend)" filter="url(#glow-backend)" />
       <text x="105" y="24" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">4. High-Precision Export</text>
       <text x="105" y="40" fill="#ffffff" font-size="10" text-anchor="middle">OBJ / Encrypted Binary</text>
-      <text x="105" y="52" fill="#d1fae5" font-size="8" text-anchor="middle">Clinical grade 3D mesh model</text>
+      <text x="105" y="52" fill="#d1fae5" font-size="8" text-anchor="middle">High-fidelity 3D mesh model</text>
     </g>
     <!-- Info Box -->
     <g transform="translate(515, 50)">
@@ -256,9 +256,9 @@ where $\vec{n}_i$ is the unit normal vector at the target point $p_i$.
 
 ### The Geometry Loophole / 几何上的致命漏洞
 
-While highly effective for asymmetric structures, classic ICP fails catastrophically on **geometrical symmetries** (like planes, cylinders, or spheres) or long parallel surfaces (like bone shafts, dental arches, or smooth molds). 
+While highly effective for asymmetric structures, classic ICP fails catastrophically on **geometrical symmetries** (like planes, cylinders, or spheres) or long parallel surfaces (like pipes, architectural columns, or smooth molds). 
 
-虽然纯几何 ICP 对非对称结构非常有效，但在面对**几何对称体**（如平面、圆柱体、球体）或长距离平行结构（如骨干、牙弓、平滑模具）时，会发生毁灭性的失效。
+虽然纯几何 ICP 对非对称结构非常有效，但在面对**几何对称体**（如平面、圆柱体、球体）或长距离平行结构（如管道、建筑立柱、平滑模具）时，会发生毁灭性的失效。
 
 Because the optimization landscape along the parallel axis is entirely flat, the point cloud can slide infinitely along the surface without increasing the geometric error. This is known as **sliding ambiguity**.
 
