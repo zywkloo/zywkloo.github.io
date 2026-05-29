@@ -2,11 +2,15 @@
 title: 'wtcraft: A Lightweight, Git-Native Scaffolding for Bounded Multi-Agent Coding'
 description: 'How do you actually enforce boundaries on autonomous agents? Explore Harness Engineering, the competitive landscape of task contracts, and how the wtcraft CLI implements bounded sandboxes locally.'
 pubDate: 'May 26 2026'
-heroImage: '../../assets/wtcraft-hero.png'
+heroImage: '../../assets/wtcraft-scaffolding-hero.png'
 tags: ['AI Tools', 'Harness Engineering', 'Git', 'Worktrees', 'wtcraft', 'Codex', 'Claude Code']
 ---
 
-[![npm package](https://img.shields.io/npm/v/wtcraft.svg?style=flat-square&color=cb3837)](https://www.npmjs.com/package/wtcraft) [![PyPI version](https://img.shields.io/pypi/v/wtcraft.svg?style=flat-square&color=3775a9)](https://pypi.org/project/wtcraft/) [![GitHub Repository](https://img.shields.io/badge/GitHub-wtcraft-24292e?style=flat-square&logo=github)](https://github.com/zywkloo/wtcraft)
+<div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+  <a href="https://www.npmjs.com/package/wtcraft"><img src="https://img.shields.io/npm/v/wtcraft.svg?style=flat-square&color=cb3837" alt="npm package" /></a>
+  <a href="https://pypi.org/project/wtcraft/"><img src="https://img.shields.io/pypi/v/wtcraft.svg?style=flat-square&color=3775a9" alt="PyPI version" /></a>
+  <a href="https://github.com/zywkloo/wtcraft"><img src="https://img.shields.io/badge/GitHub-wtcraft-24292e?style=flat-square&logo=github" alt="GitHub Repository" /></a>
+</div>
 
 ## Contents
 

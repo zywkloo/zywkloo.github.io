@@ -2,11 +2,15 @@
 title: 'Chief Token Orchestrator: Manage Claude, Codex, and Gemini as a Structured Software Team'
 description: 'Spawning parallel agents is easy. Spawning them without hitting token limits, context pollution, or review bottlenecks is hard. Discover why you need a structured, layered team architecture.'
 pubDate: 'May 26 2026'
-heroImage: '../../assets/wtcraft-hero.png'
+heroImage: '../../assets/chief-orchestrator-hero.png'
 tags: ['AI Tools', 'Agent Architecture', 'Claude Code', 'Codex', 'Gemini', 'Solo Dev', 'Engineering']
 ---
 
-[![npm package](https://img.shields.io/npm/v/wtcraft.svg?style=flat-square&color=cb3837)](https://www.npmjs.com/package/wtcraft) [![PyPI version](https://img.shields.io/pypi/v/wtcraft.svg?style=flat-square&color=3775a9)](https://pypi.org/project/wtcraft/) [![GitHub Repository](https://img.shields.io/badge/GitHub-wtcraft-24292e?style=flat-square&logo=github)](https://github.com/zywkloo/wtcraft)
+<div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+  <a href="https://www.npmjs.com/package/wtcraft"><img src="https://img.shields.io/npm/v/wtcraft.svg?style=flat-square&color=cb3837" alt="npm package" /></a>
+  <a href="https://pypi.org/project/wtcraft/"><img src="https://img.shields.io/pypi/v/wtcraft.svg?style=flat-square&color=3775a9" alt="PyPI version" /></a>
+  <a href="https://github.com/zywkloo/wtcraft"><img src="https://img.shields.io/badge/GitHub-wtcraft-24292e?style=flat-square&logo=github" alt="GitHub Repository" /></a>
+</div>
 
 ## Contents
 
