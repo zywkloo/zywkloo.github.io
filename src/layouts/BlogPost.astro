@@ -105,18 +105,18 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 				box-shadow: var(--box-shadow);
 			}
 			.prose :global(table) {
-				/* keep readability on narrow viewports while allowing horizontal scroll */
-				width: max-content;
-				min-width: 100%;
+				/* constrain block to prose width; inner content scrolls if needed */
+				width: 100%;
+				max-width: 100%;
 				table-layout: auto;
 				border-collapse: collapse;
-				margin-top: 1.25em;
-				margin-bottom: 1.75em;
+				margin: 1.25em auto 1.75em;
 				display: block;
 				overflow-x: auto;
 				-webkit-overflow-scrolling: touch;
 				font-size: 0.88rem;
 				line-height: 1.5;
+				box-sizing: border-box;
 			}
 			.prose :global(table th),
 			.prose :global(table td) {
@@ -124,14 +124,15 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 				vertical-align: top;
 				text-align: left;
 				border: 1px solid var(--line);
-				word-break: normal;
+				word-break: break-word;
 				overflow-wrap: anywhere;
+				min-width: 80px;
 			}
-			/* first column: fixed label width; all other columns split the rest equally */
+			/* first column: narrower label; other columns share remaining space */
 			.prose :global(table th:first-child),
 			.prose :global(table td:first-child) {
-				width: 140px;
-				min-width: 110px;
+				width: 130px;
+				min-width: 100px;
 			}
 			.prose :global(table th) {
 				background: var(--surface-muted);
@@ -139,7 +140,7 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 				font-size: 0.8rem;
 				text-transform: uppercase;
 				letter-spacing: 0.04em;
-				white-space: normal;
+				white-space: nowrap;
 			}
 			.prose :global(table tr:nth-child(even) td) {
 				background: rgba(var(--gray-light), 0.35);
