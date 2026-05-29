@@ -34,7 +34,79 @@ What follows are the bugs I hit while building **EightStrokes** — a digital in
 
 ---
 
-## 1. The CALayer Hierarchy & ZStack Compositing Trap / 1. CALayer 图层树与 ZStack 的合成陷阱
+## 1. The SwiftUI Orientation Re-init Trap / 1. SwiftUI 屏幕旋转下的重复初始化陷阱
+
+> **The Symptom:** Rotate the iPad. Everything looks fine — still 120 FPS. Then you glance at the Xcode console.
+>
+> **症状：** 旋转 iPad，一切看起来正常——依然 120 FPS。然后你瞟了一眼 Xcode 控制台。
+
+```text
+[CAMetalLayerDrawable texture] should not be called after already presenting this drawable.
+[libMTLHud] Metric com.apple.hud-stat.frame-interval already exist.
+```
+
+It's spamming. Every rotation. I told myself it was probably fine.
+每次旋转都在刷屏。我告诉自己可能没事。
+
+It was not fine.
+并没有没事。
+
+### The Root Cause / 根本原因
+
+I was handling portrait/landscape with a standard `if/else`:
+我用标准的 `if/else` 处理竖/横屏：
+
+```swift
+// ❌ SwiftUI sees these as two distinct view trees
+// ❌ SwiftUI 把这两个当成完全不同的视图树
+if isLandscape {
+    HStack(spacing: 16) { ReferencePanelView(); writingPanel }
+} else {
+    VStack(spacing: 16) { ReferencePanelView(); writingPanel }
+}
+```
+
+SwiftUI doesn't know `writingPanel` in the `HStack` is the same thing as `writingPanel` in the `VStack`. Structural branching kills view identity. On every rotation, SwiftUI tears down the entire active tree and rebuilds the other branch — which means `makeUIView(context:)` fires a second time, spawning a second `MetalRenderer` on the same `MTLDevice`.
+SwiftUI 不知道 `HStack` 里的 `writingPanel` 和 `VStack` 里的是同一个东西。结构性分支消灭了视图标识。每次旋转，SwiftUI 销毁整棵活跃视图树并重建另一棵——这意味着 `makeUIView(context:)` 被再次触发，在同一个 `MTLDevice` 上产生了第二个 `MetalRenderer`。
+
+Two renderers. Same display link. Both trying to present the same drawable at the same frame boundary. That's the console spam.
+两个渲染器，同一个 display link，同时试图在同一帧边界 present 同一个 drawable。这就是控制台在刷的原因。
+
+### The Fix / 修复方案
+
+iOS 16's `AnyLayout` lets you swap the layout algorithm *without* destroying the child tree. View identity survives the rotation.
+iOS 16 的 `AnyLayout` 让你在*不销毁*子视图树的情况下切换布局算法。视图标识在旋转中得以保留。
+
+```swift
+// ✅ Same child tree, layout switches in-place
+// ✅ 同一子视图树，布局原地切换
+let canvasLayout: AnyLayout = isLandscape
+    ? AnyLayout(HStackLayout(spacing: 16))
+    : AnyLayout(VStackLayout(spacing: 16))
+
+canvasLayout {
+    ReferencePanelView()
+    writingPanel  // makeUIView fires exactly once / makeUIView 只触发一次
+}
+```
+
+Also add a re-entrancy guard as a safety net — if a duplicate renderer somehow gets created by a future SwiftUI update, it won't take down the frame:
+同时加一个防重入锁作为安全网——万一未来 SwiftUI 更新意外产生了重复渲染器，不会把帧搞崩：
+
+```swift
+private var isDrawing = false
+
+func draw(in view: MTKView) {
+    guard !isDrawing else { return }
+    isDrawing = true
+    defer { isDrawing = false }
+    // ...
+}
+```
+
+---
+
+## 2. The CALayer Hierarchy & ZStack Compositing Trap / 2. CALayer 图层树与 ZStack 的合成陷阱
 
 > **The Symptom:** You put a pure SwiftUI view *above* a `UIViewRepresentable` in a `ZStack`. The code is correct. It compiles. The view is completely invisible.
 >
@@ -124,78 +196,6 @@ let view = InkMTKView(frame: .zero)
 view.isOpaque = false
 view.backgroundColor = .clear
 view.layer.isOpaque = false    // don't assume propagation / 不要假设会自动传播
-```
-
----
-
-## 2. The SwiftUI Orientation Re-init Trap / 2. SwiftUI 屏幕旋转下的重复初始化陷阱
-
-> **The Symptom:** Rotate the iPad. Everything looks fine — still 120 FPS. Then you glance at the Xcode console.
->
-> **症状：** 旋转 iPad，一切看起来正常——依然 120 FPS。然后你瞟了一眼 Xcode 控制台。
-
-```text
-[CAMetalLayerDrawable texture] should not be called after already presenting this drawable.
-[libMTLHud] Metric com.apple.hud-stat.frame-interval already exist.
-```
-
-It's spamming. Every rotation. I told myself it was probably fine.
-每次旋转都在刷屏。我告诉自己可能没事。
-
-It was not fine.
-并没有没事。
-
-### The Root Cause / 根本原因
-
-I was handling portrait/landscape with a standard `if/else`:
-我用标准的 `if/else` 处理竖/横屏：
-
-```swift
-// ❌ SwiftUI sees these as two distinct view trees
-// ❌ SwiftUI 把这两个当成完全不同的视图树
-if isLandscape {
-    HStack(spacing: 16) { ReferencePanelView(); writingPanel }
-} else {
-    VStack(spacing: 16) { ReferencePanelView(); writingPanel }
-}
-```
-
-SwiftUI doesn't know `writingPanel` in the `HStack` is the same thing as `writingPanel` in the `VStack`. Structural branching kills view identity. On every rotation, SwiftUI tears down the entire active tree and rebuilds the other branch — which means `makeUIView(context:)` fires a second time, spawning a second `MetalRenderer` on the same `MTLDevice`.
-SwiftUI 不知道 `HStack` 里的 `writingPanel` 和 `VStack` 里的是同一个东西。结构性分支消灭了视图标识。每次旋转，SwiftUI 销毁整棵活跃视图树并重建另一棵——这意味着 `makeUIView(context:)` 被再次触发，在同一个 `MTLDevice` 上产生了第二个 `MetalRenderer`。
-
-Two renderers. Same display link. Both trying to present the same drawable at the same frame boundary. That's the console spam.
-两个渲染器，同一个 display link，同时试图在同一帧边界 present 同一个 drawable。这就是控制台在刷的原因。
-
-### The Fix / 修复方案
-
-iOS 16's `AnyLayout` lets you swap the layout algorithm *without* destroying the child tree. View identity survives the rotation.
-iOS 16 的 `AnyLayout` 让你在*不销毁*子视图树的情况下切换布局算法。视图标识在旋转中得以保留。
-
-```swift
-// ✅ Same child tree, layout switches in-place
-// ✅ 同一子视图树，布局原地切换
-let canvasLayout: AnyLayout = isLandscape
-    ? AnyLayout(HStackLayout(spacing: 16))
-    : AnyLayout(VStackLayout(spacing: 16))
-
-canvasLayout {
-    ReferencePanelView()
-    writingPanel  // makeUIView fires exactly once / makeUIView 只触发一次
-}
-```
-
-Also add a re-entrancy guard as a safety net — if a duplicate renderer somehow gets created by a future SwiftUI update, it won't take down the frame:
-同时加一个防重入锁作为安全网——万一未来 SwiftUI 更新意外产生了重复渲染器，不会把帧搞崩：
-
-```swift
-private var isDrawing = false
-
-func draw(in view: MTKView) {
-    guard !isDrawing else { return }
-    isDrawing = true
-    defer { isDrawing = false }
-    // ...
-}
 ```
 
 ---
@@ -328,8 +328,8 @@ All four bugs share one trait: they are **physically correct but logically wrong
 
 | Gotcha | Root cause / 根本原因 | Stage / 触发阶段 | Silent? / 静默? |
 | --- | --- | --- | --- |
-| ZStack compositing | SwiftUI doesn't guarantee logical→physical sublayer order when UIViewRepresentable is mixed in | Compositing / 合成 | ✅ |
 | Orientation re-init | `if/else` branching destroys view identity, double-allocates Metal renderer | Layout / 布局 | ✅ |
+| ZStack compositing | SwiftUI doesn't guarantee logical→physical sublayer order when UIViewRepresentable is mixed in | Compositing / 合成 | ✅ |
 | Premultiplied alpha | Invalid RGB > A in clearColor — CA compositor gets undefined-behavior input | CA compositor / CA 合成器 | ✅ |
 | Blend state disabled | Default pipeline factors `.one / .zero` ignore alpha on every draw call | Render pipeline / 渲染管线 | ✅ |
 
