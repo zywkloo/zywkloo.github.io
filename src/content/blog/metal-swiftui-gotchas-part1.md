@@ -108,12 +108,12 @@ func draw(in view: MTKView) {
 
 ## 2. The CALayer Hierarchy & ZStack Compositing Trap / 2. CALayer 图层树与 ZStack 的合成陷阱
 
-> **The Symptom:** You put a pure SwiftUI view *above* a `UIViewRepresentable` in a `ZStack`. The code is correct. It compiles. The view is completely invisible.
+> **The Symptom:** You put a pure SwiftUI view (like a red calligraphy template) *above* a `UIViewRepresentable` Metal view in a `ZStack`. The red character is completely invisible on the canvas — yet it mysteriously shows up underneath the semi-transparent Metal HUD.
 >
-> **症状：** 你把一个纯 SwiftUI 视图放在 ZStack 中 `UIViewRepresentable` 的*上方*。代码正确，编译通过，视图完全不可见。
+> **症状：** 你把一个纯 SwiftUI 视图（如红色的临摹描红）放在 ZStack 中 `UIViewRepresentable` Metal 画布的*上方*。屏幕上红色的描红字形完全不出现——但诡异的是，它却能呈现在半透明的 Metal HUD 调试胶囊下方。
 
-I had a translucent ghost of the 永 character — a `TraceReferenceView` — that users could follow to practice their strokes. It was supposed to sit on top of the Metal canvas. I put it above `MetalCanvasView` in the `ZStack`. Ran the app. Gone. Completely invisible.
-我有一个半透明的"永"字描红视图（`TraceReferenceView`），让用户跟着练笔顺。它应该浮在 Metal 画布上面。我在 `ZStack` 里把它放在 `MetalCanvasView` 上方。运行 app，消失了。完全不可见。
+I had a red calligraphy character on a warm paper background — a `TraceReferenceView` — that users could follow to practice their strokes. It was supposed to float on top of the Metal canvas. I put it above `MetalCanvasView` in the `ZStack`. Ran the app. The red template character completely disappeared. It was invisible on the canvas, yet when I moved the semi-transparent debug HUD over it, it mysteriously showed up inside the capsule!
+我有一个在宣纸背景上浮现红色“永”字字形的描红视图（`TraceReferenceView`）供用户临摹。它本应浮在 Metal 画布之上。我在 `ZStack` 里把它放在 `MetalCanvasView` 上方。运行 App 后，红色描红字体完全没有出现，画布上一片空白。但非常神奇的是，当我把半透明的调试 HUD 移动到对应位置时，描红字形居然在半透明胶囊的下方显现了出来！
 
 ```swift
 // Looks correct — SwiftUI ZStack is bottom-to-top
