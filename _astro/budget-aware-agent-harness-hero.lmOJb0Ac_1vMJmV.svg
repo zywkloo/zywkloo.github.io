@@ -1,0 +1,102 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#07120F"/>
+  <path d="M0 0H1200V630H0V0Z" fill="url(#bg)"/>
+
+  <path d="M58 508C172 402 277 367 372 403C501 452 568 523 720 453C846 395 878 272 1013 241C1083 225 1136 236 1190 274" stroke="#5EEAD4" stroke-width="3" stroke-linecap="round" opacity="0.32"/>
+  <path d="M82 562C186 496 301 472 424 490C557 509 628 551 746 510C858 471 910 384 1017 352C1083 333 1140 341 1188 369" stroke="#84CC16" stroke-width="2" stroke-linecap="round" opacity="0.24"/>
+  <path d="M22 398C144 311 264 293 380 344C501 397 605 416 720 348C829 284 873 188 1011 168C1085 157 1142 176 1192 202" stroke="#22C55E" stroke-width="3" stroke-linecap="round" opacity="0.24"/>
+
+  <circle cx="1010" cy="500" r="142" fill="#22C55E" opacity="0.08"/>
+  <circle cx="212" cy="139" r="116" fill="#5EEAD4" opacity="0.07"/>
+  <path d="M998 456C1030 442 1049 411 1056 374C1073 419 1057 461 1021 486C1064 478 1100 496 1125 532C1078 518 1034 526 998 560C1012 521 1011 488 998 456Z" fill="#22C55E" opacity="0.13"/>
+
+  <text x="70" y="84" fill="#ECFDF5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="38" font-weight="800">Beyond Worktrees</text>
+  <text x="72" y="120" fill="#A7F3D0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19">a lightweight harness for solo agent orchestration</text>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="700">
+    <rect x="72" y="153" width="130" height="34" rx="17" fill="#064E3B" stroke="#22C55E" stroke-opacity="0.55"/>
+    <text x="94" y="175" fill="#BBF7D0">solo dev</text>
+    <rect x="214" y="153" width="158" height="34" rx="17" fill="#052E2B" stroke="#2DD4BF" stroke-opacity="0.45"/>
+    <text x="236" y="175" fill="#A7F3D0">budget-aware</text>
+    <rect x="384" y="153" width="126" height="34" rx="17" fill="#052E2B" stroke="#2DD4BF" stroke-opacity="0.45"/>
+    <text x="407" y="175" fill="#A7F3D0">handoff</text>
+    <rect x="522" y="153" width="132" height="34" rx="17" fill="#052E2B" stroke="#2DD4BF" stroke-opacity="0.45"/>
+    <text x="543" y="175" fill="#A7F3D0">boundary</text>
+    <rect x="666" y="153" width="136" height="34" rx="17" fill="#052E2B" stroke="#2DD4BF" stroke-opacity="0.45"/>
+    <text x="688" y="175" fill="#A7F3D0">lightweight</text>
+  </g>
+
+  <g filter="url(#softShadow)">
+    <circle cx="404" cy="356" r="155" fill="#0B2538" fill-opacity="0.72" stroke="#38BDF8" stroke-opacity="0.54" stroke-width="2"/>
+    <circle cx="586" cy="356" r="155" fill="#0B3A2A" fill-opacity="0.7" stroke="#34D399" stroke-opacity="0.58" stroke-width="2"/>
+    <circle cx="496" cy="440" r="148" fill="#17320C" fill-opacity="0.68" stroke="#A3E635" stroke-opacity="0.5" stroke-width="2"/>
+  </g>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+    <text x="300" y="274" fill="#BAE6FD" font-size="20" font-weight="800">agent apps</text>
+    <text x="300" y="304" fill="#93C5FD" font-size="16">Codex App</text>
+    <text x="300" y="329" fill="#93C5FD" font-size="16">Codex Cloud</text>
+
+    <text x="596" y="274" fill="#BBF7D0" font-size="20" font-weight="800">worktrees</text>
+    <text x="596" y="304" fill="#86EFAC" font-size="16">Claude Code</text>
+    <text x="596" y="329" fill="#86EFAC" font-size="16">workmux</text>
+
+    <text x="376" y="532" fill="#D9F99D" font-size="20" font-weight="800">skills / templates</text>
+    <text x="398" y="558" fill="#BEF264" font-size="16">portable prompts</text>
+  </g>
+
+  <g filter="url(#centerGlow)">
+    <rect x="402" y="338" width="246" height="116" rx="26" fill="#052E16" stroke="#86EFAC" stroke-width="2.5"/>
+    <rect x="416" y="352" width="218" height="88" rx="18" fill="url(#wtcraftGlow)" opacity="0.92"/>
+    <text x="453" y="393" fill="#ECFDF5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="32" font-weight="900">wtcraft</text>
+    <text x="444" y="421" fill="#BBF7D0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="700">git-native task contracts</text>
+  </g>
+
+  <g stroke="#A7F3D0" stroke-width="2" stroke-linecap="round" opacity="0.78">
+    <path d="M282 408C240 408 212 421 189 445"/>
+    <path d="M680 397C735 390 775 370 808 334"/>
+    <path d="M650 461C708 487 755 524 792 572"/>
+  </g>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-weight="800">
+    <rect x="72" y="399" width="150" height="42" rx="14" fill="#0F766E"/>
+    <text x="95" y="426" fill="#ECFDF5" font-size="19">parallel</text>
+
+    <rect x="788" y="301" width="160" height="42" rx="14" fill="#166534"/>
+    <text x="812" y="328" fill="#ECFDF5" font-size="19">isolation</text>
+
+    <rect x="788" y="548" width="170" height="42" rx="14" fill="#365314"/>
+    <text x="812" y="575" fill="#ECFDF5" font-size="19">lightweight</text>
+  </g>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="800">
+    <rect x="840" y="96" width="285" height="72" rx="18" fill="#0B1519" fill-opacity="0.78" stroke="#14532D"/>
+    <text x="865" y="127" fill="#BBF7D0">missing layer:</text>
+    <text x="865" y="153" fill="#ECFDF5">handoff + file boundaries</text>
+  </g>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="800">
+    <rect x="812" y="414" width="318" height="84" rx="20" fill="#052E2B" fill-opacity="0.82" stroke="#22C55E" stroke-opacity="0.6"/>
+    <text x="840" y="449" fill="#ECFDF5">Plan as a DAG.</text>
+    <text x="840" y="477" fill="#A7F3D0">Merge shared files serially.</text>
+  </g>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="0.5" stop-color="#07120F"/>
+      <stop offset="1" stop-color="#052E16"/>
+    </linearGradient>
+    <linearGradient id="wtcraftGlow" x1="416" y1="352" x2="634" y2="440" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F766E"/>
+      <stop offset="0.58" stop-color="#047857"/>
+      <stop offset="1" stop-color="#365314"/>
+    </linearGradient>
+    <filter id="softShadow" x="208" y="182" width="555" height="431" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#020617" flood-opacity="0.48"/>
+    </filter>
+    <filter id="centerGlow" x="372" y="314" width="306" height="168" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#22C55E" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+</svg>

@@ -29,7 +29,7 @@ tags: ['AI Tools', 'Codex', 'Claude Code', 'Git', 'Worktrees', 'Solo Dev', 'Engi
 > ```bash
 > npm install -g wtcraft      # Node / npm
 > pipx install wtcraft        # Python / pipx  (recommended)
-> brew install wtcraft        # Homebrew
+> brew tap zywkloo/wtcraft https://github.com/zywkloo/wtcraft && brew install wtcraft  # Homebrew
 > ```
 
 Git worktrees are no longer a secret trick.
