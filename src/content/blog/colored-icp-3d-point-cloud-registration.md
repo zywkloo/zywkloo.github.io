@@ -18,6 +18,14 @@ tags: ["3D Scanning", "Computer Vision", "Metal", "Open3D", "Geometry", "Bilingu
   </ul>
 </blockquote>
 
+<blockquote style="background-color: rgba(36, 41, 46, 0.03); border-left: 4px solid #0284c7; padding: 14px 18px; margin-bottom: 24px; border-radius: 0 8px 8px 0; font-size: 0.9em; line-height: 1.6; color: #475569;">
+  <strong>🔒 Disclaimer & Academic Reference / 免责声明与学术引用</strong><br />
+  All technical formulations, system diagrams, and algorithmic concepts in this article are derived solely from publicly available academic materials and the pioneering paper: 
+  <em>Jaesik Park, Qian-Yi Zhou, and Vladlen Koltun, "Colored Point Cloud Registration Revisited," ICCV 2017</em>. No proprietary commercial source code, closed IP, or confidential corporate secrets are disclosed herein.<br /><br />
+  本文所涉及的系统架构、算法公式及技术图表，均完全源于公开学术资源以及下述奠基性研究论文：
+  <em>Jaesik Park, Qian-Yi Zhou, and Vladlen Koltun, "Colored Point Cloud Registration Revisited," ICCV 2017</em>。本文仅作学术探讨与算法科普，不包含任何商业私有源码、受保护的专利技术或商业机密。
+</blockquote>
+
 When building a high-precision 3D scanning application for mobile devices, the holy grail is real-time, millimeter-accurate reconstruction. Whether you are scanning industrial components, orthopedic casts, or dental impressions, the fundamental problem is the same: **how to align a continuous stream of noisy, unstructured 3D depth frames into a single, cohesive, globally consistent mesh.**
 
 在为移动设备构建高精度 3D 扫描应用时，核心终极目标是实现实时的毫米级精密重建。无论是在扫描工业零件、矫形支具，还是牙科印模，其面临的底层科学问题是相同的：**如何将连续不断的、充满噪声且无结构性的 3D 深度帧流，精准对齐并融合成一个单一、紧密、全局一致的 3D 网格模型。**
