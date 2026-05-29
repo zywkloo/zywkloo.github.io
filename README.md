@@ -1,60 +1,65 @@
-# Astro Starter Kit: Blog
+# zywkloo.github.io
 
-```sh
-npm create astro@latest -- --template blog
-```
+**Victor Zhang's personal blog and engineering portfolio.**
 
-Features:
+🌐 [zywkloo.github.io](https://zywkloo.github.io)
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+Built with [Astro](https://astro.build) and deployed via GitHub Pages.
 
-## 🚀 Project Structure
+---
 
-Inside of your Astro project, you'll see the following folders and files:
+## About
+
+Writing on software engineering, multi-agent workflows, and solo developer tooling.
+
+Featured project: **[wtcraft](https://github.com/zywkloo/wtcraft)** — a budget-aware, git-native harness for orchestrating multiple coding agents on a limited budget.
+
+## Recent Posts
+
+- [wtcraft — Budget-Aware Multi-Agent Harness](https://zywkloo.github.io/blog/beyond-worktrees-budget-aware-multi-agent-coding-harness/)
+- [Vibe Coding with Git Worktrees](https://zywkloo.github.io/blog/worktree-refactor-playbook/)
+
+## Stack
+
+| Layer | Choice |
+| --- | --- |
+| Framework | [Astro](https://astro.build) (static, content collections) |
+| Content | Markdown + MDX in `src/content/blog/` |
+| Deployment | GitHub Pages (push to `master` → auto deploy) |
+| Analytics | Post view counts via custom endpoint |
+| Fonts | Atkinson Hyperlegible |
+
+## Project Structure
 
 ```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+src/
+├── assets/          # Optimized images (Astro pipeline → WebP)
+├── components/      # Header, Footer, BaseHead, PostViewCount …
+├── content/
+│   └── blog/        # .md blog posts (frontmatter: title, pubDate, heroImage, …)
+├── layouts/
+│   └── BlogPost.astro
+├── pages/
+│   ├── index.astro
+│   └── blog/
+│       ├── index.astro
+│       └── [...slug].astro
+└── styles/
+    └── global.css
+public/
+├── fonts/
+└── images/          # Static assets (icons, screenshots)
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Dev Commands
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+| Command | Action |
+| --- | --- |
+| `npm install` | Install dependencies |
+| `npm run dev` | Start dev server at `localhost:4321` |
+| `npm run build` | Build to `./dist/` |
+| `npm run preview` | Preview production build locally |
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+## License
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+Content © Victor Zhang. Code: MIT.
