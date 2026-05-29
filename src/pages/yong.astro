@@ -39,7 +39,7 @@ import { SITE_DESCRIPTION } from '../consts';
 					<div class="demo-card">
 						<div class="video-container">
 							<video autoplay loop muted playsinline class="demo-video">
-								<source src="/videos/yong-demo-1.mp4" type="video/mp4" />
+								<source src="/videos/yong-demo-2.mp4" type="video/mp4" />
 								Your browser does not support the video tag.
 							</video>
 						</div>
@@ -51,8 +51,8 @@ import { SITE_DESCRIPTION } from '../consts';
 
 					<div class="demo-card">
 						<div class="video-container">
-							<video autoplay loop muted playsinline class="demo-video">
-								<source src="/videos/yong-demo-2.mp4" type="video/mp4" />
+							<video autoplay loop muted playsinline class="demo-video demo-video-zoom">
+								<source src="/videos/yong-demo-1.mp4" type="video/mp4" />
 								Your browser does not support the video tag.
 							</video>
 						</div>
@@ -324,6 +324,18 @@ import { SITE_DESCRIPTION } from '../consts';
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+
+	.demo-video-zoom {
+		object-position: center bottom;
+		transform: scale(1.38);
+		transform-origin: center bottom;
+	}
+
+	/* Subtle micro-animation to scale up the zoom slightly on hover */
+	.demo-card:hover .demo-video-zoom {
+		transform: scale(1.45);
 	}
 
 	.demo-info {
