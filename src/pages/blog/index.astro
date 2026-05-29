@@ -91,17 +91,28 @@ const posts = (await getCollection('blog')).sort(
 			}
 			@media (max-width: 720px) {
 				ul {
-					gap: 0.5em;
+					gap: 1.1rem;
 				}
 				ul li {
 					width: 100%;
-					text-align: center;
+					text-align: left;
 				}
 				ul li:first-child {
 					margin-bottom: 0;
 				}
+				ul li img,
+				ul li:first-child img {
+					height: auto;
+					aspect-ratio: 16 / 9;
+					object-fit: cover;
+				}
+				ul li .title,
 				ul li:first-child .title {
-					font-size: 1.563em;
+					font-size: 1.45rem;
+					line-height: 1.2;
+				}
+				.meta {
+					font-size: 0.9rem;
 				}
 			}
 		</style>
