@@ -1,12 +1,21 @@
 ---
-title: "Precision Alignment: Colored ICP Point Cloud Registration in 3D Scanning / 精密对齐：3D 扫描中的 Colored ICP 点云配准算法"
+title: "MetalSolo (Part 3): Colored ICP Point Cloud Registration in 3D Scanning / MetalSolo（第三篇）：3D 扫描中的 Colored ICP 点云配准算法"
 description: "How to solve the sliding ambiguity in 3D reconstruction using multi-scale Colored ICP, custom Metal rendering pipelines, and volumetric SLAM fusion."
 pubDate: "May 29 2026"
 heroImage: "../../assets/colored-icp-hero.png"
 tags: ["3D Scanning", "Computer Vision", "Metal", "Open3D", "Geometry", "Bilingual"]
 ---
 
-# Precision Alignment: Colored ICP Point Cloud Registration in 3D Scanning / 精密对齐：3D 扫描中的 Colored ICP 点云配准算法
+# MetalSolo (Part 3): Colored ICP Point Cloud Registration in 3D Scanning / MetalSolo（第三篇）：3D 扫描中的 Colored ICP 点云配准算法
+
+<blockquote style="background-color: rgba(36, 41, 46, 0.05); border-left: 4px solid #8b5cf6; padding: 12px 16px; margin-bottom: 24px; border-radius: 0 8px 8px 0;">
+  <strong>🎸 Series: MetalSolo (High-Performance GPU Programming)</strong>
+  <ul style="margin-top: 8px; margin-bottom: 0; padding-left: 20px;">
+    <li><strong>Part 1</strong>: <a href="/blog/metal-swiftui-gotchas-part1/">Metal + SwiftUI Layer Compositing & Lifecycle Gotchas</a></li>
+    <li><strong>Part 2</strong>: <a href="/blog/metal-geometry-math-part2/">Sacred Geometry of Stylus Input & Ink Engine Math</a></li>
+    <li>👉 <strong>Part 3: Colored ICP Point Cloud Registration in 3D Scanning (Current)</strong></li>
+  </ul>
+</blockquote>
 
 When building a high-precision 3D scanning application for mobile devices, the holy grail is real-time, millimeter-accurate reconstruction. Whether you are scanning industrial components, orthopedic casts, or dental impressions, the fundamental problem is the same: **how to align a continuous stream of noisy, unstructured 3D depth frames into a single, cohesive, globally consistent mesh.**
 

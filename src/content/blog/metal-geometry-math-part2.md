@@ -1,12 +1,21 @@
 ---
-title: "The Sacred Geometry of Stylus Input & Ink Engine Math (Part 2) / 触控笔输入与笔迹引擎的几何数学公式（第二篇）"
+title: "MetalSolo (Part 2): Sacred Geometry of Stylus Input & Ink Engine Math / MetalSolo（第二篇）：触控笔输入与笔迹引擎的几何数学公式"
 description: "Why triangles and Bezier curves are the foundation of vector ink, detailing our Catmull-Rom smoothing algorithms, variable-width tessellation math, and dynamic end-cap rendering."
 pubDate: "May 29 2026"
 heroImage: "../../assets/Yong8principles.png"
 tags: ["Geometry", "Math", "Metal", "iOS Development", "Bilingual", "Computer Graphics"]
 ---
 
-# The Sacred Geometry of Stylus Input & Ink Engine Math (Part 2) / 触控笔输入与笔迹引擎的几何数学公式（第二篇）
+# MetalSolo (Part 2): Sacred Geometry of Stylus Input & Ink Engine Math / MetalSolo（第二篇）：触控笔输入与笔迹引擎的几何数学公式
+
+<blockquote style="background-color: rgba(36, 41, 46, 0.05); border-left: 4px solid #8b5cf6; padding: 12px 16px; margin-bottom: 24px; border-radius: 0 8px 8px 0;">
+  <strong>🎸 Series: MetalSolo (High-Performance GPU Programming)</strong>
+  <ul style="margin-top: 8px; margin-bottom: 0; padding-left: 20px;">
+    <li><strong>Part 1</strong>: <a href="/blog/metal-swiftui-gotchas-part1/">Metal + SwiftUI Layer Compositing & Lifecycle Gotchas</a></li>
+    <li>👉 <strong>Part 2: Sacred Geometry of Stylus Input & Ink Engine Math (Current)</strong></li>
+    <li><strong>Part 3</strong>: <a href="/blog/colored-icp-3d-point-cloud-registration/">Colored ICP Point Cloud Registration in 3D Scanning</a></li>
+  </ul>
+</blockquote>
 
 ## Introduction: The Canvas is a Grid of Triangles / 导言：画布是三角形的网格
 

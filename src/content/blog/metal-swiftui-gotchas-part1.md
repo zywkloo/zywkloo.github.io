@@ -1,12 +1,21 @@
 ---
-title: "Metal + SwiftUI (Part 1): The Silent Layer Compositing & Lifecycle Gotchas / Metal + SwiftUI（第一篇）：静默的图层合成与生命周期陷阱"
+title: "MetalSolo (Part 1): Metal + SwiftUI Layer Compositing & Lifecycle Gotchas / MetalSolo（第一篇）：Metal + SwiftUI 图层合成与生命周期陷阱"
 description: "Three bugs that had no warnings, no crashes, and no obvious causes. Just a blank canvas staring back at me at 2am. Here's what I learned building EightStrokes."
 pubDate: "May 27 2026"
 heroImage: "../../assets/apple-engineers-metal.png"
 tags: ["Metal", "SwiftUI", "UIKit", "CALayer", "iOS Development", "Bilingual"]
 ---
 
-# Metal + SwiftUI (Part 1): The Silent Layer Compositing & Lifecycle Gotchas / Metal + SwiftUI（第一篇）：静默的图层合成与生命周期陷阱
+# MetalSolo (Part 1): Metal + SwiftUI Layer Compositing & Lifecycle Gotchas / MetalSolo（第一篇）：Metal + SwiftUI 图层合成与生命周期陷阱
+
+<blockquote style="background-color: rgba(36, 41, 46, 0.05); border-left: 4px solid #8b5cf6; padding: 12px 16px; margin-bottom: 24px; border-radius: 0 8px 8px 0;">
+  <strong>🎸 Series: MetalSolo (High-Performance GPU Programming)</strong>
+  <ul style="margin-top: 8px; margin-bottom: 0; padding-left: 20px;">
+    <li>👉 <strong>Part 1: Metal + SwiftUI Layer Compositing & Lifecycle Gotchas (Current)</strong></li>
+    <li><strong>Part 2</strong>: <a href="/blog/metal-geometry-math-part2/">Sacred Geometry of Stylus Input & Ink Engine Math</a></li>
+    <li><strong>Part 3</strong>: <a href="/blog/colored-icp-3d-point-cloud-registration/">Colored ICP Point Cloud Registration in 3D Scanning</a></li>
+  </ul>
+</blockquote>
 
 ## Solo Dev Meets the GPU / 一个人 vs GPU
 

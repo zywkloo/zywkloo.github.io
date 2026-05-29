@@ -1,5 +1,5 @@
 ---
-title: 'Vibe Coding with Git Worktrees (Part 1): A Playbook Most Devs Are Missing'
+title: 'TokenChef (Part 1): Vibe Coding with Git Worktrees — A Playbook Most Devs Are Missing'
 description: 'Most people vibe-code with one model in one branch. Here is how to use multiple models, git worktrees, and a phased workflow to ship refactors without breaking everything.'
 pubDate: 'Feb 5 2026'
 heroImage: '../../assets/vibe-coding-hero.png'
