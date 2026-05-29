@@ -1,5 +1,5 @@
 ---
-title: 'Chief Token Orchestrator: Manage Claude, Codex, and Gemini as a Structured Software Team'
+title: 'Chief Token Orchestrator (Part 2): Manage Claude, Codex, and Gemini as a Structured Software Team'
 description: 'Spawning parallel agents is easy. Spawning them without hitting token limits, context pollution, or review bottlenecks is hard. Discover why you need a structured, layered team architecture.'
 pubDate: 'May 26 2026'
 heroImage: '../../assets/chief-orchestrator-hero.png'
@@ -11,6 +11,15 @@ tags: ['AI Tools', 'Agent Architecture', 'Claude Code', 'Codex', 'Gemini', 'Solo
   <a href="https://pypi.org/project/wtcraft/"><img src="https://img.shields.io/pypi/v/wtcraft.svg?style=flat-square&color=3775a9" alt="PyPI version" /></a>
   <a href="https://github.com/zywkloo/wtcraft"><img src="https://img.shields.io/badge/GitHub-wtcraft-24292e?style=flat-square&logo=github" alt="GitHub Repository" /></a>
 </div>
+
+<blockquote style="background-color: rgba(36, 41, 46, 0.05); border-left: 4px solid #3775a9; padding: 12px 16px; margin-bottom: 24px; border-radius: 0 8px 8px 0;">
+  <strong>📦 Series: Git-Native Multi-Agent Coding</strong>
+  <ul style="margin-top: 8px; margin-bottom: 0; padding-left: 20px;">
+    <li><strong>Part 1</strong>: <a href="/blog/worktree-refactor-playbook/">Vibe Coding with Git Worktrees: A Playbook Most Devs Are Missing</a></li>
+    <li>👉 <strong>Part 2: Chief Token Orchestrator: Manage Claude, Codex, and Gemini as a Structured Software Team (Current)</strong></li>
+    <li><strong>Part 3</strong>: <a href="/blog/wtcraft-lightweight-git-native-multi-agent-scaffolding/">wtcraft: A Lightweight, Git-Native Scaffolding for Bounded Multi-Agent Coding</a></li>
+  </ul>
+</blockquote>
 
 ## Contents
 

@@ -1,5 +1,5 @@
 ---
-title: 'wtcraft: A Lightweight, Git-Native Scaffolding for Bounded Multi-Agent Coding'
+title: 'wtcraft (Part 3): A Lightweight, Git-Native Scaffolding for Bounded Multi-Agent Coding'
 description: 'How do you actually enforce boundaries on autonomous agents? Explore Harness Engineering, the competitive landscape of task contracts, and how the wtcraft CLI implements bounded sandboxes locally.'
 pubDate: 'May 26 2026'
 heroImage: '../../assets/wtcraft-scaffolding-hero.png'
@@ -11,6 +11,15 @@ tags: ['AI Tools', 'Harness Engineering', 'Git', 'Worktrees', 'wtcraft', 'Codex'
   <a href="https://pypi.org/project/wtcraft/"><img src="https://img.shields.io/pypi/v/wtcraft.svg?style=flat-square&color=3775a9" alt="PyPI version" /></a>
   <a href="https://github.com/zywkloo/wtcraft"><img src="https://img.shields.io/badge/GitHub-wtcraft-24292e?style=flat-square&logo=github" alt="GitHub Repository" /></a>
 </div>
+
+<blockquote style="background-color: rgba(36, 41, 46, 0.05); border-left: 4px solid #24292e; padding: 12px 16px; margin-bottom: 24px; border-radius: 0 8px 8px 0;">
+  <strong>📦 Series: Git-Native Multi-Agent Coding</strong>
+  <ul style="margin-top: 8px; margin-bottom: 0; padding-left: 20px;">
+    <li><strong>Part 1</strong>: <a href="/blog/worktree-refactor-playbook/">Vibe Coding with Git Worktrees: A Playbook Most Devs Are Missing</a></li>
+    <li><strong>Part 2</strong>: <a href="/blog/chief-token-orchestrator-manage-layered-agent-team/">Chief Token Orchestrator: Manage Claude, Codex, and Gemini as a Structured Software Team</a></li>
+    <li>👉 <strong>Part 3: wtcraft: A Lightweight, Git-Native Scaffolding for Bounded Multi-Agent Coding (Current)</strong></li>
+  </ul>
+</blockquote>
 
 ## Contents
 
