@@ -2,7 +2,7 @@
 title: 'Vibe Coding with Git Worktrees (Part 1): A Playbook Most Devs Are Missing'
 description: 'Most people vibe-code with one model in one branch. Here is how to use multiple models, git worktrees, and a phased workflow to ship refactors without breaking everything.'
 pubDate: 'Feb 5 2026'
-heroImage: '../../assets/worktree-refactor-hero.svg'
+heroImage: '../../assets/vibe-coding-hero.png'
 tags: ['Vibe Coding', 'Git', 'Worktrees', 'Claude', 'AI Tools', 'Engineering']
 ---
 
