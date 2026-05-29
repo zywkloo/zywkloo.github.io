@@ -379,38 +379,38 @@
 <p>Here is the mental model I keep coming back to:</p>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>             [ Human Developer ]</span></span>
 <span class="line"><span>                      │</span></span>
-<span class="line"><span>                      ▼  (Strategic Intent + Requirement Input)</span></span>
-<span class="line"><span>┌─────────────────────────────────────────────────────────────┐</span></span>
-<span class="line"><span>│    Orchestrator (e.g., Gemini 3.5 Flash)                    │ ◄── Fast, Low-latency, Cross-Repository</span></span>
-<span class="line"><span>└─────────────────────┬───────────────────────────────────────┘</span></span>
-<span class="line"><span>                      │  (Subtask &#x26; Context)</span></span>
+<span class="line"><span>                      ▼ (Strategic Intent)</span></span>
+<span class="line"><span>┌────────────────────────────────────────────┐</span></span>
+<span class="line"><span>│   Orchestrator (Gemini 3.5 Flash)          │ ◄── Fast, Cross-Repo</span></span>
+<span class="line"><span>└─────────────────────┬──────────────────────┘</span></span>
+<span class="line"><span>                      │ (Subtask &#x26; Context)</span></span>
 <span class="line"><span>                      ▼</span></span>
-<span class="line"><span>┌─────────────────────────────────────────────────────────────┐</span></span>
-<span class="line"><span>│    Planner (e.g., Claude 3.5 Opus / GPT-5.5)                │ ◄── High-Reasoning Strategic Architect</span></span>
-<span class="line"><span>└─────────────────────┬───────────────────────────────────────┘      ▲</span></span>
-<span class="line"><span>                      │  (Writes .worktree-task.md Contract)         │</span></span>
-<span class="line"><span>                      ▼                                              │</span></span>
-<span class="line"><span>┌─────────────────────────────────────────────────────────────┐      │ (Re-plan / Loopback)</span></span>
-<span class="line"><span>│    Executor (e.g., ChatGPT 5.3-codex / Claude Sonnet)       │ ◄── Precision Coder in Sandboxed Worktree</span></span>
-<span class="line"><span>└─────────────────────┬───────────────────────────────────────┘      │</span></span>
-<span class="line"><span>                      │  (Reads task, writes code in sandbox)        │</span></span>
-<span class="line"><span>                      ▼                                              │</span></span>
-<span class="line"><span>             [ Human Developer ] (Pushes, creates PR)                │</span></span>
-<span class="line"><span>                      │                                              │</span></span>
-<span class="line"><span>                      ▼                                              │</span></span>
-<span class="line"><span>┌─────────────────────────────────────────────────────────────┐      │</span></span>
-<span class="line"><span>│    Verifier (e.g., Claude Opus / GPT-5.5 / Gemini Pro)      │ ◄── Agentic Code Review (Upcoming)</span></span>
-<span class="line"><span>└─────────────────────┬───────────────────────────────────────┘      │</span></span>
-<span class="line"><span>                      │                                              │</span></span>
-<span class="line"><span>                      ▼                                              │</span></span>
-<span class="line"><span>             [ Human Developer ] ────────────────────────────────────┘</span></span>
+<span class="line"><span>┌────────────────────────────────────────────┐</span></span>
+<span class="line"><span>│   Planner (Claude 3.5 Opus / GPT-5.5)      │ ◄── Strategic Architect</span></span>
+<span class="line"><span>└─────────────────────┬──────────────────────┘      ▲</span></span>
+<span class="line"><span>                      │ (Writes Task Contract)      │</span></span>
+<span class="line"><span>                      ▼                             │</span></span>
+<span class="line"><span>┌────────────────────────────────────────────┐      │ (Re-plan / Loopback)</span></span>
+<span class="line"><span>│   Executor (GPT-5.3 / Claude Sonnet)       │ ◄── Precision Coder</span></span>
+<span class="line"><span>└─────────────────────┬──────────────────────┘      │</span></span>
+<span class="line"><span>                      │ (Writes Code in Sandbox)    │</span></span>
+<span class="line"><span>                      ▼                             │</span></span>
+<span class="line"><span>             [ Human Developer ] (Pushes, Creates PR)</span></span>
+<span class="line"><span>                      │                             │</span></span>
+<span class="line"><span>                      ▼                             │</span></span>
+<span class="line"><span>┌────────────────────────────────────────────┐      │</span></span>
+<span class="line"><span>│   Verifier (Claude Opus / Gemini Pro)      │ ◄── Agentic Review (Upcoming)</span></span>
+<span class="line"><span>└─────────────────────┬──────────────────────┘      │</span></span>
+<span class="line"><span>                      │                             │</span></span>
+<span class="line"><span>                      ▼                             │</span></span>
+<span class="line"><span>             [ Human Developer ] ───────────────────┘</span></span>
 <span class="line"><span>             (Approve OR Retry / Re-plan)</span></span>
 <span class="line"><span>                      │</span></span>
 <span class="line"><span>                      │ (If Approved -> Merge)</span></span>
 <span class="line"><span>                      ▼</span></span>
-<span class="line"><span>┌─────────────────────────────────────────────────────────────┐</span></span>
-<span class="line"><span>│    Finisher (e.g., Gemini 3.5 Flash / Claude Haiku)         │ ◄── Local Worktree Cleanup</span></span>
-<span class="line"><span>└─────────────────────────────────────────────────────────────┘</span></span></code></pre>
+<span class="line"><span>┌────────────────────────────────────────────┐</span></span>
+<span class="line"><span>│   Finisher (Gemini Flash / Claude Haiku)   │ ◄── Local Cleanup</span></span>
+<span class="line"><span>└────────────────────────────────────────────┘</span></span></code></pre>
 <p>The small detail that makes the whole system work is the contract in the middle.</p>
 <p>Without it, “multi-agent coding” turns into a room full of very fast interns all touching the same whiteboard.</p>
 <p>With it, a solo developer can start to feel like a small engineering team:</p>
