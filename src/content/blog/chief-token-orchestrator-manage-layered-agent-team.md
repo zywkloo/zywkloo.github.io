@@ -6,6 +6,10 @@ heroImage: '../../assets/wtcraft-hero.png'
 tags: ['AI Tools', 'Agent Architecture', 'Claude Code', 'Codex', 'Gemini', 'Solo Dev', 'Engineering']
 ---
 
+[![npm package](https://img.shields.io/npm/v/wtcraft.svg?style=flat-square&color=cb3837)](https://www.npmjs.com/package/wtcraft)
+[![PyPI version](https://img.shields.io/pypi/v/wtcraft.svg?style=flat-square&color=3775a9)](https://pypi.org/project/wtcraft/)
+[![GitHub Repo](https://img.shields.io/github/stars/zywkloo/wtcraft.svg?style=flat-square&label=GitHub%20Stars&color=24292e)](https://github.com/zywkloo/wtcraft)
+
 ## Contents
 
 - [Why this exists](#why-this-exists)
