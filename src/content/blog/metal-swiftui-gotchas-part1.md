@@ -18,6 +18,10 @@ tags: ["Metal", "SwiftUI", "UIKit", "CALayer", "iOS Development", "Bilingual"]
   </ul>
 </blockquote>
 
+<p style="text-align: center; margin: 0 0 32px;">
+  <a href="https://apps.apple.com/ca/app/8strokes/id6774579880" target="_blank" rel="noopener" style="display: inline-block; padding: 12px 24px; background: #8b5cf6; color: #fff; font-weight: 600; border-radius: 99px; text-decoration: none;"> Download EightStrokes (永字八法) on the App Store</a>
+</p>
+
 ## Solo Dev Meets the GPU / 一个人 vs GPU
 
 Imagine hiring a classically trained violinist and asking them to play death metal. No coaching, no sheet music. Just hand them the guitar and say "you'll figure it out."

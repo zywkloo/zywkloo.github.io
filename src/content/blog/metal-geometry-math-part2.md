@@ -18,6 +18,10 @@ tags: ["Geometry", "Math", "Metal", "iOS Development", "Bilingual", "Computer Gr
   </ul>
 </blockquote>
 
+<p style="text-align: center; margin: 0 0 32px;">
+  <a href="https://apps.apple.com/ca/app/8strokes/id6774579880" target="_blank" rel="noopener" style="display: inline-block; padding: 12px 24px; background: #8b5cf6; color: #fff; font-weight: 600; border-radius: 99px; text-decoration: none;"> Download EightStrokes (永字八法) on the App Store</a>
+</p>
+
 ## Introduction: The Canvas is a Grid of Triangles / 导言：画布是三角形的网格
 
 To a GPU, there is no such thing as an "ink stroke" or a "curved brush." The graphics hardware is a cold, mechanical calculator that understands only one fundamental shape: the triangle. 

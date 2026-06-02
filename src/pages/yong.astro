@@ -21,9 +21,10 @@ import { SITE_DESCRIPTION } from '../consts';
 					<p class="tagline">Practice daily, find zen in every stroke. Start your calligraphy journey anytime, anywhere with just your fingertip.</p>
 					
 					<div class="cta-group">
-						<a href="#features" class="btn btn-primary">探索核心特色 / Explore Features</a>
-						<a href="#support" class="btn btn-secondary">技术支持 / Support</a>
+						<a href="https://apps.apple.com/ca/app/8strokes/id6774579880" target="_blank" rel="noopener" class="btn btn-primary"> App Store 下载 / Download</a>
+						<a href="#features" class="btn btn-secondary">探索核心特色 / Explore Features</a>
 					</div>
+					<p class="coming-soon">🚀 现已支持 iPad · <strong>iPhone 版本、更多字帖与更多平台兼容即将到来</strong><br /><span class="en-sub">Now on iPad · iPhone, more copybooks & broader device support coming soon</span></p>
 				</div>
 				
 				<div class="hero-preview">
@@ -96,6 +97,31 @@ import { SITE_DESCRIPTION } from '../consts';
 						<p>对自己的高分作品感到骄傲？一键生成古典、精美的书法打分卡片，轻松分享到朋友圈或以笔会友。</p>
 						<small>Proud of a high score? Generate an elegant, minimalist scorecard in one tap and share it with friends — challenge each other and bond through the art of calligraphy.</small>
 					</div>
+				</div>
+			</section>
+
+			<section id="blessing" class="blessing-section">
+				<h2>祝福卡片 · 同框分享 / Blessing Cards & Shareable Moments</h2>
+				<p class="blessing-subtitle">把一笔一画的心意，写进一张可分享的祝福卡。挥毫落墨，随手相赠。<br /><span class="en-sub">Turn every stroke into a heartfelt blessing card you can share. Write elegantly and gift effortlessly.</span></p>
+
+				<div class="blessing-grid">
+					<figure class="blessing-card-item">
+						<img src="/images/04_blessing_card_ipad.png" alt="永字八法 祝福卡片 iPad 样机预览 / EightStrokes Blessing Card on iPad" loading="lazy" />
+						<figcaption>
+							<h4>🧧 祝福卡片 / Blessing Card</h4>
+							<p>挥毫写下祝福，一键生成古典雅致的祝福卡片，把指尖的墨香送给最在意的人。</p>
+							<small>Write a blessing by hand and generate an elegant, classical card in one tap — send the scent of ink to the people who matter most.</small>
+						</figcaption>
+					</figure>
+
+					<figure class="blessing-card-item">
+						<img src="/images/05_replay_score_card_ipad.png" alt="永字八法 笔迹回放评分卡 iPad 样机预览 / EightStrokes Replay Scorecard on iPad" loading="lazy" />
+						<figcaption>
+							<h4>🎞️ 回放评分卡 / Replay Scorecard</h4>
+							<p>逐笔回放你的书写过程，搭配多维度评分卡，随时复盘每一次落笔与进步。</p>
+							<small>Replay your writing stroke by stroke alongside a multi-dimensional scorecard — review every stroke and watch yourself improve.</small>
+						</figcaption>
+					</figure>
 				</div>
 			</section>
 
@@ -222,6 +248,22 @@ import { SITE_DESCRIPTION } from '../consts';
 	.cta-group {
 		display: flex;
 		gap: 1rem;
+	}
+
+	.coming-soon {
+		margin-top: 1.25rem;
+		font-size: 0.95rem;
+		line-height: 1.5;
+		color: #8b7355;
+	}
+
+	.coming-soon strong {
+		color: #735f46;
+	}
+
+	.coming-soon .en-sub {
+		font-size: 0.85rem;
+		color: #9c938e;
 	}
 
 	.btn {
@@ -414,6 +456,82 @@ import { SITE_DESCRIPTION } from '../consts';
 	}
 
 	.feature-card small {
+		display: block;
+		font-size: 0.82rem;
+		line-height: 1.4;
+		color: #9c938e;
+	}
+
+	/* Blessing Cards Section */
+	.blessing-section {
+		padding: 5rem 0;
+		border-top: 1px solid rgba(139, 115, 85, 0.15);
+	}
+
+	.blessing-section h2 {
+		font-size: 2rem;
+		font-weight: 700;
+		text-align: center;
+		margin-bottom: 0.5rem;
+		color: #1a1716;
+	}
+
+	.blessing-subtitle {
+		text-align: center;
+		font-size: 1.1rem;
+		color: #8b837e;
+		margin-bottom: 3.5rem;
+	}
+
+	.blessing-subtitle .en-sub {
+		font-size: 0.95rem;
+	}
+
+	.blessing-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2.5rem;
+		align-items: start;
+	}
+
+	@media (max-width: 768px) {
+		.blessing-grid {
+			grid-template-columns: 1fr;
+			gap: 2.5rem;
+		}
+	}
+
+	.blessing-card-item {
+		margin: 0;
+	}
+
+	.blessing-card-item img {
+		width: 100%;
+		height: auto;
+		border-radius: 20px;
+		box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+		display: block;
+	}
+
+	.blessing-card-item figcaption {
+		margin-top: 1.5rem;
+	}
+
+	.blessing-card-item h4 {
+		font-size: 1.2rem;
+		font-weight: 700;
+		margin-bottom: 0.5rem;
+		color: #1a1716;
+	}
+
+	.blessing-card-item p {
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: #5c5652;
+		margin: 0 0 0.5rem 0;
+	}
+
+	.blessing-card-item small {
 		display: block;
 		font-size: 0.82rem;
 		line-height: 1.4;
