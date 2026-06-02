@@ -1,5 +1,5 @@
 ---
-title: 'TokenChef (Part 4): Stop Reinventing the Agent — wtCraft Boundaries, Ledgers & Sign-off First / 别卷 Agent 了：wtcraft 要先把边界、账本和验收做好'
+title: 'TokenChef (Part 4): Stop Reinventing the Agent — wtCRAFT Boundaries, Ledgers & Sign-off First / 别卷 Agent 了：wtcraft 要先把边界、账本和验收做好'
 series: 'TokenChef'
 description: '从 Claude Code 源码泄露与 CCB 逆向架构出发，用同一套六层架构对比 Codex 和 Claude Code，得出结论：wtcraft 不该再造 runtime，而该把任务边界、运行账本和验收流程做扎实。'
 pubDate: 'Jun 02 2026'
