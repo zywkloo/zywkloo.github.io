@@ -115,7 +115,10 @@ import { SITE_DESCRIPTION } from '../consts';
 					</figure>
 
 					<figure class="blessing-card-item">
-						<img src="/images/05_replay_score_card_ipad.png" class="shift-down" alt="永字八法 笔迹回放评分卡 iPad 样机预览 / 8 Strokes Replay Scorecard on iPad" loading="lazy" />
+						<video class="shift-down" autoplay loop muted playsinline aria-label="永字八法 笔迹回放评分卡演示 / 8 Strokes Replay Scorecard demo">
+							<source src="/videos/replay-score-card.mp4" type="video/mp4" />
+							Your browser does not support the video tag.
+						</video>
 						<figcaption>
 							<h4>🎞️ 回放评分卡 / Replay Scorecard</h4>
 							<p>逐笔回放你的书写过程，搭配多维度评分卡，随时复盘每一次落笔与进步。</p>
@@ -492,7 +495,8 @@ import { SITE_DESCRIPTION } from '../consts';
 		}
 	}
 
-	.blessing-card-item img.shift-down {
+	.blessing-card-item img.shift-down,
+	.blessing-card-item video.shift-down {
 		object-position: center 40%;
 	}
 
@@ -509,7 +513,8 @@ import { SITE_DESCRIPTION } from '../consts';
 		text-align: center;
 	}
 
-	.blessing-card-item img {
+	.blessing-card-item img,
+	.blessing-card-item video {
 		width: 80%;
 		max-width: 360px;
 		aspect-ratio: 3 / 3.2;
