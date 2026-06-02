@@ -1,5 +1,5 @@
 ---
-title: 'TokenChef (Part 4): 别卷 Agent 了：wtcraft 要先把边界、账本和验收做好'
+title: 'TokenChef (Part 4): Stop Reinventing the Agent — Nail Boundaries, Ledgers & Sign-off First / 别卷 Agent 了：wtcraft 要先把边界、账本和验收做好'
 series: 'TokenChef'
 description: '从 Claude Code 源码泄露与 CCB 逆向架构出发，用同一套六层架构对比 Codex 和 Claude Code，得出结论：wtcraft 不该再造 runtime，而该把任务边界、运行账本和验收流程做扎实。'
 pubDate: 'Jun 02 2026'
@@ -21,7 +21,7 @@ tags: ['AI Tools', 'Agent Architecture', 'Codex', 'Claude Code', 'wtcraft', 'Git
     <li><strong>Part 1</strong>: <a href="/blog/worktree-refactor-playbook/">Vibe Coding with Git Worktrees</a></li>
     <li><strong>Part 2</strong>: <a href="/blog/chief-token-orchestrator-manage-layered-agent-team/">Chief Token Orchestrator</a></li>
     <li><strong>Part 3</strong>: <a href="/blog/wtcraft-lightweight-git-native-multi-agent-scaffolding/">wtcraft: Git-Native Scaffolding</a></li>
-    <li>👉 <strong>Part 4: 别卷 Agent 了 (Current)</strong></li>
+    <li>👉 <strong>Part 4: Stop Reinventing the Agent / 别卷 Agent 了 (Current)</strong></li>
   </ul>
 </blockquote>
 
