@@ -104,7 +104,7 @@ import { SITE_DESCRIPTION } from '../consts';
 				<h2>祝福卡片 · 同框分享 / Blessing Cards & Shareable Moments</h2>
 				<p class="blessing-subtitle">把一笔一画的心意，写进一张可分享的祝福卡。挥毫落墨，随手相赠。<br /><span class="en-sub">Turn every stroke into a heartfelt blessing card you can share. Write elegantly and gift effortlessly.</span></p>
 
-				<div class="blessing-grid">
+				<div class="blessing-grid" id="support">
 					<figure class="blessing-card-item">
 						<img src="/images/04_blessing_card_ipad.png" alt="永字八法 祝福卡片 iPad 样机预览 / 8 Strokes Blessing Card on iPad" loading="lazy" />
 						<figcaption>
@@ -122,27 +122,11 @@ import { SITE_DESCRIPTION } from '../consts';
 							<small>Replay your writing stroke by stroke alongside a multi-dimensional scorecard — review every stroke and watch yourself improve.</small>
 						</figcaption>
 					</figure>
-				</div>
-			</section>
 
-			<section id="support" class="support-section">
-				<div class="section-container">
-					<h2>技术支持与反馈 / Support & Feedback</h2>
-					<p>在使用 <strong>永字八法 (8 Strokes)</strong> 的过程中，如果您有任何疑问、发现 Bug、或者有任何功能性的建议，欢迎通过以下渠道与我们取得联系：</p>
-					<p class="english-law">If you have any questions, find a bug, or have feature suggestions while using <strong>8 Strokes</strong>, please reach out through the channels below:</p>
-					
-					<div class="contact-methods">
-						<div class="contact-card">
-							<h4>✉️ 电子邮件 / Email</h4>
-							<p><a href="mailto:victor@goldenarc.digital">victor@goldenarc.digital</a></p>
-							<small>我们通常会在 24 小时内回复您的问题。<br />We typically respond within 24 hours.</small>
-						</div>
-						
-						<div class="contact-card">
-							<h4>🔒 源码与反馈 / Repository & Feedback</h4>
-							<p>私有代码仓库 / Private Repository</p>
-							<small>本项目代码仓目前为私有，暂不支持公开提交 Issue。欢迎通过电子邮件与我们进行交流。<br />The repository is currently private. Technical feedback and ideas are welcome via email.</small>
-						</div>
+					<div class="contact-card support-card">
+						<h4>✉️ 技术支持 / Support</h4>
+						<p><a href="mailto:victor@goldenarc.digital">victor@goldenarc.digital</a></p>
+						<small>使用中有任何疑问、Bug 或功能建议，欢迎来信，我们通常 24 小时内回复。<br />Questions, bugs, or feature ideas while using 8 Strokes? Email us — we usually reply within 24 hours.</small>
 					</div>
 				</div>
 			</section>
@@ -489,9 +473,16 @@ import { SITE_DESCRIPTION } from '../consts';
 
 	.blessing-grid {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: 1fr 1fr 0.9fr;
 		gap: 2.5rem;
-		align-items: start;
+		align-items: center;
+	}
+
+	@media (max-width: 900px) {
+		.blessing-grid {
+			grid-template-columns: 1fr 1fr;
+			align-items: start;
+		}
 	}
 
 	@media (max-width: 768px) {
@@ -499,6 +490,14 @@ import { SITE_DESCRIPTION } from '../consts';
 			grid-template-columns: 1fr;
 			gap: 2.5rem;
 		}
+	}
+
+	.support-card {
+		align-self: center;
+	}
+
+	.support-card small {
+		margin-top: 0.5rem;
 	}
 
 	.blessing-card-item {
