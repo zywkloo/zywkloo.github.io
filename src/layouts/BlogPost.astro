@@ -17,11 +17,12 @@ interface Props {
 }
 
 const { title, description, series, slug, pubDate, updatedDate, heroImage } = Astro.props;
+const plainTitle = title.replace(/<[^>]+>/g, '');
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={plainTitle} description={description} />
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
 		<style>
 			main {
@@ -299,7 +300,7 @@ const { title, description, series, slug, pubDate, updatedDate, heroImage } = As
 							</div>
 							{slug && <PostViewCount slug={slug} />}
 						</div>
-						<h1>{title}</h1>
+						<h1 set:html={title}></h1>
 						<hr />
 					</div>
 					<slot />
