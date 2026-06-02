@@ -176,7 +176,7 @@ const posts = (await getCollection('blog')).sort(
 											</span>
 										</div>
 									)}
-									<h4 class="title" set:html={post.data.title}></h4>
+									<h4 class="title" set:html={post.data.title.split(' / ')[0]}></h4>
 									<p class="meta">
 										<FormattedDate date={post.data.pubDate} />
 										<span class="meta-stats" data-post-card-stats hidden>
