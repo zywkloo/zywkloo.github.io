@@ -115,7 +115,7 @@ import { SITE_DESCRIPTION } from '../consts';
 					</figure>
 
 					<figure class="blessing-card-item">
-						<img src="/images/05_replay_score_card_ipad.png" alt="永字八法 笔迹回放评分卡 iPad 样机预览 / 8 Strokes Replay Scorecard on iPad" loading="lazy" />
+						<img src="/images/05_replay_score_card_ipad.png" class="shift-down" alt="永字八法 笔迹回放评分卡 iPad 样机预览 / 8 Strokes Replay Scorecard on iPad" loading="lazy" />
 						<figcaption>
 							<h4>🎞️ 回放评分卡 / Replay Scorecard</h4>
 							<p>逐笔回放你的书写过程，搭配多维度评分卡，随时复盘每一次落笔与进步。</p>
@@ -490,6 +490,10 @@ import { SITE_DESCRIPTION } from '../consts';
 			grid-template-columns: 1fr;
 			gap: 2.5rem;
 		}
+	}
+
+	.blessing-card-item img.shift-down {
+		object-position: center 40%;
 	}
 
 	.support-card {
