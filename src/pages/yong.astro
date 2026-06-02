@@ -8,7 +8,7 @@ import { SITE_DESCRIPTION } from '../consts';
 <!doctype html>
 <html lang="zh-CN">
 	<head>
-		<BaseHead title="永字八法 | EightStrokes Calligraphy" description="永字八法 (EightStrokes) — 每日一练，笔尖修禅。指尖落笔即得评分，一键分享书法佳作。" />
+		<BaseHead title="永字八法 | 8 Strokes Calligraphy" description="永字八法 (8 Strokes) — 每日一练，笔尖修禅。指尖落笔即得评分，一键分享书法佳作。" />
 	</head>
 	<body>
 		<Header />
@@ -16,7 +16,7 @@ import { SITE_DESCRIPTION } from '../consts';
 			<div class="hero-container">
 				<div class="hero-content">
 					<div class="app-tag">🎉 App Store 新鲜上架 · Now Available</div>
-					<h1>永字八法 / EightStrokes</h1>
+					<h1>永字八法 / 8 Strokes</h1>
 					<p class="subtitle">每日一练，笔尖修禅。随时随地用指尖开启你的书法修行。</p>
 					<p class="tagline">Practice daily, find zen in every stroke. Start your calligraphy journey anytime, anywhere with just your fingertip.</p>
 					
@@ -106,7 +106,7 @@ import { SITE_DESCRIPTION } from '../consts';
 
 				<div class="blessing-grid">
 					<figure class="blessing-card-item">
-						<img src="/images/04_blessing_card_ipad.png" alt="永字八法 祝福卡片 iPad 样机预览 / EightStrokes Blessing Card on iPad" loading="lazy" />
+						<img src="/images/04_blessing_card_ipad.png" alt="永字八法 祝福卡片 iPad 样机预览 / 8 Strokes Blessing Card on iPad" loading="lazy" />
 						<figcaption>
 							<h4>🧧 祝福卡片 / Blessing Card</h4>
 							<p>挥毫写下祝福，一键生成古典雅致的祝福卡片，把指尖的墨香送给最在意的人。</p>
@@ -115,7 +115,7 @@ import { SITE_DESCRIPTION } from '../consts';
 					</figure>
 
 					<figure class="blessing-card-item">
-						<img src="/images/05_replay_score_card_ipad.png" alt="永字八法 笔迹回放评分卡 iPad 样机预览 / EightStrokes Replay Scorecard on iPad" loading="lazy" />
+						<img src="/images/05_replay_score_card_ipad.png" alt="永字八法 笔迹回放评分卡 iPad 样机预览 / 8 Strokes Replay Scorecard on iPad" loading="lazy" />
 						<figcaption>
 							<h4>🎞️ 回放评分卡 / Replay Scorecard</h4>
 							<p>逐笔回放你的书写过程，搭配多维度评分卡，随时复盘每一次落笔与进步。</p>
@@ -128,8 +128,8 @@ import { SITE_DESCRIPTION } from '../consts';
 			<section id="support" class="support-section">
 				<div class="section-container">
 					<h2>技术支持与反馈 / Support & Feedback</h2>
-					<p>在使用 <strong>永字八法 (EightStrokes)</strong> 的过程中，如果您有任何疑问、发现 Bug、或者有任何功能性的建议，欢迎通过以下渠道与我们取得联系：</p>
-					<p class="english-law">If you have any questions, find a bug, or have feature suggestions while using <strong>EightStrokes</strong>, please reach out through the channels below:</p>
+					<p>在使用 <strong>永字八法 (8 Strokes)</strong> 的过程中，如果您有任何疑问、发现 Bug、或者有任何功能性的建议，欢迎通过以下渠道与我们取得联系：</p>
+					<p class="english-law">If you have any questions, find a bug, or have feature suggestions while using <strong>8 Strokes</strong>, please reach out through the channels below:</p>
 					
 					<div class="contact-methods">
 						<div class="contact-card">
@@ -154,7 +154,7 @@ import { SITE_DESCRIPTION } from '../consts';
 					
 					<div class="privacy-content">
 						<h3>1. 个人数据收集说明 / No Personal Data Collection</h3>
-						<p><strong>永字八法 (EightStrokes)</strong> 极其尊重您的个人隐私。我们<strong>不会收集、存储、分享或上传</strong>您的任何个人信息、手写笔迹数据、打分结果或设备标识符。</p>
+						<p><strong>永字八法 (8 Strokes)</strong> 极其尊重您的个人隐私。我们<strong>不会收集、存储、分享或上传</strong>您的任何个人信息、手写笔迹数据、打分结果或设备标识符。</p>
 						<p class="english-law">We do not collect, store, share, or upload any of your personal information, drawing strokes, scorecards, or device identifiers.</p>
 
 						<h3>2. 端侧处理保证 / 100% On-Device Processing</h3>
@@ -503,18 +503,27 @@ import { SITE_DESCRIPTION } from '../consts';
 
 	.blessing-card-item {
 		margin: 0;
+		text-align: center;
 	}
 
 	.blessing-card-item img {
-		width: 100%;
-		height: auto;
+		width: 80%;
+		max-width: 360px;
+		aspect-ratio: 3 / 3.2;
+		object-fit: cover;
+		object-position: center;
 		border-radius: 20px;
 		box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
 		display: block;
+		margin: 0 auto;
 	}
 
 	.blessing-card-item figcaption {
 		margin-top: 1.5rem;
+		text-align: left;
+		max-width: 360px;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.blessing-card-item h4 {

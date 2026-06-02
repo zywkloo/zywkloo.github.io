@@ -1,7 +1,7 @@
 ---
 title: "MetalSolo (Part 1): Metal + SwiftUI Layer Compositing & Lifecycle Gotchas / MetalSolo（第一篇）：Metal + SwiftUI 图层合成与生命周期陷阱"
 series: 'MetalSolo'
-description: "Three bugs that had no warnings, no crashes, and no obvious causes. Just a blank canvas staring back at me at 2am. Here's what I learned building EightStrokes."
+description: "Three bugs that had no warnings, no crashes, and no obvious causes. Just a blank canvas staring back at me at 2am. Here's what I learned building 8 Strokes."
 pubDate: "Apr 15 2026"
 heroImage: "../../assets/apple-engineers-metal.png"
 tags: ["Metal", "SwiftUI", "UIKit", "CALayer", "iOS Development", "Bilingual"]
@@ -19,7 +19,7 @@ tags: ["Metal", "SwiftUI", "UIKit", "CALayer", "iOS Development", "Bilingual"]
 </blockquote>
 
 <p style="text-align: center; margin: 0 0 32px;">
-  <a href="https://apps.apple.com/ca/app/8strokes/id6774579880" target="_blank" rel="noopener" style="display: inline-block; padding: 12px 24px; background: #8b5cf6; color: #fff; font-weight: 600; border-radius: 99px; text-decoration: none;"> Download EightStrokes (永字八法) on the App Store</a>
+  <a href="https://apps.apple.com/ca/app/8strokes/id6774579880" target="_blank" rel="noopener" style="display: inline-block; padding: 12px 24px; background: #8b5cf6; color: #fff; font-weight: 600; border-radius: 99px; text-decoration: none;"> Download 8 Strokes (永字八法) on the App Store</a>
 </p>
 
 ## Solo Dev Meets the GPU / 一个人 vs GPU
@@ -33,8 +33,8 @@ That's what it felt like to wire Metal into SwiftUI alone.
 SwiftUI is elegant and declarative. Metal is a GPU pipeline that doesn't care about your feelings. Between them sits UIKit's compositing engine, which has its own opinions about where pixels actually end up — opinions it will not share with you until you've already wasted three days.
 SwiftUI 优雅，声明式。Metal 是个 GPU 管线，不在乎你的感受。夹在中间的是 UIKit 的合成引擎，它对像素最终落在哪里有自己的看法——但它不会告诉你，直到你已经浪费了三天。
 
-What follows are the bugs I hit while building **EightStrokes** — a digital ink engine for Chinese calligraphy. None of them produced a compiler warning. None crashed the app. They just silently produced wrong output and waited for me to figure out why.
-以下是我在开发 **EightStrokes（永字八法）**——一个中文书法数字墨水引擎——时踩过的坑。没有一个产生编译警告，没有一个让应用崩溃。它们只是静默地输出错误的结果，然后等着我来搞清楚原因。
+What follows are the bugs I hit while building **8 Strokes** — a digital ink engine for Chinese calligraphy. None of them produced a compiler warning. None crashed the app. They just silently produced wrong output and waited for me to figure out why.
+以下是我在开发 **8 Strokes（永字八法）**——一个中文书法数字墨水引擎——时踩过的坑。没有一个产生编译警告，没有一个让应用崩溃。它们只是静默地输出错误的结果，然后等着我来搞清楚原因。
 
 ---
 
@@ -318,7 +318,7 @@ Four bugs. Zero compile warnings. Zero crashes between them. All solved in one i
 After fixing all of them, the ink engine worked. The paper texture showed through. The trace reference floated on top. Rotations were smooth and silent. I submitted to the App Store.
 全修好之后，墨水引擎跑起来了。宣纸纹理透了出来，描红视图浮在最上方，旋转平滑无声。我提交了 App Store。
 
-![EightStrokes scorecard — the first share after everything finally worked / 永字八法得分卡——一切终于跑通后第一次分享](../../assets/metal-part1-result-share.png)
+![8 Strokes scorecard — the first share after everything finally worked / 永字八法得分卡——一切终于跑通后第一次分享](../../assets/metal-part1-result-share.png)
 
 That scorecard — total 74, stroke order 81, flow 88 — was the first thing I shared after the whole thing compiled, ran, scored, and didn't explode. Good enough.
 那张得分卡——总分 74，笔法 81，流势 88——是整个东西能编译、能运行、能评分、没炸掉之后我分享的第一张。够了。

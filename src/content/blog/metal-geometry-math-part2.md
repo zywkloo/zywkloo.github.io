@@ -19,7 +19,7 @@ tags: ["Geometry", "Math", "Metal", "iOS Development", "Bilingual", "Computer Gr
 </blockquote>
 
 <p style="text-align: center; margin: 0 0 32px;">
-  <a href="https://apps.apple.com/ca/app/8strokes/id6774579880" target="_blank" rel="noopener" style="display: inline-block; padding: 12px 24px; background: #8b5cf6; color: #fff; font-weight: 600; border-radius: 99px; text-decoration: none;"> Download EightStrokes (永字八法) on the App Store</a>
+  <a href="https://apps.apple.com/ca/app/8strokes/id6774579880" target="_blank" rel="noopener" style="display: inline-block; padding: 12px 24px; background: #8b5cf6; color: #fff; font-weight: 600; border-radius: 99px; text-decoration: none;"> Download 8 Strokes (永字八法) on the App Store</a>
 </p>
 
 ## Introduction: The Canvas is a Grid of Triangles / 导言：画布是三角形的网格
@@ -30,8 +30,8 @@ To a GPU, there is no such thing as an "ink stroke" or a "curved brush." The gra
 Every elegant swirl of a calligraphy master, every dynamic sweep of the ink, must eventually be flattened, smooth-interpolated, and split into thousands of tiny triangles before it can be rendered to the screen.
 书法大师落笔时的每一个优雅回锋，水墨流转的每一次动态挥洒，在被呈现在屏幕上之前，最终都必须经过扁平化、平滑插值，并拆解为数以千计的微小三角形。
 
-In this second part of our engineering series, we dive deep into the math that powers the **EightStrokes** ink rendering engine. We discuss why we start with triangles and curves, dissect the math behind our Catmull-Rom smoothing spline, list the exact geometry equations used to generate variable-width ribbons, and explore the dynamic end-cap generation equations.
-在工程技术系列的第二篇中，我们将深入探索为 **EightStrokes（永字八法）** 笔迹渲染引擎提供动力支持的底层数学。我们将讨论为何要从三角形和曲线讲起，剖析 Catmull-Rom 平滑样条线背后的数学公式，列出用于生成可变宽度三角带的精确几何方程，以及端点半圆的闭合几何方程。
+In this second part of our engineering series, we dive deep into the math that powers the **8 Strokes** ink rendering engine. We discuss why we start with triangles and curves, dissect the math behind our Catmull-Rom smoothing spline, list the exact geometry equations used to generate variable-width ribbons, and explore the dynamic end-cap generation equations.
+在工程技术系列的第二篇中，我们将深入探索为 **8 Strokes（永字八法）** 笔迹渲染引擎提供动力支持的底层数学。我们将讨论为何要从三角形和曲线讲起，剖析 Catmull-Rom 平滑样条线背后的数学公式，列出用于生成可变宽度三角带的精确几何方程，以及端点半圆的闭合几何方程。
 
 ---
 
@@ -56,8 +56,8 @@ Many vector graphics engines rely on **Bezier curves** (quadratic or cubic) to m
 Instead, Bezier control points act as external gravitational anchors, "pulling" the curve toward them. If a calligrapher meticulously places their pen tip at a specific point, a Bezier-fitted curve might drift away from that exact path, creating a feeling of sluggish control and mismatch.
 相反，贝塞尔控制点更像是外部的引力锚点，将曲线朝其方向“拉曳”。如果书法家极其严谨地将笔尖落在某个特定的像素点上，拟合出来的贝塞尔曲线可能会偏离该真实轨迹，从而产生一种控制迟滞和漂移感。
 
-To prevent this, EightStrokes utilizes the **Catmull-Rom Spline**. Catmull-Rom is a cubic interpolating spline with a remarkable property: **the generated curve is guaranteed to pass exactly through every single recorded control point**. 
-为了杜绝这一现象，EightStrokes 采用了 **Catmull-Rom 样条曲线**。Catmull-Rom 是一种三次插值样条，它拥有一个极其卓越的数学特性：**生成的曲线保证 100% 精确穿过每一个记录的控制点**。
+To prevent this, 8 Strokes utilizes the **Catmull-Rom Spline**. Catmull-Rom is a cubic interpolating spline with a remarkable property: **the generated curve is guaranteed to pass exactly through every single recorded control point**. 
+为了杜绝这一现象，8 Strokes 采用了 **Catmull-Rom 样条曲线**。Catmull-Rom 是一种三次插值样条，它拥有一个极其卓越的数学特性：**生成的曲线保证 100% 精确穿过每一个记录的控制点**。
 
 ```
 Bezier Curve (Control points pull from outside)     Catmull-Rom Spline (Curve passes through points)
@@ -155,8 +155,8 @@ This triangle fan smoothly seals the ribbon's head and tail, replicating the sof
 
 ## Conclusion / 结语
 
-From a single finger touch to a highly optimized mesh, the architecture of EightStrokes is a testament to the power of combining math with graphics hardware.
-从轻触屏幕的指尖，到高度优化的渲染网格，EightStrokes（永字八法）的底层架构完美证明了数学与图形硬件结合的无限威力。
+From a single finger touch to a highly optimized mesh, the architecture of 8 Strokes is a testament to the power of combining math with graphics hardware.
+从轻触屏幕的指尖，到高度优化的渲染网格，8 Strokes（永字八法）的底层架构完美证明了数学与图形硬件结合的无限威力。
 
 We hope this two-part series gave you a transparent look behind the curtain. Next time you write your daily \"Yong\" character, remember: under the serene flowing ink, millions of triangles are dancing to the rhythm of geometry.
 我们希望这两篇技术系列博客能为你揭开那层充满科技魅力的神秘面纱。下一次当你进行每日的“永”字书法修行时，请记得：在那平静、流淌的水墨笔迹之下，有数以百万计的三角形正在随着几何的律动翩翩起舞。
