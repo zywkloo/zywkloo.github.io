@@ -9,14 +9,6 @@ tags: ["3D Scanning", "Computer Vision", "Metal", "Open3D", "Geometry", "Bilingu
 
 # MetalSolo (Part 3): Colored ICP Point Cloud Registration in 3D Scanning / MetalSolo（第三篇）：3D 扫描中的 Colored ICP 点云配准算法
 
-<blockquote style="background-color: rgba(36, 41, 46, 0.05); border-left: 4px solid #8b5cf6; padding: 12px 16px; margin-bottom: 24px; border-radius: 0 8px 8px 0;">
-  <strong>🎸 Series: MetalSolo (High-Performance GPU Programming)</strong>
-  <ul style="margin-top: 8px; margin-bottom: 0; padding-left: 20px;">
-    <li><strong>Part 1</strong>: <a href="/blog/metal-swiftui-gotchas-part1/">Metal + SwiftUI Layer Compositing & Lifecycle Gotchas</a></li>
-    <li><strong>Part 2</strong>: <a href="/blog/metal-geometry-math-part2/">Sacred Geometry of Stylus Input & Ink Engine Math</a></li>
-    <li>👉 <strong>Part 3: Colored ICP Point Cloud Registration in 3D Scanning (Current)</strong></li>
-  </ul>
-</blockquote>
 
 <blockquote style="background-color: rgba(36, 41, 46, 0.03); border-left: 4px solid #0284c7; padding: 14px 18px; margin-bottom: 24px; border-radius: 0 8px 8px 0; font-size: 0.9em; line-height: 1.6; color: #475569;">
   <strong>🔒 Disclaimer & Academic Reference / 免责声明与学术引用</strong><br />

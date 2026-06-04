@@ -15,15 +15,6 @@ tags: ['AI Tools', 'Agent Architecture', 'Codex', 'Claude Code', 'wtcraft', 'Git
   <a href="https://github.com/zywkloo/wtcraft/blob/main/LICENSE"><img src="https://img.shields.io/github/license/zywkloo/wtcraft?style=flat-square&color=blue" alt="License" /></a>
 </div>
 
-<blockquote style="background-color: rgba(36, 41, 46, 0.05); border-left: 4px solid #cb3837; padding: 12px 16px; margin-bottom: 24px; border-radius: 0 8px 8px 0;">
-  <strong>👨‍🍳 Series: TokenChef (Git-Native Multi-Agent Coding)</strong>
-  <ul style="margin-top: 8px; margin-bottom: 0; padding-left: 20px;">
-    <li><strong>Part 1</strong>: <a href="/blog/worktree-refactor-playbook/">Vibe Coding with Git Worktrees</a></li>
-    <li><strong>Part 2</strong>: <a href="/blog/chief-token-orchestrator-manage-layered-agent-team/">Chief Token Orchestrator</a></li>
-    <li><strong>Part 3</strong>: <a href="/blog/wtcraft-lightweight-git-native-multi-agent-scaffolding/">wtcraft: Git-Native Scaffolding</a></li>
-    <li>👉 <strong>Part 4: Stop Reinventing the Agent / 别卷 Agent 了 (Current)</strong></li>
-  </ul>
-</blockquote>
 
 > 本文先中文、后英文。English version follows the Chinese one below.
 

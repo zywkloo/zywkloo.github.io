@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
@@ -10,14 +11,66 @@ interface Props {
 	title: string;
 	description: string;
 	series?: string;
+	category?: string;
 	slug?: string;
 	pubDate: Date;
 	updatedDate?: Date;
 	heroImage?: ImageMetadata;
 }
 
-const { title, description, series, slug, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, series, category, slug, pubDate, updatedDate, heroImage } = Astro.props;
 const plainTitle = title.replace(/<[^>]+>/g, '');
+
+const SERIES_META: Record<string, { icon: string; subtitle: string; color: string }> = {
+	'TokenChef':       { icon: '👨‍🍳', subtitle: 'Git-Native Multi-Agent Coding',    color: '#cb3837' },
+	'MetalSolo':       { icon: '🎸',    subtitle: 'High-Performance GPU Programming', color: '#8b5cf6' },
+	'Clean Semantics': { icon: '✨',    subtitle: 'Domain-Driven Engineering',         color: '#0ea5e9' },
+};
+
+function stripNavTitle(rawTitle: string): string {
+	const plain = rawTitle.replace(/<[^>]+>/g, '').trim();
+	const m = plain.match(/^.+?\(Part \d+\):\s*(.+)/);
+	return m ? m[1] : plain;
+}
+
+type NavPost = { id: string; navTitle: string; partNum: number };
+
+let seriesNavPosts: NavPost[] = [];
+let currentPartNum = 0;
+let seriesGroupName = '';
+let seriesAccentColor = '#6b7280';
+let seriesIcon = '📚';
+let seriesSubtitle = '';
+
+if (series && slug) {
+	const groupKey = (category || series).replace(/\s+\d+$/, '');
+	const meta = SERIES_META[groupKey];
+	seriesGroupName = groupKey;
+	if (meta) {
+		seriesAccentColor = meta.color;
+		seriesIcon = meta.icon;
+		seriesSubtitle = meta.subtitle;
+	}
+
+	const allPosts = await getCollection('blog');
+	const sorted = allPosts
+		.filter(p => (p.data.category || p.data.series || '').replace(/\s+\d+$/, '') === groupKey)
+		.sort((a, b) => a.data.pubDate.getTime() - b.data.pubDate.getTime());
+
+	const total = sorted.length;
+	const idx = sorted.findIndex(p => p.id === slug);
+
+	if (idx >= 0 && total > 1) {
+		currentPartNum = idx + 1;
+		const W = 3;
+		const start = total <= W ? 0 : Math.max(0, Math.min(idx - 1, total - W));
+		seriesNavPosts = sorted.slice(start, start + W).map((p, i) => ({
+			id: p.id,
+			navTitle: stripNavTitle(p.data.title),
+			partNum: start + i + 1,
+		}));
+	}
+}
 ---
 
 <html lang="en">
@@ -205,6 +258,18 @@ const plainTitle = title.replace(/<[^>]+>/g, '');
 				background: rgba(14, 165, 233, 0.08);
 				color: #0ea5e9;
 			}
+			.series-nav {
+				background-color: rgba(36, 41, 46, 0.05);
+				border-left: 4px solid var(--series-accent, #6b7280);
+				padding: 12px 16px;
+				margin-bottom: 24px;
+				border-radius: 0 8px 8px 0;
+				font-size: 0.95em;
+			}
+			.series-nav ul {
+				margin-top: 8px;
+				margin-bottom: 0;
+			}
 			.meta-row {
 				display: flex;
 				align-items: center;
@@ -303,6 +368,21 @@ const plainTitle = title.replace(/<[^>]+>/g, '');
 						<h1 set:html={title}></h1>
 						<hr />
 					</div>
+					{seriesNavPosts.length > 0 && (
+						<div class="series-nav" style={`--series-accent: ${seriesAccentColor}`}>
+							<strong>{seriesIcon} Series: {seriesGroupName}{seriesSubtitle && <> ({seriesSubtitle})</>}</strong>
+							<ul>
+								{seriesNavPosts.map(post => (
+									<li>
+										{post.partNum === currentPartNum
+											? <span>👉 <strong>Part {post.partNum}: {post.navTitle} (Current)</strong></span>
+											: <span><strong>Part {post.partNum}</strong>: <a href={`/blog/${post.id}/`}>{post.navTitle}</a></span>
+										}
+									</li>
+								))}
+							</ul>
+						</div>
+					)}
 					<slot />
 				</div>
 			</article>
