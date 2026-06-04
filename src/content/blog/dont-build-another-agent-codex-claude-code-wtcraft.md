@@ -11,7 +11,6 @@ tags: ['AI Tools', 'Agent Architecture', 'Codex', 'Claude Code', 'wtcraft', 'Git
   <a href="https://www.npmjs.com/package/wtcraft"><img src="https://img.shields.io/npm/v/wtcraft.svg?style=flat-square&logo=npm&color=cb3837" alt="npm package" /></a>
   <a href="https://pypi.org/project/wtcraft/"><img src="https://img.shields.io/pypi/v/wtcraft.svg?style=flat-square&logo=pypi&color=3775a9" alt="PyPI version" /></a>
   <a href="https://github.com/zywkloo/wtcraft/actions/workflows/ci.yml"><img src="https://github.com/zywkloo/wtcraft/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://github.com/zywkloo/wtcraft/releases"><img src="https://img.shields.io/github/v/release/zywkloo/wtcraft?style=flat-square&logo=github&color=24292e" alt="GitHub release" /></a>
   <a href="https://github.com/zywkloo/wtcraft/blob/main/LICENSE"><img src="https://img.shields.io/github/license/zywkloo/wtcraft?style=flat-square&color=blue" alt="License" /></a>
 </div>
 
