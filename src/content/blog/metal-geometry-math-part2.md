@@ -9,14 +9,6 @@ tags: ["Geometry", "Math", "Metal", "iOS Development", "Bilingual", "Computer Gr
 
 # MetalSolo (Part 2): Sacred Geometry of Stylus Input & Ink Engine Math / MetalSolo（第二篇）：触控笔输入与笔迹引擎的几何数学公式
 
-<blockquote style="background-color: rgba(36, 41, 46, 0.05); border-left: 4px solid #8b5cf6; padding: 12px 16px; margin-bottom: 24px; border-radius: 0 8px 8px 0;">
-  <strong>🎸 Series: MetalSolo (High-Performance GPU Programming)</strong>
-  <ul style="margin-top: 8px; margin-bottom: 0; padding-left: 20px;">
-    <li><strong>Part 1</strong>: <a href="/blog/metal-swiftui-gotchas-part1/">Metal + SwiftUI Layer Compositing & Lifecycle Gotchas</a></li>
-    <li>👉 <strong>Part 2: Sacred Geometry of Stylus Input & Ink Engine Math (Current)</strong></li>
-    <li><strong>Part 3</strong>: <a href="/blog/colored-icp-3d-point-cloud-registration/">Colored ICP Point Cloud Registration in 3D Scanning</a></li>
-  </ul>
-</blockquote>
 
 <p style="text-align: center; margin: 0 0 32px;">
   <a href="https://apps.apple.com/ca/app/8strokes/id6774579880" target="_blank" rel="noopener" style="display: inline-block; padding: 12px 24px; background: #8b5cf6; color: #fff; font-weight: 600; border-radius: 99px; text-decoration: none;"> Download 8 Strokes (永字八法) on the App Store</a>
