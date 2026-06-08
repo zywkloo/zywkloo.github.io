@@ -2,10 +2,11 @@
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 import { SITE_AUTHOR } from '../../consts';
+import { Content as Overview } from './_overview.md';
 
+// Ordering is intentional (package → blog → legacy sites); set via pubDate.
 const docs = (await getCollection('docs')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
@@ -15,8 +16,8 @@ const docs = (await getCollection('docs')).sort(
 <html lang="en">
 	<head>
 		<BaseHead
-			title={`Docs & Guides | ${SITE_AUTHOR}`}
-			description="In-depth guides and case studies on SEO/GEO, web architecture, and shipping open-source dev tools."
+			title={`SEO & GEO Field Notes | ${SITE_AUTHOR}`}
+			description="Working notes on optimizing for AI answer engines (GEO) and search engines (SEO) — for open-source packages, a personal Astro blog, and commercial site rebuilds."
 			ogImageUrl="/images/blog-og.svg"
 		/>
 	</head>
@@ -24,31 +25,38 @@ const docs = (await getCollection('docs')).sort(
 		<Header />
 		<main>
 			<header class="page-head">
-				<h1>Docs &amp; Guides</h1>
-				<p>深度指南与案例分析 — SEO/GEO、架构选型与开源工具实践。</p>
+				<h1>SEO &amp; GEO Field Notes</h1>
+				<p>被 AI 引用,而不只是被搜索到 — practical notes on Generative Engine Optimization.</p>
 			</header>
-			<ul class="card-list">
-				{docs.map((doc) => (
-					<li>
-						<a href={`/docs/${doc.id}/`}>
-							<h2 class="card-title">{doc.data.title}</h2>
-							<p class="card-desc">{doc.data.description}</p>
-							<p class="card-meta"><FormattedDate date={doc.data.pubDate} /></p>
-						</a>
-					</li>
-				))}
-			</ul>
+
+			<article class="overview">
+				<Overview />
+			</article>
+
+			<section class="practical">
+				<h2 class="practical-title">实战 · Hands-on guides</h2>
+				<ul class="card-list">
+					{docs.map((doc) => (
+						<li>
+							<a href={`/docs/${doc.id}/`}>
+								<h3 class="card-title">{doc.data.title}</h3>
+								<p class="card-desc">{doc.data.description}</p>
+							</a>
+						</li>
+					))}
+				</ul>
+			</section>
 		</main>
 		<Footer />
 		<style>
 			main {
-				width: min(820px, 100%);
+				width: min(760px, 100%);
 				margin: 0 auto;
-				padding: 0 1rem;
+				padding: 0 1rem 3rem;
 			}
 			.page-head {
 				text-align: center;
-				padding: 2.5rem 0 1.5rem;
+				padding: 2.5rem 0 1rem;
 			}
 			.page-head h1 {
 				margin: 0 0 0.4rem;
@@ -59,6 +67,83 @@ const docs = (await getCollection('docs')).sort(
 			.page-head p {
 				margin: 0;
 				color: rgb(var(--gray));
+			}
+			/* Prose for the imported overview markdown */
+			.overview {
+				line-height: 1.7;
+				color: rgb(var(--gray-dark));
+			}
+			.overview :global(h2) {
+				margin: 2.2rem 0 0.8rem;
+				font-size: 1.5rem;
+				font-weight: 700;
+				color: rgb(var(--black));
+				letter-spacing: -0.01em;
+			}
+			.overview :global(h3) {
+				margin: 1.4rem 0 0.5rem;
+				font-size: 1.1rem;
+				color: rgb(var(--black));
+			}
+			.overview :global(p) {
+				margin: 0 0 1rem;
+			}
+			.overview :global(ul),
+			.overview :global(ol) {
+				margin: 0 0 1rem;
+				padding-left: 1.4rem;
+			}
+			.overview :global(li) {
+				margin: 0.3rem 0;
+			}
+			.overview :global(blockquote) {
+				margin: 1rem 0;
+				padding: 0.6rem 1rem;
+				border-left: 3px solid var(--accent);
+				background: var(--surface-muted);
+				border-radius: 0 8px 8px 0;
+				color: rgb(var(--gray-dark));
+			}
+			.overview :global(blockquote p) {
+				margin: 0;
+				font-size: 0.95rem;
+			}
+			.overview :global(table) {
+				width: 100%;
+				border-collapse: collapse;
+				margin: 1rem 0;
+				font-size: 0.92rem;
+			}
+			.overview :global(th),
+			.overview :global(td) {
+				border: 1px solid var(--line);
+				padding: 0.5rem 0.7rem;
+				text-align: left;
+				vertical-align: top;
+			}
+			.overview :global(th) {
+				background: var(--surface-muted);
+			}
+			.overview :global(code) {
+				font-size: 0.88em;
+				background: var(--surface-muted);
+				padding: 0.1rem 0.35rem;
+				border-radius: 5px;
+			}
+			.overview :global(hr) {
+				border: none;
+				border-top: 1px solid var(--line);
+				margin: 2rem 0;
+			}
+			.practical {
+				margin-top: 2.5rem;
+			}
+			.practical-title {
+				font-size: 1.5rem;
+				font-weight: 700;
+				margin: 0 0 1rem;
+				padding-bottom: 0.4rem;
+				border-bottom: 1px solid var(--line);
 			}
 			.card-list {
 				list-style: none;
@@ -86,20 +171,15 @@ const docs = (await getCollection('docs')).sort(
 			}
 			.card-title {
 				margin: 0 0 0.4rem;
-				font-size: 1.2rem;
+				font-size: 1.15rem;
 				line-height: 1.35;
 				color: rgb(var(--black));
 			}
 			.card-desc {
-				margin: 0 0 0.5rem;
-				font-size: 0.92rem;
+				margin: 0;
+				font-size: 0.9rem;
 				color: rgb(var(--gray-dark));
 				line-height: 1.55;
-			}
-			.card-meta {
-				margin: 0;
-				font-size: 0.85rem;
-				color: rgb(var(--gray));
 			}
 			.card-list a:hover .card-title {
 				color: rgb(var(--accent));
