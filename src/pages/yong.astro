@@ -2,13 +2,35 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION } from '../consts';
+import { SITE_DESCRIPTION, SITE_URL } from '../consts';
+
+const APP_STORE_URL = 'https://apps.apple.com/ca/app/8strokes/id6774579880';
+
+// MobileApplication structured data for 8 Strokes (永字八法).
+const appLd = {
+	'@context': 'https://schema.org',
+	'@type': 'MobileApplication',
+	name: '8 Strokes / 永字八法',
+	alternateName: '永字八法',
+	applicationCategory: 'EducationApplication',
+	operatingSystem: 'iOS, iPadOS',
+	url: APP_STORE_URL,
+	installUrl: APP_STORE_URL,
+	downloadUrl: APP_STORE_URL,
+	inLanguage: ['zh-CN', 'en'],
+	description:
+		'永字八法 (8 Strokes) — a Chinese calligraphy practice app: real-time low-latency ink rendering, on-device stroke scoring, and one-tap sharing of your work.',
+	screenshot: `${SITE_URL}/images/yong-preview.png`,
+	offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+	author: { '@type': 'Person', name: 'Victor Zhang', alternateName: 'zywkloo', url: SITE_URL },
+};
 ---
 
 <!doctype html>
 <html lang="zh-CN">
 	<head>
 		<BaseHead title="永字八法 | 8 Strokes Calligraphy" description="永字八法 (8 Strokes) — 每日一练，笔尖修禅。指尖落笔即得评分，一键分享书法佳作。" />
+			<script type="application/ld+json" set:html={JSON.stringify(appLd)} />
 	</head>
 	<body>
 		<Header />
