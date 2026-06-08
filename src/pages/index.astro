@@ -2,7 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, SITE_AUTHOR, PROFILE_IMAGE, USER_TITLE, GITHUB_URL, WTCRAFT_URL, LINKEDIN_URL, EMAIL, MEDIUM_URL, SAME_AS, SITE_AUTHOR_ALT } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, SITE_AUTHOR, PROFILE_IMAGE, USER_TITLE, GITHUB_URL, WTCRAFT_URL, LINKEDIN_URL, EMAIL, MEDIUM_URL, SAME_AS, SITE_AUTHOR_ALT, GOLDENARC_NAME, GOLDENARC_SAME_AS } from '../consts';
 
 // Identity knowledge graph for AI/search engines: who Victor Zhang is and what
 // this site is. Person + WebSite, cross-linked by @id.
@@ -24,7 +24,16 @@ const personLd = {
 		{ '@type': 'CollegeOrUniversity', name: 'University of British Columbia' },
 		{ '@type': 'CollegeOrUniversity', name: 'Peking University' },
 	],
+	worksFor: { '@id': `${SITE_URL}/#goldenarc` },
 	sameAs: SAME_AS,
+};
+const organizationLd = {
+	'@type': 'Organization',
+	'@id': `${SITE_URL}/#goldenarc`,
+	name: GOLDENARC_NAME,
+	description: 'Independent digital studio founded by Victor Zhang (pre-launch).',
+	founder: { '@id': `${SITE_URL}/#person` },
+	...(GOLDENARC_SAME_AS.length ? { sameAs: GOLDENARC_SAME_AS } : {}),
 };
 const websiteLd = {
 	'@type': 'WebSite',
@@ -36,7 +45,7 @@ const websiteLd = {
 	author: { '@id': `${SITE_URL}/#person` },
 	publisher: { '@id': `${SITE_URL}/#person` },
 };
-const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personLd] };
+const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personLd, organizationLd] };
 ---
 
 <!doctype html>

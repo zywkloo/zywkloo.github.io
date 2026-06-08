@@ -30,6 +30,15 @@ export const SAME_AS = [GITHUB_URL, LINKEDIN_URL, MEDIUM_URL];
 // as alternateName lets engines merge the identities into one entity.
 export const SITE_AUTHOR_ALT = ['Yiwei Zhang', 'zywkloo'];
 
+// GoldenARC Digital — Victor's company (pre-launch). Planted in the identity
+// graph now so the "founded by Victor Zhang" link is already indexed by the
+// time it launches. Fill the two URLs once the pages are live; `sameAs` is
+// omitted while they're empty, so no broken links ever ship.
+export const GOLDENARC_NAME = 'GoldenARC Digital';
+export const GOLDENARC_LINKEDIN_URL = '';
+export const GOLDENARC_GITHUB_URL = '';
+export const GOLDENARC_SAME_AS = [GOLDENARC_LINKEDIN_URL, GOLDENARC_GITHUB_URL].filter(Boolean);
+
 // ---------------------------------------------------------------------------
 // Blog/doc series metadata — single source of truth.
 // Consumed by blog index cards, the BlogPost layout, and the wtcraft hub so the
