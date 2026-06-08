@@ -6,6 +6,7 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import PostViewCount from '../components/PostViewCount.astro';
+import { SERIES_META, seriesBadgeClass, seriesBadgeLabel } from '../consts';
 
 interface Props {
 	title: string;
@@ -13,19 +14,14 @@ interface Props {
 	series?: string;
 	category?: string;
 	slug?: string;
+	lang?: string;
 	pubDate: Date;
 	updatedDate?: Date;
 	heroImage?: ImageMetadata;
 }
 
-const { title, description, series, category, slug, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, series, category, slug, lang = 'en', pubDate, updatedDate, heroImage } = Astro.props;
 const plainTitle = title.replace(/<[^>]+>/g, '');
-
-const SERIES_META: Record<string, { icon: string; subtitle: string; color: string }> = {
-	'TokenChef':       { icon: '👨‍🍳', subtitle: 'Git-Native Multi-Agent Coding',    color: '#cb3837' },
-	'MetalSolo':       { icon: '🎸',    subtitle: 'High-Performance GPU Programming', color: '#8b5cf6' },
-	'Clean Semantics': { icon: '✨',    subtitle: 'Domain-Driven Engineering',         color: '#0ea5e9' },
-};
 
 function stripNavTitle(rawTitle: string): string {
 	const plain = rawTitle.replace(/<[^>]+>/g, '').trim();
@@ -47,7 +43,7 @@ if (series && slug) {
 	const meta = SERIES_META[groupKey];
 	seriesGroupName = groupKey;
 	if (meta) {
-		seriesAccentColor = meta.color;
+		seriesAccentColor = meta.accentColor;
 		seriesIcon = meta.icon;
 		seriesSubtitle = meta.subtitle;
 	}
@@ -73,7 +69,7 @@ if (series && slug) {
 }
 ---
 
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<BaseHead title={plainTitle} description={description} />
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
@@ -338,18 +334,8 @@ if (series && slug) {
 				<div class="prose">
 					<div class="title">
 						{series && (
-							<div class={`series ${
-								series === 'TokenChef' ? 'tokenchef' :
-								series === 'MetalSolo' ? 'metalsolo' :
-								series.startsWith('Clean Semantics') ? 'cleansemantics' :
-								''
-							}`}>
-								{
-									series === 'TokenChef' ? '👨‍🍳 TokenChef' :
-									series === 'MetalSolo' ? '🎸 MetalSolo' :
-									series.startsWith('Clean Semantics') ? `✨ Clean Semantics (Part ${series.split(' ').pop()})` :
-									series
-								}
+							<div class={`series ${seriesBadgeClass(series)}`}>
+								{seriesBadgeLabel(series)}
 							</div>
 						)}
 						<div class="meta-row">
