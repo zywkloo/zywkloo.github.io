@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import PostViewCount from '../components/PostViewCount.astro';
-import { SERIES_META, seriesBadgeClass, seriesBadgeLabel } from '../consts';
+import { SERIES_META, seriesBadgeClass, seriesBadgeLabel, SITE_URL, SITE_AUTHOR, PROFILE_IMAGE, SAME_AS } from '../consts';
 
 interface Props {
 	title: string;
@@ -15,13 +15,41 @@ interface Props {
 	category?: string;
 	slug?: string;
 	lang?: string;
+	tags?: string[];
 	pubDate: Date;
 	updatedDate?: Date;
 	heroImage?: ImageMetadata;
 }
 
-const { title, description, series, category, slug, lang = 'en', pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, series, category, slug, lang = 'en', tags, pubDate, updatedDate, heroImage } = Astro.props;
 const plainTitle = title.replace(/<[^>]+>/g, '');
+
+// BlogPosting structured data — makes every article a citable entity for AI
+// answer engines (author, dates, keywords, language, hero image).
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const articleImage = heroImage ? new URL(heroImage.src, Astro.site).href : undefined;
+const blogPostingLd = {
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	headline: plainTitle,
+	description,
+	inLanguage: lang === 'zh' ? 'zh-CN' : 'en',
+	datePublished: pubDate.toISOString(),
+	dateModified: (updatedDate ?? pubDate).toISOString(),
+	...(articleImage ? { image: articleImage } : {}),
+	...(tags && tags.length ? { keywords: tags.join(', ') } : {}),
+	...(series ? { isPartOf: { '@type': 'CreativeWorkSeries', name: series } } : {}),
+	author: {
+		'@type': 'Person',
+		name: SITE_AUTHOR,
+		alternateName: 'zywkloo',
+		url: SITE_URL,
+		image: PROFILE_IMAGE,
+		sameAs: SAME_AS,
+	},
+	publisher: { '@type': 'Person', name: SITE_AUTHOR, url: SITE_URL },
+	mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL },
+};
 
 function stripNavTitle(rawTitle: string): string {
 	const plain = rawTitle.replace(/<[^>]+>/g, '').trim();
@@ -72,6 +100,7 @@ if (series && slug) {
 <html lang={lang}>
 	<head>
 		<BaseHead title={plainTitle} description={description} />
+		<script type="application/ld+json" set:html={JSON.stringify(blogPostingLd)} />
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
 		<style>
 			main {

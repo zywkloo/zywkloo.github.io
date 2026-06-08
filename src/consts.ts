@@ -19,6 +19,11 @@ export const WTCRAFT_PYPI_URL = 'https://pypi.org/project/wtcraft/';
 // Profile
 export const PROFILE_IMAGE = 'https://avatars.githubusercontent.com/u/18610590?s=400&u=bb73412244714c5465010503fee1c6381c8b46fe&v=4';
 export const USER_TITLE = 'Mobile & Systems Engineer';
+export const MEDIUM_URL = 'https://medium.com/@zywkloo';
+
+// Profiles that point back to this identity — used as `sameAs` in Person /
+// WebSite JSON-LD so AI engines can resolve "Victor Zhang (zywkloo)" confidently.
+export const SAME_AS = [GITHUB_URL, LINKEDIN_URL, MEDIUM_URL];
 
 // ---------------------------------------------------------------------------
 // Blog/doc series metadata — single source of truth.

@@ -2,15 +2,48 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE, PROFILE_IMAGE, USER_TITLE, GITHUB_URL, WTCRAFT_URL, LINKEDIN_URL, EMAIL } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, SITE_AUTHOR, PROFILE_IMAGE, USER_TITLE, GITHUB_URL, WTCRAFT_URL, LINKEDIN_URL, EMAIL, MEDIUM_URL, SAME_AS } from '../consts';
 
-const MEDIUM_URL = 'https://medium.com/@zywkloo';
+// Identity knowledge graph for AI/search engines: who Victor Zhang is and what
+// this site is. Person + WebSite, cross-linked by @id.
+const personLd = {
+	'@type': 'Person',
+	'@id': `${SITE_URL}/#person`,
+	name: SITE_AUTHOR,
+	alternateName: 'zywkloo',
+	url: SITE_URL,
+	image: PROFILE_IMAGE,
+	jobTitle: USER_TITLE,
+	email: `mailto:${EMAIL}`,
+	knowsAbout: [
+		'iOS Development', 'Swift', 'SwiftUI', 'React Native',
+		'BLE / IoT device sync', 'Backend data pipelines', 'Telemetry',
+		'Agentic AI workflows', 'Metal GPU programming',
+	],
+	alumniOf: [
+		{ '@type': 'CollegeOrUniversity', name: 'University of British Columbia' },
+		{ '@type': 'CollegeOrUniversity', name: 'Peking University' },
+	],
+	sameAs: SAME_AS,
+};
+const websiteLd = {
+	'@type': 'WebSite',
+	'@id': `${SITE_URL}/#website`,
+	url: SITE_URL,
+	name: SITE_TITLE,
+	description: SITE_DESCRIPTION,
+	inLanguage: ['en', 'zh-CN'],
+	author: { '@id': `${SITE_URL}/#person` },
+	publisher: { '@id': `${SITE_URL}/#person` },
+};
+const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personLd] };
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<script type="application/ld+json" set:html={JSON.stringify(homeLd)} />
 	</head>
 	<body>
 		<Header />
