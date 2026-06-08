@@ -3,6 +3,27 @@ dist/
 # generated types
 .astro/
 
+# Build artifacts previously mirrored to repo root by the old copy-dist script.
+# Deploy is now done by GitHub Actions (.github/workflows/deploy.yml) straight
+# from dist/, so the repo root must only contain source — never these.
+/_astro/
+/_site/
+/about/
+/blog/
+/docs/
+/yong/
+/wtcraft/
+/index.html
+/404.html
+/favicon.svg
+/fonts/
+/images/
+/videos/
+/robots.txt
+/rss.xml
+/sitemap-0.xml
+/sitemap-index.xml
+
 # dependencies
 node_modules/
 
