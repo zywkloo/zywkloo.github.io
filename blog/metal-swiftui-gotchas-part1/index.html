@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/png" href="/images/wtcraft-icon.PNG"><link rel="apple-touch-icon" href="/images/wtcraft-icon.PNG"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Victor Zhang | Mobile &#38; Systems Engineer | Apps from Device to Cloud" href="https://zywkloo.github.io/rss.xml"><meta name="generator" content="Astro v5.18.2"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://zywkloo.github.io/blog/metal-swiftui-gotchas-part1/"><!-- Primary Meta Tags --><title>MetalSolo (Part 1): Metal + SwiftUI Layer Compositing &amp; Lifecycle Gotchas / MetalSolo（第一篇）：Metal + SwiftUI 图层合成与生命周期陷阱</title><meta name="title" content="MetalSolo (Part 1): Metal + SwiftUI Layer Compositing &#38; Lifecycle Gotchas / MetalSolo（第一篇）：Metal + SwiftUI 图层合成与生命周期陷阱"><meta name="description" content="Three bugs that had no warnings, no crashes, and no obvious causes. Just a blank canvas staring back at me at 2am. Here's what I learned building 8 Strokes."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://zywkloo.github.io/blog/metal-swiftui-gotchas-part1/"><meta property="og:title" content="MetalSolo (Part 1): Metal + SwiftUI Layer Compositing &#38; Lifecycle Gotchas / MetalSolo（第一篇）：Metal + SwiftUI 图层合成与生命周期陷阱"><meta property="og:description" content="Three bugs that had no warnings, no crashes, and no obvious causes. Just a blank canvas staring back at me at 2am. Here's what I learned building 8 Strokes."><meta property="og:image" content="https://zywkloo.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://zywkloo.github.io/blog/metal-swiftui-gotchas-part1/"><meta property="twitter:title" content="MetalSolo (Part 1): Metal + SwiftUI Layer Compositing &#38; Lifecycle Gotchas / MetalSolo（第一篇）：Metal + SwiftUI 图层合成与生命周期陷阱"><meta property="twitter:description" content="Three bugs that had no warnings, no crashes, and no obvious causes. Just a blank canvas staring back at me at 2am. Here's what I learned building 8 Strokes."><meta property="twitter:image" content="https://zywkloo.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"><link rel="stylesheet" href="/_astro/_slug_.sRgVrfA3.css">
+<link rel="stylesheet" href="/_astro/_slug_.CzKQ3gC6.css"></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Victor Zhang | Mobile &amp; Systems Engineer | Apps from Device to Cloud</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Home </a>  <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Blog </a>  <a href="/yong" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> 永 </a>  <a href="/about" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> About </a>  </div> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://linkedin.com/in/yiweiZ315" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Victor Zhang on LinkedIn</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://github.com/zywkloo/wtcraft" target="_blank" title="wtcraft — CLI for multi-agent coding" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>wtcraft — CLI for multi-agent coding</span> <img src="/images/wtcraft-icon.PNG" alt="wtcraft" class="wtcraft-icon" data-astro-cid-3ef6ksr2> </a> <a href="https://github.com/zywkloo" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Victor Zhang on GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path></svg> </a> </div> </nav> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo> <img src="/_astro/apple-engineers-metal.0rlyndZ-_Z12LMhK.webp" alt data-astro-cid-bvzihdzo="true" loading="lazy" decoding="async" fetchpriority="auto" width="1020" height="510"> <div class="hero-overlay" data-astro-cid-bvzihdzo></div> </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="series metalsolo" data-astro-cid-bvzihdzo> 🎸 MetalSolo </div> <div class="meta-row" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2026-04-15T07:00:00.000Z"> Apr 15, 2026 </time>  </div> <div class="post-view-count" data-post-view-count data-slug="metal-swiftui-gotchas-part1" hidden data-astro-cid-hcz7kujg> <span class="post-view-count__metric" data-astro-cid-hcz7kujg> <span class="post-view-count__value" data-post-view-value data-astro-cid-hcz7kujg>--</span> <span class="post-view-count__label" data-astro-cid-hcz7kujg>views</span> </span> <span class="post-view-count__separator" data-astro-cid-hcz7kujg>·</span> <button class="post-like-button" type="button" data-post-like-button data-astro-cid-hcz7kujg> <span class="post-like-button__icon" data-post-like-icon data-astro-cid-hcz7kujg>♡</span> <span class="post-like-button__label" data-post-like-label data-astro-cid-hcz7kujg>Like</span> <span class="post-like-button__count" data-post-like-value data-astro-cid-hcz7kujg>--</span> </button> </div>  <script type="module" src="/_astro/PostViewCount.astro_astro_type_script_index_0_lang.ClL0nZFe.js"></script> </div> <h1 data-astro-cid-bvzihdzo>MetalSolo (Part 1): Metal + SwiftUI Layer Compositing & Lifecycle Gotchas / MetalSolo（第一篇）：Metal + SwiftUI 图层合成与生命周期陷阱</h1> <hr data-astro-cid-bvzihdzo> </div> <div class="series-nav" style="--series-accent: #8b5cf6" data-astro-cid-bvzihdzo> <strong data-astro-cid-bvzihdzo>🎸 Series: MetalSolo (High-Performance GPU Programming)</strong> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <span data-astro-cid-bvzihdzo>👉 <strong data-astro-cid-bvzihdzo>Part 1: Metal + SwiftUI Layer Compositing &amp; Lifecycle Gotchas / MetalSolo（第一篇）：Metal + SwiftUI 图层合成与生命周期陷阱 (Current)</strong></span> </li><li data-astro-cid-bvzihdzo> <span data-astro-cid-bvzihdzo><strong data-astro-cid-bvzihdzo>Part 2</strong>: <a href="/blog/metal-geometry-math-part2/" data-astro-cid-bvzihdzo>Sacred Geometry of Stylus Input &amp; Ink Engine Math / MetalSolo（第二篇）：触控笔输入与笔迹引擎的几何数学公式</a></span> </li><li data-astro-cid-bvzihdzo> <span data-astro-cid-bvzihdzo><strong data-astro-cid-bvzihdzo>Part 3</strong>: <a href="/blog/colored-icp-3d-point-cloud-registration/" data-astro-cid-bvzihdzo>Colored ICP Point Cloud Registration in 3D Scanning / MetalSolo（第三篇）：3D 扫描中的 Colored ICP 点云配准算法</a></span> </li> </ul> </div>  <h1 id="metalsolo-part-1-metal--swiftui-layer-compositing--lifecycle-gotchas--metalsolo第一篇metal--swiftui-图层合成与生命周期陷阱">MetalSolo (Part 1): Metal + SwiftUI Layer Compositing &#x26; Lifecycle Gotchas / MetalSolo（第一篇）：Metal + SwiftUI 图层合成与生命周期陷阱</h1>
+<p style="text-align: center; margin: 0 0 32px;">
+  <a href="https://apps.apple.com/ca/app/8strokes/id6774579880" target="_blank" rel="noopener" style="display: inline-block; padding: 12px 24px; background: #8b5cf6; color: #fff; font-weight: 600; border-radius: 99px; text-decoration: none;"> Download 8 Strokes (永字八法) on the App Store</a>
+</p>
+<h2 id="solo-dev-meets-the-gpu--一个人-vs-gpu">Solo Dev Meets the GPU / 一个人 vs GPU</h2>
+<p>Imagine hiring a classically trained violinist and asking them to play death metal. No coaching, no sheet music. Just hand them the guitar and say “you’ll figure it out.”
+想象一下，雇一个受过古典训练的小提琴手，让他去演奏死亡金属。没有指导，没有乐谱。直接把吉他塞给他，说”你会搞定的”。</p>
+<p>That’s what it felt like to wire Metal into SwiftUI alone.
+一个人把 Metal 接进 SwiftUI，就是这种感觉。</p>
+<p>SwiftUI is elegant and declarative. Metal is a GPU pipeline that doesn’t care about your feelings. Between them sits UIKit’s compositing engine, which has its own opinions about where pixels actually end up — opinions it will not share with you until you’ve already wasted three days.
+SwiftUI 优雅，声明式。Metal 是个 GPU 管线，不在乎你的感受。夹在中间的是 UIKit 的合成引擎，它对像素最终落在哪里有自己的看法——但它不会告诉你，直到你已经浪费了三天。</p>
+<p>What follows are the bugs I hit while building <strong>8 Strokes</strong> — a digital ink engine for Chinese calligraphy. None of them produced a compiler warning. None crashed the app. They just silently produced wrong output and waited for me to figure out why.
+以下是我在开发 <strong>8 Strokes（永字八法）</strong>——一个中文书法数字墨水引擎——时踩过的坑。没有一个产生编译警告，没有一个让应用崩溃。它们只是静默地输出错误的结果，然后等着我来搞清楚原因。</p>
+<hr>
+<h2 id="1-the-swiftui-orientation-re-init-trap--1-swiftui-屏幕旋转下的重复初始化陷阱">1. The SwiftUI Orientation Re-init Trap / 1. SwiftUI 屏幕旋转下的重复初始化陷阱</h2>
+<blockquote>
+<p><strong>The Symptom:</strong> Rotate the iPad. Everything looks fine — still 120 FPS. Then you glance at the Xcode console.</p>
+<p><strong>症状：</strong> 旋转 iPad，一切看起来正常——依然 120 FPS。然后你瞟了一眼 Xcode 控制台。</p>
+</blockquote>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>[CAMetalLayerDrawable texture] should not be called after already presenting this drawable.</span></span>
+<span class="line"><span>[libMTLHud] Metric com.apple.hud-stat.frame-interval already exist.</span></span></code></pre>
+<p>It’s spamming. Every rotation. I told myself it was probably fine.
+每次旋转都在刷屏。我告诉自己可能没事。</p>
+<p>It was not fine.
+并没有没事。</p>
+<h3 id="the-root-cause--根本原因">The Root Cause / 根本原因</h3>
+<p>I was handling portrait/landscape with a standard <code>if/else</code>:
+我用标准的 <code>if/else</code> 处理竖/横屏：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#6A737D">// ❌ SwiftUI sees these as two distinct view trees</span></span>
+<span class="line"><span style="color:#6A737D">// ❌ SwiftUI 把这两个当成完全不同的视图树</span></span>
+<span class="line"><span style="color:#F97583">if</span><span style="color:#E1E4E8"> isLandscape {</span></span>
+<span class="line"><span style="color:#79B8FF">    HStack</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">spacing</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">16</span><span style="color:#E1E4E8">) { </span><span style="color:#79B8FF">ReferencePanelView</span><span style="color:#E1E4E8">(); writingPanel }</span></span>
+<span class="line"><span style="color:#E1E4E8">} </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    VStack</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">spacing</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">16</span><span style="color:#E1E4E8">) { </span><span style="color:#79B8FF">ReferencePanelView</span><span style="color:#E1E4E8">(); writingPanel }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>SwiftUI doesn’t know <code>writingPanel</code> in the <code>HStack</code> is the same thing as <code>writingPanel</code> in the <code>VStack</code>. Structural branching kills view identity. On every rotation, SwiftUI tears down the entire active tree and rebuilds the other branch — which means <code>makeUIView(context:)</code> fires a second time, spawning a second <code>MetalRenderer</code> on the same <code>MTLDevice</code>.
+SwiftUI 不知道 <code>HStack</code> 里的 <code>writingPanel</code> 和 <code>VStack</code> 里的是同一个东西。结构性分支消灭了视图标识。每次旋转，SwiftUI 销毁整棵活跃视图树并重建另一棵——这意味着 <code>makeUIView(context:)</code> 被再次触发，在同一个 <code>MTLDevice</code> 上产生了第二个 <code>MetalRenderer</code>。</p>
+<p>Two renderers. Same display link. Both trying to present the same drawable at the same frame boundary. That’s the console spam.
+两个渲染器，同一个 display link，同时试图在同一帧边界 present 同一个 drawable。这就是控制台在刷的原因。</p>
+<h3 id="the-fix--修复方案">The Fix / 修复方案</h3>
+<p>iOS 16’s <code>AnyLayout</code> lets you swap the layout algorithm <em>without</em> destroying the child tree. View identity survives the rotation.
+iOS 16 的 <code>AnyLayout</code> 让你在<em>不销毁</em>子视图树的情况下切换布局算法。视图标识在旋转中得以保留。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#6A737D">// ✅ Same child tree, layout switches in-place</span></span>
+<span class="line"><span style="color:#6A737D">// ✅ 同一子视图树，布局原地切换</span></span>
+<span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> canvasLayout: AnyLayout </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> isLandscape</span></span>
+<span class="line"><span style="color:#F97583">    ?</span><span style="color:#79B8FF"> AnyLayout</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">HStackLayout</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">spacing</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">16</span><span style="color:#E1E4E8">))</span></span>
+<span class="line"><span style="color:#F97583">    :</span><span style="color:#79B8FF"> AnyLayout</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">VStackLayout</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">spacing</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">16</span><span style="color:#E1E4E8">))</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">canvasLayout</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    ReferencePanelView</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    writingPanel  </span><span style="color:#6A737D">// makeUIView fires exactly once / makeUIView 只触发一次</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Also add a re-entrancy guard as a safety net — if a duplicate renderer somehow gets created by a future SwiftUI update, it won’t take down the frame:
+同时加一个防重入锁作为安全网——万一未来 SwiftUI 更新意外产生了重复渲染器，不会把帧搞崩：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> isDrawing </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">func</span><span style="color:#B392F0"> draw</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">in</span><span style="color:#E1E4E8"> view: MTKView) {</span></span>
+<span class="line"><span style="color:#F97583">    guard</span><span style="color:#F97583"> !</span><span style="color:#E1E4E8">isDrawing </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> { </span><span style="color:#F97583">return</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#E1E4E8">    isDrawing </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#F97583">    defer</span><span style="color:#E1E4E8"> { isDrawing </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<hr>
+<h2 id="2-the-calayer-hierarchy--zstack-compositing-trap--2-calayer-图层树与-zstack-的合成陷阱">2. The CALayer Hierarchy &#x26; ZStack Compositing Trap / 2. CALayer 图层树与 ZStack 的合成陷阱</h2>
+<blockquote>
+<p><strong>The Symptom:</strong> You put a pure SwiftUI view (like a red calligraphy template) <em>above</em> a <code>UIViewRepresentable</code> Metal view in a <code>ZStack</code>. The red character is completely invisible on the canvas — yet it mysteriously shows up underneath the semi-transparent Metal HUD.</p>
+<p><strong>症状：</strong> 你把一个纯 SwiftUI 视图（如红色的临摹描红）放在 ZStack 中 <code>UIViewRepresentable</code> Metal 画布的<em>上方</em>。屏幕上红色的描红字形完全不出现——但诡异的是，它却能呈现在半透明的 Metal HUD 调试胶囊下方。</p>
+</blockquote>
+<p>I had a red calligraphy character on a warm paper background — a <code>TraceReferenceView</code> — that users could follow to practice their strokes. It was supposed to float on top of the Metal canvas. I put it above <code>MetalCanvasView</code> in the <code>ZStack</code>. Ran the app. The red template character completely disappeared. It was invisible on the canvas, yet when I moved the semi-transparent debug HUD over it, it mysteriously showed up inside the capsule!
+我有一个在宣纸背景上浮现红色“永”字字形的描红视图（<code>TraceReferenceView</code>）供用户临摹。它本应浮在 Metal 画布之上。我在 <code>ZStack</code> 里把它放在 <code>MetalCanvasView</code> 上方。运行 App 后，红色描红字体完全没有出现，画布上一片空白。但非常神奇的是，当我把半透明的调试 HUD 移动到对应位置时，描红字形居然在半透明胶囊的下方显现了出来！</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#6A737D">// Looks correct — SwiftUI ZStack is bottom-to-top</span></span>
+<span class="line"><span style="color:#6A737D">// 看起来完全正确 —— SwiftUI ZStack 从底向上堆叠</span></span>
+<span class="line"><span style="color:#79B8FF">ZStack</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    MetalCanvasView</span><span style="color:#E1E4E8">()           </span><span style="color:#6A737D">// UIViewRepresentable  ← lower / 底层</span></span>
+<span class="line"><span style="color:#79B8FF">    TraceReferenceView</span><span style="color:#E1E4E8">()        </span><span style="color:#6A737D">// Pure SwiftUI         ← higher, should be on top / 顶层</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>My first instinct: opacity bug. Color bug. Frame bug. I checked all of them. The view was there, it just wasn’t visible.
+我的第一反应：是不是 opacity 问题？颜色问题？Frame 问题？全查了一遍，视图明明在，就是看不见。</p>
+<h3 id="the-frosted-glass-moment--磨砂玻璃的灵异时刻">The Frosted Glass Moment / 磨砂玻璃的灵异时刻</h3>
+<p>I had a <code>BrushDebugHUD</code> — a floating debug capsule with <code>.ultraThinMaterial</code> background — for monitoring brush latency. During one late-night session I noticed something strange: the 永 ghost was appearing. But <em>only</em> inside the capsule.
+我有一个 <code>BrushDebugHUD</code>——一个带 <code>.ultraThinMaterial</code> 背景的浮动调试胶囊，用来监控笔刷延迟。某个深夜，我注意到了一件诡异的事：永字描红出现了。但只在胶囊<em>内部</em>。</p>
+<p>The frosted glass was seeing through the Metal canvas and revealing the hidden view underneath.
+磨砂玻璃穿透了 Metal 画布，把隐藏在下面的视图给”透”出来了。</p>
+<p><img alt="Metal debug HUD showing the frosted glass revealing the hidden TraceReferenceView / Metal 调试 HUD，磨砂玻璃透出隐藏的描红视图" loading="lazy" decoding="async" fetchpriority="auto" width="1668" height="2388" src="/_astro/metal-part1-debug-hud.DpmYmGyb_Z2oDkuj.webp" ></p>
+<p>That screenshot was taken at 2:32 AM. I stared at it for a long time.
+那张截图是凌晨 2:32 截的。我盯着它看了很久。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>SwiftUI ZStack (Logical / 逻辑顺序)     UIKit Layer Tree (Physical / 物理合成树)</span></span>
+<span class="line"><span>───────────────────────────────     ──────────────────────────────────────────</span></span>
+<span class="line"><span>TraceReferenceView  (Top / 顶)       ┌ Hosting UIView (UIHostingController)</span></span>
+<span class="line"><span>                                     │  ├ CALayer (Parent's own content / 父级自身像素)</span></span>
+<span class="line"><span>MetalCanvasView   (Bottom / 底)      │  │   └── [TraceReferenceView pixels here] ← BEHIND subviews</span></span>
+<span class="line"><span>                                     │  └ MetalCanvasView (UIView subview / UIKit 子视图)</span></span>
+<span class="line"><span>                                     │       └ CAMetalLayer  ← PHYSICALLY ON TOP of parent CALayer</span></span>
+<span class="line"><span>                                     └</span></span></code></pre>
+<h3 id="why-it-happens--根本原因">Why It Happens / 根本原因</h3>
+<p>SwiftUI’s <code>ZStack</code> is a <strong>logical</strong> order. UIKit’s layer tree is <strong>physical</strong>.
+SwiftUI 的 <code>ZStack</code> 是<strong>逻辑</strong>顺序。UIKit 的图层树是<strong>物理</strong>顺序。</p>
+<p>When you embed a <code>UIViewRepresentable</code>, SwiftUI spawns a real <code>UIView</code> subview. In UIKit, subviews are <em>always</em> composited above their parent’s own <code>CALayer</code> content — no exceptions.
+嵌入 <code>UIViewRepresentable</code> 时，SwiftUI 会创建一个真实的 <code>UIView</code> subview。在 UIKit 里，subview <em>永远</em>在父 view 自身 CALayer 内容之上合成——没有例外。</p>
+<p>SwiftUI does not guarantee that <code>ZStack</code>’s logical ordering maps to physical sublayer ordering when <code>UIViewRepresentable</code> is in the mix. Whether SwiftUI renders the sibling pure-SwiftUI content into the parent’s backing layer, or inserts it as an earlier sublayer — the physical outcome is the same: the Metal canvas ends up on top. Silently.
+当 <code>ZStack</code> 中混有 <code>UIViewRepresentable</code> 时，SwiftUI <strong>不保证</strong>逻辑顺序会映射到物理 sublayer 的插入顺序。无论是把纯 SwiftUI 内容合并进父 view 的 backing layer，还是作为较早的 sublayer 插入——物理结果相同：Metal canvas 跑到最上面。无声无息。</p>
+<p><code>.ultraThinMaterial</code> is backed by <code>UIVisualEffectView</code>, which captures screen content at the <strong>IOSurface / compositor level</strong> — below the UIKit layer tree. That’s why it can see pixels that are visually occluded at the UIKit layer level, revealing the trapped <code>TraceReferenceView</code> beneath the Metal surface.
+<code>.ultraThinMaterial</code> 底层是 <code>UIVisualEffectView</code>，它在 <strong>IOSurface / compositor 层</strong>捕获屏幕内容——低于 UIKit 图层树。这就是它能看到在 UIKit 层级上被遮挡的像素的原因，把压在 Metal 表面下的 <code>TraceReferenceView</code> 给”透”了出来。</p>
+<h3 id="the-fix--修复方案-1">The Fix / 修复方案</h3>
+<p>Stop relying on <code>ZStack</code> position for anything above a <code>UIViewRepresentable</code>. Use <code>.overlay()</code> — it forces SwiftUI to create a dedicated UIView container, inserted as the <em>last</em> (topmost) subview.
+不要再依赖 <code>ZStack</code> 位置来叠加 <code>UIViewRepresentable</code> 上面的东西。用 <code>.overlay()</code>——它强制 SwiftUI 创建一个独立的 UIView 容器，作为<em>最后</em>（最顶层）的 subview 插入。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#6A737D">// ❌ BEFORE — ZStack position doesn't guarantee physical layer order</span></span>
+<span class="line"><span style="color:#6A737D">// ❌ 之前 —— ZStack 位置不保证物理图层顺序</span></span>
+<span class="line"><span style="color:#79B8FF">ZStack</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    MetalCanvasView</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#79B8FF">    TraceReferenceView</span><span style="color:#E1E4E8">()   </span><span style="color:#6A737D">// logically above, physically below / 逻辑上在上，物理上在下</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// ✅ AFTER — .overlay() guarantees a separate UIView on top</span></span>
+<span class="line"><span style="color:#6A737D">// ✅ 之后 —— .overlay() 保证独立 UIView 在物理最顶层</span></span>
+<span class="line"><span style="color:#79B8FF">ZStack</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    MetalCanvasView</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">overlay</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    TraceReferenceView</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Also: <code>CAMetalLayer.isOpaque</code> defaults to <code>true</code>. Even if everything else is set correctly, the compositor will treat your Metal layer as a solid wall. Be explicit.
+另外：<code>CAMetalLayer.isOpaque</code> 默认为 <code>true</code>。即使其他一切都设置正确，compositor 也会把你的 Metal 图层当成实心墙。必须显式设置。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> view </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> InkMTKView</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">frame</span><span style="color:#E1E4E8">: .zero)</span></span>
+<span class="line"><span style="color:#E1E4E8">view.isOpaque </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"><span style="color:#E1E4E8">view.backgroundColor </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> .clear</span></span>
+<span class="line"><span style="color:#E1E4E8">view.layer.isOpaque </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#6A737D">    // don't assume propagation / 不要假设会自动传播</span></span></code></pre>
+<hr>
+<h2 id="3-the-transparent-background--premultiplied-alpha-trap--3-透明背景与预乘-alpha-陷阱">3. The Transparent Background &#x26; Premultiplied Alpha Trap / 3. 透明背景与预乘 Alpha 陷阱</h2>
+<blockquote>
+<p><strong>The Symptom:</strong> You want a paper-textured background under the ink. You set <code>clearColor</code> to a warm paper tone with alpha zero, expecting transparency. The canvas is solid black.</p>
+<p><strong>症状：</strong> 你想在墨水下方放一张宣纸纹理。把 <code>clearColor</code> 设成暖色宣纸色调、alpha 为零，期望透明。画布变成了纯黑色。</p>
+</blockquote>
+<p>At this point I had already spent days on the ZStack bug. I set one color value. Black screen. I genuinely considered switching to SpriteKit.
+这时我已经在 ZStack 那个 bug 上花了好几天。改了一个颜色值，黑屏。我认真考虑过换 SpriteKit。</p>
+<h3 id="the-premultiplied-rule--预乘法则">The Premultiplied Rule / 预乘法则</h3>
+<p>Metal’s compositing pipeline uses <strong>Premultiplied Alpha</strong>. Every RGB component must be pre-multiplied by alpha before it reaches the compositor:
+Metal 的合成管线使用<strong>预乘 Alpha</strong>。每个 RGB 分量在到达 compositor 之前必须预先乘以 alpha：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext>Color</mtext><mtext>premul</mtext></msub><mo>=</mo><mo stretchy="false">(</mo><mi>R</mi><mo>×</mo><mi>A</mi><mo separator="true">,</mo><mtext> </mtext><mi>G</mi><mo>×</mo><mi>A</mi><mo separator="true">,</mo><mtext> </mtext><mi>B</mi><mo>×</mo><mi>A</mi><mo separator="true">,</mo><mtext> </mtext><mi>A</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{Color}_{\text{premul}} = (R \times A,\ G \times A,\ B \times A,\ A)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9805em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord text"><span class="mord">Color</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">premul</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">G</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">A</span><span class="mclose">)</span></span></span></span></p>
+<p>This imposes a hard constraint: <strong>RGB values can never exceed alpha</strong> (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo separator="true">,</mo><mi>G</mi><mo separator="true">,</mo><mi>B</mi><mo>≤</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">R, G, B \leq A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">G</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span></span></span></span>).
+这带来一个硬性约束：<strong>RGB 值绝对不能超过 alpha</strong>（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo separator="true">,</mo><mi>G</mi><mo separator="true">,</mo><mi>B</mi><mo>≤</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">R, G, B \leq A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">G</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span></span></span></span>）。</p>
+<p>I set <code>clearColor</code> to <code>(0.97, 0.96, 0.92, 0)</code>. Metal itself doesn’t validate this — it just writes those raw values into the <code>CAMetalLayer</code> texture as-is. The problem happens one step later, when Core Animation’s compositor picks up that texture and tries to composite it using premultiplied blending:
+我把 <code>clearColor</code> 设成了 <code>(0.97, 0.96, 0.92, 0)</code>。Metal 本身不校验这个值——它只是把这些原始值原封不动写进 <code>CAMetalLayer</code> 的 texture。问题发生在下一步，Core Animation compositor 拿到这张 texture，用预乘混合方式进行合成：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>result.rgb = src_premul.rgb + dst.rgb × (1 - src.a)</span></span>
+<span class="line"><span>           = (0.97, 0.96, 0.92) + dst × (1 - 0)</span></span>
+<span class="line"><span>           = RGB values go through fully, alpha channel is zero</span></span></code></pre>
+<p>The compositor received an invalid premultiplied state — RGB far exceeding alpha. The result is implementation-dependent: solid black, opaque gray, or something else. No error, no warning, just wrong.
+compositor 收到的是无效的预乘状态——RGB 远超 alpha。结果是实现相关的行为：纯黑、不透明灰，或者别的什么。没有报错，没有警告，就是不对。</p>
+<h3 id="the-fix--修复方案-2">The Fix / 修复方案</h3>
+<p>Clear to mathematical zero. Then put the paper texture in a SwiftUI layer <em>behind</em> the Metal view — let the transparent Metal layer overlay the ink strokes on top.
+清空到数学上的零。然后把宣纸纹理放在 Metal 视图<em>后面</em>的 SwiftUI 图层里——让透明的 Metal 图层把墨水笔迹叠加在上面。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#6A737D">// ✅ Valid premultiplied zero — RGB ≤ A satisfied trivially</span></span>
+<span class="line"><span style="color:#6A737D">// ✅ 有效的预乘零值 —— RGB ≤ A 自然满足</span></span>
+<span class="line"><span style="color:#E1E4E8">mtkView.clearColor </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> MTLClearColor</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">red</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">green</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">blue</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">alpha</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<hr>
+<h2 id="4-the-render-pipeline-blend-state-trap--4-渲染管线混合状态陷阱">4. The Render Pipeline Blend State Trap / 4. 渲染管线混合状态陷阱</h2>
+<blockquote>
+<p><strong>The Symptom:</strong> <code>clearColor</code> is valid. <code>isOpaque</code> is false. The canvas is transparent. But as soon as you draw a stroke, the background turns black underneath it.</p>
+<p><strong>症状：</strong> <code>clearColor</code> 合法，<code>isOpaque</code> 已设为 false，画布是透明的。但一旦开始画笔迹，笔迹下面的背景就变黑了。</p>
+</blockquote>
+<p>This is a separate bug that produces the same surface symptom as Gotcha 3, but at a different stage. The clearColor fix gets you a transparent canvas at rest. The render pipeline blend state controls what happens when you actually <em>draw</em> into it.
+这是一个独立的 bug，和第 3 个坑表面症状相同，但发生在不同阶段。clearColor 修复解决的是静止时的透明画布。渲染管线的混合状态控制的是你实际<em>绘制</em>时发生的事。</p>
+<h3 id="default-blend-factors-are-opaque--默认混合因子是不透明的">Default Blend Factors Are Opaque / 默认混合因子是不透明的</h3>
+<p>The default <code>MTLRenderPipelineDescriptor</code> has blending disabled, and the default blend factors are <code>(.one, .zero)</code> — meaning each draw call writes its RGB values opaquely over whatever was there, ignoring alpha entirely:
+默认的 <code>MTLRenderPipelineDescriptor</code> 禁用了混合，默认混合因子是 <code>(.one, .zero)</code>——意味着每次 draw call 都会把自己的 RGB 值不透明地覆盖到原有内容上，完全忽略 alpha：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#6A737D">// ❌ Default — blending disabled, strokes punch solid holes in the background</span></span>
+<span class="line"><span style="color:#6A737D">// ❌ 默认 —— 混合禁用，笔迹在背景上打出实心洞</span></span>
+<span class="line"><span style="color:#E1E4E8">pipelineDescriptor.colorAttachments[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">].isBlendingEnabled </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"><span style="color:#6A737D">// effectively: sourceRGBBlendFactor = .one, destinationRGBBlendFactor = .zero</span></span></code></pre>
+<p>Even with a perfectly transparent clearColor and <code>isOpaque = false</code>, every stroke call overwrites destination pixels with opaque color, making the underlying SwiftUI layers invisible in those regions.
+即使 clearColor 完全合法、<code>isOpaque = false</code> 已设好，每次笔迹的 draw call 都会用不透明颜色覆写目标像素，让下面的 SwiftUI 图层在那些区域消失。</p>
+<h3 id="the-fix--修复方案-3">The Fix / 修复方案</h3>
+<p>Enable blending and use standard premultiplied alpha factors:
+开启混合并使用标准预乘 alpha 因子：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#6A737D">// ✅ Premultiplied alpha blending — strokes composite correctly over the background</span></span>
+<span class="line"><span style="color:#6A737D">// ✅ 预乘 alpha 混合 —— 笔迹正确叠加在背景上</span></span>
+<span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> attachment </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> pipelineDescriptor.colorAttachments[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">attachment.isBlendingEnabled </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#E1E4E8">attachment.sourceRGBBlendFactor </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> .one               </span><span style="color:#6A737D">// src already premultiplied / src 已预乘</span></span>
+<span class="line"><span style="color:#E1E4E8">attachment.destinationRGBBlendFactor </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> .oneMinusSourceAlpha</span></span>
+<span class="line"><span style="color:#E1E4E8">attachment.sourceAlphaBlendFactor </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> .one</span></span>
+<span class="line"><span style="color:#E1E4E8">attachment.destinationAlphaBlendFactor </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> .oneMinusSourceAlpha</span></span></code></pre>
+<p>This is the standard setup for drawing transparent content. It’s not the default because Metal’s defaults are designed for opaque rendering pipelines where blending overhead is unwanted.
+这是绘制透明内容的标准配置。之所以不是默认值，是因为 Metal 的默认设置是为不透明渲染管线设计的，那种场景下混合开销是不必要的。</p>
+<hr>
+<h2 id="putting-it-together--合并来看">Putting It Together / 合并来看</h2>
+<p>Here’s the thing: these four bugs produce similar symptoms but fire at completely different stages of the rendering pipeline. I hit all of them in roughly this order, each one masking or mimicking the one before.
+关键在于：这四个 bug 症状相似，但在渲染管线的完全不同阶段触发。我大致按这个顺序踩遍了它们，每一个都在掩盖或模仿上一个。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>ZStack order wrong          → TraceReferenceView missing at compositing</span></span>
+<span class="line"><span>isOpaque = true (default)   → Metal layer is a solid wall, nothing below shows</span></span>
+<span class="line"><span>clearColor premul violation → CA compositor gets invalid texture, fallback color</span></span>
+<span class="line"><span>Blend state disabled        → Strokes paint over background, destroying alpha</span></span></code></pre>
+<p>These are four <em>independent</em> causes. Fixing one doesn’t fix the others. If <code>isOpaque</code> had been <code>true</code> from the start, I might never have seen the frosted glass clue for the ZStack bug — the whole layer would have been opaque and the symptoms would have blended together into one undifferentiated “why is everything wrong” session.
+这是四个<em>独立</em>的原因。修一个不解决其他的。如果一开始 <code>isOpaque</code> 是 <code>true</code>，我可能永远看不到 ZStack bug 的磨砂玻璃线索——整个图层会是不透明的，所有症状会混在一起变成一个无法分辨的”为什么所有东西都不对”的 debug 会话。</p>
+<hr>
+<h2 id="one-intense-night-later--熬过一个通宵之后">One Intense Night Later / 熬过一个通宵之后</h2>
+<p>Four bugs. Zero compile warnings. Zero crashes between them. All solved in one intense, sleepless night of relentless debugging.
+四个 bug，零编译警告，彼此之间零崩溃。全都在一宿没睡、死磕到底的极限 Debug 战役中被彻底搞定。</p>
+<p>After fixing all of them, the ink engine worked. The paper texture showed through. The trace reference floated on top. Rotations were smooth and silent. I submitted to the App Store.
+全修好之后，墨水引擎跑起来了。宣纸纹理透了出来，描红视图浮在最上方，旋转平滑无声。我提交了 App Store。</p>
+<p><img alt="8 Strokes scorecard — the first share after everything finally worked / 永字八法得分卡——一切终于跑通后第一次分享" loading="lazy" decoding="async" fetchpriority="auto" width="1200" height="630" src="/_astro/metal-part1-result-share.BlyJvFyu_cMBLK.webp" ></p>
+<p>That scorecard — total 74, stroke order 81, flow 88 — was the first thing I shared after the whole thing compiled, ran, scored, and didn’t explode. Good enough.
+那张得分卡——总分 74，笔法 81，流势 88——是整个东西能编译、能运行、能评分、没炸掉之后我分享的第一张。够了。</p>
+<hr>
+<h2 id="the-pattern--规律总结">The Pattern / 规律总结</h2>
+<p>All four bugs share one trait: they are <strong>physically correct but logically wrong</strong> from the SwiftUI developer’s perspective. The OS did exactly what it was supposed to do. I just didn’t know the rules.
+四个 bug 有一个共同点：从 SwiftUI 开发者视角看，它们<strong>物理上正确，逻辑上错误</strong>。操作系统做了它该做的事，只是我不知道规则。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Gotcha</th><th>Root cause / 根本原因</th><th>Stage / 触发阶段</th><th>Silent? / 静默?</th></tr></thead><tbody><tr><td>Orientation re-init</td><td><code>if/else</code> branching destroys view identity, double-allocates Metal renderer</td><td>Layout / 布局</td><td>Semi-silent / 半静默 (Console warning / 控制台警告)</td></tr><tr><td>ZStack compositing</td><td>SwiftUI doesn’t guarantee logical→physical sublayer order when UIViewRepresentable is mixed in</td><td>Compositing / 合成</td><td>✅ (Fully silent / 完全静默)</td></tr><tr><td>Premultiplied alpha</td><td>Invalid RGB > A in clearColor — CA compositor gets undefined-behavior input</td><td>CA compositor / CA 合成器</td><td>✅ (Fully silent / 完全静默)</td></tr><tr><td>Blend state disabled</td><td>Default pipeline factors <code>.one / .zero</code> ignore alpha on every draw call</td><td>Render pipeline / 渲染管线</td><td>✅ (Fully silent / 完全静默)</td></tr></tbody></table>
+<p>In <a href="/blog/metal-geometry-math-part2/">Part 2</a>, we dive deep into the vector ink geometry: how raw Pencil inputs are smoothed using Catmull-Rom splines, and the exact math behind generating variable-width triangle strips for smooth rendering.
+<a href="/blog/metal-geometry-math-part2/">第二篇</a>进入几何部分：剖析我们如何将原始 Pencil 触点转换为平滑的 Catmull-Rom 样条，以及如何通过数学公式生成可变宽度的三角带。</p>
+<p>Keep your strokes clean.
+落笔要稳。</p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2026 Victor Zhang. All rights reserved.
+<div class="social-links" data-astro-cid-sz7xmlte> <a href="https://medium.com/@zywkloo" target="_blank" title="Medium Blog" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Read Victor's Medium articles</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M13.54 12l6.23-6.23V5.24L15.89 2L9.23 8.66v-2.5L5.24 5.24v.96l3.99 3.99L5.24 14v2.23l4.04 2.72v-2.5l4.93-4.93z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://www.linkedin.com/in/yiweiz315/" target="_blank" title="LinkedIn" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Connect with Victor on LinkedIn</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="mailto:yiweizhangca@gmail.com" title="Email" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Email Victor</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://zzz-movie-rec-system.vercel.app/" target="_blank" title="Movie Rec System" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Movie Recommendation System</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://github.com/ZZZ-RecSys/ZZZ-MovieRecSystem" target="_blank" title="GitHub" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Visit Victor's GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path> </svg> </a> </div> </footer>  </body></html>

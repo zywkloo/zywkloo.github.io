@@ -1,0 +1,1070 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/png" href="/images/wtcraft-icon.PNG"><link rel="apple-touch-icon" href="/images/wtcraft-icon.PNG"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Victor Zhang | Mobile &#38; Systems Engineer | Apps from Device to Cloud" href="https://zywkloo.github.io/rss.xml"><meta name="generator" content="Astro v5.18.2"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://zywkloo.github.io/blog/dont-build-another-agent-codex-claude-code-wtcraft/"><!-- Primary Meta Tags --><title>TokenChef (Part 4): Stop Reinventing the Agent — wtcraft Boundaries, Ledgers &amp; Sign-off First / 别卷 Agent 了：wtcraft 要先把边界、账本和验收做好</title><meta name="title" content="TokenChef (Part 4): Stop Reinventing the Agent — wtcraft Boundaries, Ledgers &#38; Sign-off First / 别卷 Agent 了：wtcraft 要先把边界、账本和验收做好"><meta name="description" content="从 Claude Code 源码泄露与 CCB 逆向架构出发，用同一套六层架构对比 Codex 和 Claude Code，得出结论：wtcraft 不该再造 runtime，而该把任务边界、运行账本和验收流程做扎实。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://zywkloo.github.io/blog/dont-build-another-agent-codex-claude-code-wtcraft/"><meta property="og:title" content="TokenChef (Part 4): Stop Reinventing the Agent — wtcraft Boundaries, Ledgers &#38; Sign-off First / 别卷 Agent 了：wtcraft 要先把边界、账本和验收做好"><meta property="og:description" content="从 Claude Code 源码泄露与 CCB 逆向架构出发，用同一套六层架构对比 Codex 和 Claude Code，得出结论：wtcraft 不该再造 runtime，而该把任务边界、运行账本和验收流程做扎实。"><meta property="og:image" content="https://zywkloo.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://zywkloo.github.io/blog/dont-build-another-agent-codex-claude-code-wtcraft/"><meta property="twitter:title" content="TokenChef (Part 4): Stop Reinventing the Agent — wtcraft Boundaries, Ledgers &#38; Sign-off First / 别卷 Agent 了：wtcraft 要先把边界、账本和验收做好"><meta property="twitter:description" content="从 Claude Code 源码泄露与 CCB 逆向架构出发，用同一套六层架构对比 Codex 和 Claude Code，得出结论：wtcraft 不该再造 runtime，而该把任务边界、运行账本和验收流程做扎实。"><meta property="twitter:image" content="https://zywkloo.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"><link rel="stylesheet" href="/_astro/_slug_.sRgVrfA3.css">
+<link rel="stylesheet" href="/_astro/_slug_.CzKQ3gC6.css"></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Victor Zhang | Mobile &amp; Systems Engineer | Apps from Device to Cloud</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Home </a>  <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Blog </a>  <a href="/yong" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> 永 </a>  <a href="/about" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> About </a>  </div> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://linkedin.com/in/yiweiZ315" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Victor Zhang on LinkedIn</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://github.com/zywkloo/wtcraft" target="_blank" title="wtcraft — CLI for multi-agent coding" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>wtcraft — CLI for multi-agent coding</span> <img src="/images/wtcraft-icon.PNG" alt="wtcraft" class="wtcraft-icon" data-astro-cid-3ef6ksr2> </a> <a href="https://github.com/zywkloo" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Victor Zhang on GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path></svg> </a> </div> </nav> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo> <img src="/_astro/agent-boundaries-hero.C5TCzxvO_26pGf6.svg" alt data-astro-cid-bvzihdzo="true" loading="lazy" decoding="async" fetchpriority="auto" width="1020" height="510"> <div class="hero-overlay" data-astro-cid-bvzihdzo></div> </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="series tokenchef" data-astro-cid-bvzihdzo> 👨‍🍳 TokenChef </div> <div class="meta-row" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2026-06-02T07:00:00.000Z"> Jun 2, 2026 </time>  </div> <div class="post-view-count" data-post-view-count data-slug="dont-build-another-agent-codex-claude-code-wtcraft" hidden data-astro-cid-hcz7kujg> <span class="post-view-count__metric" data-astro-cid-hcz7kujg> <span class="post-view-count__value" data-post-view-value data-astro-cid-hcz7kujg>--</span> <span class="post-view-count__label" data-astro-cid-hcz7kujg>views</span> </span> <span class="post-view-count__separator" data-astro-cid-hcz7kujg>·</span> <button class="post-like-button" type="button" data-post-like-button data-astro-cid-hcz7kujg> <span class="post-like-button__icon" data-post-like-icon data-astro-cid-hcz7kujg>♡</span> <span class="post-like-button__label" data-post-like-label data-astro-cid-hcz7kujg>Like</span> <span class="post-like-button__count" data-post-like-value data-astro-cid-hcz7kujg>--</span> </button> </div>  <script type="module" src="/_astro/PostViewCount.astro_astro_type_script_index_0_lang.ClL0nZFe.js"></script> </div> <h1 data-astro-cid-bvzihdzo>TokenChef (Part 4): Stop Reinventing the Agent — <em>wtcraft</em> Boundaries, Ledgers & Sign-off First / 别卷 Agent 了：<em>wtcraft</em> 要先把边界、账本和验收做好</h1> <hr data-astro-cid-bvzihdzo> </div> <div class="series-nav" style="--series-accent: #cb3837" data-astro-cid-bvzihdzo> <strong data-astro-cid-bvzihdzo>👨‍🍳 Series: TokenChef (Git-Native Multi-Agent Coding)</strong> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <span data-astro-cid-bvzihdzo><strong data-astro-cid-bvzihdzo>Part 2</strong>: <a href="/blog/chief-token-orchestrator-manage-layered-agent-team/" data-astro-cid-bvzihdzo>Chief Token Orchestrator — Manage Claude, Codex, and Gemini as a Structured Software Team</a></span> </li><li data-astro-cid-bvzihdzo> <span data-astro-cid-bvzihdzo><strong data-astro-cid-bvzihdzo>Part 3</strong>: <a href="/blog/wtcraft-lightweight-git-native-multi-agent-scaffolding/" data-astro-cid-bvzihdzo>wtcraft — A Lightweight, Git-Native Scaffolding for Bounded Multi-Agent Coding</a></span> </li><li data-astro-cid-bvzihdzo> <span data-astro-cid-bvzihdzo>👉 <strong data-astro-cid-bvzihdzo>Part 4: Stop Reinventing the Agent — wtcraft Boundaries, Ledgers &amp; Sign-off First / 别卷 Agent 了：wtcraft 要先把边界、账本和验收做好 (Current)</strong></span> </li> </ul> </div>  <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+  <a href="https://www.npmjs.com/package/wtcraft"><img src="https://img.shields.io/npm/v/wtcraft.svg?style=flat-square&#x26;logo=npm&#x26;color=cb3837" alt="npm package"></a>
+  <a href="https://pypi.org/project/wtcraft/"><img src="https://img.shields.io/pypi/v/wtcraft.svg?style=flat-square&#x26;logo=pypi&#x26;color=3775a9" alt="PyPI version"></a>
+  <a href="https://github.com/zywkloo/wtcraft/actions/workflows/ci.yml"><img src="https://github.com/zywkloo/wtcraft/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/zywkloo/wtcraft/blob/main/LICENSE"><img src="https://img.shields.io/github/license/zywkloo/wtcraft?style=flat-square&#x26;color=blue" alt="License"></a>
+</div>
+<blockquote>
+<p>本文先中文、后英文。English version follows the Chinese one below.</p>
+</blockquote>
+<hr>
+<h1 id="中文版">中文版</h1>
+<h2 id="引子从一次源码泄露说起">引子：从一次源码泄露说起</h2>
+<p>2026-03-31 前后，Claude Code 出了一次 npm source map 泄露事件。<a href="https://www.infoq.com/news/2026/04/claude-code-source-leak/">InfoQ 的报道</a> 说，<code>@anthropic-ai/claude-code</code> 2.1.88 里夹带了本不该发布的 source map；<a href="https://www.axios.com/2026/03/31/anthropic-leaked-source-code-ai">Axios 的报道</a> 引述 Anthropic 的说法，称没有客户数据或凭据暴露。</p>
+<p>对我这种做 multi-agent harness 的人来说，这件事的意义不在「八卦」，而在于：它让外界第一次能比较系统地看到一个成熟 coding agent 的<strong>工程形状</strong>——不是它的 prompt 有多神，而是 loop 周围那一圈权限、压缩、工具、会话是怎么搭的。后来 arXiv 上也有基于公开可得 TypeScript 源码写的分析，比如 <a href="https://arxiv.org/abs/2604.14228">Dive into Claude Code</a>，把核心概括成一句很朴素的话：<code>model -> tools -> repeat</code>。</p>
+<p>我不会在这里引用、传播或复刻泄露代码里的任何具体实现。真正让我重新动笔的，是最近注意到的一个逆向工程资料站：<strong>CCB（Claude Code Best）</strong> 的架构文档 <a href="https://ccb.agent-aura.top/docs/introduction/what-is-claude-code">https://ccb.agent-aura.top/docs/introduction/what-is-claude-code</a>。它配套一个社区重建项目 <a href="https://github.com/claude-code-best/claude-code"><code>claude-code-best/claude-code</code></a>——一个用 TypeScript + Bun 写的、可运行可调试的 Claude Code 重构版（声明仅供学习研究，版权归 Anthropic）。</p>
+<p>CCB 文档的好处是：它把 Claude Code 拆成了清清楚楚的<strong>六层架构</strong>。于是我做了一件一直想做的事——<strong>用 CCB 的这套六层架构当统一标尺，把 <a href="https://github.com/openai/codex"><code>openai/codex</code></a> 和 Claude Code 阵营（官方 <a href="https://github.com/anthropics/claude-code"><code>anthropics/claude-code</code></a> + 重建版 <code>claude-code-best/claude-code</code>）摆在一起对比</strong>。</p>
+<p>这篇是 TokenChef 系列第四篇。结论先放这儿：</p>
+<blockquote>
+<p>对比完之后，我对 <code>wtcraft</code> 的定位反而更确定了——
+它不该变成 Codex，也不该变成 Claude Code，而该把这些 coding agent 的<strong>边界、账本、验收</strong>做扎实。</p>
+</blockquote>
+<h2 id="这次研究的几个项目">这次研究的几个项目</h2>
+<ul>
+<li><strong>wtcraft</strong>：<a href="https://github.com/zywkloo/wtcraft">https://github.com/zywkloo/wtcraft</a></li>
+<li><strong>OpenAI Codex</strong>：<a href="https://github.com/openai/codex">https://github.com/openai/codex</a></li>
+<li><strong>Anthropic Claude Code（官方）</strong>：<a href="https://github.com/anthropics/claude-code">https://github.com/anthropics/claude-code</a></li>
+<li><strong>claude-code-best/claude-code（社区重建版）</strong>：<a href="https://github.com/claude-code-best/claude-code">https://github.com/claude-code-best/claude-code</a></li>
+<li><strong>CCB 架构文档（逆向解读）</strong>：<a href="https://ccb.agent-aura.top/docs/introduction/what-is-claude-code">https://ccb.agent-aura.top/docs/introduction/what-is-claude-code</a></li>
+<li><strong>Claude Code Agent SDK 文档</strong>：<a href="https://code.claude.com/docs/en/agent-sdk/agent-loop">https://code.claude.com/docs/en/agent-sdk/agent-loop</a></li>
+</ul>
+<hr>
+<h2 id="1-先定标尺ccb-给出的六层架构">1. 先定标尺：CCB 给出的六层架构</h2>
+<p>CCB 文档把 Claude Code 描述成一个 <strong>terminal-native 的 agentic coding system</strong>，并拆成六层（对应重建版里的文件名）：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>层级</th><th>代表组件</th><th>职责</th></tr></thead><tbody><tr><td>Entry 入口层</td><td><code>cli.tsx</code> → <code>main.tsx</code></td><td>初始化 Commander.js CLI、注入运行时 polyfill、设定构建目标</td></tr><tr><td>Interaction 交互层</td><td><code>REPL.tsx</code></td><td>React / Ink 终端 UI，捕获输入、维护 session 状态</td></tr><tr><td>Orchestration 编排层</td><td><code>QueryEngine.ts</code></td><td>管理 turn 生命周期、token 预算、上下文压缩触发</td></tr><tr><td>Core Loop 核心循环层</td><td><code>query.ts</code></td><td>组装上下文 → 调 API → 解析工具调用 → 权限检查 → 执行工具 → 迭代</td></tr><tr><td>Tool 工具执行层</td><td><code>BashTool</code> / <code>FileEditTool</code> / <code>Grep</code> …</td><td>文件操作、命令执行、代码搜索</td></tr><tr><td>Communication 通信层</td><td><code>claude.ts</code></td><td>对 Anthropic API 的 HTTP streaming，多 provider（Bedrock / Vertex / Foundry）</td></tr></tbody></table>
+<p>这套分层的好处是：它把「agent loop」这个被说烂的词，落到了一个<strong>可对照的骨架</strong>上。核心循环（<code>query.ts</code>）其实很短，复杂度全在它上下两层——编排层的预算与压缩、工具层的权限门。</p>
+<p>下面我就用这六层，把 Codex 也摆进去。</p>
+<hr>
+<h2 id="2-把-codex-摆进这六层">2. 把 Codex 摆进这六层</h2>
+<p><code>openai/codex</code> 是 Rust 实现，强调 runtime-first、协议化、可观测。逐层对应一下，会发现它和 CCB 那套骨架惊人地一致：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>CCB 层级</th><th>Codex 对应物</th></tr></thead><tbody><tr><td>Entry 入口层</td><td><code>codex</code> CLI（Rust，多子命令）</td></tr><tr><td>Interaction 交互层</td><td>ratatui 写的 TUI；外加 <code>codex exec</code> headless 入口</td></tr><tr><td>Orchestration 编排层</td><td>session / thread / turn 状态机、token 预算、压缩</td></tr><tr><td>Core Loop 核心循环层</td><td>core agent loop：model turn ↔ tool call 之间的状态机</td></tr><tr><td>Tool 工具执行层</td><td>sandbox 命令执行、<code>apply_patch</code>、MCP 工具</td></tr><tr><td>Communication 通信层</td><td>model client、streaming、responses 协议</td></tr></tbody></table>
+<p>差异主要在<strong>最外两层</strong>：</p>
+<ul>
+<li><strong>入口/交互层</strong>：Codex 把 headless 做成一等公民。<code>codex exec --json</code> 默认吐 <strong>JSONL event stream</strong>，session 还能 rollout 成 JSONL。这让 Codex 天然像「一个可以被别的系统调用的 coding worker」。</li>
+<li><strong>边界层</strong>：Codex 把 sandbox / approval 做得很显式——macOS 上 Seatbelt、Linux 上 Landlock/seccomp，配 <code>--sandbox</code> 与 approval policy。</li>
+</ul>
+<p>核心循环本身呢？跟 CCB 描述的 <code>query.ts</code> 是同一个大结构：<code>组装上下文 → 调模型 → 执行被允许的工具 → 把结果喂回去 → 继续或停止</code>。</p>
+<p>对 <code>wtcraft</code> 来说，Codex 最有价值的那一点是：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">codex</span><span style="color:#9ECBFF"> exec</span><span style="color:#79B8FF"> --json</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#79B8FF">  --sandbox</span><span style="color:#9ECBFF"> workspace-write</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#79B8FF">  --output-last-message</span><span style="color:#9ECBFF"> last.md</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#9ECBFF">  "Read .worktree-task.md and implement only the Scope."</span></span></code></pre>
+<p>这条命令把「我相信 agent 说它做完了」变成「我有一份可解析、可审计的执行账本」——什么时候开始、跑了哪些 shell、改了哪些文件、token 用了多少、最后说了什么、有没有失败、失败在哪。</p>
+<hr>
+<h2 id="3-把-claude-code-阵营摆进这六层">3. 把 Claude Code 阵营摆进这六层</h2>
+<p>Claude Code 这边要分两半看，因为官方仓库和重建版暴露的东西不一样。</p>
+<p><strong>官方 <code>anthropics/claude-code</code></strong> 公开出来的，更像一个<strong>产品 + 插件生态入口</strong>：安装入口、插件目录、commands、agents、hooks、bug report、隐私说明。它不像 Codex 那样把完整 runtime 摊开给你读。但从 <a href="https://code.claude.com/docs/en/agent-sdk/agent-loop">Agent SDK 文档</a> 看，SDK 跑的就是和 Claude Code 同源的 autonomous agent loop——评估状态、调工具、收结果、重复，直到任务结束，并暴露 <code>Read</code>/<code>Edit</code>/<code>Write</code>/<code>Glob</code>/<code>Grep</code>/<code>Bash</code>/Web/Agent/Skill/hooks/permissions/budget/usage/session/compaction 等能力。</p>
+<p><strong>重建版 <code>claude-code-best/claude-code</code> + CCB 文档</strong> 则补上了官方没摊开的那部分。重建版是 TypeScript（99.8%）+ Bun 的 monorepo，构建后 450+ chunk，还往外扩了多实例编排（Pipe IPC / 局域网发现）、ACP（Zed / Cursor 集成）、自托管远程控制、企业监控（Langfuse / Sentry）、自定义 model provider（OpenAI / Gemini / Grok）等。</p>
+<p>把它逐层对应回 CCB 的六层，几乎是一比一（毕竟 CCB 文档就是按重建版的文件结构写的）：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>CCB 层级</th><th>Claude Code 阵营对应物</th></tr></thead><tbody><tr><td>Entry 入口层</td><td>官方 <code>claude</code> CLI；重建版 <code>cli.tsx</code> → <code>main.tsx</code></td></tr><tr><td>Interaction 交互层</td><td>terminal / IDE / GitHub 入口；重建版 <code>REPL.tsx</code>（React/Ink）</td></tr><tr><td>Orchestration 编排层</td><td><code>QueryEngine.ts</code>：turn 生命周期、budget、compaction</td></tr><tr><td>Core Loop 核心循环层</td><td><code>query.ts</code>：agentic loop</td></tr><tr><td>Tool 工具执行层</td><td><code>BashTool</code> / <code>FileEditTool</code> / <code>Grep</code> + 权限检查</td></tr><tr><td>Communication 通信层</td><td><code>claude.ts</code>：streaming + 多 provider 适配</td></tr></tbody></table>
+<p>Claude Code 的差异化在<strong>外层的 workflow 表面</strong>：<code>CLAUDE.md</code>、slash commands、hooks、skills、subagents、plugins、MCP、IDE / GitHub / terminal 多入口、权限提示、项目记忆。它的强项不是「没有 runtime」，而是把 runtime 包进了开发者的日常工作流。</p>
+<p>它也有 headless（<code>claude -p</code> / print mode），但<strong>输出形状和 Codex 不一样</strong>，这个坑后面第 5 节专门讲。</p>
+<hr>
+<h2 id="4-对比结论内核几乎一样差异在表层和封装">4. 对比结论：内核几乎一样，差异在表层和封装</h2>
+<p>把三者（Codex / 官方 CC / 重建版 CC）按同一套六层骨架摆完，最直接的观感是：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Entry / Interaction ── 曾经差异最大，但正在收敛（两边都长出了 CLI + 桌面 GUI + IDE + web/cloud）</span></span>
+<span class="line"><span>Orchestration       ── 高度相似（turn 生命周期 + token 预算 + 上下文压缩）</span></span>
+<span class="line"><span>Core Loop           ── 几乎一样（组装上下文 → 调模型 → 执行工具 → 喂回 → 继续/停止）</span></span>
+<span class="line"><span>Tool                ── 形态一致（文件 / 搜索 / shell / MCP + 权限门）</span></span>
+<span class="line"><span>Communication       ── 一致（streaming + 多 provider）</span></span></code></pre>
+<p>这里要修正我自己一开始的一个偷懒说法：「入口/交互层差异最大」其实已经过时了。经过几轮改版，两边的产品表面<strong>越来越像</strong>：</p>
+<ul>
+<li><strong>Claude Code</strong> 早就不只是终端工具。桌面版现在有三个标签——<strong>Chat</strong>（快速对话）、<strong>Cowork</strong>（带 50+ connector 的自主 agent，负责 code 以外的活）、<strong>Code</strong>（terminal-native 开发工具），外加 VS Code 扩展和 web IDE。</li>
+<li><strong>Codex</strong> 也不只是 CLI。它有 app、IDE 集成，CLI 也照样在终端里跑，和 Claude Code 几乎是镜像关系。</li>
+</ul>
+<p>换句话说，「Codex = headless 一等，Claude Code = 工作流一等」这种二分法，在 2026 年中已经站不太住了。两边都补齐了 CLI / GUI / IDE / cloud 四种表面。所以更准确的说法是：</p>
+<blockquote>
+<p>越往内核（Core Loop）看，Codex 和 Claude Code 越像；外层（入口、交互）曾经差得最远，但现在也在快速趋同。<strong>总体趋势就是越来越像。</strong></p>
+</blockquote>
+<p>汇成一张表：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>Codex</th><th>Claude Code（官方 + 重建版）</th></tr></thead><tbody><tr><td>核心循环</td><td>model–tool loop</td><td>model–tool loop</td></tr><tr><td>编排层</td><td>session/thread/turn、budget、compaction</td><td>QueryEngine：turn、budget、compaction</td></tr><tr><td>外部入口</td><td>CLI + app + IDE（headless / JSONL 仍最突出）</td><td>CLI + 桌面 Chat/Cowork/Code + VS Code + web IDE</td></tr><tr><td>项目记忆</td><td>agent instructions / sessions / 运行事件</td><td><code>CLAUDE.md</code>、skills、hooks、commands、plugins、sessions</td></tr><tr><td>边界控制</td><td><strong>OS 内核级</strong> sandbox / approval / event lifecycle</td><td><strong>应用层</strong> permissions / hooks / approval / budgets / compaction</td></tr><tr><td>对 wtcraft 的启发</td><td><strong>可审计执行账本</strong></td><td><strong>可持续项目工作流</strong></td></tr></tbody></table>
+<p>这不是谁先进谁落后的问题。它们是在<strong>同一类 agent architecture</strong> 上，给开发者暴露了<strong>越来越接近</strong>的产品表面。</p>
+<h3 id="插一段cc-cli-vs-codex-cli有系统对比资料">插一段：CC CLI vs Codex CLI（有系统对比资料）</h3>
+<p>既然两边都把 CLI 当核心入口，那不妨直接把两个 CLI 摆一起。网上其实有不少系统对比（<a href="https://www.nxcode.io/resources/news/claude-code-vs-codex-cli-terminal-coding-comparison-2026">NxCode</a>、<a href="https://www.termdock.com/en/blog/claude-code-vs-codex-cli">Termdock</a>、<a href="https://www.datacamp.com/blog/codex-vs-claude-code">DataCamp</a>、<a href="https://northflank.com/blog/claude-code-vs-openai-codex">Northflank</a>），综合下来大致是这样：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>Claude Code CLI</th><th>Codex CLI</th></tr></thead><tbody><tr><td>开源</td><td>闭源</td><td>开源（Rust）</td></tr><tr><td>sandbox</td><td>应用层 hooks / permissions</td><td>OS 内核级（macOS Seatbelt / Linux Landlock）</td></tr><tr><td>默认执行</td><td>本地</td><td>偏向云端/隔离沙箱执行</td></tr><tr><td>token 效率</td><td>烧得快</td><td>同等任务约省 4×，更省</td></tr><tr><td>速度 / 吞吐</td><td>偏慢，重推理</td><td>更快，Terminal-Bench 2.0 领先（约 77.3%）</td></tr><tr><td>代码质量</td><td>SWE-bench Verified 约 80.9%，盲测约 67% 胜率</td><td>略低，但差距在缩小</td></tr><tr><td>context</td><td>1M（生产级）</td><td>1M（GPT-5.4，实验性）</td></tr><tr><td>扩展机制</td><td>MCP / hooks / plan mode / subagents / skills / <code>/loop</code></td><td>MCP / <code>codex exec</code> headless / JSONL event stream</td></tr><tr><td>起价</td><td>$20/月 起</td><td>$20/月 起</td></tr></tbody></table>
+<p>读法别只看分数：</p>
+<ul>
+<li><strong>重推理 vs 重吞吐</strong>：改动牵涉十几个文件、依赖图很重时，Claude Code 那种「先建全局心智图再下笔」更稳；要快速、隔离、塞进 CI 又想省预算时，Codex CLI 更顺手。</li>
+<li><strong>边界哲学不同</strong>：Codex 把隔离压到 OS 内核层；Claude Code 主要靠应用层 hooks / permissions。这恰恰呼应本文主题——<strong>这正是 <code>wtcraft</code> 想用 git worktree 在更外层补齐的那层边界</strong>。</li>
+</ul>
+<p>但请注意：这些都是<strong>外层表面 + 模型能力</strong>的差异。一旦把它们按第 1~3 节那套六层架构摆回去，内核还是同一套 model–tool loop。<strong>所以结论不变：表层在分化竞争，内核在持续趋同。</strong></p>
+<hr>
+<h2 id="5-泄露--逆向真正说明了什么loop-不神秘周边系统才难">5. 泄露 + 逆向真正说明了什么：loop 不神秘，周边系统才难</h2>
+<p>从 CCB 的拆解和公开分析看，核心 loop 本身真的不神秘：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>while task not done:</span></span>
+<span class="line"><span>  call model</span></span>
+<span class="line"><span>  execute approved tools</span></span>
+<span class="line"><span>  feed results back</span></span></code></pre>
+<p>真正的工程含金量全在它周围：</p>
+<ul>
+<li><strong>权限系统</strong>：哪些工具能自动跑、哪些必须问人、哪些必须拒绝。</li>
+<li><strong>上下文管理</strong>：长任务怎么压缩历史、保留关键决策、避免上下文爆炸（QueryEngine 的 compaction 触发）。</li>
+<li><strong>工具生态</strong>：内置文件 / 搜索 / shell / Web / MCP / 自定义工具。</li>
+<li><strong>workflow affordances</strong>：<code>CLAUDE.md</code>、commands、skills、hooks、plugins。</li>
+<li><strong>delegation</strong>：subagent、隔离工作区、父子任务摘要。</li>
+<li><strong>observability</strong>：session、usage、cost、result subtype、hook events。</li>
+</ul>
+<p>这直接决定了 <code>wtcraft</code> 的定位。既然 Codex 和 Claude Code 都已经有成熟的 model–tool loop，那 <code>wtcraft</code> 再写一个 loop，<strong>价值很低、风险很高</strong>。真正缺的，是跨 agent、跨 worktree、跨任务的<strong>交接系统</strong>：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Which task?         哪个任务</span></span>
+<span class="line"><span>Which branch?       哪个分支</span></span>
+<span class="line"><span>Which files?        能改哪些文件</span></span>
+<span class="line"><span>Which off-limits?   哪些路径禁止动</span></span>
+<span class="line"><span>Which verification? 用什么验收</span></span>
+<span class="line"><span>Which artifacts?    留下哪些运行痕迹</span></span>
+<span class="line"><span>Which reviewer?     谁来签字</span></span></code></pre>
+<p>说白了，是把协作流程落到<strong>文件、分支、日志、验收结果</strong>上。</p>
+<hr>
+<h2 id="6-agent-loop不要复制大脑要控制循环边界">6. Agent loop：不要复制大脑，要控制循环边界</h2>
+<p>研究完之后，很容易产生一个诱惑：我们是不是也该在 <code>wtcraft</code> 里实现自己的 agent loop？</p>
+<p>我的答案是：<strong>不要，至少现在不要。</strong></p>
+<p>Codex 在内层 loop 上已经做了一大堆复杂工程——streaming、tool router、并行工具调用、sandbox 执行、approval、diff tracking、上下文压缩、token 限额、pending input drain、turn lifecycle、hooks。Claude Code 阵营同样有完整的工具调用、权限、hooks、commands、subagents、skills、plugins、MCP、compaction、session、budget。</p>
+<p><code>wtcraft</code> 要是去重写这个 loop，就会从一个轻量 harness 变成 runtime 竞争者——那不是它的强项。它该控制的是<strong>更外层的那个 loop</strong>：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Plan</span></span>
+<span class="line"><span>→ Create worktree</span></span>
+<span class="line"><span>→ Write task contract</span></span>
+<span class="line"><span>→ Invoke agent</span></span>
+<span class="line"><span>→ Capture run ledger</span></span>
+<span class="line"><span>→ Check scope</span></span>
+<span class="line"><span>→ Verify commands</span></span>
+<span class="line"><span>→ Review / replan / finish</span></span></code></pre>
+<p>这两层必须分清：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>层级</th><th>谁负责</th><th>关注点</th></tr></thead><tbody><tr><td>Model tool loop</td><td>Codex / Claude Code</td><td>如何读上下文、调工具、改代码</td></tr><tr><td>Supervision loop</td><td>wtcraft</td><td>谁做哪个任务、能改哪些文件、是否通过验收、如何交接</td></tr></tbody></table>
+<p>所以我现在越来越信这条原则：</p>
+<blockquote>
+<p><code>wtcraft</code> 不该追求 agentic autonomy，而该追求 bounded automation。
+自动化可以很强，但边界必须很窄。</p>
+</blockquote>
+<hr>
+<h2 id="7-headless别把两家的输出格式混在一起">7. Headless：别把两家的输出格式混在一起</h2>
+<p>如果只挑 Codex 的一个启发，我选 <strong>headless + JSONL</strong>。<code>codex exec</code> 这类命令天生适合被 shell / CI / orchestrator 调用。</p>
+<p>但这里有个坑：Claude Code 也有 headless（<code>claude -p</code> / print mode），<strong>输出形状却和 Codex 不一样</strong>。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># Codex：默认就是 JSONL event stream</span></span>
+<span class="line"><span style="color:#B392F0">codex</span><span style="color:#9ECBFF"> exec</span><span style="color:#79B8FF"> --json</span><span style="color:#9ECBFF"> ...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Claude Code：单个 JSON 结果对象，文本在 .result，附带 session id / usage / cost</span></span>
+<span class="line"><span style="color:#B392F0">claude</span><span style="color:#79B8FF"> -p</span><span style="color:#9ECBFF"> "Summarize this project"</span><span style="color:#79B8FF"> --output-format</span><span style="color:#9ECBFF"> json</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Claude Code：要逐行 event 必须显式开 stream</span></span>
+<span class="line"><span style="color:#B392F0">claude</span><span style="color:#79B8FF"> -p</span><span style="color:#9ECBFF"> "Explain recursion"</span><span style="color:#79B8FF"> --output-format</span><span style="color:#9ECBFF"> stream-json</span><span style="color:#79B8FF"> --verbose</span><span style="color:#79B8FF"> --include-partial-messages</span></span></code></pre>
+<p>汇总：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Engine</th><th>Headless 命令</th><th>程序化形状</th></tr></thead><tbody><tr><td>Codex</td><td><code>codex exec --json ...</code></td><td>默认 JSONL event stream</td></tr><tr><td>Claude Code</td><td><code>claude -p --output-format json ...</code></td><td>单个 JSON 结果对象</td></tr><tr><td>Claude Code</td><td><code>claude -p --output-format stream-json --verbose ...</code></td><td>JSONL event stream</td></tr></tbody></table>
+<p>还有一个更要命的细节：<strong>cost 不等于账单</strong>。Claude Code 的 <code>--output-format json</code> payload 里有 <code>total_cost_usd</code> 和 per-model 拆分；Agent SDK 的 result message 也带 <code>usage</code> / <code>total_cost_usd</code> / <code>num_turns</code> / <code>session_id</code>。但 <code>total_cost_usd</code> 是客户端按本地价格表算出来的<strong>估算值</strong>。对 Pro / Max 订阅用户，session cost ≠ 真实账单——<a href="https://code.claude.com/docs/en/costs">官方成本页</a> 也提醒订阅用户主要看 plan usage bars，别把这个 dollar figure 当 billing truth。</p>
+<p>所以 <code>wtcraft</code> 的 run ledger 可以记 token usage、session id、num turns、model breakdown、estimated cost，但<strong>不该用 <code>total_cost_usd</code> 做财务结算</strong>。</p>
+<p>这就是订阅模式下做 multi-agent orchestrator 最现实的问题：命令格式、权限模式、输出 schema、usage metadata、计划限额，<strong>没有一个统一标准</strong>，而且这些 CLI 还在高速迭代——今天能 parse 的字段，明天可能改名、移动、拆成 event，或只在某个 auth/plan/flag 组合下出现。</p>
+<p>更底层的还有 task 边界和 sandbox 边界：</p>
+<ul>
+<li><strong>task 边界</strong>：这个 agent 负责哪个 issue / branch / 文件 / 验收条件。</li>
+<li><strong>sandbox 边界</strong>：能不能写文件、写哪里、能不能跑 shell、能不能联网、能不能读本机 secrets。</li>
+<li><strong>escalation 边界</strong>：哪些命令自动过、哪些停下来问人、哪些直接禁止。</li>
+<li><strong>merge 边界</strong>：一个 worktree 的结果什么时候能进主线、什么时候必须退回重做。</li>
+</ul>
+<p>所以全自动 orchestrator 的 ROI 要打折。<code>wtcraft</code> 更合理的做法是：先把运行结果落成自己的 run artifact，同时允许人工接管；engine adapter 薄一点、保守一点，坏了也只是少抓点 metadata，而不是让整个任务系统停摆。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>.wtcraft/runs/&#x3C;run-id>/</span></span>
+<span class="line"><span>  events.jsonl</span></span>
+<span class="line"><span>  last-message.md</span></span>
+<span class="line"><span>  usage.json</span></span>
+<span class="line"><span>  changed-files.txt</span></span>
+<span class="line"><span>  verification.json</span></span>
+<span class="line"><span>  summary.md</span></span></code></pre>
+<p>因为 multi-agent 最大的问题从来不是「agent 不够聪明」，而是：它到底做了什么？有没有越界？改了哪些文件？跑没跑验证？失败在哪？下一个 agent 接不接得上？</p>
+<blockquote>
+<p>没有 run ledger，多 agent 就退化成一堆聊天窗口。
+有了 run ledger，多 agent 才可能变成一个工程系统。</p>
+</blockquote>
+<hr>
+<h2 id="8-worktree-isolation不是护城河是-wtcraft-该守的本分">8. Worktree isolation：不是护城河，是 wtcraft 该守的本分</h2>
+<p>先把话说清楚：<code>git worktree</code> 是 git 自带的功能，谁都能用，它<strong>算不上谁的护城河</strong>。Codex、Claude Code，甚至一个 shell 脚本，都能开 worktree。<code>wtcraft</code> 不会因为「用了 worktree」就有壁垒。</p>
+<p>但它确实是 <code>wtcraft</code> 最该守的本分。Codex 和 Claude Code 都能在一个 repo 里干活，可它们默认都不是「跨任务 worktree orchestrator」——它们关心的是一次 coding turn 里怎么把事做好，不是怎么把多个任务在多个 worktree 之间隔离、记录、验收、合并。这块没人替你做，而它恰好是 multi-agent 协作真正的痛点。</p>
+<p>所以 <code>wtcraft</code> 的核心假设很朴素：</p>
+<blockquote>
+<p>agent 的隔离边界不该只靠 prompt，应该落到 git worktree。</p>
+</blockquote>
+<p>价值不在「发明 worktree」，而在<strong>把 worktree 升级成一份跨 agent 的任务契约</strong>：每个 worktree 配一份 <code>.worktree-task.md</code>、一份 run ledger、一套 <code>check</code> / <code>verify</code>，让任何 agent（或人）都能在同一份边界下接力。</p>
+<p>Prompt 里写「please only edit these files」有用，但不够。真正稳的边界长这样：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>任务 A → worktree A → Scope A → verify A</span></span>
+<span class="line"><span>任务 B → worktree B → Scope B → verify B</span></span>
+<span class="line"><span>任务 C → worktree C → Scope C → verify C</span></span></code></pre>
+<p>好处很直接：</p>
+<ol>
+<li><strong>上下文隔离</strong>：每个 agent 只看到自己的任务契约。</li>
+<li><strong>冲突可见</strong>：shared files 串行，file-disjoint tasks 并行。</li>
+<li><strong>回滚便宜</strong>：一个 worktree 搞坏了不污染主工作区。</li>
+<li><strong>交接明确</strong>：下一个 agent 不用读完整聊天历史，只读任务文件、diff、run ledger。</li>
+<li><strong>验证可自动化</strong>：<code>wtcraft check</code> / <code>wtcraft verify</code> 独立于 agent 执行。</li>
+</ol>
+<p>这也是 <code>wtcraft</code> 和一般 agent CLI 最大的不同：</p>
+<blockquote>
+<p>Agent CLI 关心「如何完成一次 coding turn」。
+<code>wtcraft</code> 关心「如何组织多个 coding turns，形成可合并的工程工作流」。</p>
+</blockquote>
+<hr>
+<h2 id="9-wtcraft-下一步边界账本验收">9. wtcraft 下一步：边界、账本、验收</h2>
+<p>研究完这些项目，我认为 <code>wtcraft</code> 应该更坚定地保持轻量。不是做「另一个 Codex / 另一个 Claude Code / 另一个全能 runtime」，而是做：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>一个 git-native、agent-neutral、budget-aware 的 coordination harness</span></span></code></pre>
+<p>优先级这样排：</p>
+<h3 id="第一优先级task--sandbox-boundary">第一优先级：Task / Sandbox Boundary</h3>
+<p>先把「谁能做什么」说清楚。<code>.worktree-task.md</code> 不只是任务说明，要逐渐承担边界声明：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">src/auth/**</span></span>
+<span class="line"><span style="color:#85E89D">off_limits</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">package.json</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">.env*</span></span>
+<span class="line"><span style="color:#85E89D">sandbox</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  filesystem</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">workspace-write</span></span>
+<span class="line"><span style="color:#85E89D">  network</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">false</span></span>
+<span class="line"><span style="color:#85E89D">allowed_commands</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">npm test</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">npm run lint</span></span>
+<span class="line"><span style="color:#85E89D">requires_approval</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">git commit</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">npm install</span></span></code></pre>
+<p>关键不是马上实现完美 sandbox，而是把边界写进 <strong>repo-native contract</strong>，让人类、Codex、Claude Code、Gemini、CI 看到同一份约束。没有 task boundary，agent 会做多；没有 sandbox boundary，agent 可能做错地方；没有 approval boundary，自动化会从「省时间」变成「制造风险」。</p>
+<h3 id="第二优先级run-ledger">第二优先级：Run Ledger</h3>
+<p>每次执行都该留结构化痕迹：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>.wtcraft/runs/&#x3C;run-id>/</span></span>
+<span class="line"><span>  meta.json</span></span>
+<span class="line"><span>  prompt.md</span></span>
+<span class="line"><span>  events.jsonl</span></span>
+<span class="line"><span>  last-message.md</span></span>
+<span class="line"><span>  changed-files.txt</span></span>
+<span class="line"><span>  check.txt</span></span>
+<span class="line"><span>  verify.txt</span></span>
+<span class="line"><span>  summary.md</span></span></code></pre>
+<p>让 agent 工作从「聊天记录」变成「工程记录」。</p>
+<h3 id="第三优先级thin-engine-adapter">第三优先级：Thin Engine Adapter</h3>
+<p>别把 <code>wtcraft</code> 绑死在某一个 CLI 上，也别把「全自动调度所有 agent」当短期核心卖点。先支持很薄的 adapter：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">wtcraft</span><span style="color:#9ECBFF"> run</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">worktre</span><span style="color:#E1E4E8">e</span><span style="color:#F97583">></span><span style="color:#79B8FF"> --engine</span><span style="color:#9ECBFF"> codex</span></span>
+<span class="line"><span style="color:#B392F0">wtcraft</span><span style="color:#9ECBFF"> run</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">worktre</span><span style="color:#E1E4E8">e</span><span style="color:#F97583">></span><span style="color:#79B8FF"> --engine</span><span style="color:#9ECBFF"> claude</span><span style="color:#6A737D">   # 逐步扩展</span></span>
+<span class="line"><span style="color:#B392F0">wtcraft</span><span style="color:#9ECBFF"> run</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">worktre</span><span style="color:#E1E4E8">e</span><span style="color:#F97583">></span><span style="color:#79B8FF"> --engine</span><span style="color:#9ECBFF"> gemini</span></span></code></pre>
+<p>Adapter 只负责：怎么启动 agent、怎么传 prompt、怎么收输出（Codex 的 <code>--json</code> 和 Claude 的 <code>--output-format json</code> / <code>stream-json</code> 不是同一种形状）、怎么落 run artifact、失败时留够信息让人接手。真正的边界仍由 <code>.worktree-task.md</code> / <code>check</code> / <code>verify</code> 控制——抓不到 metadata 时任务不该失效，最多是这次账本不够完整。</p>
+<h3 id="第四优先级contract-schema">第四优先级：Contract Schema</h3>
+<p><code>.worktree-task.md</code> 保持人类可读，同时逐步机器可读：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">status</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">ready</span></span>
+<span class="line"><span style="color:#85E89D">agent</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">codex</span></span>
+<span class="line"><span style="color:#85E89D">priority</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">medium</span></span>
+<span class="line"><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">src/auth/**</span></span>
+<span class="line"><span style="color:#85E89D">off_limits</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">package.json</span></span>
+<span class="line"><span style="color:#85E89D">verification</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">npm test</span></span></code></pre>
+<p>让 Planner、Executor、Verifier、Finisher 之间的交接更稳。</p>
+<h3 id="第五优先级verifier-作为一等角色">第五优先级：Verifier 作为一等角色</h3>
+<p>现在 agent 最大的风险不是不会写代码，而是会自信地说「完成了」。所以 Verifier 不能只是人肉步骤：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">wtcraft</span><span style="color:#9ECBFF"> check</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">worktre</span><span style="color:#E1E4E8">e</span><span style="color:#F97583">></span></span>
+<span class="line"><span style="color:#B392F0">wtcraft</span><span style="color:#9ECBFF"> verify</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">worktre</span><span style="color:#E1E4E8">e</span><span style="color:#F97583">></span></span>
+<span class="line"><span style="color:#B392F0">wtcraft</span><span style="color:#9ECBFF"> review</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">worktre</span><span style="color:#E1E4E8">e</span><span style="color:#F97583">></span><span style="color:#6A737D">   # 未来可接 Codex review / Claude review，甚至交叉 review</span></span></code></pre>
+<p>但无论谁 review，最终都得回到：diff、Scope、Off-limits、tests、exit code。</p>
+<hr>
+<h2 id="10-设计原则让-agent-像承包商不像室友">10. 设计原则：让 agent 像承包商，不像室友</h2>
+<blockquote>
+<p>不要让 agent 像室友一样住进你的主工作区；
+让 agent 像承包商一样，在明确工地、明确合同、明确验收标准下干活。</p>
+</blockquote>
+<ul>
+<li>Codex 很适合做一个<strong>可观测的承包商</strong>。</li>
+<li>Claude Code 很适合做一个<strong>懂你项目习惯的结对伙伴</strong>。</li>
+<li>而 <code>wtcraft</code> 该做的是<strong>项目经理</strong>：分任务、开 worktree、写合同、查越界、跑验收、记账本、合并结果。</li>
+</ul>
+<p>这也是 TokenChef 系列一直追的方向：</p>
+<blockquote>
+<p>不是买一个最贵的超级 agent，
+而是用便宜、专长不同、可替换的 agent，组织成一个可控的小团队。</p>
+</blockquote>
+<p>把 Codex 和 Claude Code 摆进同一套六层架构对比完，最后给 <code>wtcraft</code> 的启发其实很简单：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Codex teaches observability.   Codex 教我可观测。</span></span>
+<span class="line"><span>Claude Code teaches workflow.  Claude Code 教我工作流。</span></span>
+<span class="line"><span>wtcraft should provide boundaries.  wtcraft 该提供边界。</span></span></code></pre>
+<p>Agent 会越来越强。但越强的 agent，越需要清楚的边界。这正是 <code>wtcraft</code> 要做的事。</p>
+<hr>
+<hr>
+<h1 id="english-version">English Version</h1>
+<h2 id="prologue-starting-from-a-source-leak">Prologue: Starting from a source leak</h2>
+<p>Around 2026-03-31, Claude Code had an npm source-map leak. <a href="https://www.infoq.com/news/2026/04/claude-code-source-leak/">InfoQ reported</a> that <code>@anthropic-ai/claude-code</code> 2.1.88 shipped a source map it shouldn’t have; <a href="https://www.axios.com/2026/03/31/anthropic-leaked-source-code-ai">Axios reported</a> Anthropic’s statement that no customer data or credentials were exposed.</p>
+<p>For someone building a multi-agent harness, the interesting part isn’t the gossip — it’s that the wider community could, for the first time, see the <strong>engineering shape</strong> of a mature coding agent. Not how magical the prompt is, but how the ring of permissions, compaction, tools, and sessions around the loop is wired. Later, analyses based on publicly available TypeScript appeared on arXiv, e.g. <a href="https://arxiv.org/abs/2604.14228">Dive into Claude Code</a>, which boils the core down to a plain sentence: <code>model -> tools -> repeat</code>.</p>
+<p>I will not quote, redistribute, or reproduce any concrete implementation from the leaked code. What actually got me writing again was a reverse-engineering reference site I recently noticed: the <strong>CCB (Claude Code Best)</strong> architecture docs at <a href="https://ccb.agent-aura.top/docs/introduction/what-is-claude-code">https://ccb.agent-aura.top/docs/introduction/what-is-claude-code</a>. It comes with a community reconstruction, <a href="https://github.com/claude-code-best/claude-code"><code>claude-code-best/claude-code</code></a> — a runnable, debuggable Claude Code rebuild in TypeScript + Bun (declared for learning/research only; all rights belong to Anthropic).</p>
+<p>The value of the CCB docs is that they break Claude Code into a clean <strong>six-layer architecture</strong>. So I did something I’d wanted to do for a while: <strong>use CCB’s six layers as a common ruler and line up <a href="https://github.com/openai/codex"><code>openai/codex</code></a> against the Claude Code camp (official <a href="https://github.com/anthropics/claude-code"><code>anthropics/claude-code</code></a> + the rebuild <code>claude-code-best/claude-code</code>)</strong>.</p>
+<p>This is Part 4 of the TokenChef series. The conclusion up front:</p>
+<blockquote>
+<p>After the comparison, I’m more certain than ever about <code>wtcraft</code>’s role —
+it shouldn’t become Codex, nor Claude Code. It should nail the <strong>boundaries, ledger, and verification</strong> around these coding agents.</p>
+</blockquote>
+<h2 id="projects-studied">Projects studied</h2>
+<ul>
+<li><strong>wtcraft</strong>: <a href="https://github.com/zywkloo/wtcraft">https://github.com/zywkloo/wtcraft</a></li>
+<li><strong>OpenAI Codex</strong>: <a href="https://github.com/openai/codex">https://github.com/openai/codex</a></li>
+<li><strong>Anthropic Claude Code (official)</strong>: <a href="https://github.com/anthropics/claude-code">https://github.com/anthropics/claude-code</a></li>
+<li><strong>claude-code-best/claude-code (community rebuild)</strong>: <a href="https://github.com/claude-code-best/claude-code">https://github.com/claude-code-best/claude-code</a></li>
+<li><strong>CCB architecture docs (reverse-engineered)</strong>: <a href="https://ccb.agent-aura.top/docs/introduction/what-is-claude-code">https://ccb.agent-aura.top/docs/introduction/what-is-claude-code</a></li>
+<li><strong>Claude Code Agent SDK docs</strong>: <a href="https://code.claude.com/docs/en/agent-sdk/agent-loop">https://code.claude.com/docs/en/agent-sdk/agent-loop</a></li>
+</ul>
+<hr>
+<h2 id="1-setting-the-ruler-ccbs-six-layer-architecture">1. Setting the ruler: CCB’s six-layer architecture</h2>
+<p>The CCB docs describe Claude Code as a <strong>terminal-native agentic coding system</strong>, split into six layers (with file names from the rebuild):</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Layer</th><th>Representative component</th><th>Responsibility</th></tr></thead><tbody><tr><td>Entry</td><td><code>cli.tsx</code> → <code>main.tsx</code></td><td>Init Commander.js CLI, inject runtime polyfills, set build targets</td></tr><tr><td>Interaction</td><td><code>REPL.tsx</code></td><td>React / Ink terminal UI; capture input, keep session state</td></tr><tr><td>Orchestration</td><td><code>QueryEngine.ts</code></td><td>Manage turn lifecycle, token budget, context-compaction triggers</td></tr><tr><td>Core Loop</td><td><code>query.ts</code></td><td>Assemble context → call API → parse tool calls → permission check → execute tools → iterate</td></tr><tr><td>Tool</td><td><code>BashTool</code> / <code>FileEditTool</code> / <code>Grep</code> …</td><td>File ops, command execution, code search</td></tr><tr><td>Communication</td><td><code>claude.ts</code></td><td>HTTP streaming to the Anthropic API, multi-provider (Bedrock / Vertex / Foundry)</td></tr></tbody></table>
+<p>The benefit: it pins the over-used term “agent loop” onto a <strong>comparable skeleton</strong>. The core loop (<code>query.ts</code>) is actually short; all the complexity lives one layer above (budget + compaction) and one below (the permission gate in the tool layer).</p>
+<p>Let me drop Codex into the same six layers.</p>
+<hr>
+<h2 id="2-codex-against-the-six-layers">2. Codex against the six layers</h2>
+<p><code>openai/codex</code> is a Rust implementation that’s runtime-first, protocol-driven, observable. Mapped layer by layer, it’s strikingly aligned with CCB’s skeleton:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>CCB layer</th><th>Codex counterpart</th></tr></thead><tbody><tr><td>Entry</td><td><code>codex</code> CLI (Rust, multi-subcommand)</td></tr><tr><td>Interaction</td><td>ratatui-based TUI; plus the <code>codex exec</code> headless entry</td></tr><tr><td>Orchestration</td><td>session / thread / turn state machine, token budget, compaction</td></tr><tr><td>Core Loop</td><td>core agent loop: the state machine between a model turn and tool calls</td></tr><tr><td>Tool</td><td>sandboxed command execution, <code>apply_patch</code>, MCP tools</td></tr><tr><td>Communication</td><td>model client, streaming, responses protocol</td></tr></tbody></table>
+<p>The differences are mostly in the <strong>outer two layers</strong>:</p>
+<ul>
+<li><strong>Entry/Interaction</strong>: Codex makes headless a first-class citizen. <code>codex exec --json</code> emits a <strong>JSONL event stream</strong> by default, and sessions can roll out to JSONL. That makes Codex naturally feel like “a coding worker other systems can call.”</li>
+<li><strong>Boundary layer</strong>: Codex makes sandbox / approval very explicit — Seatbelt on macOS, Landlock/seccomp on Linux, plus <code>--sandbox</code> and approval policy.</li>
+</ul>
+<p>The core loop itself? Same big shape as CCB’s <code>query.ts</code>: <code>assemble context → call model → execute approved tools → feed results back → continue or stop</code>.</p>
+<p>For <code>wtcraft</code>, Codex’s single most valuable bit is:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">codex</span><span style="color:#9ECBFF"> exec</span><span style="color:#79B8FF"> --json</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#79B8FF">  --sandbox</span><span style="color:#9ECBFF"> workspace-write</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#79B8FF">  --output-last-message</span><span style="color:#9ECBFF"> last.md</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#9ECBFF">  "Read .worktree-task.md and implement only the Scope."</span></span></code></pre>
+<p>This turns “I trust the agent that says it’s done” into “I have a parseable, auditable execution ledger” — when it started, which shell commands ran, which files changed, how many tokens, the final message, whether it failed, and where.</p>
+<hr>
+<h2 id="3-the-claude-code-camp-against-the-six-layers">3. The Claude Code camp against the six layers</h2>
+<p>The Claude Code side splits in two, because the official repo and the rebuild expose different things.</p>
+<p><strong>Official <code>anthropics/claude-code</code></strong> looks more like a <strong>product + plugin-ecosystem entry point</strong>: install entry, plugin catalog, commands, agents, hooks, bug report, privacy notes. It doesn’t lay out a full runtime like Codex does. But per the <a href="https://code.claude.com/docs/en/agent-sdk/agent-loop">Agent SDK docs</a>, the SDK runs the same autonomous agent loop as Claude Code — assess state, call tools, receive results, repeat until done — exposing <code>Read</code>/<code>Edit</code>/<code>Write</code>/<code>Glob</code>/<code>Grep</code>/<code>Bash</code>/Web/Agent/Skill/hooks/permissions/budget/usage/session/compaction.</p>
+<p><strong>The rebuild <code>claude-code-best/claude-code</code> + CCB docs</strong> fill in what the official repo doesn’t expose. The rebuild is a TypeScript (99.8%) + Bun monorepo, 450+ chunks after build, extended with multi-instance orchestration (Pipe IPC / LAN discovery), ACP (Zed / Cursor integration), self-hosted remote control, enterprise monitoring (Langfuse / Sentry), and custom model providers (OpenAI / Gemini / Grok).</p>
+<p>Mapped back onto CCB’s six layers, it’s nearly one-to-one (the CCB docs are written against the rebuild’s file structure after all):</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>CCB layer</th><th>Claude Code camp counterpart</th></tr></thead><tbody><tr><td>Entry</td><td>official <code>claude</code> CLI; rebuild <code>cli.tsx</code> → <code>main.tsx</code></td></tr><tr><td>Interaction</td><td>terminal / IDE / GitHub entries; rebuild <code>REPL.tsx</code> (React/Ink)</td></tr><tr><td>Orchestration</td><td><code>QueryEngine.ts</code>: turn lifecycle, budget, compaction</td></tr><tr><td>Core Loop</td><td><code>query.ts</code>: the agentic loop</td></tr><tr><td>Tool</td><td><code>BashTool</code> / <code>FileEditTool</code> / <code>Grep</code> + permission checks</td></tr><tr><td>Communication</td><td><code>claude.ts</code>: streaming + multi-provider adapters</td></tr></tbody></table>
+<p>Claude Code’s differentiation is in its <strong>outer workflow surface</strong>: <code>CLAUDE.md</code>, slash commands, hooks, skills, subagents, plugins, MCP, IDE / GitHub / terminal entries, permission prompts, project memory. Its strength isn’t “no runtime”; it’s wrapping the runtime into the developer’s daily workflow.</p>
+<p>It has headless too (<code>claude -p</code> / print mode), but the <strong>output shape differs from Codex</strong> — a pitfall I cover in §5.</p>
+<hr>
+<h2 id="4-verdict-the-cores-are-nearly-identical-the-differences-are-surface-and-packaging">4. Verdict: the cores are nearly identical; the differences are surface and packaging</h2>
+<p>After lining up all three (Codex / official CC / rebuild CC) against one six-layer skeleton, the immediate impression is:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Entry / Interaction ── once the biggest difference, now converging (both grew CLI + desktop GUI + IDE + web/cloud)</span></span>
+<span class="line"><span>Orchestration       ── highly similar (turn lifecycle + token budget + context compaction)</span></span>
+<span class="line"><span>Core Loop           ── nearly identical (assemble context → call model → execute tools → feed back → continue/stop)</span></span>
+<span class="line"><span>Tool                ── same shape (files / search / shell / MCP + permission gate)</span></span>
+<span class="line"><span>Communication       ── same (streaming + multi-provider)</span></span></code></pre>
+<p>I need to correct a lazy claim I made earlier: “the entry/interaction layer differs most” is already out of date. After several revisions, the two product surfaces look <strong>more and more alike</strong>:</p>
+<ul>
+<li><strong>Claude Code</strong> is no longer just a terminal tool. The desktop app now has three tabs — <strong>Chat</strong> (quick conversations), <strong>Cowork</strong> (an autonomous agent with 50+ connectors that handles everything except code), and <strong>Code</strong> (the terminal-native developer tool) — plus a VS Code extension and a web IDE.</li>
+<li><strong>Codex</strong> is no longer just a CLI either. It has an app, IDE integrations, and the CLI still runs in the terminal — almost a mirror image of Claude Code.</li>
+</ul>
+<p>So the “Codex = headless-first, Claude Code = workflow-first” dichotomy doesn’t really hold by mid-2026. Both now cover all four surfaces: CLI / GUI / IDE / cloud. A more accurate statement:</p>
+<blockquote>
+<p>The closer you look at the core loop, the more Codex and Claude Code resemble each other; the outer layers (entry, interaction) once differed most, but are now converging fast too. <strong>The overall trend is simply: more and more alike.</strong></p>
+</blockquote>
+<p>As a table:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Dimension</th><th>Codex</th><th>Claude Code (official + rebuild)</th></tr></thead><tbody><tr><td>Core loop</td><td>model–tool loop</td><td>model–tool loop</td></tr><tr><td>Orchestration</td><td>session/thread/turn, budget, compaction</td><td>QueryEngine: turn, budget, compaction</td></tr><tr><td>Entry points</td><td>CLI + app + IDE (headless / JSONL still most prominent)</td><td>CLI + desktop Chat/Cowork/Code + VS Code + web IDE</td></tr><tr><td>Project memory</td><td>agent instructions / sessions / run events</td><td><code>CLAUDE.md</code>, skills, hooks, commands, plugins, sessions</td></tr><tr><td>Boundary control</td><td><strong>OS-kernel-level</strong> sandbox / approval / event lifecycle</td><td><strong>app-layer</strong> permissions / hooks / approval / budgets / compaction</td></tr><tr><td>Lesson for wtcraft</td><td><strong>auditable execution ledger</strong></td><td><strong>sustainable project workflow</strong></td></tr></tbody></table>
+<p>This isn’t about who’s ahead. They expose <strong>increasingly similar</strong> product surfaces on top of the <strong>same class of agent architecture</strong>.</p>
+<h3 id="aside-cc-cli-vs-codex-cli-theres-systematic-comparison-material">Aside: CC CLI vs Codex CLI (there’s systematic comparison material)</h3>
+<p>Since both treat the CLI as a core entry point, let’s put the two CLIs side by side. There’s plenty of systematic comparison online (<a href="https://www.nxcode.io/resources/news/claude-code-vs-codex-cli-terminal-coding-comparison-2026">NxCode</a>, <a href="https://www.termdock.com/en/blog/claude-code-vs-codex-cli">Termdock</a>, <a href="https://www.datacamp.com/blog/codex-vs-claude-code">DataCamp</a>, <a href="https://northflank.com/blog/claude-code-vs-openai-codex">Northflank</a>); the synthesis is roughly:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Dimension</th><th>Claude Code CLI</th><th>Codex CLI</th></tr></thead><tbody><tr><td>Open source</td><td>closed</td><td>open (Rust)</td></tr><tr><td>Sandbox</td><td>app-layer hooks / permissions</td><td>OS-kernel-level (macOS Seatbelt / Linux Landlock)</td></tr><tr><td>Default execution</td><td>local</td><td>leans cloud / isolated sandbox</td></tr><tr><td>Token efficiency</td><td>burns fast</td><td>~4× leaner on equivalent tasks</td></tr><tr><td>Speed / throughput</td><td>slower, reasoning-heavy</td><td>faster, leads Terminal-Bench 2.0 (~77.3%)</td></tr><tr><td>Code quality</td><td>~80.9% SWE-bench Verified, ~67% blind win rate</td><td>slightly lower, gap narrowing</td></tr><tr><td>Context</td><td>1M (production-ready)</td><td>1M (GPT-5.4, experimental)</td></tr><tr><td>Extensions</td><td>MCP / hooks / plan mode / subagents / skills / <code>/loop</code></td><td>MCP / <code>codex exec</code> headless / JSONL event stream</td></tr><tr><td>Entry price</td><td>from $20/mo</td><td>from $20/mo</td></tr></tbody></table>
+<p>Don’t read only the scores:</p>
+<ul>
+<li><strong>Reasoning-heavy vs throughput-heavy</strong>: when a change touches a dozen files and the dependency graph matters, Claude Code’s “build a mental map first, then write” is steadier; when you need fast, isolated, CI-friendly execution on a budget, Codex CLI fits better.</li>
+<li><strong>Different boundary philosophies</strong>: Codex pushes isolation down to the OS kernel; Claude Code relies mostly on app-layer hooks / permissions. That echoes this post’s theme — <strong>this is exactly the boundary layer <code>wtcraft</code> wants to fill from further out, with git worktrees.</strong></li>
+</ul>
+<p>But note: these are differences in <strong>outer surface + model capability</strong>. Drop them back into the six-layer architecture from §1–3 and the core is still the same model–tool loop. <strong>So the conclusion holds: the surface diverges in competition, while the core keeps converging.</strong></p>
+<hr>
+<h2 id="5-what-the-leak--reverse-engineering-really-show-the-loop-isnt-mysterious-the-surrounding-system-is-hard">5. What the leak + reverse engineering really show: the loop isn’t mysterious; the surrounding system is hard</h2>
+<p>From CCB’s breakdown and public analysis, the core loop really isn’t mysterious:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>while task not done:</span></span>
+<span class="line"><span>  call model</span></span>
+<span class="line"><span>  execute approved tools</span></span>
+<span class="line"><span>  feed results back</span></span></code></pre>
+<p>The real engineering weight is all around it:</p>
+<ul>
+<li><strong>Permissions</strong>: which tools auto-run, which must ask a human, which are forbidden.</li>
+<li><strong>Context management</strong>: how a long task compacts history, keeps key decisions, avoids context blow-up (QueryEngine’s compaction triggers).</li>
+<li><strong>Tool ecosystem</strong>: built-in files / search / shell / Web / MCP / custom tools.</li>
+<li><strong>Workflow affordances</strong>: <code>CLAUDE.md</code>, commands, skills, hooks, plugins.</li>
+<li><strong>Delegation</strong>: subagents, isolated workspaces, parent/child task summaries.</li>
+<li><strong>Observability</strong>: session, usage, cost, result subtype, hook events.</li>
+</ul>
+<p>This directly settles <code>wtcraft</code>’s role. Since both Codex and Claude Code already have a mature model–tool loop, writing yet another loop in <code>wtcraft</code> is <strong>low value, high risk</strong>. What’s actually missing is a <strong>handoff system</strong> across agents, worktrees, and tasks:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Which task?</span></span>
+<span class="line"><span>Which branch?</span></span>
+<span class="line"><span>Which files?</span></span>
+<span class="line"><span>Which off-limits paths?</span></span>
+<span class="line"><span>Which verification commands?</span></span>
+<span class="line"><span>Which run artifacts?</span></span>
+<span class="line"><span>Which reviewer signs off?</span></span></code></pre>
+<p>Put plainly: land the collaboration process onto <strong>files, branches, logs, and verification results</strong>.</p>
+<hr>
+<h2 id="6-agent-loop-dont-copy-the-brain-control-the-loop-boundary">6. Agent loop: don’t copy the brain, control the loop boundary</h2>
+<p>After the study, there’s a temptation: shouldn’t we implement our own agent loop in <code>wtcraft</code> too?</p>
+<p>My answer: <strong>no — at least not now.</strong></p>
+<p>Codex already does a ton of complex engineering on the inner loop — streaming, tool router, parallel tool calls, sandboxed execution, approval, diff tracking, context compaction, token-limit handling, pending-input drain, turn lifecycle, hooks. The Claude Code camp likewise has full tool calling, permissions, hooks, commands, subagents, skills, plugins, MCP, compaction, sessions, and budgets.</p>
+<p>If <code>wtcraft</code> rewrote that loop, it would turn from a light harness into a runtime competitor — not its strength. What it should control is the <strong>outer loop</strong>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Plan</span></span>
+<span class="line"><span>→ Create worktree</span></span>
+<span class="line"><span>→ Write task contract</span></span>
+<span class="line"><span>→ Invoke agent</span></span>
+<span class="line"><span>→ Capture run ledger</span></span>
+<span class="line"><span>→ Check scope</span></span>
+<span class="line"><span>→ Verify commands</span></span>
+<span class="line"><span>→ Review / replan / finish</span></span></code></pre>
+<p>Keep the two layers distinct:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Layer</th><th>Owner</th><th>Concern</th></tr></thead><tbody><tr><td>Model tool loop</td><td>Codex / Claude Code</td><td>How to read context, call tools, change code</td></tr><tr><td>Supervision loop</td><td>wtcraft</td><td>Who does which task, which files are editable, did it pass verification, how to hand off</td></tr></tbody></table>
+<p>So the principle I increasingly believe:</p>
+<blockquote>
+<p><code>wtcraft</code> shouldn’t chase agentic autonomy; it should chase bounded automation.
+Automation can be powerful, but the boundary must be narrow.</p>
+</blockquote>
+<hr>
+<h2 id="7-headless-dont-conflate-the-two-output-formats">7. Headless: don’t conflate the two output formats</h2>
+<p>If I pick one lesson from Codex, it’s <strong>headless + JSONL</strong>. Commands like <code>codex exec</code> are born to be called by shells / CI / orchestrators.</p>
+<p>But here’s the pitfall: Claude Code also has headless (<code>claude -p</code> / print mode), and its <strong>output shape differs from Codex</strong>.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># Codex: JSONL event stream by default</span></span>
+<span class="line"><span style="color:#B392F0">codex</span><span style="color:#9ECBFF"> exec</span><span style="color:#79B8FF"> --json</span><span style="color:#9ECBFF"> ...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Claude Code: a single JSON result object; text in .result, with session id / usage / cost</span></span>
+<span class="line"><span style="color:#B392F0">claude</span><span style="color:#79B8FF"> -p</span><span style="color:#9ECBFF"> "Summarize this project"</span><span style="color:#79B8FF"> --output-format</span><span style="color:#9ECBFF"> json</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Claude Code: for line-by-line events you must explicitly stream</span></span>
+<span class="line"><span style="color:#B392F0">claude</span><span style="color:#79B8FF"> -p</span><span style="color:#9ECBFF"> "Explain recursion"</span><span style="color:#79B8FF"> --output-format</span><span style="color:#9ECBFF"> stream-json</span><span style="color:#79B8FF"> --verbose</span><span style="color:#79B8FF"> --include-partial-messages</span></span></code></pre>
+<p>Summary:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Engine</th><th>Headless command</th><th>Programmatic shape</th></tr></thead><tbody><tr><td>Codex</td><td><code>codex exec --json ...</code></td><td>JSONL event stream by default</td></tr><tr><td>Claude Code</td><td><code>claude -p --output-format json ...</code></td><td>single JSON result object</td></tr><tr><td>Claude Code</td><td><code>claude -p --output-format stream-json --verbose ...</code></td><td>JSONL event stream</td></tr></tbody></table>
+<p>An even nastier detail: <strong>cost ≠ billing</strong>. Claude Code’s <code>--output-format json</code> payload includes <code>total_cost_usd</code> and a per-model breakdown; the Agent SDK result message also carries <code>usage</code> / <code>total_cost_usd</code> / <code>num_turns</code> / <code>session_id</code>. But <code>total_cost_usd</code> is a client-side <strong>estimate</strong> computed from a local price table. For Pro / Max subscribers, session cost ≠ real billing — the <a href="https://code.claude.com/docs/en/costs">official costs page</a> reminds subscribers to watch the plan usage bars rather than treat that dollar figure as billing truth.</p>
+<p>So <code>wtcraft</code>’s run ledger can record token usage, session id, num turns, model breakdown, estimated cost — but it <strong>shouldn’t settle finances with <code>total_cost_usd</code></strong>.</p>
+<p>This is the most concrete problem of building a multi-agent orchestrator under subscriptions: command formats, permission modes, output schemas, usage metadata, plan limits — <strong>none of it is standardized</strong>, and these CLIs iterate fast. A field you can parse today may be renamed, moved, split into events, or only appear under a certain auth/plan/flag combo tomorrow.</p>
+<p>Below the surface there are also task and sandbox boundaries:</p>
+<ul>
+<li><strong>Task boundary</strong>: which issue / branch / files / acceptance criteria this agent owns.</li>
+<li><strong>Sandbox boundary</strong>: can it write files, where, run a shell, reach the network, read local secrets.</li>
+<li><strong>Escalation boundary</strong>: which commands auto-pass, which stop to ask, which are forbidden.</li>
+<li><strong>Merge boundary</strong>: when a worktree’s result enters the mainline, when it must be sent back.</li>
+</ul>
+<p>So a fully automatic orchestrator’s ROI takes a haircut. <code>wtcraft</code>’s saner path: land run results as its own run artifacts while allowing human takeover; keep the engine adapter thin and conservative so a break just loses some metadata rather than stalling the whole task system.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>.wtcraft/runs/&#x3C;run-id>/</span></span>
+<span class="line"><span>  events.jsonl</span></span>
+<span class="line"><span>  last-message.md</span></span>
+<span class="line"><span>  usage.json</span></span>
+<span class="line"><span>  changed-files.txt</span></span>
+<span class="line"><span>  verification.json</span></span>
+<span class="line"><span>  summary.md</span></span></code></pre>
+<p>Because multi-agent’s biggest problem was never “the agent isn’t smart enough.” It’s: what did it actually do? did it overstep? which files changed? did it run verification? where did it fail? can the next agent pick up?</p>
+<blockquote>
+<p>Without a run ledger, multi-agent degrades into a pile of chat windows.
+With a run ledger, multi-agent can become an engineering system.</p>
+</blockquote>
+<hr>
+<h2 id="8-worktree-isolation-not-a-moat-but-wtcrafts-job-to-get-right">8. Worktree isolation: not a moat, but wtcraft’s job to get right</h2>
+<p>Let’s be clear up front: <code>git worktree</code> is a built-in git feature anyone can use — it’s <strong>nobody’s moat</strong>. Codex, Claude Code, even a shell script can spin up worktrees. <code>wtcraft</code> doesn’t gain a barrier just by “using worktrees.”</p>
+<p>But it is the thing <code>wtcraft</code> should own. Codex and Claude Code can both work inside a repo, yet neither is a “cross-task worktree orchestrator” by default — they care about doing one coding turn well, not about isolating, logging, verifying, and merging many tasks across many worktrees. Nobody does that part for you, and it happens to be the real pain point of multi-agent collaboration.</p>
+<p>So <code>wtcraft</code>’s core assumption is plain:</p>
+<blockquote>
+<p>An agent’s isolation boundary shouldn’t rely only on prompts; it should land on a git worktree.</p>
+</blockquote>
+<p>The value isn’t “inventing worktrees” — it’s <strong>upgrading a worktree into a cross-agent task contract</strong>: each worktree carries a <code>.worktree-task.md</code>, a run ledger, and a <code>check</code> / <code>verify</code> pair, so any agent (or human) can take the baton under the same boundary.</p>
+<p>“please only edit these files” in a prompt helps, but isn’t enough. The sturdy boundary looks like:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Task A → worktree A → Scope A → verify A</span></span>
+<span class="line"><span>Task B → worktree B → Scope B → verify B</span></span>
+<span class="line"><span>Task C → worktree C → Scope C → verify C</span></span></code></pre>
+<p>Direct benefits:</p>
+<ol>
+<li><strong>Context isolation</strong>: each agent sees only its own task contract.</li>
+<li><strong>Visible conflicts</strong>: shared files serialize; file-disjoint tasks parallelize.</li>
+<li><strong>Cheap rollback</strong>: a broken worktree doesn’t pollute the main workspace.</li>
+<li><strong>Clear handoff</strong>: the next agent reads the task file, diff, and run ledger — not the whole chat history.</li>
+<li><strong>Automatable verification</strong>: <code>wtcraft check</code> / <code>wtcraft verify</code> run independently of the agent.</li>
+</ol>
+<p>This is the biggest difference between <code>wtcraft</code> and a typical agent CLI:</p>
+<blockquote>
+<p>An agent CLI cares about “how to complete one coding turn.”
+<code>wtcraft</code> cares about “how to organize many coding turns into a mergeable engineering workflow.”</p>
+</blockquote>
+<hr>
+<h2 id="9-wtcrafts-next-steps-boundaries-ledger-verification">9. wtcraft’s next steps: boundaries, ledger, verification</h2>
+<p>After studying these projects, I think <code>wtcraft</code> should stay deliberately light. Not “another Codex / another Claude Code / another all-in-one runtime,” but:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>a git-native, agent-neutral, budget-aware coordination harness</span></span></code></pre>
+<p>Priorities:</p>
+<h3 id="priority-1-task--sandbox-boundary">Priority 1: Task / Sandbox boundary</h3>
+<p>Make “who can do what” explicit. <code>.worktree-task.md</code> isn’t just a task description — it should gradually carry the boundary declaration:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">src/auth/**</span></span>
+<span class="line"><span style="color:#85E89D">off_limits</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">package.json</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">.env*</span></span>
+<span class="line"><span style="color:#85E89D">sandbox</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  filesystem</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">workspace-write</span></span>
+<span class="line"><span style="color:#85E89D">  network</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">false</span></span>
+<span class="line"><span style="color:#85E89D">allowed_commands</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">npm test</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">npm run lint</span></span>
+<span class="line"><span style="color:#85E89D">requires_approval</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">git commit</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">npm install</span></span></code></pre>
+<p>The point isn’t a perfect sandbox right away; it’s writing the boundary into a <strong>repo-native contract</strong> so humans, Codex, Claude Code, Gemini, and CI all see the same constraints. Without a task boundary, agents do too much; without a sandbox boundary, agents act in the wrong place; without an approval boundary, automation turns from “saving time” into “manufacturing risk.”</p>
+<h3 id="priority-2-run-ledger">Priority 2: Run ledger</h3>
+<p>Every run should leave a structured trail:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>.wtcraft/runs/&#x3C;run-id>/</span></span>
+<span class="line"><span>  meta.json</span></span>
+<span class="line"><span>  prompt.md</span></span>
+<span class="line"><span>  events.jsonl</span></span>
+<span class="line"><span>  last-message.md</span></span>
+<span class="line"><span>  changed-files.txt</span></span>
+<span class="line"><span>  check.txt</span></span>
+<span class="line"><span>  verify.txt</span></span>
+<span class="line"><span>  summary.md</span></span></code></pre>
+<p>This turns agent work from “chat logs” into “engineering records.”</p>
+<h3 id="priority-3-thin-engine-adapter">Priority 3: Thin engine adapter</h3>
+<p>Don’t bind <code>wtcraft</code> to one CLI, and don’t make “fully automatic orchestration of all agents” the short-term headline. Start with a thin adapter:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">wtcraft</span><span style="color:#9ECBFF"> run</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">worktre</span><span style="color:#E1E4E8">e</span><span style="color:#F97583">></span><span style="color:#79B8FF"> --engine</span><span style="color:#9ECBFF"> codex</span></span>
+<span class="line"><span style="color:#B392F0">wtcraft</span><span style="color:#9ECBFF"> run</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">worktre</span><span style="color:#E1E4E8">e</span><span style="color:#F97583">></span><span style="color:#79B8FF"> --engine</span><span style="color:#9ECBFF"> claude</span><span style="color:#6A737D">   # expand gradually</span></span>
+<span class="line"><span style="color:#B392F0">wtcraft</span><span style="color:#9ECBFF"> run</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">worktre</span><span style="color:#E1E4E8">e</span><span style="color:#F97583">></span><span style="color:#79B8FF"> --engine</span><span style="color:#9ECBFF"> gemini</span></span></code></pre>
+<p>The adapter only handles: how to launch the agent, how to pass the prompt, how to collect output (Codex’s <code>--json</code> and Claude’s <code>--output-format json</code> / <code>stream-json</code> are not the same shape), how to land run artifacts, and how to leave enough info on failure for a human to take over. Real boundaries still come from <code>.worktree-task.md</code> / <code>check</code> / <code>verify</code> — when metadata can’t be captured, the task shouldn’t fail; at most this run’s ledger is incomplete.</p>
+<h3 id="priority-4-contract-schema">Priority 4: Contract schema</h3>
+<p><code>.worktree-task.md</code> stays human-readable while becoming gradually machine-readable:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">status</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">ready</span></span>
+<span class="line"><span style="color:#85E89D">agent</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">codex</span></span>
+<span class="line"><span style="color:#85E89D">priority</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">medium</span></span>
+<span class="line"><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">src/auth/**</span></span>
+<span class="line"><span style="color:#85E89D">off_limits</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">package.json</span></span>
+<span class="line"><span style="color:#85E89D">verification</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">npm test</span></span></code></pre>
+<p>This makes handoffs between Planner, Executor, Verifier, and Finisher sturdier.</p>
+<h3 id="priority-5-verifier-as-a-first-class-role">Priority 5: Verifier as a first-class role</h3>
+<p>The biggest risk today isn’t that agents can’t write code — it’s that they’ll confidently say “done.” So the Verifier can’t be a manual afterthought:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">wtcraft</span><span style="color:#9ECBFF"> check</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">worktre</span><span style="color:#E1E4E8">e</span><span style="color:#F97583">></span></span>
+<span class="line"><span style="color:#B392F0">wtcraft</span><span style="color:#9ECBFF"> verify</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">worktre</span><span style="color:#E1E4E8">e</span><span style="color:#F97583">></span></span>
+<span class="line"><span style="color:#B392F0">wtcraft</span><span style="color:#9ECBFF"> review</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">worktre</span><span style="color:#E1E4E8">e</span><span style="color:#F97583">></span><span style="color:#6A737D">   # later: Codex review / Claude review, even cross-review</span></span></code></pre>
+<p>But whoever reviews, it all comes back to: diff, Scope, Off-limits, tests, exit code.</p>
+<hr>
+<h2 id="10-design-principle-make-agents-contractors-not-roommates">10. Design principle: make agents contractors, not roommates</h2>
+<blockquote>
+<p>Don’t let an agent move into your main workspace like a roommate;
+let it work like a contractor — on a defined site, under a clear contract, against clear acceptance criteria.</p>
+</blockquote>
+<ul>
+<li>Codex makes a great <strong>observable contractor</strong>.</li>
+<li>Claude Code makes a great <strong>pair partner that knows your project’s habits</strong>.</li>
+<li><code>wtcraft</code> should be the <strong>project manager</strong>: split tasks, open worktrees, write the contract, check overreach, run acceptance, keep the ledger, merge results.</li>
+</ul>
+<p>This is the direction TokenChef has chased all along:</p>
+<blockquote>
+<p>Not buying the single most expensive super-agent,
+but organizing cheap, differently-skilled, replaceable agents into a controllable small team.</p>
+</blockquote>
+<p>After lining Codex and Claude Code up against one six-layer architecture, the lesson for <code>wtcraft</code> is simple:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Codex teaches observability.</span></span>
+<span class="line"><span>Claude Code teaches workflow.</span></span>
+<span class="line"><span>wtcraft should provide boundaries.</span></span></code></pre>
+<p>Agents will keep getting stronger. But the stronger the agent, the more it needs clear boundaries. That’s exactly what <code>wtcraft</code> is for.</p>
+<hr>
+<h2 id="references">References</h2>
+<ul>
+<li>wtcraft: <a href="https://github.com/zywkloo/wtcraft">https://github.com/zywkloo/wtcraft</a></li>
+<li>OpenAI Codex: <a href="https://github.com/openai/codex">https://github.com/openai/codex</a></li>
+<li>Anthropic Claude Code (official): <a href="https://github.com/anthropics/claude-code">https://github.com/anthropics/claude-code</a></li>
+<li>claude-code-best/claude-code (community rebuild): <a href="https://github.com/claude-code-best/claude-code">https://github.com/claude-code-best/claude-code</a></li>
+<li>CCB — What is Claude Code (reverse-engineered architecture): <a href="https://ccb.agent-aura.top/docs/introduction/what-is-claude-code">https://ccb.agent-aura.top/docs/introduction/what-is-claude-code</a></li>
+<li>Claude Code Agent SDK: How the agent loop works: <a href="https://code.claude.com/docs/en/agent-sdk/agent-loop">https://code.claude.com/docs/en/agent-sdk/agent-loop</a></li>
+<li>Claude Code: Run Claude Code programmatically: <a href="https://code.claude.com/docs/en/headless">https://code.claude.com/docs/en/headless</a></li>
+<li>Claude Code CLI reference: <a href="https://code.claude.com/docs/en/cli-usage">https://code.claude.com/docs/en/cli-usage</a></li>
+<li>Claude Code Agent SDK cost tracking: <a href="https://code.claude.com/docs/en/agent-sdk/cost-tracking">https://code.claude.com/docs/en/agent-sdk/cost-tracking</a></li>
+<li>Claude Code costs: <a href="https://code.claude.com/docs/en/costs">https://code.claude.com/docs/en/costs</a></li>
+<li>Anthropic Claude Code product page: <a href="https://www.anthropic.com/product/claude-code">https://www.anthropic.com/product/claude-code</a></li>
+<li>Claude Chat vs Cowork vs Code (desktop modes): <a href="https://www.nocode.mba/articles/claude-desktop-chat-vs-cowork-vs-code">https://www.nocode.mba/articles/claude-desktop-chat-vs-cowork-vs-code</a></li>
+<li>NxCode: Claude Code vs Codex CLI 2026: <a href="https://www.nxcode.io/resources/news/claude-code-vs-codex-cli-terminal-coding-comparison-2026">https://www.nxcode.io/resources/news/claude-code-vs-codex-cli-terminal-coding-comparison-2026</a></li>
+<li>Termdock: Claude Code vs Codex CLI 2026: <a href="https://www.termdock.com/en/blog/claude-code-vs-codex-cli">https://www.termdock.com/en/blog/claude-code-vs-codex-cli</a></li>
+<li>DataCamp: Codex vs Claude Code: <a href="https://www.datacamp.com/blog/codex-vs-claude-code">https://www.datacamp.com/blog/codex-vs-claude-code</a></li>
+<li>Northflank: Claude Code vs OpenAI Codex: <a href="https://northflank.com/blog/claude-code-vs-openai-codex">https://northflank.com/blog/claude-code-vs-openai-codex</a></li>
+<li>InfoQ: Anthropic Accidentally Exposes Claude Code Source via npm Source Map File: <a href="https://www.infoq.com/news/2026/04/claude-code-source-leak/">https://www.infoq.com/news/2026/04/claude-code-source-leak/</a></li>
+<li>Axios: Anthropic leaked its own Claude source code: <a href="https://www.axios.com/2026/03/31/anthropic-leaked-source-code-ai">https://www.axios.com/2026/03/31/anthropic-leaked-source-code-ai</a></li>
+<li>arXiv: Dive into Claude Code: <a href="https://arxiv.org/abs/2604.14228">https://arxiv.org/abs/2604.14228</a></li>
+<li>TokenChef Part 3: <a href="https://zywkloo.github.io/blog/wtcraft-lightweight-git-native-multi-agent-scaffolding/">https://zywkloo.github.io/blog/wtcraft-lightweight-git-native-multi-agent-scaffolding/</a>
+
+</li>
+</ul>
+  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2026 Victor Zhang. All rights reserved.
+<div class="social-links" data-astro-cid-sz7xmlte> <a href="https://medium.com/@zywkloo" target="_blank" title="Medium Blog" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Read Victor's Medium articles</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M13.54 12l6.23-6.23V5.24L15.89 2L9.23 8.66v-2.5L5.24 5.24v.96l3.99 3.99L5.24 14v2.23l4.04 2.72v-2.5l4.93-4.93z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://www.linkedin.com/in/yiweiz315/" target="_blank" title="LinkedIn" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Connect with Victor on LinkedIn</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="mailto:yiweizhangca@gmail.com" title="Email" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Email Victor</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://zzz-movie-rec-system.vercel.app/" target="_blank" title="Movie Rec System" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Movie Recommendation System</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://github.com/ZZZ-RecSys/ZZZ-MovieRecSystem" target="_blank" title="GitHub" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Visit Victor's GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path> </svg> </a> </div> </footer>  </body></html>

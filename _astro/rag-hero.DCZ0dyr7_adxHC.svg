@@ -1,0 +1,52 @@
+<svg width="1020" height="510" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a202c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d3748;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="retrievalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="generationGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ecdc4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#44a3c5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bgGradient)" />
+
+  <!-- Knowledge Base / Document Store (left) -->
+  <rect x="80" y="150" width="200" height="200" rx="15" fill="url(#retrievalGradient)" opacity="0.8"/>
+  <text x="180" y="250" font-family="Inter, sans-serif" font-size="40" fill="#ecf0f1" text-anchor="middle" font-weight="bold">Knowledge</text>
+  <text x="180" y="290" font-family="Inter, sans-serif" font-size="30" fill="#ecf0f1" text-anchor="middle">Base</text>
+  <path d="M180 100 L180 140" stroke="#ecf0f1" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+  <circle cx="180" cy="90" r="15" fill="#ecf0f1" opacity="0.6"/>
+
+  <!-- Retrieval Process (middle-left) -->
+  <path d="M280 250 L400 250" stroke="#ecf0f1" stroke-width="5" stroke-linecap="round" marker-end="url(#arrowhead)" opacity="0.8"/>
+  <text x="340" y="230" font-family="Inter, sans-serif" font-size="25" fill="#ecf0f1" text-anchor="middle" opacity="0.7">Retrieval</text>
+
+  <!-- LLM (middle-right) -->
+  <rect x="400" y="150" width="220" height="200" rx="15" fill="url(#generationGradient)" opacity="0.8"/>
+  <text x="510" y="250" font-family="Inter, sans-serif" font-size="50" fill="#ecf0f1" text-anchor="middle" font-weight="bold">LLM</text>
+  <text x="510" y="300" font-family="Inter, sans-serif" font-size="25" fill="#ecf0f1" text-anchor="middle">Generation</text>
+
+  <!-- Output / Answer (right) -->
+  <path d="M620 250 L740 250" stroke="#ecf0f1" stroke-width="5" stroke-linecap="round" marker-end="url(#arrowhead)" opacity="0.8"/>
+  <text x="680" y="230" font-family="Inter, sans-serif" font-size="25" fill="#ecf0f1" text-anchor="middle" opacity="0.7">Augmentation</text>
+
+  <rect x="740" y="150" width="200" height="200" rx="15" fill="#ecf0f1" opacity="0.8"/>
+  <text x="840" y="250" font-family="Inter, sans-serif" font-size="40" fill="#2d3748" text-anchor="middle" font-weight="bold">Answer</text>
+  <text x="840" y="290" font-family="Inter, sans-serif" font-size="30" fill="#2d3748" text-anchor="middle">Contextual</text>
+
+  <!-- Arrowhead definition -->
+  <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+    <polygon points="0 0, 10 3.5, 0 7" fill="#ecf0f1" />
+  </marker>
+
+  <!-- Title Text -->
+  <text x="510" y="400" font-family="Inter, sans-serif" font-size="60" fill="#ecf0f1" text-anchor="middle" font-weight="bold">Retrieval Augmented Generation</text>
+  <text x="510" y="460" font-family="Inter, sans-serif" font-size="30" fill="#ecf0f1" text-anchor="middle" opacity="0.8">Hybrid Search Strategies</text>
+</svg>
+
