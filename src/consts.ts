@@ -13,6 +13,8 @@ export const EMAIL = 'yiweizhangca@gmail.com';
 
 // Featured project
 export const WTCRAFT_URL = 'https://github.com/zywkloo/wtcraft';
+export const WTCRAFT_NPM_URL = 'https://www.npmjs.com/package/wtcraft';
+export const WTCRAFT_PYPI_URL = 'https://pypi.org/project/wtcraft/';
 
 // Profile
 export const PROFILE_IMAGE = 'https://avatars.githubusercontent.com/u/18610590?s=400&u=bb73412244714c5465010503fee1c6381c8b46fe&v=4';

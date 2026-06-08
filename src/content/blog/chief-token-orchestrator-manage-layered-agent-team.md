@@ -4,7 +4,7 @@ series: 'TokenChef'
 description: 'Spawning parallel agents is easy. Spawning them without hitting token limits, context pollution, or review bottlenecks is hard. Discover why you need a structured, layered team architecture.'
 pubDate: 'May 28 2026'
 heroImage: '../../assets/chief-orchestrator-hero.png'
-tags: ['AI Tools', 'Agent Architecture', 'Claude Code', 'Codex', 'Gemini', 'Solo Dev', 'Engineering']
+tags: ['AI Tools', 'Agent Architecture', 'Claude Code', 'Codex', 'Gemini', 'Solo Dev', 'Engineering', 'wtcraft']
 ---
 
 <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">

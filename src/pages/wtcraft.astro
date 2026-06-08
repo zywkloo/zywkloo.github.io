@@ -1,0 +1,337 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { WTCRAFT_URL, WTCRAFT_NPM_URL, WTCRAFT_PYPI_URL } from '../consts';
+
+const posts = (await getCollection('blog'))
+	.filter((post) => post.data.tags?.includes('wtcraft'))
+	.sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
+
+const docs = [
+	{
+		href: '/docs',
+		title: 'SEO + GEO Optimization Guide',
+		titleZh: 'SEO + GEO 优化指南',
+		description:
+			'A hands-on SEO and Generative Engine Optimization playbook for an Astro portfolio/blog. / 面向 Astro 个人站的 SEO 与生成式引擎优化实战。',
+	},
+	{
+		href: '/docs/package-blog-seo-geo',
+		title: 'Open-Source Package & Blog SEO/GEO',
+		titleZh: '开源包与技术博客 SEO/GEO 实战',
+		description:
+			'Leverage GitHub / NPM / PyPI domain authority and bilingual blogging to feed AI search engines. / 借助 GitHub / NPM / PyPI 权重与双语博客喂养 AI 搜索引擎。',
+	},
+	{
+		href: '/docs/marketing-refactor-case-study',
+		title: 'Marketing Site Refactor Case Study',
+		titleZh: '营销/商业网站重构案例',
+		description:
+			'Framework selection, migration strategy, hosting TCO, and SEO/GEO for real marketing sites. / 真实商业站点的选型、迁移、托管成本与 SEO/GEO 综合方案。',
+	},
+];
+
+const pageTitle = 'wtcraft — Git-Native Multi-Agent Coding Scaffolding | Victor Zhang';
+const pageDescription =
+	'wtcraft is a lightweight, git-native CLI for bounded multi-agent coding. Install via npm, pipx, or Homebrew. Plus the TokenChef series and SEO/GEO guides behind it.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={pageTitle} description={pageDescription} ogImageUrl="/images/wtcraft-icon.PNG" />
+		<script type="application/ld+json" set:html={JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'SoftwareApplication',
+			name: 'wtcraft',
+			description: pageDescription,
+			applicationCategory: 'DeveloperApplication',
+			operatingSystem: 'macOS, Linux',
+			offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+			author: { '@type': 'Person', name: 'Victor Zhang', alternateName: 'zywkloo' },
+			downloadUrl: [WTCRAFT_NPM_URL, WTCRAFT_PYPI_URL],
+			sameAs: [WTCRAFT_URL, WTCRAFT_NPM_URL, WTCRAFT_PYPI_URL],
+		})} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<!-- Hero -->
+			<section class="hero">
+				<img src="/images/wtcraft-icon.PNG" alt="wtcraft" class="hero-logo" />
+				<h1 class="hero-title">wtcraft</h1>
+				<p class="hero-tagline">Git-native, bounded scaffolding for multi-agent coding</p>
+				<p class="hero-tagline-zh">为多智能体编码打造的、Git 原生的有界脚手架</p>
+				<p class="hero-pitch">
+					Spawn parallel AI agents inside isolated git worktrees with strict, verifiable
+					task boundaries — instead of reinventing another runtime.
+					<br />
+					<span class="zh">在隔离的 git worktree 中并行运行 AI 智能体，用可验证的任务边界约束它们 —— 而不是再造一个 runtime。</span>
+				</p>
+				<div class="badges">
+					<a href={WTCRAFT_NPM_URL}><img src="https://img.shields.io/npm/v/wtcraft.svg?style=flat-square&logo=npm&color=cb3837" alt="npm package" /></a>
+					<a href={WTCRAFT_PYPI_URL}><img src="https://img.shields.io/pypi/v/wtcraft.svg?style=flat-square&logo=pypi&color=3775a9" alt="PyPI version" /></a>
+					<a href="https://github.com/zywkloo/wtcraft/actions/workflows/ci.yml"><img src="https://github.com/zywkloo/wtcraft/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+					<a href="https://github.com/zywkloo/wtcraft/blob/main/LICENSE"><img src="https://img.shields.io/github/license/zywkloo/wtcraft?style=flat-square&color=blue" alt="License" /></a>
+				</div>
+				<div class="hero-cta">
+					<a href={WTCRAFT_NPM_URL} target="_blank" class="btn btn-primary">npm</a>
+					<a href={WTCRAFT_PYPI_URL} target="_blank" class="btn btn-secondary">PyPI</a>
+					<a href={WTCRAFT_URL} target="_blank" class="btn btn-secondary">GitHub</a>
+				</div>
+			</section>
+
+			<!-- Install -->
+			<section class="block">
+				<h2 class="section-title">Install / 安装</h2>
+				<pre class="install"><code># Node / npm
+npm install -g wtcraft
+
+# Python / pipx (recommended)
+pipx install wtcraft
+
+# Homebrew (macOS)
+brew tap zywkloo/wtcraft https://github.com/zywkloo/wtcraft && brew install wtcraft</code></pre>
+				<p class="install-note">
+					Then run <code>wtcraft init</code> in your repo root to scaffold the harness.
+					<br />
+					<span class="zh">随后在仓库根目录运行 <code>wtcraft init</code> 即可生成脚手架。</span>
+				</p>
+			</section>
+
+			<!-- Articles -->
+			<section class="block">
+				<h2 class="section-title">Articles / 系列文章 <span class="muted">· TokenChef</span></h2>
+				<ul class="card-list">
+					{posts.map((post) => (
+						<li>
+							<a href={`/blog/${post.id}/`}>
+								{post.data.series && (
+									<span class="series-badge tokenchef">👨‍🍳 TokenChef</span>
+								)}
+								<h3 class="card-title" set:html={post.data.title.split(' / ')[0]}></h3>
+								<p class="card-desc">{post.data.description}</p>
+								<p class="card-meta"><FormattedDate date={post.data.pubDate} /></p>
+							</a>
+						</li>
+					))}
+				</ul>
+			</section>
+
+			<!-- Guides / Docs -->
+			<section class="block">
+				<h2 class="section-title">Guides / 营销与优化文档</h2>
+				<ul class="card-list">
+					{docs.map((doc) => (
+						<li>
+							<a href={doc.href}>
+								<span class="series-badge docs">📄 Docs</span>
+								<h3 class="card-title">{doc.title}</h3>
+								<p class="card-title-zh">{doc.titleZh}</p>
+								<p class="card-desc">{doc.description}</p>
+							</a>
+						</li>
+					))}
+				</ul>
+			</section>
+		</main>
+		<Footer />
+		<style>
+			main {
+				width: min(900px, 100%);
+				margin: 0 auto;
+				padding: 0 1rem;
+			}
+			.hero {
+				text-align: center;
+				padding: 2.5rem 0 1.5rem;
+			}
+			.hero-logo {
+				width: 84px;
+				height: 84px;
+				border-radius: 22px;
+				object-fit: cover;
+				box-shadow: var(--shadow-sm);
+			}
+			.hero-title {
+				margin: 1rem 0 0.4rem;
+				font-size: 2.6rem;
+				font-weight: 800;
+				letter-spacing: -0.02em;
+			}
+			.hero-tagline {
+				margin: 0;
+				font-size: 1.15rem;
+				font-weight: 600;
+				color: rgb(var(--black));
+			}
+			.hero-tagline-zh {
+				margin: 0.15rem 0 1rem;
+				color: rgb(var(--gray));
+				font-size: 0.98rem;
+			}
+			.hero-pitch {
+				max-width: 620px;
+				margin: 0 auto 1.4rem;
+				color: rgb(var(--gray-dark));
+				line-height: 1.55;
+			}
+			.hero-pitch .zh,
+			.install-note .zh {
+				color: rgb(var(--gray));
+				font-size: 0.92rem;
+			}
+			.badges {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 8px;
+				justify-content: center;
+				margin-bottom: 1.4rem;
+			}
+			.badges img {
+				height: 20px;
+			}
+			.hero-cta {
+				display: flex;
+				gap: 0.6rem;
+				justify-content: center;
+				flex-wrap: wrap;
+			}
+			.btn {
+				padding: 0.55rem 1.4rem;
+				border-radius: 999px;
+				text-decoration: none;
+				font-weight: 600;
+				font-size: 0.95rem;
+				border: 1px solid var(--line);
+				transition: 0.2s var(--ease);
+			}
+			.btn-primary {
+				background: var(--accent);
+				color: #fff;
+				border-color: var(--accent);
+			}
+			.btn-secondary {
+				background: var(--surface-muted);
+				color: rgb(var(--gray-dark));
+			}
+			.btn:hover {
+				box-shadow: var(--shadow-sm);
+				transform: translateY(-1px);
+			}
+			.block {
+				margin: 2.4rem 0;
+			}
+			.section-title {
+				font-size: 1.4rem;
+				font-weight: 700;
+				margin-bottom: 1rem;
+				border-bottom: 1px solid var(--line);
+				padding-bottom: 0.4rem;
+			}
+			.section-title .muted {
+				color: rgb(var(--gray));
+				font-weight: 600;
+				font-size: 1rem;
+			}
+			.install {
+				background: #0d1117;
+				color: #e6edf3;
+				border-radius: 12px;
+				padding: 1.1rem 1.3rem;
+				overflow-x: auto;
+				font-size: 0.9rem;
+				line-height: 1.6;
+			}
+			.install code {
+				background: none;
+				color: inherit;
+				padding: 0;
+			}
+			.install-note {
+				margin-top: 0.8rem;
+				color: rgb(var(--gray-dark));
+			}
+			.card-list {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 1rem;
+			}
+			.card-list li {
+				border: 1px solid var(--line);
+				border-radius: 14px;
+				background: rgba(255, 255, 255, 0.6);
+				transition: 0.2s var(--ease);
+			}
+			.card-list li:hover {
+				box-shadow: var(--shadow-sm);
+				transform: translateY(-2px);
+			}
+			.card-list a {
+				display: block;
+				padding: 1.1rem 1.2rem;
+				text-decoration: none;
+				color: inherit;
+			}
+			.series-badge {
+				display: inline-block;
+				padding: 0.15rem 0.55rem;
+				font-size: 0.7rem;
+				font-weight: 700;
+				border-radius: 9999px;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				margin-bottom: 0.55rem;
+			}
+			.series-badge.tokenchef {
+				background-color: rgba(239, 68, 68, 0.08);
+				color: #ef4444;
+				border: 1px solid rgba(239, 68, 68, 0.18);
+			}
+			.series-badge.docs {
+				background-color: rgba(14, 165, 233, 0.08);
+				color: #0ea5e9;
+				border: 1px solid rgba(14, 165, 233, 0.18);
+			}
+			.card-title {
+				margin: 0 0 0.25rem;
+				font-size: 1.08rem;
+				line-height: 1.3;
+				color: rgb(var(--black));
+			}
+			.card-title-zh {
+				margin: 0 0 0.4rem;
+				font-size: 0.9rem;
+				color: rgb(var(--gray));
+			}
+			.card-desc {
+				margin: 0 0 0.5rem;
+				font-size: 0.9rem;
+				color: rgb(var(--gray-dark));
+				line-height: 1.5;
+			}
+			.card-meta {
+				margin: 0;
+				font-size: 0.85rem;
+				color: rgb(var(--gray));
+			}
+			.card-list a:hover .card-title {
+				color: rgb(var(--accent));
+			}
+			@media (max-width: 720px) {
+				.card-list {
+					grid-template-columns: 1fr;
+				}
+				.hero-title {
+					font-size: 2.1rem;
+				}
+			}
+		</style>
+	</body>
+</html>
