@@ -2,7 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_URL } from '../consts';
+import { SITE_DESCRIPTION, SITE_URL, SITE_AUTHOR_ALT } from '../consts';
 
 const APP_STORE_URL = 'https://apps.apple.com/ca/app/8strokes/id6774579880';
 
@@ -22,7 +22,7 @@ const appLd = {
 		'永字八法 (8 Strokes) — a Chinese calligraphy practice app: real-time low-latency ink rendering, on-device stroke scoring, and one-tap sharing of your work.',
 	screenshot: `${SITE_URL}/images/yong-preview.png`,
 	offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-	author: { '@type': 'Person', name: 'Victor Zhang', alternateName: 'zywkloo', url: SITE_URL },
+	author: { '@type': 'Person', name: 'Victor Zhang', alternateName: SITE_AUTHOR_ALT, url: SITE_URL },
 };
 ---
 

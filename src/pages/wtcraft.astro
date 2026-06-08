@@ -4,7 +4,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
-import { WTCRAFT_URL, WTCRAFT_NPM_URL, WTCRAFT_PYPI_URL, SITE_URL, seriesBadgeClass, seriesBadgeLabel } from '../consts';
+import { WTCRAFT_URL, WTCRAFT_NPM_URL, WTCRAFT_PYPI_URL, SITE_URL, SITE_AUTHOR_ALT, seriesBadgeClass, seriesBadgeLabel } from '../consts';
 
 const posts = (await getCollection('blog'))
 	.filter((post) => post.data.tags?.includes('wtcraft'))
@@ -70,7 +70,7 @@ const softwareLd = {
 	license: 'https://github.com/zywkloo/wtcraft/blob/main/LICENSE',
 	programmingLanguage: ['TypeScript', 'Python'],
 	codeRepository: WTCRAFT_URL,
-	author: { '@type': 'Person', name: 'Victor Zhang', alternateName: 'zywkloo', url: SITE_URL },
+	author: { '@type': 'Person', name: 'Victor Zhang', alternateName: SITE_AUTHOR_ALT, url: SITE_URL },
 	downloadUrl: [WTCRAFT_NPM_URL, WTCRAFT_PYPI_URL],
 	sameAs: [WTCRAFT_URL, WTCRAFT_NPM_URL, WTCRAFT_PYPI_URL],
 };

@@ -25,6 +25,11 @@ export const MEDIUM_URL = 'https://medium.com/@zywkloo';
 // WebSite JSON-LD so AI engines can resolve "Victor Zhang (zywkloo)" confidently.
 export const SAME_AS = [GITHUB_URL, LINKEDIN_URL, MEDIUM_URL];
 
+// Alternate names for the same person (display name is SITE_AUTHOR = "Victor
+// Zhang"). "Yiwei Zhang" is the legal name; "zywkloo" the handle. Listing both
+// as alternateName lets engines merge the identities into one entity.
+export const SITE_AUTHOR_ALT = ['Yiwei Zhang', 'zywkloo'];
+
 // ---------------------------------------------------------------------------
 // Blog/doc series metadata — single source of truth.
 // Consumed by blog index cards, the BlogPost layout, and the wtcraft hub so the

@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import PostViewCount from '../components/PostViewCount.astro';
-import { SERIES_META, seriesBadgeClass, seriesBadgeLabel, SITE_URL, SITE_AUTHOR, PROFILE_IMAGE, SAME_AS } from '../consts';
+import { SERIES_META, seriesBadgeClass, seriesBadgeLabel, SITE_URL, SITE_AUTHOR, PROFILE_IMAGE, SAME_AS, SITE_AUTHOR_ALT } from '../consts';
 
 interface Props {
 	title: string;
@@ -42,7 +42,7 @@ const blogPostingLd = {
 	author: {
 		'@type': 'Person',
 		name: SITE_AUTHOR,
-		alternateName: 'zywkloo',
+		alternateName: SITE_AUTHOR_ALT,
 		url: SITE_URL,
 		image: PROFILE_IMAGE,
 		sameAs: SAME_AS,

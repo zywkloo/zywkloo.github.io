@@ -2,7 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, SITE_AUTHOR, PROFILE_IMAGE, USER_TITLE, GITHUB_URL, WTCRAFT_URL, LINKEDIN_URL, EMAIL, MEDIUM_URL, SAME_AS } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, SITE_AUTHOR, PROFILE_IMAGE, USER_TITLE, GITHUB_URL, WTCRAFT_URL, LINKEDIN_URL, EMAIL, MEDIUM_URL, SAME_AS, SITE_AUTHOR_ALT } from '../consts';
 
 // Identity knowledge graph for AI/search engines: who Victor Zhang is and what
 // this site is. Person + WebSite, cross-linked by @id.
@@ -10,7 +10,7 @@ const personLd = {
 	'@type': 'Person',
 	'@id': `${SITE_URL}/#person`,
 	name: SITE_AUTHOR,
-	alternateName: 'zywkloo',
+	alternateName: SITE_AUTHOR_ALT,
 	url: SITE_URL,
 	image: PROFILE_IMAGE,
 	jobTitle: USER_TITLE,
