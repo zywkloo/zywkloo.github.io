@@ -4,38 +4,93 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
-import { WTCRAFT_URL, WTCRAFT_NPM_URL, WTCRAFT_PYPI_URL, seriesBadgeClass, seriesBadgeLabel } from '../consts';
+import { WTCRAFT_URL, WTCRAFT_NPM_URL, WTCRAFT_PYPI_URL, SITE_URL, seriesBadgeClass, seriesBadgeLabel } from '../consts';
 
 const posts = (await getCollection('blog'))
 	.filter((post) => post.data.tags?.includes('wtcraft'))
 	.sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
 
-// Pull wtcraft-tagged guides straight from the docs collection — no hardcoding.
-const docs = (await getCollection('docs'))
+// Guides list = the /docs landing overview (which lives in _overview.md, not
+// the collection, so getCollection can't see it) followed by every
+// wtcraft-tagged guide pulled straight from the docs collection.
+const collectionGuides = (await getCollection('docs'))
 	.filter((doc) => doc.data.tags?.includes('wtcraft'))
-	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.map((doc) => ({
+		href: `/docs/${doc.id}/`,
+		badge: '📄 Docs',
+		title: doc.data.title,
+		description: doc.data.description,
+	}));
+
+const guides = [
+	{
+		href: '/docs',
+		badge: '🧭 Overview',
+		title: 'SEO & GEO Field Notes',
+		description:
+			'Why / how / when + the GEO acceptance loop — the strategic overview behind the three hands-on guides.',
+	},
+	...collectionGuides,
+];
 
 const pageTitle = 'wtcraft — Git-Native Multi-Agent Coding Scaffolding | Victor Zhang';
 const pageDescription =
 	'wtcraft is a lightweight, git-native CLI for bounded multi-agent coding. Install via npm, pipx, or Homebrew. Plus the TokenChef series and SEO/GEO guides behind it.';
+
+// FAQ — rendered visibly below AND mirrored into FAQPage structured data
+// (Google requires the schema to match on-page content).
+const faqs = [
+	{
+		q: 'What is wtcraft?',
+		a: 'wtcraft is a lightweight, git-native CLI that runs parallel AI coding agents inside isolated git worktrees with strict, verifiable task boundaries — so you can orchestrate a multi-agent team without reinventing a runtime.',
+	},
+	{
+		q: "How is wtcraft different from plain git worktrees or Claude Code's --worktree?",
+		a: 'Raw worktrees give you isolation but leave token budget, file scope, and task handoff up to you. wtcraft adds the missing contract layer: a per-task .worktree-task.md with explicit Scope and Off-limits blocks, plus a run ledger and a sign-off step.',
+	},
+	{
+		q: 'Does wtcraft work with Claude Code, Codex, and Gemini?',
+		a: 'Yes. wtcraft is agent-agnostic scaffolding; run `wtcraft init --patch-agent-files` to opt into integration with Claude Code, OpenAI Codex, or the Gemini CLI.',
+	},
+	{
+		q: 'How do I install wtcraft?',
+		a: 'Install globally via npm (npm install -g wtcraft), pipx (pipx install wtcraft), or Homebrew, then run `wtcraft init` in your repository root.',
+	},
+];
+
+const softwareLd = {
+	'@context': 'https://schema.org',
+	'@type': 'SoftwareApplication',
+	name: 'wtcraft',
+	description: pageDescription,
+	applicationCategory: 'DeveloperApplication',
+	operatingSystem: 'macOS, Linux',
+	offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+	license: 'https://github.com/zywkloo/wtcraft/blob/main/LICENSE',
+	programmingLanguage: ['TypeScript', 'Python'],
+	codeRepository: WTCRAFT_URL,
+	author: { '@type': 'Person', name: 'Victor Zhang', alternateName: 'zywkloo', url: SITE_URL },
+	downloadUrl: [WTCRAFT_NPM_URL, WTCRAFT_PYPI_URL],
+	sameAs: [WTCRAFT_URL, WTCRAFT_NPM_URL, WTCRAFT_PYPI_URL],
+};
+const faqLd = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faqs.map((f) => ({
+		'@type': 'Question',
+		name: f.q,
+		acceptedAnswer: { '@type': 'Answer', text: f.a },
+	})),
+};
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={pageTitle} description={pageDescription} ogImageUrl="/images/wtcraft-icon.PNG" />
-		<script type="application/ld+json" set:html={JSON.stringify({
-			'@context': 'https://schema.org',
-			'@type': 'SoftwareApplication',
-			name: 'wtcraft',
-			description: pageDescription,
-			applicationCategory: 'DeveloperApplication',
-			operatingSystem: 'macOS, Linux',
-			offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-			author: { '@type': 'Person', name: 'Victor Zhang', alternateName: 'zywkloo' },
-			downloadUrl: [WTCRAFT_NPM_URL, WTCRAFT_PYPI_URL],
-			sameAs: [WTCRAFT_URL, WTCRAFT_NPM_URL, WTCRAFT_PYPI_URL],
-		})} />
+		<script type="application/ld+json" set:html={JSON.stringify(softwareLd)} />
+			<script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
 	</head>
 	<body>
 		<Header />
@@ -106,16 +161,29 @@ brew tap zywkloo/wtcraft https://github.com/zywkloo/wtcraft && brew install wtcr
 			<section class="block">
 				<h2 class="section-title">Guides / 营销与优化文档</h2>
 				<ul class="card-list">
-					{docs.map((doc) => (
+					{guides.map((guide) => (
 						<li>
-							<a href={`/docs/${doc.id}/`}>
-								<span class="series-badge docs">📄 Docs</span>
-								<h3 class="card-title">{doc.data.title}</h3>
-								<p class="card-desc">{doc.data.description}</p>
+							<a href={guide.href}>
+								<span class="series-badge docs">{guide.badge}</span>
+								<h3 class="card-title">{guide.title}</h3>
+								<p class="card-desc">{guide.description}</p>
 							</a>
 						</li>
 					))}
 				</ul>
+			</section>
+
+			<!-- FAQ (mirrors FAQPage structured data) -->
+			<section class="block">
+				<h2 class="section-title">FAQ</h2>
+				<div class="faq">
+					{faqs.map((f) => (
+						<details>
+							<summary>{f.q}</summary>
+							<p>{f.a}</p>
+						</details>
+					))}
+				</div>
 			</section>
 		</main>
 		<Footer />
@@ -308,6 +376,28 @@ brew tap zywkloo/wtcraft https://github.com/zywkloo/wtcraft && brew install wtcr
 				.hero-title {
 					font-size: 2.1rem;
 				}
+			}
+			.faq details {
+				border: 1px solid var(--line);
+				border-radius: 12px;
+				background: rgba(255, 255, 255, 0.6);
+				padding: 0.5rem 1rem;
+				margin-bottom: 0.7rem;
+			}
+			.faq summary {
+				cursor: pointer;
+				font-weight: 600;
+				color: rgb(var(--black));
+				padding: 0.4rem 0;
+			}
+			.faq details[open] summary {
+				color: var(--accent-dark);
+			}
+			.faq p {
+				margin: 0.4rem 0 0.6rem;
+				color: rgb(var(--gray-dark));
+				font-size: 0.95rem;
+				line-height: 1.6;
 			}
 		</style>
 	</body>
