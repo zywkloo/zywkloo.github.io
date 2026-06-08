@@ -4,35 +4,16 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
-import { WTCRAFT_URL, WTCRAFT_NPM_URL, WTCRAFT_PYPI_URL } from '../consts';
+import { WTCRAFT_URL, WTCRAFT_NPM_URL, WTCRAFT_PYPI_URL, seriesBadgeClass, seriesBadgeLabel } from '../consts';
 
 const posts = (await getCollection('blog'))
 	.filter((post) => post.data.tags?.includes('wtcraft'))
 	.sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
 
-const docs = [
-	{
-		href: '/docs',
-		title: 'SEO + GEO Optimization Guide',
-		titleZh: 'SEO + GEO 优化指南',
-		description:
-			'A hands-on SEO and Generative Engine Optimization playbook for an Astro portfolio/blog. / 面向 Astro 个人站的 SEO 与生成式引擎优化实战。',
-	},
-	{
-		href: '/docs/package-blog-seo-geo',
-		title: 'Open-Source Package & Blog SEO/GEO',
-		titleZh: '开源包与技术博客 SEO/GEO 实战',
-		description:
-			'Leverage GitHub / NPM / PyPI domain authority and bilingual blogging to feed AI search engines. / 借助 GitHub / NPM / PyPI 权重与双语博客喂养 AI 搜索引擎。',
-	},
-	{
-		href: '/docs/marketing-refactor-case-study',
-		title: 'Marketing Site Refactor Case Study',
-		titleZh: '营销/商业网站重构案例',
-		description:
-			'Framework selection, migration strategy, hosting TCO, and SEO/GEO for real marketing sites. / 真实商业站点的选型、迁移、托管成本与 SEO/GEO 综合方案。',
-	},
-];
+// Pull wtcraft-tagged guides straight from the docs collection — no hardcoding.
+const docs = (await getCollection('docs'))
+	.filter((doc) => doc.data.tags?.includes('wtcraft'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const pageTitle = 'wtcraft — Git-Native Multi-Agent Coding Scaffolding | Victor Zhang';
 const pageDescription =
@@ -110,7 +91,7 @@ brew tap zywkloo/wtcraft https://github.com/zywkloo/wtcraft && brew install wtcr
 						<li>
 							<a href={`/blog/${post.id}/`}>
 								{post.data.series && (
-									<span class="series-badge tokenchef">👨‍🍳 TokenChef</span>
+									<span class={`series-badge ${seriesBadgeClass(post.data.series)}`}>{seriesBadgeLabel(post.data.series)}</span>
 								)}
 								<h3 class="card-title" set:html={post.data.title.split(' / ')[0]}></h3>
 								<p class="card-desc">{post.data.description}</p>
@@ -127,11 +108,10 @@ brew tap zywkloo/wtcraft https://github.com/zywkloo/wtcraft && brew install wtcr
 				<ul class="card-list">
 					{docs.map((doc) => (
 						<li>
-							<a href={doc.href}>
+							<a href={`/docs/${doc.id}/`}>
 								<span class="series-badge docs">📄 Docs</span>
-								<h3 class="card-title">{doc.title}</h3>
-								<p class="card-title-zh">{doc.titleZh}</p>
-								<p class="card-desc">{doc.description}</p>
+								<h3 class="card-title">{doc.data.title}</h3>
+								<p class="card-desc">{doc.data.description}</p>
 							</a>
 						</li>
 					))}
@@ -304,11 +284,6 @@ brew tap zywkloo/wtcraft https://github.com/zywkloo/wtcraft && brew install wtcr
 				font-size: 1.08rem;
 				line-height: 1.3;
 				color: rgb(var(--black));
-			}
-			.card-title-zh {
-				margin: 0 0 0.4rem;
-				font-size: 0.9rem;
-				color: rgb(var(--gray));
 			}
 			.card-desc {
 				margin: 0 0 0.5rem;
