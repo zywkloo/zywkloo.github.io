@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Allow main AI Search crawlers
+User-agent: OAI-SearchBot
+Disallow:
+
+User-agent: GPTBot
+Disallow:
+
+User-agent: Claude-Web
+Disallow:
+
+User-agent: Google-Extended
+Disallow:
+
+Sitemap: https://zywkloo.github.io/sitemap-index.xml

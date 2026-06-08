@@ -9,6 +9,33 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 <html lang="en">
 	<head>
 		<BaseHead title="About Me | Victor Zhang" description={SITE_DESCRIPTION} />
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "ProfilePage",
+			"mainEntity": {
+				"@type": "Person",
+				"name": "Victor Zhang",
+				"alternateName": "zywkloo",
+				"jobTitle": "Mobile & Systems Engineer",
+				"alumniOf": [
+					{
+						"@type": "EducationalOrganization",
+						"name": "University of British Columbia"
+					},
+					{
+						"@type": "EducationalOrganization",
+						"name": "Peking University"
+					}
+				],
+				"knowsAbout": ["iOS Development", "Swift", "React Native", "FastAPI", "Agentic Workflows"],
+				"sameAs": [
+					"https://github.com/zywkloo",
+					"https://zywkloo.github.io"
+				]
+			}
+		}
+		</script>
 	</head>
 	<body>
 		<Header />
