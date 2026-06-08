@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/png" href="/images/wtcraft-icon.PNG"><link rel="apple-touch-icon" href="/images/wtcraft-icon.PNG"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Victor Zhang | Mobile &#38; Systems Engineer | Apps from Device to Cloud" href="https://zywkloo.github.io/rss.xml"><meta name="generator" content="Astro v5.18.2"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://zywkloo.github.io/docs/marketing-refactor-case-study/"><!-- Primary Meta Tags --><title>营销与商业网站重构实战：SEO/GEO 优化与全栈选型深度案例分析</title><meta name="title" content="营销与商业网站重构实战：SEO/GEO 优化与全栈选型深度案例分析"><meta name="description" content="以 VitalMark.health 和 OrthoMedtech.com 为案例，深度剖析如何为营销和商业站点设计重构方案，涵盖 Next.js vs. TanStack Start 选型、云托管成本分析以及 SEO 与 GEO 落地实战。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://zywkloo.github.io/docs/marketing-refactor-case-study/"><meta property="og:title" content="营销与商业网站重构实战：SEO/GEO 优化与全栈选型深度案例分析"><meta property="og:description" content="以 VitalMark.health 和 OrthoMedtech.com 为案例，深度剖析如何为营销和商业站点设计重构方案，涵盖 Next.js vs. TanStack Start 选型、云托管成本分析以及 SEO 与 GEO 落地实战。"><meta property="og:image" content="https://zywkloo.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://zywkloo.github.io/docs/marketing-refactor-case-study/"><meta property="twitter:title" content="营销与商业网站重构实战：SEO/GEO 优化与全栈选型深度案例分析"><meta property="twitter:description" content="以 VitalMark.health 和 OrthoMedtech.com 为案例，深度剖析如何为营销和商业站点设计重构方案，涵盖 Next.js vs. TanStack Start 选型、云托管成本分析以及 SEO 与 GEO 落地实战。"><meta property="twitter:image" content="https://zywkloo.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"><link rel="stylesheet" href="/_astro/_slug_.sRgVrfA3.css">
+<link rel="stylesheet" href="/_astro/_slug_.CzKQ3gC6.css"></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Victor Zhang | Mobile &amp; Systems Engineer | Apps from Device to Cloud</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Home </a>  <a href="/blog" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Blog </a>  <a href="/yong" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> 永 </a>  <a href="/about" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> About </a>  </div> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://linkedin.com/in/yiweiZ315" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Victor Zhang on LinkedIn</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://github.com/zywkloo/wtcraft" target="_blank" title="wtcraft — CLI for multi-agent coding" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>wtcraft — CLI for multi-agent coding</span> <img src="/images/wtcraft-icon.PNG" alt="wtcraft" class="wtcraft-icon" data-astro-cid-3ef6ksr2> </a> <a href="https://github.com/zywkloo" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Victor Zhang on GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path></svg> </a> </div> </nav> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo>  <div class="hero-overlay" data-astro-cid-bvzihdzo></div> </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo>  <div class="meta-row" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2026-06-08T00:00:00.000Z"> Jun 7, 2026 </time>  </div> <div class="post-view-count" data-post-view-count data-slug="marketing-refactor-case-study" hidden data-astro-cid-hcz7kujg> <span class="post-view-count__metric" data-astro-cid-hcz7kujg> <span class="post-view-count__value" data-post-view-value data-astro-cid-hcz7kujg>--</span> <span class="post-view-count__label" data-astro-cid-hcz7kujg>views</span> </span> <span class="post-view-count__separator" data-astro-cid-hcz7kujg>·</span> <button class="post-like-button" type="button" data-post-like-button data-astro-cid-hcz7kujg> <span class="post-like-button__icon" data-post-like-icon data-astro-cid-hcz7kujg>♡</span> <span class="post-like-button__label" data-post-like-label data-astro-cid-hcz7kujg>Like</span> <span class="post-like-button__count" data-post-like-value data-astro-cid-hcz7kujg>--</span> </button> </div>  <script type="module" src="/_astro/PostViewCount.astro_astro_type_script_index_0_lang.ClL0nZFe.js"></script> </div> <h1 data-astro-cid-bvzihdzo>营销与商业网站重构实战：SEO/GEO 优化与全栈选型深度案例分析</h1> <hr data-astro-cid-bvzihdzo> </div>   <p>在当今的 Web 生态中，商业和营销站点（Marketing &#x26; Business Sites）正面临着双重挑战：一方面需要通过<strong>传统搜索引擎（SEO）<strong>获取持续的自然流量，另一方面需要优化网站架构以迎合</strong>生成式 AI 搜索引擎（GEO）</strong>（如 ChatGPT Search, Perplexity）的语义检索与直接引用。</p>
+<p>本篇文档以两个真实的商业站点重构为例，深入探讨如何进行架构规划、框架选型、托管成本控制以及 SEO/GEO 的综合优化。</p>
+<hr>
+<h2 id="一-两个典型商业站点的现状与痛点">一、 两个典型商业站点的现状与痛点</h2>
+<p>在制定重构方案前，我们先定义两个具备代表性的重构标的：</p>
+<h3 id="1-案例-avitalmarkhealth消费者-landing-page--iot-产品官网">1. 案例 A：VitalMark.health（消费者 Landing Page / IoT 产品官网）</h3>
+<ul>
+<li><strong>现状</strong>：使用普通的 React 单页应用（CSR，基于 Create React App）构建。</li>
+<li><strong>痛点</strong>：
+<ul>
+<li><strong>SEO/GEO 极差</strong>：原始 HTML 是一个空壳（仅包含 <code>&#x3C;div id="root"></code>），内容全靠浏览器端执行 JS 渲染。AI 爬虫和部分搜索引擎爬虫直接抓到空页面。</li>
+<li><strong>加载性能慢</strong>：用户需要下载并执行庞大的 JS Bundle 才能看到页面，导致 FCP（首次内容绘制）时间过长。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-案例-borthomedtechcomb2b-医疗科技官网">2. 案例 B：OrthoMedtech.com（B2B 医疗科技官网）</h3>
+<ul>
+<li><strong>现状</strong>：现运行于 WordPress 系统，拥有大量存量的博客文章和高权重的 SEO 历史链接，设计师正在对其进行视觉重新设计。</li>
+<li><strong>痛点</strong>：
+<ul>
+<li><strong>旧系统尾大不掉</strong>：如果完全抛弃 WordPress 重写，会丢失多年积累的 SEO 域名权重，且运营人员需要重新学习内容发布后台。</li>
+<li><strong>性能瓶颈</strong>：传统主机部署的 WordPress 响应速度慢，缺乏全球边缘加速能力。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="二-重构方案设计与平滑迁移策略">二、 重构方案设计与平滑迁移策略</h2>
+<p>针对上述两个站点，我们设计了不同的渐进式重构路线：</p>
+<h3 id="1-vitalmarkhealth迁移至-astro-或-nextjs-静态导出-ssg">1. VitalMark.health：迁移至 Astro 或 Next.js 静态导出 (SSG)</h3>
+<p>由于该站点是一个相对静态的产品落地页加 App 引导，核心痛点是<strong>加载速度</strong>和<strong>SEO</strong>：</p>
+<ul>
+<li><strong>方案</strong>：使用 <strong>Astro</strong>（首选）或 <strong>Next.js (Static Export)</strong> 重写。</li>
+<li><strong>Astro 的优势</strong>：
+<ul>
+<li><strong>0 字节 JS 载入</strong>：Astro 在编译时生成纯 HTML，默认不向浏览器发送任何 JavaScript，带来极致的首屏速度与完美的 Lighthouse 跑分。</li>
+<li><strong>孤岛架构</strong>：若页面中需要动态的交互组件（如“设备兼容性查询”），仅为该组件载入 JS，其余部分保持静态。</li>
+</ul>
+</li>
+<li><strong>托管决策</strong>：由于导出为纯静态资源，可部署在 <strong>Cloudflare Pages</strong> 或 <strong>Netlify</strong> 上，享受<strong>完全免费且无商业限制</strong>的全球边缘 CDN 加速。</li>
+</ul>
+<h3 id="2-orthomedtechcomnextjs-反向代理rewrites平滑过渡">2. OrthoMedtech.com：Next.js 反向代理（Rewrites）平滑过渡</h3>
+<p>为了在不抛弃老 WordPress 站点的历史文章和后台系统的前提下上线新版设计，我们采用 <strong>Next.js 反向代理</strong> 方案：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="mermaid"><code><span class="line"><span style="color:#E1E4E8">graph TD</span></span>
+<span class="line"><span style="color:#E1E4E8">    User([访客 / AI 爬虫]) -->|访问主域名 orthomedtech.com| Vercel[Vercel / Next.js 路由层]</span></span>
+<span class="line"><span style="color:#E1E4E8">    Vercel -->|新版页面: 首页, /about, /products| NextJS[Next.js 新版静态页]</span></span>
+<span class="line"><span style="color:#E1E4E8">    Vercel -->|未重构页面: /blog/*, /wp-admin| WP[隐藏的 WordPress 旧站]</span></span></code></pre>
+<ul>
+<li><strong>方案实施</strong>：
+<ol>
+<li>将原有 WordPress 站点修改域名为 <code>wp-backend.orthomedtech.com</code> 并继续运行。</li>
+<li>新设计的页面用 Next.js 开发，并将主域名 <code>orthomedtech.com</code> 指向 Vercel。</li>
+<li>在 Next.js 的 <a href="file:///Users/zhangyiwei/Documents/VitalMark-Cardiac/docs/architecture/website_refactoring_and_seo_geo_strategy.md#L83">next.config.js</a> 中配置静默代理规则：
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#79B8FF">module</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">exports</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  async</span><span style="color:#B392F0"> rewrites</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> [</span></span>
+<span class="line"><span style="color:#6A737D">      // 保持后台管理可用</span></span>
+<span class="line"><span style="color:#E1E4E8">      { source: </span><span style="color:#9ECBFF">'/wp-admin/:path*'</span><span style="color:#E1E4E8">, destination: </span><span style="color:#9ECBFF">'https://wp-backend.orthomedtech.com/wp-admin/:path*'</span><span style="color:#E1E4E8"> },</span></span>
+<span class="line"><span style="color:#6A737D">      // 保持老博客与素材直达旧站，URL 保持主域名不变</span></span>
+<span class="line"><span style="color:#E1E4E8">      { source: </span><span style="color:#9ECBFF">'/blog/:path*'</span><span style="color:#E1E4E8">, destination: </span><span style="color:#9ECBFF">'https://wp-backend.orthomedtech.com/blog/:path*'</span><span style="color:#E1E4E8"> },</span></span>
+<span class="line"><span style="color:#E1E4E8">      { source: </span><span style="color:#9ECBFF">'/wp-content/:path*'</span><span style="color:#E1E4E8">, destination: </span><span style="color:#9ECBFF">'https://wp-backend.orthomedtech.com/wp-content/:path*'</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#E1E4E8">    ];</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
+</li>
+</ol>
+</li>
+<li><strong>优势</strong>：
+<ul>
+<li><strong>SEO 零损失</strong>：历史链接完美保留，域名权重不流失。</li>
+<li><strong>开发无压力</strong>：新老系统并存，可以今天改首页，下个月改产品页，逐步替换。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="三-全栈框架选型nextjs-vs-tanstack-start">三、 全栈框架选型：Next.js vs. TanStack Start</h2>
+<p>对于商业和营销网站，在 <strong>Next.js</strong> 和最近火热的 <strong>TanStack Start</strong> 之间，我们有清晰的选型标准：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">维度</th><th align="left"><strong>Next.js (App Router / SSG)</strong></th><th align="left"><strong>TanStack Start (全栈框架)</strong></th></tr></thead><tbody><tr><td align="left"><strong>首选场景</strong></td><td align="left"><strong>营销官网、内容站、电商、SEO/GEO 敏感型站点</strong></td><td align="left"><strong>复杂后台、SaaS 面板、强数据交互型 App</strong></td></tr><tr><td align="left"><strong>主要优势</strong></td><td align="left">* 静态图片自动压缩与按需裁剪 (<code>next/image</code>)。<br>* 字体自动预加载与脚本优化布局。<br>* 极度庞大且成熟的第三方 SEO/Analytics 生态。</td><td align="left">* 100% 深度类型安全 (Type-Safe Routing)。<br>* 极其强大的 URL 查询参数（Search Params）状态同步。<br>* 与 TanStack Query 完美集成。</td></tr><tr><td align="left"><strong>静态优化</strong></td><td align="left">极其成熟的 SSG/ISR 机制，配合全局 CDN。</td><td align="left">新兴全栈，偏向 SSR/RPC 模式，对纯静态导出的优化还在演进。</td></tr></tbody></table>
+<p><strong>选型结论</strong>：
+对于 VitalMark 和 OrthoMedtech 这类内容驱动、强 SEO/GEO 诉求的商业官网，<strong>Next.js (或 Astro) 是更好的选择</strong>；但如果要为它们开发配对的“医生管理后台”或“患者健康数据监测面板”，<strong>TanStack Start</strong> 的开发体验和类型安全性则会更胜一筹。</p>
+<hr>
+<h2 id="四-云托管方案对比与财务核算">四、 云托管方案对比与财务核算</h2>
+<p>老板和财务团队往往对技术栈重构的“运行成本”极度敏感。下表为四类托管方案的深度对比：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">维度</th><th align="left"><strong>Vercel</strong> (Serverless)</th><th align="left"><strong>Cloudflare Pages / Netlify</strong></th><th align="left"><strong>DigitalOcean Droplet</strong> (VPS)</th><th align="left"><strong>传统主机</strong> (如 Network Solutions)</th></tr></thead><tbody><tr><td align="left"><strong>商业版费用</strong></td><td align="left"><strong>$20/月 / 开发者席位</strong></td><td align="left"><strong>$0/月</strong> (静态托管商业免费)</td><td align="left"><strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>−</mo></mrow><annotation encoding="application/x-tex">4 - </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">4</span><span class="mord">−</span></span></span></span>12/月</strong> (按配置计费)</td><td align="left"><strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mo>−</mo></mrow><annotation encoding="application/x-tex">10 - </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">10</span><span class="mord">−</span></span></span></span>30/月</strong> (通常需按年预付)</td></tr><tr><td align="left"><strong>运维开发工时</strong></td><td align="left"><strong>几乎为 0</strong> (Git 推送自动部署)</td><td align="left"><strong>几乎为 0</strong> (Git 推送自动部署)</td><td align="left"><strong>极高</strong> (需自己配置 Linux, SSL, Nginx)</td><td align="left"><strong>一般</strong> (老旧的 FTP 上传)</td></tr><tr><td align="left"><strong>性能体验</strong></td><td align="left">极佳（自动边缘 Serverless 运行）</td><td align="left">极佳（利用 Cloudflare 顶级 CDN）</td><td align="left">平均（单节点部署，需另接 CDN）</td><td align="left">差（共享 CPU，响应慢）</td></tr></tbody></table>
+<h3 id="️-商业费用的关键考量">⚠️ 商业费用的关键考量</h3>
+<ol>
+<li><strong>Vercel 的免费版（Hobby）严格限制商业用途</strong>。因此，OrthoMedtech 和 VitalMark 如果使用 Next.js 动态路由功能部署在 Vercel 上，<strong>法律上必须购买 Pro 计划（$20/月/开发者）</strong>。
+<ul>
+<li><em>注：只需为推代码的开发席位付费，非技术管理者和客户预览无需付费。</em></li>
+</ul>
+</li>
+<li><strong>Astro + Cloudflare Pages 的免费组合</strong>：
+如果像 VitalMark 这样纯粹是静态页面，我们推荐用 Astro 打包成纯静态 HTML，部署到 Cloudflare Pages 上。<strong>静态托管平台对商业项目依然提供免费额度</strong>，这可以帮助公司合法实现 <strong>$0/月</strong> 的托管开销。</li>
+<li><strong>不要为了省钱而使用自建 VPS (DigitalOcean)</strong>：
+虽然 DO Droplet 每月只需 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>6</mn><mtext>，但为了维护这台服务器，开发人员需要处理</mtext><mi>O</mi><mi>S</mi><mtext>安全漏洞补丁、</mtext><mi>S</mi><mi>S</mi><mi>L</mi><mtext>证书自动更新续签、防</mtext><mi>D</mi><mi>D</mi><mi>O</mi><mi>S</mi><mtext>攻击、解决</mtext><mi>N</mi><mi>o</mi><mi>d</mi><mi>e</mi><mtext>进程崩溃当机等。</mtext><mo>∗</mo><mo>∗</mo><mtext>自建运维所消耗的开发工时成本，远远超过了</mtext><mi>V</mi><mi>e</mi><mi>r</mi><mi>c</mi><mi>e</mi><mi>l</mi><mtext>每月</mtext></mrow><annotation encoding="application/x-tex">6，但为了维护这台服务器，开发人员需要处理 OS 安全漏洞补丁、SSL 证书自动更新续签、防 DDOS 攻击、解决 Node 进程崩溃当机等。**自建运维所消耗的开发工时成本，远远超过了 Vercel 每月 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">6</span><span class="mord cjk_fallback">，但为了维护这台服务器，开发人员需要处理</span><span class="mord mathnormal" style="margin-right:0.0278em;">O</span><span class="mord mathnormal" style="margin-right:0.0576em;">S</span><span class="mord cjk_fallback">安全漏洞补丁、</span><span class="mord mathnormal" style="margin-right:0.0576em;">S</span><span class="mord mathnormal" style="margin-right:0.0576em;">S</span><span class="mord mathnormal">L</span><span class="mord cjk_fallback">证书自动更新续签、防</span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="mord mathnormal" style="margin-right:0.0278em;">O</span><span class="mord mathnormal" style="margin-right:0.0576em;">S</span><span class="mord cjk_fallback">攻击、解决</span><span class="mord mathnormal" style="margin-right:0.109em;">N</span><span class="mord mathnormal">o</span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span><span class="mord cjk_fallback">进程崩溃当机等。</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">∗</span><span class="mord cjk_fallback">自建运维所消耗的开发工时成本，远远超过了</span><span class="mord mathnormal" style="margin-right:0.2222em;">V</span><span class="mord mathnormal" style="margin-right:0.0278em;">er</span><span class="mord mathnormal">ce</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord cjk_fallback">每月</span></span></span></span>20 的订阅费。**</li>
+</ol>
+<hr>
+<h2 id="五-seo--geo-的落地实操策略">五、 SEO &#x26; GEO 的落地实操策略</h2>
+<p>不管是 Next.js 还是 Astro，重构的终极目的是带来流量。在内容层面我们需要做到：</p>
+<h3 id="1-技术底座-seo">1. 技术底座 (SEO)</h3>
+<ul>
+<li>避免使用 CSR。使用预渲染（SSG）或按需更新（ISR）确保爬虫请求时，原始 HTML 已经填满了文字。</li>
+<li>每一个页面都必须通过组件动态输出独立的 <code>&#x3C;title></code>、<code>&#x3C;meta name="description"></code> 以及 Canonical URL，防止镜像站分流。</li>
+</ul>
+<h3 id="2-迎合-ai-引擎提炼-geo">2. 迎合 AI 引擎提炼 (GEO)</h3>
+<p>AI 搜索引擎依靠 <strong>RAG 机制</strong> 将网页文字切片提炼。我们在编写文章、介绍医疗器械或 IoT 贴片时，必须遵循以下规则：</p>
+<ul>
+<li><strong>BLUF 结构 (结论先行)</strong>：在所有段落开头，用 60 字以内的粗体段落直白地回答“该产品是什么/有什么用”。AI 极度偏好直接抓取这行字。</li>
+<li><strong>数据表格化</strong>：用 Markdown 绘制参数对比表（如芯片参数、续航、材质）。Perplexity 等引擎在回答对比类提问时，会直接在聊天框里渲染该表格并附带来源链接。</li>
+<li><strong>FAQ 与问题式标题</strong>：使用用户会向 AI 提问的口吻做 H3 标题（例如 <code>### OrthoMedtech 假体关节在手术中有什么优势？</code>），并在下方立即给出解答。</li>
+</ul>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2026 Victor Zhang. All rights reserved.
+<div class="social-links" data-astro-cid-sz7xmlte> <a href="https://medium.com/@zywkloo" target="_blank" title="Medium Blog" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Read Victor's Medium articles</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M13.54 12l6.23-6.23V5.24L15.89 2L9.23 8.66v-2.5L5.24 5.24v.96l3.99 3.99L5.24 14v2.23l4.04 2.72v-2.5l4.93-4.93z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://www.linkedin.com/in/yiweiz315/" target="_blank" title="LinkedIn" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Connect with Victor on LinkedIn</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="mailto:yiweizhangca@gmail.com" title="Email" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Email Victor</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://zzz-movie-rec-system.vercel.app/" target="_blank" title="Movie Rec System" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Movie Recommendation System</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://github.com/ZZZ-RecSys/ZZZ-MovieRecSystem" target="_blank" title="GitHub" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Visit Victor's GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" fill="currentColor" data-astro-cid-sz7xmlte> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path> </svg> </a> </div> </footer>  </body></html>

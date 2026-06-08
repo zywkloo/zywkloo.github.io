@@ -1,0 +1,10 @@
+---
+import BlogPost from '../../layouts/BlogPost.astro';
+import { Content, frontmatter } from './_marketing_refactor_case_study.md';
+
+const pubDate = new Date(frontmatter.pubDate);
+---
+
+<BlogPost {...frontmatter} pubDate={pubDate} slug="marketing-refactor-case-study">
+	<Content />
+</BlogPost>
