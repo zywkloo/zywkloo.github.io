@@ -2,6 +2,8 @@
 title: "开源包 (NPM/PyPI) 与技术博客的 SEO & GEO 优化实战"
 description: "如何通过重构 GitHub README、配置包注册表元数据以及优化双语技术博客的结构，获取传统搜索引擎与生成式 AI 搜索引擎 (Perplexity/ChatGPT) 的高权重推荐。"
 pubDate: 2026-06-08
+lang: "zh"
+tags: ["wtcraft", "SEO", "GEO", "NPM", "PyPI"]
 ---
 
 本指南主要面向个人开源项目开发者，阐述如何利用高域名权重平台（GitHub、NPM、PyPI）为个人网站导流，以及如何优化双语技术博客以迎合 AI 搜索引擎（GEO）的抓取和提炼规则。

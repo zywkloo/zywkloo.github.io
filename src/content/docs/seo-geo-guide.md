@@ -2,6 +2,8 @@
 title: "个人网站 SEO + GEO 优化指南"
 description: "面向个人 Astro 博客及 Portfolio 网站的传统搜索引擎优化 (SEO) 与生成式 AI 引擎优化 (GEO) 的实战方案。"
 pubDate: 2026-06-08
+lang: "zh"
+tags: ["wtcraft", "SEO", "GEO", "Astro"]
 ---
 
 本指南针对基于 **Astro** 构建的个人 Portfolio/Blog 网站（如 `zywkloo.github.io`），详细阐述如何进行传统搜索引擎优化（SEO）和新兴 AI 搜索引擎优化（GEO - Generative Engine Optimization）。

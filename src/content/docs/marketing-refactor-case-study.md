@@ -2,6 +2,8 @@
 title: "营销与商业网站重构实战：SEO/GEO 优化与全栈选型深度案例分析"
 description: "以 VitalMark.health 和 OrthoMedtech.com 为案例，深度剖析如何为营销和商业站点设计重构方案，通过多个决策对比矩阵，详解 Next.js 与 Astro 选型、平滑迁移策略、云托管 TCO 成本以及 SEO 与 GEO 实操。"
 pubDate: 2026-06-08
+lang: "zh"
+tags: ["wtcraft", "SEO", "GEO", "Astro", "Next.js"]
 ---
 
 在当今的 Web 生态中，商业和营销站点（Marketing & Business Sites）正面临着双重挑战：一方面需要通过**传统搜索引擎（SEO）**获取持续的自然流量，另一方面需要优化网站架构以迎合**生成式 AI 搜索引擎（GEO）**（如 ChatGPT Search, Perplexity）的语义检索与直接引用。
