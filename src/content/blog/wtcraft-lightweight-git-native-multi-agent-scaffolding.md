@@ -1,5 +1,5 @@
 ---
-title: 'TokenChef (Part 3): wtcraft — A Lightweight, Git-Native Scaffolding for Bounded Multi-Agent Coding'
+title: 'TokenChef (Part 3): wtcraft — A Lightweight, Git-Native Governance Core for Claude Code, Codex, and Gemini'
 series: 'TokenChef'
 description: 'How do you actually enforce boundaries on autonomous agents? Explore Harness Engineering, the competitive landscape of task contracts, and how the wtcraft CLI implements bounded sandboxes locally.'
 pubDate: 'May 29 2026'
@@ -17,6 +17,7 @@ tags: ['AI Tools', 'Harness Engineering', 'Git', 'Worktrees', 'wtcraft', 'Codex'
 ## Contents
 
 - [Introduction](#introduction)
+- [When wtcraft earns its keep (and when to skip it)](#when-wtcraft-earns-its-keep-and-when-to-skip-it)
 - [What is Harness Engineering?](#what-is-harness-engineering)
 - [The Competitive Landscape](#the-competitive-landscape)
 - [The Contract: .worktree-task.md](#the-contract-worktree-task-md)
@@ -35,6 +36,16 @@ But design philosophies are useless without a mechanism to enforce them.
 If you tell a coding agent to *"fix this issue,"* but don't give it a strict sandbox and a verifiable boundary, it will wander off, touch files it shouldn't, write unnecessary code, and blow through your API quota.
 
 To prevent this, we need **Harness Engineering**. This article explores the tactical tools, the competitive task landscape, and how the lightweight, git-native CLI [**wtcraft**](https://github.com/zywkloo/wtcraft) implements bounded contracts on your local machine.
+
+---
+
+## When wtcraft earns its keep (and when to skip it)
+
+Before the mechanics, the honest scoping — because a tool that can't tell you when *not* to use it isn't worth trusting.
+
+wtcraft is built for one specific situation: **you run more than one agent _vendor_** — say Claude Code, Codex, and the Gemini CLI — **on a limited budget**, and you want to spread work across them (to stretch free tiers and cheaper quota) without them tripping over each other. That's the seam where coordination actually hurts: two vendors editing the same files, blowing past scope, or dropping the task hand-off between them. wtcraft's whole job is to keep each one in its lane — a per-task contract, isolated worktrees, and a verifiable sign-off.
+
+**If that's not you, skip it.** If you run a *single* vendor on an unlimited plan, you don't need an external governance layer — that product's own sub-agent orchestration already handles the coordination inside its own walls. wtcraft earns its keep precisely at the **multi-vendor + budget** seam, not inside one vendor's garden. And because it's git-native — no daemon, no database, state lives in your repo — adopting it costs you nothing to try and nothing to walk away from.
 
 ---
 
