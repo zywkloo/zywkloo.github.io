@@ -34,16 +34,16 @@ const guides = [
 	...collectionGuides,
 ];
 
-const pageTitle = 'wtcraft — Git-Native Multi-Agent Coding Scaffolding | Victor Zhang';
+const pageTitle = 'wtcraft — Git-Native Governance for Claude Code, Codex & Gemini on a Budget | Victor Zhang';
 const pageDescription =
-	'wtcraft is a lightweight, git-native CLI for bounded multi-agent coding. Install via npm, pipx, or Homebrew. Plus the TokenChef series and SEO/GEO guides behind it.';
+	'wtcraft is a lightweight, git-native CLI that keeps multiple coding-agent CLIs — Claude Code, Codex, Gemini — in their lanes and on budget. No daemon, no DB, just git. Install via npm, pipx, or Homebrew.';
 
 // FAQ — rendered visibly below AND mirrored into FAQPage structured data
 // (Google requires the schema to match on-page content).
 const faqs = [
 	{
 		q: 'What is wtcraft?',
-		a: 'wtcraft is a lightweight, git-native CLI that runs parallel AI coding agents inside isolated git worktrees with strict, verifiable task boundaries — so you can orchestrate a multi-agent team without reinventing a runtime.',
+		a: 'wtcraft is a lightweight, git-native CLI that lets you run multiple coding-agent CLIs — Claude Code, Codex, Gemini — side by side in isolated git worktrees, with strict, verifiable task boundaries that keep them in their lanes and on budget. No daemon or database — state lives in git.',
 	},
 	{
 		q: "How is wtcraft different from plain git worktrees or Claude Code's --worktree?",
@@ -99,13 +99,14 @@ const faqLd = {
 			<section class="hero">
 				<img src="/images/wtcraft-icon.PNG" alt="wtcraft" class="hero-logo" />
 				<h1 class="hero-title">wtcraft</h1>
-				<p class="hero-tagline">Git-native, bounded scaffolding for multi-agent coding</p>
-				<p class="hero-tagline-zh">为多智能体编码打造的、Git 原生的有界脚手架</p>
+				<p class="hero-tagline">Git-native governance for running Claude Code, Codex &amp; Gemini together — on a budget</p>
+				<p class="hero-tagline-zh">把 Claude Code、Codex、Gemini 摆一起跑而不打架 —— Git 原生、零依赖的治理内核</p>
 				<p class="hero-pitch">
-					Spawn parallel AI agents inside isolated git worktrees with strict, verifiable
-					task boundaries — instead of reinventing another runtime.
+					Run Claude Code, Codex, and Gemini side by side in isolated git worktrees, with
+					strict, verifiable task boundaries that keep them from stepping on each other —
+					instead of reinventing another runtime.
 					<br />
-					<span class="zh">在隔离的 git worktree 中并行运行 AI 智能体，用可验证的任务边界约束它们 —— 而不是再造一个 runtime。</span>
+					<span class="zh">把 Claude Code、Codex、Gemini 放进各自隔离的 git worktree 并行跑，用可验证的任务边界防止它们互相打架 —— 而不是再造一个 runtime。</span>
 				</p>
 				<div class="badges">
 					<a href={WTCRAFT_NPM_URL}><img src="https://img.shields.io/npm/v/wtcraft.svg?style=flat-square&logo=npm&color=cb3837" alt="npm package" /></a>
