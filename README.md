@@ -10,13 +10,13 @@ Built with [Astro](https://astro.build) and deployed via GitHub Pages.
 
 ## About
 
-Writing on software engineering, multi-agent workflows, and solo developer tooling.
+Writing on software engineering, multi-vendor agent workflows, and solo developer tooling.
 
-Featured project: **[wtcraft](https://github.com/zywkloo/wtcraft)** — a budget-aware, git-native harness for orchestrating multiple coding agents on a limited budget.
+Featured project: **[wtcraft](https://github.com/zywkloo/wtcraft)** — a git-native governance core for running multiple coding-agent CLIs together (Claude Code, Codex, Gemini) without them stepping on each other — on a budget. No daemon, no DB, just git.
 
 ## Recent Posts
 
-- [wtcraft — Budget-Aware Multi-Agent Harness](https://zywkloo.github.io/blog/beyond-worktrees-budget-aware-multi-agent-coding-harness/)
+- [wtcraft — Budget-Aware Multi-Vendor Agent Harness](https://zywkloo.github.io/blog/beyond-worktrees-budget-aware-multi-agent-coding-harness/)
 - [Vibe Coding with Git Worktrees](https://zywkloo.github.io/blog/worktree-refactor-playbook/)
 
 ## Stack
