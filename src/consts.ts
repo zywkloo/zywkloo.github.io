@@ -47,15 +47,17 @@ export const GOLDENARC_SAME_AS = [GOLDENARC_LINKEDIN_URL, GOLDENARC_GITHUB_URL].
 export interface SeriesMeta {
 	icon: string;
 	name: string;
+	shortName: string;
 	subtitle: string;
 	accentColor: string;
 	badgeClass: string;
 }
 
 export const SERIES_META: Record<string, SeriesMeta> = {
-	TokenChef: { icon: '👨‍🍳', name: 'TokenChef', subtitle: 'Git-Native Multi-Agent Coding', accentColor: '#cb3837', badgeClass: 'tokenchef' },
-	MetalSolo: { icon: '🎸', name: 'MetalSolo', subtitle: 'High-Performance GPU Programming', accentColor: '#8b5cf6', badgeClass: 'metalsolo' },
-	'Clean Semantics': { icon: '✨', name: 'Clean Semantics', subtitle: 'Domain-Driven Engineering', accentColor: '#0ea5e9', badgeClass: 'cleansemantics' },
+	TokenChef: { icon: '👨‍🍳', name: 'TokenChef', shortName: 'Token', subtitle: 'Git-Native Multi-Agent Coding', accentColor: '#cb3837', badgeClass: 'tokenchef' },
+	MetalSolo: { icon: '🎸', name: 'MetalSolo', shortName: 'Metal', subtitle: 'High-Performance GPU Programming', accentColor: '#8b5cf6', badgeClass: 'metalsolo' },
+	'Clean Semantics': { icon: '✨', name: 'Clean Semantics', shortName: 'Semantics', subtitle: 'Domain-Driven Engineering', accentColor: '#0ea5e9', badgeClass: 'cleansemantics' },
+	'REACT NATIVE CULPRITS': { icon: '⚛️', name: 'REACT NATIVE CULPRITS', shortName: 'RN', subtitle: 'React Native Core Deep Dive', accentColor: '#61dafb', badgeClass: 'reactnativeculprits' },
 };
 
 // Normalize a raw series value (e.g. "Clean Semantics 01") into its group key,
@@ -75,11 +77,11 @@ export function seriesBadgeClass(series?: string): string {
 	return m ? m.badgeClass : (series ?? '').toLowerCase();
 }
 
-// Badge label, e.g. "👨‍🍳 TokenChef" or "✨ Clean Semantics (Part 01)".
+// Badge label, e.g. "🧑‍🍳 TokenChef" or "✨ Clean Semantics (Part 01)".
 export function seriesBadgeLabel(series?: string): string {
 	const m = getSeriesMeta(series);
 	if (!m) return series ?? '';
-	return m.key === 'Clean Semantics' && m.part
+	return m.part
 		? `${m.icon} ${m.name} (Part ${m.part})`
 		: `${m.icon} ${m.name}`;
 }

@@ -5,11 +5,25 @@ import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE, SITE_AUTHOR, seriesBadgeClass, seriesBadgeLabel } from '../../consts';
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_AUTHOR, seriesBadgeClass, seriesBadgeLabel, SERIES_META, getSeriesMeta } from '../../consts';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+// Compute counts
+const seriesCounts = new Map<string, number>();
+let otherCount = 0;
+const allCount = posts.length;
+
+posts.forEach(post => {
+	const meta = getSeriesMeta(post.data.series);
+	if (meta) {
+		seriesCounts.set(meta.key, (seriesCounts.get(meta.key) || 0) + 1);
+	} else {
+		otherCount++;
+	}
+});
 ---
 
 <!doctype html>
@@ -22,7 +36,84 @@ const posts = (await getCollection('blog')).sort(
 		/>
 		<style>
 			main {
-				width: 960px;
+				width: 1000px;
+				max-width: 100%;
+				margin: 0 auto;
+			}
+			.blog-container {
+				display: flex;
+				gap: 2rem;
+				align-items: flex-start;
+			}
+			.sidebar {
+				width: 90px;
+				flex-shrink: 0;
+				display: flex;
+				flex-direction: column;
+				gap: 0.5rem;
+				transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+				overflow: hidden;
+				position: sticky;
+				top: 2rem;
+				background: rgba(var(--gray-light), 0.2);
+				padding: 1rem 0;
+				border-radius: 16px;
+				border: 1px solid rgba(var(--gray), 0.1);
+			}
+			.sidebar:hover {
+				width: 320px;
+				background: rgba(var(--gray-light), 0.5);
+			}
+			.filter-btn {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+				padding: 0.6rem 1rem;
+				border: none;
+				background: transparent;
+				cursor: pointer;
+				transition: background 0.2s;
+				text-align: left;
+				white-space: nowrap;
+				color: rgb(var(--black));
+				font-family: inherit;
+				font-size: 0.95rem;
+			}
+			.filter-btn:hover {
+				background: rgba(var(--gray), 0.1);
+			}
+			.filter-btn.active {
+				background: rgba(var(--gray), 0.15);
+				font-weight: 600;
+			}
+			.filter-icon {
+				font-size: 1.3rem;
+				width: 28px;
+				text-align: center;
+				flex-shrink: 0;
+			}
+			.filter-short {
+				display: inline-block;
+				opacity: 1;
+				transition: opacity 0.2s;
+				color: rgb(var(--gray-dark));
+			}
+			.filter-full {
+				display: none;
+				opacity: 0;
+				transition: opacity 0.2s;
+			}
+			.sidebar:hover .filter-short {
+				display: none;
+				opacity: 0;
+			}
+			.sidebar:hover .filter-full {
+				display: inline-block;
+				opacity: 1;
+			}
+			.content {
+				flex-grow: 1;
+				min-width: 0;
 			}
 			ul {
 				display: flex;
@@ -39,12 +130,12 @@ const posts = (await getCollection('blog')).sort(
 				text-decoration: none;
 				transition: 0.2s ease;
 			}
-			ul li:first-child {
+			ul li.featured-post {
 				width: 100%;
 				margin-bottom: 1rem;
 				text-align: center;
 			}
-			ul li:first-child .title {
+			ul li.featured-post .title {
 				font-size: 2.369rem;
 			}
 			ul li img {
@@ -55,7 +146,7 @@ const posts = (await getCollection('blog')).sort(
 				object-fit: cover;
 				object-position: center;
 			}
-			ul li:first-child img {
+			ul li.featured-post img {
 				height: auto;
 				max-height: 520px;
 				object-position: top;
@@ -66,7 +157,7 @@ const posts = (await getCollection('blog')).sort(
 			.title {
 				margin: 0;
 				color: rgb(var(--black));
-				line-height: 1;
+				line-height: 1.2;
 			}
 			.series-badge-container {
 				margin-top: 0.75rem;
@@ -96,6 +187,11 @@ const posts = (await getCollection('blog')).sort(
 				color: #0ea5e9;
 				border: 1px solid rgba(14, 165, 233, 0.18);
 			}
+			.series-badge.reactnativeculprits {
+				background-color: rgba(97, 218, 251, 0.08);
+				color: #0c8ba8;
+				border: 1px solid rgba(97, 218, 251, 0.2);
+			}
 			.meta {
 				margin: 0;
 				color: rgb(var(--gray));
@@ -104,6 +200,10 @@ const posts = (await getCollection('blog')).sort(
 				gap: 0.45rem;
 				align-items: center;
 				font-size: 0.95rem;
+				justify-content: flex-start;
+			}
+			ul li.featured-post .meta {
+				justify-content: center;
 			}
 			.meta-separator {
 				opacity: 0.6;
@@ -123,7 +223,31 @@ const posts = (await getCollection('blog')).sort(
 			ul a:hover img {
 				box-shadow: var(--box-shadow);
 			}
-			@media (max-width: 720px) {
+			@media (max-width: 768px) {
+				.blog-container {
+					flex-direction: column;
+				}
+				.sidebar {
+					width: 100%;
+					flex-direction: row;
+					flex-wrap: wrap;
+					position: static;
+					padding: 0.5rem;
+					border-radius: 8px;
+				}
+				.sidebar:hover {
+					width: 100%;
+				}
+				.filter-btn {
+					padding: 0.4rem 0.8rem;
+				}
+				.filter-short {
+					display: none;
+				}
+				.filter-full {
+					display: inline-block;
+					opacity: 1;
+				}
 				ul {
 					gap: 1.1rem;
 				}
@@ -131,17 +255,21 @@ const posts = (await getCollection('blog')).sort(
 					width: 100%;
 					text-align: left;
 				}
-				ul li:first-child {
+				ul li.featured-post {
 					margin-bottom: 0;
+					text-align: left;
+				}
+				ul li.featured-post .meta {
+					justify-content: flex-start;
 				}
 				ul li img,
-				ul li:first-child img {
+				ul li.featured-post img {
 					height: auto;
 					aspect-ratio: 16 / 9;
 					object-fit: cover;
 				}
 				ul li .title,
-				ul li:first-child .title {
+				ul li.featured-post .title {
 					font-size: 1.45rem;
 					line-height: 1.2;
 				}
@@ -154,38 +282,67 @@ const posts = (await getCollection('blog')).sort(
 	<body>
 		<Header />
 		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
-									{post.data.series && (
-										<div class="series-badge-container">
-											<span class={`series-badge ${seriesBadgeClass(post.data.series)}`}>
-												{seriesBadgeLabel(post.data.series)}
-											</span>
-										</div>
-									)}
-									<h4 class="title" set:html={post.data.title.split(' / ')[0]}></h4>
-									<p class="meta">
-										<FormattedDate date={post.data.pubDate} />
-										<span class="meta-stats" data-post-card-stats hidden>
-											<span class="meta-separator">·</span>
-											<span class="views" data-post-card-view data-slug={post.id}>
-												<span data-post-card-view-value>--</span> views
-											</span>
-										</span>
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
+			<div class="blog-container">
+				<aside class="sidebar" id="blog-sidebar">
+					<button class="filter-btn active" data-series="all">
+						<span class="filter-short">All</span>
+						<span class="filter-full">All Posts ({allCount})</span>
+					</button>
+					{Object.entries(SERIES_META).map(([key, meta]) => {
+						const count = seriesCounts.get(key) || 0;
+						if (count === 0) return null;
+						return (
+							<button class="filter-btn" data-series={key}>
+								<span class="filter-icon">{meta.icon}</span>
+								<span class="filter-short">{meta.shortName}</span>
+								<span class="filter-full">{meta.name} ({count})</span>
+							</button>
+						);
+					})}
+					{otherCount > 0 && (
+						<button class="filter-btn" data-series="other">
+							<span class="filter-short">Other</span>
+							<span class="filter-full">Other ({otherCount})</span>
+						</button>
+					)}
+				</aside>
+				<section class="content">
+					<ul id="blog-list">
+						{
+							posts.map((post) => {
+								const meta = getSeriesMeta(post.data.series);
+								const seriesKey = meta ? meta.key : 'other';
+								return (
+									<li data-series-key={seriesKey}>
+										<a href={`/blog/${post.id}/`}>
+											{post.data.heroImage && (
+												<Image width={720} height={360} src={post.data.heroImage} alt="" />
+											)}
+											{post.data.series && (
+												<div class="series-badge-container">
+													<span class={`series-badge ${seriesBadgeClass(post.data.series)}`}>
+														{seriesBadgeLabel(post.data.series)}
+													</span>
+												</div>
+											)}
+											<h4 class="title" set:html={post.data.title.split(' / ')[0]}></h4>
+											<p class="meta">
+												<FormattedDate date={post.data.pubDate} />
+												<span class="meta-stats" data-post-card-stats hidden>
+													<span class="meta-separator">·</span>
+													<span class="views" data-post-card-view data-slug={post.id}>
+														<span data-post-card-view-value>--</span> views
+													</span>
+												</span>
+											</p>
+										</a>
+									</li>
+								);
+							})
+						}
+					</ul>
+				</section>
+			</div>
 		</main>
 		<script>
 			import { fetchViewCounts, hasPostStatsConfig } from '../../lib/post-stats';
@@ -224,6 +381,39 @@ const posts = (await getCollection('blog')).sort(
 					});
 				});
 			}
+
+			// Sidebar Filtering Logic
+			const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+			const blogItems = document.querySelectorAll<HTMLLIElement>('#blog-list li');
+			
+			function updateFeatured() {
+				let firstVisible = true;
+				blogItems.forEach(item => {
+					item.classList.remove('featured-post');
+					if (item.style.display !== 'none' && firstVisible) {
+						item.classList.add('featured-post');
+						firstVisible = false;
+					}
+				});
+			}
+			
+			filterBtns.forEach(btn => {
+				btn.addEventListener('click', () => {
+					filterBtns.forEach(b => b.classList.remove('active'));
+					btn.classList.add('active');
+					
+					const series = btn.dataset.series;
+					blogItems.forEach(item => {
+						if (series === 'all' || item.dataset.seriesKey === series) {
+							item.style.display = '';
+						} else {
+							item.style.display = 'none';
+						}
+					});
+					updateFeatured();
+				});
+			});
+			updateFeatured();
 		</script>
 		<Footer />
 	</body>

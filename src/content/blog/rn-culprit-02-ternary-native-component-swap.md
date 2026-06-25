@@ -1,9 +1,9 @@
 ---
-title: "RN Culprit #2: Ternary Swap Between Different Native Component Types"
-series: "RN Culprit"
-description: "The same crash signature as #1, but a different culprit. Rapidly alternating between two different native components in the same slot corrupts Fabric's commit pipeline."
-pubDate: "Jun 25 2026"
-heroImage: "../../assets/react-native-meteor-hero.svg"
+title: "Ternary Native Component Swap"
+series: "REACT NATIVE CULPRITS 02"
+description: "Identical stack to RN Culprit #1. Same assertion. The fix looks like magic, but is deeply logical when you understand how Fabric commit queues process layout-only view unmounting."
+pubDate: "Jun 26 2026"
+heroImage: "../../assets/rn_ternary_native_component_swap_hero.jpg"
 tags: ["React Native", "Fabric", "iOS", "Crash", "New Architecture", "Debugging"]
 ---
 
