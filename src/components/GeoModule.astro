@@ -1,0 +1,123 @@
+---
+import { SITE_AUTHOR, SITE_URL, PROFILE_IMAGE, SAME_AS, SITE_AUTHOR_ALT } from '../consts';
+
+interface Props {
+	title: string;
+	description: string;
+	pubDate: Date;
+	updatedDate?: Date;
+	lang?: string;
+	tags?: string[];
+	series?: string;
+	heroImage?: string;
+	url: string;
+	tldr?: string;
+	showCitation?: boolean;
+}
+
+const { title, description, pubDate, updatedDate, lang = 'en', tags, series, heroImage, url, tldr, showCitation = true } = Astro.props;
+
+const plainTitle = title.replace(/<[^>]+>/g, '');
+
+// BlogPosting structured data makes every article a citable entity for AI answer engines
+const blogPostingLd = {
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	headline: plainTitle,
+	description,
+	inLanguage: lang === 'zh' ? 'zh-CN' : 'en',
+	datePublished: pubDate.toISOString(),
+	dateModified: (updatedDate ?? pubDate).toISOString(),
+	...(heroImage ? { image: heroImage } : {}),
+	...(tags && tags.length ? { keywords: tags.join(', ') } : {}),
+	...(series ? { isPartOf: { '@type': 'CreativeWorkSeries', name: series } } : {}),
+	author: {
+		'@type': 'Person',
+		name: SITE_AUTHOR,
+		alternateName: SITE_AUTHOR_ALT,
+		url: SITE_URL,
+		image: PROFILE_IMAGE,
+		sameAs: SAME_AS,
+	},
+	publisher: { '@type': 'Person', name: SITE_AUTHOR, url: SITE_URL },
+	mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+};
+
+// Generate BibTeX citation for academic and AI reference extraction
+const citationId = `${SITE_AUTHOR.split(' ').pop()?.toLowerCase() || 'author'}${pubDate.getFullYear()}`;
+const citationText = `@misc{${citationId},
+  title = {${plainTitle}},
+  author = {${SITE_AUTHOR}},
+  year = {${pubDate.getFullYear()}},
+  howpublished = {\\url{${url}}}
+}`;
+---
+
+<!-- JSON-LD Injection -->
+<script type="application/ld+json" set:html={JSON.stringify(blogPostingLd)} />
+
+<!-- TL;DR AI Summary Block -->
+{tldr && (
+	<div class="geo-tldr">
+		<div class="geo-tldr-header">
+			<span class="geo-icon">🤖</span>
+			<strong>TL;DR / AI Summary</strong>
+		</div>
+		<p>{tldr}</p>
+	</div>
+)}
+
+<!-- Main Content Slot -->
+<slot />
+
+<!-- Citation Block for AI/Academic references -->
+{showCitation && (
+	<div class="geo-citation">
+		<div class="geo-citation-header">
+			<span class="geo-icon">🔗</span>
+			<strong>Citation (BibTeX)</strong>
+		</div>
+		<pre><code>{citationText}</code></pre>
+	</div>
+)}
+
+<style>
+	.geo-tldr {
+		background: rgba(var(--accent), 0.05);
+		border-left: 4px solid rgb(var(--accent));
+		padding: 1.25rem 1.5rem;
+		margin: 1.5rem 0 2.5rem 0;
+		border-radius: 0 8px 8px 0;
+	}
+	.geo-tldr-header, .geo-citation-header {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin-bottom: 0.5rem;
+		color: var(--accent-dark, #333);
+	}
+	.geo-tldr-header strong, .geo-citation-header strong {
+		font-weight: 700;
+		letter-spacing: 0.02em;
+	}
+	.geo-tldr p {
+		margin: 0;
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: rgb(var(--black));
+	}
+	.geo-citation {
+		margin-top: 4rem;
+		padding-top: 2rem;
+		border-top: 1px dashed rgba(var(--gray), 0.3);
+	}
+	.geo-citation pre {
+		background: rgba(var(--gray-light), 0.3);
+		padding: 1rem 1.25rem;
+		border-radius: 8px;
+		font-size: 0.85rem;
+		overflow-x: auto;
+		color: rgb(var(--gray-dark));
+		border: 1px solid rgba(var(--gray), 0.1);
+	}
+</style>
