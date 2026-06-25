@@ -1,6 +1,6 @@
 ---
 title: 'React State Fundamentals — Why These Still Bite You in Fabric'
-series: 'React Native Culprits 01'
+series: 'ReactNativeCulprits 01'
 description: 'The React state patterns from 2019 that remain directly relevant to understanding why Fabric crashes happen in 2024. Async batching, immutability, and re-render pressure are not new problems — Fabric just makes them lethal.'
 pubDate: 'Dec 01 2019'
 updatedDate: 'Jun 25 2026'
