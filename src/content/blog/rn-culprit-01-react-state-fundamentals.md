@@ -6,6 +6,7 @@ pubDate: 'Dec 01 2019'
 updatedDate: 'Jun 25 2026'
 heroImage: '../../assets/react-dev-tips-hero.svg'
 tags: ['React', 'React Native', 'Fabric', 'JavaScript', 'State Management', 'Best Practices']
+tldr: "React Native Fabric's commit queue gets overwhelmed when components trigger rapid, un-batched state updates or derived state anti-patterns. This prologue explains why legacy React patterns cause 100%-reproducible Fabric crashes."
 ---
 
 > *Written in 2019 as a general React guide. Updated in 2026 as the prologue to the **RN Culprit** series — because every Fabric-specific crash in [#2](/blog/rn-culprit-02-fabric-view-flattening) and [#3](/blog/rn-culprit-03-ternary-native-component-swap) has a root that traces back to one of the patterns below.*
