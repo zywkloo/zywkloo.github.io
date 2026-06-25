@@ -54,7 +54,7 @@ export interface SeriesMeta {
 }
 
 export const SERIES_META: Record<string, SeriesMeta> = {
-	TokenChef: { icon: '🧑‍🍳', name: 'TokenChef', shortName: 'Token', subtitle: 'Git-Native Multi-Agent Coding', accentColor: '#cb3837', badgeClass: 'tokenchef' },
+	TokenChef: { icon: '👨‍🍳', name: 'TokenChef', shortName: 'Token', subtitle: 'Git-Native Multi-Agent Coding', accentColor: '#cb3837', badgeClass: 'tokenchef' },
 	MetalSolo: { icon: '🎸', name: 'MetalSolo', shortName: 'Metal', subtitle: 'High-Performance GPU Programming', accentColor: '#8b5cf6', badgeClass: 'metalsolo' },
 	'Clean Semantics': { icon: '✨', name: 'Clean Semantics', shortName: 'Semantics', subtitle: 'Domain-Driven Engineering', accentColor: '#0ea5e9', badgeClass: 'cleansemantics' },
 	'REACT NATIVE CULPRITS': { icon: '⚛️', name: 'REACT NATIVE CULPRITS', shortName: 'RN', subtitle: 'React Native Core Deep Dive', accentColor: '#61dafb', badgeClass: 'reactnativeculprits' },
