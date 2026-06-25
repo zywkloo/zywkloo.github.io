@@ -1,9 +1,23 @@
 ---
-title: 'Essential React State Management: Common Pitfalls and Best Practices'
-description: 'Learn critical React state management patterns and avoid common mistakes that lead to bugs and performance issues'
+title: 'RN Culprit #0: React State Fundamentals — Why These Still Bite You in Fabric'
+series: 'RN Culprit'
+description: 'The React state patterns from 2019 that remain directly relevant to understanding why Fabric crashes happen in 2024. Async batching, immutability, and re-render pressure are not new problems — Fabric just makes them lethal.'
 pubDate: 'Dec 01 2019'
+updatedDate: 'Jun 25 2026'
 heroImage: '../../assets/react-dev-tips-hero.svg'
-tags: ['React', 'JavaScript', 'Frontend', 'State Management', 'Best Practices']
+tags: ['React', 'React Native', 'Fabric', 'JavaScript', 'State Management', 'Best Practices']
+---
+
+> *Written in 2019 as a general React guide. Updated in 2026 as the prologue to the **RN Culprit** series — because every Fabric-specific crash in [#1](/blog/rn-culprit-01-fabric-view-flattening) and [#2](/blog/rn-culprit-02-ternary-native-component-swap) has a root that traces back to one of the patterns below.*
+
+The React Native Fabric crashes I document in this series are not random. They follow predictable patterns that become obvious once you understand how React's rendering model works at the fundamental level. Specifically:
+
+- **Async state batching** → controls how many Fabric commits fire per user action
+- **Functional updates** → determines whether rapid state changes collapse into one commit or many
+- **Derived state anti-patterns** → create phantom re-renders that add commit queue pressure
+
+If these feel familiar already, jump straight to [#1](/blog/rn-culprit-01-fabric-view-flattening). If not, this is where to start.
+
 ---
 
 ## Understanding React State Updates
@@ -34,7 +48,7 @@ React batches state updates for performance. Use functional updates:
 ```javascript
 // ✅ Correct approach
 function Counter() {
-  const [count, setCount] = [useState(0);
+  const [count, setCount] = useState(0);
   
   const handleClick = () => {
     setCount(prevCount => prevCount + 1);
@@ -45,6 +59,8 @@ function Counter() {
 ```
 
 **Why it matters**: Functional updates ensure you're working with the most current state value, even when updates are batched.
+
+> **Fabric connection**: In React Native Fabric, each un-batched `setState` call can generate a separate commit dispatched to the main thread. If a store emits state updates at high frequency (e.g., on every downloaded chunk, every BLE sensor packet, every scroll position change), the commit queue fills faster than the main thread drains it. This is the pressure that turns a latent Fabric bug into a 100%-reproducible crash. See [RN Culprit #2](/blog/rn-culprit-02-ternary-native-component-swap).
 
 ## Working with Objects and Arrays
 
@@ -187,6 +203,8 @@ function Counter() {
 }
 ```
 
+> **Fabric connection**: `useReducer` is particularly valuable in React Native because dispatching an action produces exactly one state object, which produces exactly one Fabric commit. Multiple `useState` setters called in sequence outside of React's event system (e.g., from a native BLE callback) can each produce an independent commit. Consolidating them into a single reducer dispatch or a single Zustand `set({...})` call is the correct way to keep commit pressure low.
+
 ## Performance Considerations
 
 ### Optimizing Re-renders
@@ -234,10 +252,20 @@ function Parent() {
 5. ✅ Use useMemo and useCallback to optimize performance
 6. ✅ Test state updates, especially async operations
 
-## Conclusion
+---
 
-Understanding these fundamentals prevents common bugs and leads to more maintainable React code. Start with these patterns, and gradually incorporate more advanced techniques as your applications grow in complexity.
+## Where This Leads in Fabric
 
-Remember: React's state management is powerful but requires understanding its quirks. Practice these patterns and you'll write more predictable, performant code.
+These patterns were written against the old React Native bridge architecture. In Fabric, the consequences are sharper:
 
-**Related Topics**: Check out my posts on [Board Game AI Development](/blog/board-game-ai-development) and [JavaScript Data Visualization](/blog/javascript-data-visualization-frameworks) for related patterns.
+- **Un-batched rapid state updates** no longer just feel laggy — they can corrupt Fabric's commit pipeline and crash the app. ([#2: Ternary Native Component Swap](/blog/rn-culprit-02-ternary-native-component-swap))
+- **Derived state anti-patterns** that cause extra renders add commits to the main-thread queue, increasing the window for ordering bugs.
+- **Missing useCallback stabilisation** on callbacks passed to native event handlers can cause the native layer to reference stale closures, making Fabric see a different component tree than JS expects.
+
+The Fabric crashes documented in this series all have a JS-side contributing factor. Understanding the React fundamentals above is what makes the native crash reports interpretable.
+
+**Next**: [RN Culprit #1 — The Fabric View-Flattening Crash](/blog/rn-culprit-01-fabric-view-flattening)
+
+---
+
+*Part of the **RN Culprit** series — post-mortems on React Native Fabric bugs where the crash stack tells you nothing and the real culprit is hiding in plain sight.*
