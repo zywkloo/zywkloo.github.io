@@ -6,6 +6,7 @@ category: 'Clean Semantics'
 tags: ['domain semantics', 'transaction apps', 'design systems', 'ui semantics']
 pubDate: 'Mar 29 2026'
 heroImage: '../../assets/domain-semantics-hero.jpg'
+tldr: 'A practical methodology for preserving domain semantics across contracts, policies, validators, and UI states to prevent architectural decay in transactional applications.'
 ---
 
 > "In the beginning was the Word..."

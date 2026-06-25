@@ -6,6 +6,7 @@ category: 'Clean Semantics'
 tags: ['domain semantics', 'ddd', 'ddia', 'system design']
 pubDate: 'Mar 28 2026'
 heroImage: '../../assets/eit-tcf-executable-semantics-hero.svg'
+tldr: 'Explains how the TEC-FIT framework leverages Domain-Driven Design (DDD) and Designing Data-Intensive Applications (DDIA) to implement executable semantics in modern software.'
 ---
 
 > "...and brought them unto Adam to see what he would call them... and whatsoever Adam called every living creature, that was the name thereof."

@@ -5,6 +5,7 @@ description: '从 Claude Code 源码泄露与 CCB 逆向架构出发，用同一
 pubDate: 'Jun 02 2026'
 heroImage: '../../assets/agent-boundaries-hero.svg'
 tags: ['AI Tools', 'Agent Architecture', 'Codex', 'Claude Code', 'wtcraft', 'Git Worktrees', 'Harness Engineering']
+tldr: "An architectural comparison of Codex and Claude Code reveals that we don't need another agent runtime; instead, we need wtcraft to enforce task boundaries, execution ledgers, and sign-offs."
 ---
 
 <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">

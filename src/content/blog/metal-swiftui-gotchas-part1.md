@@ -5,6 +5,7 @@ description: "Three bugs that had no warnings, no crashes, and no obvious causes
 pubDate: "Apr 15 2026"
 heroImage: "../../assets/apple-engineers-metal.png"
 tags: ["Metal", "SwiftUI", "UIKit", "CALayer", "iOS Development", "Bilingual"]
+tldr: 'Uncovers three silent Metal and SwiftUI compositing bugs encountered while building 8 Strokes, providing solutions for missing warnings and rendering failures.'
 ---
 
 # MetalSolo (Part 1): Metal + SwiftUI Layer Compositing & Lifecycle Gotchas / MetalSolo（第一篇）：Metal + SwiftUI 图层合成与生命周期陷阱

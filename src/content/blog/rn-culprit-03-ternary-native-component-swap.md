@@ -5,6 +5,7 @@ description: "Identical stack to RN Culprit #1. Same assertion. The fix looks li
 pubDate: "Jun 26 2026"
 heroImage: "../../assets/rn_ternary_native_component_swap_hero.jpg"
 tags: ["React Native", "Fabric", "iOS", "Crash", "New Architecture", "Debugging"]
+tldr: "Investigates a Fabric crash identical to Culprit #2's stack trace, but triggered by ternary unmounting of layout-only views, and explains the commit pipeline fix."
 ---
 
 ## The Same Crash, a Different Cause

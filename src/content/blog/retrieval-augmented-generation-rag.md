@@ -4,6 +4,7 @@ description: 'An in-depth exploration of RAG, comparing vector and keyword retri
 pubDate: 'Oct 25 2025'
 heroImage: '../../assets/rag-hero.svg'
 tags: ['AI', 'LLM', 'RAG', 'Information Retrieval', 'Vector Search', 'Keyword Search', 'Machine Learning']
+tldr: 'A comprehensive look at Retrieval-Augmented Generation (RAG), detailing how hybrid search and vector databases empower modern LLMs to access private knowledge.'
 ---
 
 ## What is RAG?

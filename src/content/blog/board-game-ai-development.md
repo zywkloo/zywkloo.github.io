@@ -4,6 +4,7 @@ description: 'Exploring the evolution of artificial intelligence in board games,
 pubDate: 'Aug 01 2020'
 heroImage: '../../assets/board-game-ai-hero.svg'
 tags: ['AI', 'Machine Learning', 'Game Development', 'Python', 'Algorithms']
+tldr: 'An overview of how artificial intelligence in board games has evolved from classical Minimax search algorithms to modern deep reinforcement learning techniques.'
 ---
 
 ## The Journey from Chess to Go

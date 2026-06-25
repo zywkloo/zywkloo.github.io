@@ -5,6 +5,7 @@ description: "A 100%-reproducible crash in React Native Fabric. The stack points
 pubDate: "Jun 25 2026"
 heroImage: "../../assets/rn_fabric_view_flattening_hero.jpg"
 tags: ["React Native", "Fabric", "iOS", "Crash", "New Architecture", "Debugging"]
+tldr: 'A detailed post-mortem on a 100%-reproducible Fabric crash caused by missing `collapsable={false}` props on absolute-positioned layout wrappers.'
 ---
 
 ## The Crime Scene

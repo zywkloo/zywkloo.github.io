@@ -5,6 +5,7 @@ description: 'Spawning parallel agents is easy. Spawning them without hitting to
 pubDate: 'May 28 2026'
 heroImage: '../../assets/chief-orchestrator-hero.png'
 tags: ['AI Tools', 'Agent Architecture', 'Claude Code', 'Codex', 'Gemini', 'Solo Dev', 'Engineering', 'wtcraft']
+tldr: 'Scaling AI agents requires structured orchestration to avoid token limits and context pollution. Learn how to manage Claude, Codex, and Gemini as a layered software team.'
 ---
 
 <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">

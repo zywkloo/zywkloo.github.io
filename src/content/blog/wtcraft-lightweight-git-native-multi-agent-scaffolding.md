@@ -5,6 +5,7 @@ description: 'How do you actually enforce boundaries on autonomous agents? Explo
 pubDate: 'May 29 2026'
 heroImage: '../../assets/wtcraft-scaffolding-hero.png'
 tags: ['AI Tools', 'Harness Engineering', 'Git', 'Worktrees', 'wtcraft', 'Codex', 'Claude Code']
+tldr: 'Introduces wtcraft, a lightweight CLI that uses Git-native workflows to sandbox autonomous agents and strictly enforce task contracts.'
 ---
 
 <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
