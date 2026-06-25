@@ -17,7 +17,7 @@ reason: 'RCTComponentViewRegistry: Attempt to recycle a mounted view.'
        at RCTComponentViewRegistry.mm:114
 ```
 
-Identical stack to [RN Culprit #1](/blog/rn-culprit-01-fabric-view-flattening). Same assertion. Same `Delete` instruction firing on a view whose `superview` is still non-nil.
+Identical stack to [RN Culprit #2](/blog/rn-culprit-02-fabric-view-flattening). Same assertion. Same `Delete` instruction firing on a view whose `superview` is still non-nil.
 
 Different root cause entirely.
 
@@ -103,7 +103,7 @@ The root problem is not the frequency. It is the Delete+Create cycle itself for 
 
 With both components always mounted, state changes produce only `Update` instructions — `updateProps`, `updateLayoutMetrics` — never `Delete` or `Create`. The recycle pool is never touched. The commit pipeline processes the update in a single pass regardless of how fast `isDownloading` toggles.
 
-The `collapsable={false}` props are required on any absolute-positioned layout wrapper with no visual properties. That is the subject of [RN Culprit #1](/blog/rn-culprit-01-fabric-view-flattening) — the crash this fix accidentally introduced before `collapsable={false}` was added.
+The `collapsable={false}` props are required on any absolute-positioned layout wrapper with no visual properties. That is the subject of [RN Culprit #2](/blog/rn-culprit-02-fabric-view-flattening) — the crash this fix accidentally introduced before `collapsable={false}` was added.
 
 ---
 
@@ -119,7 +119,7 @@ Corollaries:
 
 **③ The fix is architectural, not a throttle.** Throttling state updates papers over the crash; eliminating the type-swap prevents it. The two strategies have different failure modes: throttling fails when a frame drops; always-mount never fails at the Fabric level.
 
-**④ Always-mount + opacity requires `collapsable={false}` on layout-only wrappers.** The two fixes are a pair — applying one without the other trades one crash for another. See [RN Culprit #1](/blog/rn-culprit-01-fabric-view-flattening).
+**④ Always-mount + opacity requires `collapsable={false}` on layout-only wrappers.** The two fixes are a pair — applying one without the other trades one crash for another. See [RN Culprit #2](/blog/rn-culprit-02-fabric-view-flattening).
 
 ---
 

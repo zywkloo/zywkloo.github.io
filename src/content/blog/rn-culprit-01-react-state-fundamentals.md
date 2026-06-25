@@ -8,7 +8,7 @@ heroImage: '../../assets/react-dev-tips-hero.svg'
 tags: ['React', 'React Native', 'Fabric', 'JavaScript', 'State Management', 'Best Practices']
 ---
 
-> *Written in 2019 as a general React guide. Updated in 2026 as the prologue to the **RN Culprit** series — because every Fabric-specific crash in [#1](/blog/rn-culprit-01-fabric-view-flattening) and [#2](/blog/rn-culprit-02-ternary-native-component-swap) has a root that traces back to one of the patterns below.*
+> *Written in 2019 as a general React guide. Updated in 2026 as the prologue to the **RN Culprit** series — because every Fabric-specific crash in [#2](/blog/rn-culprit-02-fabric-view-flattening) and [#3](/blog/rn-culprit-03-ternary-native-component-swap) has a root that traces back to one of the patterns below.*
 
 The React Native Fabric crashes I document in this series are not random. They follow predictable patterns that become obvious once you understand how React's rendering model works at the fundamental level. Specifically:
 
@@ -16,7 +16,7 @@ The React Native Fabric crashes I document in this series are not random. They f
 - **Functional updates** → determines whether rapid state changes collapse into one commit or many
 - **Derived state anti-patterns** → create phantom re-renders that add commit queue pressure
 
-If these feel familiar already, jump straight to [#1](/blog/rn-culprit-01-fabric-view-flattening). If not, this is where to start.
+If these feel familiar already, jump straight to [#2](/blog/rn-culprit-02-fabric-view-flattening). If not, this is where to start.
 
 ---
 
@@ -60,7 +60,7 @@ function Counter() {
 
 **Why it matters**: Functional updates ensure you're working with the most current state value, even when updates are batched.
 
-> **Fabric connection**: In React Native Fabric, each un-batched `setState` call can generate a separate commit dispatched to the main thread. If a store emits state updates at high frequency (e.g., on every downloaded chunk, every BLE sensor packet, every scroll position change), the commit queue fills faster than the main thread drains it. This is the pressure that turns a latent Fabric bug into a 100%-reproducible crash. See [RN Culprit #2](/blog/rn-culprit-02-ternary-native-component-swap).
+> **Fabric connection**: In React Native Fabric, each un-batched `setState` call can generate a separate commit dispatched to the main thread. If a store emits state updates at high frequency (e.g., on every downloaded chunk, every BLE sensor packet, every scroll position change), the commit queue fills faster than the main thread drains it. This is the pressure that turns a latent Fabric bug into a 100%-reproducible crash. See [RN Culprit #3](/blog/rn-culprit-03-ternary-native-component-swap).
 
 ## Working with Objects and Arrays
 
@@ -258,13 +258,13 @@ function Parent() {
 
 These patterns were written against the old React Native bridge architecture. In Fabric, the consequences are sharper:
 
-- **Un-batched rapid state updates** no longer just feel laggy — they can corrupt Fabric's commit pipeline and crash the app. ([#2: Ternary Native Component Swap](/blog/rn-culprit-02-ternary-native-component-swap))
+- **Un-batched rapid state updates** no longer just feel laggy — they can corrupt Fabric's commit pipeline and crash the app. ([#3: Ternary Native Component Swap](/blog/rn-culprit-03-ternary-native-component-swap))
 - **Derived state anti-patterns** that cause extra renders add commits to the main-thread queue, increasing the window for ordering bugs.
 - **Missing useCallback stabilisation** on callbacks passed to native event handlers can cause the native layer to reference stale closures, making Fabric see a different component tree than JS expects.
 
 The Fabric crashes documented in this series all have a JS-side contributing factor. Understanding the React fundamentals above is what makes the native crash reports interpretable.
 
-**Next**: [RN Culprit #1 — The Fabric View-Flattening Crash](/blog/rn-culprit-01-fabric-view-flattening)
+**Next**: [RN Culprit #2 — The Fabric View-Flattening Crash](/blog/rn-culprit-02-fabric-view-flattening)
 
 ---
 
