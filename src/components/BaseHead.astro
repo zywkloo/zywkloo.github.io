@@ -5,6 +5,7 @@ import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
 import FallbackImage from '../assets/blog-placeholder-1.jpg';
 import { SITE_TITLE } from '../consts';
+import { SEO } from 'astro-seo';
 
 interface Props {
 	title: string;
@@ -37,24 +38,24 @@ const ogImage = ogImageUrl ? new URL(ogImageUrl, Astro.site) : new URL(image.src
 <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin />
 <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin />
 
-<!-- Canonical URL -->
-<link rel="canonical" href={canonicalURL} />
-
-<!-- Primary Meta Tags -->
-<title>{title}</title>
-<meta name="title" content={title} />
-<meta name="description" content={description} />
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:image" content={ogImage} />
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={ogImage} />
+<SEO
+	title={title}
+	description={description}
+	canonical={canonicalURL.toString()}
+	openGraph={{
+		basic: {
+			title: title,
+			type: "website",
+			image: ogImage.toString(),
+		},
+		optional: {
+			description: description,
+		}
+	}}
+	twitter={{
+		card: "summary_large_image",
+		title: title,
+		description: description,
+		image: ogImage.toString()
+	}}
+/>

@@ -5,6 +5,7 @@ description: "Why triangles and Bezier curves are the foundation of vector ink, 
 pubDate: "Apr 20 2026"
 heroImage: "../../assets/Yong8principles.png"
 tags: ["Geometry", "Math", "Metal", "iOS Development", "Bilingual", "Computer Graphics"]
+tldr: 'A deep dive into the vector ink engine math behind 8 Strokes, covering Catmull-Rom smoothing, variable-width tessellation, and dynamic end-cap rendering.'
 ---
 
 # MetalSolo (Part 2): Sacred Geometry of Stylus Input & Ink Engine Math / MetalSolo（第二篇）：触控笔输入与笔迹引擎的几何数学公式

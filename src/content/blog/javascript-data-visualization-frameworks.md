@@ -4,6 +4,7 @@ description: 'A comprehensive guide comparing popular JavaScript data visualizat
 pubDate: 'Mar 01 2024'
 heroImage: '../../assets/javascript-data-visualization-hero.svg'
 tags: ['JavaScript', 'Data Visualization', 'Frontend', 'D3.js', 'Chart.js']
+tldr: 'A comparative guide to JavaScript data visualization libraries, helping developers select the right framework based on performance, customization, and ecosystem.'
 ---
 
 ## Introduction

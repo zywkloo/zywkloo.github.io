@@ -5,6 +5,7 @@ description: 'Most people vibe-code with one model in one branch. Here is how to
 pubDate: 'Feb 5 2026'
 heroImage: '../../assets/vibe-coding-hero.png'
 tags: ['Vibe Coding', 'Git', 'Worktrees', 'Claude', 'AI Tools', 'Engineering', 'wtcraft']
+tldr: 'A phased vibe-coding playbook that combines multiple AI models with git worktrees to safely execute massive code refactors without breaking the main branch.'
 ---
 
 
