@@ -1,9 +1,9 @@
 ---
-title: "RN Culprit #1: The Fabric View-Flattening Crash"
-series: "RN Culprit"
+title: "The Fabric View-Flattening Crash"
+series: "REACT NATIVE CULPRITS 01"
 description: "A 100%-reproducible crash in React Native Fabric. The stack points squarely at RN internals. The real culprit is two missing collapsable={false} props on absolute-positioned wrappers."
 pubDate: "Jun 25 2026"
-heroImage: "../../assets/react-native-meteor-hero.svg"
+heroImage: "../../assets/rn_fabric_view_flattening_hero.jpg"
 tags: ["React Native", "Fabric", "iOS", "Crash", "New Architecture", "Debugging"]
 ---
 

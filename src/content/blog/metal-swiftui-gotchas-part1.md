@@ -1,6 +1,6 @@
 ---
-title: "MetalSolo (Part 1): Metal + SwiftUI Layer Compositing & Lifecycle Gotchas / MetalSolo（第一篇）：Metal + SwiftUI 图层合成与生命周期陷阱"
-series: 'MetalSolo'
+title: "Metal + SwiftUI Layer Compositing & Lifecycle Gotchas / Metal + SwiftUI 图层合成与生命周期陷阱"
+series: 'MetalSolo 01'
 description: "Three bugs that had no warnings, no crashes, and no obvious causes. Just a blank canvas staring back at me at 2am. Here's what I learned building 8 Strokes."
 pubDate: "Apr 15 2026"
 heroImage: "../../assets/apple-engineers-metal.png"
