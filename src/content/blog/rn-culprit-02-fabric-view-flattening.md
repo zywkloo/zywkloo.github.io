@@ -26,7 +26,9 @@ reason: 'RCTComponentViewRegistry: Attempt to recycle a mounted view.'
 
 Nothing in the trace points to your code. Every frame is deep inside React Native Fabric's mounting machinery. This is the classic shape of a Fabric internal crash — and it is often deterministic. Not a random race condition, but a structural bug.
 
-While there are a few distinct triggers for this exact stack trace (such as legacy interop components failing to detach their views — a notorious example being `react-native-linear-gradient`), one of the most common—and sneakiest—culprits is **missing `collapsable={false}` props on absolute-positioned layout wrappers.** Let's break down exactly how that happens using a real-world header layout.
+While there are a few distinct triggers for this exact stack trace—such as legacy interop components failing to detach their views. A notorious example is `react-native-linear-gradient`, which often forces teams to completely rip out the package and rebuild their gradients natively using `<Defs><LinearGradient>` in `react-native-svg` just to achieve stable Fabric compatibility.
+
+But aside from third-party legacy bugs, one of the most common—and sneakiest—culprits that lives purely in your React code is **missing `collapsable={false}` props on absolute-positioned layout wrappers.** Let's break down exactly how that happens using a real-world header layout.
 
 ---
 
