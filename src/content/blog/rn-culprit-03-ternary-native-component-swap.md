@@ -27,14 +27,14 @@ But triggered by a different architectural pattern entirely. While legacy intero
 ## The Pattern
 
 ```jsx
-{isDownloading
+{isLoading
   ? <ActivityIndicator color="#FFFFFF" size="small" />  // native component A
   : <SearchIcon color="#FFFFFF" size={24} />}           // native component B
 ```
 
 A ternary in a slot. One branch renders a native `ActivityIndicator` (`UIActivityIndicatorView` under the hood). The other renders an SVG-backed `SearchIcon`. The slot always holds one or the other.
 
-When `isDownloading` changes, Fabric must replace one native component with the other:
+When `isLoading` changes, Fabric must replace one native component with the other:
 
 ```
 Transition: true → false
@@ -51,7 +51,7 @@ A clean four-instruction sequence. Harmless for a single, low-frequency transiti
 
 ## Why It Breaks Under Rapid Updates
 
-The `isDownloading` state was not just a binary flag. It came from a download progress store that updated on every transferred chunk — potentially dozens of times per second. Each update called `setStatus({kind: 'downloading', bytesDone, bytesTotal})`. Each call triggered a render. React batched some, but not all. Multiple Fabric commits were generated and queued.
+The `isLoading` state might be tied to a progress store that updates on every transferred chunk of data — potentially dozens of times per second. Each update calls `setProgress(bytesTransferred)`. Each call triggers a render. React batches some, but not all. Multiple Fabric commits are generated and queued.
 
 Now consider the commit pipeline when state alternates `true → false → true` in rapid succession.
 
@@ -68,12 +68,12 @@ The component types being *different* is what makes this worse than updating a s
 
 ## The Misread Fix
 
-The obvious instinct is to slow down state updates — throttle the progress callbacks, debounce the store writes. That reduces the crash rate but does not eliminate it. The underlying fragility remains: any commit overlap during a type-swap is potentially unsafe. One slow frame during a download can still trigger it.
+The obvious instinct is to slow down state updates — throttle the progress callbacks, debounce the store writes. That reduces the crash rate but does not eliminate it. The underlying fragility remains: any commit overlap during a type-swap is potentially unsafe. One slow frame during a busy operation can still trigger it.
 
 A less obvious wrong fix: wrapping the ternary in a `key` prop.
 
 ```jsx
-{isDownloading
+{isLoading
   ? <ActivityIndicator key="spinner" color="#FFFFFF" size="small" />
   : <SearchIcon key="icon" color="#FFFFFF" size={24} />}
 ```
@@ -89,20 +89,19 @@ The root problem is not the frequency. It is the Delete+Create cycle itself for 
 ```jsx
 {/* always mounted — no Delete/Create cycle on state change */}
 <View
-  style={[styles.searchIconLayer, isDownloading && styles.transparent]}
+  style={[styles.searchIconLayer, isLoading && styles.transparent]}
   collapsable={false}           {/* see RN Culprit #2 for why this matters */}
   pointerEvents="none"
-  accessibilityElementsHidden={isDownloading}>
+  accessibilityElementsHidden={isLoading}>
   <SearchIcon color="#FFFFFF" size={24} />
 </View>
 
-<OfflineDownloadIndicator
-  visible={isDownloading}       {/* opacity toggle, not mount/unmount */}
-  display={downloadDisplay}
+<LoadingIndicator
+  visible={isLoading}           {/* opacity toggle, not mount/unmount */}
 />
 ```
 
-With both components always mounted, state changes produce only `Update` instructions — `updateProps`, `updateLayoutMetrics` — never `Delete` or `Create`. The recycle pool is never touched. The commit pipeline processes the update in a single pass regardless of how fast `isDownloading` toggles.
+With both components always mounted, state changes produce only `Update` instructions — `updateProps`, `updateLayoutMetrics` — never `Delete` or `Create`. The recycle pool is never touched. The commit pipeline processes the update in a single pass regardless of how fast `isLoading` toggles.
 
 The `collapsable={false}` props are required on any absolute-positioned layout wrapper with no visual properties. That is the subject of [RN Culprit #2](/blog/rn-culprit-02-fabric-view-flattening) — the crash this fix accidentally introduced before `collapsable={false}` was added.
 
