@@ -1,5 +1,5 @@
 ---
-title: "The Fabric View-Flattening Crash"
+title: "Linear Gradients, Non-Linear Crashes: Fabric View Flattening"
 series: 'ReactNativeCulprits 02'
 description: "A 100%-reproducible crash in React Native Fabric. The stack points squarely at RN internals. The real culprit is two missing collapsable={false} props on absolute-positioned wrappers."
 pubDate: "Jun 25 2026"
@@ -26,7 +26,9 @@ reason: 'RCTComponentViewRegistry: Attempt to recycle a mounted view.'
 
 Nothing in the trace points to your code. Every frame is deep inside React Native Fabric's mounting machinery. This is the classic shape of a Fabric internal crash — and it is often deterministic. Not a random race condition, but a structural bug.
 
-While there are a few distinct triggers for this exact stack trace (such as legacy interop components failing to detach their views), one of the most common—and sneakiest—culprits is **missing `collapsable={false}` props on absolute-positioned layout wrappers.** Let's break down exactly how that happens using a real-world header layout.
+While there are a few distinct triggers for this exact stack trace—such as legacy interop components failing to detach their views. A notorious example is `react-native-linear-gradient`, which often forces teams to completely rip out the package and rebuild their gradients natively using `<Defs><LinearGradient>` in `react-native-svg` just to achieve stable Fabric compatibility.
+
+But aside from third-party legacy bugs, one of the most common—and sneakiest—culprits that lives purely in your React code is **missing `collapsable={false}` props on absolute-positioned layout wrappers.** Let's break down exactly how that happens using a real-world header layout.
 
 ---
 
@@ -63,23 +65,23 @@ The original header code used a ternary to swap between two native components in
 
 ```jsx
 // old code — the ternary pattern
-{offlineSyncStatus?.kind === 'downloading'
+{isLoading
   ? <ActivityIndicator color="#FFFFFF" size="small" />
   : <SearchIcon color="#FFFFFF" size={24} />}
 ```
 
-When the download state changes, Fabric must `Delete` the `ActivityIndicator` and `Create` + `Insert` the `SearchIcon` (or vice versa). Two different native component types alternating in the same slot under rapid state updates — that is also a known Fabric trigger for "Attempt to recycle a mounted view."
+When the loading state changes, Fabric must `Delete` the `ActivityIndicator` and `Create` + `Insert` the `SearchIcon` (or vice versa). Two different native component types alternating in the same slot under rapid state updates — that is also a known Fabric trigger for "Attempt to recycle a mounted view."
 
 The fix was correct in principle: **stop conditionally mounting and unmounting native components in the same slot.** Instead, keep both always mounted and toggle visibility via opacity:
 
 ```jsx
 // new approach — always mounted, opacity toggle
-<View style={[styles.searchIconLayer, isDownloading && styles.transparent]}
+<View style={[styles.searchIconLayer, isLoading && styles.transparent]}
       collapsable={false}>        {/* ← this is what we'll get to */}
   <SearchIcon color="#FFFFFF" size={24} />
 </View>
 
-<OfflineDownloadIndicator visible={isDownloading} />
+<LoadingIndicator visible={isLoading} />
 ```
 
 This eliminates the `Delete` / `Create` cycle entirely. The always-mount approach is the right call. But it introduced a new crash for a different reason.
@@ -101,7 +103,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // no background, no border, no shadow → collapsable
   },
-  offlineDownloadIndicator: {
+  loadingIndicator: {
     position: 'absolute',
     height: 48,
     width: 124,
@@ -123,7 +125,7 @@ UIKit native hierarchy (the real world)
     └── SearchIcon (SVG)         ← promoted one level up
 ```
 
-Fabric's reconciler computes `Remove` instructions using shadow tree parent-child relationships. When a layout commit arrives (BLE disconnect causes a state update that changes the header layout), Fabric generates:
+Fabric's reconciler computes `Remove` instructions using shadow tree parent-child relationships. When a layout commit arrives (for example, a network request finishes and changes the layout), Fabric generates:
 
 ```
 Remove SearchIcon from searchIconLayer
@@ -139,9 +141,9 @@ Delete  SearchIcon
 Force a native view for every absolute-positioned layout wrapper. `collapsable={false}` prevents Fabric from eliminating the view, keeping the shadow tree and UIKit hierarchy structurally identical:
 
 ```jsx
-// OfflineDownloadIndicator root
+// LoadingIndicator root
 <View
-  style={[styles.offlineDownloadIndicator, !visible && styles.transparent]}
+  style={[styles.loadingIndicator, !visible && styles.transparent]}
   pointerEvents="none"
   accessibilityElementsHidden={!visible}
   importantForAccessibility={visible ? 'auto' : 'no-hide-descendants'}
@@ -151,7 +153,7 @@ Force a native view for every absolute-positioned layout wrapper. `collapsable={
 
 // searchIconLayer in GlobalHeader
 <View
-  style={[styles.searchIconLayer, isDownloading && styles.transparent]}
+  style={[styles.searchIconLayer, isLoading && styles.transparent]}
   pointerEvents="none"
   collapsable={false}>   {/* ← same fix */}
   <SearchIcon color="#FFFFFF" size={24} />
@@ -165,7 +167,7 @@ Shadow Tree == UIKit hierarchy
   Animated.View
     ├── searchIconLayer (native UIView backed)
     │     └── SearchIcon
-    └── OfflineDownloadIndicator (native UIView backed)
+    └── LoadingIndicator (native UIView backed)
           ├── ActivityIndicator
           └── View > Text, Text
 ```
