@@ -1,5 +1,5 @@
 ---
-title: "Ternary Native Component Swap"
+title: "Ternary Swaps, Binary Crashes: Native Component Churn"
 series: 'ReactNativeCulprits 03'
 description: "Identical stack to RN Culprit #1. Same assertion. The fix looks like magic, but is deeply logical when you understand how Fabric commit queues process layout-only view unmounting."
 pubDate: "Jun 26 2026"

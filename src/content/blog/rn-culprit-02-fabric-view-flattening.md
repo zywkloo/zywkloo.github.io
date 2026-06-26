@@ -1,5 +1,5 @@
 ---
-title: "The Fabric View-Flattening Crash"
+title: "Linear Gradients, Non-Linear Crashes: Fabric View Flattening"
 series: 'ReactNativeCulprits 02'
 description: "A 100%-reproducible crash in React Native Fabric. The stack points squarely at RN internals. The real culprit is two missing collapsable={false} props on absolute-positioned wrappers."
 pubDate: "Jun 25 2026"
