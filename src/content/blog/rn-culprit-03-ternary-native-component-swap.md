@@ -20,7 +20,7 @@ reason: 'RCTComponentViewRegistry: Attempt to recycle a mounted view.'
 
 Identical stack to [RN Culprit #2](/blog/rn-culprit-02-fabric-view-flattening). Same assertion. Same `Delete` instruction firing on a view whose `superview` is still non-nil.
 
-Different root cause entirely.
+But triggered by a different architectural pattern entirely. While legacy interop components (like `react-native-linear-gradient` running through Fabric's interop layer) or view flattening are notorious for causing this assertion, another major culprit that lives purely in your React logic is the ternary native component swap.
 
 ---
 
@@ -90,7 +90,7 @@ The root problem is not the frequency. It is the Delete+Create cycle itself for 
 {/* always mounted — no Delete/Create cycle on state change */}
 <View
   style={[styles.searchIconLayer, isDownloading && styles.transparent]}
-  collapsable={false}           {/* see RN Culprit #1 for why this matters */}
+  collapsable={false}           {/* see RN Culprit #2 for why this matters */}
   pointerEvents="none"
   accessibilityElementsHidden={isDownloading}>
   <SearchIcon color="#FFFFFF" size={24} />
