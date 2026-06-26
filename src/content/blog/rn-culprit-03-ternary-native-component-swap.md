@@ -20,7 +20,7 @@ reason: 'RCTComponentViewRegistry: Attempt to recycle a mounted view.'
 
 Identical stack to [RN Culprit #2](/blog/rn-culprit-02-fabric-view-flattening). Same assertion. Same `Delete` instruction firing on a view whose `superview` is still non-nil.
 
-Different root cause entirely.
+But triggered by a different architectural pattern entirely. While legacy interop components (like old gradient libraries) or view flattening are notorious for causing this assertion, another major culprit that lives purely in your React logic is the ternary native component swap.
 
 ---
 
