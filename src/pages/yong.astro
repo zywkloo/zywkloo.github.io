@@ -2,25 +2,28 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_URL, SITE_AUTHOR_ALT } from '../consts';
+import { SITE_URL, SITE_AUTHOR_ALT } from '../consts';
 
-const APP_STORE_URL = 'https://apps.apple.com/ca/app/8strokes/id6774579880';
+const APP_STORE_URL = 'https://apps.apple.com/ca/app/wishes-by-hand/id6774579880';
 
-// MobileApplication structured data for 8 Strokes (永字八法).
+// MobileApplication structured data for Wishes by Hand (亲笔小卡).
+// The app rebranded from "永字八法 / 8 Strokes" (a calligraphy scorer) into a
+// gentle-reconnection handwriting-card app; the old names stay as alternateName
+// so calligraphy search traffic still resolves here.
 const appLd = {
 	'@context': 'https://schema.org',
 	'@type': 'MobileApplication',
-	name: '8 Strokes / 永字八法',
-	alternateName: '永字八法',
-	applicationCategory: 'EducationApplication',
+	name: 'Wishes by Hand / 亲笔小卡',
+	alternateName: ['亲笔小卡', '親筆小卡', '永字八法', '8 Strokes'],
+	applicationCategory: 'LifestyleApplication',
 	operatingSystem: 'iOS, iPadOS',
 	url: APP_STORE_URL,
 	installUrl: APP_STORE_URL,
 	downloadUrl: APP_STORE_URL,
-	inLanguage: ['zh-CN', 'en'],
+	inLanguage: ['zh-Hans', 'zh-Hant', 'en'],
 	description:
-		'永字八法 (8 Strokes) — a Chinese calligraphy practice app: real-time low-latency ink rendering, on-device stroke scoring, and one-tap sharing of your work.',
-	screenshot: `${SITE_URL}/images/yong-preview.png`,
+		'Wishes by Hand (亲笔小卡) — a handwriting app for quiet human reconnection. Write a few words by hand, turn them into a small card, and send it to the people you care about. An optional 永字八法 practice room grades your strokes on-device.',
+	screenshot: `${SITE_URL}/images/wishes-who.png`,
 	offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
 	author: { '@type': 'Person', name: 'Victor Zhang', alternateName: SITE_AUTHOR_ALT, url: SITE_URL },
 };
@@ -29,35 +32,81 @@ const appLd = {
 <!doctype html>
 <html lang="zh-CN">
 	<head>
-		<BaseHead title="永字八法 | 8 Strokes Calligraphy" description="永字八法 (8 Strokes) — 每日一练，笔尖修禅。指尖落笔即得评分，一键分享书法佳作。" />
-			<script type="application/ld+json" set:html={JSON.stringify(appLd)} />
+		<BaseHead
+			title="亲笔小卡 · Wishes by Hand | 手写一点心意，给在乎的人"
+			description="亲笔小卡 (Wishes by Hand)：亲手写几句话，做成一张小卡片，寄给父母、家人与老朋友。为「轻轻重新联系」而生的手写 App，附带可选的永字八法练习房。"
+		/>
+		<script type="application/ld+json" is:inline set:html={JSON.stringify(appLd)} />
 	</head>
 	<body>
 		<Header />
 		<main class="yong-page">
 			<div class="hero-container">
 				<div class="hero-content">
-					<div class="app-tag">🎉 App Store 新鲜上架 · Now Available</div>
-					<h1>永字八法 / 8 Strokes</h1>
-					<p class="subtitle">每日一练，笔尖修禅。随时随地用指尖开启你的书法修行。</p>
-					<p class="tagline">Practice daily, find zen in every stroke. Start your calligraphy journey anytime, anywhere with just your fingertip.</p>
-					
+					<div class="app-tag">🖌️ App Store · iPhone &amp; iPad · Now Available</div>
+					<h1>亲笔小卡 · Wishes by Hand</h1>
+					<p class="subtitle">手写一点心意，给在乎的人。</p>
+					<p class="tagline">亲手写下几句话，做成一张小卡片，寄给父母、家人，或那个你一直想联系却迟迟没开口的人。<br /><span class="en-sub">Write a few words by hand, turn them into a small card, and send it to someone you care about.</span></p>
+
 					<div class="cta-group">
-						<a href="https://apps.apple.com/ca/app/8strokes/id6774579880" target="_blank" rel="noopener" class="btn btn-primary"> App Store 下载 / Download</a>
-						<a href="#features" class="btn btn-secondary">探索核心特色 / Explore Features</a>
+						<a href={APP_STORE_URL} target="_blank" rel="noopener" class="btn btn-primary">App Store 下载 / Download</a>
+						<a href="#features" class="btn btn-secondary">核心特色 / Features</a>
 					</div>
-					<p class="coming-soon">🚀 现已支持 iPad · <strong>iPhone 版本、更多字帖与更多平台兼容即将到来</strong><br /><span class="en-sub">Now on iPad · iPhone, more copybooks & broader device support coming soon</span></p>
+					<p class="coming-soon">🕊️ 比一通电话更轻，比一条消息更有温度<br /><span class="en-sub">简体中文 · 繁體中文 · English · iCloud 同步 / Lighter than a call, warmer than a text</span></p>
 				</div>
-				
+
 				<div class="hero-preview">
-					<img src="/images/yong-preview.png" alt="永字八法 iPad 样机预览" class="framed-mockup" />
+					<img src="/images/04_blessing_card_ipad.png" alt="亲笔小卡 手写祝福卡片预览 / Wishes by Hand handwritten card preview" class="framed-mockup" />
 				</div>
 			</div>
 
+			<section class="loop-section">
+				<h2>从想起一个人开始 / It Starts With Someone on Your Mind</h2>
+				<p class="loop-subtitle">当电话太正式、消息太轻，实体贺卡又太麻烦时，夜晚书信模式陪你慢慢写下一点真心话。<br /><span class="en-sub">When a call feels too formal and a text feels too bare, the late-night letter mode helps you write, slowly.</span></p>
+
+				<div class="steps-grid">
+					<div class="step-card">
+						<div class="phone-frame">
+							<img src="/images/wishes-onmind.png" alt="书写提示：有谁忽然浮现在你脑海？ / Prompt: has someone suddenly come to mind?" loading="lazy" />
+						</div>
+						<div class="step-body">
+							<span class="step-num">1</span>
+							<h4>想起一个人 / Someone comes to mind</h4>
+							<p>从一个忽然浮现的名字开始 —— 父母、伴侣、孩子、家乡，或很久没联系的老友。</p>
+							<small>Start from a name that surfaces — a parent, a partner, a child, your hometown, or an old friend.</small>
+						</div>
+					</div>
+
+					<div class="step-card">
+						<div class="phone-frame">
+							<img src="/images/wishes-writeslow.png" alt="书写提示：慢慢写，一笔一画，他们会回到你身边 / Prompt: write slowly, stroke by stroke" loading="lazy" />
+						</div>
+						<div class="step-body">
+							<span class="step-num">2</span>
+							<h4>亲手慢慢写 / Write it by hand</h4>
+							<p>用手指或 Apple Pencil 一笔一画写下心意，墨迹如落在宣纸上，慢一点，也更认真一点。</p>
+							<small>Write with your finger or Apple Pencil; your strokes fall like brush ink on rice paper.</small>
+						</div>
+					</div>
+
+					<div class="step-card">
+						<div class="phone-frame">
+							<img src="/images/wishes-who.png" alt="选择写给谁：父母 / 伴侣 / 孩子 / 家乡 / 老友 / Choose who to write to" loading="lazy" />
+						</div>
+						<div class="step-body">
+							<span class="step-num">3</span>
+							<h4>成卡 · 寄出 / Make a card &amp; send</h4>
+							<p>把手写字做成一张国风小卡，一键分享到短信、微信、WhatsApp、Instagram。</p>
+							<small>Turn it into a card and share in one tap via Messages, WeChat, WhatsApp, or Instagram.</small>
+						</div>
+					</div>
+				</div>
+			</section>
+
 			<section class="demo-section">
-				<h2>极速手感与智能反馈 / Fluid Touch & Smart Feedback</h2>
-				<p class="demo-subtitle">在 iPad 屏幕上，用最简单的动作，体验极低延迟的矢量书法演算。<br /><span class="en-sub">Experience ultra-low-latency vector calligraphy rendering on your iPad with the simplest gestures.</span></p>
-				
+				<h2>手写成墨 · 成卡即发 / Ink That Feels Handwritten</h2>
+				<p class="demo-subtitle">低延迟渲染引擎让每一笔都有毛笔的顿挫与晕染；写完，就是一张可以发出去的卡。<br /><span class="en-sub">A low-latency engine gives every stroke real brush character — and what you write is already a card worth sending.</span></p>
+
 				<div class="demo-grid">
 					<div class="demo-card">
 						<div class="video-container">
@@ -67,23 +116,23 @@ const appLd = {
 							</video>
 						</div>
 						<div class="demo-info">
-							<h4>指尖即墨 · 实时渲染 / Real-time Ink Rendering</h4>
-							<p>依托低延迟渲染引擎，无缝捕捉压感与轨迹，完美呈现水墨晕染与笔锋顿挫。</p>
-							<small>Powered by a low-latency rendering engine that captures pressure and trajectory to produce authentic ink wash effects and brush dynamics.</small>
+							<h4>指尖即墨 · 实时渲染 / Real-time Ink</h4>
+							<p>无缝捕捉压感与轨迹，完美呈现水墨晕染与笔锋顿挫，让你的字有手写的温度。</p>
+							<small>Pressure and trajectory are captured seamlessly to produce authentic ink-wash strokes with real handwritten warmth.</small>
 						</div>
 					</div>
 
 					<div class="demo-card">
 						<div class="video-container">
-							<video autoplay loop muted playsinline class="demo-video demo-video-zoom">
-								<source src="/videos/yong-demo-1.mp4" type="video/mp4" />
+							<video autoplay loop muted playsinline class="demo-video shift-down" aria-label="回放评分卡演示 / Replay card demo">
+								<source src="/videos/replay-score-card.mp4" type="video/mp4" />
 								Your browser does not support the video tag.
 							</video>
 						</div>
 						<div class="demo-info">
-							<h4>端侧智能评测打分 / On-Device Smart Scoring</h4>
-							<p>规则与 ML 引擎多维度精准考量笔顺、结构与平滑度，给出即时、细致的书写评分反馈。</p>
-							<small>A hybrid rule-based and ML engine evaluates stroke order, structure, and smoothness to provide instant, detailed scoring feedback.</small>
+							<h4>逐笔回放 · 一键分享 / Replay &amp; Share</h4>
+							<p>把手写小瞬间逐笔回放，配上落款钤印，做成一张温暖体面、值得发出去的小卡片。</p>
+							<small>Replay each stroke, add a seal-style signature, and share a card that feels warmer than chat, lighter than a long call.</small>
 						</div>
 					</div>
 				</div>
@@ -93,65 +142,78 @@ const appLd = {
 				<h2>核心特色 / Core Features</h2>
 				<div class="features-grid">
 					<div class="feature-card">
-						<div class="feature-icon">✨</div>
-						<h3>指尖即墨 / Fingertip Ink</h3>
-						<p>无需纸墨，指尖即笔。屏幕上会呈现如宣纸般晕染浸润的优美笔迹，完美还原汉字横折撇捺的骨骼与神韵。</p>
-						<small>No ink or paper needed — draw naturally with your finger or stylus. The screen renders beautiful ink strokes that mimic the diffusion of brush on rice paper, faithfully reproducing the structure and spirit of each character.</small>
+						<div class="feature-icon">✍️</div>
+						<h3>亲手书写 / Handwriting by Hand</h3>
+						<p>无需纸墨，指尖即笔。屏幕上呈现如宣纸般晕染的优美墨迹，还原汉字横折撇捺的骨骼与神韵。</p>
+						<small>No ink or paper needed — draw naturally with your finger or Apple Pencil, in a brush-like ink style on rice paper.</small>
 					</div>
 
 					<div class="feature-card">
-						<div class="feature-icon">📅</div>
-						<h3>每日一练 / Daily Habit</h3>
-						<p>每天一分钟的静心练习，经典的“永”字八笔成型。在忙碌的日常中寻得片刻宁静，磨练专注力与写字法度。</p>
-						<small>One minute a day of mindful practice with the legendary "Yong" (永) character — the one character whose eight strokes encompass every fundamental brush technique. Find a moment of calm in your busy day and sharpen your focus.</small>
+						<div class="feature-icon">🕯️</div>
+						<h3>写给谁 · 夜晚书信 / Who Is This For</h3>
+						<p>从想到一个人开始，夜晚书信模式陪你慢慢写，把回答拼成一封给父母或老友的手写信。</p>
+						<small>A "who is this for" composer and a late-night letter mode help you write, slowly, to the people who matter.</small>
 					</div>
 
 					<div class="feature-card">
-						<div class="feature-icon">🤖</div>
-						<h3>智能评分 / On-Device Grading</h3>
-						<p>应用内置智能评分引擎，从笔顺、间架平衡度、笔画平滑度等多个维度为您实时打分，您的每一次进步都清晰可见。</p>
-						<small>Built-in smart scoring engine rates your writing in real time across multiple dimensions — stroke order, structural balance, and smoothness — so every improvement is visible at a glance.</small>
+						<div class="feature-icon">🧧</div>
+						<h3>国风手写小卡 / Classic Cards</h3>
+						<p>宣纸、朱砂、水墨、洒金等主题，加上落款钤印，让一句小小的话变成一张温暖体面的卡片。</p>
+						<small>Rice-paper, cinnabar, ink, and gold-fleck themes with a seal-style signature turn a short line into a heartfelt card.</small>
+					</div>
+
+					<div class="feature-card">
+						<div class="feature-icon">🕸️</div>
+						<h3>亲友图谱 / Relationship Map</h3>
+						<p>记住你曾写给谁，把每一次寄出汇成一张关系图谱，让重要的人不被聊天记录淹没。</p>
+						<small>A relationship map remembers who you've written to, so care doesn't disappear into the chat scroll.</small>
 					</div>
 
 					<div class="feature-card">
 						<div class="feature-icon">✉️</div>
-						<h3>雅致分享 / Elegant Sharing</h3>
-						<p>对自己的高分作品感到骄傲？一键生成古典、精美的书法打分卡片，轻松分享到朋友圈或以笔会友。</p>
-						<small>Proud of a high score? Generate an elegant, minimalist scorecard in one tap and share it with friends — challenge each other and bond through the art of calligraphy.</small>
+						<h3>一键分享 / One-tap Share</h3>
+						<p>做好的小卡片可一键分享到短信、微信、WhatsApp、Instagram 等日常渠道，随手相赠。</p>
+						<small>Share finished cards in one tap through Messages, WeChat, WhatsApp, Instagram, and more.</small>
+					</div>
+
+					<div class="feature-card">
+						<div class="feature-icon">🖋️</div>
+						<h3>永字八法练习房 / Practice Room</h3>
+						<p>想把字写得更好？可选的「永字八法」练习房用端侧评分帮你打磨笔法，纯属自愿，不打扰书信。</p>
+						<small>Want to write better? An optional 永字八法 practice room grades your strokes on-device — entirely opt-in.</small>
 					</div>
 				</div>
 			</section>
 
-			<section id="blessing" class="blessing-section">
-				<h2>祝福卡片 · 同框分享 / Blessing Cards & Shareable Moments</h2>
-				<p class="blessing-subtitle">把一笔一画的心意，写进一张可分享的祝福卡。挥毫落墨，随手相赠。<br /><span class="en-sub">Turn every stroke into a heartfelt blessing card you can share. Write elegantly and gift effortlessly.</span></p>
+			<section class="practice-section">
+				<h2>永字八法练习房（可选）/ Optional 永字八法 Practice Room</h2>
+				<p class="practice-subtitle">如果你想把每一笔写得更稳，练习房用规则与 ML 引擎从笔法、字形、平衡、流势多维度即时打分 —— 全程离线，纯属自愿。<br /><span class="en-sub">Want steadier strokes? The practice room scores Stroke / Shape / Balance / Flow on-device — fully offline, entirely optional.</span></p>
 
-				<div class="blessing-grid" id="support">
-					<figure class="blessing-card-item">
-						<img src="/images/04_blessing_card_ipad.png" alt="永字八法 祝福卡片 iPad 样机预览 / 8 Strokes Blessing Card on iPad" loading="lazy" />
-						<figcaption>
-							<h4>🧧 祝福卡片 / Blessing Card</h4>
-							<p>挥毫写下祝福，一键生成古典雅致的祝福卡片，把指尖的墨香送给最在意的人。</p>
-							<small>Write a blessing by hand and generate an elegant, classical card in one tap — send the scent of ink to the people who matter most.</small>
-						</figcaption>
-					</figure>
-
-					<figure class="blessing-card-item">
-						<video class="shift-down" autoplay loop muted playsinline aria-label="永字八法 笔迹回放评分卡演示 / 8 Strokes Replay Scorecard demo">
-							<source src="/videos/replay-score-card.mp4" type="video/mp4" />
+				<div class="practice-grid">
+					<div class="video-container practice-video">
+						<video autoplay loop muted playsinline class="demo-video demo-video-zoom" aria-label="端侧智能评分演示 / On-device scoring demo">
+							<source src="/videos/yong-demo-1.mp4" type="video/mp4" />
 							Your browser does not support the video tag.
 						</video>
-						<figcaption>
-							<h4>🎞️ 回放评分卡 / Replay Scorecard</h4>
-							<p>逐笔回放你的书写过程，搭配多维度评分卡，随时复盘每一次落笔与进步。</p>
-							<small>Replay your writing stroke by stroke alongside a multi-dimensional scorecard — review every stroke and watch yourself improve.</small>
-						</figcaption>
+					</div>
+					<figure class="practice-shot">
+						<img src="/images/wishes-practice-score.png" alt="永字八法练习房 · 四维评分 / Practice room four-dimension scoring" loading="lazy" />
+						<figcaption>四维评分：笔法 / 字形 / 平衡 / 流势<br /><span class="en-sub">Scored on Stroke / Shape / Balance / Flow</span></figcaption>
 					</figure>
+					<figure class="practice-shot">
+						<img src="/images/wishes-practice-levels.png" alt="永字八法练习房 · 关卡与祝福短句 / Practice room levels and blessing phrases" loading="lazy" />
+						<figcaption>关卡循序渐进，练成一句祝福短句<br /><span class="en-sub">Levels build up to a whole blessing phrase</span></figcaption>
+					</figure>
+				</div>
+			</section>
 
-					<div class="contact-card support-card">
-						<h4>✉️ 技术支持 / Support</h4>
+			<section id="support" class="support-section">
+				<div class="section-container">
+					<h2>技术支持 / Support</h2>
+					<div class="contact-card">
+						<h4>✉️ 联系我们 / Contact</h4>
 						<p><a href="mailto:victor@goldenarc.digital">victor@goldenarc.digital</a></p>
-						<small>使用中有任何疑问、Bug 或功能建议，欢迎来信，我们通常 24 小时内回复。<br />Questions, bugs, or feature ideas while using 8 Strokes? Email us — we usually reply within 24 hours.</small>
+						<small>使用中有任何疑问、Bug 或功能建议，欢迎来信，我们通常 24 小时内回复。<br />Questions, bugs, or feature ideas? Email us — we usually reply within 24 hours.</small>
 					</div>
 				</div>
 			</section>
@@ -159,26 +221,30 @@ const appLd = {
 			<section id="privacy" class="privacy-section">
 				<div class="section-container">
 					<h2>隐私政策 / Privacy Policy</h2>
-					<p class="update-date">最后更新日期：2026年5月29日 · Last updated: May 29, 2026</p>
-					
+					<p class="update-date">最后更新日期：2026年7月23日 · Last updated: July 23, 2026</p>
+
 					<div class="privacy-content">
 						<h3>1. 个人数据收集说明 / No Personal Data Collection</h3>
-						<p><strong>永字八法 (8 Strokes)</strong> 极其尊重您的个人隐私。我们<strong>不会收集、存储、分享或上传</strong>您的任何个人信息、手写笔迹数据、打分结果或设备标识符。</p>
-						<p class="english-law">We do not collect, store, share, or upload any of your personal information, drawing strokes, scorecards, or device identifiers.</p>
+						<p><strong>亲笔小卡 (Wishes by Hand)</strong> 极其尊重您的个人隐私。我们<strong>不会收集、存储、分享或上传</strong>您的任何个人信息、手写笔迹数据、卡片内容、评分结果或设备标识符。</p>
+						<p class="english-law">We do not collect, store, share, or upload any of your personal information, handwriting, card contents, scores, or device identifiers.</p>
 
 						<h3>2. 端侧处理保证 / 100% On-Device Processing</h3>
-						<p>应用内所有的轨迹演算、图形网格生成以及智能评分等级计算，均<strong>完全在您的本地设备上进行（On-Device Processing）</strong>。评分模型（包括规则引擎与 CoreML 技术）全部离线运行，无需联网，保证您的书写修行绝对私密安全。</p>
-						<p class="english-law">All calculations, brush tessellation, and stroke evaluation are computed entirely offline and locally on your device.</p>
+						<p>应用内所有的轨迹演算、图形网格生成以及练习房的智能评分，均<strong>完全在您的本地设备上进行（On-Device Processing）</strong>。评分模型（包括规则引擎与 CoreML 技术）全部离线运行，无需联网，保证您的书写与卡片绝对私密安全。</p>
+						<p class="english-law">All calculations, brush tessellation, and practice-room scoring are computed entirely offline and locally on your device.</p>
 
-						<h3>3. 第三方SDK与广告 / No Third-party SDKs or Ads</h3>
-						<p>本应用<strong>不包含任何第三方广告 SDK 或数据分析追踪工具</strong>，我们致力于为您提供纯净无干扰的书写修身空间。</p>
+						<h3>3. iCloud 同步 / iCloud Sync</h3>
+						<p>若您选择开启同步，您的作品与卡片会通过您自己的私人 iCloud 账户在您的设备之间同步。这些数据存放在<strong>您本人的 Apple iCloud 中</strong>，我们无法访问，也不会收集。</p>
+						<p class="english-law">If you enable sync, your work and cards sync across your devices through your own private iCloud account, which we cannot access.</p>
+
+						<h3>4. 第三方SDK与广告 / No Third-party SDKs or Ads</h3>
+						<p>本应用<strong>不包含任何第三方广告 SDK 或数据分析追踪工具</strong>，我们致力于为您提供纯净无干扰的书写空间。</p>
 						<p class="english-law">The application does not integrate any advertising SDKs or tracking tools.</p>
 
-						<h3>4. 隐私政策的更新 / Updates</h3>
+						<h3>5. 隐私政策的更新 / Updates</h3>
 						<p>我们可能会不时更新本隐私政策。若有任何重大更改，我们将通过应用内公告或此网页及时告知您。</p>
 						<p class="english-law">We may update this privacy policy from time to time. Any material changes will be communicated via in-app announcements or on this page.</p>
 
-						<h3>5. 联系我们 / Contact Us</h3>
+						<h3>6. 联系我们 / Contact Us</h3>
 						<p>如果您对我们的隐私政策有任何问题，欢迎随时发信联络我们：<a href="mailto:victor@goldenarc.digital">victor@goldenarc.digital</a>。</p>
 						<p class="english-law">If you have any questions about our privacy policy, feel free to contact us at <a href="mailto:victor@goldenarc.digital">victor@goldenarc.digital</a>.</p>
 					</div>
@@ -198,6 +264,11 @@ const appLd = {
 		color: #2c2927;
 	}
 
+	.en-sub {
+		font-size: 0.85rem;
+		color: #9c938e;
+	}
+
 	/* Hero Section */
 	.hero-container {
 		display: grid;
@@ -213,7 +284,7 @@ const appLd = {
 			gap: 2.5rem;
 			text-align: center;
 		}
-		
+
 		.cta-group {
 			justify-content: center;
 		}
@@ -231,7 +302,7 @@ const appLd = {
 	}
 
 	.hero-content h1 {
-		font-size: 3rem;
+		font-size: 2.7rem;
 		font-weight: 800;
 		line-height: 1.15;
 		letter-spacing: -0.02em;
@@ -244,19 +315,20 @@ const appLd = {
 		font-weight: 500;
 		line-height: 1.5;
 		color: #5c5652;
-		margin-bottom: 0.5rem;
+		margin-bottom: 0.75rem;
 	}
 
 	.tagline {
 		font-size: 1.05rem;
-		line-height: 1.5;
+		line-height: 1.6;
 		color: #8b837e;
-		margin-bottom: 2.5rem;
+		margin-bottom: 2.25rem;
 	}
 
 	.cta-group {
 		display: flex;
 		gap: 1rem;
+		flex-wrap: wrap;
 	}
 
 	.coming-soon {
@@ -264,15 +336,6 @@ const appLd = {
 		font-size: 0.95rem;
 		line-height: 1.5;
 		color: #8b7355;
-	}
-
-	.coming-soon strong {
-		color: #735f46;
-	}
-
-	.coming-soon .en-sub {
-		font-size: 0.85rem;
-		color: #9c938e;
 	}
 
 	.btn {
@@ -320,13 +383,21 @@ const appLd = {
 		margin: 0 auto;
 	}
 
-	/* Demo Videos Section */
-	.demo-section {
+	/* Section shared heading rhythm */
+	.loop-section,
+	.demo-section,
+	.features-section,
+	.practice-section,
+	.support-section,
+	.privacy-section {
 		padding: 5rem 0;
 		border-top: 1px solid rgba(139, 115, 85, 0.15);
 	}
 
-	.demo-section h2 {
+	.loop-section h2,
+	.demo-section h2,
+	.features-section h2,
+	.practice-section h2 {
 		font-size: 2rem;
 		font-weight: 700;
 		text-align: center;
@@ -334,13 +405,99 @@ const appLd = {
 		color: #1a1716;
 	}
 
-	.demo-subtitle {
-		text-align: center;
-		font-size: 1.1rem;
-		color: #8b837e;
-		margin-bottom: 3.5rem !important;
+	.features-section h2 {
+		margin-bottom: 3.5rem;
 	}
 
+	.loop-subtitle,
+	.demo-subtitle,
+	.practice-subtitle {
+		text-align: center;
+		font-size: 1.1rem;
+		line-height: 1.6;
+		color: #8b837e;
+		margin: 0 auto 3.5rem auto;
+		max-width: 760px;
+	}
+
+	/* Loop / How-it-works steps */
+	.steps-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2.5rem;
+	}
+
+	@media (max-width: 768px) {
+		.steps-grid {
+			grid-template-columns: 1fr;
+			gap: 3rem;
+			max-width: 420px;
+			margin: 0 auto;
+		}
+	}
+
+	.step-card {
+		text-align: center;
+	}
+
+	.phone-frame {
+		width: 78%;
+		max-width: 250px;
+		margin: 0 auto 1.5rem auto;
+		border-radius: 30px;
+		padding: 6px;
+		background: linear-gradient(160deg, #efe9df, #ddd2c2);
+		box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+	}
+
+	.phone-frame img {
+		width: 100%;
+		height: auto;
+		border-radius: 24px;
+		display: block;
+	}
+
+	.step-body {
+		max-width: 300px;
+		margin: 0 auto;
+	}
+
+	.step-num {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 1.9rem;
+		height: 1.9rem;
+		border-radius: 50%;
+		background: #8b7355;
+		color: #fff;
+		font-size: 0.9rem;
+		font-weight: 700;
+		margin-bottom: 0.85rem;
+	}
+
+	.step-body h4 {
+		font-size: 1.15rem;
+		font-weight: 700;
+		margin: 0 0 0.5rem 0;
+		color: #1a1716;
+	}
+
+	.step-body p {
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: #5c5652;
+		margin: 0 0 0.5rem 0;
+	}
+
+	.step-body small {
+		display: block;
+		font-size: 0.82rem;
+		line-height: 1.45;
+		color: #9c938e;
+	}
+
+	/* Demo Videos Section */
 	.demo-grid {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -383,14 +540,19 @@ const appLd = {
 		transition: transform 0.3s ease;
 	}
 
+	.demo-video.shift-down {
+		object-position: center 35%;
+	}
+
 	.demo-video-zoom {
 		object-position: center bottom;
 		transform: scale(1.38);
 		transform-origin: center bottom;
 	}
 
-	/* Subtle micro-animation to scale up the zoom slightly on hover */
-	.demo-card:hover .demo-video-zoom {
+	/* Preserve the original hover micro-zoom now that the scoring video lives
+	   in the practice room instead of a .demo-card. */
+	.practice-video:hover .demo-video-zoom {
 		transform: scale(1.45);
 	}
 
@@ -409,23 +571,17 @@ const appLd = {
 		font-size: 0.95rem;
 		line-height: 1.6;
 		color: #5c5652;
-		margin: 0;
+		margin: 0 0 0.4rem 0;
+	}
+
+	.demo-info small {
+		display: block;
+		font-size: 0.82rem;
+		line-height: 1.45;
+		color: #9c938e;
 	}
 
 	/* Features Section */
-	.features-section {
-		padding: 5rem 0;
-		border-top: 1px solid rgba(139, 115, 85, 0.15);
-	}
-
-	.features-section h2 {
-		font-size: 2rem;
-		font-weight: 700;
-		text-align: center;
-		margin-bottom: 3.5rem;
-		color: #1a1716;
-	}
-
 	.features-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -471,118 +627,60 @@ const appLd = {
 		color: #9c938e;
 	}
 
-	/* Blessing Cards Section */
-	.blessing-section {
-		padding: 5rem 0;
-		border-top: 1px solid rgba(139, 115, 85, 0.15);
-	}
-
-	.blessing-section h2 {
-		font-size: 2rem;
-		font-weight: 700;
-		text-align: center;
-		margin-bottom: 0.5rem;
-		color: #1a1716;
-	}
-
-	.blessing-subtitle {
-		text-align: center;
-		font-size: 1.1rem;
-		color: #8b837e;
-		margin-bottom: 3.5rem;
-	}
-
-	.blessing-subtitle .en-sub {
-		font-size: 0.95rem;
-	}
-
-	.blessing-grid {
+	/* Practice Room (opt-in, demoted) */
+	.practice-grid {
 		display: grid;
-		grid-template-columns: 1fr 1fr 0.9fr;
+		grid-template-columns: 1.2fr 0.9fr 0.9fr;
 		gap: 2.5rem;
 		align-items: center;
 	}
 
 	@media (max-width: 900px) {
-		.blessing-grid {
+		.practice-grid {
 			grid-template-columns: 1fr 1fr;
 			align-items: start;
 		}
-	}
-
-	@media (max-width: 768px) {
-		.blessing-grid {
-			grid-template-columns: 1fr;
-			gap: 2.5rem;
+		.practice-video {
+			grid-column: 1 / -1;
 		}
 	}
 
-	.blessing-card-item img.shift-down,
-	.blessing-card-item video.shift-down {
-		object-position: center 40%;
+	@media (max-width: 600px) {
+		.practice-grid {
+			grid-template-columns: 1fr;
+			gap: 2.5rem;
+			max-width: 360px;
+			margin: 0 auto;
+		}
 	}
 
-	.support-card {
-		align-self: center;
+	.practice-video {
+		border-radius: 24px;
+		box-shadow: 0 12px 35px rgba(139, 115, 85, 0.1);
+		border-bottom: none;
 	}
 
-	.support-card small {
-		margin-top: 0.5rem;
-	}
-
-	.blessing-card-item {
+	.practice-shot {
 		margin: 0;
 		text-align: center;
 	}
 
-	.blessing-card-item img,
-	.blessing-card-item video {
-		width: 80%;
-		max-width: 360px;
-		aspect-ratio: 3 / 3.2;
-		object-fit: cover;
-		object-position: center;
-		border-radius: 20px;
-		box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+	.practice-shot img {
+		width: 78%;
+		max-width: 230px;
+		border-radius: 22px;
+		box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1);
 		display: block;
-		margin: 0 auto;
+		margin: 0 auto 1rem auto;
 	}
 
-	.blessing-card-item figcaption {
-		margin-top: 1.5rem;
-		text-align: left;
-		max-width: 360px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.blessing-card-item h4 {
-		font-size: 1.2rem;
-		font-weight: 700;
-		margin-bottom: 0.5rem;
-		color: #1a1716;
-	}
-
-	.blessing-card-item p {
-		font-size: 0.95rem;
-		line-height: 1.6;
-		color: #5c5652;
-		margin: 0 0 0.5rem 0;
-	}
-
-	.blessing-card-item small {
-		display: block;
-		font-size: 0.82rem;
-		line-height: 1.4;
-		color: #9c938e;
+	.practice-shot figcaption {
+		font-size: 0.9rem;
+		line-height: 1.5;
+		color: #8b837e;
 	}
 
 	/* Support & Privacy Common */
-	.support-section, .privacy-section {
-		padding: 5rem 0;
-		border-top: 1px solid rgba(139, 115, 85, 0.15);
-	}
-
 	.section-container {
 		max-width: 800px;
 		margin: 0 auto;
@@ -593,28 +691,7 @@ const appLd = {
 		font-weight: 700;
 		margin-bottom: 1.5rem;
 		color: #1a1716;
-	}
-
-	.section-container p {
-		font-size: 1.05rem;
-		line-height: 1.65;
-		color: #5c5652;
-		margin-bottom: 2rem;
-	}
-
-	/* Support Grid */
-	.contact-methods {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 2rem;
-		margin-top: 2rem;
-	}
-
-	@media (max-width: 600px) {
-		.contact-methods {
-			grid-template-columns: 1fr;
-			gap: 1.5rem;
-		}
+		text-align: center;
 	}
 
 	.contact-card {
@@ -622,6 +699,9 @@ const appLd = {
 		background: #ffffff;
 		border: 1px solid rgba(139, 115, 85, 0.15);
 		border-radius: 16px;
+		max-width: 460px;
+		margin: 0 auto;
+		text-align: center;
 	}
 
 	.contact-card h4 {
@@ -646,12 +726,14 @@ const appLd = {
 		display: block;
 		font-size: 0.85rem;
 		color: #8b837e;
+		line-height: 1.5;
 	}
 
 	/* Privacy Style */
 	.update-date {
 		font-size: 0.9rem !important;
 		color: #8b837e !important;
+		text-align: center;
 		margin-bottom: 2.5rem !important;
 	}
 
