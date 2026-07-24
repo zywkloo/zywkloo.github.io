@@ -66,8 +66,10 @@ const appLd = {
 
 				<div class="steps-grid">
 					<div class="step-card">
-						<div class="phone-frame">
-							<img src="/images/wishes-onmind.png" alt="书写提示：有谁忽然浮现在你脑海？ / Prompt: has someone suddenly come to mind?" loading="lazy" />
+						<div class="step-media">
+							<div class="phone-frame">
+								<img src="/images/wishes-who.png" alt="选择写给谁：父母 / 伴侣 / 孩子 / 家乡 / 老友 / Choose who to write to tonight" loading="lazy" />
+							</div>
 						</div>
 						<div class="step-body">
 							<span class="step-num">1</span>
@@ -78,8 +80,10 @@ const appLd = {
 					</div>
 
 					<div class="step-card">
-						<div class="phone-frame">
-							<img src="/images/wishes-writeslow.png" alt="书写提示：慢慢写，一笔一画，他们会回到你身边 / Prompt: write slowly, stroke by stroke" loading="lazy" />
+						<div class="step-media">
+							<div class="phone-frame">
+								<img src="/images/wishes-writeslow.png" alt="书写提示：慢慢写，一笔一画，他们会回到你身边 / Prompt: write slowly, stroke by stroke" loading="lazy" />
+							</div>
 						</div>
 						<div class="step-body">
 							<span class="step-num">2</span>
@@ -90,8 +94,10 @@ const appLd = {
 					</div>
 
 					<div class="step-card">
-						<div class="phone-frame">
-							<img src="/images/wishes-who.png" alt="选择写给谁：父母 / 伴侣 / 孩子 / 家乡 / 老友 / Choose who to write to" loading="lazy" />
+						<div class="step-media">
+							<div class="card-frame">
+								<img src="/images/wishes-card.png" alt="亲笔手写的祝福小卡，已寄出 / A handwritten blessing card, delivered" loading="lazy" />
+							</div>
 						</div>
 						<div class="step-body">
 							<span class="step-num">3</span>
@@ -434,16 +440,30 @@ const appLd = {
 			max-width: 420px;
 			margin: 0 auto;
 		}
+		.step-media {
+			aspect-ratio: auto;
+		}
 	}
 
 	.step-card {
 		text-align: center;
 	}
 
-	.phone-frame {
+	/* Consistent media box (phone aspect) so a phone screen and the shorter
+	   card sit at the same height and all three captions line up. */
+	.step-media {
 		width: 78%;
-		max-width: 250px;
+		max-width: 252px;
+		aspect-ratio: 720 / 1558;
 		margin: 0 auto 1.5rem auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.phone-frame {
+		width: 100%;
+		margin: 0;
 		border-radius: 30px;
 		padding: 6px;
 		background: linear-gradient(160deg, #efe9df, #ddd2c2);
@@ -454,6 +474,23 @@ const appLd = {
 		width: 100%;
 		height: auto;
 		border-radius: 24px;
+		display: block;
+	}
+
+	/* Step 3 shows a finished card (not a phone screen), so it gets a plain
+	   card frame instead of the phone bezel. */
+	.card-frame {
+		width: 100%;
+		margin: 0;
+		border-radius: 16px;
+		overflow: hidden;
+		background: #fff;
+		box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+	}
+
+	.card-frame img {
+		width: 100%;
+		height: auto;
 		display: block;
 	}
 
