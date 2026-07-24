@@ -35,7 +35,7 @@ export const SITE_AUTHOR_ALT = ['Yiwei Zhang', 'zywkloo'];
 // time it launches. Fill the two URLs once the pages are live; `sameAs` is
 // omitted while they're empty, so no broken links ever ship.
 export const GOLDENARC_NAME = 'GoldenARC Digital';
-export const GOLDENARC_LINKEDIN_URL = '';
+export const GOLDENARC_LINKEDIN_URL = 'https://www.linkedin.com/company/golden-arc-digital';
 export const GOLDENARC_GITHUB_URL = '';
 export const GOLDENARC_SAME_AS = [GOLDENARC_LINKEDIN_URL, GOLDENARC_GITHUB_URL].filter(Boolean);
 
