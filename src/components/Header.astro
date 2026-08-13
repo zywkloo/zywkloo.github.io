@@ -9,6 +9,7 @@ import HeaderLink from './HeaderLink.astro';
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
+			<HeaderLink href="/goldenarc">GoldenARC</HeaderLink>
 			<HeaderLink href="/wtcraft">wtcraft</HeaderLink>
 			<HeaderLink href="/yong">亲笔</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
@@ -138,10 +139,28 @@ import HeaderLink from './HeaderLink.astro';
 	}
 	@media (max-width: 720px) {
 		header {
-			padding: 0.55rem 0.8rem;
+			padding: 0.55rem 0;
 		}
 		h2 {
-			max-width: 100%;
+			display: none;
+		}
+		nav {
+			display: block;
+		}
+		.internal-links {
+			width: 100%;
+			overflow-x: auto;
+			padding-inline: 0.8rem;
+			border: 0;
+			border-radius: 0;
+			box-shadow: none;
+			scrollbar-width: none;
+		}
+		.internal-links::-webkit-scrollbar {
+			display: none;
+		}
+		.internal-links a {
+			flex: 0 0 auto;
 		}
 		.social-links {
 			display: none;

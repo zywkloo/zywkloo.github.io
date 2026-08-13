@@ -158,12 +158,15 @@ const appLd = {
 		--edf-ink-2: #131c33;
 		--edf-paper: #f4f6fa;
 		--edf-mint: #2de0a8;
-		--edf-muted: #97a3bd;
+		--edf-accent: #087a61;
+		--edf-accent-dark: #065f4d;
+		--edf-muted: #5f6b7e;
 
-		max-width: 720px;
+		width: min(720px, calc(100% - 2rem));
+		max-width: none;
 		margin: 0 auto;
 		padding: 0 1.5rem 4rem;
-		color: #d7deeb;
+		color: #374151;
 		background: transparent;
 	}
 	.edf-page .hero {
@@ -203,7 +206,12 @@ const appLd = {
 		margin: 0.4rem 0;
 	}
 	.edf-page a {
-		color: var(--edf-mint);
+		color: var(--edf-accent);
+		text-decoration: underline;
+		text-decoration-thickness: 1px;
+	}
+	.edf-page a:hover {
+		color: var(--edf-accent-dark);
 	}
 	.edf-page code {
 		background: rgba(120, 140, 180, 0.16);
