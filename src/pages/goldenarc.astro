@@ -11,21 +11,21 @@ const products = [
 		description: 'Open EDF, EDF+ and BDF recordings, explore every channel, and inspect file metadata locally.',
 		status: 'Available',
 		href: '/edfviewer',
-		icon: 'wave',
+		icon: '/images/goldenarc/arc-edf-viewer.png',
 	},
 	{
 		name: 'ARC Scanner',
 		platform: 'iPhone + iPad',
 		description: 'Scan or import pages, review them, and export useful document formats with on-device processing.',
 		status: 'In development',
-		icon: 'scan',
+		icon: '/images/goldenarc/arc-scanner.png',
 	},
 	{
 		name: 'ARC PDF Studio',
 		platform: 'iPhone + iPad',
 		description: 'Read, annotate, arrange, merge, and export standard PDFs without locking work into one app.',
 		status: 'Planned',
-		icon: 'pdf',
+		icon: '/images/goldenarc/arc-pdf-studio.png',
 	},
 ];
 
@@ -50,9 +50,13 @@ const organizationLd = {
 	</head>
 	<body>
 		<Header />
-		<main class="arc-page">
+		<div class="arc-stage">
+			<main class="arc-page">
 			<section class="hero">
-				<p class="eyebrow">GoldenARC Digital</p>
+				<div class="brand-lockup">
+					<img src="/images/goldenarc/brand-mark.png" alt="" width="64" height="64" />
+					<span>GoldenARC Digital</span>
+				</div>
 				<h1>Focused tools for real files.</h1>
 				<p class="lede">
 					A family of native, privacy-first utilities for Apple platforms. Each app does one job clearly,
@@ -72,10 +76,8 @@ const organizationLd = {
 				<div class="product-grid">
 					{products.map((product) => (
 						<article class:list={['product-card', { available: product.href }]}>
-							<div class:list={['product-icon', product.icon]} aria-hidden="true">
-								{product.icon === 'wave' && <span class="wave-line">⌁</span>}
-								{product.icon === 'scan' && <span class="scan-corners">▣</span>}
-								{product.icon === 'pdf' && <span class="pdf-sheet">PDF</span>}
+							<div class="product-visual">
+								<img src={product.icon} alt={`${product.name} app icon`} width="512" height="512" loading="lazy" />
 							</div>
 							<div class="product-meta">
 								<span class:list={['status', { live: product.status === 'Available' }]}>{product.status}</span>
@@ -104,12 +106,20 @@ const organizationLd = {
 					<div><strong>Portable</strong><span>Exports remain useful outside the ARC family.</span></div>
 				</div>
 			</section>
-		</main>
+			</main>
+		</div>
 		<Footer />
 	</body>
 </html>
 
 <style>
+	.arc-stage {
+		background:
+			radial-gradient(42rem 26rem at 8% 8%, rgba(27, 135, 201, 0.18), transparent 72%),
+			radial-gradient(38rem 24rem at 94% 26%, rgba(232, 93, 26, 0.13), transparent 74%),
+			linear-gradient(180deg, #e9eff5 0%, #f5f7fa 48%, #e8eef4 100%);
+		border-bottom: 1px solid #d6dee7;
+	}
 	.arc-page {
 		--arc-ink: #111827;
 		--arc-muted: #556274;
@@ -126,7 +136,24 @@ const organizationLd = {
 		max-width: 760px;
 		padding-bottom: 5rem;
 	}
-	.eyebrow {
+	.brand-lockup {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-bottom: 1.35rem;
+		color: var(--arc-ink);
+		font-size: 1rem;
+		font-weight: 700;
+		letter-spacing: -0.01em;
+		text-transform: none;
+	}
+	.brand-lockup img {
+		width: 3rem;
+		height: 3rem;
+		border-radius: 0;
+		filter: drop-shadow(0 8px 12px rgba(16, 23, 31, 0.14));
+	}
+	.arc-page .eyebrow {
 		margin: 0 0 0.8rem;
 		color: var(--arc-teal);
 	}
@@ -171,8 +198,8 @@ const organizationLd = {
 		min-height: 430px;
 		flex-direction: column;
 		padding: 1.4rem;
-		background: rgba(255, 255, 255, 0.76);
-		border: 1px solid var(--line);
+		background: rgba(255, 255, 255, 0.94);
+		border: 1px solid #cfd8e3;
 		border-radius: 22px;
 		box-shadow: var(--shadow-sm);
 	}
@@ -180,40 +207,25 @@ const organizationLd = {
 		border-color: rgba(8, 122, 97, 0.3);
 		box-shadow: 0 20px 48px rgba(17, 24, 39, 0.09);
 	}
-	.product-icon {
+	.product-visual {
 		display: grid;
 		width: 100%;
-		height: 150px;
+		height: 176px;
 		place-items: center;
 		margin-bottom: 1.25rem;
 		overflow: hidden;
-		background: var(--arc-navy);
+		background:
+			radial-gradient(circle at 50% 30%, rgba(45, 224, 168, 0.14), transparent 58%),
+			var(--arc-navy);
 		border-radius: 15px;
-		color: var(--arc-mint);
 	}
-	.wave-line {
-		font-family: Georgia, serif;
-		font-size: 7rem;
-		line-height: 1;
-		transform: scaleX(1.45) rotate(-4deg);
-	}
-	.scan-corners {
-		font-size: 5.5rem;
-		font-weight: 400;
-		line-height: 1;
-	}
-	.pdf-sheet {
-		display: grid;
-		width: 76px;
-		height: 96px;
-		place-items: end center;
-		padding-bottom: 0.75rem;
-		background: #f8fafc;
-		border-radius: 7px 13px 7px 7px;
-		color: var(--arc-navy);
-		font-size: 1rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
+	.product-visual img {
+		width: 126px;
+		height: 126px;
+		border: 1px solid rgba(255, 255, 255, 0.18);
+		border-radius: 27px;
+		box-shadow: 0 18px 32px rgba(5, 10, 25, 0.38);
+		object-fit: cover;
 	}
 	.product-meta {
 		display: flex;
@@ -221,10 +233,10 @@ const organizationLd = {
 		justify-content: space-between;
 		gap: 0.5rem;
 		color: var(--arc-muted);
-		font-size: 0.74rem;
+		font-size: 0.8rem;
 		font-weight: 700;
-		letter-spacing: 0.04em;
-		text-transform: uppercase;
+		letter-spacing: 0;
+		text-transform: none;
 	}
 	.status {
 		padding: 0.18rem 0.5rem;

@@ -7,9 +7,14 @@ import HeaderLink from './HeaderLink.astro';
 	<nav>
 		<h2><a href="/">{SITE_TITLE}</a></h2>
 		<div class="internal-links">
+			<HeaderLink href="/goldenarc" class="arc-nav-link">
+				<span class="arc-tab-content">
+					<img src="/images/goldenarc/brand-mark.png" alt="" width="22" height="22" />
+					<span>ARC</span>
+				</span>
+			</HeaderLink>
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/goldenarc">GoldenARC</HeaderLink>
 			<HeaderLink href="/wtcraft">wtcraft</HeaderLink>
 			<HeaderLink href="/yong">亲笔</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
@@ -84,6 +89,17 @@ import HeaderLink from './HeaderLink.astro';
 		border: 1px solid var(--line);
 		border-radius: 999px;
 		box-shadow: var(--shadow-sm);
+	}
+	.arc-tab-content {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+	}
+	.arc-tab-content img {
+		width: 1.25rem;
+		height: 1.25rem;
+		border-radius: 0;
+		object-fit: contain;
 	}
 	nav a {
 		padding: 0.5rem 0.85rem;
@@ -162,8 +178,27 @@ import HeaderLink from './HeaderLink.astro';
 		.internal-links a {
 			flex: 0 0 auto;
 		}
+		.internal-links :global(.arc-nav-link) {
+			position: sticky;
+			left: 0;
+			z-index: 2;
+			background: rgba(255, 255, 255, 0.96);
+			box-shadow: 8px 0 12px rgba(17, 24, 39, 0.05);
+		}
+		.internal-links :global(.arc-nav-link.active) {
+			background: var(--accent);
+		}
 		.social-links {
 			display: none;
+		}
+	}
+	@media (min-width: 721px) and (max-width: 1040px) {
+		h2,
+		.social-links {
+			display: none;
+		}
+		nav {
+			justify-content: center;
 		}
 	}
 </style>
