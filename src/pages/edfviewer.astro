@@ -1,0 +1,234 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_URL, SITE_AUTHOR_ALT } from '../consts';
+
+// This page is the Support URL and the Privacy Policy URL on the App Store
+// listing. Both are mandatory fields, App Review does open them, and a 404 on
+// the privacy URL is a guaranteed rejection — so this page has to exist and stay
+// reachable for as long as the app is on sale.
+//
+// It lives here rather than in the app's own repository because that repository
+// is private, and GitHub Pages does not publish from a private repo on a free
+// plan.
+
+const SUPPORT_EMAIL = 'victor@goldenarc.digital';
+
+const appLd = {
+	'@context': 'https://schema.org',
+	'@type': 'SoftwareApplication',
+	name: 'ARC EDF & BDF Viewer',
+	applicationCategory: 'UtilitiesApplication',
+	operatingSystem: 'iPadOS, macOS',
+	inLanguage: ['en'],
+	description:
+		'A native viewer for EDF, EDF+ and BDF biosignal recordings, for iPad and Mac. Browse every channel, place a measurement cursor, and inspect the full file header. A file-viewing utility for research, educational and engineering use — not a medical device.',
+	offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+	publisher: { '@type': 'Organization', name: 'GoldenARC Digital' },
+	author: { '@type': 'Person', name: 'Victor Zhang', alternateName: SITE_AUTHOR_ALT, url: SITE_URL },
+};
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="ARC EDF & BDF Viewer | Open biosignal recordings on iPad and Mac"
+			description="A native viewer for EDF, EDF+ and BDF biosignal files. Browse every channel, measure with a cursor, and inspect the full file header. Support and privacy policy."
+		/>
+		<script type="application/ld+json" is:inline set:html={JSON.stringify(appLd)} />
+	</head>
+	<body>
+		<Header />
+		<main class="edf-page">
+			<section class="hero">
+				<h1>ARC EDF &amp; BDF Viewer</h1>
+				<p class="tagline">Open and inspect biosignal recordings on iPad and Mac.</p>
+				<hr class="rule" />
+				<p class="lede">
+					A native viewer for the European Data Format (EDF, EDF+) and the BioSemi
+					Data Format (BDF) — the file formats used across sleep, EEG, ECG and
+					electrophysiology research. No installer, no Java or Python environment,
+					no account. Open a file and look at your data.
+				</p>
+			</section>
+
+			<section>
+				<h2>What it does</h2>
+				<ul>
+					<li>All-Channels montage, or one channel at a time, with sample rate and physical unit shown per channel.</li>
+					<li>Min/max envelope rendering, so a spike is never lost the way naive downsampling loses it.</li>
+					<li>Pinch to zoom and drag to pan; on Mac, <code>⌘+</code>, <code>⌘-</code> and the arrow keys.</li>
+					<li>Tap to place a measurement cursor and read the exact time and amplitude.</li>
+					<li>Fixed amplitude scales as well as auto-fit, so a quiet stretch and a loud one can actually be compared.</li>
+					<li>A full header inspector: format, start date and time, record layout, and each signal's physical and digital ranges.</li>
+					<li>Open in place from Files or the Finder, drag and drop, and recent files.</li>
+				</ul>
+			</section>
+
+			<section class="panel">
+				<h3>Not a medical device</h3>
+				<p>
+					This is a file-viewing utility for research, educational, and engineering
+					use. It does not diagnose, monitor, or support any clinical decision, and
+					it is not intended for diagnosis or treatment.
+				</p>
+			</section>
+
+			<section>
+				<h2>Pro</h2>
+				<p>
+					Everything above is free. A single one-time Pro purchase adds export: the
+					current view as a PNG image, the visible window as CSV at full sample
+					resolution, and the complete file header as text. There is no subscription.
+				</p>
+			</section>
+
+			<section>
+				<h2>Questions</h2>
+
+				<h3>Which files can it open?</h3>
+				<p>
+					<code>.edf</code> and <code>.bdf</code>, including EDF+. 16-bit EDF and
+					24-bit BDF are both decoded using the calibration declared in the file
+					header.
+				</p>
+
+				<h3>Is there a sample file?</h3>
+				<p>
+					Yes — a demo recording is built into the app, so there is something to
+					look at before you have a file of your own. Its signals are generated,
+					not recorded from a person.
+				</p>
+
+				<h3>Does it upload anything?</h3>
+				<p>No. The app has no network features at all. See <a href="#privacy">Privacy</a>.</p>
+
+				<h3>Why is my recording hard to read at the default window?</h3>
+				<p>
+					A ten-second window of a fast rhythm packs a great many cycles into the
+					pane. Pinch in, or press <code>⌘+</code>, to shorten the window; switch
+					the gain away from Auto to hold the amplitude scale still while you move
+					around.
+				</p>
+			</section>
+
+			<section id="privacy">
+				<h2>Privacy</h2>
+				<p>
+					<strong>The developer collects nothing.</strong> The app has no analytics,
+					no crash reporting, no accounts, no advertising, and no third-party SDKs.
+					It makes no network requests of any kind.
+				</p>
+				<ul>
+					<li>Recordings you open are read on your device and never leave it. The developer cannot see them.</li>
+					<li>The only thing kept between launches is your list of recently opened files, stored on device so those files can be reopened without asking you to find them again.</li>
+					<li>Exported files are written only where you choose to save them.</li>
+					<li>Purchases are handled entirely by Apple. The developer never receives your payment details.</li>
+				</ul>
+				<p class="note">
+					Because no personal data is collected, there is nothing to request,
+					correct, or delete from the developer. Removing the app removes its stored
+					list of recent files.
+				</p>
+			</section>
+
+			<section>
+				<h2>Support</h2>
+				<p>
+					Email <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>. Including
+					the app version and what you were opening will get you a faster answer.
+				</p>
+				<p class="note">
+					ARC EDF &amp; BDF Viewer is published by GoldenARC Digital. Not a medical
+					device. For research, educational, and engineering use only.
+				</p>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	/* Palette shared with the app icon, so the page and the icon read as one
+	   product rather than two. */
+	.edf-page {
+		--edf-ink: #0a1020;
+		--edf-ink-2: #131c33;
+		--edf-paper: #f4f6fa;
+		--edf-mint: #2de0a8;
+		--edf-muted: #97a3bd;
+
+		max-width: 720px;
+		margin: 0 auto;
+		padding: 0 1.5rem 4rem;
+		color: #d7deeb;
+		background: transparent;
+	}
+	.edf-page .hero {
+		padding: 3.5rem 0 1rem;
+	}
+	.edf-page h1 {
+		font-size: clamp(2rem, 6vw, 2.6rem);
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+		margin: 0 0 0.5rem;
+	}
+	.edf-page .tagline {
+		font-size: 1.1rem;
+		color: var(--edf-muted);
+		margin: 0;
+	}
+	.edf-page .rule {
+		width: 64px;
+		height: 4px;
+		background: var(--edf-mint);
+		border: 0;
+		margin: 1.5rem 0;
+	}
+	.edf-page .lede {
+		font-size: 1.05rem;
+	}
+	.edf-page h2 {
+		font-size: 1.3rem;
+		margin: 3rem 0 0.75rem;
+		letter-spacing: -0.01em;
+	}
+	.edf-page h3 {
+		font-size: 1rem;
+		margin: 1.5rem 0 0.35rem;
+	}
+	.edf-page li {
+		margin: 0.4rem 0;
+	}
+	.edf-page a {
+		color: var(--edf-mint);
+	}
+	.edf-page code {
+		background: rgba(120, 140, 180, 0.16);
+		padding: 0.1rem 0.35rem;
+		border-radius: 4px;
+		font-size: 0.9em;
+	}
+	.edf-page .panel {
+		background: var(--edf-ink-2);
+		border: 1px solid rgba(244, 246, 250, 0.12);
+		border-radius: 12px;
+		padding: 0.25rem 1.5rem 1.25rem;
+		margin: 2rem 0;
+		color: #d7deeb;
+	}
+	.edf-page .panel h3 {
+		margin-top: 1.25rem;
+	}
+	.edf-page .note {
+		color: var(--edf-muted);
+		font-size: 0.92rem;
+	}
+	/* The privacy section is linked directly from the App Store listing, so make
+	   it obvious the reader landed in the right place. */
+	.edf-page #privacy {
+		scroll-margin-top: 5rem;
+	}
+</style>
