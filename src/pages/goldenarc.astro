@@ -9,7 +9,8 @@ const products = [
 		name: 'ARC EDF & BDF Viewer',
 		platform: 'iPad + Mac',
 		description: 'Open EDF, EDF+ and BDF recordings, explore every channel, and inspect file metadata locally.',
-		status: 'Available',
+		status: 'In App Review',
+		statusTone: 'review',
 		href: '/edfviewer',
 		icon: '/images/goldenarc/arc-edf-viewer.png',
 	},
@@ -18,13 +19,23 @@ const products = [
 		platform: 'iPhone + iPad',
 		description: 'Scan or import pages, review them, and export useful document formats with on-device processing.',
 		status: 'In development',
+		statusTone: 'building',
 		icon: '/images/goldenarc/arc-scanner.png',
 	},
 	{
-		name: 'ARC PDF Studio',
+		name: 'ARC Markdown',
 		platform: 'iPhone + iPad',
+		description: 'Open local Markdown and TXT files as readable documents, with clean front matter and a reliable outline.',
+		status: 'In development',
+		statusTone: 'building',
+		monogram: 'MD',
+	},
+	{
+		name: 'ARC PDF Studio',
+		platform: 'iPad + Mac',
 		description: 'Read, annotate, arrange, merge, and export standard PDFs without locking work into one app.',
-		status: 'Planned',
+		status: 'Architecture planned',
+		statusTone: 'planned',
 		icon: '/images/goldenarc/arc-pdf-studio.png',
 	},
 ];
@@ -43,8 +54,8 @@ const organizationLd = {
 <html lang="en">
 	<head>
 		<BaseHead
-			title="GoldenARC Digital | Focused tools for real files"
-			description="GoldenARC Digital builds focused, privacy-first utilities for Apple platforms, including ARC EDF Viewer, ARC Scanner, and ARC PDF Studio."
+			title="GoldenARC Digital | Native tools, deliberate foundations"
+			description="GoldenARC Digital builds local-first Apple platform tools on a modular Swift package architecture, including ARC EDF & BDF Viewer, ARC Scanner, ARC Markdown, and ARC PDF Studio."
 		/>
 		<script type="application/ld+json" is:inline set:html={JSON.stringify(organizationLd)} />
 	</head>
@@ -57,10 +68,10 @@ const organizationLd = {
 					<img src="/images/goldenarc/brand-mark.png" alt="" width="64" height="64" />
 					<span>GoldenARC Digital</span>
 				</div>
-				<h1>Focused tools for real files.</h1>
+				<h1>Native tools. Deliberate foundations.</h1>
 				<p class="lede">
-					A family of native, privacy-first utilities for Apple platforms. Each app does one job clearly,
-					keeps core work on your device, and produces files you can use elsewhere.
+					A family of local-first utilities for Apple platforms. Each app has a focused job; shared
+					capabilities live in small, testable Swift Package products with explicit dependency boundaries.
 				</p>
 			</section>
 
@@ -70,17 +81,25 @@ const organizationLd = {
 						<p class="eyebrow">The ARC series</p>
 						<h2 id="tools-heading">Choose a tool</h2>
 					</div>
-					<p>One product family, separate apps, no forced account.</p>
+					<p>Separate products at different stages, built around the same engineering discipline.</p>
 				</div>
 
 				<div class="product-grid">
 					{products.map((product) => (
 						<article class:list={['product-card', { available: product.href }]}>
 							<div class="product-visual">
-								<img src={product.icon} alt={`${product.name} app icon`} width="512" height="512" loading="lazy" />
+								{product.icon ? (
+									<img src={product.icon} alt={`${product.name} app icon`} width="512" height="512" loading="lazy" />
+								) : (
+									<div class="product-monogram arc-markdown-icon" role="img" aria-label={`${product.name} app icon concept`}>
+										<span class="markdown-wordmark">.{product.monogram}</span>
+										<span class="markdown-ruler" aria-hidden="true"></span>
+										<span class="markdown-lines" aria-hidden="true"><i></i><i></i><i></i></span>
+									</div>
+								)}
 							</div>
 							<div class="product-meta">
-								<span class:list={['status', { live: product.status === 'Available' }]}>{product.status}</span>
+								<span class:list={['status', product.statusTone]}>{product.status}</span>
 								<span>{product.platform}</span>
 							</div>
 							<h3>{product.name}</h3>
@@ -97,13 +116,141 @@ const organizationLd = {
 				</div>
 			</section>
 
+			<section class="architecture" aria-labelledby="architecture-heading">
+				<div class="section-heading architecture-heading">
+					<div>
+						<p class="eyebrow">Engineering under the apps</p>
+						<h2 id="architecture-heading">One-way dependencies. No umbrella package.</h2>
+					</div>
+					<p>
+						The graph separates the integrated Scanner path from PDF Studio's planned domain packages,
+						so roadmap work is not presented as shipped code.
+					</p>
+				</div>
+
+				<div class="architecture-panel">
+					<div class="diagram-legend" aria-label="Architecture diagram legend">
+						<span><i class="legend-line solid"></i> Implemented / integrated</span>
+						<span><i class="legend-line dashed"></i> Planned dependency</span>
+						<span><i class="legend-box"></i> Independent app stack</span>
+					</div>
+
+					<svg class="dependency-graph" viewBox="0 0 1080 770" role="img" aria-labelledby="graph-title graph-desc">
+						<title id="graph-title">GoldenARC product and Swift package dependency graph</title>
+						<desc id="graph-desc">
+							ARC Scanner uses DocumentPipelineKit, which uses ARC Shared Infra and Apple frameworks.
+							ARC PDF Studio is planned to use PDFDocumentKit, DocumentPipelineKit, and InkObjectKit.
+							ARC EDF and BDF Viewer and ARC Markdown remain independent specialized apps built directly on Apple frameworks.
+						</desc>
+						<defs>
+							<marker id="arrow-solid" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+								<path d="M0,0 L8,4 L0,8 Z" class="arrow-head solid" />
+							</marker>
+							<marker id="arrow-planned" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+								<path d="M0,0 L8,4 L0,8 Z" class="arrow-head planned" />
+							</marker>
+						</defs>
+
+						<text class="layer-label" x="18" y="112">PRODUCT APPS</text>
+						<text class="layer-label" x="18" y="278">PDF DOMAIN</text>
+						<text class="layer-label" x="18" y="438">DOCUMENT DOMAIN</text>
+						<text class="layer-label" x="18" y="598">NEUTRAL INFRA</text>
+						<text class="layer-label" x="18" y="730">APPLE PLATFORM</text>
+
+						<g class="graph-edges">
+							<path class="edge solid" marker-end="url(#arrow-solid)" d="M250 154 C250 390 220 520 250 690" />
+							<path class="edge solid" marker-end="url(#arrow-solid)" d="M480 154 L500 385" />
+							<path class="edge solid" marker-end="url(#arrow-solid)" d="M710 154 C710 380 675 520 710 690" />
+							<path class="edge solid" marker-end="url(#arrow-solid)" d="M500 475 L500 545" />
+							<path class="edge solid" marker-end="url(#arrow-solid)" d="M500 635 L500 690" />
+
+							<path class="edge planned" marker-end="url(#arrow-planned)" d="M940 154 L920 225" />
+							<path class="edge planned" marker-end="url(#arrow-planned)" d="M865 154 C710 235 675 320 620 385" />
+							<path class="edge planned" marker-end="url(#arrow-planned)" d="M1000 154 L1000 545" />
+							<path class="edge planned" marker-end="url(#arrow-planned)" d="M800 270 C700 300 675 360 620 405" />
+							<path class="edge planned" marker-end="url(#arrow-planned)" d="M920 315 L920 545" />
+							<path class="edge planned" marker-end="url(#arrow-planned)" d="M920 635 L920 690" />
+						</g>
+
+						<g class="graph-node independent">
+							<rect x="150" y="65" width="200" height="89" rx="18" />
+							<text class="node-title" x="170" y="101">EDF &amp; BDF Viewer</text>
+							<text class="node-meta" x="170" y="128">Independent stack</text>
+						</g>
+						<g class="graph-node implemented">
+							<rect x="380" y="65" width="200" height="89" rx="18" />
+							<text class="node-title" x="400" y="101">ARC Scanner</text>
+							<text class="node-meta" x="400" y="128">App path integrated</text>
+						</g>
+						<g class="graph-node independent">
+							<rect x="610" y="65" width="200" height="89" rx="18" />
+							<text class="node-title" x="630" y="101">ARC Markdown</text>
+							<text class="node-meta" x="630" y="128">Independent reader core</text>
+						</g>
+						<g class="graph-node planned">
+							<rect x="840" y="65" width="200" height="89" rx="18" />
+							<text class="node-title" x="860" y="101">ARC PDF Studio</text>
+							<text class="node-meta" x="860" y="128">Architecture planned</text>
+						</g>
+
+						<g class="graph-node planned">
+							<rect x="800" y="225" width="240" height="90" rx="18" />
+							<text class="node-title" x="824" y="261">PDFDocumentKit</text>
+							<text class="node-meta" x="824" y="288">Composition · annotation · text</text>
+						</g>
+						<g class="graph-node implemented emphasized">
+							<rect x="380" y="385" width="240" height="90" rx="18" />
+							<text class="node-title" x="404" y="421">DocumentPipelineKit</text>
+							<text class="node-meta" x="404" y="448">Contracts · pipeline · export</text>
+						</g>
+						<g class="graph-node implemented">
+							<rect x="380" y="545" width="240" height="90" rx="18" />
+							<text class="node-title" x="404" y="581">ARC Shared Infra</text>
+							<text class="node-meta" x="404" y="608">File intake · scan · OCR</text>
+						</g>
+						<g class="graph-node planned">
+							<rect x="800" y="545" width="240" height="90" rx="18" />
+							<text class="node-title" x="824" y="581">InkObjectKit</text>
+							<text class="node-meta" x="824" y="608">Ink · objects · Pencil adapter</text>
+						</g>
+						<g class="graph-node platform">
+							<rect x="150" y="690" width="890" height="62" rx="18" />
+							<text class="node-title platform-title" x="595" y="727" text-anchor="middle">Apple frameworks · Files · Vision · VisionKit · PDFKit · PencilKit</text>
+						</g>
+					</svg>
+
+					<div class="dependency-list" aria-hidden="true">
+						<div><strong>ARC Scanner</strong><span>↓ DocumentPipelineKit ↓ ARC Shared Infra ↓ Apple frameworks</span></div>
+						<div><strong>ARC PDF Studio <em>planned</em></strong><span>↓ PDFDocumentKit + DocumentPipelineKit + InkObjectKit ↓ Apple frameworks</span></div>
+						<div><strong>ARC Markdown</strong><span>↓ Independent Markdown reader core ↓ Apple frameworks</span></div>
+						<div><strong>EDF &amp; BDF Viewer</strong><span>↓ Independent specialized stack ↓ Apple frameworks</span></div>
+					</div>
+
+					<div class="architecture-note">
+						<strong>The important part is the boundary, not the box count.</strong>
+						<p>
+							Apps depend downward; infrastructure never reaches back into a product. Platform results are
+							normalized into contracts, concrete providers are injected at each app's composition root, and
+							consumers select individual SPM products instead of linking an all-in-one framework.
+						</p>
+					</div>
+				</div>
+
+				<div class="evidence-grid" aria-label="Architecture implementation evidence">
+					<div><strong>12</strong><span>selectable SPM library products across the implemented shared packages</span></div>
+					<div><strong>66</strong><span>passing package tests at the documented Scanner integration baseline</span></div>
+					<div><strong>iOS 16 → 26+</strong><span>baseline OCR with capability-gated structured document recognition</span></div>
+					<div><strong>Local first</strong><span>core intake, scan, OCR, export, and file work require no account or cloud service</span></div>
+				</div>
+			</section>
+
 			<section class="principles" aria-labelledby="principles-heading">
-				<p class="eyebrow">Product principles</p>
-				<h2 id="principles-heading">Useful by default.</h2>
+				<p class="eyebrow">Product and engineering principles</p>
+				<h2 id="principles-heading">Useful by default. Replaceable by design.</h2>
 				<div class="principle-grid">
 					<div><strong>Local first</strong><span>Core file work stays on your device.</span></div>
-					<div><strong>Focused</strong><span>Each app has a clear job and a small surface area.</span></div>
-					<div><strong>Portable</strong><span>Exports remain useful outside the ARC family.</span></div>
+					<div><strong>Focused products</strong><span>Each app has a clear job and links only the capabilities it needs.</span></div>
+					<div><strong>Portable output</strong><span>Exports remain useful outside the ARC family.</span></div>
 				</div>
 			</section>
 			</main>
@@ -190,7 +337,7 @@ const organizationLd = {
 	}
 	.product-grid {
 		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 1rem;
 	}
 	.product-card {
@@ -227,6 +374,72 @@ const organizationLd = {
 		box-shadow: 0 18px 32px rgba(5, 10, 25, 0.38);
 		object-fit: cover;
 	}
+	.product-monogram {
+		position: relative;
+		width: 126px;
+		height: 126px;
+		overflow: hidden;
+		background: #080e1d;
+		border: 1px solid rgba(255, 255, 255, 0.22);
+		border-radius: 27px;
+		box-shadow: 0 18px 32px rgba(5, 10, 25, 0.38);
+	}
+	.markdown-wordmark {
+		position: absolute;
+		top: 13px;
+		left: 50%;
+		transform: translateX(-50%);
+		color: #f8fafc;
+		font-family: "DIN Condensed", "Arial Narrow", sans-serif;
+		font-size: 3.55rem;
+		font-stretch: condensed;
+		font-weight: 700;
+		letter-spacing: 0.015em;
+		line-height: 1;
+		white-space: nowrap;
+	}
+	.markdown-ruler {
+		position: absolute;
+		top: 72px;
+		left: 17px;
+		width: 92px;
+		height: 8px;
+		background: repeating-linear-gradient(90deg, #dbe4ef 0 1px, transparent 1px 15px);
+		border-top: 1px solid #dbe4ef;
+	}
+	.markdown-ruler::after {
+		position: absolute;
+		top: -1px;
+		left: 50%;
+		width: 1px;
+		height: 11px;
+		background: #dbe4ef;
+		content: "";
+	}
+	.markdown-lines {
+		position: absolute;
+		top: 89px;
+		left: 19px;
+		display: grid;
+		width: 88px;
+		gap: 4px;
+		transform: rotate(1.5deg);
+	}
+	.markdown-lines i {
+		display: block;
+		height: 4px;
+		background: #2de0a8;
+		border-radius: 2px;
+	}
+	.markdown-lines i:nth-child(1) {
+		width: 68%;
+	}
+	.markdown-lines i:nth-child(2) {
+		width: 100%;
+	}
+	.markdown-lines i:nth-child(3) {
+		width: 82%;
+	}
 	.product-meta {
 		display: flex;
 		align-items: center;
@@ -246,6 +459,18 @@ const organizationLd = {
 	.status.live {
 		background: #daf7ed;
 		color: var(--arc-teal-dark);
+	}
+	.status.review {
+		background: #e0f2fe;
+		color: #075985;
+	}
+	.status.building {
+		background: #dcfce7;
+		color: #166534;
+	}
+	.status.planned {
+		background: #f1f5f9;
+		color: #475569;
 	}
 	.product-card h3 {
 		margin: 1rem 0 0.55rem;
@@ -270,8 +495,171 @@ const organizationLd = {
 	.product-link.muted {
 		color: var(--arc-muted);
 	}
-	.principles {
+	.architecture {
 		margin-top: 6rem;
+	}
+	.architecture-heading {
+		align-items: end;
+	}
+	.architecture-panel {
+		padding: 1.25rem;
+		background: rgba(255, 255, 255, 0.92);
+		border: 1px solid #cfd8e3;
+		border-radius: 24px;
+		box-shadow: 0 24px 60px rgba(17, 24, 39, 0.08);
+	}
+	.diagram-legend {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.8rem 1.35rem;
+		padding: 0.45rem 0.35rem 1rem;
+		color: var(--arc-muted);
+		font-size: 0.78rem;
+		font-weight: 700;
+	}
+	.diagram-legend span {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+	}
+	.legend-line {
+		display: inline-block;
+		width: 1.8rem;
+		height: 0;
+		border-top: 2px solid var(--arc-teal);
+	}
+	.legend-line.dashed {
+		border-top-color: #8290a3;
+		border-top-style: dashed;
+	}
+	.legend-box {
+		display: inline-block;
+		width: 1.1rem;
+		height: 0.8rem;
+		background: #f8fafc;
+		border: 1px solid #94a3b8;
+		border-radius: 4px;
+	}
+	.dependency-graph {
+		display: block;
+		width: 100%;
+		height: auto;
+		font-family: inherit;
+	}
+	.layer-label {
+		fill: #718096;
+		font-size: 12px;
+		font-weight: 800;
+		letter-spacing: 0.09em;
+	}
+	.edge {
+		fill: none;
+		stroke-width: 2.5;
+	}
+	.edge.solid {
+		stroke: var(--arc-teal);
+	}
+	.edge.planned {
+		stroke: #8290a3;
+		stroke-dasharray: 8 7;
+	}
+	.arrow-head.solid {
+		fill: var(--arc-teal);
+	}
+	.arrow-head.planned {
+		fill: #8290a3;
+	}
+	.graph-node rect {
+		stroke-width: 1.5;
+	}
+	.graph-node.implemented rect {
+		fill: #eefbf7;
+		stroke: #31a884;
+	}
+	.graph-node.implemented.emphasized rect {
+		fill: #ddf7ef;
+		stroke: var(--arc-teal);
+		stroke-width: 2;
+	}
+	.graph-node.planned rect {
+		fill: #f8fafc;
+		stroke: #94a3b8;
+		stroke-dasharray: 7 5;
+	}
+	.graph-node.independent rect {
+		fill: #f8fafc;
+		stroke: #94a3b8;
+	}
+	.graph-node.platform rect {
+		fill: var(--arc-navy);
+		stroke: var(--arc-navy);
+	}
+	.node-title {
+		fill: var(--arc-ink);
+		font-size: 17px;
+		font-weight: 800;
+	}
+	.node-meta {
+		fill: var(--arc-muted);
+		font-size: 12px;
+		font-weight: 600;
+	}
+	.platform-title {
+		fill: #f8fafc;
+		font-size: 15px;
+	}
+	.dependency-list {
+		display: none;
+	}
+	.architecture-note {
+		display: grid;
+		grid-template-columns: minmax(190px, 0.7fr) minmax(0, 1.7fr);
+		gap: 1.5rem;
+		margin: 0.25rem;
+		padding: 1.35rem;
+		background: #f0f7f5;
+		border: 1px solid #d4e7e1;
+		border-radius: 16px;
+	}
+	.architecture-note strong {
+		color: var(--arc-teal-dark);
+		font-size: 1rem;
+		line-height: 1.45;
+	}
+	.architecture-note p {
+		margin: 0;
+		color: var(--arc-muted);
+		font-size: 0.91rem;
+		line-height: 1.6;
+	}
+	.evidence-grid {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 0.8rem;
+		margin-top: 0.9rem;
+	}
+	.evidence-grid div {
+		display: grid;
+		align-content: start;
+		gap: 0.35rem;
+		min-height: 138px;
+		padding: 1.1rem;
+		background: rgba(255, 255, 255, 0.76);
+		border: 1px solid #d5dde7;
+		border-radius: 16px;
+	}
+	.evidence-grid strong {
+		color: var(--arc-teal-dark);
+		font-size: 1.38rem;
+		letter-spacing: -0.035em;
+	}
+	.evidence-grid span {
+		color: var(--arc-muted);
+		font-size: 0.85rem;
+		line-height: 1.45;
+	}
+	.principles {
+		margin-top: 5rem;
 		padding: 2.3rem;
 		background: var(--arc-navy);
 		border-radius: 24px;
@@ -310,6 +698,44 @@ const organizationLd = {
 		.product-link {
 			margin-top: 1.25rem;
 		}
+		.dependency-graph {
+			display: none;
+		}
+		.dependency-list {
+			display: grid;
+			gap: 0.75rem;
+			padding: 0.2rem 0 0.8rem;
+		}
+		.dependency-list div {
+			display: grid;
+			gap: 0.45rem;
+			padding: 1rem;
+			background: #f8fafc;
+			border: 1px solid #d5dde7;
+			border-radius: 14px;
+		}
+		.dependency-list strong {
+			color: var(--arc-ink);
+		}
+		.dependency-list em {
+			color: var(--arc-muted);
+			font-size: 0.72rem;
+			font-style: normal;
+			font-weight: 700;
+			text-transform: uppercase;
+		}
+		.dependency-list span {
+			color: var(--arc-muted);
+			font-size: 0.86rem;
+			line-height: 1.55;
+		}
+		.architecture-note {
+			grid-template-columns: 1fr;
+			gap: 0.55rem;
+		}
+		.evidence-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
 	}
 	@media (max-width: 600px) {
 		.arc-page {
@@ -331,6 +757,19 @@ const organizationLd = {
 		}
 		.principle-grid {
 			grid-template-columns: 1fr;
+		}
+		.architecture-panel {
+			padding: 0.9rem;
+			border-radius: 18px;
+		}
+		.diagram-legend {
+			display: grid;
+		}
+		.evidence-grid {
+			grid-template-columns: 1fr;
+		}
+		.evidence-grid div {
+			min-height: 0;
 		}
 	}
 </style>
