@@ -123,7 +123,7 @@ const organizationLd = {
 						<h2 id="architecture-heading">One-way dependencies. No umbrella package.</h2>
 					</div>
 					<p>
-						The graph separates shipped paths, planned domain packages, and future optional import work,
+						The graph separates shipped paths, planned domain packages, and future optional import or export work,
 						so roadmap ideas are visible without pretending they already exist.
 					</p>
 				</div>
@@ -142,7 +142,7 @@ const organizationLd = {
 							ARC Scanner uses DocumentPipelineKit, which uses ARC Shared Infra and Apple frameworks.
 							ARC PDF Studio is planned to use PDFDocumentKit, DocumentPipelineKit, and InkObjectKit.
 							ARC Markdown currently uses an independent reader core and may later add an optional OCR and PDF import path through DocumentPipelineKit.
-							The ARC EDF &amp; BDF Viewer remains an independent specialized app built directly on Apple frameworks.
+							The ARC EDF &amp; BDF Viewer remains an independent specialized app built directly on Apple frameworks and may later add app-local PDF export or report output.
 						</desc>
 						<defs>
 							<marker id="arrow-solid" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
@@ -175,13 +175,14 @@ const organizationLd = {
 							<path class="edge planned" marker-end="url(#arrow-planned)" d="M800 270 C700 300 675 360 620 405" />
 							<path class="edge planned" marker-end="url(#arrow-planned)" d="M920 315 L920 545" />
 							<path class="edge planned" marker-end="url(#arrow-planned)" d="M920 635 L920 690" />
+							<path class="edge future" marker-end="url(#arrow-future)" d="M250 154 C248 214 242 236 218 255" />
 							<path class="edge future" marker-end="url(#arrow-future)" d="M680 154 C638 225 620 310 560 385" />
 						</g>
 
 						<g class="graph-node independent">
 							<rect x="150" y="65" width="200" height="89" rx="18" />
 							<text class="node-title" x="170" y="101">EDF &amp; BDF Viewer</text>
-							<text class="node-meta" x="170" y="128">Independent stack</text>
+							<text class="node-meta" x="170" y="128">Signals now · PDF later</text>
 						</g>
 						<g class="graph-node implemented">
 							<rect x="380" y="65" width="200" height="89" rx="18" />
@@ -199,6 +200,11 @@ const organizationLd = {
 							<text class="node-meta" x="860" y="128">Architecture planned</text>
 						</g>
 
+						<g class="future-label">
+							<rect x="116" y="255" width="176" height="44" rx="14" />
+							<text x="204" y="273" text-anchor="middle">Future optional</text>
+							<text x="204" y="290" text-anchor="middle">PDF export / report</text>
+						</g>
 						<g class="graph-node planned">
 							<rect x="800" y="225" width="240" height="90" rx="18" />
 							<text class="node-title" x="824" y="261">PDFDocumentKit</text>
@@ -234,7 +240,7 @@ const organizationLd = {
 						<div><strong>ARC Scanner</strong><span>↓ DocumentPipelineKit ↓ ARC Shared Infra ↓ Apple frameworks</span></div>
 						<div><strong>ARC PDF Studio <em>planned</em></strong><span>↓ PDFDocumentKit + DocumentPipelineKit + InkObjectKit ↓ Apple frameworks</span></div>
 						<div><strong>ARC Markdown</strong><span>Current: independent Markdown reader core ↓ Apple frameworks. Future optional: OCR / PDF import through DocumentPipelineKit.</span></div>
-						<div><strong>EDF &amp; BDF Viewer</strong><span>↓ Independent specialized stack ↓ Apple frameworks</span></div>
+						<div><strong>EDF &amp; BDF Viewer</strong><span>Current: independent specialized stack ↓ Apple frameworks. Future optional: PDF export / report stays app-local.</span></div>
 					</div>
 
 					<div class="architecture-note">
