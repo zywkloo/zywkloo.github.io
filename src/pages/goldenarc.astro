@@ -54,8 +54,8 @@ const organizationLd = {
 <html lang="en">
 	<head>
 		<BaseHead
-			title="GoldenARC Digital | Native tools, deliberate foundations"
-			description="GoldenARC Digital builds local-first Apple platform tools on a modular Swift package architecture, including ARC EDF & BDF Viewer, ARC Scanner, ARC Markdown, and ARC PDF Studio."
+			title="GoldenARC Digital | One Core. Many Arcs."
+			description="Plug Once. Grow Everywhere. GoldenARC Digital builds local-first Apple platform tools on a modular Swift package architecture, including ARC EDF & BDF Viewer, ARC Scanner, ARC Markdown, and ARC PDF Studio."
 		/>
 		<script type="application/ld+json" is:inline set:html={JSON.stringify(organizationLd)} />
 	</head>
@@ -68,9 +68,9 @@ const organizationLd = {
 					<img src="/images/goldenarc/brand-mark.png" alt="" width="64" height="64" />
 					<span>GoldenARC Digital</span>
 				</div>
-				<h1>Native tools. Deliberate foundations.</h1>
+				<h1>One Core. Many Arcs.</h1>
 				<p class="lede">
-					A family of local-first utilities for Apple platforms. Each app has a focused job; shared
+					Plug Once. Grow Everywhere. GoldenARC tools stay focused at the product layer while shared
 					capabilities live in small, testable Swift Package products with explicit dependency boundaries.
 				</p>
 			</section>
@@ -123,8 +123,8 @@ const organizationLd = {
 						<h2 id="architecture-heading">One-way dependencies. No umbrella package.</h2>
 					</div>
 					<p>
-						The graph separates the integrated Scanner path from PDF Studio's planned domain packages,
-						so roadmap work is not presented as shipped code.
+						The graph separates shipped paths, planned domain packages, and future optional import work,
+						so roadmap ideas are visible without pretending they already exist.
 					</p>
 				</div>
 
@@ -132,6 +132,7 @@ const organizationLd = {
 					<div class="diagram-legend" aria-label="Architecture diagram legend">
 						<span><i class="legend-line solid"></i> Implemented / integrated</span>
 						<span><i class="legend-line dashed"></i> Planned dependency</span>
+						<span><i class="legend-line future"></i> Future optional path</span>
 						<span><i class="legend-box"></i> Independent app stack</span>
 					</div>
 
@@ -140,7 +141,8 @@ const organizationLd = {
 						<desc id="graph-desc">
 							ARC Scanner uses DocumentPipelineKit, which uses ARC Shared Infra and Apple frameworks.
 							ARC PDF Studio is planned to use PDFDocumentKit, DocumentPipelineKit, and InkObjectKit.
-							ARC EDF and BDF Viewer and ARC Markdown remain independent specialized apps built directly on Apple frameworks.
+							ARC Markdown currently uses an independent reader core and may later add an optional OCR and PDF import path through DocumentPipelineKit.
+							The ARC EDF &amp; BDF Viewer remains an independent specialized app built directly on Apple frameworks.
 						</desc>
 						<defs>
 							<marker id="arrow-solid" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
@@ -148,6 +150,9 @@ const organizationLd = {
 							</marker>
 							<marker id="arrow-planned" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
 								<path d="M0,0 L8,4 L0,8 Z" class="arrow-head planned" />
+							</marker>
+							<marker id="arrow-future" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+								<path d="M0,0 L8,4 L0,8 Z" class="arrow-head future" />
 							</marker>
 						</defs>
 
@@ -170,6 +175,7 @@ const organizationLd = {
 							<path class="edge planned" marker-end="url(#arrow-planned)" d="M800 270 C700 300 675 360 620 405" />
 							<path class="edge planned" marker-end="url(#arrow-planned)" d="M920 315 L920 545" />
 							<path class="edge planned" marker-end="url(#arrow-planned)" d="M920 635 L920 690" />
+							<path class="edge future" marker-end="url(#arrow-future)" d="M680 154 C638 225 620 310 560 385" />
 						</g>
 
 						<g class="graph-node independent">
@@ -185,7 +191,7 @@ const organizationLd = {
 						<g class="graph-node independent">
 							<rect x="610" y="65" width="200" height="89" rx="18" />
 							<text class="node-title" x="630" y="101">ARC Markdown</text>
-							<text class="node-meta" x="630" y="128">Independent reader core</text>
+							<text class="node-meta" x="630" y="128">Reader core now · import later</text>
 						</g>
 						<g class="graph-node planned">
 							<rect x="840" y="65" width="200" height="89" rx="18" />
@@ -202,6 +208,11 @@ const organizationLd = {
 							<rect x="380" y="385" width="240" height="90" rx="18" />
 							<text class="node-title" x="404" y="421">DocumentPipelineKit</text>
 							<text class="node-meta" x="404" y="448">Contracts · pipeline · export</text>
+						</g>
+						<g class="future-label">
+							<rect x="565" y="255" width="150" height="44" rx="14" />
+							<text x="640" y="273" text-anchor="middle">Future optional</text>
+							<text x="640" y="290" text-anchor="middle">OCR / PDF import</text>
 						</g>
 						<g class="graph-node implemented">
 							<rect x="380" y="545" width="240" height="90" rx="18" />
@@ -222,7 +233,7 @@ const organizationLd = {
 					<div class="dependency-list" aria-hidden="true">
 						<div><strong>ARC Scanner</strong><span>↓ DocumentPipelineKit ↓ ARC Shared Infra ↓ Apple frameworks</span></div>
 						<div><strong>ARC PDF Studio <em>planned</em></strong><span>↓ PDFDocumentKit + DocumentPipelineKit + InkObjectKit ↓ Apple frameworks</span></div>
-						<div><strong>ARC Markdown</strong><span>↓ Independent Markdown reader core ↓ Apple frameworks</span></div>
+						<div><strong>ARC Markdown</strong><span>Current: independent Markdown reader core ↓ Apple frameworks. Future optional: OCR / PDF import through DocumentPipelineKit.</span></div>
 						<div><strong>EDF &amp; BDF Viewer</strong><span>↓ Independent specialized stack ↓ Apple frameworks</span></div>
 					</div>
 
@@ -246,7 +257,7 @@ const organizationLd = {
 
 			<section class="principles" aria-labelledby="principles-heading">
 				<p class="eyebrow">Product and engineering principles</p>
-				<h2 id="principles-heading">Useful by default. Replaceable by design.</h2>
+				<h2 id="principles-heading">Built as packages. Shipped as tools.</h2>
 				<div class="principle-grid">
 					<div><strong>Local first</strong><span>Core file work stays on your device.</span></div>
 					<div><strong>Focused products</strong><span>Each app has a clear job and links only the capabilities it needs.</span></div>
@@ -532,6 +543,11 @@ const organizationLd = {
 		border-top-color: #8290a3;
 		border-top-style: dashed;
 	}
+	.legend-line.future {
+		border-top-color: #b6c0cd;
+		border-top-style: dotted;
+		opacity: 0.75;
+	}
 	.legend-box {
 		display: inline-block;
 		width: 1.1rem;
@@ -563,11 +579,21 @@ const organizationLd = {
 		stroke: #8290a3;
 		stroke-dasharray: 8 7;
 	}
+	.edge.future {
+		stroke: #aab5c4;
+		stroke-dasharray: 2 8;
+		stroke-linecap: round;
+		opacity: 0.72;
+	}
 	.arrow-head.solid {
 		fill: var(--arc-teal);
 	}
 	.arrow-head.planned {
 		fill: #8290a3;
+	}
+	.arrow-head.future {
+		fill: #aab5c4;
+		opacity: 0.72;
 	}
 	.graph-node rect {
 		stroke-width: 1.5;
@@ -593,6 +619,17 @@ const organizationLd = {
 	.graph-node.platform rect {
 		fill: var(--arc-navy);
 		stroke: var(--arc-navy);
+	}
+	.future-label rect {
+		fill: #f8fafc;
+		stroke: #cbd5e1;
+		stroke-dasharray: 3 5;
+	}
+	.future-label text {
+		fill: #64748b;
+		font-size: 11px;
+		font-weight: 750;
+		letter-spacing: 0;
 	}
 	.node-title {
 		fill: var(--arc-ink);
