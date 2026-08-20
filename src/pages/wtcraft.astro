@@ -10,30 +10,6 @@ const posts = (await getCollection('blog'))
 	.filter((post) => post.data.tags?.includes('wtcraft'))
 	.sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
 
-// Guides list = the /docs landing overview (which lives in _overview.md, not
-// the collection, so getCollection can't see it) followed by every
-// wtcraft-tagged guide pulled straight from the docs collection.
-const collectionGuides = (await getCollection('docs'))
-	.filter((doc) => doc.data.tags?.includes('wtcraft'))
-	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-	.map((doc) => ({
-		href: `/docs/${doc.id}/`,
-		badge: '📄 Docs',
-		title: doc.data.title,
-		description: doc.data.description,
-	}));
-
-const guides = [
-	{
-		href: '/docs',
-		badge: '🧭 Overview',
-		title: 'SEO & GEO Field Notes',
-		description:
-			'Why / how / when + the GEO acceptance loop — the strategic overview behind the three hands-on guides.',
-	},
-	...collectionGuides,
-];
-
 const pageTitle = 'wtcraft — Git-Native Governance for Claude Code, Codex & Gemini on a Budget | Victor Zhang';
 const pageDescription =
 	'wtcraft is a lightweight, git-native CLI that keeps multiple coding-agent CLIs — Claude Code, Codex, Gemini — in their lanes and on budget. No daemon, no DB, just git. Install via npm, pipx, or Homebrew.';
@@ -100,13 +76,10 @@ const faqLd = {
 				<img src="/images/wtcraft-icon.PNG" alt="wtcraft" class="hero-logo" />
 				<h1 class="hero-title">wtcraft</h1>
 				<p class="hero-tagline">Git-native governance for running Claude Code, Codex &amp; Gemini together — on a budget</p>
-				<p class="hero-tagline-zh">把 Claude Code、Codex、Gemini 摆一起跑而不打架 —— Git 原生、零依赖的治理内核</p>
 				<p class="hero-pitch">
 					Run Claude Code, Codex, and Gemini side by side in isolated git worktrees, with
 					strict, verifiable task boundaries that keep them from stepping on each other —
 					instead of reinventing another runtime.
-					<br />
-					<span class="zh">把 Claude Code、Codex、Gemini 放进各自隔离的 git worktree 并行跑，用可验证的任务边界防止它们互相打架 —— 而不是再造一个 runtime。</span>
 				</p>
 				<div class="badges">
 					<a href={WTCRAFT_NPM_URL}><img src="https://img.shields.io/npm/v/wtcraft.svg?style=flat-square&logo=npm&color=cb3837" alt="npm package" /></a>
@@ -123,7 +96,7 @@ const faqLd = {
 
 			<!-- Install -->
 			<section class="block">
-				<h2 class="section-title">Install / 安装</h2>
+				<h2 class="section-title">Install</h2>
 				<pre class="install"><code># Node / npm
 npm install -g wtcraft
 
@@ -134,14 +107,12 @@ pipx install wtcraft
 brew tap zywkloo/wtcraft https://github.com/zywkloo/wtcraft && brew install wtcraft</code></pre>
 				<p class="install-note">
 					Then run <code>wtcraft init</code> in your repo root to scaffold the harness.
-					<br />
-					<span class="zh">随后在仓库根目录运行 <code>wtcraft init</code> 即可生成脚手架。</span>
 				</p>
 			</section>
 
 			<!-- Articles -->
 			<section class="block">
-				<h2 class="section-title">Articles / 系列文章 <span class="muted">· TokenChef</span></h2>
+				<h2 class="section-title">Articles <span class="muted">· TokenChef</span></h2>
 				<ul class="card-list">
 					{posts.map((post) => (
 						<li>
@@ -152,22 +123,6 @@ brew tap zywkloo/wtcraft https://github.com/zywkloo/wtcraft && brew install wtcr
 								<h3 class="card-title" set:html={post.data.title.split(' / ')[0]}></h3>
 								<p class="card-desc">{post.data.description}</p>
 								<p class="card-meta"><FormattedDate date={post.data.pubDate} /></p>
-							</a>
-						</li>
-					))}
-				</ul>
-			</section>
-
-			<!-- Guides / Docs -->
-			<section class="block">
-				<h2 class="section-title">Guides / 营销与优化文档</h2>
-				<ul class="card-list">
-					{guides.map((guide) => (
-						<li>
-							<a href={guide.href}>
-								<span class="series-badge docs">{guide.badge}</span>
-								<h3 class="card-title">{guide.title}</h3>
-								<p class="card-desc">{guide.description}</p>
 							</a>
 						</li>
 					))}
@@ -214,26 +169,16 @@ brew tap zywkloo/wtcraft https://github.com/zywkloo/wtcraft && brew install wtcr
 				letter-spacing: -0.02em;
 			}
 			.hero-tagline {
-				margin: 0;
+				margin: 0 0 1rem;
 				font-size: 1.15rem;
 				font-weight: 600;
 				color: rgb(var(--black));
-			}
-			.hero-tagline-zh {
-				margin: 0.15rem 0 1rem;
-				color: rgb(var(--gray));
-				font-size: 0.98rem;
 			}
 			.hero-pitch {
 				max-width: 620px;
 				margin: 0 auto 1.4rem;
 				color: rgb(var(--gray-dark));
 				line-height: 1.55;
-			}
-			.hero-pitch .zh,
-			.install-note .zh {
-				color: rgb(var(--gray));
-				font-size: 0.92rem;
 			}
 			.badges {
 				display: flex;
@@ -344,11 +289,6 @@ brew tap zywkloo/wtcraft https://github.com/zywkloo/wtcraft && brew install wtcr
 				background-color: rgba(239, 68, 68, 0.08);
 				color: #ef4444;
 				border: 1px solid rgba(239, 68, 68, 0.18);
-			}
-			.series-badge.docs {
-				background-color: rgba(14, 165, 233, 0.08);
-				color: #0ea5e9;
-				border: 1px solid rgba(14, 165, 233, 0.18);
 			}
 			.card-title {
 				margin: 0 0 0.25rem;
