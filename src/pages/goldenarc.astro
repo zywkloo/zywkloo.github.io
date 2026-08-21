@@ -9,8 +9,8 @@ const products = [
 		name: 'ARC EDF & BDF Viewer',
 		platform: 'iPad + Mac',
 		description: 'Open EDF, EDF+ and BDF recordings, explore every channel, and inspect file metadata locally.',
-		status: 'In App Review',
-		statusTone: 'review',
+		status: 'Now on App Store',
+		statusTone: 'live',
 		href: '/edfviewer',
 		icon: '/images/goldenarc/arc-edf-viewer.png',
 	},
@@ -85,34 +85,41 @@ const organizationLd = {
 				</div>
 
 				<div class="product-grid">
-					{products.map((product) => (
-						<article class:list={['product-card', { available: product.href }]}>
-							<div class="product-visual">
-								{product.icon ? (
-									<img src={product.icon} alt={`${product.name} app icon`} width="512" height="512" loading="lazy" />
+					{products.map((product) => {
+						const CardTag = product.href ? 'a' : 'article';
+						return (
+							<CardTag
+								href={product.href}
+								class:list={['product-card', { available: product.href }]}
+								aria-label={product.href ? `Explore ${product.name}` : undefined}
+							>
+								<div class="product-visual">
+									{product.icon ? (
+										<img src={product.icon} alt={`${product.name} app icon`} width="512" height="512" loading="lazy" />
+									) : (
+										<div class="product-monogram arc-markdown-icon" role="img" aria-label={`${product.name} app icon concept`}>
+											<span class="markdown-wordmark">.{product.monogram}</span>
+											<span class="markdown-ruler" aria-hidden="true"></span>
+											<span class="markdown-lines" aria-hidden="true"><i></i><i></i><i></i></span>
+										</div>
+									)}
+								</div>
+								<div class="product-meta">
+									<span class:list={['status', product.statusTone]}>{product.status}</span>
+									<span>{product.platform}</span>
+								</div>
+								<h3>{product.name}</h3>
+								<p>{product.description}</p>
+								{product.href ? (
+									<span class="product-link">
+										Explore the app <span class="arrow" aria-hidden="true">→</span>
+									</span>
 								) : (
-									<div class="product-monogram arc-markdown-icon" role="img" aria-label={`${product.name} app icon concept`}>
-										<span class="markdown-wordmark">.{product.monogram}</span>
-										<span class="markdown-ruler" aria-hidden="true"></span>
-										<span class="markdown-lines" aria-hidden="true"><i></i><i></i><i></i></span>
-									</div>
+									<span class="product-link muted">Details will follow</span>
 								)}
-							</div>
-							<div class="product-meta">
-								<span class:list={['status', product.statusTone]}>{product.status}</span>
-								<span>{product.platform}</span>
-							</div>
-							<h3>{product.name}</h3>
-							<p>{product.description}</p>
-							{product.href ? (
-								<a class="product-link" href={product.href} aria-label={`Explore ${product.name}`}>
-									Explore the app <span aria-hidden="true">→</span>
-								</a>
-							) : (
-								<span class="product-link muted">Details will follow</span>
-							)}
-						</article>
-					))}
+							</CardTag>
+						);
+					})}
 				</div>
 			</section>
 
@@ -369,10 +376,19 @@ const organizationLd = {
 		border: 1px solid #cfd8e3;
 		border-radius: 22px;
 		box-shadow: var(--shadow-sm);
+		text-decoration: none;
+		color: inherit;
+		transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 	}
 	.product-card.available {
 		border-color: rgba(8, 122, 97, 0.3);
-		box-shadow: 0 20px 48px rgba(17, 24, 39, 0.09);
+		box-shadow: 0 12px 35px rgba(17, 24, 39, 0.07);
+		cursor: pointer;
+	}
+	.product-card.available:hover {
+		transform: translateY(-5px);
+		border-color: rgba(8, 122, 97, 0.55);
+		box-shadow: 0 24px 52px rgba(8, 122, 97, 0.16), 0 8px 24px rgba(17, 24, 39, 0.08);
 	}
 	.product-visual {
 		display: grid;
@@ -385,6 +401,12 @@ const organizationLd = {
 			radial-gradient(circle at 50% 30%, rgba(45, 224, 168, 0.14), transparent 58%),
 			var(--arc-navy);
 		border-radius: 15px;
+		transition: background 0.3s ease;
+	}
+	.product-card.available:hover .product-visual {
+		background:
+			radial-gradient(circle at 50% 30%, rgba(45, 224, 168, 0.26), transparent 64%),
+			#0d1527;
 	}
 	.product-visual img {
 		width: 126px;
@@ -393,6 +415,12 @@ const organizationLd = {
 		border-radius: 27px;
 		box-shadow: 0 18px 32px rgba(5, 10, 25, 0.38);
 		object-fit: cover;
+		transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, filter 0.3s ease;
+	}
+	.product-card.available:hover .product-visual img {
+		transform: scale(1.08) translateY(-2px);
+		box-shadow: 0 24px 42px rgba(5, 10, 25, 0.55);
+		filter: brightness(1.05);
 	}
 	.product-monogram {
 		position: relative;
@@ -495,6 +523,10 @@ const organizationLd = {
 	.product-card h3 {
 		margin: 1rem 0 0.55rem;
 		font-size: 1.35rem;
+		transition: color 0.2s ease;
+	}
+	.product-card.available:hover h3 {
+		color: var(--arc-teal);
 	}
 	.product-card p {
 		margin: 0;
@@ -508,9 +540,19 @@ const organizationLd = {
 		color: var(--arc-teal);
 		font-size: 0.9rem;
 		font-weight: 700;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
 	}
-	.product-link:hover {
+	.product-card.available:hover .product-link {
 		color: var(--arc-teal-dark);
+	}
+	.product-link .arrow {
+		display: inline-block;
+		transition: transform 0.2s ease;
+	}
+	.product-card.available:hover .product-link .arrow {
+		transform: translateX(4px);
 	}
 	.product-link.muted {
 		color: var(--arc-muted);

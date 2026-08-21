@@ -4,26 +4,24 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_URL, SITE_AUTHOR_ALT } from '../consts';
 
-// This page is the Support URL and the Privacy Policy URL on the App Store
-// listing. Both are mandatory fields, App Review does open them, and a 404 on
-// the privacy URL is a guaranteed rejection — so this page has to exist and stay
-// reachable for as long as the app is on sale.
-//
-// It lives here rather than in the app's own repository because that repository
-// is private, and GitHub Pages does not publish from a private repo on a free
-// plan.
-
+// App Store Live URL
+const APP_STORE_URL = 'https://apps.apple.com/app/id6801383472';
 const SUPPORT_EMAIL = 'victor@goldenarc.digital';
 
 const appLd = {
 	'@context': 'https://schema.org',
 	'@type': 'SoftwareApplication',
-	name: 'EDF & BDF Viewer',
+	name: 'ARC EDF & BDF Viewer',
+	alternateName: ['EDF & BDF Viewer', 'EDF Viewer', 'BDF Viewer'],
 	applicationCategory: 'UtilitiesApplication',
-	operatingSystem: 'iPadOS, macOS',
+	operatingSystem: 'macOS, iPadOS',
+	url: APP_STORE_URL,
+	installUrl: APP_STORE_URL,
+	downloadUrl: APP_STORE_URL,
 	inLanguage: ['en'],
 	description:
-		'A native viewer for EDF, EDF+ and BDF biosignal recordings, for iPad and Mac. Browse every channel, place a measurement cursor, and inspect the full file header. A file-viewing utility for research, educational and engineering use — not a medical device.',
+		'A high-performance native SwiftUI viewer for EDF, EDF+ and BDF biosignal recordings on Mac and iPad. Stacked multi-channel montage, min/max peak-preserving downsampling, precision measurement cursor, and full header inspection. 100% on-device and private.',
+	screenshot: `${SITE_URL}/images/edfviewer/hero-preview.webp`,
 	offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
 	publisher: { '@type': 'Organization', name: 'GoldenARC Digital' },
 	author: { '@type': 'Person', name: 'Victor Zhang', alternateName: SITE_AUTHOR_ALT, url: SITE_URL },
@@ -34,116 +32,287 @@ const appLd = {
 <html lang="en">
 	<head>
 		<BaseHead
-			title="EDF & BDF Viewer | Open biosignal recordings on iPad and Mac"
-			description="A native viewer for EDF, EDF+ and BDF biosignal files. Browse every channel, measure with a cursor, and inspect the full file header. Support and privacy policy."
+			title="ARC EDF & BDF Viewer | Native Biosignal Viewer for Mac & iPad"
+			description="Open and inspect EDF, EDF+ and BDF biosignal files on Mac and iPad. Multi-channel montage, min/max waveform rendering, precision cursor, and full header inspector. 100% offline."
+			ogImageUrl="/images/edfviewer/hero-preview.webp"
 		/>
 		<script type="application/ld+json" is:inline set:html={JSON.stringify(appLd)} />
 	</head>
 	<body>
 		<Header />
 		<main class="edf-page">
-			<section class="hero">
-				<h1>EDF &amp; BDF Viewer</h1>
-				<p class="tagline">Open and inspect biosignal recordings on iPad and Mac.</p>
-				<hr class="rule" />
-				<p class="lede">
-					A native viewer for the European Data Format (EDF, EDF+) and the BioSemi
-					Data Format (BDF) — the file formats used across sleep, EEG, ECG and
-					electrophysiology research. No installer, no Java or Python environment,
-					no account. Open a file and look at your data.
+			<!-- Hero Section -->
+			<div class="hero-container">
+				<div class="hero-content">
+					<div class="app-tag">⚡ Mac App Store · Universal for macOS &amp; iPadOS · Now Available</div>
+					<h1>EDF &amp; BDF Viewer</h1>
+					<p class="subtitle">Open and inspect biosignal recordings on Mac and iPad.</p>
+					<p class="tagline">
+						A high-performance, native SwiftUI viewer for European Data Format (EDF, EDF+) and BioSemi Data Format (BDF) files across EEG, ECG, sleep, and electrophysiology research. Zero runtime dependencies, no Java/Python environment, 100% on-device.
+					</p>
+
+					<div class="cta-group">
+						<a href={APP_STORE_URL} target="_blank" rel="noopener" class="btn btn-primary">
+							<svg class="apple-icon" viewBox="0 0 170 170" width="16" height="16" fill="currentColor" aria-hidden="true">
+								<path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.59-7.71-11.66-14.01-6.19-9.56-10.9-20.2-14.13-31.92-3.23-11.72-4.85-22.95-4.85-33.69 0-14.13 3.63-25.75 10.9-34.85 7.27-9.1 16.31-13.78 27.12-14.06 4.35 0 9.28 1.13 14.79 3.38 5.51 2.26 9.4 3.44 11.66 3.56 1.85 0 5.86-1.25 12.02-3.74 6.16-2.5 11.53-3.63 16.11-3.39 12.08.75 21.65 5.38 28.71 13.9-10.88 6.64-16.19 15.54-15.93 26.7.26 8.71 3.59 16.03 10 21.96 6.41 5.93 13.9 9.38 22.47 10.35-2.28 6.95-5.07 14.18-8.37 21.68zM119.22 31.84c0-7.38 2.65-14.28 7.95-20.7 5.3-6.42 11.83-10.45 19.59-12.09.87 7.06-1.57 14.01-7.32 20.85-5.75 6.84-12.49 10.82-20.22 11.94z" />
+							</svg>
+							Download on App Store
+						</a>
+						<a href="#features" class="btn btn-secondary">Core Features ↓</a>
+					</div>
+					<p class="coming-soon">
+						🔬 Pure Swift Parser · Min/Max Downsampling · Zero Network · 100% On-Device
+					</p>
+				</div>
+
+				<div class="hero-preview">
+					<img
+						src="/images/edfviewer/hero-preview.webp"
+						alt="ARC EDF & BDF Viewer on macOS — All-Channels Montage View"
+						class="framed-mockup"
+					/>
+				</div>
+			</div>
+
+			<!-- 3-Step Walkthrough -->
+			<section class="loop-section">
+				<h2>Inspect Biosignal Recordings in Three Steps</h2>
+				<p class="loop-subtitle">
+					No command line tools, no Python runtime setup, no cloud uploads. Open a file directly and begin inspecting data.
 				</p>
+
+				<div class="steps-grid">
+					<div class="step-card">
+						<div class="step-media">
+							<div class="mac-frame">
+								<img src="/images/edfviewer/step-open.webp" alt="Open EDF and BDF recordings directly" loading="lazy" />
+							</div>
+						</div>
+						<div class="step-body">
+							<span class="step-num">1</span>
+							<h4>Open Instantly</h4>
+							<p>Double-click in Finder, open from Files app, or drag and drop. A built-in synthetic demo recording is included.</p>
+							<small>Supports .edf, .edf+ (16-bit) and .bdf (24-bit) files.</small>
+						</div>
+					</div>
+
+					<div class="step-card">
+						<div class="step-media">
+							<div class="mac-frame">
+								<img src="/images/edfviewer/step-montage.webp" alt="All Channels Montage and Min/Max Waveform" loading="lazy" />
+							</div>
+						</div>
+						<div class="step-body">
+							<span class="step-num">2</span>
+							<h4>Every Channel in Sync</h4>
+							<p>Stacked montage with channel sidebar. Min/max envelope rendering ensures zero spike loss at any zoom level.</p>
+							<small>Trackpad swipe, pinch to zoom, or ⌘+ / ⌘- and arrow keys.</small>
+						</div>
+					</div>
+
+					<div class="step-card">
+						<div class="step-media">
+							<div class="mac-frame">
+								<img src="/images/edfviewer/step-cursor.webp" alt="Measurement Cursor and Time Amplitude Readout" loading="lazy" />
+							</div>
+						</div>
+						<div class="step-body">
+							<span class="step-num">3</span>
+							<h4>Measure &amp; Inspect</h4>
+							<p>Click or tap anywhere to place a crosshair cursor for exact time and amplitude readout. Inspect full file header metadata.</p>
+							<small>Calibrated physical units (μV, mV, bpm) and digital ranges.</small>
+						</div>
+					</div>
+				</div>
 			</section>
 
-			<section>
-				<h2>What it does</h2>
-				<ul>
-					<li>All-Channels montage, or one channel at a time, with sample rate and physical unit shown per channel.</li>
-					<li>Min/max envelope rendering, so a spike is never lost the way naive downsampling loses it.</li>
-					<li>Pinch to zoom and drag to pan; on Mac, <code>⌘+</code>, <code>⌘-</code> and the arrow keys.</li>
-					<li>Tap to place a measurement cursor and read the exact time and amplitude.</li>
-					<li>Fixed amplitude scales as well as auto-fit, so a quiet stretch and a loud one can actually be compared.</li>
-					<li>A full header inspector: format, start date and time, record layout, and each signal's physical and digital ranges.</li>
-					<li>Open in place from Files or the Finder, drag and drop, and recent files.</li>
-				</ul>
+			<!-- Feature Showcase (Deep-Dives) -->
+			<section class="showcase-section">
+				<h2>Engineered for Electrophysiology Research</h2>
+				<p class="showcase-subtitle">
+					From multi-gigabyte PSG sleep recordings to high-channel EEG, explore your signals with native desktop speed.
+				</p>
+
+				<div class="showcase-grid">
+					<div class="showcase-card">
+						<div class="showcase-image-box">
+							<img src="/images/edfviewer/store-montage.webp" alt="Peak-Preserving Min/Max Waveform Downsampling" loading="lazy" />
+						</div>
+						<div class="showcase-info">
+							<h4>Peak-Preserving Min/Max Rendering</h4>
+							<p>Naive downsampling drops transient spikes and high-frequency artifacts. Our dual-envelope algorithm calculates local extrema per pixel bucket, rendering millions of samples smoothly while preserving critical diagnostic peaks.</p>
+							<small>Accurate waveform display across 1-second to multi-hour time windows.</small>
+						</div>
+					</div>
+
+					<div class="showcase-card">
+						<div class="showcase-image-box">
+							<img src="/images/edfviewer/store-cursor.webp" alt="Interactive Measurement Crosshair Readout" loading="lazy" />
+						</div>
+						<div class="showcase-info">
+							<h4>Interactive Measurement Crosshair</h4>
+							<p>Place a measurement cursor at any point along the waveform timeline. Read calibrated physical values in exact units (μV, mV, bpm, %SpO2) alongside timestamps with microsecond precision.</p>
+							<small>Compare quiet vs active stretches with fixed or auto-fit amplitude scales.</small>
+						</div>
+					</div>
+
+					<div class="showcase-card full-width">
+						<div class="showcase-image-box">
+							<img src="/images/edfviewer/store-header.webp" alt="Full Header & Signal Calibration Inspector" loading="lazy" />
+						</div>
+						<div class="showcase-info">
+							<h4>Complete Header &amp; Signal Calibration</h4>
+							<p>Inspect recording start date and time, patient and recording identification fields, total data records, and per-signal calibration specifications (sample rate, physical/digital minimums &amp; maximums, transducer type, and prefiltering).</p>
+							<small>Exact calibration decoding for standard 16-bit EDF and 24-bit BioSemi BDF formats.</small>
+						</div>
+					</div>
+				</div>
 			</section>
 
-			<section class="panel">
-				<h3>Not a medical device</h3>
-				<p>
-					This is a file-viewing utility for research, educational, and engineering
-					use. It does not diagnose, monitor, or support any clinical decision, and
-					it is not intended for diagnosis or treatment.
-				</p>
+			<!-- Core Features Grid -->
+			<section id="features" class="features-section">
+				<h2>Core Capabilities</h2>
+				<div class="features-grid">
+					<div class="feature-card">
+						<div class="feature-icon">⚡</div>
+						<h3>Native Swift &amp; SwiftUI</h3>
+						<p>Built purely in Swift with zero C runtime bridge or Python dependencies. Instant launch, responsive UI, and native macOS &amp; iPadOS integration.</p>
+						<small>macOS 13+ and iPadOS 16+ Universal Purchase.</small>
+					</div>
+
+					<div class="feature-card">
+						<div class="feature-icon">📊</div>
+						<h3>All-Channels Montage</h3>
+						<p>View all recording channels stacked in one synchronized view, or navigate through individual channels with sample rate and physical units displayed.</p>
+						<small>Side-by-side signal inspection with adjustable gain.</small>
+					</div>
+
+					<div class="feature-card">
+						<div class="feature-icon">📐</div>
+						<h3>Min/Max Decimation</h3>
+						<p>Min/max envelope rendering ensures high-frequency spikes and artifacts remain visible at any zoom level without signal aliasing.</p>
+						<small>Peak-preserving rendering for massive recordings.</small>
+					</div>
+
+					<div class="feature-card">
+						<div class="feature-icon">🎯</div>
+						<h3>Precision Cursor</h3>
+						<p>Single-tap or click crosshair cursor reads exact timestamp and calibrated physical amplitude (μV, mV, bpm) across active channels.</p>
+						<small>Accurate point-by-point quantitative inspection.</small>
+					</div>
+
+					<div class="feature-card">
+						<div class="feature-icon">📑</div>
+						<h3>Header Inspector</h3>
+						<p>Full inspection of recording metadata: format version, start date/time, record count, and per-signal digital and physical boundary definitions.</p>
+						<small>Complete file layout transparency for researchers.</small>
+					</div>
+
+					<div class="feature-card">
+						<div class="feature-icon">🔒</div>
+						<h3>100% On-Device &amp; Private</h3>
+						<p>Zero analytics, zero tracking, no accounts, and no network requests. Your biosignal data never leaves your device.</p>
+						<small>Safe for sensitive research and local data analysis.</small>
+					</div>
+				</div>
 			</section>
 
-			<section>
-				<h2>Pro</h2>
-				<p>
-					Everything above is free. A single one-time Pro purchase adds export: the
-					current view as a PNG image, the visible window as CSV at full sample
-					resolution, and the complete file header as text. There is no subscription.
-				</p>
+			<!-- Not a Medical Device Disclaimer Panel -->
+			<section class="panel-section">
+				<div class="panel">
+					<h3>Not a medical device</h3>
+					<p>
+						This is a file-viewing utility for research, educational, and engineering use. It does not diagnose, monitor, or support any clinical decision, and it is not intended for diagnosis or treatment.
+					</p>
+				</div>
 			</section>
 
-			<section>
-				<h2>Questions</h2>
-
-				<h3>Which files can it open?</h3>
-				<p>
-					<code>.edf</code> and <code>.bdf</code>, including EDF+. 16-bit EDF and
-					24-bit BDF are both decoded using the calibration declared in the file
-					header.
-				</p>
-
-				<h3>Is there a sample file?</h3>
-				<p>
-					Yes — a demo recording is built into the app, so there is something to
-					look at before you have a file of your own. Its signals are generated,
-					not recorded from a person.
-				</p>
-
-				<h3>Does it upload anything?</h3>
-				<p>No. The app has no network features at all. See <a href="#privacy">Privacy</a>.</p>
-
-				<h3>Why is my recording hard to read at the default window?</h3>
-				<p>
-					A ten-second window of a fast rhythm packs a great many cycles into the
-					pane. Pinch in, or press <code>⌘+</code>, to shorten the window; switch
-					the gain away from Auto to hold the amplitude scale still while you move
-					around.
-				</p>
+			<!-- Pro & Free Edition -->
+			<section class="pro-section">
+				<div class="section-container">
+					<h2>Free &amp; Pro Edition</h2>
+					<p class="pro-desc">
+						Everything required to open, inspect, zoom, navigate, and measure recordings is completely free. A single one-time Pro purchase adds export capabilities:
+					</p>
+					<div class="pro-card">
+						<div class="pro-badge">One-Time Purchase · No Subscription</div>
+						<ul class="pro-list">
+							<li><strong>PNG Image Export:</strong> Export current waveform view at high resolution.</li>
+							<li><strong>CSV Data Export:</strong> Export visible time window as CSV at full original sample rate.</li>
+							<li><strong>Header Text Export:</strong> Export the complete file header as structured text.</li>
+						</ul>
+					</div>
+				</div>
 			</section>
 
-			<section id="privacy">
-				<h2>Privacy</h2>
-				<p>
-					<strong>The developer collects nothing.</strong> The app has no analytics,
-					no crash reporting, no accounts, no advertising, and no third-party SDKs.
-					It makes no network requests of any kind.
-				</p>
-				<ul>
-					<li>Recordings you open are read on your device and never leave it. The developer cannot see them.</li>
-					<li>The only thing kept between launches is your list of recently opened files, stored on device so those files can be reopened without asking you to find them again.</li>
-					<li>Exported files are written only where you choose to save them.</li>
-					<li>Purchases are handled entirely by Apple. The developer never receives your payment details.</li>
-				</ul>
-				<p class="note">
-					Because no personal data is collected, there is nothing to request,
-					correct, or delete from the developer. Removing the app removes its stored
-					list of recent files.
-				</p>
+			<!-- FAQ / Questions -->
+			<section class="faq-section">
+				<div class="section-container">
+					<h2>Frequently Asked Questions</h2>
+					<div class="faq-list">
+						<div class="faq-item">
+							<h3>Which files can it open?</h3>
+							<p><code>.edf</code> and <code>.bdf</code>, including EDF+. 16-bit EDF and 24-bit BDF are both decoded using the calibration declared in the file header.</p>
+						</div>
+
+						<div class="faq-item">
+							<h3>Is there a sample file?</h3>
+							<p>Yes — a demo recording is built into the app, so there is something to look at before you have a file of your own. Its signals are generated, not recorded from a person.</p>
+						</div>
+
+						<div class="faq-item">
+							<h3>Does it upload anything?</h3>
+							<p>No. The app has no network features at all. See <a href="#privacy">Privacy</a>.</p>
+						</div>
+
+						<div class="faq-item">
+							<h3>Why is my recording hard to read at the default window?</h3>
+							<p>A ten-second window of a fast rhythm packs a great many cycles into the pane. Pinch in, or press <code>⌘+</code>, to shorten the window; switch the gain away from Auto to hold the amplitude scale still while you move around.</p>
+						</div>
+					</div>
+				</div>
 			</section>
 
-			<section>
-				<h2>Support</h2>
-				<p>
-					Email <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>. Including
-					the app version and what you were opening will get you a faster answer.
-				</p>
-				<p class="note">
-					EDF &amp; BDF Viewer is published by GoldenARC Digital. Not a medical
-					device. For research, educational, and engineering use only.
-				</p>
+			<!-- Privacy Section (UNMODIFIED AS REQUESTED) -->
+			<section id="privacy" class="privacy-section">
+				<div class="section-container">
+					<h2>Privacy</h2>
+					<div class="privacy-content">
+						<p>
+							<strong>The developer collects nothing.</strong> The app has no analytics,
+							no crash reporting, no accounts, no advertising, and no third-party SDKs.
+							It makes no network requests of any kind.
+						</p>
+						<ul>
+							<li>Recordings you open are read on your device and never leave it. The developer cannot see them.</li>
+							<li>The only thing kept between launches is your list of recently opened files, stored on device so those files can be reopened without asking you to find them again.</li>
+							<li>Exported files are written only where you choose to save them.</li>
+							<li>Purchases are handled entirely by Apple. The developer never receives your payment details.</li>
+						</ul>
+						<p class="note">
+							Because no personal data is collected, there is nothing to request,
+							correct, or delete from the developer. Removing the app removes its stored
+							list of recent files.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Support Section -->
+			<section id="support" class="support-section">
+				<div class="section-container">
+					<h2>Support</h2>
+					<div class="contact-card">
+						<h4>✉️ Contact</h4>
+						<p><a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a></p>
+						<small>
+							Email us for any questions, bug reports, or format feedback. Including the app version and what you were opening will get you a faster answer.
+						</small>
+					</div>
+					<p class="note support-note">
+						EDF &amp; BDF Viewer is published by GoldenARC Digital. Not a medical device. For research, educational, and engineering use only.
+					</p>
+				</div>
 			</section>
 		</main>
 		<Footer />
@@ -151,92 +320,614 @@ const appLd = {
 </html>
 
 <style>
-	/* Palette shared with the app icon, so the page and the icon read as one
-	   product rather than two. */
 	.edf-page {
+		width: min(1140px, 100%);
+		margin: 0 auto;
+		padding: 3rem 1.25rem 5rem;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+		color: #2c2927;
 		--edf-ink: #0a1020;
 		--edf-ink-2: #131c33;
+		--edf-surface: #1e293b;
 		--edf-paper: #f4f6fa;
 		--edf-mint: #2de0a8;
 		--edf-accent: #087a61;
 		--edf-accent-dark: #065f4d;
 		--edf-muted: #5f6b7e;
+	}
 
-		width: min(720px, calc(100% - 2rem));
-		max-width: none;
-		margin: 0 auto;
-		padding: 0 1.5rem 4rem;
-		color: #374151;
-		background: transparent;
+	/* Hero Section */
+	.hero-container {
+		display: grid;
+		grid-template-columns: 1.1fr 0.9fr;
+		gap: 3.5rem;
+		align-items: center;
+		padding: 2rem 0 4.5rem 0;
 	}
-	.edf-page .hero {
-		padding: 3.5rem 0 1rem;
+
+	@media (max-width: 900px) {
+		.hero-container {
+			grid-template-columns: 1fr;
+			gap: 2.5rem;
+			text-align: center;
+		}
+
+		.cta-group {
+			justify-content: center;
+		}
 	}
-	.edf-page h1 {
-		font-size: clamp(2rem, 6vw, 2.6rem);
-		line-height: 1.1;
-		letter-spacing: -0.02em;
-		margin: 0 0 0.5rem;
-	}
-	.edf-page .tagline {
-		font-size: 1.1rem;
-		color: var(--edf-muted);
-		margin: 0;
-	}
-	.edf-page .rule {
-		width: 64px;
-		height: 4px;
-		background: var(--edf-mint);
-		border: 0;
-		margin: 1.5rem 0;
-	}
-	.edf-page .lede {
-		font-size: 1.05rem;
-	}
-	.edf-page h2 {
-		font-size: 1.3rem;
-		margin: 3rem 0 0.75rem;
-		letter-spacing: -0.01em;
-	}
-	.edf-page h3 {
-		font-size: 1rem;
-		margin: 1.5rem 0 0.35rem;
-	}
-	.edf-page li {
-		margin: 0.4rem 0;
-	}
-	.edf-page a {
+
+	.app-tag {
+		display: inline-block;
+		padding: 0.35rem 0.85rem;
+		background: rgba(8, 122, 97, 0.1);
 		color: var(--edf-accent);
-		text-decoration: underline;
-		text-decoration-thickness: 1px;
+		border-radius: 99px;
+		font-size: 0.85rem;
+		font-weight: 600;
+		margin-bottom: 1.25rem;
+		border: 1px solid rgba(8, 122, 97, 0.2);
 	}
-	.edf-page a:hover {
+
+	.hero-content h1 {
+		font-size: clamp(2.4rem, 5vw, 3.2rem);
+		font-weight: 800;
+		line-height: 1.12;
+		letter-spacing: -0.03em;
+		margin: 0 0 1rem 0;
+		color: var(--edf-ink);
+	}
+
+	.subtitle {
+		font-size: 1.35rem;
+		font-weight: 600;
+		line-height: 1.45;
+		color: #374151;
+		margin-bottom: 0.75rem;
+	}
+
+	.tagline {
+		font-size: 1.05rem;
+		line-height: 1.65;
+		color: var(--edf-muted);
+		margin-bottom: 2.25rem;
+	}
+
+	.cta-group {
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.coming-soon {
+		margin-top: 1.35rem;
+		font-size: 0.92rem;
+		line-height: 1.5;
+		color: var(--edf-accent);
+		font-weight: 600;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.85rem 1.6rem;
+		font-size: 0.95rem;
+		font-weight: 600;
+		border-radius: 99px;
+		text-decoration: none;
+		transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+	}
+
+	.btn:hover {
+		transform: translateY(-2px);
+	}
+
+	.btn-primary {
+		background: var(--edf-accent);
+		color: #ffffff;
+		box-shadow: 0 4px 14px rgba(8, 122, 97, 0.28);
+	}
+
+	.btn-primary:hover {
+		background: var(--edf-accent-dark);
+		box-shadow: 0 6px 20px rgba(8, 122, 97, 0.38);
+		color: #ffffff;
+	}
+
+	.btn-secondary {
+		background: rgba(10, 16, 32, 0.05);
+		color: var(--edf-ink);
+		border: 1px solid rgba(10, 16, 32, 0.15);
+	}
+
+	.btn-secondary:hover {
+		background: rgba(10, 16, 32, 0.09);
+		color: var(--edf-ink);
+	}
+
+	.apple-icon {
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.framed-mockup {
+		width: 100%;
+		max-width: 520px;
+		height: auto;
+		border-radius: 16px;
+		box-shadow: 0 24px 50px rgba(10, 16, 32, 0.15);
+		border: 1px solid rgba(10, 16, 32, 0.08);
+		display: block;
+		margin: 0 auto;
+		transition: transform 0.3s ease;
+	}
+
+	.framed-mockup:hover {
+		transform: scale(1.015);
+	}
+
+	/* Section Rhythm */
+	.loop-section,
+	.showcase-section,
+	.features-section,
+	.panel-section,
+	.pro-section,
+	.faq-section,
+	.support-section,
+	.privacy-section {
+		padding: 5rem 0;
+		border-top: 1px solid rgba(10, 16, 32, 0.08);
+	}
+
+	.loop-section h2,
+	.showcase-section h2,
+	.features-section h2,
+	.pro-section h2,
+	.faq-section h2,
+	.support-section h2,
+	.privacy-section h2 {
+		font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+		font-weight: 800;
+		text-align: center;
+		margin-bottom: 0.5rem;
+		color: var(--edf-ink);
+		letter-spacing: -0.02em;
+	}
+
+	.features-section h2 {
+		margin-bottom: 3.5rem;
+	}
+
+	.loop-subtitle,
+	.showcase-subtitle {
+		text-align: center;
+		font-size: 1.1rem;
+		line-height: 1.6;
+		color: var(--edf-muted);
+		margin: 0 auto 3.5rem auto;
+		max-width: 740px;
+	}
+
+	/* 3-Step Walkthrough */
+	.steps-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2.25rem;
+	}
+
+	@media (max-width: 820px) {
+		.steps-grid {
+			grid-template-columns: 1fr;
+			gap: 3rem;
+			max-width: 460px;
+			margin: 0 auto;
+		}
+	}
+
+	.step-card {
+		text-align: center;
+	}
+
+	.step-media {
+		width: 100%;
+		margin: 0 auto 1.5rem auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.mac-frame {
+		width: 100%;
+		border-radius: 12px;
+		overflow: hidden;
+		background: #ffffff;
+		border: 1px solid rgba(10, 16, 32, 0.1);
+		box-shadow: 0 12px 28px rgba(10, 16, 32, 0.08);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.mac-frame:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 18px 36px rgba(10, 16, 32, 0.12);
+	}
+
+	.mac-frame img {
+		width: 100%;
+		height: auto;
+		display: block;
+		object-fit: cover;
+	}
+
+	.step-body {
+		max-width: 320px;
+		margin: 0 auto;
+	}
+
+	.step-num {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 1.9rem;
+		height: 1.9rem;
+		border-radius: 50%;
+		background: var(--edf-accent);
+		color: #fff;
+		font-size: 0.9rem;
+		font-weight: 700;
+		margin-bottom: 0.85rem;
+	}
+
+	.step-body h4 {
+		font-size: 1.15rem;
+		font-weight: 700;
+		margin: 0 0 0.5rem 0;
+		color: var(--edf-ink);
+	}
+
+	.step-body p {
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: #4b5563;
+		margin: 0 0 0.5rem 0;
+	}
+
+	.step-body small {
+		display: block;
+		font-size: 0.82rem;
+		line-height: 1.45;
+		color: var(--edf-muted);
+	}
+
+	/* Showcase Deep-Dive Grid */
+	.showcase-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2rem;
+	}
+
+	.showcase-card {
+		background: #ffffff;
+		border: 1px solid rgba(10, 16, 32, 0.1);
+		border-radius: 20px;
+		overflow: hidden;
+		box-shadow: 0 4px 20px rgba(10, 16, 32, 0.04);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.showcase-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 16px 36px rgba(10, 16, 32, 0.08);
+	}
+
+	.showcase-card.full-width {
+		grid-column: 1 / -1;
+		display: grid;
+		grid-template-columns: 1.2fr 0.8fr;
+		align-items: center;
+	}
+
+	@media (max-width: 820px) {
+		.showcase-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.showcase-card.full-width {
+			grid-column: auto;
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.showcase-image-box {
+		width: 100%;
+		background: #0a1020;
+		overflow: hidden;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.showcase-image-box img {
+		width: 100%;
+		height: auto;
+		display: block;
+		object-fit: cover;
+	}
+
+	.showcase-info {
+		padding: 1.75rem;
+	}
+
+	.showcase-info h4 {
+		font-size: 1.25rem;
+		font-weight: 700;
+		margin: 0 0 0.6rem 0;
+		color: var(--edf-ink);
+	}
+
+	.showcase-info p {
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: #4b5563;
+		margin: 0 0 0.5rem 0;
+	}
+
+	.showcase-info small {
+		display: block;
+		font-size: 0.84rem;
+		line-height: 1.45;
+		color: var(--edf-muted);
+	}
+
+	/* Core Features Grid */
+	.features-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1.75rem;
+	}
+
+	.feature-card {
+		padding: 2.25rem 1.75rem;
+		background: #ffffff;
+		border: 1px solid rgba(10, 16, 32, 0.08);
+		border-radius: 20px;
+		box-shadow: 0 4px 16px rgba(10, 16, 32, 0.03);
+		transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+	}
+
+	.feature-card:hover {
+		box-shadow: 0 12px 30px rgba(10, 16, 32, 0.08);
+		border-color: rgba(8, 122, 97, 0.3);
+		transform: translateY(-2px);
+	}
+
+	.feature-icon {
+		font-size: 2rem;
+		margin-bottom: 1.25rem;
+	}
+
+	.feature-card h3 {
+		font-size: 1.2rem;
+		font-weight: 700;
+		margin-bottom: 0.75rem;
+		color: var(--edf-ink);
+	}
+
+	.feature-card p {
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: #4b5563;
+		margin-bottom: 0.85rem;
+	}
+
+	.feature-card small {
+		display: block;
+		font-size: 0.82rem;
+		line-height: 1.4;
+		color: var(--edf-muted);
+	}
+
+	/* Medical Panel */
+	.panel-section {
+		padding: 3rem 0;
+	}
+
+	.panel {
+		background: var(--edf-ink-2);
+		border: 1px solid rgba(45, 224, 168, 0.2);
+		border-radius: 16px;
+		padding: 1.75rem 2rem;
+		max-width: 800px;
+		margin: 0 auto;
+		color: #d7deeb;
+		box-shadow: 0 12px 30px rgba(10, 16, 32, 0.12);
+	}
+
+	.panel h3 {
+		margin: 0 0 0.5rem 0;
+		color: var(--edf-mint);
+		font-size: 1.15rem;
+		font-weight: 700;
+	}
+
+	.panel p {
+		margin: 0;
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: #e2e8f0;
+	}
+
+	/* Pro Section */
+	.section-container {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.pro-desc {
+		text-align: center;
+		font-size: 1.05rem;
+		line-height: 1.6;
+		color: var(--edf-muted);
+		margin-bottom: 2rem;
+	}
+
+	.pro-card {
+		background: #ffffff;
+		border: 1px solid rgba(8, 122, 97, 0.25);
+		border-radius: 20px;
+		padding: 2.25rem;
+		box-shadow: 0 10px 30px rgba(8, 122, 97, 0.06);
+	}
+
+	.pro-badge {
+		display: inline-block;
+		background: rgba(8, 122, 97, 0.1);
 		color: var(--edf-accent-dark);
+		font-weight: 700;
+		font-size: 0.85rem;
+		padding: 0.3rem 0.8rem;
+		border-radius: 99px;
+		margin-bottom: 1.25rem;
 	}
-	.edf-page code {
-		background: rgba(120, 140, 180, 0.16);
-		padding: 0.1rem 0.35rem;
+
+	.pro-list {
+		margin: 0;
+		padding-left: 1.25rem;
+		display: grid;
+		gap: 0.75rem;
+	}
+
+	.pro-list li {
+		font-size: 0.98rem;
+		line-height: 1.6;
+		color: #374151;
+	}
+
+	/* FAQ Section */
+	.faq-list {
+		display: grid;
+		gap: 1.5rem;
+		margin-top: 2rem;
+	}
+
+	.faq-item {
+		background: #ffffff;
+		border: 1px solid rgba(10, 16, 32, 0.08);
+		border-radius: 16px;
+		padding: 1.5rem 1.75rem;
+	}
+
+	.faq-item h3 {
+		font-size: 1.1rem;
+		font-weight: 700;
+		margin: 0 0 0.5rem 0;
+		color: var(--edf-ink);
+	}
+
+	.faq-item p {
+		margin: 0;
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: #4b5563;
+	}
+
+	.faq-item code {
+		background: rgba(10, 16, 32, 0.06);
+		padding: 0.15rem 0.4rem;
 		border-radius: 4px;
 		font-size: 0.9em;
+		color: var(--edf-ink);
 	}
-	.edf-page .panel {
-		background: var(--edf-ink-2);
-		border: 1px solid rgba(244, 246, 250, 0.12);
-		border-radius: 12px;
-		padding: 0.25rem 1.5rem 1.25rem;
-		margin: 2rem 0;
-		color: #d7deeb;
+
+	.faq-item a {
+		color: var(--edf-accent);
+		text-decoration: underline;
 	}
-	.edf-page .panel h3 {
-		margin-top: 1.25rem;
+
+	/* Privacy Section (Verbatim requirements) */
+	.privacy-content {
+		background: #ffffff;
+		padding: 2.25rem;
+		border-radius: 20px;
+		border: 1px solid rgba(10, 16, 32, 0.08);
+		box-shadow: 0 4px 16px rgba(10, 16, 32, 0.02);
+		margin-top: 1.5rem;
 	}
-	.edf-page .note {
+
+	.privacy-content p {
+		font-size: 0.98rem;
+		line-height: 1.65;
+		color: #374151;
+		margin-bottom: 1rem;
+	}
+
+	.privacy-content ul {
+		margin: 0 0 1.25rem 0;
+		padding-left: 1.35rem;
+	}
+
+	.privacy-content li {
+		margin: 0.45rem 0;
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: #4b5563;
+	}
+
+	.privacy-content .note {
 		color: var(--edf-muted);
-		font-size: 0.92rem;
+		font-size: 0.9rem;
+		line-height: 1.55;
+		margin-bottom: 0;
 	}
-	/* The privacy section is linked directly from the App Store listing, so make
-	   it obvious the reader landed in the right place. */
-	.edf-page #privacy {
+
+	#privacy {
 		scroll-margin-top: 5rem;
 	}
+
+	/* Support Section */
+	.contact-card {
+		padding: 2rem;
+		background: #ffffff;
+		border: 1px solid rgba(10, 16, 32, 0.1);
+		border-radius: 16px;
+		max-width: 480px;
+		margin: 1.5rem auto 1.25rem auto;
+		text-align: center;
+		box-shadow: 0 4px 16px rgba(10, 16, 32, 0.04);
+	}
+
+	.contact-card h4 {
+		font-size: 1.15rem;
+		font-weight: 700;
+		margin-bottom: 0.5rem;
+		color: var(--edf-ink);
+	}
+
+	.contact-card p {
+		font-size: 1.15rem;
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+	}
+
+	.contact-card p a {
+		color: var(--edf-accent);
+		text-decoration: underline;
+	}
+
+	.contact-card small {
+		display: block;
+		font-size: 0.85rem;
+		color: var(--edf-muted);
+		line-height: 1.5;
+	}
+
+	.support-note {
+		text-align: center;
+		color: var(--edf-muted);
+		font-size: 0.88rem;
+		margin-top: 1rem;
+	}
 </style>
+
