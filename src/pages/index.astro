@@ -66,207 +66,125 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	<body>
 		<Header />
 		<main class="homepage">
-			<!-- Hero Section -->
-			<section class="hero">
-				<div class="hero-content">
-					<img src={PROFILE_IMAGE} alt="Victor Zhang" class="profile-image" />
-					<h1 class="hero-title">Hi, I'm <span class="highlight">Victor Zhang</span></h1>
-					<p class="hero-subtitle">{USER_TITLE}</p>
-					<p class="hero-subtitle hero-subtitle-secondary">Building end-to-end data systems, from IoT to cloud — 10+ years in tech, 6 in software engineering.</p>
-					<p class="hero-description">
-						I build mobile products where data flows cleanly between devices and backend services. My work spans iOS, React Native, BLE sync, backend data pipelines, and telemetry, with a strong focus on correctness, resilience, and the control policies that keep real systems stable.
-					</p>
-					<div class="hero-cta">
-						<a href="#work" class="btn btn-primary">See My Work ↓</a>
-						<a href="/about" class="btn btn-secondary">About Me</a>
-					</div>
-				</div>
-			</section>
-
-			<!-- Proof Strip: the receipts, up front -->
-			<section class="proof">
-				<div class="container">
-					<div class="proof-grid">
-						<a href="#story" class="proof-tile">
-							<img src="/images/proof/carleton-university-medal.webp" alt="Carleton University Medal in Computer Science, engraved with Yiwei Zhang, 2020" class="proof-thumb proof-thumb-medal" loading="lazy" />
-							<div class="proof-text">
-								<div class="proof-title">University Medal in Computer Science</div>
-								<div class="proof-sub">Carleton University · 2020</div>
-							</div>
-						</a>
-						<a href="#wilddunk" class="proof-tile">
-							<img src="/images/proof/wilddunk-appannie-2015.webp" alt="App Annie Highest Ranks report for 全民大灌篮 / Wild Dunk showing #1 Sports (Games) in China, May 3 2015" class="proof-thumb proof-thumb-rank" loading="lazy" />
-							<div class="proof-text">
-								<div class="proof-title">#1 Sports · China App Store</div>
-								<div class="proof-sub">Wild Dunk · May 3, 2015</div>
-							</div>
-						</a>
-						<a href="#projects" class="proof-tile proof-tile-icon">
-							<div class="proof-icon">🏆</div>
-							<div class="proof-text">
-								<div class="proof-title">2× Hackathon Winner</div>
-								<div class="proof-sub">cuHacking · 2019 &amp; 2020</div>
-							</div>
-						</a>
-					</div>
-				</div>
-			</section>
-
-			<!-- Signature Work: the career arc, game design to production systems -->
-			<section class="signature" id="work">
-				<div class="container">
-					<h2 class="section-title">Signature Work</h2>
-					<p class="signature-intro">
-						Four projects that trace one arc — from ranking and economy design in a mobile game to the production data systems I build today.
-					</p>
-
-					<div class="signature-grid">
-						<div class="timeline-rail" aria-hidden="true">
-							<svg class="timeline-path" viewBox="0 0 100 440" preserveAspectRatio="none">
-								<path
-									d="M50 10 C 92 40, 92 100, 50 132 C 8 164, 8 218, 50 250 C 92 282, 92 336, 50 368 C 24 390, 10 402, 46 424"
-									vector-effect="non-scaling-stroke"
-								/>
-							</svg>
-							<div class="timeline-node" style="top:5%">
-								<span class="node-dot"></span>
-								<span class="node-label">Started as<br />Mobile Game</span>
-							</div>
-							<div class="timeline-node" style="top:34%">
-								<span class="node-dot"></span>
-								<span class="node-label">Into Mobile<br />Engineering</span>
-							</div>
-							<div class="timeline-node" style="top:63%">
-								<span class="node-dot"></span>
-								<span class="node-label">Data &amp; Agentic<br />Pipeline Governance</span>
-							</div>
-							<div class="timeline-node" style="top:92%">
-								<span class="node-dot"></span>
-								<span class="node-label">Then Developer<br />Tooling</span>
-							</div>
+			<section class="hero" aria-labelledby="home-title">
+				<div class="hero-inner">
+					<div class="hero-copy">
+						<p class="hero-kicker">{USER_TITLE}</p>
+						<h1 id="home-title">I build the data systems inside mobile products.</h1>
+						<p class="hero-description">iOS, React Native, BLE sync, backend pipelines, and telemetry — engineered for correctness and resilience under real-world conditions, from device to cloud.</p>
+						<div class="hero-cta">
+							<a href="#work" class="btn btn-primary">See My Work ↓</a>
+							<a href="/about" class="btn btn-secondary">How I Think →</a>
 						</div>
+						<p class="hero-credibility">10+ years in tech · 7 years in software engineering</p>
+					</div>
+					<div class="hero-visual">
+						<div class="hero-art">
+							<img src="/images/home-systems-hero.webp" alt="Layered mobile data system connecting a device, governed pipelines, and cloud services" />
+							<span>Device → pipeline → cloud</span>
+						</div>
+						<a class="hero-proof" href="#story">
+							<img src="/images/proof/carleton-university-medal.webp" alt="" />
+							<span><strong>University Medal</strong><small>Carleton · 2020</small></span>
+						</a>
+					</div>
+				</div>
+			</section>
 
-						<!-- 1. Wild Dunk — game design origin -->
-						<article class="sig-block" id="wilddunk">
-							<div class="sig-media">
-								<div class="video-facade" data-video-id={WILDDUNK_YT_ID} role="button" tabindex="0" aria-label="Play Wild Dunk gameplay video">
-									<img src="/images/wilddunk/video-poster.webp" alt="全民大灌篮 / Wild Dunk gameplay artwork" loading="lazy" />
-									<span class="play-btn" aria-hidden="true">
-										<svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M8 5v14l11-7z" /></svg>
-									</span>
-								</div>
-								<figure class="rank-card">
-									<img src="/images/proof/wilddunk-appannie-2015.webp" alt="App Annie Highest Ranks report: #9 Overall, #1 Sports (Games), China, May 3 2015" loading="lazy" />
-									<figcaption>
-										Archived App Annie report · China · May 3, 2015. App Annie (now Sensor Tower) discontinued public app reports; Wild Dunk was later delisted from the App Store. App Store ID 949338049.
-									</figcaption>
-								</figure>
-							</div>
-							<div class="sig-body">
-								<p class="eyebrow">Game Design · 2015</p>
-								<h3>全民大灌篮 · Wild Dunk</h3>
-								<p>
-									As game design lead I owned core gameplay, ranking, and monetization for this basketball title — it reached <strong>#9 Overall</strong> and <strong>#1 in Sports</strong> on the China App Store. Designing its ranking ladders, seasonal economy, and retention loops is where I first learned to think in the state machines and control policies I now apply to production data systems.
-								</p>
-							</div>
-						</article>
+			<section class="proof" aria-label="Selected proof points">
+				<div class="container proof-grid">
+					<a href="#story" class="proof-card">
+						<div class="proof-media proof-medal"><img src="/images/proof/carleton-university-medal.webp" alt="Carleton University Medal in Computer Science, engraved with Yiwei Zhang, 2020" /></div>
+						<div class="proof-copy"><strong>University Medal in Computer Science</strong><span>Carleton University · 2020</span></div>
+					</a>
+					<a href="#wilddunk" class="proof-card">
+						<div class="proof-media proof-rank"><img src="/images/proof/wilddunk-appannie-2015.webp" alt="App Annie Highest Ranks report showing Wild Dunk at number 1 in Sports in China" /></div>
+						<div class="proof-copy"><strong>#1 Sports · China App Store</strong><span>Wild Dunk · May 3, 2015</span></div>
+					</a>
+					<a href="#projects" class="proof-card">
+						<div class="proof-media proof-trophy" aria-hidden="true">🏆</div>
+						<div class="proof-copy"><strong>2× Hackathon Winner</strong><span>cuHacking · 2019 &amp; 2020</span></div>
+					</a>
+				</div>
+			</section>
 
-						<!-- 2. Wishes by Hand — emotional craft product -->
-						<article class="sig-block sig-reverse" id="wishes">
-							<div class="sig-media">
-								<div class="phone-frame">
-									<video autoplay loop muted playsinline class="sig-video" aria-label="亲笔小卡 handwriting demo">
-										<source src="/videos/yong-demo-1.mp4" type="video/mp4" />
-									</video>
-								</div>
-							</div>
-							<div class="sig-body">
-								<p class="eyebrow">Signature Project · App Store</p>
-								<h3>亲笔小卡 · Wishes by Hand</h3>
-								<p>
-									A handwriting app for quiet reconnection: write by finger or Apple Pencil, watch a low-latency ink engine render real brush character, then send a finished card in one tap via Messages, WeChat, WhatsApp, or Instagram.
-								</p>
-								<div class="sig-cta">
-									<a href={WISHES_APP_STORE_URL} target="_blank" rel="noopener" class="btn btn-primary btn-sm">App Store ↗</a>
-									<a href="/yong" class="btn btn-secondary btn-sm">Full Story →</a>
-								</div>
-							</div>
-						</article>
+			<section class="signature" id="work" aria-labelledby="signature-title">
+				<div class="signature-heading container">
+					<p class="eyebrow">A career, traced through artifacts</p>
+					<h2 id="signature-title">Signature Work</h2>
+					<p>Four projects trace one arc — from ranking and economy design in a mobile game to production systems and tools.</p>
+				</div>
 
-						<!-- 3. wtcraft — developer tool -->
-						<article class="sig-block" id="wtcraft-sig">
-							<div class="sig-media">
-								<div class="terminal-card" aria-hidden="true">
-									<div class="terminal-titlebar">
-										<span></span><span></span><span></span>
+				<div class="arc-flow">
+					<svg class="desktop-career-route" viewBox="0 0 1248 2611" preserveAspectRatio="none" aria-hidden="true">
+						<path d="M120 30 C190 90 190 170 190 230 C190 340 50 660 50 770 C50 880 190 1200 190 1310 C190 1420 50 1740 50 1850 C50 1960 220 2050 608 2080 L608 2120 C584 2160 564 2230 556 2284 C549 2305 564 2325 584 2335 C599 2338 612 2339 624 2340 C674 2346 724 2350 768 2352 C799 2358 829 2370 856 2380 C834 2420 809 2465 792 2500 C734 2485 664 2475 604 2468 C579 2465 554 2463 536 2460 C549 2435 562 2412 572 2392 C589 2375 609 2355 624 2340 C639 2380 644 2500 644 2611" />
+						<circle cx="190" cy="230" r="11" /><circle cx="50" cy="770" r="11" /><circle cx="190" cy="1310" r="11" /><circle cx="50" cy="1850" r="11" />
+						<circle cx="608" cy="2204" r="6" /><circle cx="624" cy="2340" r="7" /><circle cx="856" cy="2380" r="6" /><circle cx="536" cy="2460" r="6" />
+					</svg>
+
+					<div class="works-layout">
+						<div class="career-labels" aria-hidden="true">
+							<span style="top:260px">Started as<br />Mobile Game</span>
+							<span style="top:800px">Into Mobile<br />Engineering</span>
+							<span style="top:1340px">Data &amp; Agentic<br />Pipeline Governance</span>
+							<span style="top:1880px">Then Developer<br />Tooling</span>
+						</div>
+						<div class="signature-list">
+							<article class="sig-block" id="wilddunk">
+								<div class="sig-media">
+									<div class="video-facade" data-video-id={WILDDUNK_YT_ID} role="button" tabindex="0" aria-label="Play Wild Dunk gameplay video">
+										<img src="/images/wilddunk/video-poster.webp" alt="全民大灌篮 / Wild Dunk gameplay artwork" loading="lazy" />
+										<span class="play-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z" /></svg></span>
 									</div>
-									<pre class="terminal-body"><code><span class="t-prompt">$</span> wtcraft init
+									<figure class="rank-card">
+										<img src="/images/proof/wilddunk-appannie-2015.webp" alt="App Annie report: Wild Dunk ranked number 9 overall and number 1 in Sports in China on May 3, 2015" loading="lazy" />
+										<figcaption>Archived App Annie report · China · May 3, 2015. Wild Dunk was later delisted. App Store ID 949338049.</figcaption>
+									</figure>
+								</div>
+								<div class="sig-body"><p class="eyebrow">Game Design · 2015</p><h3>全民大灌篮 · Wild Dunk</h3><p>As game design lead I owned core gameplay, ranking, and monetization for this basketball title — it reached <strong>#9 Overall</strong> and <strong>#1 in Sports</strong> on the China App Store. Its ranking ladders and economy taught me to think in the state machines and control policies I now apply to production systems.</p></div>
+							</article>
+
+							<article class="sig-block sig-reverse" id="wishes">
+								<div class="sig-media"><img src="/images/wishes-hero.webp" alt="Wishes by Hand app showing a handwritten Chinese greeting card" class="sig-frame wishes-frame" loading="lazy" /></div>
+								<div class="sig-body"><p class="eyebrow">Emotional Product · App Store</p><h3>亲笔小卡 · Wishes by Hand</h3><p>A handwriting app for quiet reconnection: write by finger or Apple Pencil, watch a low-latency ink engine render real brush character, then send a finished card in one tap.</p><div class="sig-cta"><a href={WISHES_APP_STORE_URL} target="_blank" rel="noopener" class="btn btn-primary btn-sm">App Store ↗</a><a href="/yong" class="btn btn-secondary btn-sm">Full Story →</a></div></div>
+							</article>
+
+							<article class="sig-block" id="wtcraft-sig">
+								<div class="sig-media"><div class="terminal-card" aria-hidden="true"><div class="terminal-titlebar"><span></span><span></span><span></span></div><pre class="terminal-body"><code><span class="t-prompt">$</span> wtcraft init
 <span class="t-prompt">$</span> wtcraft check
 <span class="t-ok">✓</span> scope respected
 <span class="t-ok">✓</span> off-limits clear
 <span class="t-prompt">$</span> wtcraft verify
-<span class="t-ok">✓</span> tests passed</code></pre>
-								</div>
-							</div>
-							<div class="sig-body">
-								<p class="eyebrow">Developer Tool · Open Source</p>
-								<h3>wtcraft</h3>
-								<p>
-									A git-native CLI for multi-agent coding workflows. It scaffolds task contracts per worktree — Scope, Off-limits, Verification — then checks the actual changeset against them and runs deterministic verification, so a solo developer can hand bounded work to Claude, Codex, or any coding agent without losing the handoff.
-								</p>
-								<div class="sig-cta">
-									<a href={WTCRAFT_URL} target="_blank" rel="noopener" class="btn btn-primary btn-sm">GitHub ↗</a>
-									<a href="/wtcraft" class="btn btn-secondary btn-sm">Full Page →</a>
-								</div>
-							</div>
-						</article>
+<span class="t-ok">✓</span> tests passed</code></pre></div></div>
+								<div class="sig-body"><p class="eyebrow">Developer Tool · Open Source</p><h3>wtcraft</h3><p>A git-native CLI for multi-agent coding workflows. It scaffolds task contracts per worktree, checks actual changes against them, and runs deterministic verification — keeping delegation bounded without losing the handoff.</p><div class="sig-cta"><a href={WTCRAFT_URL} target="_blank" rel="noopener" class="btn btn-primary btn-sm">GitHub ↗</a><a href="/wtcraft" class="btn btn-secondary btn-sm">Full Page →</a></div></div>
+							</article>
 
-						<!-- 4. EDF & BDF Viewer — professional tool -->
-						<article class="sig-block sig-reverse" id="edfviewer-sig">
-							<div class="sig-media">
-								<img src="/images/edfviewer/hero-preview.webp" alt="ARC EDF & BDF Viewer on macOS — All-Channels Montage View" class="sig-frame" loading="lazy" />
-							</div>
-							<div class="sig-body">
-								<p class="eyebrow">Mac App Store · macOS &amp; iPadOS</p>
-								<h3>EDF &amp; BDF Viewer</h3>
-								<p>
-									A native SwiftUI viewer for European Data Format (EDF, EDF+) and BioSemi Data Format (BDF) biosignal recordings — EEG, ECG, sleep, and electrophysiology research. Zero runtime dependencies, no Java/Python environment, 100% on-device and private.
-								</p>
-								<div class="sig-cta">
-									<a href={EDF_APP_STORE_URL} target="_blank" rel="noopener" class="btn btn-primary btn-sm">Mac App Store ↗</a>
-									<a href="/edfviewer" class="btn btn-secondary btn-sm">Full Page →</a>
-								</div>
-							</div>
-						</article>
+							<article class="sig-block sig-reverse" id="edfviewer-sig">
+								<div class="sig-media"><img src="/images/edfviewer/hero-preview.webp" alt="ARC EDF and BDF Viewer on macOS showing an all-channels montage" class="sig-frame" loading="lazy" /></div>
+								<div class="sig-body"><p class="eyebrow">Professional Tool · macOS &amp; iPadOS</p><h3>EDF &amp; BDF Viewer</h3><p>A native SwiftUI viewer for EDF and BDF biosignal recordings — EEG, ECG, sleep, and electrophysiology research. Zero runtime dependencies, 100% on-device and private.</p><div class="sig-cta"><a href={EDF_APP_STORE_URL} target="_blank" rel="noopener" class="btn btn-primary btn-sm">Mac App Store ↗</a><a href="/edfviewer" class="btn btn-secondary btn-sm">Full Page →</a></div></div>
+							</article>
+						</div>
 					</div>
 
-					<!-- Where the arc leads: the path forks into the current skill set -->
-					<div class="skills-fanout">
-						<p class="fanout-caption">Where the arc leads</p>
-						<svg class="fanout-svg" viewBox="0 0 1000 90" preserveAspectRatio="none" aria-hidden="true">
-							<path d="M500 4 C 500 34, 200 34, 125 84" vector-effect="non-scaling-stroke" />
-							<path d="M500 4 C 500 30, 330 44, 375 84" vector-effect="non-scaling-stroke" />
-							<path d="M500 4 C 500 30, 670 44, 625 84" vector-effect="non-scaling-stroke" />
-							<path d="M500 4 C 500 34, 800 34, 875 84" vector-effect="non-scaling-stroke" />
+					<div class="bridge-scene" tabindex="0" aria-describedby="bridge-message">
+						<img src="/images/konigsberg-bridges.webp" width="720" height="531" alt="Historical map of Königsberg showing the seven bridges between two riverbanks and two islands" loading="lazy" />
+						<span class="bridge-badge">Where the Arc Leads</span>
+						<a class="map-credit" href="https://commons.wikimedia.org/wiki/File:Konigsberg_bridges.png" target="_blank" rel="license noopener">Map: Bogdan Giuşcă · CC BY-SA 3.0</a>
+						<svg class="water-flow" viewBox="0 0 720 531" aria-hidden="true">
+							<path class="flow-one" d="M0 232 C160 220 340 225 430 222 C500 220 555 216 600 222" />
+							<path class="flow-two" d="M150 302 C300 300 450 300 545 308 C575 340 600 380 592 420 C585 455 580 495 600 525" />
 						</svg>
-						<div class="skills-row">
-							<div class="skill-chip">
-								<span class="skill-icon">📱</span>
-								<span class="skill-label">Mobile Engineering</span>
-							</div>
-							<div class="skill-chip">
-								<span class="skill-icon">🔄</span>
-								<span class="skill-label">Data &amp; Pipeline Systems</span>
-							</div>
-							<div class="skill-chip">
-								<span class="skill-icon">🤖</span>
-								<span class="skill-label">Agentic Workflows</span>
-							</div>
-							<div class="skill-chip">
-								<span class="skill-icon">🛠️</span>
-								<span class="skill-label">Developer Tooling</span>
-							</div>
-						</div>
+						<svg class="mobile-map-route" viewBox="0 0 720 531" aria-hidden="true"><path d="M344 0 L344 40 C320 80 300 150 292 204 C285 225 300 245 320 255 C335 258 348 259 360 260 C410 266 460 270 504 272 C535 278 565 290 592 300 C570 340 545 385 528 420 C470 405 400 395 340 388 C315 385 290 383 272 380 C285 355 298 332 308 312 C325 295 345 275 360 260 C375 300 380 420 380 531" /></svg>
+						<div class="bridge-reveal" id="bridge-message"><strong>Victor Z.</strong><span>I turn ambiguous product problems into governed systems — across languages, agents, and data pipelines.</span></div>
+					</div>
+					<p class="bridge-hint">Hover or focus the map to reveal the principle</p>
+
+					<svg class="skills-fork" viewBox="0 0 1248 110" preserveAspectRatio="none" aria-hidden="true"><path d="M644 0 C644 30 315 45 146 105" /><path d="M644 0 C644 35 500 48 465 105" /><path d="M644 0 C644 35 770 48 783 105" /><path d="M644 0 C644 30 988 45 1102 105" /></svg>
+					<div class="skills-grid" aria-label="What I do">
+						<article class="skill-card"><span class="skill-icon" aria-hidden="true">📱</span><h3>Mobile Development</h3><p>Building production mobile apps across iOS native and React Native, with strong focus on maintainability, performance, and product delivery.</p><div class="tag-list"><span>Swift / SwiftUI</span><span>UIKit</span><span>React Native</span><span>Core Data</span></div></article>
+						<article class="skill-card"><span class="skill-icon" aria-hidden="true">🌐</span><h3>Full Stack Development</h3><p>Building scalable web applications with modern JavaScript frameworks and robust backend services.</p><div class="tag-list"><span>React</span><span>Next.js</span><span>Node.js</span><span>FastAPI</span></div></article>
+						<article class="skill-card"><span class="skill-icon" aria-hidden="true">💻</span><h3>Desktop Development</h3><p>Building and modernizing desktop applications with C#, .NET, C++, and platform-specific UI frameworks.</p><div class="tag-list"><span>C#</span><span>.NET Framework</span><span>C++</span><span>macOS (SwiftUI)</span></div></article>
+						<article class="skill-card"><span class="skill-icon" aria-hidden="true">🎮</span><h3>Game Design</h3><p>Spearheaded core gameplay and monetization design for a mobile game that reached No. 9 in Games and No. 1 in Sports on the Apple App Store (China), on May 3, 2015.</p><div class="tag-list"><span>Gameplay Design</span><span>UI/UX</span><span>Storytelling</span><span>Ranking System</span></div></article>
 					</div>
 				</div>
 			</section>
@@ -1043,5 +961,673 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		color: #fff;
 		border-color: rgba(255, 255, 255, 0.4);
 		transform: translateY(-2px);
+	}
+
+	/* Home v2 — product-page composition */
+	.hero {
+		padding: clamp(4.5rem, 8vw, 7rem) 1.5rem clamp(4rem, 7vw, 6rem);
+		background: radial-gradient(900px 540px at 14% -8%, var(--accent-soft) 0%, rgba(238, 240, 255, 0) 68%);
+	}
+	.hero-inner {
+		display: grid;
+		grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+		align-items: center;
+		gap: clamp(3rem, 6vw, 5.5rem);
+		max-width: 1248px;
+		margin: 0 auto;
+	}
+	.hero-copy {
+		position: relative;
+		z-index: 2;
+	}
+	.hero-kicker {
+		display: inline-flex;
+		align-items: center;
+		margin: 0 0 1.6rem;
+		padding: 0.45rem 1rem;
+		border: 1px solid var(--line);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.88);
+		box-shadow: var(--shadow-sm);
+		color: var(--accent);
+		font-size: 0.76rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		line-height: 1.35;
+		text-transform: uppercase;
+	}
+	.hero h1 {
+		max-width: 710px;
+		margin: 0 0 1.4rem;
+		font-size: clamp(3.2rem, 5.15vw, 4.65rem);
+		letter-spacing: -0.04em;
+		line-height: 1.03;
+	}
+	.hero-description {
+		max-width: 590px;
+		margin: 0 0 2rem;
+		font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+		line-height: 1.65;
+	}
+	.hero-cta {
+		justify-content: flex-start;
+		margin-bottom: 1.4rem;
+	}
+	.hero-credibility {
+		margin: 0;
+		color: rgb(var(--gray));
+		font-size: 0.88rem;
+		font-weight: 700;
+		letter-spacing: 0.02em;
+	}
+	.hero-visual {
+		position: relative;
+		justify-self: center;
+		width: min(100%, 440px);
+		padding: 0 0 2.5rem 2rem;
+	}
+	.hero-art {
+		position: relative;
+		aspect-ratio: 1;
+		overflow: hidden;
+		border-radius: 32px;
+		background: var(--surface-deep);
+		box-shadow: var(--shadow-lg);
+	}
+	.hero-art::after {
+		content: '';
+		position: absolute;
+		inset: 50% 0 0;
+		background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.52));
+	}
+	.hero-art img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 0;
+	}
+	.hero-art > span {
+		position: absolute;
+		z-index: 1;
+		left: 1.35rem;
+		bottom: 1.25rem;
+		color: rgba(255, 255, 255, 0.9);
+		font-size: 0.74rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+	.hero-proof {
+		position: absolute;
+		z-index: 2;
+		left: -1rem;
+		bottom: 0;
+		display: flex;
+		align-items: center;
+		gap: 0.8rem;
+		min-width: 240px;
+		padding: 0.9rem 1.05rem;
+		border: 1px solid rgba(228, 228, 231, 0.75);
+		border-radius: 18px;
+		background: rgba(255, 255, 255, 0.94);
+		box-shadow: var(--shadow-lg);
+		backdrop-filter: blur(14px);
+	}
+	.hero-proof img {
+		width: 50px;
+		height: 50px;
+		flex: 0 0 auto;
+		object-fit: cover;
+		object-position: center 25%;
+		border-radius: 10px;
+	}
+	.hero-proof span {
+		display: grid;
+		line-height: 1.25;
+	}
+	.hero-proof strong {
+		font-size: 0.9rem;
+	}
+	.hero-proof small {
+		margin-top: 0.22rem;
+		color: rgb(var(--gray));
+		font-size: 0.76rem;
+	}
+
+	.proof {
+		padding: 0 0 clamp(5rem, 9vw, 8rem);
+	}
+	.proof-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: clamp(1rem, 2.4vw, 1.75rem);
+		max-width: 1248px;
+	}
+	.proof-card {
+		display: block;
+		overflow: hidden;
+		border: 1px solid var(--line);
+		border-radius: var(--radius-lg);
+		background: var(--surface-raised);
+		box-shadow: var(--shadow-md);
+		color: inherit;
+		transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+	}
+	.proof-card:hover {
+		transform: translateY(-6px);
+		border-color: rgba(var(--accent-rgb), 0.3);
+		box-shadow: var(--shadow-lg);
+	}
+	.proof-media {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 210px;
+		overflow: hidden;
+		background: var(--accent-soft);
+	}
+	.proof-media img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		border-radius: 0;
+	}
+	.proof-medal {
+		background: #151515;
+	}
+	.proof-medal img {
+		object-fit: cover;
+		object-position: center 23%;
+	}
+	.proof-rank {
+		padding: 1.3rem;
+	}
+	.proof-rank img {
+		height: auto;
+		object-fit: contain;
+		border-radius: 9px;
+		box-shadow: 0 0 0 1px var(--line), var(--shadow-sm);
+	}
+	.proof-trophy {
+		background: linear-gradient(135deg, var(--accent-soft), #fff);
+		font-size: 4.4rem;
+	}
+	.proof-copy {
+		display: grid;
+		gap: 0.35rem;
+		padding: 1.4rem 1.55rem 1.65rem;
+	}
+	.proof-copy strong {
+		font-size: 1.14rem;
+		line-height: 1.3;
+	}
+	.proof-copy span {
+		color: rgb(var(--gray));
+		font-size: 0.88rem;
+	}
+
+	.signature {
+		overflow: hidden;
+		padding: clamp(5rem, 8vw, 7rem) 1.5rem clamp(6rem, 10vw, 9rem);
+	}
+	.signature-heading {
+		margin-bottom: clamp(3.5rem, 6vw, 5rem);
+		text-align: center;
+	}
+	.signature-heading h2 {
+		margin: 0.45rem 0 1rem;
+		font-size: clamp(2.4rem, 4vw, 3.3rem);
+		letter-spacing: -0.035em;
+	}
+	.signature-heading > p:last-child {
+		max-width: 650px;
+		margin: 0 auto;
+		color: rgb(var(--gray-dark));
+		font-size: 1.04rem;
+	}
+	.arc-flow {
+		position: relative;
+		max-width: 1248px;
+		margin: 0 auto;
+	}
+	.desktop-career-route {
+		display: none;
+		pointer-events: none;
+	}
+	.works-layout {
+		position: relative;
+	}
+	.career-labels {
+		display: none;
+	}
+	.signature-list {
+		display: grid;
+		gap: clamp(2.5rem, 5vw, 5rem);
+	}
+	.sig-block {
+		position: relative;
+		z-index: 3;
+		gap: clamp(1.75rem, 3.4vw, 2.75rem);
+		padding: clamp(1.5rem, 3vw, 2.5rem);
+		box-shadow: var(--shadow-md);
+	}
+	.sig-block:hover {
+		box-shadow: var(--shadow-lg);
+	}
+	.sig-body h3 {
+		margin: 0.45rem 0 0.9rem;
+		font-size: clamp(1.5rem, 2.3vw, 1.85rem);
+		letter-spacing: -0.025em;
+	}
+	.sig-body p {
+		font-size: 1rem;
+	}
+	.sig-media,
+	.sig-body {
+		min-width: 0;
+	}
+	.sig-frame,
+	.video-facade,
+	.terminal-card {
+		box-shadow: var(--shadow-lg);
+	}
+	.wishes-frame {
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
+	}
+	.play-btn svg {
+		width: 22px;
+		height: 22px;
+	}
+
+	.bridge-scene {
+		position: relative;
+		z-index: 1;
+		width: min(720px, 100%);
+		aspect-ratio: 720 / 531;
+		margin: 0 auto;
+		overflow: hidden;
+		border-radius: var(--radius);
+		box-shadow: var(--shadow-lg);
+		isolation: isolate;
+	}
+	.bridge-scene > img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 0;
+	}
+	.bridge-badge,
+	.map-credit {
+		position: absolute;
+		z-index: 5;
+		background: rgba(255, 255, 255, 0.9);
+		box-shadow: var(--shadow-sm);
+		backdrop-filter: blur(8px);
+	}
+	.bridge-badge {
+		top: 0.9rem;
+		left: 0.9rem;
+		padding: 0.38rem 0.85rem;
+		border-radius: 999px;
+		color: rgb(var(--gray));
+		font-size: 0.66rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+	.map-credit {
+		right: 0.65rem;
+		bottom: 0.55rem;
+		padding: 0.18rem 0.4rem;
+		border-radius: 6px;
+		color: rgba(17, 24, 39, 0.66);
+		font-size: 0.6rem;
+		line-height: 1.2;
+	}
+	.water-flow,
+	.mobile-map-route {
+		position: absolute;
+		z-index: 2;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+	}
+	.water-flow path {
+		fill: none;
+		stroke: #38bdf8;
+		stroke-width: 2.5;
+		stroke-linecap: round;
+	}
+	.flow-one {
+		stroke-dasharray: 7 11;
+		stroke-opacity: 0.72;
+		animation: river-flow 3.2s linear infinite;
+	}
+	.flow-two {
+		stroke-dasharray: 6 10;
+		stroke-opacity: 0.62;
+		animation: river-flow 4.1s linear infinite reverse;
+	}
+	@keyframes river-flow {
+		to { stroke-dashoffset: -72; }
+	}
+	.mobile-map-route path {
+		fill: none;
+		stroke: var(--accent);
+		stroke-width: 7;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke-opacity: 0.78;
+		vector-effect: non-scaling-stroke;
+	}
+	.bridge-reveal {
+		position: absolute;
+		z-index: 6;
+		inset: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 0.55rem;
+		padding: 2rem;
+		background: rgba(250, 250, 249, 0.91);
+		opacity: 0;
+		text-align: center;
+		transition: opacity 0.35s var(--ease);
+	}
+	.bridge-reveal strong {
+		font-size: 1.4rem;
+	}
+	.bridge-reveal span {
+		max-width: 500px;
+		color: rgb(var(--gray-dark));
+		font-size: 0.95rem;
+		line-height: 1.5;
+	}
+	.bridge-scene:hover .bridge-reveal,
+	.bridge-scene:focus-visible .bridge-reveal,
+	.bridge-scene:focus-within .bridge-reveal {
+		opacity: 1;
+	}
+	.bridge-hint {
+		margin: 0.55rem 0 0;
+		color: rgb(var(--gray));
+		font-size: 0.72rem;
+		text-align: center;
+	}
+	.skills-fork {
+		display: block;
+		width: 100%;
+		height: 110px;
+		margin: 0 auto;
+	}
+	.skills-fork path {
+		fill: none;
+		stroke: var(--accent);
+		stroke-width: 2.6;
+		stroke-linecap: round;
+		stroke-opacity: 0.45;
+		vector-effect: non-scaling-stroke;
+	}
+	.skills-grid {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: clamp(1rem, 2vw, 1.5rem);
+	}
+	.skill-card {
+		display: flex;
+		flex-direction: column;
+		padding: clamp(1.35rem, 2.25vw, 2rem) clamp(1.2rem, 2vw, 1.75rem);
+		border: 1px solid var(--line);
+		border-radius: var(--radius-lg);
+		background: var(--surface-raised);
+		box-shadow: var(--shadow-md);
+	}
+	.skill-card .skill-icon {
+		width: 3.25rem;
+		height: 3.25rem;
+		margin-bottom: 1.2rem;
+		font-size: 1.6rem;
+	}
+	.skill-card h3 {
+		margin: 0 0 0.7rem;
+		font-size: 1.14rem;
+		line-height: 1.25;
+	}
+	.skill-card p {
+		margin: 0 0 1.25rem;
+		color: rgb(var(--gray));
+		font-size: 0.88rem;
+		line-height: 1.6;
+	}
+	.tag-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.45rem;
+		margin-top: auto;
+	}
+	.tag-list span {
+		padding: 0.3rem 0.67rem;
+		border: 1px solid var(--line);
+		border-radius: 999px;
+		background: var(--surface-muted);
+		color: var(--accent);
+		font-size: 0.72rem;
+		font-weight: 700;
+		line-height: 1.2;
+	}
+
+	@media (min-width: 1280px) {
+		.works-layout {
+			display: grid;
+			grid-template-columns: 240px minmax(0, 1fr);
+			gap: 40px;
+			height: 2080px;
+		}
+		.desktop-career-route {
+			position: absolute;
+			z-index: 2;
+			top: 0;
+			left: 0;
+			display: block;
+			width: 100%;
+			height: 2611px;
+		}
+		.desktop-career-route path {
+			fill: none;
+			stroke: var(--accent);
+			stroke-width: 13;
+			stroke-linecap: round;
+			stroke-linejoin: round;
+			stroke-opacity: 0.58;
+			vector-effect: non-scaling-stroke;
+		}
+		.desktop-career-route circle {
+			fill: var(--accent);
+		}
+		.career-labels {
+			position: relative;
+			z-index: 3;
+			display: block;
+		}
+		.career-labels span {
+			position: absolute;
+			left: 0;
+			width: 240px;
+			color: rgb(var(--gray));
+			font-size: 0.7rem;
+			font-weight: 700;
+			letter-spacing: 0.04em;
+			line-height: 1.4;
+			text-align: center;
+			text-transform: uppercase;
+		}
+		.signature-list {
+			gap: 80px;
+		}
+		.sig-block {
+			height: 460px;
+		}
+		.mobile-map-route {
+			display: none;
+		}
+	}
+
+	@media (min-width: 860px) and (max-width: 1279px) {
+		.works-layout {
+			display: grid;
+			grid-template-columns: 150px minmax(0, 1fr);
+			gap: 24px;
+		}
+		.career-labels {
+			position: relative;
+			display: block;
+		}
+		.career-labels::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 50%;
+			width: 9px;
+			border-radius: 999px;
+			background: linear-gradient(var(--accent), #38bdf8, var(--accent));
+			opacity: 0.5;
+			transform: translateX(-50%);
+		}
+		.career-labels span {
+			position: absolute;
+			left: 0;
+			z-index: 1;
+			width: 100%;
+			padding: 0.5rem;
+			border-radius: 10px;
+			background: var(--surface-muted);
+			color: rgb(var(--gray));
+			font-size: 0.66rem;
+			font-weight: 700;
+			line-height: 1.35;
+			text-align: center;
+			text-transform: uppercase;
+			transform: translateY(-50%);
+		}
+		.career-labels span:nth-child(1) { top: 230px !important; }
+		.career-labels span:nth-child(2) { top: 755px !important; }
+		.career-labels span:nth-child(3) { top: 1280px !important; }
+		.career-labels span:nth-child(4) { top: 1805px !important; }
+		.signature-list { gap: 64px; }
+		.sig-block { min-height: 460px; }
+		.bridge-scene { margin-top: 4rem; }
+	}
+
+	@media (max-width: 980px) {
+		.hero-inner {
+			grid-template-columns: 1fr 380px;
+			gap: 2.5rem;
+		}
+		.hero h1 { font-size: clamp(2.75rem, 6vw, 3.7rem); }
+		.skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+		.skills-fork { height: 80px; }
+	}
+
+	@media (max-width: 859px) {
+		.hero-inner {
+			grid-template-columns: 1fr;
+		}
+		.hero-visual {
+			width: min(100%, 500px);
+		}
+		.proof-grid {
+			grid-template-columns: 1fr;
+			max-width: 560px;
+		}
+		.proof-card {
+			display: grid;
+			grid-template-columns: 42% 58%;
+		}
+		.proof-media { height: 180px; }
+		.proof-copy { align-content: center; }
+		.signature-list {
+			position: relative;
+			padding-left: 2rem;
+		}
+		.signature-list::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: -2rem;
+			left: 0.25rem;
+			width: 8px;
+			border-radius: 999px;
+			background: linear-gradient(var(--accent), #38bdf8, var(--accent));
+			opacity: 0.5;
+		}
+		.sig-block::before {
+			content: '';
+			position: absolute;
+			left: -2.1rem;
+			top: 2.5rem;
+			width: 14px;
+			height: 14px;
+			border: 4px solid var(--surface-muted);
+			border-radius: 50%;
+			background: var(--accent);
+		}
+		.bridge-scene { margin-top: 2rem; }
+	}
+
+	@media (max-width: 620px) {
+		.hero {
+			padding-top: 3.5rem;
+		}
+		.hero h1 {
+			font-size: clamp(2.55rem, 13vw, 3.35rem);
+		}
+		.hero-visual {
+			padding-left: 0;
+		}
+		.hero-proof {
+			left: 0.8rem;
+			bottom: 0;
+		}
+		.proof-card {
+			grid-template-columns: 1fr;
+		}
+		.proof-media { height: 210px; }
+		.signature {
+			padding-right: 1rem;
+			padding-left: 1rem;
+		}
+		.signature-list {
+			padding-left: 1.45rem;
+		}
+		.sig-block {
+			padding: 1.25rem;
+		}
+		.sig-block::before {
+			left: -1.54rem;
+		}
+		.rank-card figcaption {
+			font-size: 0.67rem;
+		}
+		.bridge-badge {
+			top: 0.55rem;
+			left: 0.55rem;
+		}
+		.map-credit {
+			right: 0.4rem;
+			bottom: 0.35rem;
+		}
+		.bridge-hint { display: none; }
+		.skills-fork { height: 58px; }
+		.skills-grid {
+			grid-template-columns: 1fr;
+		}
+		.skill-card {
+			min-height: 0;
+		}
 	}
 </style>
