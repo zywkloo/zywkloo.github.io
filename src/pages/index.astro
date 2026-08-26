@@ -80,29 +80,25 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 					</div>
 					<div class="hero-visual">
 						<div class="hero-art">
-							<img src="/images/home-systems-hero.webp" alt="Layered mobile data system connecting a device, governed pipelines, and cloud services" />
-							<span>Device → pipeline → cloud</span>
+							<img src="/images/wilddunk/video-poster.webp" alt="Artwork from 全民大灌篮 / Wild Dunk, a China App Store charting basketball game" />
+							<span>Wild Dunk · 2015</span>
 						</div>
-						<a class="hero-proof" href="#story">
-							<img src="/images/proof/carleton-university-medal.webp" alt="" />
-							<span><strong>University Medal</strong><small>Carleton · 2020</small></span>
-						</a>
 					</div>
 				</div>
 			</section>
 
-			<section class="proof" aria-label="Selected proof points">
+			<section class="proof" id="proof" aria-label="Selected proof points">
 				<div class="container proof-grid">
-					<a href="#story" class="proof-card">
-						<div class="proof-media proof-medal"><img src="/images/proof/carleton-university-medal.webp" alt="Carleton University Medal in Computer Science, engraved with Yiwei Zhang, 2020" /></div>
-						<div class="proof-copy"><strong>University Medal in Computer Science</strong><span>Carleton University · 2020</span></div>
-					</a>
+					<article class="proof-card">
+						<div class="proof-media proof-medal"><img src="/images/proof/carleton-university-medal-detail.webp" alt="Carleton University Medal in Computer Science, engraved with Yiwei Zhang, 2020" /></div>
+						<div class="proof-copy"><strong>University Medal</strong><span>Computer Science · 2020</span></div>
+					</article>
 					<a href="#wilddunk" class="proof-card">
 						<div class="proof-media proof-rank"><img src="/images/proof/wilddunk-appannie-2015.webp" alt="App Annie Highest Ranks report showing Wild Dunk at number 1 in Sports in China" /></div>
 						<div class="proof-copy"><strong>#1 Sports · China App Store</strong><span>Wild Dunk · May 3, 2015</span></div>
 					</a>
-					<a href="#projects" class="proof-card">
-						<div class="proof-media proof-trophy" aria-hidden="true">🏆</div>
+					<a href="https://devpost.com/zywkloo" target="_blank" rel="noopener" class="proof-card">
+						<div class="proof-media proof-devpost"><img src="/images/proof/devpost-hackathon-winners.webp" alt="Victor Zhang's Devpost portfolio showing two projects marked Winner" /></div>
 						<div class="proof-copy"><strong>2× Hackathon Winner</strong><span>cuHacking · 2019 &amp; 2020</span></div>
 					</a>
 				</div>
@@ -174,9 +170,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							<path class="flow-two" d="M150 302 C300 300 450 300 545 308 C575 340 600 380 592 420 C585 455 580 495 600 525" />
 						</svg>
 						<svg class="mobile-map-route" viewBox="0 0 720 531" aria-hidden="true"><path d="M344 0 L344 40 C320 80 300 150 292 204 C285 225 300 245 320 255 C335 258 348 259 360 260 C410 266 460 270 504 272 C535 278 565 290 592 300 C570 340 545 385 528 420 C470 405 400 395 340 388 C315 385 290 383 272 380 C285 355 298 332 308 312 C325 295 345 275 360 260 C375 300 380 420 380 531" /></svg>
-						<div class="bridge-reveal" id="bridge-message"><strong>Victor Z.</strong><span>I turn ambiguous product problems into governed systems — across languages, agents, and data pipelines.</span></div>
+						<div class="bridge-reveal" id="bridge-message"><span class="bridge-kicker">Systems mindset</span><strong>Complexity,<br />made navigable.</strong></div>
 					</div>
-					<p class="bridge-hint">Hover or focus the map to reveal the principle</p>
 
 					<svg class="skills-fork" viewBox="0 0 1248 110" preserveAspectRatio="none" aria-hidden="true"><path d="M644 0 C644 30 315 45 146 105" /><path d="M644 0 C644 35 500 48 465 105" /><path d="M644 0 C644 35 770 48 783 105" /><path d="M644 0 C644 30 988 45 1102 105" /></svg>
 					<div class="skills-grid" aria-label="What I do">
@@ -184,25 +179,6 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						<article class="skill-card"><span class="skill-icon" aria-hidden="true">🌐</span><h3>Full Stack Development</h3><p>Building scalable web applications with modern JavaScript frameworks and robust backend services.</p><div class="tag-list"><span>React</span><span>Next.js</span><span>Node.js</span><span>FastAPI</span></div></article>
 						<article class="skill-card"><span class="skill-icon" aria-hidden="true">💻</span><h3>Desktop Development</h3><p>Building and modernizing desktop applications with C#, .NET, C++, and platform-specific UI frameworks.</p><div class="tag-list"><span>C#</span><span>.NET Framework</span><span>C++</span><span>macOS (SwiftUI)</span></div></article>
 						<article class="skill-card"><span class="skill-icon" aria-hidden="true">🎮</span><h3>Game Design</h3><p>Spearheaded core gameplay and monetization design for a mobile game that reached No. 9 in Games and No. 1 in Sports on the Apple App Store (China), on May 3, 2015.</p><div class="tag-list"><span>Gameplay Design</span><span>UI/UX</span><span>Storytelling</span><span>Ranking System</span></div></article>
-					</div>
-				</div>
-			</section>
-
-			<!-- Medal + Intro: bridge from Home's "what" to About's "how I think" -->
-			<section class="story" id="story">
-				<div class="container story-grid">
-					<img src="/images/proof/carleton-university-medal.webp" alt="Carleton University Medal in Computer Science, engraved with Yiwei Zhang, 2020, held open in its presentation box" class="story-image" loading="lazy" />
-					<div class="story-body">
-						<h2>From Ranking Systems to System Design</h2>
-						<p>
-							In 2020 I graduated top of my Computer Science class at Carleton University, awarded the University Medal.
-						</p>
-						<p>
-							My path ran through urban planning at Peking University, then four years of mobile game design — where Wild Dunk taught me to design ranking ladders and economy systems — before I moved fully into software engineering.
-						</p>
-						<p>
-							<a href="/about" class="story-link">Curious how I break down mobile systems today? →</a>
-						</p>
 					</div>
 				</div>
 			</section>
@@ -802,46 +778,6 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		display: block;
 	}
 
-	/* Story (medal + intro bridge to About) */
-	.story-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 2rem;
-		align-items: center;
-		max-width: 900px;
-	}
-	@media (min-width: 700px) {
-		.story-grid {
-			grid-template-columns: 280px 1fr;
-			gap: 3rem;
-		}
-	}
-	.story-image {
-		width: 100%;
-		max-width: 280px;
-		margin: 0 auto;
-		border-radius: var(--radius-lg);
-		box-shadow: var(--shadow-lg);
-		display: block;
-	}
-	.story-body h2 {
-		font-size: clamp(1.6rem, 3vw, 2.1rem);
-		margin: 0 0 1rem;
-	}
-	.story-body p {
-		color: rgb(var(--gray-dark));
-		font-size: 1rem;
-		line-height: 1.75;
-		margin: 0 0 1rem;
-	}
-	.story-link {
-		font-weight: 700;
-		color: var(--accent);
-	}
-	.story-link:hover {
-		color: var(--accent-dark);
-	}
-
 	/* Project cards (More Work) */
 	.projects-grid {
 		display: grid;
@@ -1023,7 +959,6 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		position: relative;
 		justify-self: center;
 		width: min(100%, 440px);
-		padding: 0 0 2.5rem 2rem;
 	}
 	.hero-art {
 		position: relative;
@@ -1057,43 +992,6 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
 	}
-	.hero-proof {
-		position: absolute;
-		z-index: 2;
-		left: -1rem;
-		bottom: 0;
-		display: flex;
-		align-items: center;
-		gap: 0.8rem;
-		min-width: 240px;
-		padding: 0.9rem 1.05rem;
-		border: 1px solid rgba(228, 228, 231, 0.75);
-		border-radius: 18px;
-		background: rgba(255, 255, 255, 0.94);
-		box-shadow: var(--shadow-lg);
-		backdrop-filter: blur(14px);
-	}
-	.hero-proof img {
-		width: 50px;
-		height: 50px;
-		flex: 0 0 auto;
-		object-fit: cover;
-		object-position: center 25%;
-		border-radius: 10px;
-	}
-	.hero-proof span {
-		display: grid;
-		line-height: 1.25;
-	}
-	.hero-proof strong {
-		font-size: 0.9rem;
-	}
-	.hero-proof small {
-		margin-top: 0.22rem;
-		color: rgb(var(--gray));
-		font-size: 0.76rem;
-	}
-
 	.proof {
 		padding: 0 0 clamp(5rem, 9vw, 8rem);
 	}
@@ -1136,7 +1034,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	}
 	.proof-medal img {
 		object-fit: cover;
-		object-position: center 23%;
+		object-position: center;
 	}
 	.proof-rank {
 		padding: 1.3rem;
@@ -1147,9 +1045,12 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		border-radius: 9px;
 		box-shadow: 0 0 0 1px var(--line), var(--shadow-sm);
 	}
-	.proof-trophy {
-		background: linear-gradient(135deg, var(--accent-soft), #fff);
-		font-size: 4.4rem;
+	.proof-devpost {
+		background: #eef2f3;
+	}
+	.proof-devpost img {
+		object-fit: cover;
+		object-position: top center;
 	}
 	.proof-copy {
 		display: grid;
@@ -1241,14 +1142,12 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 
 	.bridge-scene {
 		position: relative;
-		z-index: 1;
 		width: min(720px, 100%);
 		aspect-ratio: 720 / 531;
 		margin: 0 auto;
 		overflow: hidden;
 		border-radius: var(--radius);
 		box-shadow: var(--shadow-lg);
-		isolation: isolate;
 	}
 	.bridge-scene > img {
 		display: block;
@@ -1318,34 +1217,37 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		inset: 0;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: center;
-		gap: 0.55rem;
-		padding: 2rem;
-		background: rgba(250, 250, 249, 0.91);
+		gap: 1.15rem;
+		padding: clamp(2.25rem, 7vw, 5rem);
+		background: linear-gradient(90deg, rgba(250, 250, 249, 0.98) 0%, rgba(250, 250, 249, 0.94) 62%, rgba(250, 250, 249, 0.78) 100%);
 		opacity: 0;
-		text-align: center;
+		text-align: left;
 		transition: opacity 0.35s var(--ease);
 	}
 	.bridge-reveal strong {
-		font-size: 1.4rem;
+		max-width: 600px;
+		font-size: clamp(2.65rem, 6.5vw, 5rem);
+		letter-spacing: -0.055em;
+		line-height: 0.95;
 	}
-	.bridge-reveal span {
-		max-width: 500px;
-		color: rgb(var(--gray-dark));
-		font-size: 0.95rem;
-		line-height: 1.5;
+	.bridge-reveal .bridge-kicker {
+		display: inline-flex;
+		padding: 0.45rem 0.9rem;
+		border-radius: 999px;
+		background: var(--accent-soft);
+		color: var(--accent);
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.11em;
+		line-height: 1.2;
+		text-transform: uppercase;
 	}
 	.bridge-scene:hover .bridge-reveal,
 	.bridge-scene:focus-visible .bridge-reveal,
 	.bridge-scene:focus-within .bridge-reveal {
 		opacity: 1;
-	}
-	.bridge-hint {
-		margin: 0.55rem 0 0;
-		color: rgb(var(--gray));
-		font-size: 0.72rem;
-		text-align: center;
 	}
 	.skills-fork {
 		display: block;
@@ -1575,13 +1477,6 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		.hero h1 {
 			font-size: clamp(2.55rem, 13vw, 3.35rem);
 		}
-		.hero-visual {
-			padding-left: 0;
-		}
-		.hero-proof {
-			left: 0.8rem;
-			bottom: 0;
-		}
 		.proof-card {
 			grid-template-columns: 1fr;
 		}
@@ -1606,7 +1501,6 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 			top: 0.55rem;
 			left: 0.55rem;
 		}
-		.bridge-hint { display: none; }
 		.skills-fork { height: 58px; }
 		.skills-grid {
 			grid-template-columns: 1fr;
