@@ -4,6 +4,12 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, SITE_AUTHOR, PROFILE_IMAGE, USER_TITLE, GITHUB_URL, WTCRAFT_URL, LINKEDIN_URL, EMAIL, MEDIUM_URL, SAME_AS, SITE_AUTHOR_ALT, GOLDENARC_NAME, GOLDENARC_SAME_AS } from '../consts';
 
+// Signature-work links kept local to this page (mirrors the pattern used by
+// edfviewer.astro / yong.astro, which each define their own APP_STORE_URL).
+const WISHES_APP_STORE_URL = 'https://apps.apple.com/ca/app/wishes-by-hand/id6774579880';
+const EDF_APP_STORE_URL = 'https://apps.apple.com/app/id6801383472';
+const WILDDUNK_YT_ID = 'ysmp5vK4R_c';
+
 // Identity knowledge graph for AI/search engines: who Victor Zhang is and what
 // this site is. Person + WebSite, cross-linked by @id.
 const personLd = {
@@ -23,8 +29,10 @@ const personLd = {
 	],
 	alumniOf: [
 		{ '@type': 'CollegeOrUniversity', name: 'University of British Columbia' },
+		{ '@type': 'CollegeOrUniversity', name: 'Carleton University' },
 		{ '@type': 'CollegeOrUniversity', name: 'Peking University' },
 	],
+	award: 'University Medal in Computer Science, Carleton University (2020)',
 	worksFor: { '@id': `${SITE_URL}/#goldenarc` },
 	sameAs: SAME_AS,
 };
@@ -64,144 +72,266 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 					<img src={PROFILE_IMAGE} alt="Victor Zhang" class="profile-image" />
 					<h1 class="hero-title">Hi, I'm <span class="highlight">Victor Zhang</span></h1>
 					<p class="hero-subtitle">{USER_TITLE}</p>
-					<p class="hero-subtitle hero-subtitle-secondary">Building end-to-end data systems, from IoT to cloud</p>
+					<p class="hero-subtitle hero-subtitle-secondary">Building end-to-end data systems, from IoT to cloud — 10+ years in tech, 6 in software engineering.</p>
 					<p class="hero-description">
 						I build mobile products where data flows cleanly between devices and backend services. My work spans iOS, React Native, BLE sync, backend data pipelines, and telemetry, with a strong focus on correctness, resilience, and the control policies that keep real systems stable.
 					</p>
-					<p class="hero-description hero-description-secondary">
-						I also spent 5 years as a lead mobile product designer. One of the products I worked on, a basketball game, reached No. 9 in Games and No. 1 in Sports on the Apple App Store (China) on May 3, 2015, where I led core gameplay and monetization design.
-					</p>
 					<div class="hero-cta">
-						<a href="/blog" class="btn btn-primary">View My Blog</a>
-						<a href="/about" class="btn btn-secondary">Learn More</a>
+						<a href="#work" class="btn btn-primary">See My Work ↓</a>
+						<a href="/about" class="btn btn-secondary">About Me</a>
 					</div>
-					<div class="hero-stats">
-						<div class="stat">
-							<div class="stat-number">10+</div>
-							<div class="stat-label">Years in Tech</div>
-							<div class="stat-sub">6 in Software Engineering</div>
+				</div>
+			</section>
+
+			<!-- Proof Strip: the receipts, up front -->
+			<section class="proof">
+				<div class="container">
+					<div class="proof-grid">
+						<a href="#story" class="proof-tile">
+							<img src="/images/proof/carleton-university-medal.webp" alt="Carleton University Medal in Computer Science, engraved with Yiwei Zhang, 2020" class="proof-thumb proof-thumb-medal" loading="lazy" />
+							<div class="proof-text">
+								<div class="proof-title">University Medal in Computer Science</div>
+								<div class="proof-sub">Carleton University · 2020</div>
+							</div>
+						</a>
+						<a href="#wilddunk" class="proof-tile">
+							<img src="/images/proof/wilddunk-appannie-2015.webp" alt="App Annie Highest Ranks report for 全民大灌篮 / Wild Dunk showing #1 Sports (Games) in China, May 3 2015" class="proof-thumb proof-thumb-rank" loading="lazy" />
+							<div class="proof-text">
+								<div class="proof-title">#1 Sports · China App Store</div>
+								<div class="proof-sub">Wild Dunk · May 3, 2015</div>
+							</div>
+						</a>
+						<a href="#projects" class="proof-tile proof-tile-icon">
+							<div class="proof-icon">🏆</div>
+							<div class="proof-text">
+								<div class="proof-title">2× Hackathon Winner</div>
+								<div class="proof-sub">cuHacking · 2019 &amp; 2020</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</section>
+
+			<!-- Signature Work: the career arc, game design to production systems -->
+			<section class="signature" id="work">
+				<div class="container">
+					<h2 class="section-title">Signature Work</h2>
+					<p class="signature-intro">
+						Four projects that trace one arc — from ranking and economy design in a mobile game to the production data systems I build today.
+					</p>
+
+					<div class="signature-grid">
+						<div class="timeline-rail" aria-hidden="true">
+							<svg class="timeline-path" viewBox="0 0 100 440" preserveAspectRatio="none">
+								<path
+									d="M50 10 C 92 40, 92 100, 50 132 C 8 164, 8 218, 50 250 C 92 282, 92 336, 50 368 C 24 390, 10 402, 46 424"
+									vector-effect="non-scaling-stroke"
+								/>
+							</svg>
+							<div class="timeline-node" style="top:5%">
+								<span class="node-dot"></span>
+								<span class="node-label">Started as<br />Mobile Game</span>
+							</div>
+							<div class="timeline-node" style="top:34%">
+								<span class="node-dot"></span>
+								<span class="node-label">Into Mobile<br />Engineering</span>
+							</div>
+							<div class="timeline-node" style="top:63%">
+								<span class="node-dot"></span>
+								<span class="node-label">Data &amp; Agentic<br />Pipeline Governance</span>
+							</div>
+							<div class="timeline-node" style="top:92%">
+								<span class="node-dot"></span>
+								<span class="node-label">Then Developer<br />Tooling</span>
+							</div>
 						</div>
-						<div class="stat">
-							<div class="stat-number">20+</div>
-							<div class="stat-label">Projects</div>
-							<div class="stat-sub">#1 Sports in App Store<br />(May 2015, China)</div>
-						</div>
-						<div class="stat">
-							<div class="stat-number">2x</div>
-							<div class="stat-label">Hackathon Winner</div>
-							<div class="stat-sub">1x University Medal<br />Carleton Uni. 2020</div>
+
+						<!-- 1. Wild Dunk — game design origin -->
+						<article class="sig-block" id="wilddunk">
+							<div class="sig-media">
+								<div class="video-facade" data-video-id={WILDDUNK_YT_ID} role="button" tabindex="0" aria-label="Play Wild Dunk gameplay video">
+									<img src="/images/wilddunk/video-poster.webp" alt="全民大灌篮 / Wild Dunk gameplay artwork" loading="lazy" />
+									<span class="play-btn" aria-hidden="true">
+										<svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M8 5v14l11-7z" /></svg>
+									</span>
+								</div>
+								<figure class="rank-card">
+									<img src="/images/proof/wilddunk-appannie-2015.webp" alt="App Annie Highest Ranks report: #9 Overall, #1 Sports (Games), China, May 3 2015" loading="lazy" />
+									<figcaption>
+										Archived App Annie report · China · May 3, 2015. App Annie (now Sensor Tower) discontinued public app reports; Wild Dunk was later delisted from the App Store. App Store ID 949338049.
+									</figcaption>
+								</figure>
+							</div>
+							<div class="sig-body">
+								<p class="eyebrow">Game Design · 2015</p>
+								<h3>全民大灌篮 · Wild Dunk</h3>
+								<p>
+									As game design lead I owned core gameplay, ranking, and monetization for this basketball title — it reached <strong>#9 Overall</strong> and <strong>#1 in Sports</strong> on the China App Store. Designing its ranking ladders, seasonal economy, and retention loops is where I first learned to think in the state machines and control policies I now apply to production data systems.
+								</p>
+							</div>
+						</article>
+
+						<!-- 2. Wishes by Hand — emotional craft product -->
+						<article class="sig-block sig-reverse" id="wishes">
+							<div class="sig-media">
+								<div class="phone-frame">
+									<video autoplay loop muted playsinline class="sig-video" aria-label="亲笔小卡 handwriting demo">
+										<source src="/videos/yong-demo-1.mp4" type="video/mp4" />
+									</video>
+								</div>
+							</div>
+							<div class="sig-body">
+								<p class="eyebrow">Signature Project · App Store</p>
+								<h3>亲笔小卡 · Wishes by Hand</h3>
+								<p>
+									A handwriting app for quiet reconnection: write by finger or Apple Pencil, watch a low-latency ink engine render real brush character, then send a finished card in one tap via Messages, WeChat, WhatsApp, or Instagram.
+								</p>
+								<div class="sig-cta">
+									<a href={WISHES_APP_STORE_URL} target="_blank" rel="noopener" class="btn btn-primary btn-sm">App Store ↗</a>
+									<a href="/yong" class="btn btn-secondary btn-sm">Full Story →</a>
+								</div>
+							</div>
+						</article>
+
+						<!-- 3. wtcraft — developer tool -->
+						<article class="sig-block" id="wtcraft-sig">
+							<div class="sig-media">
+								<div class="terminal-card" aria-hidden="true">
+									<div class="terminal-titlebar">
+										<span></span><span></span><span></span>
+									</div>
+									<pre class="terminal-body"><code><span class="t-prompt">$</span> wtcraft init
+<span class="t-prompt">$</span> wtcraft check
+<span class="t-ok">✓</span> scope respected
+<span class="t-ok">✓</span> off-limits clear
+<span class="t-prompt">$</span> wtcraft verify
+<span class="t-ok">✓</span> tests passed</code></pre>
+								</div>
+							</div>
+							<div class="sig-body">
+								<p class="eyebrow">Developer Tool · Open Source</p>
+								<h3>wtcraft</h3>
+								<p>
+									A git-native CLI for multi-agent coding workflows. It scaffolds task contracts per worktree — Scope, Off-limits, Verification — then checks the actual changeset against them and runs deterministic verification, so a solo developer can hand bounded work to Claude, Codex, or any coding agent without losing the handoff.
+								</p>
+								<div class="sig-cta">
+									<a href={WTCRAFT_URL} target="_blank" rel="noopener" class="btn btn-primary btn-sm">GitHub ↗</a>
+									<a href="/wtcraft" class="btn btn-secondary btn-sm">Full Page →</a>
+								</div>
+							</div>
+						</article>
+
+						<!-- 4. EDF & BDF Viewer — professional tool -->
+						<article class="sig-block sig-reverse" id="edfviewer-sig">
+							<div class="sig-media">
+								<img src="/images/edfviewer/hero-preview.webp" alt="ARC EDF & BDF Viewer on macOS — All-Channels Montage View" class="sig-frame" loading="lazy" />
+							</div>
+							<div class="sig-body">
+								<p class="eyebrow">Mac App Store · macOS &amp; iPadOS</p>
+								<h3>EDF &amp; BDF Viewer</h3>
+								<p>
+									A native SwiftUI viewer for European Data Format (EDF, EDF+) and BioSemi Data Format (BDF) biosignal recordings — EEG, ECG, sleep, and electrophysiology research. Zero runtime dependencies, no Java/Python environment, 100% on-device and private.
+								</p>
+								<div class="sig-cta">
+									<a href={EDF_APP_STORE_URL} target="_blank" rel="noopener" class="btn btn-primary btn-sm">Mac App Store ↗</a>
+									<a href="/edfviewer" class="btn btn-secondary btn-sm">Full Page →</a>
+								</div>
+							</div>
+						</article>
+					</div>
+
+					<!-- Where the arc leads: the path forks into the current skill set -->
+					<div class="skills-fanout">
+						<p class="fanout-caption">Where the arc leads</p>
+						<svg class="fanout-svg" viewBox="0 0 1000 90" preserveAspectRatio="none" aria-hidden="true">
+							<path d="M500 4 C 500 34, 200 34, 125 84" vector-effect="non-scaling-stroke" />
+							<path d="M500 4 C 500 30, 330 44, 375 84" vector-effect="non-scaling-stroke" />
+							<path d="M500 4 C 500 30, 670 44, 625 84" vector-effect="non-scaling-stroke" />
+							<path d="M500 4 C 500 34, 800 34, 875 84" vector-effect="non-scaling-stroke" />
+						</svg>
+						<div class="skills-row">
+							<div class="skill-chip">
+								<span class="skill-icon">📱</span>
+								<span class="skill-label">Mobile Engineering</span>
+							</div>
+							<div class="skill-chip">
+								<span class="skill-icon">🔄</span>
+								<span class="skill-label">Data &amp; Pipeline Systems</span>
+							</div>
+							<div class="skill-chip">
+								<span class="skill-icon">🤖</span>
+								<span class="skill-label">Agentic Workflows</span>
+							</div>
+							<div class="skill-chip">
+								<span class="skill-icon">🛠️</span>
+								<span class="skill-label">Developer Tooling</span>
+							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- Expertise Section -->
-			<section class="expertise">
-				<div class="container">
-					<h2 class="section-title">What I Do</h2>
-					<div class="expertise-grid">
-						<div class="expertise-card">
-							<div class="expertise-icon">📱</div>
-							<h3>Mobile Development</h3>
-							<p>Building production mobile apps across iOS native and React Native, with strong focus on maintainability, performance, and product delivery.</p>
-							<ul class="expertise-skills">
-								<li>Swift / SwiftUI</li>
-								<li>UIKit</li>
-								<li>React Native</li>
-								<li>Core Data</li>
-							</ul>
-						</div>
-						<div class="expertise-card">
-							<div class="expertise-icon">🌐</div>
-							<h3>Full Stack Development</h3>
-							<p>Building scalable web applications with modern JavaScript frameworks and robust backend services.</p>
-							<ul class="expertise-skills">
-								<li>React</li>
-								<li>Next.js</li>
-								<li>Node.js</li>
-								<li>FastAPI</li>
-							</ul>
-						</div>
-						<div class="expertise-card">
-							<div class="expertise-icon">💻</div>
-							<h3>Desktop Development</h3>
-							<p>Building and modernizing desktop applications with C#, .NET, C++, and platform-specific UI frameworks.</p>
-							<ul class="expertise-skills">
-								<li>C#</li>
-								<li>.NET Framework</li>
-								<li>C++</li>
-								<li>macOS (SwiftUI)</li>
-							</ul>
-						</div>
-						<div class="expertise-card">
-							<div class="expertise-icon">🎮</div>
-							<h3>Game Design</h3>
-							<p>Spearheaded core gameplay and monetization design for a mobile game that reached No. 9 in Games and No. 1 in Sports on the Apple App Store (China), on May 3, 2015.</p>
-							<ul class="expertise-skills">
-								<li>Gameplay Design</li>
-								<li>UI/UX</li>
-								<li>Storytelling</li>
-								<li>Ranking System</li>
-							</ul>
-						</div>
+			<!-- Medal + Intro: bridge from Home's "what" to About's "how I think" -->
+			<section class="story" id="story">
+				<div class="container story-grid">
+					<img src="/images/proof/carleton-university-medal.webp" alt="Carleton University Medal in Computer Science, engraved with Yiwei Zhang, 2020, held open in its presentation box" class="story-image" loading="lazy" />
+					<div class="story-body">
+						<h2>From Ranking Systems to System Design</h2>
+						<p>
+							In 2020 I graduated top of my Computer Science class at Carleton University, awarded the University Medal.
+						</p>
+						<p>
+							My path ran through urban planning at Peking University, then four years of mobile game design — where Wild Dunk taught me to design ranking ladders and economy systems — before I moved fully into software engineering.
+						</p>
+						<p>
+							<a href="/about" class="story-link">Curious how I break down mobile systems today? →</a>
+						</p>
 					</div>
 				</div>
 			</section>
 
-			<!-- Projects Section -->
-			<section class="projects">
+			<!-- More Work -->
+			<section class="projects" id="projects">
 				<div class="container">
-					<h2 class="section-title">Featured Projects</h2>
-				<div class="projects-grid">
-					<div class="project-card">
-						<div class="project-icon">🖌️</div>
-						<h3>亲笔小卡 · Wishes by Hand</h3>
-						<p>Handwritten cards for quiet reconnection</p>
-						<a href="https://apps.apple.com/ca/app/wishes-by-hand/id6774579880" target="_blank" rel="noopener" class="project-link">View on App Store →</a>
+					<h2 class="section-title">More Work</h2>
+					<div class="projects-grid">
+						<div class="project-card">
+							<div class="project-icon">🏥</div>
+							<h3>VitalMark Wellness</h3>
+							<p>HealthKit Integration &amp; SwiftUI</p>
+							<a href="https://apps.apple.com/us/app/vitalmark-wellness-fitness/id6745228850" target="_blank" class="project-link">View on App Store →</a>
+						</div>
+						<div class="project-card">
+							<div class="project-icon">🤖</div>
+							<h3>Ninja AI Agentic App</h3>
+							<p>LLM Streaming &amp; Multi-Model AI</p>
+							<a href="https://apps.apple.com/us/app/ninja-ai-chat-code-create/id6702030312" target="_blank" class="project-link">View on App Store →</a>
+						</div>
+						<div class="project-card">
+							<div class="project-icon">🎬</div>
+							<h3>ZZZ Movie Rec System</h3>
+							<p>ML-powered Movie Recommendations</p>
+							<a href="https://zzz-movie-rec-system.vercel.app/" target="_blank" class="project-link">View Project →</a>
+						</div>
+						<div class="project-card">
+							<div class="project-icon">📚</div>
+							<h3>TutorOcean iOS App</h3>
+							<p>Professional Tutoring Platform</p>
+							<a href="https://apps.apple.com/ca/app/tutorocean/id1480876532" target="_blank" class="project-link">View on App Store →</a>
+						</div>
+						<div class="project-card">
+							<div class="project-icon">🔍</div>
+							<h3>cuHacking 2020 Winner</h3>
+							<p>Crime Scene Forensic Analyzer</p>
+							<a href="https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer" target="_blank" class="project-link">View on Devpost →</a>
+						</div>
+						<div class="project-card">
+							<div class="project-icon">🏆</div>
+							<h3>cuHacking 2019 Winner</h3>
+							<p>Amazon Connect Pizza Order System</p>
+							<a href="https://devpost.com/software/cuhackingamazonconnect" target="_blank" class="project-link">View on Devpost →</a>
+						</div>
 					</div>
-					<div class="project-card">
-						<div class="project-icon">🌲</div>
-						<h3>wtcraft</h3>
-						<p>Git-native Multi-Agent Worktree Scaffolding</p>
-						<a href="https://github.com/zywkloo/wtcraft" target="_blank" class="project-link">View on GitHub →</a>
-					</div>
-					<div class="project-card">
-						<div class="project-icon">🏥</div>
-						<h3>VitalMark Wellness</h3>
-						<p>HealthKit Integration & SwiftUI</p>
-						<a href="https://apps.apple.com/us/app/vitalmark-wellness-fitness/id6745228850" target="_blank" class="project-link">View on App Store →</a>
-					</div>
-					<div class="project-card">
-						<div class="project-icon">🤖</div>
-						<h3>Ninja AI Agentic App</h3>
-						<p>LLM Streaming & Multi-Model AI</p>
-						<a href="https://apps.apple.com/us/app/ninja-ai-chat-code-create/id6702030312" target="_blank" class="project-link">View on App Store →</a>
-					</div>
-					<div class="project-card">
-						<div class="project-icon">🎬</div>
-						<h3>ZZZ Movie Rec System</h3>
-						<p>ML-powered Movie Recommendations</p>
-						<a href="https://zzz-movie-rec-system.vercel.app/" target="_blank" class="project-link">View Project →</a>
-					</div>
-					<div class="project-card">
-						<div class="project-icon">📚</div>
-						<h3>TutorOcean iOS App</h3>
-						<p>Professional Tutoring Platform</p>
-						<a href="https://apps.apple.com/ca/app/tutorocean/id1480876532" target="_blank" class="project-link">View on App Store →</a>
-					</div>
-					<div class="project-card">
-						<div class="project-icon">🔍</div>
-						<h3>cuHacking 2020 Winner</h3>
-						<p>Crime Scene Forensic Analyzer</p>
-						<a href="https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer" target="_blank" class="project-link">View on Devpost →</a>
-					</div>
-					<div class="project-card">
-						<div class="project-icon">🏆</div>
-						<h3>cuHacking 2019 Winner</h3>
-						<p>Amazon Connect Pizza Order System</p>
-						<a href="https://devpost.com/software/cuhackingamazonconnect" target="_blank" class="project-link">View on Devpost →</a>
-					</div>
-				</div>
 				</div>
 			</section>
 
@@ -221,6 +351,36 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 			</section>
 		</main>
 		<Footer />
+
+		<script>
+			// Click-to-play facade for the Wild Dunk video: no third-party iframe/JS
+			// is loaded until the visitor actually asks to watch.
+			document.querySelectorAll('.video-facade').forEach((facade) => {
+				const play = () => {
+					const videoId = facade.getAttribute('data-video-id');
+					if (!videoId) return;
+					const iframe = document.createElement('iframe');
+					iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
+					iframe.title = 'Wild Dunk gameplay';
+					iframe.setAttribute('frameborder', '0');
+					iframe.setAttribute(
+						'allow',
+						'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+					);
+					iframe.setAttribute('allowfullscreen', '');
+					iframe.loading = 'lazy';
+					facade.replaceChildren(iframe);
+					facade.classList.add('is-playing');
+				};
+				facade.addEventListener('click', play);
+				facade.addEventListener('keydown', (e) => {
+					if (e instanceof KeyboardEvent && (e.key === 'Enter' || e.key === ' ')) {
+						e.preventDefault();
+						play();
+					}
+				});
+			});
+		</script>
 	</body>
 </html>
 
@@ -235,7 +395,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	.hero {
 		position: relative;
 		overflow: hidden;
-		padding: clamp(4rem, 11vw, 8rem) 1.5rem clamp(3.5rem, 8vw, 6rem);
+		padding: clamp(4rem, 11vw, 8rem) 1.5rem clamp(3rem, 7vw, 5rem);
 		background:
 			radial-gradient(720px 420px at 50% -10%, var(--accent-soft) 0%, rgba(227, 244, 239, 0) 70%);
 	}
@@ -252,7 +412,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		position: relative;
 		z-index: 2;
 		text-align: center;
-		max-width: 760px;
+		max-width: 720px;
 		margin: 0 auto;
 	}
 
@@ -303,13 +463,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		font-size: 1.075rem;
 		line-height: 1.7;
 		color: rgb(var(--gray-dark));
-		max-width: 660px;
-		margin: 0 auto 1.1rem;
-	}
-	.hero-description-secondary {
-		font-size: 1rem;
-		color: rgb(var(--gray));
-		margin-bottom: 1.75rem;
+		max-width: 620px;
+		margin: 0 auto 2rem;
 	}
 
 	.hero-cta {
@@ -317,62 +472,78 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		gap: 0.85rem;
 		justify-content: center;
 		flex-wrap: wrap;
-		margin-bottom: 3rem;
 	}
 
-	.hero-stats {
+	/* Proof strip */
+	.proof {
+		padding: 0 0 clamp(3rem, 7vw, 5rem);
+	}
+	.proof-grid {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: 1fr;
 		gap: 1rem;
-		max-width: 560px;
+		max-width: 900px;
 		margin: 0 auto;
 	}
-	.stat {
+	@media (min-width: 700px) {
+		.proof-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+	.proof-tile {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
 		background: var(--surface-raised);
-		padding: 1.4rem 1rem;
+		padding: 1rem;
 		border-radius: var(--radius);
 		border: 1px solid var(--line);
 		box-shadow: var(--shadow-sm);
-		transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+		text-decoration: none;
+		transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
 	}
-	.stat:hover {
+	.proof-tile:hover {
 		transform: translateY(-3px);
 		box-shadow: var(--shadow-md);
+		border-color: rgba(var(--accent-rgb), 0.32);
 	}
-	.stat-number {
-		font-size: 2rem;
+	.proof-thumb {
+		width: 52px;
+		height: 52px;
+		object-fit: cover;
+		border-radius: 10px;
+		flex-shrink: 0;
+		box-shadow: 0 0 0 1px var(--line);
+	}
+	.proof-thumb-medal {
+		object-position: center 30%;
+	}
+	.proof-icon {
+		width: 52px;
+		height: 52px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.5rem;
+		border-radius: 10px;
+		background: var(--accent-soft);
+		flex-shrink: 0;
+	}
+	.proof-title {
+		font-size: 0.9rem;
 		font-weight: 700;
-		color: var(--accent-dark);
-		letter-spacing: -0.02em;
+		color: rgb(var(--black));
+		line-height: 1.3;
 	}
-	.stat-label {
-		font-size: 0.74rem;
-		color: rgb(var(--gray));
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		font-weight: 700;
-		margin-top: 0.25rem;
-	}
-	.stat-sub {
-		margin-top: 0.55rem;
-		padding-top: 0.5rem;
-		border-top: 1px dashed var(--line);
+	.proof-sub {
 		font-size: 0.78rem;
 		color: rgb(var(--gray));
-		font-weight: 600;
+		margin-top: 0.15rem;
 	}
 
 	/* Sections */
 	section {
 		padding: var(--space-section) 0;
-	}
-	.expertise {
-		background: var(--surface-muted);
-		border-bottom: 1px solid var(--line);
-	}
-	.expertise,
-	.projects {
-		border-top: 1px solid transparent;
 	}
 	.container {
 		max-width: var(--content);
@@ -382,7 +553,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	.section-title {
 		text-align: center;
 		font-size: clamp(1.9rem, 3.6vw, 2.5rem);
-		margin: 0 0 3.25rem;
+		margin: 0 0 1rem;
 		position: relative;
 		padding-bottom: 1rem;
 	}
@@ -398,33 +569,379 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		background: var(--accent);
 	}
 
-	/* Cards */
-	.expertise-grid {
+	/* Signature Work */
+	.signature {
+		background: var(--surface-muted);
+		border-top: 1px solid var(--line);
+		border-bottom: 1px solid var(--line);
+	}
+	.signature-intro {
+		text-align: center;
+		max-width: 620px;
+		margin: 0 auto clamp(2.5rem, 5vw, 3.5rem);
+		color: rgb(var(--gray-dark));
+		font-size: 1.02rem;
+		line-height: 1.65;
+	}
+
+	.signature-grid {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 1.5rem;
+		row-gap: clamp(3rem, 6vw, 4.5rem);
 	}
+	.timeline-rail {
+		display: none;
+	}
+	@media (min-width: 1040px) {
+		.signature-grid {
+			grid-template-columns: 88px 1fr;
+			column-gap: 2rem;
+		}
+		.timeline-rail {
+			display: block;
+			position: relative;
+			grid-column: 1;
+			grid-row: 1 / span 4;
+		}
+	}
+	.timeline-path {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+	}
+	.timeline-path path {
+		fill: none;
+		stroke: var(--accent);
+		stroke-opacity: 0.55;
+		stroke-width: 6px;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		vector-effect: non-scaling-stroke;
+	}
+	.timeline-node {
+		position: absolute;
+		left: 0;
+		right: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		transform: translateY(-50%);
+	}
+	.node-dot {
+		width: 11px;
+		height: 11px;
+		border-radius: 50%;
+		background: var(--accent);
+		box-shadow: 0 0 0 4px var(--accent-soft);
+		margin-bottom: 0.4rem;
+	}
+	.node-label {
+		font-size: 0.62rem;
+		line-height: 1.4;
+		text-align: center;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		font-weight: 700;
+		color: rgb(var(--gray));
+		padding: 0 0.15rem;
+	}
+
+	.sig-block {
+		display: flex;
+		flex-direction: column;
+		gap: 1.75rem;
+		background: var(--surface-raised);
+		border: 1px solid var(--line);
+		border-radius: var(--radius-lg);
+		padding: clamp(1.5rem, 3vw, 2.25rem);
+		box-shadow: var(--shadow-sm);
+	}
+	@media (min-width: 860px) {
+		.sig-block {
+			flex-direction: row;
+			align-items: center;
+			gap: 2.5rem;
+		}
+		.sig-block.sig-reverse {
+			flex-direction: row-reverse;
+		}
+		.sig-media,
+		.sig-body {
+			flex: 1 1 50%;
+			min-width: 0;
+		}
+	}
+
+	/* Fan-out: the path's end branches into the current skill set */
+	.skills-fanout {
+		margin-top: clamp(2.5rem, 5vw, 3.5rem);
+	}
+	.fanout-caption {
+		text-align: center;
+		font-size: 0.74rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		color: rgb(var(--gray));
+		margin: 0 0 0.5rem;
+	}
+	.fanout-svg {
+		display: block;
+		width: 100%;
+		max-width: 720px;
+		height: 56px;
+		margin: 0 auto;
+	}
+	.fanout-svg path {
+		fill: none;
+		stroke: var(--accent);
+		stroke-opacity: 0.4;
+		stroke-width: 2px;
+		stroke-linecap: round;
+	}
+	.skills-row {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 0.9rem;
+		max-width: 760px;
+		margin: 0 auto;
+	}
+	@media (min-width: 700px) {
+		.skills-row {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+	.skill-chip {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+		text-align: center;
+		background: var(--surface-raised);
+		border: 1px solid var(--line);
+		border-radius: var(--radius);
+		padding: 1.1rem 0.75rem;
+		box-shadow: var(--shadow-sm);
+		transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+	}
+	.skill-chip:hover {
+		transform: translateY(-3px);
+		box-shadow: var(--shadow-md);
+	}
+	.skill-icon {
+		width: 2.4rem;
+		height: 2.4rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.2rem;
+		border-radius: 10px;
+		background: var(--accent-soft);
+	}
+	.skill-label {
+		font-size: 0.82rem;
+		font-weight: 700;
+		color: rgb(var(--black));
+		line-height: 1.3;
+	}
+
+	.sig-body h3 {
+		font-size: 1.4rem;
+		margin: 0.35rem 0 0.75rem;
+		color: rgb(var(--black));
+	}
+	.sig-body p {
+		color: rgb(var(--gray-dark));
+		font-size: 0.98rem;
+		line-height: 1.7;
+		margin: 0 0 1rem;
+	}
+	.sig-cta {
+		display: flex;
+		gap: 0.6rem;
+		flex-wrap: wrap;
+	}
+	.btn-sm {
+		padding: 0.6rem 1.25rem;
+		font-size: 0.86rem;
+	}
+
+	/* Video facade (Wild Dunk) */
+	.video-facade {
+		position: relative;
+		aspect-ratio: 4 / 3;
+		border-radius: var(--radius);
+		overflow: hidden;
+		cursor: pointer;
+		box-shadow: var(--shadow-md);
+		background: #000;
+	}
+	.video-facade img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.4s var(--ease);
+	}
+	.video-facade:hover img {
+		transform: scale(1.03);
+	}
+	.video-facade.is-playing iframe {
+		width: 100%;
+		height: 100%;
+		display: block;
+		border: 0;
+	}
+	.play-btn {
+		position: absolute;
+		inset: 0;
+		margin: auto;
+		width: 58px;
+		height: 58px;
+		border-radius: 50%;
+		background: rgba(17, 24, 39, 0.72);
+		color: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: transform 0.25s var(--ease), background 0.25s var(--ease);
+	}
+	.video-facade:hover .play-btn {
+		transform: scale(1.08);
+		background: var(--accent);
+	}
+
+	.rank-card {
+		margin: 0.9rem 0 0;
+	}
+	.rank-card img {
+		width: 100%;
+		border-radius: 10px;
+		box-shadow: 0 0 0 1px var(--line);
+		display: block;
+	}
+	.rank-card figcaption {
+		font-size: 0.72rem;
+		line-height: 1.5;
+		color: rgb(var(--gray));
+		margin-top: 0.5rem;
+	}
+
+	/* Wishes phone frame */
+	.phone-frame {
+		max-width: 260px;
+		margin: 0 auto;
+		border-radius: 28px;
+		overflow: hidden;
+		box-shadow: var(--shadow-lg);
+		border: 6px solid var(--surface-deep);
+	}
+	.sig-video {
+		width: 100%;
+		display: block;
+	}
+
+	/* wtcraft terminal card */
+	.terminal-card {
+		background: var(--surface-deep);
+		border-radius: var(--radius);
+		overflow: hidden;
+		box-shadow: var(--shadow-md);
+	}
+	.terminal-titlebar {
+		display: flex;
+		gap: 0.4rem;
+		padding: 0.7rem 0.85rem;
+		background: rgba(255, 255, 255, 0.05);
+	}
+	.terminal-titlebar span {
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.18);
+	}
+	.terminal-body {
+		margin: 0;
+		padding: 1.25rem 1.4rem 1.5rem;
+		font-family: ui-monospace, "SF Mono", Menlo, monospace;
+		font-size: 0.86rem;
+		line-height: 1.85;
+		color: rgba(255, 255, 255, 0.82);
+		overflow-x: auto;
+	}
+	.t-prompt {
+		color: var(--on-dark-accent);
+	}
+	.t-ok {
+		color: #4ade80;
+	}
+
+	/* EDF frame */
+	.sig-frame {
+		width: 100%;
+		border-radius: var(--radius);
+		box-shadow: var(--shadow-md);
+		display: block;
+	}
+
+	/* Story (medal + intro bridge to About) */
+	.story-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+		align-items: center;
+		max-width: 900px;
+	}
+	@media (min-width: 700px) {
+		.story-grid {
+			grid-template-columns: 280px 1fr;
+			gap: 3rem;
+		}
+	}
+	.story-image {
+		width: 100%;
+		max-width: 280px;
+		margin: 0 auto;
+		border-radius: var(--radius-lg);
+		box-shadow: var(--shadow-lg);
+		display: block;
+	}
+	.story-body h2 {
+		font-size: clamp(1.6rem, 3vw, 2.1rem);
+		margin: 0 0 1rem;
+	}
+	.story-body p {
+		color: rgb(var(--gray-dark));
+		font-size: 1rem;
+		line-height: 1.75;
+		margin: 0 0 1rem;
+	}
+	.story-link {
+		font-weight: 700;
+		color: var(--accent);
+	}
+	.story-link:hover {
+		color: var(--accent-dark);
+	}
+
+	/* Project cards (More Work) */
 	.projects-grid {
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 1.5rem;
 	}
 	@media (min-width: 700px) {
-		.expertise-grid,
 		.projects-grid {
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 	@media (min-width: 1000px) {
-		.expertise-grid {
-			grid-template-columns: repeat(4, 1fr);
-		}
 		.projects-grid {
 			grid-template-columns: repeat(3, 1fr);
 		}
 	}
 
-	.expertise-card,
 	.project-card {
 		background: var(--surface-raised);
 		padding: 2rem 1.75rem;
@@ -436,14 +953,12 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 			box-shadow 0.3s var(--ease),
 			border-color 0.3s var(--ease);
 	}
-	.expertise-card:hover,
 	.project-card:hover {
 		transform: translateY(-6px);
 		box-shadow: var(--shadow-lg);
 		border-color: rgba(var(--accent-rgb), 0.32);
 	}
 
-	.expertise-icon,
 	.project-icon {
 		display: inline-flex;
 		align-items: center;
@@ -454,35 +969,6 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		border-radius: 14px;
 		background: var(--accent-soft);
 		margin-bottom: 1.25rem;
-	}
-
-	.expertise-card h3 {
-		font-size: 1.15rem;
-		margin-bottom: 0.6rem;
-		color: rgb(var(--black));
-	}
-	.expertise-card p {
-		color: rgb(var(--gray));
-		font-size: 0.96rem;
-		line-height: 1.65;
-		margin-bottom: 1.35rem;
-	}
-	.expertise-skills {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.45rem;
-	}
-	.expertise-skills li {
-		background: var(--surface-muted);
-		border: 1px solid var(--line);
-		padding: 0.28rem 0.7rem;
-		border-radius: 999px;
-		font-size: 0.8rem;
-		color: var(--accent-dark);
-		font-weight: 700;
 	}
 
 	.project-card h3 {
@@ -557,12 +1043,5 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		color: #fff;
 		border-color: rgba(255, 255, 255, 0.4);
 		transform: translateY(-2px);
-	}
-
-	@media (max-width: 720px) {
-		.hero-stats {
-			grid-template-columns: 1fr;
-			max-width: 320px;
-		}
 	}
 </style>
