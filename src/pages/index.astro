@@ -167,9 +167,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 					</div>
 
 					<div class="bridge-scene" tabindex="0" aria-describedby="bridge-message">
-						<img src="/images/konigsberg-bridges.webp" width="720" height="531" alt="Historical map of Königsberg showing the seven bridges between two riverbanks and two islands" loading="lazy" />
+						<img src="/images/konigsberg-bridges-simple.webp" width="720" height="531" alt="Simple map illustration of the seven bridges of Königsberg connecting two riverbanks and two islands" loading="lazy" />
 						<span class="bridge-badge">Where the Arc Leads</span>
-						<a class="map-credit" href="https://commons.wikimedia.org/wiki/File:Konigsberg_bridges.png" target="_blank" rel="license noopener">Map: Bogdan Giuşcă · CC BY-SA 3.0</a>
 						<svg class="water-flow" viewBox="0 0 720 531" aria-hidden="true">
 							<path class="flow-one" d="M0 232 C160 220 340 225 430 222 C500 220 555 216 600 222" />
 							<path class="flow-two" d="M150 302 C300 300 450 300 545 308 C575 340 600 380 592 420 C585 455 580 495 600 525" />
@@ -1258,8 +1257,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		object-fit: cover;
 		border-radius: 0;
 	}
-	.bridge-badge,
-	.map-credit {
+	.bridge-badge {
 		position: absolute;
 		z-index: 5;
 		background: rgba(255, 255, 255, 0.9);
@@ -1276,15 +1274,6 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		font-weight: 700;
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
-	}
-	.map-credit {
-		right: 0.65rem;
-		bottom: 0.55rem;
-		padding: 0.18rem 0.4rem;
-		border-radius: 6px;
-		color: rgba(17, 24, 39, 0.66);
-		font-size: 0.6rem;
-		line-height: 1.2;
 	}
 	.water-flow,
 	.mobile-map-route {
@@ -1616,10 +1605,6 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		.bridge-badge {
 			top: 0.55rem;
 			left: 0.55rem;
-		}
-		.map-credit {
-			right: 0.4rem;
-			bottom: 0.35rem;
 		}
 		.bridge-hint { display: none; }
 		.skills-fork { height: 58px; }
