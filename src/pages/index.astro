@@ -640,6 +640,12 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 												<p class="scrim-summary">
 													Every bridge crossed — from game leadership and client runtimes to telemetry pipelines and agent swarms — distilled into verifiable architectural craft.
 												</p>
+												<div class="scrim-replay-cue" aria-label="Click anywhere to replay journey">
+													<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+														<path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+													</svg>
+													<span>Click anywhere to replay journey ↺</span>
+												</div>
 											</div>
 										</div>
 
@@ -1301,6 +1307,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 			// Progressive Euler Bridges -> Skills Dispersal Flow Controller
 			const initEulerFlow = () => {
 				const stage = document.getElementById('pivot-stage');
+				const scrim = stage?.querySelector('.stage-journey-scrim');
 				const path = document.getElementById('euler-active-path');
 				const runner = document.getElementById('euler-runner');
 				const milestoneGroups = Array.from(document.querySelectorAll('.milestone-pin-group'));
@@ -1308,10 +1315,13 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 				const fork = document.getElementById('topological-fork');
 				const forkBranches = Array.from(document.querySelectorAll('.fork-branch'));
 				const cards = Array.from(document.querySelectorAll('#specs-grid .spec-card'));
+				const exitPin = stage?.querySelector('.canvas-exit-pin');
 
 				if (!stage || !path) return;
 
-				let hasAnimated = false;
+				let isRunning = false;
+				let animFrameId = null;
+				let forkTimeoutId = null;
 				let pathLength = 0;
 				try {
 					pathLength = path.getTotalLength();
@@ -1330,29 +1340,45 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 					} catch (_) {}
 				});
 
-				const triggerAnimation = () => {
-					if (hasAnimated) return;
-					hasAnimated = true;
+				const startEulerAnimation = () => {
+					if (isRunning) return;
+					isRunning = true;
+
+					if (animFrameId) cancelAnimationFrame(animFrameId);
+					if (forkTimeoutId) clearTimeout(forkTimeoutId);
+
+					// Reset visual states cleanly
+					if (scrim) scrim.classList.remove('is-active');
+					if (exitPin) exitPin.classList.remove('is-passed');
+					milestoneGroups.forEach((g) => g.classList.remove('is-passed'));
+					callouts.forEach((c) => c.classList.remove('is-active'));
+
+					if (runner) {
+						runner.style.opacity = '1';
+						runner.setAttribute('cx', '-20');
+						runner.setAttribute('cy', '-20');
+					}
+
+					path.style.transition = 'none';
+					path.style.strokeDashoffset = `${pathLength}`;
+					void path.offsetWidth; // Force DOM reflow
 
 					// Reduced motion check
 					if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 						path.style.strokeDashoffset = '0';
 						milestoneGroups.forEach((g) => g.classList.add('is-passed'));
 						callouts.forEach((c) => c.classList.add('is-active'));
-						const scrim = stage.querySelector('.stage-journey-scrim');
 						if (scrim) scrim.classList.add('is-active');
-						const exitPin = stage.querySelector('.canvas-exit-pin');
 						if (exitPin) exitPin.classList.add('is-passed');
 						forkBranches.forEach((b) => (b.style.strokeDashoffset = '0'));
 						cards.forEach((c) => c.classList.add('is-revealed'));
+						isRunning = false;
 						return;
 					}
 
 					// Animate path drawing across the bridges (Slowed down 3x to 6.6s for cinematic storytelling)
 					const duration = 6600;
 					const startTime = performance.now();
-
-					if (runner) runner.style.opacity = '1';
 
 					const step = (currentTime) => {
 						const elapsed = currentTime - startTime;
@@ -1393,7 +1419,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						});
 
 						if (progress < 1) {
-							requestAnimationFrame(step);
+							animFrameId = requestAnimationFrame(step);
 						} else {
 							// 1. All bridges traversed!
 							if (runner) runner.style.opacity = '0.4';
@@ -1403,15 +1429,15 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							callouts.forEach((c) => c.classList.add('is-active'));
 
 							// 2. FADE IN THE 70%-WIDTH FULL-CANVAS SCRIM OVERLAY ACROSS THE SEVEN BRIDGES MAP
-							const scrim = stage.querySelector('.stage-journey-scrim');
 							if (scrim) scrim.classList.add('is-active');
 
 							// 3. Activate bottom exit pin
-							const exitPin = stage.querySelector('.canvas-exit-pin');
 							if (exitPin) exitPin.classList.add('is-passed');
 
+							isRunning = false;
+
 							// 4. Pause 1s for user to absorb transition text, then guide eyes down into fork & cards
-							setTimeout(() => {
+							forkTimeoutId = setTimeout(() => {
 								if (fork) fork.classList.add('is-active');
 								forkBranches.forEach((branch, idx) => {
 									setTimeout(() => {
@@ -1430,15 +1456,23 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						}
 					};
 
-					requestAnimationFrame(step);
+					animFrameId = requestAnimationFrame(step);
 				};
+
+				// Replay interaction: clicking anywhere in this area restarts the journey
+				if (scrim) {
+					scrim.addEventListener('click', (e) => {
+						e.stopPropagation();
+						startEulerAnimation();
+					});
+				}
 
 				// IntersectionObserver to start as user scrolls near Chapter 05
 				const observer = new IntersectionObserver(
 					(entries) => {
 						entries.forEach((entry) => {
 							if (entry.isIntersecting) {
-								triggerAnimation();
+								startEulerAnimation();
 								observer.disconnect();
 							}
 						});
@@ -2606,6 +2640,11 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	.stage-journey-scrim.is-active {
 		opacity: 1;
 		pointer-events: auto;
+		cursor: pointer;
+	}
+	.stage-journey-scrim.is-active:hover .scrim-transition-card {
+		border-color: #e5b382;
+		box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 0 1.5px rgba(229, 179, 130, 0.5);
 	}
 	.scrim-transition-card {
 		width: 70%;
@@ -2670,6 +2709,30 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		margin: 0 auto;
 		max-width: 520px;
 		text-wrap: balance;
+	}
+	.scrim-replay-cue {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 6px;
+		margin-top: 14px;
+		padding: 4px 14px;
+		border-radius: 999px;
+		background: rgba(229, 179, 130, 0.12);
+		border: 1px solid rgba(229, 179, 130, 0.35);
+		color: #e5b382;
+		font-family: var(--apaper-font-mono);
+		font-size: 8.5px;
+		letter-spacing: 0.12em;
+		font-weight: 700;
+		text-transform: uppercase;
+		transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+	}
+	.stage-journey-scrim.is-active:hover .scrim-replay-cue {
+		background: #e5b382;
+		color: #121415;
+		border-color: #e5b382;
+		transform: translateY(-1px);
 	}
 
 	/* Footer Caption inside map frame */
