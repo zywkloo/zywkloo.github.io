@@ -58,9 +58,19 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-paper-theme="carbon">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<script is:inline>
+			(function () {
+				try {
+					var theme = localStorage.getItem('apaper-theme') || 'carbon';
+					document.documentElement.setAttribute('data-paper-theme', theme);
+				} catch (e) {
+					document.documentElement.setAttribute('data-paper-theme', 'carbon');
+				}
+			})();
+		</script>
 		<script type="application/ld+json" set:html={JSON.stringify(homeLd)} />
 	</head>
 	<body>
@@ -985,7 +995,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 					<div class="theme-palette-bar" aria-label="Paper Theme Switcher">
 						<span class="theme-bar-label">PAPER TONE // 纸本色印:</span>
 						<div class="theme-pills">
-							<button type="button" class="theme-pill washi active" data-theme="washi" title="和纸朱砂 · Washi &amp; Cinnabar">
+							<button type="button" class="theme-pill washi" data-theme="washi" title="和纸朱砂 · Washi &amp; Cinnabar">
 								<span class="pill-swatch" style="background: #c45e49;"></span>
 								<span class="pill-title">和纸朱砂</span>
 							</button>
@@ -1001,7 +1011,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 								<span class="pill-swatch" style="background: #2d6a4f;"></span>
 								<span class="pill-title">竹简青素</span>
 							</button>
-							<button type="button" class="theme-pill carbon" data-theme="carbon" title="玄纸泥金 · Carbon Washi &amp; Gold">
+							<button type="button" class="theme-pill carbon active" data-theme="carbon" title="玄纸泥金 · Carbon Washi &amp; Gold">
 								<span class="pill-swatch" style="background: #d4a373;"></span>
 								<span class="pill-title">玄纸泥金</span>
 							</button>
@@ -1147,7 +1157,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 			// Paper Theme Switcher with localStorage persistence
 			const initPaperTheme = () => {
 				try {
-					const savedTheme = localStorage.getItem('apaper-theme') || 'washi';
+					const savedTheme = localStorage.getItem('apaper-theme') || 'carbon';
 					document.documentElement.setAttribute('data-paper-theme', savedTheme);
 					document.querySelectorAll('.theme-pill').forEach((btn) => {
 						btn.classList.toggle('active', btn.getAttribute('data-theme') === savedTheme);
@@ -1337,6 +1347,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		--apaper-accent: #c45e49;
 		--apaper-accent-soft: rgba(196, 94, 73, 0.08);
 		--apaper-accent-line: rgba(196, 94, 73, 0.25);
+		--apaper-btn-text: #ffffff;
+		--apaper-tag-bg: rgba(32, 34, 33, 0.04);
 		--apaper-font-mono: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
 		--apaper-font-serif: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
 	}
@@ -1355,6 +1367,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		--apaper-accent: #b86d29;
 		--apaper-accent-soft: rgba(184, 109, 41, 0.09);
 		--apaper-accent-line: rgba(184, 109, 41, 0.28);
+		--apaper-btn-text: #ffffff;
+		--apaper-tag-bg: rgba(38, 34, 28, 0.04);
 	}
 
 	/* Preset 3: 学术蓝图 · Blueprint & Slate */
@@ -1371,6 +1385,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		--apaper-accent: #2563eb;
 		--apaper-accent-soft: rgba(37, 99, 235, 0.08);
 		--apaper-accent-line: rgba(37, 99, 235, 0.25);
+		--apaper-btn-text: #ffffff;
+		--apaper-tag-bg: rgba(30, 37, 48, 0.04);
 	}
 
 	/* Preset 4: 竹简青素 · Bamboo & Celadon */
@@ -1387,22 +1403,26 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		--apaper-accent: #2d6a4f;
 		--apaper-accent-soft: rgba(45, 106, 79, 0.08);
 		--apaper-accent-line: rgba(45, 106, 79, 0.25);
+		--apaper-btn-text: #ffffff;
+		--apaper-tag-bg: rgba(31, 38, 35, 0.04);
 	}
 
-	/* Preset 5: 玄纸泥金 · Carbon Washi & Gold (暗调纸本) */
+	/* Preset 5: 玄纸泥金 · Carbon Washi & Gold (暗调奢雅纸本 · 解决所有看不清的对比度优化) */
 	[data-paper-theme="carbon"] {
-		--apaper-bg: #161718;
-		--apaper-bg-alt: #1c1e1f;
-		--apaper-card: #212325;
-		--apaper-header-bg: rgba(22, 23, 24, 0.88);
-		--apaper-ink: #ede9e1;
-		--apaper-ink-secondary: #c2bdaf;
-		--apaper-muted: #8c877c;
-		--apaper-line: #333638;
-		--apaper-line-light: #282a2c;
-		--apaper-accent: #d4a373;
-		--apaper-accent-soft: rgba(212, 163, 115, 0.12);
-		--apaper-accent-line: rgba(212, 163, 115, 0.3);
+		--apaper-bg: #141617;
+		--apaper-bg-alt: #1a1c1e;
+		--apaper-card: #202325;
+		--apaper-header-bg: rgba(20, 22, 23, 0.92);
+		--apaper-ink: #f5f2eb;             /* 纯粹温润米白，用于大标题、卡片主标题，字字清晰锐利 */
+		--apaper-ink-secondary: #ded9cf;   /* 高对比度暖调亮宣纸白，正文说明、描述、引用清晰通透 */
+		--apaper-muted: #aba496;           /* 典雅暖沙金，元数据、钢印、副标清晰可读不再灰暗 */
+		--apaper-line: #383c3e;            /* 规整纤细发丝线 */
+		--apaper-line-light: #282c2e;
+		--apaper-accent: #e5b382;          /* 澄澈暖泥金，高光点缀与核心呼出 */
+		--apaper-accent-soft: rgba(229, 179, 130, 0.16);
+		--apaper-accent-line: rgba(229, 179, 130, 0.38);
+		--apaper-btn-text: #121415;        /* 金色或米白主按钮上的深墨黑字，对比度 10:1+ 极度清晰 */
+		--apaper-tag-bg: rgba(255, 255, 255, 0.07); /* 标签半透发光底色，消除黑底黑字 */
 	}
 
 	:global(body) {
@@ -1427,7 +1447,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		padding: 7px 16px;
 		border-radius: 999px;
 		background: var(--apaper-ink);
-		color: #ffffff;
+		color: var(--apaper-btn-text, #ffffff);
 		font-family: var(--apaper-font-mono);
 		font-size: 11px;
 		letter-spacing: 0.06em;
@@ -1439,18 +1459,19 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	.btn-apaper:hover {
 		background: var(--apaper-accent);
 		border-color: var(--apaper-accent);
-		color: #ffffff;
+		color: var(--apaper-btn-text, #ffffff);
 		transform: translateY(-1px);
 	}
 	.btn-apaper-primary {
 		background: var(--apaper-accent);
 		border-color: var(--apaper-accent);
-		color: #ffffff;
+		color: var(--apaper-btn-text, #ffffff);
+		font-weight: 600;
 	}
 	.btn-apaper-primary:hover {
 		background: var(--apaper-ink);
 		border-color: var(--apaper-ink);
-		color: #ffffff;
+		color: var(--apaper-btn-text, #ffffff);
 	}
 	.btn-apaper-ghost {
 		background: transparent;
@@ -2368,39 +2389,6 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		flex-wrap: wrap;
 		margin-bottom: 16px;
 	}
-	.btn-apaper {
-		display: inline-flex;
-		align-items: center;
-		gap: 6px;
-		padding: 7px 16px;
-		border-radius: 999px;
-		background: var(--apaper-ink);
-		color: #ffffff;
-		font-family: var(--apaper-font-mono);
-		font-size: 11px;
-		letter-spacing: 0.06em;
-		text-transform: uppercase;
-		text-decoration: none;
-		border: 1px solid var(--apaper-ink);
-		transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
-	}
-	.btn-apaper:hover {
-		background: var(--apaper-accent);
-		border-color: var(--apaper-accent);
-		color: #ffffff;
-		transform: translateY(-1px);
-	}
-	.btn-apaper-ghost {
-		background: transparent;
-		color: var(--apaper-ink);
-		border-color: var(--apaper-line);
-	}
-	.btn-apaper-ghost:hover {
-		background: rgba(32, 34, 33, 0.05);
-		border-color: var(--apaper-ink);
-		color: var(--apaper-ink);
-	}
-
 	/* Tags in apaper style */
 	.plate-tags, .spec-tags {
 		display: flex;
@@ -2410,13 +2398,13 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	}
 	.plate-tags span, .spec-tags span {
 		font-family: var(--apaper-font-mono);
-		font-size: 10px;
+		font-size: 9.5px;
 		letter-spacing: 0.03em;
-		padding: 3px 9px;
+		padding: 2.5px 8.5px;
 		border: 1px solid var(--apaper-line);
 		border-radius: 999px;
-		background: rgba(255, 255, 255, 0.6);
-		color: var(--apaper-muted);
+		background: var(--apaper-tag-bg);
+		color: var(--apaper-ink-secondary);
 	}
 
 	.terminal-title {
@@ -2478,13 +2466,13 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		top: clamp(10px, 1.8vw, 18px);
 		left: clamp(10px, 1.8vw, 18px);
 		max-width: 440px;
-		background: rgba(248, 246, 240, 0.92);
+		background: var(--apaper-header-bg);
 		backdrop-filter: blur(12px);
 		-webkit-backdrop-filter: blur(12px);
 		border: 1px solid var(--apaper-line);
 		border-radius: 12px;
 		padding: 12px 18px;
-		box-shadow: 0 8px 24px rgba(32, 34, 33, 0.07);
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 		z-index: 4;
 		opacity: 0;
 		transform: translateY(14px);
@@ -2509,11 +2497,11 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		text-transform: uppercase;
 	}
 	.overlay-stamp {
-		color: var(--apaper-muted);
-		background: rgba(32, 34, 33, 0.04);
+		color: var(--apaper-accent);
+		background: var(--apaper-accent-soft);
 		padding: 2px 7px;
 		border-radius: 4px;
-		border: 1px solid var(--apaper-line);
+		border: 1px solid var(--apaper-accent-line);
 	}
 	.overlay-title {
 		font-family: var(--apaper-font-serif);
@@ -2690,13 +2678,13 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	}
 
 	.callout-card {
-		background: rgba(252, 251, 248, 0.94);
+		background: var(--apaper-header-bg);
 		backdrop-filter: blur(10px);
 		-webkit-backdrop-filter: blur(10px);
 		border: 1px solid var(--apaper-line);
 		border-radius: 8px;
 		padding: 5px 10px;
-		box-shadow: 0 4px 14px rgba(32, 34, 33, 0.08);
+		box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
 		display: flex;
 		flex-direction: column;
 		min-width: 135px;
@@ -2707,7 +2695,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	.callout-card:hover {
 		border-color: var(--apaper-accent);
 		transform: scale(1.04);
-		box-shadow: 0 8px 20px rgba(32, 34, 33, 0.12);
+		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
 	}
 	.callout-badge {
 		font-family: var(--apaper-font-mono);
@@ -2729,7 +2717,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		font-family: var(--apaper-font-mono);
 		font-size: 7.5px;
 		letter-spacing: 0.03em;
-		color: var(--apaper-muted);
+		color: var(--apaper-ink-secondary);
 	}
 
 	/* Canvas Exit Pin Dot (Exact connection point at bottom center) */
@@ -3078,8 +3066,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		letter-spacing: 0.14em;
 		font-weight: 700;
 		color: var(--apaper-accent);
-		background: rgba(196, 94, 73, 0.08);
-		border: 1px solid rgba(196, 94, 73, 0.28);
+		background: var(--apaper-accent-soft);
+		border: 1px solid var(--apaper-accent-line);
 		padding: 2px 6px;
 		border-radius: 4px;
 		text-transform: uppercase;
@@ -3109,13 +3097,13 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	}
 	.project-card-tags span {
 		font-family: var(--apaper-font-mono);
-		font-size: 9px;
-		letter-spacing: 0.02em;
-		padding: 2.5px 8px;
+		font-size: 9.5px;
+		letter-spacing: 0.03em;
+		padding: 2.5px 8.5px;
 		border-radius: 999px;
-		background: rgba(32, 34, 33, 0.03);
+		background: var(--apaper-tag-bg);
 		border: 1px solid var(--apaper-line);
-		color: var(--apaper-muted);
+		color: var(--apaper-ink-secondary);
 	}
 	.project-card-footer {
 		display: flex;
@@ -3140,7 +3128,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		text-transform: uppercase;
 	}
 	.stamp-live {
-		color: #059669;
+		color: #10b981;
 	}
 	.stamp-award {
 		color: var(--apaper-accent);
@@ -3295,10 +3283,11 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		transform: translateY(-1px);
 	}
 	.theme-pill.active {
-		border-color: var(--apaper-ink);
-		background: var(--apaper-ink);
-		color: #ffffff;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+		border-color: var(--apaper-accent);
+		background: var(--apaper-accent);
+		color: var(--apaper-btn-text, #ffffff);
+		font-weight: 600;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 	}
 	.pill-swatch {
 		width: 8px;
@@ -3307,7 +3296,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		flex-shrink: 0;
 	}
 	.theme-pill.active .pill-swatch {
-		box-shadow: 0 0 0 1px #fff;
+		box-shadow: 0 0 0 1.5px var(--apaper-btn-text, #fff);
 	}
 
 	/* Responsive media queries */
