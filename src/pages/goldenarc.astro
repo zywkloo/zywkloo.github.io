@@ -3,6 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { GOLDENARC_LINKEDIN_URL, GOLDENARC_NAME, SITE_URL } from '../consts';
+import { GOLDENARC_COPY } from '../data/goldenarc';
 
 const products = [
 	{
@@ -54,8 +55,8 @@ const organizationLd = {
 <html lang="en">
 	<head>
 		<BaseHead
-			title="GoldenARC Digital | One Core. Many Arcs."
-			description="Plug Once. Grow Everywhere. GoldenARC Digital builds local-first Apple platform tools on a modular Swift package architecture, including ARC EDF & BDF Viewer, ARC Scanner, ARC Markdown, and ARC PDF Studio."
+			title={GOLDENARC_COPY.meta.title}
+			description={GOLDENARC_COPY.meta.description}
 		/>
 		<script type="application/ld+json" is:inline set:html={JSON.stringify(organizationLd)} />
 	</head>
@@ -68,20 +69,17 @@ const organizationLd = {
 					<img src="/images/goldenarc/brand-mark.png" alt="" width="64" height="64" />
 					<span>GoldenARC Digital</span>
 				</div>
-				<h1>One Core. Many Arcs.</h1>
-				<p class="lede">
-					Plug Once. Grow Everywhere. GoldenARC tools stay focused at the product layer while shared
-					capabilities live in small, testable Swift Package products with explicit dependency boundaries.
-				</p>
+				<h1>{GOLDENARC_COPY.hero.title}</h1>
+				<p class="lede">{GOLDENARC_COPY.hero.lede}</p>
 			</section>
 
 			<section aria-labelledby="tools-heading">
 				<div class="section-heading">
 					<div>
-						<p class="eyebrow">The ARC series</p>
-						<h2 id="tools-heading">Choose a tool</h2>
+						<p class="eyebrow">{GOLDENARC_COPY.tools.eyebrow}</p>
+						<h2 id="tools-heading">{GOLDENARC_COPY.tools.title}</h2>
 					</div>
-					<p>Separate products at different stages, built around the same engineering discipline.</p>
+					<p>{GOLDENARC_COPY.tools.description}</p>
 				</div>
 
 				<div class="product-grid">
