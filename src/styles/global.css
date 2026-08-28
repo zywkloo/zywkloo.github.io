@@ -122,6 +122,40 @@ html[data-paper-theme="operator"] {
 	--gray-gradient: rgba(19, 35, 49, 0.75), #0d1721;
 }
 
+/* Paper is the light editorial reading surface: warm stock, ink, and a restrained vermilion signal. */
+html[data-paper-theme="paper"] {
+	--apaper-bg: #f5f0e7;
+	--apaper-bg-alt: #ebe4d8;
+	--apaper-card: #fffdf8;
+	--apaper-header-bg: rgba(245, 240, 231, 0.92);
+	--apaper-ink: #1d252a;
+	--apaper-ink-secondary: #4b5860;
+	--apaper-muted: #748087;
+	--apaper-line: #d4cdc0;
+	--apaper-line-light: #e5ded2;
+	--apaper-accent: #a84635;
+	--apaper-accent-soft: rgba(168, 70, 53, 0.12);
+	--apaper-accent-line: rgba(168, 70, 53, 0.35);
+	--apaper-btn-text: #fffaf4;
+	--apaper-tag-bg: rgba(29, 37, 42, 0.06);
+	--accent: #a84635;
+	--accent-dark: #803226;
+	--accent-bright: #c26452;
+	--accent-soft: rgba(168, 70, 53, 0.12);
+	--accent-rgb: 168, 70, 53;
+	--black: 29, 37, 42;
+	--ink: 45, 56, 63;
+	--gray: 116, 128, 135;
+	--gray-light: 229, 222, 210;
+	--gray-dark: 45, 56, 63;
+	--surface: #f5f0e7;
+	--surface-raised: #fffdf8;
+	--surface-muted: #ebe4d8;
+	--surface-deep: #273035;
+	--line: #d4cdc0;
+	--gray-gradient: rgba(235, 228, 216, 0.78), #f5f0e7;
+}
+
 @font-face {
 	font-family: "Atkinson";
 	src: url("/fonts/atkinson-regular.woff") format("woff");

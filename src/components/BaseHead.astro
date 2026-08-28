@@ -29,7 +29,7 @@ const ogImage = ogImageUrl ? new URL(ogImageUrl, Astro.site) : new URL(image.src
 	(() => {
 		try {
 			const saved = localStorage.getItem('site-paper-theme');
-			const theme = saved === 'operator' ? 'operator' : 'carbon';
+			const theme = saved === 'operator' || saved === 'paper' ? saved : 'carbon';
 			document.documentElement.setAttribute('data-paper-theme', theme);
 		} catch (_) {
 			document.documentElement.setAttribute('data-paper-theme', 'carbon');

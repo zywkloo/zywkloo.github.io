@@ -44,15 +44,19 @@ import HeaderLink from './HeaderLink.astro';
 			</a>
 		</div>
 		<div class="site-theme-switcher" role="group" aria-label="Site appearance">
+			<button type="button" data-site-theme="paper" aria-label="Use Paper theme" title="Paper">☀</button>
 			<button type="button" data-site-theme="carbon" aria-label="Use Carbon theme" title="Carbon">☾</button>
-			<button type="button" data-site-theme="operator" aria-label="Use Operator Blue theme" title="Operator Blue">☀</button>
+			<button type="button" data-site-theme="operator" aria-label="Use Operator Blue theme" title="Operator Blue">✦</button>
 		</div>
 	</nav>
 </header>
 <script>
 	const initSiteThemeSwitcher = () => {
 		const buttons = document.querySelectorAll<HTMLButtonElement>('[data-site-theme]');
-		const currentTheme = () => document.documentElement.getAttribute('data-paper-theme') === 'operator' ? 'operator' : 'carbon';
+		const currentTheme = () => {
+			const theme = document.documentElement.getAttribute('data-paper-theme');
+			return theme === 'operator' || theme === 'paper' ? theme : 'carbon';
+		};
 		const sync = () => buttons.forEach((button) => {
 			button.classList.toggle('active', button.dataset.siteTheme === currentTheme());
 		});
@@ -219,6 +223,7 @@ import HeaderLink from './HeaderLink.astro';
 		cursor: pointer;
 	}
 	.site-theme-switcher button[data-site-theme="carbon"] { color: #e5b382; }
+	.site-theme-switcher button[data-site-theme="paper"] { color: #a84635; }
 	.site-theme-switcher button[data-site-theme="operator"] { color: #69c7d5; }
 	.site-theme-switcher button.active {
 		background: var(--apaper-accent, var(--accent));
