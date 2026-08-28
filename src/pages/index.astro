@@ -984,12 +984,13 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						</article>
 
 						<!-- Card 07: Crime Scene Forensic Analyzer -->
-						<article class="project-card">
+						<article class="project-card card-award">
 							<div class="project-card-header">
 								<div class="header-id-group">
 									<span class="project-id">[HCK-07]</span>
 									<div class="platform-badges" aria-label="Supported Platforms">
 										<span class="platform-chip chip-web">Web</span>
+										<span class="platform-chip chip-winner">🏆 1st Place Winner</span>
 									</div>
 								</div>
 								<div class="project-glyph" title="Spatial Computer Vision Reticle">
@@ -1002,6 +1003,10 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 									</svg>
 								</div>
 							</div>
+							<div class="card-award-banner">
+								<span class="award-trophy">🏆</span>
+								<span class="award-text">CUHACKING 2020 · 1ST PLACE CHAMPION</span>
+							</div>
 							<h3 class="project-card-title">Crime Scene Forensic Analyzer</h3>
 							<p class="project-card-desc">1st Place Winner at CUHacking 2020. Multi-modal forensic evidence analyzer combining computer vision, spatial audio triangulation, and 3D coordinate crime-scene reconstruction.</p>
 							<div class="project-card-tags">
@@ -1012,18 +1017,22 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							</div>
 							<div class="project-card-footer">
 								<a href="https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">Devpost Case ↗</a>
-								<span class="project-status-stamp stamp-award">🏆 1ST PLACE</span>
+								<span class="project-status-stamp stamp-award">
+									<span class="trophy-icon">🏆</span>
+									<span>1ST PLACE WINNER</span>
+								</span>
 							</div>
 						</article>
 
 						<!-- Card 08: Amazon Connect Voice Flow -->
-						<article class="project-card">
+						<article class="project-card card-award">
 							<div class="project-card-header">
 								<div class="header-id-group">
 									<span class="project-id">[HCK-08]</span>
 									<div class="platform-badges" aria-label="Supported Platforms">
 										<span class="platform-chip chip-cloud">Cloud</span>
 										<span class="platform-chip chip-web">Web</span>
+										<span class="platform-chip chip-winner">🏆 1st Place Winner</span>
 									</div>
 								</div>
 								<div class="project-glyph" title="Telephony Contact Flow State Machine">
@@ -1031,6 +1040,10 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
 									</svg>
 								</div>
+							</div>
+							<div class="card-award-banner">
+								<span class="award-trophy">🏆</span>
+								<span class="award-text">CUHACKING 2019 · 1ST PLACE CHAMPION</span>
 							</div>
 							<h3 class="project-card-title">Amazon Connect Voice Flow</h3>
 							<p class="project-card-desc">1st Place Winner at CUHacking 2019. Automated telephony order processing state machine powered by serverless AWS Lambda and Amazon Connect contact flows with dynamic CRM dispatch.</p>
@@ -1042,7 +1055,10 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							</div>
 							<div class="project-card-footer">
 								<a href="https://devpost.com/software/cuhackingamazonconnect" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">Devpost Case ↗</a>
-								<span class="project-status-stamp stamp-award">🏆 1ST PLACE</span>
+								<span class="project-status-stamp stamp-award">
+									<span class="trophy-icon">🏆</span>
+									<span>1ST PLACE WINNER</span>
+								</span>
 							</div>
 						</article>
 
@@ -3382,6 +3398,13 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		border-color: rgba(251, 191, 36, 0.35);
 		background: rgba(251, 191, 36, 0.1);
 	}
+	.platform-chip.chip-winner {
+		color: #fcd34d;
+		border-color: rgba(245, 158, 11, 0.55);
+		background: rgba(245, 158, 11, 0.18);
+		font-weight: 700;
+		box-shadow: 0 0 8px rgba(245, 158, 11, 0.2);
+	}
 	.project-scope {
 		color: var(--apaper-muted);
 	}
@@ -3482,7 +3505,53 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		color: #10b981;
 	}
 	.stamp-award {
-		color: var(--apaper-accent);
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
+		padding: 3px 9px;
+		border-radius: 4px;
+		background: rgba(245, 158, 11, 0.16);
+		border: 1px solid rgba(245, 158, 11, 0.5);
+		color: #fcd34d !important;
+		font-weight: 800 !important;
+		font-size: 8.5px !important;
+		letter-spacing: 0.1em;
+		box-shadow: 0 0 8px rgba(245, 158, 11, 0.2);
+	}
+	.stamp-award .trophy-icon {
+		font-size: 11px;
+		filter: drop-shadow(0 0 3px rgba(245, 158, 11, 0.8));
+	}
+
+	/* Hackathon Champion Card Special Styling */
+	.project-card.card-award {
+		border-color: rgba(245, 158, 11, 0.4);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(245, 158, 11, 0.22);
+	}
+	.project-card.card-award:hover {
+		border-color: #f59e0b;
+		box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45), 0 0 0 1.5px rgba(245, 158, 11, 0.55);
+	}
+	.card-award-banner {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		margin: 6px 0 10px;
+		padding: 4px 10px;
+		border-radius: 6px;
+		background: linear-gradient(90deg, rgba(245, 158, 11, 0.22) 0%, rgba(245, 158, 11, 0.08) 100%);
+		border: 1px solid rgba(245, 158, 11, 0.5);
+		color: #fcd34d;
+		font-family: var(--apaper-font-mono);
+		font-size: 8.5px;
+		letter-spacing: 0.08em;
+		font-weight: 800;
+		box-shadow: 0 2px 8px rgba(245, 158, 11, 0.15);
+		width: fit-content;
+	}
+	.card-award-banner .award-trophy {
+		font-size: 11px;
+		filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.9));
 	}
 
 	/* ─────────────────────────────────────────────────────────────
