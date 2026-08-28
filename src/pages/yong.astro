@@ -263,11 +263,12 @@ const appLd = {
 
 <style>
 	.yong-page {
+		--yong-page-ink: #2c2927;
 		width: min(1140px, 100%);
 		margin: 0 auto;
 		padding: 3rem 1.25rem;
 		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
-		color: #2c2927;
+		color: var(--yong-page-ink);
 	}
 
 	.en-sub {
@@ -796,5 +797,54 @@ const appLd = {
 		color: #8b837e !important;
 		line-height: 1.5 !important;
 		margin-bottom: 1.5rem !important;
+	}
+
+	/* The cards deliberately stay like warm paper; the surrounding page follows
+	   the shared Carbon / Operator theme so headlines never disappear on dark. */
+	:global(html[data-paper-theme]) .yong-page {
+		--yong-page-ink: var(--apaper-ink);
+	}
+	:global(html[data-paper-theme]) .yong-page .en-sub,
+	:global(html[data-paper-theme]) .yong-page .tagline,
+	:global(html[data-paper-theme]) .yong-page .loop-subtitle,
+	:global(html[data-paper-theme]) .yong-page .demo-subtitle,
+	:global(html[data-paper-theme]) .yong-page .practice-subtitle,
+	:global(html[data-paper-theme]) .yong-page .step-body small,
+	:global(html[data-paper-theme]) .yong-page .practice-shot figcaption,
+	:global(html[data-paper-theme]) .yong-page .update-date {
+		color: var(--apaper-muted) !important;
+	}
+	:global(html[data-paper-theme]) .yong-page .hero-content h1,
+	:global(html[data-paper-theme]) .yong-page .loop-section h2,
+	:global(html[data-paper-theme]) .yong-page .demo-section h2,
+	:global(html[data-paper-theme]) .yong-page .features-section h2,
+	:global(html[data-paper-theme]) .yong-page .practice-section h2,
+	:global(html[data-paper-theme]) .yong-page .section-container > h2,
+	:global(html[data-paper-theme]) .yong-page .step-body h4 {
+		color: var(--apaper-ink);
+	}
+	:global(html[data-paper-theme]) .yong-page .subtitle,
+	:global(html[data-paper-theme]) .yong-page .step-body p {
+		color: var(--apaper-ink-secondary);
+	}
+	:global(html[data-paper-theme]) .yong-page .app-tag,
+	:global(html[data-paper-theme]) .yong-page .coming-soon {
+		color: var(--apaper-accent);
+	}
+	:global(html[data-paper-theme]) .yong-page .app-tag,
+	:global(html[data-paper-theme]) .yong-page .btn-secondary {
+		background: var(--apaper-accent-soft);
+		border-color: var(--apaper-accent-line);
+	}
+	:global(html[data-paper-theme]) .yong-page .btn-secondary {
+		color: var(--apaper-accent);
+	}
+	:global(html[data-paper-theme]) .yong-page .loop-section,
+	:global(html[data-paper-theme]) .yong-page .demo-section,
+	:global(html[data-paper-theme]) .yong-page .features-section,
+	:global(html[data-paper-theme]) .yong-page .practice-section,
+	:global(html[data-paper-theme]) .yong-page .support-section,
+	:global(html[data-paper-theme]) .yong-page .privacy-section {
+		border-color: var(--apaper-line);
 	}
 </style>
