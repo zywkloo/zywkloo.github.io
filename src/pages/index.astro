@@ -963,9 +963,10 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							</span>
 							<span class="contact-status-tag">AVAILABLE FOR CONSULTING</span>
 						</div>
-						<h2 id="contact-title" class="contact-title">Let's Connect · 见字如面</h2>
+						<h2 id="contact-title" class="contact-title">Let's Connect · Au Plaisir</h2>
 						<p class="contact-text">
-							Open for systems consulting, mobile data layer architecture, and agentic harness engineering. If you value correctness under real-world device conditions, let's talk.
+							Available for systems consulting, mobile data layer architecture, and agentic swarms.<br class="hide-on-mobile" />
+							If you value deterministic correctness under real-world device constraints, let's talk.
 						</p>
 						<div class="contact-buttons">
 							<a href={`mailto:${EMAIL}`} class="btn-apaper btn-apaper-primary">Direct Email ✉</a>
@@ -3215,11 +3216,12 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	}
 	.contact-text {
 		font-family: var(--apaper-font-serif);
-		font-size: clamp(1.05rem, 1.4vw, 1.18rem);
-		line-height: 1.75;
+		font-size: clamp(1rem, 1.35vw, 1.15rem);
+		line-height: 1.7;
 		color: var(--apaper-ink-secondary);
-		max-width: 620px;
-		margin: 0 auto 2.4rem;
+		max-width: 760px;
+		margin: 0 auto 2.2rem;
+		text-wrap: balance;
 	}
 	.contact-buttons {
 		display: flex;
@@ -3443,6 +3445,9 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 			flex-direction: column;
 			align-items: center;
 			text-align: center;
+		}
+		.hide-on-mobile {
+			display: none;
 		}
 	}
 </style>
