@@ -1312,13 +1312,13 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	}
 	.stage-card {
 		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 7%;
-		right: 7%;
+		top: 6px;
+		bottom: 6px;
+		left: 11%;
+		right: 11%;
 		background: var(--apaper-card);
 		border: 1px solid var(--apaper-line);
-		border-radius: 16px;
+		border-radius: 18px;
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
@@ -1337,40 +1337,40 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		transform: translate3d(0, 0, 0) scale(1);
 		opacity: 1;
 		pointer-events: auto;
-		box-shadow: 0 16px 40px rgba(32, 34, 33, 0.15);
+		box-shadow: 0 20px 48px rgba(32, 34, 33, 0.16);
 		filter: brightness(1);
 	}
 
-	/* Left Stack / Previous Card */
+	/* Left Stack / Previous Card: Prominently peeking on the left */
 	.stage-card.is-prev {
 		z-index: 2;
-		transform: translate3d(-36px, 12px, -70px) scale(0.86) rotateY(6deg);
-		opacity: 0.65;
+		transform: translate3d(-88px, 12px, -70px) scale(0.88) rotateY(6deg);
+		opacity: 0.78;
 		pointer-events: auto;
 		cursor: pointer;
-		box-shadow: -6px 8px 24px rgba(32, 34, 33, 0.08);
-		filter: brightness(0.94);
+		box-shadow: -10px 12px 28px rgba(32, 34, 33, 0.12);
+		filter: brightness(0.96);
 	}
 	.stage-card.is-prev:hover {
-		opacity: 0.92;
+		opacity: 0.96;
 		border-color: var(--apaper-accent);
-		transform: translate3d(-42px, 10px, -45px) scale(0.88) rotateY(4deg);
+		transform: translate3d(-96px, 8px, -45px) scale(0.9) rotateY(3deg);
 	}
 
-	/* Right Stack / Next Card */
+	/* Right Stack / Next Card: Prominently peeking on the right */
 	.stage-card.is-next {
 		z-index: 2;
-		transform: translate3d(36px, 12px, -70px) scale(0.86) rotateY(-6deg);
-		opacity: 0.65;
+		transform: translate3d(88px, 12px, -70px) scale(0.88) rotateY(-6deg);
+		opacity: 0.78;
 		pointer-events: auto;
 		cursor: pointer;
-		box-shadow: 6px 8px 24px rgba(32, 34, 33, 0.08);
-		filter: brightness(0.94);
+		box-shadow: 10px 12px 28px rgba(32, 34, 33, 0.12);
+		filter: brightness(0.96);
 	}
 	.stage-card.is-next:hover {
-		opacity: 0.92;
+		opacity: 0.96;
 		border-color: var(--apaper-accent);
-		transform: translate3d(42px, 10px, -45px) scale(0.88) rotateY(-4deg);
+		transform: translate3d(96px, 8px, -45px) scale(0.9) rotateY(-3deg);
 	}
 
 	/* Hidden Cards in Queue */
