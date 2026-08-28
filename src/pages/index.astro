@@ -534,37 +534,50 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										<div class="stage-map-vignette" aria-hidden="true"></div>
 
 										<!-- True Seven Bridges SVG Traversal Line -->
-										<svg class="stage-euler-svg" viewBox="0 0 720 531" aria-hidden="true">
+										<svg class="stage-euler-svg" viewBox="0 0 720 531" preserveAspectRatio="none" aria-hidden="true">
 											<!-- Faint Background Path Guide -->
 											<path
 												class="euler-track"
-												d="M 150 110 C 190 115, 245 145, 287 184 C 295 225, 250 265, 236 309 C 230 365, 315 375, 326 310 C 335 240, 375 210, 401 185 C 435 155, 495 160, 538 202 C 575 220, 545 255, 501 265 C 460 275, 490 370, 539 396 C 560 435, 450 505, 360 531"
+												d="M 150 110 C 190 115, 245 140, 288 178 C 298 220, 250 260, 236 301 C 228 355, 312 360, 327 300 C 336 235, 380 205, 404 178 C 435 150, 495 155, 537 202 C 570 220, 545 255, 505 265 C 465 275, 495 365, 539 395 C 560 430, 450 505, 360 531"
 											/>
 											<!-- Active Animated Stroke Traversing All 7 Bridges -->
 											<path
 												id="euler-active-path"
 												class="euler-stroke"
-												d="M 150 110 C 190 115, 245 145, 287 184 C 295 225, 250 265, 236 309 C 230 365, 315 375, 326 310 C 335 240, 375 210, 401 185 C 435 155, 495 160, 538 202 C 575 220, 545 255, 501 265 C 460 275, 490 370, 539 396 C 560 435, 450 505, 360 531"
+												d="M 150 110 C 190 115, 245 140, 288 178 C 298 220, 250 260, 236 301 C 228 355, 312 360, 327 300 C 336 235, 380 205, 404 178 C 435 150, 495 155, 537 202 C 570 220, 545 255, 505 265 C 465 275, 495 365, 539 395 C 560 430, 450 505, 360 531"
 											/>
-											<!-- Glowing Bridge Landmarks -->
-											<g class="bridge-nodes">
-												<circle class="bridge-pin" cx="287" cy="184" r="5.5" data-bridge="1" />
-												<circle class="bridge-pin" cx="401" cy="185" r="5.5" data-bridge="2" />
-												<circle class="bridge-pin" cx="538" cy="202" r="5.5" data-bridge="3" />
-												<circle class="bridge-pin" cx="501" cy="265" r="5.5" data-bridge="4" />
-												<circle class="bridge-pin" cx="236" cy="309" r="5.5" data-bridge="5" />
-												<circle class="bridge-pin" cx="326" cy="310" r="5.5" data-bridge="6" />
-												<circle class="bridge-pin" cx="539" cy="396" r="5.5" data-bridge="7" />
+											<!-- 4 Pivotal Milestone Dots along the traversal -->
+											<g class="milestone-nodes">
+												<!-- Milestone 01: Lead Game Designer (Bridge 1) -->
+												<g class="milestone-pin-group" data-milestone="1">
+													<circle class="milestone-halo" cx="288" cy="178" r="13" />
+													<circle class="milestone-dot" cx="288" cy="178" r="5.5" />
+												</g>
+												<!-- Milestone 02: Software Engineering (Bridge 2) -->
+												<g class="milestone-pin-group" data-milestone="2">
+													<circle class="milestone-halo" cx="404" cy="178" r="13" />
+													<circle class="milestone-dot" cx="404" cy="178" r="5.5" />
+												</g>
+												<!-- Milestone 03: Pipeline Orchestration (Bridge 4) -->
+												<g class="milestone-pin-group" data-milestone="3">
+													<circle class="milestone-halo" cx="505" cy="265" r="13" />
+													<circle class="milestone-dot" cx="505" cy="265" r="5.5" />
+												</g>
+												<!-- Milestone 04: AI Agentic Harness (Bridge 7) -->
+												<g class="milestone-pin-group" data-milestone="4">
+													<circle class="milestone-halo" cx="539" cy="395" r="13" />
+													<circle class="milestone-dot" cx="539" cy="395" r="5.5" />
+												</g>
 											</g>
 											<!-- Glowing Lead Runner Spark -->
 											<circle id="euler-runner" class="euler-runner" r="5" cx="-20" cy="-20" />
 										</svg>
 
-										<!-- Overlaid Transition Title (Floating gracefully over North Bank expanse) -->
+										<!-- Overlaid Transition Title (Floating gracefully in northern bank) -->
 										<div class="pivot-overlay">
 											<div class="overlay-meta">
 												<span class="overlay-kicker">INFLECTION POINT // SEVEN BRIDGES</span>
-												<span class="overlay-stamp">1736 EULER // TOPOLOGICAL PIVOT</span>
+												<span class="overlay-stamp">1736 EULER PIVOT</span>
 											</div>
 											<h3 class="overlay-title">
 												Victor’s journey all along.
@@ -575,9 +588,52 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 											</p>
 										</div>
 
+										<!-- 4 Floating Milestone Callout Annotations -->
+										<div class="stage-milestone-annotations" aria-label="Four Traversal Milestones">
+											<!-- Milestone 01 Callout -->
+											<div class="milestone-callout callout-1" style="left: 40.0%; top: 33.5%;">
+												<div class="callout-stem stem-sw" aria-hidden="true"></div>
+												<div class="callout-card">
+													<span class="callout-badge">PHASE // 01</span>
+													<h4 class="callout-title">Lead Game Designer</h4>
+													<span class="callout-tag">Simulation &amp; State Machines</span>
+												</div>
+											</div>
+
+											<!-- Milestone 02 Callout -->
+											<div class="milestone-callout callout-2" style="left: 56.1%; top: 33.5%;">
+												<div class="callout-stem stem-se" aria-hidden="true"></div>
+												<div class="callout-card">
+													<span class="callout-badge">PHASE // 02</span>
+													<h4 class="callout-title">Software Engineering</h4>
+													<span class="callout-tag">Client Systems &amp; GPU Compute</span>
+												</div>
+											</div>
+
+											<!-- Milestone 03 Callout -->
+											<div class="milestone-callout callout-3" style="left: 70.1%; top: 49.9%;">
+												<div class="callout-stem stem-e" aria-hidden="true"></div>
+												<div class="callout-card">
+													<span class="callout-badge">PHASE // 03</span>
+													<h4 class="callout-title">Pipeline Orchestration</h4>
+													<span class="callout-tag">Telemetry &amp; BLE Streaming</span>
+												</div>
+											</div>
+
+											<!-- Milestone 04 Callout -->
+											<div class="milestone-callout callout-4" style="left: 74.9%; top: 74.4%;">
+												<div class="callout-stem stem-w" aria-hidden="true"></div>
+												<div class="callout-card">
+													<span class="callout-badge">PHASE // 04</span>
+													<h4 class="callout-title">AI Agentic Harness</h4>
+													<span class="callout-tag">wtcraft Swarms &amp; Governance</span>
+												</div>
+											</div>
+										</div>
+
 										<div class="stage-footer-caption">
 											<span>KÖNIGSBERG SEVEN BRIDGES · EULERIAN GRAPH FOUNDATION</span>
-											<span class="caption-indicator">SINGLE TRAVERSAL FLOW ↓</span>
+											<span class="caption-indicator">PROGRESSIVE REVEAL FLOW ↓</span>
 										</div>
 									</div>
 
@@ -1115,7 +1171,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 				const stage = document.getElementById('pivot-stage');
 				const path = document.getElementById('euler-active-path');
 				const runner = document.getElementById('euler-runner');
-				const bridgePins = Array.from(document.querySelectorAll('.bridge-pin'));
+				const milestoneGroups = Array.from(document.querySelectorAll('.milestone-pin-group'));
+				const callouts = Array.from(document.querySelectorAll('.milestone-callout'));
 				const fork = document.getElementById('topological-fork');
 				const forkBranches = Array.from(document.querySelectorAll('.fork-branch'));
 				const cards = Array.from(document.querySelectorAll('#specs-grid .spec-card'));
@@ -1149,13 +1206,14 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 					// Reduced motion check
 					if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 						path.style.strokeDashoffset = '0';
-						bridgePins.forEach((p) => p.classList.add('is-passed'));
+						milestoneGroups.forEach((g) => g.classList.add('is-passed'));
+						callouts.forEach((c) => c.classList.add('is-active'));
 						forkBranches.forEach((b) => (b.style.strokeDashoffset = '0'));
 						cards.forEach((c) => c.classList.add('is-revealed'));
 						return;
 					}
 
-					// Animate path drawing across the 7 bridges in 2.2s
+					// Animate path drawing across the bridges in 2.2s
 					const duration = 2200;
 					const startTime = performance.now();
 
@@ -1169,24 +1227,32 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						path.style.strokeDashoffset = `${currentOffset}`;
 
 						// Move runner bead along path
+						let rx = -20;
+						let ry = -20;
 						if (runner && typeof path.getPointAtLength === 'function') {
 							try {
 								const pt = path.getPointAtLength(pathLength * easeProgress);
-								runner.setAttribute('cx', `${pt.x}`);
-								runner.setAttribute('cy', `${pt.y}`);
+								rx = pt.x;
+								ry = pt.y;
+								runner.setAttribute('cx', `${rx}`);
+								runner.setAttribute('cy', `${ry}`);
 							} catch (_) {}
 						}
 
-						// Illuminate bridge pins as runner passes near their coordinates
-						bridgePins.forEach((pin) => {
-							const bx = parseFloat(pin.getAttribute('cx') || '0');
-							const by = parseFloat(pin.getAttribute('cy') || '0');
-							if (runner) {
-								const rx = parseFloat(runner.getAttribute('cx') || '0');
-								const ry = parseFloat(runner.getAttribute('cy') || '0');
-								const distSq = (bx - rx) * (bx - rx) + (by - ry) * (by - ry);
-								if (distSq < 32 * 32) {
-									pin.classList.add('is-passed');
+						// Illuminate 4 milestone dots and reveal callouts as runner passes near their coordinates
+						milestoneGroups.forEach((group, idx) => {
+							const dot = group.querySelector('.milestone-dot');
+							if (!dot) return;
+							const bx = parseFloat(dot.getAttribute('cx') || '0');
+							const by = parseFloat(dot.getAttribute('cy') || '0');
+							const distSq = (bx - rx) * (bx - rx) + (by - ry) * (by - ry);
+							if (distSq < 36 * 36) {
+								if (!group.classList.contains('is-passed')) {
+									group.classList.add('is-passed');
+									const callout = callouts[idx];
+									if (callout) {
+										callout.classList.add('is-active');
+									}
 								}
 							}
 						});
@@ -1194,8 +1260,12 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						if (progress < 1) {
 							requestAnimationFrame(step);
 						} else {
-							// Bridge flow completed!
+							// Traversal completed!
 							if (runner) runner.style.opacity = '0.35';
+
+							// Ensure all 4 milestones are active
+							milestoneGroups.forEach((g) => g.classList.add('is-passed'));
+							callouts.forEach((c) => c.classList.add('is-active'));
 
 							// Trigger Fork branches downward animation
 							if (fork) fork.classList.add('is-active');
@@ -2369,20 +2439,20 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		position: relative;
 	}
 
-	/* Map Canvas Frame */
+	/* Map Canvas Frame (Exact 720x531 pixel lock) */
 	.stage-canvas-frame {
 		position: relative;
 		border-radius: 18px;
 		overflow: hidden;
 		border: 1px solid var(--apaper-line);
-		aspect-ratio: 720 / 490;
+		aspect-ratio: 720 / 531;
 		background: #e8e3d6;
 		box-shadow: 0 14px 34px rgba(32, 34, 33, 0.06);
 	}
 	.stage-map-bg {
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
+		object-fit: fill;
 		display: block;
 		filter: saturate(0.96) contrast(1.02);
 	}
@@ -2391,26 +2461,25 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		inset: 0;
 		pointer-events: none;
 		z-index: 1;
-		background: linear-gradient(180deg, rgba(248, 246, 240, 0.45) 0%, rgba(248, 246, 240, 0) 45%, rgba(248, 246, 240, 0.25) 100%);
+		background: linear-gradient(180deg, rgba(248, 246, 240, 0.35) 0%, rgba(248, 246, 240, 0) 40%, rgba(248, 246, 240, 0.2) 100%);
 	}
 
-	/* Overlaid Transition Title */
+	/* Overlaid Transition Title (Compact in northern bank) */
 	.pivot-overlay {
 		position: absolute;
-		top: clamp(14px, 2.5vw, 24px);
-		left: clamp(14px, 2.5vw, 24px);
-		right: clamp(14px, 2.5vw, 24px);
-		max-width: 640px;
-		background: rgba(248, 246, 240, 0.88);
-		backdrop-filter: blur(14px);
-		-webkit-backdrop-filter: blur(14px);
+		top: clamp(10px, 1.8vw, 18px);
+		left: clamp(10px, 1.8vw, 18px);
+		max-width: 440px;
+		background: rgba(248, 246, 240, 0.92);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
 		border: 1px solid var(--apaper-line);
-		border-radius: 14px;
-		padding: clamp(14px, 2vw, 20px) clamp(16px, 2.5vw, 24px);
-		box-shadow: 0 10px 28px rgba(32, 34, 33, 0.08);
+		border-radius: 12px;
+		padding: 12px 18px;
+		box-shadow: 0 8px 24px rgba(32, 34, 33, 0.07);
 		z-index: 4;
 		opacity: 0;
-		transform: translateY(16px);
+		transform: translateY(14px);
 		transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 	}
 	.pivot-stage.is-active .pivot-overlay {
@@ -2421,9 +2490,9 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-bottom: 8px;
+		margin-bottom: 6px;
 		font-family: var(--apaper-font-mono);
-		font-size: 9px;
+		font-size: 8.5px;
 		letter-spacing: 0.12em;
 	}
 	.overlay-kicker {
@@ -2434,30 +2503,30 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	.overlay-stamp {
 		color: var(--apaper-muted);
 		background: rgba(32, 34, 33, 0.04);
-		padding: 2px 8px;
+		padding: 2px 7px;
 		border-radius: 4px;
 		border: 1px solid var(--apaper-line);
 	}
 	.overlay-title {
 		font-family: var(--apaper-font-serif);
-		font-size: clamp(1.4rem, 2.4vw, 1.95rem);
+		font-size: clamp(1.2rem, 2vw, 1.55rem);
 		font-weight: 600;
 		letter-spacing: -0.025em;
 		color: var(--apaper-ink);
-		margin: 0 0 6px;
-		line-height: 1.25;
+		margin: 0 0 4px;
+		line-height: 1.22;
 	}
 	.overlay-subtitle {
 		display: block;
 		font-weight: 400;
 		font-style: italic;
 		color: var(--apaper-ink-secondary);
-		font-size: 0.9em;
+		font-size: 0.88em;
 	}
 	.overlay-summary {
 		font-family: var(--apaper-font-serif);
-		font-size: 0.92rem;
-		line-height: 1.6;
+		font-size: 0.84rem;
+		line-height: 1.55;
 		color: var(--apaper-ink-secondary);
 		margin: 0;
 	}
@@ -2465,14 +2534,14 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	/* Footer Caption inside map frame */
 	.stage-footer-caption {
 		position: absolute;
-		bottom: 12px;
+		bottom: 10px;
 		left: 16px;
 		right: 16px;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		font-family: var(--apaper-font-mono);
-		font-size: 8.5px;
+		font-size: 8px;
 		letter-spacing: 0.1em;
 		color: rgba(32, 34, 33, 0.6);
 		z-index: 3;
@@ -2507,23 +2576,152 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		stroke-linejoin: round;
 		filter: drop-shadow(0 0 4px rgba(196, 94, 73, 0.5));
 	}
-	.bridge-pin {
+	.milestone-halo {
+		fill: #f59e0b;
+		fill-opacity: 0;
+		transition: fill-opacity 0.4s ease, r 0.4s ease;
+	}
+	.milestone-dot {
 		fill: #fdfbf7;
 		stroke: var(--apaper-accent);
-		stroke-width: 2;
-		transition: transform 0.35s ease, fill 0.35s ease, filter 0.35s ease;
-		transform-origin: center;
+		stroke-width: 2.2;
+		transition: fill 0.35s ease, stroke 0.35s ease, filter 0.35s ease;
 	}
-	.bridge-pin.is-passed {
+	.milestone-pin-group.is-passed .milestone-halo {
+		fill-opacity: 0.25;
+		r: 15;
+	}
+	.milestone-pin-group.is-passed .milestone-dot {
 		fill: #f59e0b;
-		filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.9));
-		transform: scale(1.35);
+		stroke: #ffffff;
+		filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.85));
 	}
 	.euler-runner {
 		fill: #f59e0b;
 		filter: drop-shadow(0 0 6px #f59e0b);
 		opacity: 0;
 		transition: opacity 0.3s ease;
+	}
+
+	/* 4 Floating Milestone Callout Annotations */
+	.stage-milestone-annotations {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		z-index: 3;
+	}
+	.milestone-callout {
+		position: absolute;
+		pointer-events: auto;
+		opacity: 0;
+		transform: translateY(6px);
+		transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+	.milestone-callout.is-active {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	/* Callout Stems & Card Positions */
+	.callout-1 .callout-card {
+		transform: translate(-104%, 8px);
+	}
+	.callout-1 .callout-stem {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 18px;
+		height: 14px;
+		border-top: 1.5px dashed var(--apaper-accent);
+		border-left: 1.5px dashed var(--apaper-accent);
+		transform: translate(-18px, 0);
+		opacity: 0.5;
+	}
+
+	.callout-2 .callout-card {
+		transform: translate(12px, 8px);
+	}
+	.callout-2 .callout-stem {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 14px;
+		height: 12px;
+		border-top: 1.5px dashed var(--apaper-accent);
+		border-right: 1.5px dashed var(--apaper-accent);
+		transform: translate(0, 0);
+		opacity: 0.5;
+	}
+
+	.callout-3 .callout-card {
+		transform: translate(14px, -50%);
+	}
+	.callout-3 .callout-stem {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 14px;
+		height: 1.5px;
+		background: var(--apaper-accent);
+		transform: translate(0, 0);
+		opacity: 0.5;
+	}
+
+	.callout-4 .callout-card {
+		transform: translate(-104%, 8px);
+	}
+	.callout-4 .callout-stem {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 18px;
+		height: 14px;
+		border-top: 1.5px dashed var(--apaper-accent);
+		border-left: 1.5px dashed var(--apaper-accent);
+		transform: translate(-18px, 0);
+		opacity: 0.5;
+	}
+
+	.callout-card {
+		background: rgba(252, 251, 248, 0.94);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		border: 1px solid var(--apaper-line);
+		border-radius: 8px;
+		padding: 5px 10px;
+		box-shadow: 0 4px 14px rgba(32, 34, 33, 0.08);
+		display: flex;
+		flex-direction: column;
+		min-width: 135px;
+		white-space: nowrap;
+		cursor: default;
+		transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+	}
+	.callout-card:hover {
+		border-color: var(--apaper-accent);
+		transform: scale(1.04);
+		box-shadow: 0 8px 20px rgba(32, 34, 33, 0.12);
+	}
+	.callout-badge {
+		font-family: var(--apaper-font-mono);
+		font-size: 7.5px;
+		letter-spacing: 0.12em;
+		font-weight: 700;
+		color: var(--apaper-accent);
+		text-transform: uppercase;
+	}
+	.callout-title {
+		font-family: var(--apaper-font-serif);
+		font-size: 0.86rem;
+		font-weight: 600;
+		color: var(--apaper-ink);
+		margin: 1px 0 0;
+		line-height: 1.2;
+	}
+	.callout-tag {
+		font-family: var(--apaper-font-mono);
+		font-size: 7.5px;
+		letter-spacing: 0.03em;
+		color: var(--apaper-muted);
 	}
 
 	/* Connective Topological Fork */
@@ -3173,13 +3371,24 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 			aspect-ratio: 720 / 531;
 		}
 		.pivot-overlay {
-			padding: 12px 14px;
+			padding: 8px 12px;
+			max-width: 270px;
 		}
 		.overlay-title {
-			font-size: 1.25rem;
+			font-size: 1.02rem;
 		}
 		.overlay-summary {
-			font-size: 0.82rem;
+			display: none;
+		}
+		.callout-card {
+			padding: 3px 6px;
+			min-width: 95px;
+		}
+		.callout-title {
+			font-size: 0.72rem;
+		}
+		.callout-tag {
+			display: none;
 		}
 		.specs-grid,
 		.projects-grid {
