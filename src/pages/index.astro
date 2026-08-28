@@ -8,6 +8,7 @@ import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, SITE_AUTHOR, PROFILE_IMAGE, USE
 // edfviewer.astro / yong.astro, which each define their own APP_STORE_URL).
 const WISHES_APP_STORE_URL = 'https://apps.apple.com/ca/app/wishes-by-hand/id6774579880';
 const EDF_APP_STORE_URL = 'https://apps.apple.com/app/id6801383472';
+const NINJA_GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=ai.ninjatech.mobile';
 const WILDDUNK_YT_ID = 'ysmp5vK4R_c';
 
 // Identity knowledge graph for AI/search engines: who Victor Zhang is and what
@@ -236,50 +237,6 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 				</div>
 			</section>
 
-			<section class="proof" id="proof" aria-label="Selected proof points">
-				<div class="container proof-grid">
-					<article class="proof-card">
-						<div class="proof-card-header">
-							<span class="proof-card-id">EXHIBIT // 01</span>
-							<span class="proof-card-scope">HONOR RECORD</span>
-						</div>
-						<div class="proof-media proof-medal">
-							<img src="/images/proof/carleton-university-medal-detail.webp" alt="Carleton University Medal in Computer Science, engraved with Yiwei Zhang, 2020" />
-						</div>
-						<div class="proof-copy">
-							<strong>University Medal in Computer Science</strong>
-							<span>Carleton University · Highest Graduation Standing · 2020</span>
-						</div>
-					</article>
-					<a href="#wilddunk" class="proof-card">
-						<div class="proof-card-header">
-							<span class="proof-card-id">EXHIBIT // 02</span>
-							<span class="proof-card-scope">CHART RECORD</span>
-						</div>
-						<div class="proof-media proof-rank">
-							<img src="/images/proof/wilddunk-appannie-2015.webp" alt="App Annie Highest Ranks report showing Wild Dunk at number 1 in Sports in China" />
-						</div>
-						<div class="proof-copy">
-							<strong>#1 Sports · China App Store</strong>
-							<span>Wild Dunk · App Annie Peak Rank · May 3, 2015</span>
-						</div>
-					</a>
-					<a href="https://devpost.com/zywkloo" target="_blank" rel="noopener" class="proof-card">
-						<div class="proof-card-header">
-							<span class="proof-card-id">EXHIBIT // 03</span>
-							<span class="proof-card-scope">COMPETITION</span>
-						</div>
-						<div class="proof-media proof-devpost">
-							<img src="/images/proof/devpost-hackathon-winners.webp" alt="Victor Zhang's Devpost portfolio showing two projects marked Winner" />
-						</div>
-						<div class="proof-copy">
-							<strong>2× Hackathon Winner</strong>
-							<span>cuHacking 2019 &amp; 2020 · Devpost Verified</span>
-						</div>
-					</a>
-				</div>
-			</section>
-
 			<section class="signature" id="work" aria-labelledby="signature-title">
 				<!-- Section Lead: apaper editorial atmosphere -->
 				<div class="sig-editorial-header container">
@@ -296,7 +253,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						<p class="sig-eyebrow">CAREER TRAJECTORY &amp; TOPOLOGICAL ARC</p>
 						<h2 id="signature-title">Signature Work</h2>
 						<p class="sig-lead-text">
-							A single continuous trajectory: from leading game dev teams and product economies in a top-charting mobile hit, to tactile brush engines, agentic boundary contracts, and zero-dependency biosignal viewers — culminating in topological systems clarity.
+							Five chapters. One arc: product leadership → expressive native tools → bounded agents → private data systems.
 						</p>
 					</div>
 				</div>
@@ -335,20 +292,18 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 											></video>
 											<span class="media-stamp">ARCHIVE // 2015 · LOCAL HD</span>
 										</div>
-										<figure class="rank-card">
-											<img src="/images/proof/wilddunk-appannie-2015.webp" alt="App Annie report: Wild Dunk ranked number 9 overall and number 1 in Sports in China on May 3, 2015" loading="lazy" />
-											<figcaption>Archived App Annie report · China · May 3, 2015. App Store ID 949338049.</figcaption>
-										</figure>
 									</div>
 									<div class="plate-story">
 										<span class="plate-kicker">PRODUCT MANAGEMENT &amp; MONETIZATION</span>
 										<h3>全民大灌篮 · Wild Dunk</h3>
 										<p class="plate-p">
-											As Lead Game Designer (主策划), I spearheaded the cross-functional mobile game development team across engineering, 3D art, and QA — owning product design, core basketball gameplay, and monetization loops for this title, reaching <strong>#1 in Sports</strong> and <strong>#9 Overall</strong> on the China App Store.
+											Led the team behind a top-charting China mobile title.
 										</p>
-										<blockquote class="editorial-quote">
-											<p>Leading a fast-paced mobile dev team and modeling high-stakes player economies taught me product ownership from the ground up — balancing mathematical monetization loops, UX psychology, and client-server constraints. That foundation of cross-functional leadership and end-to-end systems thinking directly shapes how I lead and architect mobile products today.</p>
-										</blockquote>
+										<ul class="plate-highlights">
+											<li><strong>#1</strong> Sports · <strong>#9</strong> Overall, China App Store</li>
+											<li>Owned gameplay and monetization loops</li>
+											<li>Led engineering, 3D art, and QA</li>
+										</ul>
 										<div class="plate-cta">
 											<a href="https://www.youtube.com/watch?v=ysmp5vK4R_c" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">YouTube Archive ↗</a>
 										</div>
@@ -379,8 +334,55 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 								</div>
 								<div class="node-plate plate-reverse">
 									<div class="plate-media">
-										<div class="media-frame">
-											<img src="/images/wishes-hero.webp" alt="Wishes by Hand app showing a handwritten Chinese greeting card" class="sig-frame wishes-frame" loading="lazy" />
+										<div class="media-frame wishes-media-frame">
+											<div class="wishes-carousel" data-wishes-carousel aria-label="Wishes by Hand product showcase">
+												<div class="wishes-carousel-viewport">
+													<div class="wishes-carousel-track">
+														<figure class="wishes-slide is-active" data-wishes-slide aria-hidden="false">
+															<video
+																src="/videos/yong-demo-2.mp4"
+																poster="/images/wishes/video-poster.jpg"
+																autoplay
+																loop
+																muted
+																playsinline
+																class="wishes-demo-video"
+																aria-label="Wishes by Hand calligraphy and card-design demonstration"
+															></video>
+															<figcaption class="wishes-slide-label">01 · INK / REPLAY</figcaption>
+														</figure>
+														<figure class="wishes-slide wishes-card-slide" data-wishes-slide aria-hidden="true">
+															<img src="/images/wishes-blessing.webp" alt="Wishes by Hand greeting-card blessing preview" class="wishes-blessing-preview" loading="eager" />
+															<div class="wishes-sms-notification" data-wishes-notification role="status" aria-live="polite">
+																<span class="wishes-notification-icon" aria-hidden="true">✉</span>
+																<div>
+																	<span class="wishes-notification-meta">信息 · 现在</span>
+																	<strong>亲笔小卡</strong>
+																	<p>已为家人送出一张手写祝福卡</p>
+																</div>
+															</div>
+															<div class="wishes-message-composer">
+																<label for="wishes-blessing-input">送出祝福 · 自动演示</label>
+																<input id="wishes-blessing-input" data-wishes-input type="text" readonly tabindex="-1" placeholder="正在输入祝福…" aria-label="Simulated blessing" />
+																<div class="wishes-composer-footer">
+																	<span data-wishes-preview>正在准备祝福…</span>
+																	<button type="button" class="wishes-send-button" data-wishes-send disabled aria-disabled="true">发送祝福 <span aria-hidden="true">↑</span></button>
+																</div>
+																<span class="wishes-send-status" data-wishes-status role="status">准备中</span>
+															</div>
+															<figcaption class="wishes-slide-label">02 · CARD / BLESSING</figcaption>
+														</figure>
+													</div>
+												</div>
+												<div class="wishes-carousel-controls">
+													<button type="button" class="wishes-carousel-arrow" data-wishes-prev aria-label="Show previous Wishes preview">←</button>
+													<div class="wishes-carousel-dots" role="tablist" aria-label="Wishes previews">
+														<button type="button" class="wishes-carousel-dot active" data-wishes-dot="0" role="tab" aria-selected="true" aria-label="Show ink replay"></button>
+														<button type="button" class="wishes-carousel-dot" data-wishes-dot="1" role="tab" aria-selected="false" aria-label="Show blessing card"></button>
+													</div>
+													<button type="button" class="wishes-carousel-arrow" data-wishes-next aria-label="Show next Wishes preview">→</button>
+												</div>
+											</div>
 											<span class="media-stamp">PRODUCT // iOS</span>
 										</div>
 									</div>
@@ -388,11 +390,13 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										<span class="plate-kicker">LOW-LATENCY INK ENGINE</span>
 										<h3>亲笔小卡 · Wishes by Hand</h3>
 										<p class="plate-p">
-											A handwriting instrument for quiet reconnection: write by finger or Apple Pencil, powered by a custom low-latency ink engine that captures authentic Chinese calligraphy brush kinetics and pressure dynamics.
+											Turn handwriting practice into a card worth sending.
 										</p>
-										<blockquote class="editorial-quote">
-											<p>Engineered for emotional immediacy: zero friction from the first stroke to sending a finished digital card, balancing on-device Metal rendering with minimal memory footprint.</p>
-										</blockquote>
+										<ul class="plate-highlights">
+											<li>Finger or Apple Pencil → finished card</li>
+											<li>Low-latency Metal ink</li>
+											<li>On-device calligraphy scoring</li>
+										</ul>
 										<div class="plate-cta">
 											<a href={WISHES_APP_STORE_URL} target="_blank" rel="noopener" class="btn-apaper">App Store ↗</a>
 											<a href="/yong" class="btn-apaper btn-apaper-ghost">Full Story →</a>
@@ -441,11 +445,13 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										<span class="plate-kicker">AGENTIC TASK SCAFFOLDING</span>
 										<h3>wtcraft</h3>
 										<p class="plate-p">
-											A git-native CLI for multi-agent coding workflows. It scaffolds task contracts per worktree, continuously audits actual diffs against scope rules, and orchestrates deterministic verification.
+											Keep multi-agent work inside explicit, verifiable boundaries.
 										</p>
-										<blockquote class="editorial-quote">
-											<p>Keeps autonomous agent delegation bounded without losing the handoff context. Solving the coordination problem before delegating the code.</p>
-										</blockquote>
+										<ul class="plate-highlights">
+											<li>Task contract per Git worktree</li>
+											<li>Diffs checked against declared scope</li>
+											<li>Deterministic verification</li>
+										</ul>
 										<div class="plate-cta">
 											<a href={WTCRAFT_URL} target="_blank" rel="noopener" class="btn-apaper">GitHub ↗</a>
 											<a href="/wtcraft" class="btn-apaper btn-apaper-ghost">Full Page →</a>
@@ -495,11 +501,13 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										<span class="plate-kicker">ZERO-DEPENDENCY BIOSIGNALS</span>
 										<h3>EDF &amp; BDF Viewer</h3>
 										<p class="plate-p">
-											A native SwiftUI viewer for EDF and BDF biosignal recordings — EEG, ECG, sleep staging, and electrophysiology research. Zero runtime dependencies, 100% on-device and private.
+											Read dense biosignal recordings without sending them anywhere.
 										</p>
-										<blockquote class="editorial-quote">
-											<p>Engineered for instantaneous scrubbing across dense multichannel datasets with custom memory-mapped parsing and zero telemetry leaks.</p>
-										</blockquote>
+										<ul class="plate-highlights">
+											<li>EDF/BDF · EEG, ECG, and sleep research</li>
+											<li>Native multichannel waveform scrubbing</li>
+											<li>Private and local-only</li>
+										</ul>
 										<div class="plate-cta">
 											<a href={EDF_APP_STORE_URL} target="_blank" rel="noopener" class="btn-apaper">Mac App Store ↗</a>
 											<a href="/edfviewer" class="btn-apaper btn-apaper-ghost">Full Page →</a>
@@ -543,40 +551,40 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										/>
 										<div class="stage-map-vignette" aria-hidden="true"></div>
 
-										<!-- True Seven Bridges SVG Traversal Line (Cropped top 115px & bottom 86px for widescreen panorama) -->
-										<svg class="stage-euler-svg" viewBox="0 115 720 330" preserveAspectRatio="none" aria-hidden="true">
+										<!-- True Seven Bridges SVG Traversal Line, vertically remapped to the 55% panorama -->
+										<svg class="stage-euler-svg" viewBox="0 0 720 181.5" preserveAspectRatio="none" aria-hidden="true">
 											<!-- Faint Background Path Guide -->
 											<path
 												class="euler-track"
-												d="M 150 115 C 190 118, 245 140, 288 178 C 298 220, 250 260, 236 301 C 228 355, 312 360, 327 300 C 336 235, 380 205, 404 178 C 435 150, 495 155, 537 202 C 570 220, 545 255, 505 265 C 465 275, 495 365, 539 395 C 555 420, 440 445, 360 445"
+												d="M 150 0 C 190 1.65, 245 13.75, 288 34.65 C 298 57.75, 250 79.75, 236 102.3 C 228 132, 312 134.75, 327 101.75 C 336 66, 380 49.5, 404 34.65 C 435 19.25, 495 22, 537 47.85 C 570 57.75, 545 77, 505 82.5 C 465 88, 495 137.5, 539 154 C 555 167.75, 440 181.5, 360 181.5"
 											/>
 											<!-- Active Animated Stroke Traversing All 7 Bridges -->
 											<path
 												id="euler-active-path"
 												class="euler-stroke"
-												d="M 150 115 C 190 118, 245 140, 288 178 C 298 220, 250 260, 236 301 C 228 355, 312 360, 327 300 C 336 235, 380 205, 404 178 C 435 150, 495 155, 537 202 C 570 220, 545 255, 505 265 C 465 275, 495 365, 539 395 C 555 420, 440 445, 360 445"
+												d="M 150 0 C 190 1.65, 245 13.75, 288 34.65 C 298 57.75, 250 79.75, 236 102.3 C 228 132, 312 134.75, 327 101.75 C 336 66, 380 49.5, 404 34.65 C 435 19.25, 495 22, 537 47.85 C 570 57.75, 545 77, 505 82.5 C 465 88, 495 137.5, 539 154 C 555 167.75, 440 181.5, 360 181.5"
 											/>
 											<!-- 4 Pivotal Milestone Dots along the traversal -->
 											<g class="milestone-nodes">
 												<!-- Milestone 01: Lead Game Designer (Bridge 1) -->
 												<g class="milestone-pin-group" data-milestone="1">
-													<circle class="milestone-halo" cx="288" cy="178" r="13" />
-													<circle class="milestone-dot" cx="288" cy="178" r="5.5" />
+													<circle class="milestone-halo" cx="288" cy="34.65" r="13" />
+													<circle class="milestone-dot" cx="288" cy="34.65" r="5.5" />
 												</g>
 												<!-- Milestone 02: Software Engineering (Bridge 2) -->
 												<g class="milestone-pin-group" data-milestone="2">
-													<circle class="milestone-halo" cx="404" cy="178" r="13" />
-													<circle class="milestone-dot" cx="404" cy="178" r="5.5" />
+													<circle class="milestone-halo" cx="404" cy="34.65" r="13" />
+													<circle class="milestone-dot" cx="404" cy="34.65" r="5.5" />
 												</g>
 												<!-- Milestone 03: Pipeline Orchestration (Bridge 4) -->
 												<g class="milestone-pin-group" data-milestone="3">
-													<circle class="milestone-halo" cx="505" cy="265" r="13" />
-													<circle class="milestone-dot" cx="505" cy="265" r="5.5" />
+													<circle class="milestone-halo" cx="505" cy="82.5" r="13" />
+													<circle class="milestone-dot" cx="505" cy="82.5" r="5.5" />
 												</g>
 												<!-- Milestone 04: AI Agentic Harness (Bridge 7) -->
 												<g class="milestone-pin-group" data-milestone="4">
-													<circle class="milestone-halo" cx="539" cy="395" r="13" />
-													<circle class="milestone-dot" cx="539" cy="395" r="5.5" />
+													<circle class="milestone-halo" cx="539" cy="154" r="13" />
+													<circle class="milestone-dot" cx="539" cy="154" r="5.5" />
 												</g>
 											</g>
 											<!-- Glowing Lead Runner Spark -->
@@ -903,7 +911,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 									<span class="project-id">[AI-04]</span>
 									<div class="platform-badges" aria-label="Supported Platforms">
 										<span class="platform-chip chip-ios">iOS</span>
-										<span class="platform-chip chip-macos">macOS</span>
+										<span class="platform-chip chip-android">Android</span>
 									</div>
 								</div>
 								<div class="project-glyph" title="Adaptive Prompt Routing">
@@ -922,12 +930,18 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 								<span>Multi-Model</span>
 							</div>
 							<div class="project-card-footer">
-								<a href="https://apps.apple.com/us/app/ninja-ai-chat-code-create/id6702030312" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
-									<svg class="btn-brand-icon" viewBox="0 0 170 170" width="13" height="13" fill="currentColor" aria-hidden="true">
-										<path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.59-7.71-11.66-14.01-6.19-9.56-10.9-20.2-14.13-31.92-3.23-11.72-4.85-22.95-4.85-33.69 0-14.13 3.63-25.75 10.9-34.85 7.27-9.1 16.31-13.78 27.12-14.06 4.35 0 9.28 1.13 14.79 3.38 5.51 2.26 9.4 3.44 11.66 3.56 1.85 0 5.86-1.25 12.02-3.74 6.16-2.5 11.53-3.63 16.11-3.39 12.08.75 21.65 5.38 28.71 13.9-10.88 6.64-16.19 15.54-15.93 26.7.26 8.71 3.59 16.03 10 21.96 6.41 5.93 13.9 9.38 22.47 10.35-2.28 6.95-5.07 14.18-8.37 21.68zM119.22 31.84c0-7.38 2.65-14.28 7.95-20.7 5.3-6.42 11.83-10.45 19.59-12.09.87 7.06-1.57 14.01-7.32 20.85-5.75 6.84-12.49 10.82-20.22 11.94z" />
-									</svg>
-									<span>App Store ↗</span>
-								</a>
+								<div class="dual-actions">
+									<a href="https://apps.apple.com/us/app/ninja-ai-chat-code-create/id6702030312" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
+										<svg class="btn-brand-icon" viewBox="0 0 170 170" width="13" height="13" fill="currentColor" aria-hidden="true">
+											<path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.59-7.71-11.66-14.01-6.19-9.56-10.9-20.2-14.13-31.92-3.23-11.72-4.85-22.95-4.85-33.69 0-14.13 3.63-25.75 10.9-34.85 7.27-9.1 16.31-13.78 27.12-14.06 4.35 0 9.28 1.13 14.79 3.38 5.51 2.26 9.4 3.44 11.66 3.56 1.85 0 5.86-1.25 12.02-3.74 6.16-2.5 11.53-3.63 16.11-3.39 12.08.75 21.65 5.38 28.71 13.9-10.88 6.64-16.19 15.54-15.93 26.7.26 8.71 3.59 16.03 10 21.96 6.41 5.93 13.9 9.38 22.47 10.35-2.28 6.95-5.07 14.18-8.37 21.68zM119.22 31.84c0-7.38 2.65-14.28 7.95-20.7 5.3-6.42 11.83-10.45 19.59-12.09.87 7.06-1.57 14.01-7.32 20.85-5.75 6.84-12.49 10.82-20.22 11.94z" />
+										</svg>
+										<span>App Store ↗</span>
+									</a>
+									<a href={NINJA_GOOGLE_PLAY_URL} target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
+										<svg class="btn-brand-icon ninja-google-play-icon" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M5.2 3.3a1.25 1.25 0 0 0-1.9 1.07v15.26a1.25 1.25 0 0 0 1.9 1.07l13.02-7.63a1.25 1.25 0 0 0 0-2.16L5.2 3.3Z" /></svg>
+										<span>Google Play ↗</span>
+									</a>
+								</div>
 							</div>
 						</article>
 
@@ -1015,9 +1029,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										<span>App Store ↗</span>
 									</a>
 									<a href="https://play.google.com/store/apps/details?id=com.tutorocean" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
-										<svg class="btn-brand-icon" viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true">
-											<path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-1.0003 0-.5518.4482-1.0004.9993-1.0004.5512 0 .9994.4486.9994 1.0004 0 .5517-.4482 1.0003-.9994 1.0003m-11.046 0c-.5511 0-.9993-.4486-.9993-1.0003 0-.5518.4482-1.0004.9993-1.0004.5511 0 .9993.4486.9993 1.0004 0 .5517-.4482 1.0003-.9993 1.0003m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.4116 13.8533 8.125 12 8.125c-1.8533 0-3.5902.2866-5.1368.8247L4.841 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396" />
-										</svg>
+										<svg class="btn-brand-icon ninja-google-play-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d="M5.2 3.3a1.25 1.25 0 0 0-1.9 1.07v15.26a1.25 1.25 0 0 0 1.9 1.07l13.02-7.63a1.25 1.25 0 0 0 0-2.16L5.2 3.3Z" /></svg>
 										<span>Google Play ↗</span>
 									</a>
 								</div>
@@ -1145,17 +1157,55 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										</svg>
 										<span>Live App ↗</span>
 									</a>
-									<a href="https://github.com/zywkloo/Wealth-Intelligence-Your-Portfolio-Companion" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
-										<svg class="btn-brand-icon" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
-											<path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-										</svg>
-										<span>GitHub ↗</span>
-									</a>
 								</div>
 								<span class="project-status-stamp stamp-live">LIVE VERCEL</span>
 							</div>
 						</article>
 					</div>
+				</div>
+			</section>
+
+			<section class="proof" id="proof" aria-label="Selected proof points">
+				<div class="container proof-grid">
+					<article class="proof-card">
+						<div class="proof-card-header">
+							<span class="proof-card-id">EXHIBIT // 01</span>
+							<span class="proof-card-scope">HONOR RECORD</span>
+						</div>
+						<div class="proof-media proof-medal">
+							<img src="/images/proof/carleton-university-medal-detail.webp" alt="Carleton University Medal in Computer Science, engraved with Yiwei Zhang, 2020" />
+						</div>
+						<div class="proof-copy">
+							<strong>University Medal in Computer Science</strong>
+							<span>Carleton University · Highest Graduation Standing · 2020</span>
+						</div>
+					</article>
+					<a href="#wilddunk" class="proof-card">
+						<div class="proof-card-header">
+							<span class="proof-card-id">EXHIBIT // 02</span>
+							<span class="proof-card-scope">CHART RECORD</span>
+						</div>
+						<div class="proof-media proof-rank">
+							<img src="/images/proof/wilddunk-appannie-2015.webp" alt="App Annie Highest Ranks report showing Wild Dunk at number 1 in Sports in China" />
+						</div>
+						<div class="proof-copy">
+							<strong>#1 Sports · China App Store</strong>
+							<span>Wild Dunk · App Annie Peak Rank · May 3, 2015</span>
+						</div>
+					</a>
+					<a href="https://devpost.com/zywkloo" target="_blank" rel="noopener" class="proof-card">
+						<div class="proof-card-header">
+							<span class="proof-card-id">EXHIBIT // 03</span>
+							<span class="proof-card-scope">COMPETITION</span>
+						</div>
+						<div class="proof-media proof-devpost">
+							<img src="/images/proof/devpost-hackathon-winners.webp" alt="Victor Zhang's Devpost portfolio showing two projects marked Winner" />
+						</div>
+						<div class="proof-copy">
+							<strong>2× Hackathon Winner</strong>
+							<span>cuHacking 2019 &amp; 2020 · Devpost Verified</span>
+						</div>
+					</a>
 				</div>
 			</section>
 
@@ -1170,7 +1220,9 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							</span>
 							<span class="contact-status-tag">AVAILABLE FOR CONSULTING</span>
 						</div>
-						<h2 id="contact-title" class="contact-title">Let's Connect · Au Plaisir</h2>
+						<h2 id="contact-title" class="contact-title">
+							<span class="contact-title-en">Let's Connect</span><span class="contact-title-separator" aria-hidden="true"> · </span><span class="contact-title-fr">Au Plaisir</span>
+						</h2>
 						<p class="contact-text">
 							Available for systems consulting, mobile data layer architecture, and agentic swarms.<br class="hide-on-mobile" />
 							If you value deterministic correctness under real-world device constraints, let's talk.
@@ -1351,6 +1403,120 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 			initChapterVideo();
 			document.addEventListener('astro:after-swap', initChapterVideo);
 
+			// Chapter 02: full-frame Wishes demo and blessing-card carousel
+			let clearWishesCarousel = () => {};
+			const initWishesCarousel = () => {
+				clearWishesCarousel();
+				const carousel = document.querySelector('[data-wishes-carousel]');
+				if (!carousel) return;
+
+				const track = carousel.querySelector('.wishes-carousel-track');
+				const slides = Array.from(carousel.querySelectorAll('[data-wishes-slide]'));
+				const dots = Array.from(carousel.querySelectorAll('[data-wishes-dot]'));
+				const prev = carousel.querySelector('[data-wishes-prev]');
+				const next = carousel.querySelector('[data-wishes-next]');
+				const input = carousel.querySelector<HTMLInputElement>('[data-wishes-input]');
+				const preview = carousel.querySelector<HTMLSpanElement>('[data-wishes-preview]');
+				const status = carousel.querySelector<HTMLSpanElement>('[data-wishes-status]');
+				const sendButton = carousel.querySelector<HTMLButtonElement>('[data-wishes-send]');
+				const composer = carousel.querySelector<HTMLElement>('.wishes-message-composer');
+				const notification = carousel.querySelector<HTMLElement>('[data-wishes-notification]');
+				const video = carousel.querySelector<HTMLVideoElement>('.wishes-demo-video');
+				if (!track || slides.length < 2) return;
+
+				let activeIndex = 0;
+				let timer = null;
+				let simulationTimers = [];
+				const blessingText = '愿你健康快乐，幸福长伴！😘';
+				const clearSimulation = () => {
+					simulationTimers.forEach((id) => window.clearTimeout(id));
+					simulationTimers = [];
+					input && (input.value = '');
+					if (preview) preview.textContent = '正在准备祝福…';
+					if (status) status.textContent = '准备中';
+					composer?.classList.remove('is-sent');
+					sendButton?.classList.remove('is-sending');
+					notification?.classList.remove('is-visible');
+				};
+				const simulateSend = () => {
+					if (status) status.textContent = '正在模拟发送…';
+					sendButton?.classList.add('is-sending');
+					simulationTimers.push(window.setTimeout(() => {
+						composer?.classList.add('is-sent');
+						sendButton?.classList.remove('is-sending');
+						if (status) status.textContent = '已发送';
+						notification?.classList.add('is-visible');
+					}, 480));
+				};
+				const startBlessingSimulation = () => {
+					clearSimulation();
+					let characterIndex = 0;
+					const typeNextCharacter = () => {
+						if (activeIndex !== 1 || !input) return;
+						input.value = blessingText.slice(0, characterIndex + 1);
+						if (preview) preview.textContent = input.value;
+						characterIndex += 1;
+						if (characterIndex < blessingText.length) {
+							simulationTimers.push(window.setTimeout(typeNextCharacter, 95));
+						} else {
+							simulationTimers.push(window.setTimeout(simulateSend, 600));
+						}
+					};
+					simulationTimers.push(window.setTimeout(typeNextCharacter, 700));
+				};
+				const stopAutoShift = () => {
+					if (timer) window.clearInterval(timer);
+					timer = null;
+				};
+				const startAutoShift = () => {
+					stopAutoShift();
+					timer = window.setInterval(() => showSlide(activeIndex + 1), 7000);
+				};
+				const showSlide = (requestedIndex) => {
+					activeIndex = (requestedIndex + slides.length) % slides.length;
+					track.style.transform = `translateX(-${activeIndex * 50}%)`;
+					slides.forEach((slide, index) => {
+						slide.classList.toggle('is-active', index === activeIndex);
+						slide.setAttribute('aria-hidden', index === activeIndex ? 'false' : 'true');
+					});
+					dots.forEach((dot, index) => {
+						dot.classList.toggle('active', index === activeIndex);
+						dot.setAttribute('aria-selected', index === activeIndex ? 'true' : 'false');
+					});
+					if (video) {
+						if (activeIndex === 0) video.play().catch(() => {});
+						else video.pause();
+					}
+					if (activeIndex === 1) startBlessingSimulation();
+					else clearSimulation();
+				};
+
+				prev?.addEventListener('click', () => {
+					showSlide(activeIndex - 1);
+					startAutoShift();
+				});
+				next?.addEventListener('click', () => {
+					showSlide(activeIndex + 1);
+					startAutoShift();
+				});
+				dots.forEach((dot, index) => dot.addEventListener('click', () => {
+					showSlide(index);
+					startAutoShift();
+				}));
+				carousel.addEventListener('mouseenter', stopAutoShift);
+				carousel.addEventListener('mouseleave', startAutoShift);
+
+				showSlide(0);
+				startAutoShift();
+				clearWishesCarousel = () => {
+					stopAutoShift();
+					clearSimulation();
+				};
+			};
+
+			initWishesCarousel();
+			document.addEventListener('astro:after-swap', initWishesCarousel);
+
 			// Paper Theme Switcher with localStorage persistence
 			const initPaperTheme = () => {
 				try {
@@ -1480,8 +1646,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						return;
 					}
 
-					// Animate path drawing across the bridges (Slowed down 3x to 6.6s for cinematic storytelling)
-					const duration = 6600;
+					// Animate the full Seven Bridges sequence at 1.5x its previous pace.
+					const duration = 4400;
 					const startTime = performance.now();
 
 					const step = (currentTime) => {
@@ -1542,14 +1708,14 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							timers.push(
 								setTimeout(() => {
 									if (connector) connector.classList.add('is-drawn');
-								}, 400)
+								}, 267)
 							);
 
 							// 3. 然后 topology 出现 (Topology banner badge pops in smoothly)
 							timers.push(
 								setTimeout(() => {
 									if (banner) banner.classList.add('is-shown');
-								}, 900)
+								}, 600)
 							);
 
 							// 4. Trunk line drops through banner to junction
@@ -1560,7 +1726,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										t.style.strokeDashoffset = '0';
 									});
 									junctions.forEach((j) => j.classList.add('is-lit'));
-								}, 1350)
+								}, 900)
 							);
 
 							// 5. 然后才散开 4 个 (4 branches spread outward)
@@ -1575,7 +1741,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 											}, idx * 100)
 										);
 									});
-								}, 1700)
+								}, 1133)
 							);
 
 							// 6. 4 Systematic Competency Spec Cards reveal progressively
@@ -1588,7 +1754,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 											}, idx * 200)
 										);
 									});
-								}, 2450)
+								}, 1633)
 							);
 						}
 					};
@@ -2618,6 +2784,270 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		height: auto;
 		border-radius: 0;
 	}
+	.wishes-media-frame {
+		background: #111;
+	}
+	.wishes-carousel {
+		position: relative;
+		padding-bottom: 36px;
+	}
+	.wishes-carousel-viewport {
+		overflow: hidden;
+		/* Keep both portrait demos whole, but in the same compact 16:9 media slot as the other chapters. */
+		aspect-ratio: 16 / 9;
+		background: #eee4d2;
+	}
+	.wishes-carousel-track {
+		display: flex;
+		width: 200%;
+		height: 100%;
+		transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	.wishes-slide {
+		position: relative;
+		flex: 0 0 50%;
+		margin: 0;
+		background: #eee4d2;
+		overflow: hidden;
+	}
+	.wishes-media-frame .wishes-demo-video,
+	.wishes-media-frame .wishes-blessing-preview {
+		position: absolute;
+		inset: 0;
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		object-position: center top;
+		background: #eee4d2;
+	}
+	.wishes-card-slide {
+		background: #f3ead7;
+	}
+	.wishes-sms-notification {
+		position: absolute;
+		top: 4%;
+		left: 5%;
+		right: 5%;
+		z-index: 3;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 8px 10px;
+		border: 1px solid rgba(255, 255, 255, 0.78);
+		border-radius: 12px;
+		background: rgba(251, 251, 252, 0.88);
+		box-shadow: 0 7px 20px rgba(36, 30, 24, 0.22);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		opacity: 0;
+		transform: translateY(-12px) scale(0.96);
+		transition: opacity 360ms ease, transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+		pointer-events: none;
+	}
+	.wishes-sms-notification.is-visible {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+	.wishes-notification-icon {
+		display: grid;
+		place-items: center;
+		width: 23px;
+		height: 23px;
+		border-radius: 7px;
+		background: #4f8cf7;
+		color: #fff;
+		font-size: 13px;
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32);
+	}
+	.wishes-sms-notification div {
+		min-width: 0;
+		display: grid;
+		grid-template-columns: 1fr auto;
+		column-gap: 6px;
+	}
+	.wishes-notification-meta {
+		grid-column: 1 / -1;
+		font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+		font-size: 7px;
+		font-weight: 600;
+		letter-spacing: 0.03em;
+		color: #6d6d72;
+	}
+	.wishes-sms-notification strong {
+		font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+		font-size: 9px;
+		font-weight: 700;
+		color: #222225;
+	}
+	.wishes-sms-notification p {
+		grid-column: 1 / -1;
+		margin: 1px 0 0;
+		font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+		font-size: 8px;
+		line-height: 1.25;
+		color: #414146;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.wishes-slide-label {
+		position: absolute;
+		left: 12px;
+		bottom: 12px;
+		z-index: 2;
+		padding: 4px 8px;
+		border-radius: 4px;
+		background: rgba(24, 26, 27, 0.78);
+		color: #f8f5ef;
+		font-family: var(--apaper-font-mono);
+		font-size: 8px;
+		font-style: normal;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+	}
+	.wishes-message-composer {
+		position: absolute;
+		z-index: 2;
+		top: 53%;
+		/* Align with the input region inside the centered, fully-contained phone capture. */
+		left: 35.5%;
+		right: 35.5%;
+		padding: 5px;
+		background: rgba(255, 255, 255, 0.96);
+		border: 1px solid rgba(80, 65, 51, 0.26);
+		border-radius: 8px;
+		box-shadow: 0 5px 18px rgba(42, 31, 21, 0.16);
+	}
+	.wishes-message-composer label {
+		display: block;
+		margin-bottom: 3px;
+		font-family: var(--apaper-font-mono);
+		font-size: 8px;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		color: #8d3a2e;
+	}
+	.wishes-message-composer input {
+		box-sizing: border-box;
+		width: 100%;
+		border: 1px solid #d8d0c4;
+		border-radius: 5px;
+		padding: 4px 5px;
+		background: #fff;
+		color: #25211e;
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(0.7rem, 1.35vw, 0.86rem);
+		outline: none;
+	}
+	.wishes-message-composer input:focus {
+		border-color: #a4372c;
+		box-shadow: 0 0 0 2px rgba(164, 55, 44, 0.12);
+	}
+	.wishes-composer-footer {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		margin-top: 4px;
+	}
+	.wishes-message-composer [data-wishes-preview] {
+		min-width: 0;
+		flex: 1;
+		color: #7b6d60;
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(0.63rem, 1.1vw, 0.76rem);
+		line-height: 1.35;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.wishes-send-button {
+		flex-shrink: 0;
+		border: 0;
+		border-radius: 5px;
+		padding: 4px 5px;
+		background: #a4372c;
+		color: #fff;
+		font-family: var(--apaper-font-mono);
+		font-size: 8px;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		cursor: pointer;
+		transition: transform 160ms ease, background 160ms ease;
+	}
+	.wishes-send-button:hover,
+	.wishes-send-button:focus-visible {
+		background: #8d2e25;
+		transform: translateY(-1px);
+	}
+	.wishes-send-button.is-sending {
+		transform: scale(0.94);
+		background: #6f261f;
+	}
+	.wishes-send-button:disabled {
+		cursor: default;
+		opacity: 1;
+	}
+	.wishes-send-status {
+		display: block;
+		margin-top: 3px;
+		min-height: 1em;
+		color: #9a4b40;
+		font-family: var(--apaper-font-mono);
+		font-size: 7.5px;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+	}
+	.wishes-message-composer.is-sent .wishes-send-status {
+		color: #31725b;
+	}
+	.wishes-carousel-controls {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+	}
+	.wishes-carousel-arrow,
+	.wishes-carousel-dot {
+		appearance: none;
+		border: 0;
+		cursor: pointer;
+	}
+	.wishes-carousel-arrow {
+		width: 22px;
+		height: 22px;
+		border-radius: 50%;
+		background: var(--apaper-tag-bg);
+		color: var(--apaper-ink-secondary);
+		font-size: 13px;
+		line-height: 1;
+	}
+	.wishes-carousel-arrow:hover,
+	.wishes-carousel-arrow:focus-visible {
+		background: var(--apaper-accent);
+		color: var(--apaper-btn-text);
+	}
+	.wishes-carousel-dots {
+		display: flex;
+		gap: 5px;
+	}
+	.wishes-carousel-dot {
+		width: 6px;
+		height: 6px;
+		padding: 0;
+		border-radius: 50%;
+		background: var(--apaper-line);
+		transition: width 200ms ease, background 200ms ease;
+	}
+	.wishes-carousel-dot.active {
+		width: 16px;
+		border-radius: 999px;
+		background: var(--apaper-accent);
+	}
 	.media-stamp {
 		position: absolute;
 		top: 12px;
@@ -2665,6 +3095,42 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	}
 	.plate-p strong {
 		color: var(--apaper-ink);
+	}
+	.plate-highlights {
+		display: grid;
+		gap: 8px;
+		margin: 0 0 17px;
+		padding: 0;
+		list-style: none;
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(0.9rem, 1.1vw, 1rem);
+		line-height: 1.45;
+		color: var(--apaper-ink-secondary);
+	}
+	.plate-highlights li {
+		display: flex;
+		align-items: flex-start;
+		gap: 9px;
+	}
+	.plate-highlights li::before {
+		content: "✓";
+		display: grid;
+		place-items: center;
+		flex: 0 0 17px;
+		width: 17px;
+		height: 17px;
+		margin-top: 0.15em;
+		border: 1px solid var(--apaper-accent);
+		border-radius: 50%;
+		color: var(--apaper-accent);
+		font-family: var(--apaper-font-mono);
+		font-size: 10px;
+		font-weight: 700;
+		line-height: 1;
+	}
+	.plate-highlights strong {
+		color: var(--apaper-ink);
+		font-weight: 700;
 	}
 	.editorial-quote {
 		margin: 14px 0 18px;
@@ -2765,7 +3231,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		width: 100vw;
 		margin-left: calc(50% - 50vw);
 		margin-right: calc(50% - 50vw);
-		aspect-ratio: 720 / 330;
+		/* 55% of the original 330-unit panoramic crop (181.5 units). */
+		aspect-ratio: 720 / 181.5;
 		background: #e8e3d6;
 		box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
 	}
@@ -2791,7 +3258,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	.stage-journey-scrim {
 		position: absolute;
 		inset: 0;
-		z-index: 10;
+		z-index: 30;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -2813,6 +3280,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 0 1.5px rgba(229, 179, 130, 0.5);
 	}
 	.scrim-transition-card {
+		position: relative;
+		z-index: 31;
 		width: 70%;
 		max-width: 660px;
 		background: rgba(22, 24, 27, 0.95);
@@ -3564,14 +4033,27 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		align-items: center;
 		gap: 6px;
 	}
+	.project-card-footer .dual-actions .btn-with-brand {
+		min-height: 30px;
+		padding-right: clamp(10px, 2.8vw, 16px);
+		padding-left: clamp(10px, 2.8vw, 16px);
+		font-size: clamp(8.5px, 2.2vw, 11px);
+	}
+	.project-card-footer .btn-with-brand > span {
+		white-space: nowrap;
+	}
 	.btn-with-brand {
 		display: inline-flex;
 		align-items: center;
 		gap: 6px;
 	}
 	.btn-brand-icon {
+		display: block;
 		flex-shrink: 0;
 		transition: transform 0.2s ease;
+	}
+	.ninja-google-play-icon {
+		align-self: center;
 	}
 	.btn-apaper:hover .btn-brand-icon {
 		transform: scale(1.15);
@@ -3704,6 +4186,10 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		color: var(--apaper-ink);
 		margin: 0 0 1rem;
 		line-height: 1.15;
+	}
+	.contact-title-fr {
+		font-style: italic;
+		font-weight: 400;
 	}
 	.contact-text {
 		font-family: var(--apaper-font-serif);
@@ -3903,18 +4389,58 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		.node-plate {
 			padding: 18px 16px;
 		}
-		.stage-canvas-frame {
-			aspect-ratio: 720 / 531;
+		.plate-highlights {
+			gap: 7px;
+			margin-bottom: 14px;
+			font-size: 0.94rem;
+		}
+		.contact-title {
+			font-size: clamp(2rem, 10vw, 2.6rem);
+			line-height: 1.08;
+		}
+		.contact-title-en,
+		.contact-title-fr {
+			display: block;
+			white-space: nowrap;
+		}
+		.contact-title-separator {
+			display: none;
 		}
 		.scrim-transition-card {
-			width: 92%;
-			padding: 16px 18px;
+			box-sizing: border-box;
+			width: 94%;
+			max-height: calc(100% - 12px);
+			padding: 7px 10px;
+			overflow: hidden;
+			border-radius: 10px;
+		}
+		.scrim-meta {
+			margin-bottom: 4px;
+			font-size: 6.5px;
+			letter-spacing: 0.08em;
+		}
+		.scrim-stamp {
+			padding: 2px 5px;
 		}
 		.scrim-title {
-			font-size: 1.15rem;
+			margin-bottom: 0;
+			font-size: 0.88rem;
+			line-height: 1.15;
 		}
-		.scrim-summary {
-			font-size: 0.82rem;
+		.scrim-subtitle {
+			display: inline;
+			margin: 0 0 0 3px;
+		}
+		.scrim-summary,
+		.scrim-replay-cue {
+			display: none;
+		}
+		/* Center Phase 02 under its pin so it no longer collides with Phase 03. */
+		.callout-2 .callout-card {
+			transform: translate(-50%, 8px);
+		}
+		.callout-2 .callout-stem {
+			transform: translate(-7px, 0);
 		}
 		.callout-card {
 			padding: 3px 6px;
