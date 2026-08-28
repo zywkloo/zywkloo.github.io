@@ -543,18 +543,18 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										/>
 										<div class="stage-map-vignette" aria-hidden="true"></div>
 
-										<!-- True Seven Bridges SVG Traversal Line -->
-										<svg class="stage-euler-svg" viewBox="0 0 720 531" preserveAspectRatio="none" aria-hidden="true">
+										<!-- True Seven Bridges SVG Traversal Line (Cropped top 90px & bottom 86px for widescreen panorama) -->
+										<svg class="stage-euler-svg" viewBox="0 90 720 355" preserveAspectRatio="none" aria-hidden="true">
 											<!-- Faint Background Path Guide -->
 											<path
 												class="euler-track"
-												d="M 150 110 C 190 115, 245 140, 288 178 C 298 220, 250 260, 236 301 C 228 355, 312 360, 327 300 C 336 235, 380 205, 404 178 C 435 150, 495 155, 537 202 C 570 220, 545 255, 505 265 C 465 275, 495 365, 539 395 C 560 430, 450 505, 360 531"
+												d="M 150 110 C 190 115, 245 140, 288 178 C 298 220, 250 260, 236 301 C 228 355, 312 360, 327 300 C 336 235, 380 205, 404 178 C 435 150, 495 155, 537 202 C 570 220, 545 255, 505 265 C 465 275, 495 365, 539 395 C 555 420, 440 445, 360 445"
 											/>
 											<!-- Active Animated Stroke Traversing All 7 Bridges -->
 											<path
 												id="euler-active-path"
 												class="euler-stroke"
-												d="M 150 110 C 190 115, 245 140, 288 178 C 298 220, 250 260, 236 301 C 228 355, 312 360, 327 300 C 336 235, 380 205, 404 178 C 435 150, 495 155, 537 202 C 570 220, 545 255, 505 265 C 465 275, 495 365, 539 395 C 560 430, 450 505, 360 531"
+												d="M 150 110 C 190 115, 245 140, 288 178 C 298 220, 250 260, 236 301 C 228 355, 312 360, 327 300 C 336 235, 380 205, 404 178 C 435 150, 495 155, 537 202 C 570 220, 545 255, 505 265 C 465 275, 495 365, 539 395 C 555 420, 440 445, 360 445"
 											/>
 											<!-- 4 Pivotal Milestone Dots along the traversal -->
 											<g class="milestone-nodes">
@@ -586,7 +586,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										<!-- 4 Floating Milestone Callout Annotations -->
 										<div class="stage-milestone-annotations" aria-label="Four Traversal Milestones">
 											<!-- Milestone 01 Callout -->
-											<div class="milestone-callout callout-1" style="left: 40.0%; top: 33.5%;">
+											<div class="milestone-callout callout-1" style="left: 40.0%; top: 24.8%;">
 												<div class="callout-stem stem-sw" aria-hidden="true"></div>
 												<div class="callout-card">
 													<span class="callout-badge">PHASE // 01</span>
@@ -596,7 +596,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 											</div>
 
 											<!-- Milestone 02 Callout -->
-											<div class="milestone-callout callout-2" style="left: 56.1%; top: 33.5%;">
+											<div class="milestone-callout callout-2" style="left: 56.1%; top: 24.8%;">
 												<div class="callout-stem stem-se" aria-hidden="true"></div>
 												<div class="callout-card">
 													<span class="callout-badge">PHASE // 02</span>
@@ -606,7 +606,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 											</div>
 
 											<!-- Milestone 03 Callout -->
-											<div class="milestone-callout callout-3" style="left: 70.1%; top: 49.9%;">
+											<div class="milestone-callout callout-3" style="left: 70.1%; top: 49.3%;">
 												<div class="callout-stem stem-e" aria-hidden="true"></div>
 												<div class="callout-card">
 													<span class="callout-badge">PHASE // 03</span>
@@ -616,7 +616,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 											</div>
 
 											<!-- Milestone 04 Callout -->
-											<div class="milestone-callout callout-4" style="left: 74.9%; top: 74.4%;">
+											<div class="milestone-callout callout-4" style="left: 74.9%; top: 85.9%;">
 												<div class="callout-stem stem-w" aria-hidden="true"></div>
 												<div class="callout-card">
 													<span class="callout-badge">PHASE // 04</span>
@@ -660,15 +660,15 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 									<!-- Topological Dispersal Fork (Seamlessly continuous from map exit to 4 Cards) -->
 									<div class="topological-fork" id="topological-fork" aria-hidden="true">
 										<!-- Continuous connecting vertical stem bridging map to fork -->
-										<div class="fork-stem-connector" aria-hidden="true"></div>
-										<div class="fork-banner">
+										<div class="fork-stem-connector" id="fork-stem-connector" aria-hidden="true"></div>
+										<div class="fork-banner" id="fork-banner">
 											<span class="fork-pulse"></span>
 											<span class="fork-label">TOPOLOGY FORKS INTO FOUR CORE DISCIPLINES</span>
 										</div>
 										<!-- Desktop 4-Branch SVG -->
 										<svg class="fork-svg fork-desktop" viewBox="0 0 1000 68" preserveAspectRatio="none">
-											<path class="fork-trunk" d="M 500 0 L 500 24" />
-											<circle class="fork-junction" cx="500" cy="24" r="4.5" />
+											<path class="fork-trunk" id="fork-trunk" d="M 500 0 L 500 24" />
+											<circle class="fork-junction" id="fork-junction" cx="500" cy="24" r="4.5" />
 											<path class="fork-branch branch-1" d="M 500 24 C 500 48, 125 44, 125 68" />
 											<path class="fork-branch branch-2" d="M 500 24 C 500 48, 375 44, 375 68" />
 											<path class="fork-branch branch-3" d="M 500 24 C 500 48, 625 44, 625 68" />
@@ -676,8 +676,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										</svg>
 										<!-- Tablet/Mobile 2-Branch SVG -->
 										<svg class="fork-svg fork-mobile" viewBox="0 0 1000 50" preserveAspectRatio="none">
-											<path class="fork-trunk" d="M 500 0 L 500 20" />
-											<circle class="fork-junction" cx="500" cy="20" r="4" />
+											<path class="fork-trunk" id="fork-trunk-mobile" d="M 500 0 L 500 20" />
+											<circle class="fork-junction" id="fork-junction-mobile" cx="500" cy="20" r="4" />
 											<path class="fork-branch branch-1" d="M 500 20 C 500 35, 250 35, 250 50" />
 											<path class="fork-branch branch-2" d="M 500 20 C 500 35, 750 35, 750 50" />
 										</svg>
@@ -1313,6 +1313,10 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 				const milestoneGroups = Array.from(document.querySelectorAll('.milestone-pin-group'));
 				const callouts = Array.from(document.querySelectorAll('.milestone-callout'));
 				const fork = document.getElementById('topological-fork');
+				const connector = document.getElementById('fork-stem-connector');
+				const banner = document.getElementById('fork-banner');
+				const trunks = Array.from(document.querySelectorAll('.fork-trunk'));
+				const junctions = Array.from(document.querySelectorAll('.fork-junction'));
 				const forkBranches = Array.from(document.querySelectorAll('.fork-branch'));
 				const cards = Array.from(document.querySelectorAll('#specs-grid .spec-card'));
 				const exitPin = stage?.querySelector('.canvas-exit-pin');
@@ -1321,7 +1325,12 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 
 				let isRunning = false;
 				let animFrameId = null;
-				let forkTimeoutId = null;
+				let timers = [];
+				const clearAllTimers = () => {
+					timers.forEach((t) => clearTimeout(t));
+					timers = [];
+				};
+
 				let pathLength = 0;
 				try {
 					pathLength = path.getTotalLength();
@@ -1345,13 +1354,30 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 					isRunning = true;
 
 					if (animFrameId) cancelAnimationFrame(animFrameId);
-					if (forkTimeoutId) clearTimeout(forkTimeoutId);
+					clearAllTimers();
 
 					// Reset visual states cleanly
 					if (scrim) scrim.classList.remove('is-active');
 					if (exitPin) exitPin.classList.remove('is-passed');
 					milestoneGroups.forEach((g) => g.classList.remove('is-passed'));
 					callouts.forEach((c) => c.classList.remove('is-active'));
+
+					// Reset downward topology cascade
+					if (connector) connector.classList.remove('is-drawn');
+					if (banner) banner.classList.remove('is-shown');
+					trunks.forEach((t) => {
+						t.style.transition = 'none';
+						t.style.strokeDashoffset = '24';
+					});
+					junctions.forEach((j) => j.classList.remove('is-lit'));
+					if (fork) fork.classList.remove('is-active');
+					forkBranches.forEach((branch) => {
+						branch.style.transition = 'none';
+						try {
+							branch.style.strokeDashoffset = `${branch.getTotalLength()}`;
+						} catch (_) {}
+					});
+					cards.forEach((c) => c.classList.remove('is-revealed'));
 
 					if (runner) {
 						runner.style.opacity = '1';
@@ -1370,6 +1396,10 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						callouts.forEach((c) => c.classList.add('is-active'));
 						if (scrim) scrim.classList.add('is-active');
 						if (exitPin) exitPin.classList.add('is-passed');
+						if (connector) connector.classList.add('is-drawn');
+						if (banner) banner.classList.add('is-shown');
+						trunks.forEach((t) => (t.style.strokeDashoffset = '0'));
+						junctions.forEach((j) => j.classList.add('is-lit'));
 						forkBranches.forEach((b) => (b.style.strokeDashoffset = '0'));
 						cards.forEach((c) => c.classList.add('is-revealed'));
 						isRunning = false;
@@ -1421,38 +1451,71 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						if (progress < 1) {
 							animFrameId = requestAnimationFrame(step);
 						} else {
-							// 1. All bridges traversed!
+							// 1. 上面的 path 画完了 (All bridges traversed!)
 							if (runner) runner.style.opacity = '0.4';
-
-							// Ensure all 4 milestones are active
 							milestoneGroups.forEach((g) => g.classList.add('is-passed'));
 							callouts.forEach((c) => c.classList.add('is-active'));
 
-							// 2. FADE IN THE 70%-WIDTH FULL-CANVAS SCRIM OVERLAY ACROSS THE SEVEN BRIDGES MAP
+							// Fade in the 70%-width scrim overlay across the map
 							if (scrim) scrim.classList.add('is-active');
 
-							// 3. Activate bottom exit pin
+							// Activate bottom exit pin dot
 							if (exitPin) exitPin.classList.add('is-passed');
 
 							isRunning = false;
 
-							// 4. Pause 1s for user to absorb transition text, then guide eyes down into fork & cards
-							forkTimeoutId = setTimeout(() => {
-								if (fork) fork.classList.add('is-active');
-								forkBranches.forEach((branch, idx) => {
-									setTimeout(() => {
-										branch.style.transition = 'stroke-dashoffset 1.8s cubic-bezier(0.22, 1, 0.36, 1)';
-										branch.style.strokeDashoffset = '0';
-									}, idx * 160);
-								});
+							// 2. 才 画下面竖 path (Vertical stem connector draws down from exit pin)
+							timers.push(
+								setTimeout(() => {
+									if (connector) connector.classList.add('is-drawn');
+								}, 400)
+							);
 
-								// Reveal the 4 Skill cards with relaxed, progressive entrance
-								cards.forEach((card, idx) => {
-									setTimeout(() => {
-										card.classList.add('is-revealed');
-									}, 1000 + idx * 280);
-								});
-							}, 1000);
+							// 3. 然后 topology 出现 (Topology banner badge pops in smoothly)
+							timers.push(
+								setTimeout(() => {
+									if (banner) banner.classList.add('is-shown');
+								}, 900)
+							);
+
+							// 4. Trunk line drops through banner to junction
+							timers.push(
+								setTimeout(() => {
+									trunks.forEach((t) => {
+										t.style.transition = 'stroke-dashoffset 0.4s ease-out';
+										t.style.strokeDashoffset = '0';
+									});
+									junctions.forEach((j) => j.classList.add('is-lit'));
+								}, 1350)
+							);
+
+							// 5. 然后才散开 4 个 (4 branches spread outward)
+							timers.push(
+								setTimeout(() => {
+									if (fork) fork.classList.add('is-active');
+									forkBranches.forEach((branch, idx) => {
+										timers.push(
+											setTimeout(() => {
+												branch.style.transition = 'stroke-dashoffset 1.3s cubic-bezier(0.22, 1, 0.36, 1)';
+												branch.style.strokeDashoffset = '0';
+											}, idx * 100)
+										);
+									});
+								}, 1700)
+							);
+
+							// 6. 4 Systematic Competency Spec Cards reveal progressively
+							timers.push(
+								setTimeout(() => {
+									cards.forEach((card, idx) => {
+										timers.push(
+											setTimeout(() => {
+												card.classList.add('is-revealed');
+											}, idx * 200)
+										);
+									});
+								}, 2450)
+							);
 						}
 					};
 
@@ -2579,6 +2642,25 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	/* ─────────────────────────────────────────────────────────────
 	   Chapter 05: The Seven Bridges Inflection Point & Topological Fork
 	   ───────────────────────────────────────────────────────────── */
+	.editorial-node.node-pivot {
+		grid-column: 1 / -1;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
+	.node-pivot .node-rail {
+		display: none;
+	}
+	.node-pivot .node-content {
+		width: 100%;
+	}
+	.node-pivot .node-header {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 14px;
+		margin-bottom: 20px;
+	}
 	.node-pivot .node-dot-pivot {
 		border-color: var(--apaper-accent);
 		background: var(--apaper-accent);
@@ -2596,19 +2678,23 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		position: relative;
 	}
 
-	/* Map Canvas Frame (Exact 720x531 pixel lock) */
+	/* Map Canvas Frame (Exact 720x355 widescreen crop removing empty northern & southern land) */
 	.stage-canvas-frame {
 		position: relative;
 		border-radius: 18px;
 		overflow: hidden;
 		border: 1px solid var(--apaper-line);
-		aspect-ratio: 720 / 531;
+		aspect-ratio: 720 / 355;
 		background: #e8e3d6;
-		box-shadow: 0 14px 34px rgba(32, 34, 33, 0.06);
+		box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+		width: 100%;
 	}
 	.stage-map-bg {
+		position: absolute;
+		left: 0;
+		top: calc(-90 / 355 * 100%);
 		width: 100%;
-		height: 100%;
+		height: calc(531 / 355 * 100%);
 		object-fit: fill;
 		display: block;
 		filter: saturate(0.96) contrast(1.02);
@@ -2871,7 +2957,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	}
 
 	.callout-4 .callout-card {
-		transform: translate(-104%, 8px);
+		transform: translate(-104%, -75%);
 	}
 	.callout-4 .callout-stem {
 		position: absolute;
@@ -2879,9 +2965,9 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		left: 0;
 		width: 18px;
 		height: 14px;
-		border-top: 1.5px dashed var(--apaper-accent);
+		border-bottom: 1.5px dashed var(--apaper-accent);
 		border-left: 1.5px dashed var(--apaper-accent);
-		transform: translate(-18px, 0);
+		transform: translate(-18px, -14px);
 		opacity: 0.5;
 	}
 
@@ -2943,7 +3029,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		z-index: 5;
 		transition: background 0.4s ease, filter 0.4s ease, border-color 0.4s ease;
 	}
-	.pivot-stage.is-active .canvas-exit-pin {
+	.canvas-exit-pin.is-passed {
 		background: #f59e0b;
 		border-color: #ffffff;
 		filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.9));
@@ -2961,15 +3047,18 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	}
 	.fork-stem-connector {
 		width: 2.5px;
-		height: 20px;
+		height: 22px;
 		background: var(--apaper-accent);
-		opacity: 0.35;
+		transform-origin: top center;
+		transform: scaleY(0);
+		opacity: 0;
 		margin-bottom: -1px;
-		transition: opacity 0.8s ease, filter 0.8s ease;
+		transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, filter 0.5s ease;
 	}
-	.topological-fork.is-active .fork-stem-connector {
+	.fork-stem-connector.is-drawn {
+		transform: scaleY(1);
 		opacity: 1;
-		filter: drop-shadow(0 0 3px rgba(196, 94, 73, 0.4));
+		filter: drop-shadow(0 0 4px rgba(229, 179, 130, 0.7));
 	}
 	.fork-banner {
 		display: inline-flex;
@@ -2985,9 +3074,17 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		color: var(--apaper-accent);
 		font-weight: 700;
 		margin-bottom: 2px;
-		box-shadow: 0 2px 8px rgba(32, 34, 33, 0.04);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 		position: relative;
 		z-index: 2;
+		opacity: 0;
+		transform: scale(0.85);
+		transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+	}
+	.fork-banner.is-shown {
+		opacity: 1;
+		transform: scale(1);
+		border-color: var(--apaper-accent);
 	}
 	.fork-pulse {
 		width: 5px;
@@ -3013,25 +3110,29 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		stroke: var(--apaper-accent);
 		stroke-width: 2.5;
 		stroke-linecap: round;
-		stroke-opacity: 0.4;
-		transition: stroke-opacity 0.6s ease;
+		stroke-dasharray: 24;
+		stroke-dashoffset: 24;
+		transition: stroke-dashoffset 0.4s ease-out;
 	}
 	.fork-junction {
 		fill: var(--apaper-accent);
-		filter: drop-shadow(0 0 4px var(--apaper-accent));
+		filter: drop-shadow(0 0 5px var(--apaper-accent));
+		opacity: 0;
+		transform-origin: 500px 24px;
+		transform: scale(0);
+		transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+	.fork-junction.is-lit {
+		opacity: 1;
+		transform: scale(1);
 	}
 	.fork-branch {
 		fill: none;
 		stroke: var(--apaper-accent);
 		stroke-width: 2.2;
 		stroke-linecap: round;
-		stroke-opacity: 0.35;
-		transition: stroke-opacity 0.8s ease;
-	}
-	.topological-fork.is-active .fork-trunk,
-	.topological-fork.is-active .fork-branch {
 		stroke-opacity: 0.9;
-		filter: drop-shadow(0 0 3px rgba(196, 94, 73, 0.35));
+		filter: drop-shadow(0 0 3px rgba(229, 179, 130, 0.4));
 	}
 
 	/* 4 Systematic Competency Spec Cards */
