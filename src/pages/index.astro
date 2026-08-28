@@ -59,19 +59,9 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 ---
 
 <!doctype html>
-<html lang="en" data-paper-theme="carbon">
+	<html lang="en" data-paper-theme="carbon">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<script is:inline>
-			(function () {
-				try {
-					var theme = localStorage.getItem('apaper-theme') || 'carbon';
-					document.documentElement.setAttribute('data-paper-theme', theme);
-				} catch (e) {
-					document.documentElement.setAttribute('data-paper-theme', 'carbon');
-				}
-			})();
-		</script>
 		<script type="application/ld+json" set:html={JSON.stringify(homeLd)} />
 	</head>
 	<body>
@@ -1242,27 +1232,15 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 
 					<!-- Color Theme Switcher Widget -->
 					<div class="theme-palette-bar" aria-label="Paper Theme Switcher">
-						<span class="theme-bar-label">PAPER TONE // 纸本色印:</span>
+						<span class="theme-bar-label">SITE TONE // PAPER SYSTEM:</span>
 						<div class="theme-pills">
-							<button type="button" class="theme-pill washi" data-theme="washi" title="和纸朱砂 · Washi &amp; Cinnabar">
-								<span class="pill-swatch" style="background: #c45e49;"></span>
-								<span class="pill-title">和纸朱砂</span>
-							</button>
-							<button type="button" class="theme-pill amber" data-theme="amber" title="古籍琥珀 · Antique Parchment &amp; Amber">
-								<span class="pill-swatch" style="background: #b86d29;"></span>
-								<span class="pill-title">古籍琥珀</span>
-							</button>
-							<button type="button" class="theme-pill blueprint" data-theme="blueprint" title="学术蓝图 · Blueprint &amp; Slate">
-								<span class="pill-swatch" style="background: #2563eb;"></span>
-								<span class="pill-title">学术蓝图</span>
-							</button>
-							<button type="button" class="theme-pill bamboo" data-theme="bamboo" title="竹简青素 · Bamboo &amp; Celadon">
-								<span class="pill-swatch" style="background: #2d6a4f;"></span>
-								<span class="pill-title">竹简青素</span>
-							</button>
 							<button type="button" class="theme-pill carbon active" data-theme="carbon" title="玄纸泥金 · Carbon Washi &amp; Gold">
 								<span class="pill-swatch" style="background: #d4a373;"></span>
-								<span class="pill-title">玄纸泥金</span>
+								<span class="pill-title">Carbon</span>
+							</button>
+							<button type="button" class="theme-pill operator" data-theme="operator" title="Operator Blue · Deep-blue systems console">
+								<span class="pill-swatch" style="background: #69c7d5;"></span>
+								<span class="pill-title">Operator Blue</span>
 							</button>
 						</div>
 					</div>
@@ -1517,10 +1495,10 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 			initWishesCarousel();
 			document.addEventListener('astro:after-swap', initWishesCarousel);
 
-			// Paper Theme Switcher with localStorage persistence
+			// Site theme switcher with cross-page persistence.
 			const initPaperTheme = () => {
 				try {
-					const savedTheme = localStorage.getItem('apaper-theme') || 'carbon';
+					const savedTheme = localStorage.getItem('site-paper-theme') === 'operator' ? 'operator' : 'carbon';
 					document.documentElement.setAttribute('data-paper-theme', savedTheme);
 					document.querySelectorAll('.theme-pill').forEach((btn) => {
 						btn.classList.toggle('active', btn.getAttribute('data-theme') === savedTheme);
@@ -1533,7 +1511,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						if (!theme) return;
 						document.documentElement.setAttribute('data-paper-theme', theme);
 						try {
-							localStorage.setItem('apaper-theme', theme);
+							localStorage.setItem('site-paper-theme', theme);
 						} catch (_) {}
 						document.querySelectorAll('.theme-pill').forEach((b) => b.classList.remove('active'));
 						btn.classList.add('active');
@@ -1797,7 +1775,6 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	   APAPER "KAMI" EDITORIAL PUBLICATION SYSTEM & COLOR CUSTOMIZATION
 	   Paper tones, carbon ink, hairline rules, and cinnabar seal.
 	   ───────────────────────────────────────────────────────────── */
-	:root,
 	[data-paper-theme="washi"] {
 		--apaper-bg: #f8f6f0;
 		--apaper-bg-alt: #f2eee3;

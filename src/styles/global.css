@@ -52,6 +52,76 @@
 	--dur: 0.45s;
 }
 
+/* Global apaper themes. Carbon is the site default; Operator Blue is the focused systems-console variant. */
+:root,
+html[data-paper-theme="carbon"] {
+	--apaper-bg: #141617;
+	--apaper-bg-alt: #1a1c1e;
+	--apaper-card: #202325;
+	--apaper-header-bg: rgba(20, 22, 23, 0.92);
+	--apaper-ink: #f5f2eb;
+	--apaper-ink-secondary: #ded9cf;
+	--apaper-muted: #aba496;
+	--apaper-line: #383c3e;
+	--apaper-line-light: #282c2e;
+	--apaper-accent: #e5b382;
+	--apaper-accent-soft: rgba(229, 179, 130, 0.16);
+	--apaper-accent-line: rgba(229, 179, 130, 0.38);
+	--apaper-btn-text: #121415;
+	--apaper-tag-bg: rgba(255, 255, 255, 0.07);
+	--apaper-font-mono: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+	--apaper-font-serif: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
+	--accent: #e5b382;
+	--accent-dark: #c88e58;
+	--accent-bright: #f2c99f;
+	--accent-soft: rgba(229, 179, 130, 0.12);
+	--accent-rgb: 229, 179, 130;
+	--black: 245, 242, 235;
+	--ink: 222, 217, 207;
+	--gray: 171, 164, 150;
+	--gray-light: 56, 60, 62;
+	--gray-dark: 222, 217, 207;
+	--surface: #141617;
+	--surface-raised: #202325;
+	--surface-muted: #1a1c1e;
+	--surface-deep: #0d0f10;
+	--line: #383c3e;
+	--gray-gradient: rgba(26, 28, 30, 0.75), #141617;
+}
+
+html[data-paper-theme="operator"] {
+	--apaper-bg: #0d1721;
+	--apaper-bg-alt: #132331;
+	--apaper-card: #182b38;
+	--apaper-header-bg: rgba(13, 23, 33, 0.92);
+	--apaper-ink: #edf7f8;
+	--apaper-ink-secondary: #c7d9df;
+	--apaper-muted: #90aab4;
+	--apaper-line: #314b58;
+	--apaper-line-light: #213946;
+	--apaper-accent: #69c7d5;
+	--apaper-accent-soft: rgba(105, 199, 213, 0.16);
+	--apaper-accent-line: rgba(105, 199, 213, 0.38);
+	--apaper-btn-text: #071217;
+	--apaper-tag-bg: rgba(255, 255, 255, 0.07);
+	--accent: #69c7d5;
+	--accent-dark: #3a9cab;
+	--accent-bright: #9de1ea;
+	--accent-soft: rgba(105, 199, 213, 0.12);
+	--accent-rgb: 105, 199, 213;
+	--black: 237, 247, 248;
+	--ink: 199, 217, 223;
+	--gray: 144, 170, 180;
+	--gray-light: 49, 75, 88;
+	--gray-dark: 199, 217, 223;
+	--surface: #0d1721;
+	--surface-raised: #182b38;
+	--surface-muted: #132331;
+	--surface-deep: #081016;
+	--line: #314b58;
+	--gray-gradient: rgba(19, 35, 49, 0.75), #0d1721;
+}
+
 @font-face {
 	font-family: "Atkinson";
 	src: url("/fonts/atkinson-regular.woff") format("woff");

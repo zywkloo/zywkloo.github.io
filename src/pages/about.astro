@@ -45,178 +45,105 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 	<body>
 		<Header />
 		<main class="about-page">
-			<div class="container">
-				<img src={PROFILE_IMAGE} alt="Victor Zhang" class="about-profile-image" />
-				
-				<h1>About Me</h1>
-				
-				<p>
-					<strong>Mobile &amp; Systems Engineer</strong> with 7 years of experience building and shipping production apps across the US, Canada, and China.
-				</p>
+			<section class="about-hero container" aria-labelledby="about-title">
+				<div class="profile-stamp">
+					<img src={PROFILE_IMAGE} alt="Victor Zhang" class="about-profile-image" />
+					<span>VICTOR ZHANG</span>
+					<small>VANCOUVER · BC</small>
+				</div>
+				<div class="hero-copy">
+					<p class="section-kicker">PROFILE // MOBILE &amp; SYSTEMS</p>
+					<h1 id="about-title" class="sr-only">Mobile systems, from device signal to cloud</h1>
+					<figure class="system-diagram" aria-label="IoT signals, native interop, render buffer, gateway control, and cloud">
+						<ol>
+							<li><span>01</span><strong>IoT Signals</strong></li>
+							<li><span>02</span><strong>Native Interop</strong></li>
+							<li><span>03</span><strong>Render Buffer</strong></li>
+							<li><span>04</span><strong>Gateway Control</strong></li>
+							<li><span>05</span><strong>Cloud</strong></li>
+						</ol>
+					</figure>
+					<p class="hero-lead">I translate device capabilities and native boundaries into responsive product interfaces and reliable services—without losing the constraints that matter at each handoff.</p>
+					<div class="hero-actions">
+						<a href="/#work">Selected work ↗</a>
+						<a href="mailto:yiweizhangcool@gmail.com">Direct email ↗</a>
+					</div>
+				</div>
+			</section>
 
-				<p>
-					I specialize in <strong>end-to-end, data-driven mobile systems</strong>—from <strong>real-time ingestion and synchronization</strong> (e.g., BLE streaming via CoreBluetooth, local persistence, and cloud sync) to <strong>backend services and telemetry pipelines</strong>. I design systems that handle long-running sessions and unreliable networks, with a focus on <strong>correctness, concurrency, and reliability</strong>.
-				</p>
+			<section class="signal-strip" aria-label="Professional summary">
+				<div class="container signal-grid">
+					<div><strong>7+</strong><span>years shipping</span></div>
+					<div><strong>3</strong><span>markets: US · Canada · China</span></div>
+					<div><strong>Native ↔ Cloud</strong><span>one operating surface</span></div>
+				</div>
+			</section>
 
-				<p>
-					I approach systems through <strong>data flow, control policies, state, and rendering</strong>—for example, designing caching strategies (TTL, invalidation), retry with exponential backoff, and sync behavior under intermittent connectivity, then transforming streamed data into consistent UI state and responsive interfaces.
-				</p>
+			<section class="about-section container" aria-labelledby="focus-title">
+				<div class="section-heading">
+					<p class="section-kicker">01 // OPERATING FOCUS</p>
+					<h2 id="focus-title">The parts that make a product dependable.</h2>
+				</div>
+				<div class="focus-list">
+					<article><span>01</span><div><h3>Signal → state</h3><p>BLE, APIs, and local persistence become coherent UI—not a collection of race conditions.</p></div></article>
+					<article><span>02</span><div><h3>Policies that hold</h3><p>Cache, retry, sync, and observability are designed for intermittent networks and long sessions.</p></div></article>
+					<article><span>03</span><div><h3>Product-ready delivery</h3><p>Native depth where it matters; React Native leverage where it helps.</p></div></article>
+				</div>
+			</section>
 
-				<p>
-					I’m comfortable going deep on <strong>iOS native</strong> when system-level understanding is required, and I also work effectively in <strong>React Native</strong> when cross-platform leverage makes sense. I regularly work across the stack—from device integration and client architecture to backend services (Node.js, FastAPI, Redis) and production observability—to ensure systems remain reliable in practice.
-				</p>
+			<section class="about-section container" aria-labelledby="experience-title">
+				<div class="section-heading">
+					<p class="section-kicker">02 // SELECTED EXPERIENCE</p>
+					<h2 id="experience-title">A short record of ownership.</h2>
+				</div>
+				<div class="experience-list">
+					<article class="experience-row">
+						<p>2025 — NOW</p><div><h3>Medico Supplies</h3><span>Mobile Engineer &amp; Platform Developer</span></div><ul><li>Health-data services: FastAPI, Redis, async processing</li><li>React Native with Swift/Kotlin BLE and sync modules</li></ul>
+					</article>
+					<article class="experience-row">
+						<p>2024 — 2025</p><div><h3>NinjaTech AI</h3><span>Senior Mobile / Frontend Engineer</span></div><ul><li>Mixed-content agent streaming across web and mobile</li><li>60fps React Native research and citation interfaces</li></ul>
+					</article>
+					<article class="experience-row">
+						<p>2020 — 2023</p><div><h3>TutorOcean</h3><span>Mobile Developer</span></div><ul><li>Led React Native iOS/Android maintenance and the SwiftUI/Combine replacement</li><li>Owned auth, WebSocket recovery, cross-platform parity, and App Store delivery</li></ul>
+					</article>
+					<article class="experience-row">
+						<p>2013 — 2015</p><div><h3>KV Games</h3><span>Lead Game Designer &amp; Dev Lead · Wild Dunk</span></div><ul><li><strong>#1</strong> Sports · <strong>#9</strong> Overall, China App Store</li><li>Product, monetization, and cross-functional delivery</li></ul>
+					</article>
+				</div>
+			</section>
 
-				<h2 id="agent-governance-workflow"><span id="Vibecodingworkflow"></span><span id="vibe-coding-workflow"></span>Agent Governance &amp; Coding Workflow</h2>
-				<section class="agent-harness-card" aria-labelledby="agent-harness-title">
+			<section class="governance-section" id="agent-governance-workflow" aria-labelledby="governance-title">
+				<span id="Vibecodingworkflow"></span><span id="vibe-coding-workflow"></span>
+				<div class="container governance-layout">
 					<div>
-						<p class="eyebrow">Open Source · wtcraft</p>
-						<h3 id="agent-harness-title">Git-Native Agent Governance Core</h3>
-						<ul class="harness-bullets">
-							<li><strong>Task Contract</strong> — Declares immutable <code>Scope</code>, <code>Off-limits</code>, and <code>Verification</code> in <code>.worktree-task.md</code></li>
-							<li><strong>Worktree Isolation</strong> — Branch-isolated parallel agent execution with zero container/VM overhead</li>
-							<li><strong>Full-Surface Audit</strong> — <code>wtcraft check</code> blocks scope drift across committed, staged, and untracked files</li>
-							<li><strong>Deterministic Gate</strong> — <code>wtcraft verify</code> enforces non-zero exit codes before human sign-off</li>
-						</ul>
-						<div class="harness-links">
-							<a href="/wtcraft">wtcraft Overview</a>
-							<a href="/blog/dont-build-another-agent-codex-claude-code-wtcraft/">TokenChef 04</a>
-							<a class="wtcraft-link" href="https://github.com/zywkloo/wtcraft" target="_blank" rel="noopener noreferrer">GitHub <span>wtcraft</span></a>
+						<p class="section-kicker">03 // AGENT GOVERNANCE</p>
+						<h2 id="governance-title">Agents need a contract, not a vibe.</h2>
+						<p>I built <strong>wtcraft</strong> to keep parallel agent work scoped, inspectable, and verifiable in plain Git worktrees.</p>
+						<div class="hero-actions">
+							<a href="/wtcraft">Explore wtcraft ↗</a>
+							<a href="https://github.com/zywkloo/wtcraft" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
 						</div>
 					</div>
-					<div class="handoff-diagram" aria-label="Task planning to contract to deterministic verification workflow">
-						<div class="diagram-node">
-							<span>Task Planning</span>
-							<small>Claude / Spec Author</small>
-						</div>
-						<div class="diagram-arrow">↓ writes contract</div>
-						<div class="diagram-node diagram-node-contract">
-							<span>.worktree-task.md</span>
-							<small>Scope · Off-limits · Verification</small>
-						</div>
-						<div class="diagram-arrow">↓ isolated worktree</div>
-						<div class="diagram-node">
-							<span>Deterministic Gate</span>
-							<small>wtcraft check &amp; verify</small>
-						</div>
-					</div>
-				</section>
-				<h2>Recent Experience</h2>
-				<div class="experience-item">
-					<h3>Mobile Engineer &amp; Platform Developer - Medico Supplies INC.</h3>
-					<p class="experience-date">Mar 2025 - Present</p>
-					<ul>
-						<li>- Architected and built a health analytics backend using Python, FastAPI, Redis, and async task queues for long-session physiological data processing, reliable live mobile ingestion, telemetry pipelines, and scalable caching policies</li>
-						<li>- Developed a React Native app with TypeScript and local persistence, while owning native Swift/Kotlin modules for BLE parsing, sync, concurrency-sensitive device workflows, and mobile system integration</li>
-						<li>- Delivered a Windows desktop 3D scanning application with C#/.NET and C++ interop, optimizing mesh pipelines for clinical-grade accuracy</li>
-					</ul>
+					<ol class="governance-steps">
+						<li><strong>Contract</strong><span>Scope · off-limits · verification</span></li>
+						<li><strong>Isolation</strong><span>One task, one Git worktree</span></li>
+						<li><strong>Gate</strong><span>Check every changed surface</span></li>
+					</ol>
 				</div>
-				<div class="experience-item">
-					<h3>Senior Mobile / Frontend Engineer - NinjaTech AI</h3>
-					<p class="experience-date">Oct 2024 - Jan 2025</p>
-					<ul>
-						<li>- Contributed to MyNinja.ai Agentic App powered by fine-tuned Llama LLM across web and mobile — developed React.js features with RTK Query for CRUD, Tailwind CSS styling, and AI-generated image state management.</li>
-						<li>- Developed React Native mobile app with TypeScript, Expo Router, Zod validation, implementing parallel mixed-content message streaming with Zustand (MVVM), achieving 60fps scrolling for Markdown citations and research cards.</li>
-					</ul>
+			</section>
+
+			<section class="about-section container capability-section" aria-labelledby="capability-title">
+				<div class="section-heading">
+					<p class="section-kicker">04 // TOOLKIT</p>
+					<h2 id="capability-title">A compact working set.</h2>
 				</div>
-
-				<h2>Key Achievements</h2>
-				<ul>
-					<li>🎯 Founding mobile engineer on a Canada-based ed-tech startup app launch, contributing iOS-native depth while also shipping React Native features that supported fundraising in early 2023</li>
-					<li>🥇 2x Hackathon Winner (CuHacking 2019 &amp; 2020)</li>
-					<li>🎮 Lead Game Designer &amp; Dev Team Lead — drove Wild Dunk to #1 in Sports and #9 Overall on China App Store; see <a href="/#wilddunk">archive on Home</a>.</li>
-				</ul>
-
-				<h2>Background</h2>
-				<ul>
-					<li>💻 7 years of software engineering experience focused on mobile products, backend services, and reliable system design at scale</li>
-					<li>🎯 iOS-native and cross-platform mobile delivery experience with startups across the US, Canada, and China</li>
-					<li>🎮 4 years leading mobile game design, product monetization, and cross-functional dev teams</li>
-					<li>📺 Live coding streamer on twitch.tv/zywkloo, covering coding contests and gaming</li>
-					<li>💡 Passionate about building scalable applications and mentoring developers</li>
-				</ul>
-
-				<h2>Education</h2>
-				<ul>
-					<li>📖 Master of Data Science, UBC, Vancouver, Canada</li>
-					<li>🍁 B.Sc. in Computer Science, Carleton University, Ottawa, Canada</li>
-					<li>🏙️ B.Eng. in Urban Planning, Peking University, Beijing, China</li>
-				</ul>
-
-				<h2>How I Decompose Mobile Systems</h2>
-				<p>
-					I usually break mobile systems into a few practical layers so I can reason clearly about performance, consistency, reliability, and scalability end to end.
-				</p>
-				<div class="design-grid">
-					<div class="design-card">
-						<h3>1. Data Plane</h3>
-						<p>Execution paths that move data through the system: BLE streams, API calls, parsing, persistence, uploads, downloads, and live pipelines.</p>
-					</div>
-					<div class="design-card">
-						<h3>2. Control Policies</h3>
-						<p>Rules that shape behavior: caching and invalidation, retry and backoff, auth, feature flags, rate limits, and sync strategy.</p>
-					</div>
-					<div class="design-card">
-						<h3>3. State Management</h3>
-						<p>How raw data becomes consistent UI state through ViewModels, observable streams, and single sources of truth.</p>
-					</div>
-					<div class="design-card">
-						<h3>4. Rendering</h3>
-						<p>The presentation layer where SwiftUI, UIKit, or React Native turn state into responsive, smooth user experiences.</p>
-					</div>
-					<div class="design-card">
-						<h3>5. Orchestration</h3>
-						<p>Workflow coordination across the stack: connect, ingest, store, sync, notify, and recover without tangling responsibilities.</p>
-					</div>
-					<div class="design-card">
-						<h3>6. Infrastructure</h3>
-						<p>The SDKs and services underneath the product: CoreBluetooth, URLSession, Firebase, AWS, databases, queues, and platform tooling.</p>
-					</div>
-					<div class="design-card">
-						<h3>7. Observability</h3>
-						<p>Production visibility through logging, metrics, analytics, telemetry, and feedback loops that keep systems measurable and trustworthy.</p>
-					</div>
+				<div class="capability-grid">
+					<div><h3>Client systems</h3><p>Swift · SwiftUI · UIKit · React Native · CoreBluetooth</p></div>
+					<div><h3>Data services</h3><p>Python · FastAPI · Node.js · Redis · Postgres</p></div>
+					<div><h3>Production craft</h3><p>State modeling · telemetry · Git · CI/CD · product delivery</p></div>
 				</div>
-
-				<h2>Technologies I Work With</h2>
-				<div class="tech-grid">
-					<div class="tech-category">
-						<h3>Mobile</h3>
-						<ul>
-							<li>Swift / SwiftUI</li>
-							<li>UIKit</li>
-							<li>React Native</li>
-							<li>Core Data</li>
-						</ul>
-					</div>
-					<div class="tech-category">
-						<h3>Backend</h3>
-						<ul>
-							<li>Python / FastAPI</li>
-							<li>Node.js / Express</li>
-							<li>Redis / Queues</li>
-							<li>Postgres / MongoDB</li>
-						</ul>
-					</div>
-					<div class="tech-category">
-						<h3>Frontend / Desktop</h3>
-						<ul>
-							<li>React</li>
-							<li>Next.js</li>
-							<li>macOS (SwiftUI)</li>
-							<li>Windows (.NET / C#)</li>
-						</ul>
-					</div>
-					<div class="tech-category">
-						<h3>Systems / Tools</h3>
-						<ul>
-							<li>C# / .NET</li>
-							<li>C++ / CMake</li>
-							<li>Docker / AWS</li>
-							<li>Git / CI/CD</li>
-						</ul>
-					</div>
-				</div>
-			</div>
+				<p class="education-line"><strong>Education</strong> · MDS, UBC · BCS, Carleton University · BEng, Peking University</p>
+			</section>
 		</main>
 
 		<Footer />
@@ -560,5 +487,417 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 
 	.experience-item ul {
 		margin-bottom: 0;
+	}
+
+	/* About shares apaper tokens with Home; its distinction comes from content hierarchy, not a separate skin. */
+	.about-page {
+		--about-ink: var(--apaper-ink);
+		--about-muted: var(--apaper-ink-secondary);
+		--about-line: var(--apaper-line);
+		--about-wash: var(--apaper-bg-alt);
+		--about-accent: var(--apaper-accent);
+		width: 100%;
+		max-width: 100%;
+		margin: 0;
+		padding: clamp(3rem, 7vw, 6.5rem) 0 0;
+		background: var(--apaper-bg);
+		color: var(--about-ink);
+	}
+	.about-page .container {
+		width: min(960px, calc(100% - 3rem));
+		max-width: none;
+		padding: 0;
+	}
+	.about-hero {
+		display: grid;
+		grid-template-columns: 210px minmax(0, 1fr);
+		gap: clamp(2rem, 6vw, 6rem);
+		align-items: center;
+		padding-bottom: clamp(3rem, 7vw, 6rem);
+	}
+	.profile-stamp {
+		display: grid;
+		justify-items: start;
+		gap: 0.45rem;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		color: var(--about-ink);
+	}
+	.about-page .about-profile-image {
+		width: 164px;
+		height: 164px;
+		margin: 0 0 0.75rem;
+		border: 1px solid var(--about-ink);
+		border-radius: 10px;
+		box-shadow: 10px 10px 0 var(--about-wash);
+	}
+	.profile-stamp small {
+		font-size: 0.64rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		color: var(--about-muted);
+	}
+	.section-kicker {
+		margin: 0 0 0.9rem;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.13em;
+		color: var(--about-accent);
+	}
+	.about-page h1,
+	.about-page h2,
+	.about-page h3,
+	.about-page p {
+		color: var(--about-ink);
+	}
+	.system-diagram {
+		max-width: 820px;
+		margin: 0;
+	}
+	.system-diagram ol {
+		position: relative;
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 0.7rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.system-diagram ol::before {
+		content: "";
+		position: absolute;
+		top: 0.42rem;
+		left: 0.42rem;
+		right: 0.42rem;
+		height: 1px;
+		background: var(--about-line);
+	}
+	.system-diagram li {
+		position: relative;
+		min-width: 0;
+		padding-top: 1.15rem;
+	}
+	.system-diagram li::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 0.78rem;
+		height: 0.78rem;
+		box-sizing: border-box;
+		border: 2px solid var(--about-accent);
+		border-radius: 50%;
+		background: var(--apaper-bg);
+	}
+	.system-diagram li:not(:last-child)::after {
+		content: "››";
+		position: absolute;
+		top: 0;
+		left: calc(100% + 0.35rem);
+		z-index: 3;
+		display: grid;
+		width: 0.86rem;
+		height: 0.78rem;
+		place-items: center;
+		padding: 0;
+		background: var(--apaper-bg);
+		font-family: "Atkinson", system-ui, sans-serif;
+		font-size: 0.98rem;
+		font-weight: 700;
+		line-height: 1;
+		letter-spacing: -0.16em;
+		color: var(--about-accent);
+		text-shadow: none;
+		transform: translateX(-50%);
+		animation: diagram-chevron-pulse 4.2s ease-in-out infinite;
+	}
+	.system-diagram li:nth-child(1)::after { animation-delay: 0.24s; }
+	.system-diagram li:nth-child(2)::after { animation-delay: 1.08s; }
+	.system-diagram li:nth-child(3)::after { animation-delay: 1.92s; }
+	.system-diagram li:nth-child(4)::after { animation-delay: 2.76s; }
+	.system-diagram li:last-child::before { background: var(--about-accent); }
+	.system-diagram li > span {
+		display: block;
+		margin-bottom: 0.35rem;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 0.63rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		color: var(--about-accent);
+	}
+	.system-diagram strong {
+		display: block;
+		white-space: nowrap;
+		font-family: "Atkinson", system-ui, sans-serif;
+		font-size: clamp(0.76rem, 1.25vw, 0.98rem);
+		font-weight: 700;
+		line-height: 1.2;
+		letter-spacing: -0.01em;
+		color: var(--about-ink);
+		animation: diagram-label-pulse 4.2s ease-in-out infinite;
+	}
+	.system-diagram li:nth-child(2) strong { animation-delay: 0.72s; }
+	.system-diagram li:nth-child(3) strong { animation-delay: 1.56s; }
+	.system-diagram li:nth-child(4) strong { animation-delay: 2.4s; }
+	.system-diagram li:nth-child(5) strong { animation-delay: 3.24s; }
+	@keyframes diagram-chevron-pulse {
+		0%, 14%, 100% { opacity: 0.28; text-shadow: none; filter: brightness(0.82); }
+		20%, 32% { opacity: 1; text-shadow: 0 0 0.45rem var(--about-accent), 0 0 0.9rem var(--about-accent); filter: brightness(1.25); }
+		40% { opacity: 0.42; text-shadow: none; filter: brightness(0.92); }
+	}
+	@keyframes diagram-label-pulse {
+		0%, 16%, 100% { text-shadow: none; color: var(--about-ink); }
+		22%, 34% { color: var(--about-accent); text-shadow: 0 0 0.55rem color-mix(in srgb, var(--about-accent) 60%, transparent); }
+		42% { color: var(--about-ink); text-shadow: none; }
+	}
+	.about-page .hero-lead {
+		max-width: 650px;
+		margin: 1.45rem 0 1.7rem;
+		font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+		line-height: 1.55;
+		color: var(--about-muted);
+	}
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+	}
+	.hero-actions a {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.63rem 0.9rem;
+		border: 1px solid var(--about-ink);
+		border-radius: 999px;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 0.76rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		color: var(--about-ink);
+		text-decoration: none;
+		transition: background 180ms ease, color 180ms ease;
+	}
+	.hero-actions a:hover {
+		background: var(--about-ink);
+		color: var(--apaper-btn-text);
+	}
+	.signal-strip {
+		padding: 1.45rem 0;
+		background: var(--apaper-card);
+		color: var(--about-ink);
+	}
+	.signal-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+	}
+	.signal-grid div {
+		display: grid;
+		gap: 0.15rem;
+		padding-right: 1.5rem;
+		border-right: 1px solid var(--about-line);
+	}
+	.signal-grid div:last-child { border-right: 0; }
+	.signal-grid strong {
+		font-size: clamp(1.1rem, 2vw, 1.5rem);
+		font-weight: 600;
+		letter-spacing: -0.03em;
+		color: var(--about-ink);
+	}
+	.signal-grid span {
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 0.68rem;
+		letter-spacing: 0.08em;
+		color: var(--about-muted);
+		text-transform: uppercase;
+	}
+	.about-section { padding: clamp(4rem, 8vw, 7rem) 0; }
+	.section-heading {
+		display: grid;
+		grid-template-columns: minmax(170px, 0.42fr) 1fr;
+		gap: 2rem;
+		align-items: start;
+		margin-bottom: 2.25rem;
+		border-top: 1px solid var(--about-ink);
+		padding-top: 0.8rem;
+	}
+	.section-heading .section-kicker { margin: 0; }
+	.about-page h2 {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: clamp(1.8rem, 3.1vw, 3rem);
+		font-weight: 500;
+		line-height: 1.05;
+		letter-spacing: -0.045em;
+	}
+	.focus-list { border-top: 1px solid var(--about-line); }
+	.focus-list article {
+		display: grid;
+		grid-template-columns: minmax(100px, 0.24fr) minmax(0, 1fr);
+		gap: 1rem;
+		padding: 1.35rem 0;
+		border-bottom: 1px solid var(--about-line);
+	}
+	.focus-list article > span,
+	.experience-row > p {
+		margin: 0;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		color: var(--about-accent);
+	}
+	.focus-list h3,
+	.capability-grid h3 {
+		margin: 0 0 0.3rem;
+		font-size: 1.12rem;
+		font-weight: 700;
+		letter-spacing: -0.02em;
+	}
+	.focus-list p,
+	.capability-grid p {
+		max-width: 620px;
+		margin: 0;
+		font-size: 1rem;
+		line-height: 1.55;
+		color: var(--about-muted);
+	}
+	.experience-list { border-top: 1px solid var(--about-line); }
+	.experience-row {
+		display: grid;
+		grid-template-columns: 0.45fr 0.9fr 1.25fr;
+		gap: 1.4rem;
+		padding: 1.5rem 0;
+		border-bottom: 1px solid var(--about-line);
+	}
+	.experience-row h3 {
+		margin: 0 0 0.25rem;
+		font-size: 1.15rem;
+		font-weight: 700;
+		letter-spacing: -0.025em;
+	}
+	.experience-row div > span {
+		font-size: 0.86rem;
+		color: var(--about-muted);
+	}
+	.experience-row ul {
+		display: grid;
+		gap: 0.42rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		font-size: 0.9rem;
+		line-height: 1.45;
+	}
+	.experience-row li {
+		position: relative;
+		margin: 0;
+		padding-left: 0.9rem;
+		color: var(--about-muted);
+	}
+	.experience-row li::before {
+		content: "↗";
+		position: absolute;
+		left: 0;
+		color: var(--about-accent);
+	}
+	.experience-row strong { color: var(--about-ink); }
+	.governance-section {
+		padding: clamp(4rem, 8vw, 7rem) 0;
+		background: var(--apaper-bg-alt);
+		border-top: 1px solid var(--about-line);
+		border-bottom: 1px solid var(--about-line);
+	}
+	.governance-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+		gap: clamp(2rem, 6vw, 7rem);
+		align-items: end;
+	}
+	.governance-layout > div > p:not(.section-kicker) {
+		max-width: 580px;
+		margin: 1rem 0 1.4rem;
+		font-size: 1.06rem;
+		line-height: 1.58;
+		color: var(--about-muted);
+	}
+	.governance-steps {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		border-top: 1px solid var(--about-ink);
+	}
+	.governance-steps li {
+		display: grid;
+		grid-template-columns: 0.7fr 1.3fr;
+		gap: 1rem;
+		padding: 1rem 0;
+		border-bottom: 1px solid var(--about-ink);
+	}
+	.governance-steps strong {
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 0.78rem;
+		letter-spacing: 0.07em;
+		text-transform: uppercase;
+	}
+	.governance-steps span { color: var(--about-muted); font-size: 0.94rem; }
+	.capability-section { padding-bottom: clamp(5rem, 10vw, 8rem); }
+	.capability-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+	}
+	.capability-grid > div {
+		padding: 1.1rem 0 0;
+		border-top: 3px solid var(--about-accent);
+	}
+	.education-line {
+		margin: 3rem 0 0;
+		padding-top: 1rem;
+		border-top: 1px solid var(--about-line);
+		font-size: 0.85rem;
+		line-height: 1.55;
+		color: var(--about-muted);
+	}
+	.education-line strong { color: var(--about-ink); }
+	@media (max-width: 760px) {
+		.about-page .container { width: min(100% - 2rem, 960px); }
+		.about-hero { grid-template-columns: 1fr; gap: 1.8rem; }
+		.profile-stamp { grid-template-columns: auto 1fr; column-gap: 0.9rem; align-items: center; }
+		.about-page .about-profile-image { grid-row: span 2; width: 84px; height: 84px; margin: 0; }
+		.system-diagram ol { grid-template-columns: 1fr; gap: 0.55rem; }
+		.system-diagram ol::before { top: 0.4rem; bottom: 0.4rem; left: 0.39rem; right: auto; width: 1px; height: auto; }
+		.system-diagram ol::after { top: 0; left: 0.18rem; animation-name: diagram-signal-vertical; }
+		.system-diagram li { padding: 0.08rem 0 0.08rem 1.35rem; }
+		.system-diagram li::before { top: 0.1rem; }
+		.system-diagram li:not(:last-child)::after { content: "↓"; top: auto; right: auto; bottom: -0.72rem; left: 0.04rem; padding: 0; background: transparent; animation-name: diagram-chevron-vertical; }
+		.system-diagram li > span { margin-bottom: 0.15rem; }
+		.section-heading,
+		.experience-row,
+		.governance-layout { grid-template-columns: 1fr; gap: 1rem; }
+		.focus-list article { grid-template-columns: 72px 1fr; }
+		.signal-grid { grid-template-columns: 1fr; gap: 1rem; }
+		.signal-grid div { padding: 0 0 1rem; border-right: 0; border-bottom: 1px solid var(--about-line); }
+		.signal-grid div:last-child { padding-bottom: 0; border-bottom: 0; }
+		.capability-grid { grid-template-columns: 1fr; gap: 1.6rem; }
+	}
+	@keyframes diagram-signal-vertical {
+		0%, 8% { top: 0; opacity: 0; }
+		12% { opacity: 1; }
+		88% { opacity: 1; }
+		100% { top: calc(100% - 0.45rem); opacity: 0; }
+	}
+	@keyframes diagram-chevron-vertical {
+		0%, 100% { transform: translateY(-0.16rem); opacity: 0.38; }
+		50% { transform: translateY(0.18rem); opacity: 1; }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.system-diagram ol::after,
+		.system-diagram li:not(:last-child)::after,
+		.system-diagram strong { animation: none; }
+		.system-diagram strong { -webkit-text-fill-color: var(--about-ink); }
 	}
 </style>
