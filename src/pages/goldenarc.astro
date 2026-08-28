@@ -277,12 +277,12 @@ const organizationLd = {
 			</section>
 
 			<section class="principles" aria-labelledby="principles-heading">
-				<p class="eyebrow">Product and engineering principles</p>
-				<h2 id="principles-heading">Built as packages. Shipped as tools.</h2>
+				<p class="eyebrow">{GOLDENARC_COPY.principles.eyebrow}</p>
+				<h2 id="principles-heading">{GOLDENARC_COPY.principles.title}</h2>
 				<div class="principle-grid">
-					<div><strong>Local first</strong><span>Core file work stays on your device.</span></div>
-					<div><strong>Focused products</strong><span>Each app has a clear job and links only the capabilities it needs.</span></div>
-					<div><strong>Portable output</strong><span>Exports remain useful outside the ARC family.</span></div>
+					{GOLDENARC_COPY.principles.items.map((principle) => (
+						<div><strong>{principle.title}</strong><span>{principle.description}</span></div>
+					))}
 				</div>
 			</section>
 			</main>

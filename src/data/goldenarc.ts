@@ -17,4 +17,13 @@ export const GOLDENARC_COPY = {
 		title: 'Choose a tool',
 		description: 'Separate products at different stages, built around the same engineering discipline.',
 	},
+	principles: {
+		eyebrow: 'Product and engineering principles',
+		title: 'Built as packages. Shipped as tools.',
+		items: [
+			{ title: 'Local first', description: 'Core file work stays on your device.' },
+			{ title: 'Focused products', description: 'Each app has a clear job and links only the capabilities it needs.' },
+			{ title: 'Portable output', description: 'Exports remain useful outside the ARC family.' },
+		],
+	},
 } as const;
