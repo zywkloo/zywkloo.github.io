@@ -85,17 +85,109 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						</div>
 					</div>
 					<div class="hero-visual">
-						<div class="hero-art-plate">
-							<div class="hero-art">
-								<img src="/images/wilddunk/video-poster.webp" alt="Artwork from 全民大灌篮 / Wild Dunk, a China App Store charting basketball game" />
-								<div class="art-meta-stamp">
-									<span class="art-stamp-id">FIG. 00</span>
-									<span class="art-stamp-label">WILD DUNK · 2015</span>
+						<div class="stage-container" id="hero-stage" aria-label="Interactive Systems Showcase">
+							<div class="stage-meta-strip">
+								<div class="stage-title-wrap">
+									<span class="stage-pulse"></span>
+									<span class="stage-label" id="stage-active-label">SYS // 01 · 亲笔小卡 (WISHES BY HAND)</span>
+								</div>
+								<button type="button" class="stage-shift-btn" id="stage-shift-btn" title="Shift to next artifact">
+									<span class="shift-icon">⇄</span>
+									<span>SHIFT</span>
+								</button>
+							</div>
+
+							<!-- Layered Card Deck -->
+							<div class="stage-deck">
+								<!-- Card 0: Wishes by Hand (亲笔小卡) -->
+								<div class="stage-card is-front" data-index="0" data-label="SYS // 01 · 亲笔小卡 (WISHES BY HAND)">
+									<div class="card-screen card-screen-yong">
+										<video
+											src="/videos/replay-score-card.mp4"
+											autoplay
+											muted
+											playsinline
+											class="stage-video"
+											aria-label="亲笔小卡 手写评分与回放演示"
+										></video>
+										<div class="screen-badge">
+											<span class="badge-dot"></span>
+											<span>01 · 亲笔落墨 · METAL BRUSH</span>
+										</div>
+									</div>
+									<div class="card-caption-bar">
+										<div class="caption-copy">
+											<strong>Wishes by Hand · 亲笔小卡</strong>
+											<span>Low-latency Metal brush engine &amp; stroke scoring</span>
+										</div>
+										<a href="/yong" class="stage-card-link">Story →</a>
+									</div>
+								</div>
+
+								<!-- Card 1: Google Foobar Challenge Animation -->
+								<div class="stage-card is-back" data-index="1" data-label="LAB // 02 · GOOGLE FOOBAR CHALLENGE">
+									<div class="card-screen card-screen-terminal">
+										<video
+											src="/videos/google-foobar.mp4"
+											muted
+											playsinline
+											class="stage-video"
+											aria-label="Google Foobar challenge Level 1 animation"
+										></video>
+										<div class="screen-badge badge-terminal">
+											<span class="badge-dot dot-terminal"></span>
+											<span>02 · GOOGLE FOOBAR · SECRET LAB</span>
+										</div>
+									</div>
+									<div class="card-caption-bar">
+										<div class="caption-copy">
+											<strong>Google Foobar Challenge</strong>
+											<span>Algorithmic labyrinth &amp; terminal state animation</span>
+										</div>
+										<a href="https://www.youtube.com/watch?v=-rBEy82xzQc" target="_blank" rel="noopener" class="stage-card-link">Video ↗</a>
+									</div>
+								</div>
+
+								<!-- Card 2: Wild Dunk (2015 Genesis Mobile System) -->
+								<div class="stage-card is-hidden" data-index="2" data-label="NODE // 03 · 全民大灌篮 (WILD DUNK 2015)">
+									<div class="card-screen card-screen-arcade">
+										<video
+											src="/videos/wilddunk-gameplay.mp4"
+											poster="/images/wilddunk/video-poster.webp"
+											muted
+											playsinline
+											class="stage-video"
+											aria-label="Wild Dunk gameplay archive"
+										></video>
+										<div class="screen-badge badge-arcade">
+											<span class="badge-dot dot-arcade"></span>
+											<span>03 · WILD DUNK · GENESIS ARCHIVE</span>
+										</div>
+									</div>
+									<div class="card-caption-bar">
+										<div class="caption-copy">
+											<strong>全民大灌篮 · Wild Dunk</strong>
+											<span>China App Store #1 Sports · Real-time ranking state machine</span>
+										</div>
+										<a href="#wilddunk" class="stage-card-link">Archive ↓</a>
+									</div>
 								</div>
 							</div>
-							<div class="art-plate-caption">
-								<span class="caption-marker">§</span>
-								<span>GENESIS NODE // FIRST PRODUCTION MOBILE SYSTEM</span>
+
+							<!-- Stage Indicator Pills -->
+							<div class="stage-pills" role="tablist">
+								<button type="button" class="stage-pill active" data-target="0" role="tab" aria-selected="true">
+									<span class="pill-dot"></span>
+									<span>01 亲笔小卡</span>
+								</button>
+								<button type="button" class="stage-pill" data-target="1" role="tab" aria-selected="false">
+									<span class="pill-dot"></span>
+									<span>02 Google Foobar</span>
+								</button>
+								<button type="button" class="stage-pill" data-target="2" role="tab" aria-selected="false">
+									<span class="pill-dot"></span>
+									<span>03 全民大灌篮</span>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -188,10 +280,17 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 								</div>
 								<div class="node-plate">
 									<div class="plate-media">
-										<div class="video-facade" data-video-id={WILDDUNK_YT_ID} role="button" tabindex="0" aria-label="Play Wild Dunk gameplay video">
-											<img src="/images/wilddunk/video-poster.webp" alt="全民大灌篮 / Wild Dunk gameplay artwork" loading="lazy" />
-											<span class="play-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z" /></svg></span>
-											<span class="media-stamp">ARCHIVE // 2015</span>
+										<div class="chapter-video-wrap">
+											<video
+												src="/videos/wilddunk-gameplay.mp4"
+												poster="/images/wilddunk/video-poster.webp"
+												controls
+												preload="metadata"
+												playsinline
+												class="chapter-native-video"
+												aria-label="Wild Dunk gameplay video"
+											></video>
+											<span class="media-stamp">ARCHIVE // 2015 · LOCAL HD</span>
 										</div>
 										<figure class="rank-card">
 											<img src="/images/proof/wilddunk-appannie-2015.webp" alt="App Annie report: Wild Dunk ranked number 9 overall and number 1 in Sports in China on May 3, 2015" loading="lazy" />
@@ -640,33 +739,107 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		<Footer />
 
 		<script>
-			// Click-to-play facade for the Wild Dunk video: no third-party iframe/JS
-			// is loaded until the visitor actually asks to watch.
-			document.querySelectorAll('.video-facade').forEach((facade) => {
-				const play = () => {
-					const videoId = facade.getAttribute('data-video-id');
-					if (!videoId) return;
-					const iframe = document.createElement('iframe');
-					iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
-					iframe.title = 'Wild Dunk gameplay';
-					iframe.setAttribute('frameborder', '0');
-					iframe.setAttribute(
-						'allow',
-						'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-					);
-					iframe.setAttribute('allowfullscreen', '');
-					iframe.loading = 'lazy';
-					facade.replaceChildren(iframe);
-					facade.classList.add('is-playing');
+			// Interactive Hero Stage Deck (Layered depth shift carousel)
+			const initHeroStage = () => {
+				const stage = document.getElementById('hero-stage');
+				if (!stage) return;
+
+				const cards = Array.from(stage.querySelectorAll('.stage-card'));
+				const pills = Array.from(stage.querySelectorAll('.stage-pill'));
+				const shiftBtn = document.getElementById('stage-shift-btn');
+				const activeLabel = document.getElementById('stage-active-label');
+				let currentIndex = 0;
+				let isTransitioning = false;
+				let timer = null;
+
+				const updateCards = (nextIndex) => {
+					if (isTransitioning && nextIndex === currentIndex) return;
+					isTransitioning = true;
+					currentIndex = (nextIndex + cards.length) % cards.length;
+
+					cards.forEach((card, idx) => {
+						const video = card.querySelector('video');
+						card.classList.remove('is-front', 'is-back', 'is-hidden');
+
+						if (idx === currentIndex) {
+							card.classList.add('is-front');
+							if (video) {
+								video.currentTime = 0;
+								video.muted = true; // Always muted so audio never blasts unexpectedly
+								video.play().catch(() => {});
+							}
+							if (activeLabel) {
+								activeLabel.textContent = card.getAttribute('data-label') || '';
+							}
+						} else if (idx === (currentIndex + 1) % cards.length) {
+							card.classList.add('is-back');
+							if (video) {
+								video.pause();
+							}
+						} else {
+							card.classList.add('is-hidden');
+							if (video) {
+								video.pause();
+							}
+						}
+					});
+
+					pills.forEach((pill, idx) => {
+						pill.classList.toggle('active', idx === currentIndex);
+						pill.setAttribute('aria-selected', idx === currentIndex ? 'true' : 'false');
+					});
+
+					clearTimeout(timer);
+					// Auto shift timer fallback in case video ends early or late
+					timer = setTimeout(() => {
+						updateCards(currentIndex + 1);
+					}, 8500);
+
+					setTimeout(() => {
+						isTransitioning = false;
+					}, 500);
 				};
-				facade.addEventListener('click', play);
-				facade.addEventListener('keydown', (e) => {
-					if (e instanceof KeyboardEvent && (e.key === 'Enter' || e.key === ' ')) {
-						e.preventDefault();
-						play();
+
+				// Listen for 'ended' event on each card's video for automatic shift
+				cards.forEach((card, idx) => {
+					const video = card.querySelector('video');
+					if (video) {
+						video.addEventListener('ended', () => {
+							if (card.classList.contains('is-front')) {
+								updateCards(currentIndex + 1);
+							}
+						});
 					}
+
+					// Clicking a back card brings it to front
+					card.addEventListener('click', (e) => {
+						if (card.classList.contains('is-back')) {
+							e.preventDefault();
+							updateCards(idx);
+						}
+					});
 				});
-			});
+
+				// Shift button
+				if (shiftBtn) {
+					shiftBtn.addEventListener('click', () => {
+						updateCards(currentIndex + 1);
+					});
+				}
+
+				// Indicator pills
+				pills.forEach((pill, idx) => {
+					pill.addEventListener('click', () => {
+						updateCards(idx);
+					});
+				});
+
+				// Start with card 0
+				updateCards(0);
+			};
+
+			initHeroStage();
+			document.addEventListener('astro:after-swap', initHeroStage);
 
 			// Paper Theme Switcher with localStorage persistence
 			const initPaperTheme = () => {
@@ -931,73 +1104,300 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		border-radius: 50%;
 		background: var(--apaper-accent);
 	}
+	/* Hero Visual Stage — Layered Depth Cards */
 	.hero-visual {
 		position: relative;
 		justify-self: center;
-		width: min(100%, 440px);
+		width: min(100%, 460px);
 	}
-	.hero-art-plate {
-		background: var(--apaper-card);
-		border: 1px solid var(--apaper-line);
-		border-radius: 18px;
-		padding: 12px;
-		box-shadow: 0 12px 32px rgba(32, 34, 33, 0.06);
-		transition: border-color 0.2s ease, transform 0.2s ease;
-	}
-	.hero-art-plate:hover {
-		border-color: var(--apaper-accent);
-		transform: translateY(-2px);
-	}
-	.hero-art {
-		position: relative;
-		aspect-ratio: 1;
-		overflow: hidden;
-		border-radius: 12px;
-		background: #151515;
-	}
-	.hero-art img {
-		display: block;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-	.art-meta-stamp {
-		position: absolute;
-		left: 14px;
-		bottom: 14px;
-		display: inline-flex;
-		align-items: center;
-		gap: 8px;
-		padding: 4px 10px;
-		background: rgba(22, 23, 24, 0.82);
-		backdrop-filter: blur(8px);
-		border: 1px solid rgba(255, 255, 255, 0.18);
-		border-radius: 6px;
-		font-family: var(--apaper-font-mono);
-		font-size: 9px;
-		letter-spacing: 0.08em;
-	}
-	.art-stamp-id {
-		color: #ffffff;
-		font-weight: 700;
-	}
-	.art-stamp-label {
-		color: rgba(255, 255, 255, 0.78);
-	}
-	.art-plate-caption {
+	.stage-container {
 		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+	.stage-meta-strip {
+		display: flex;
+		justify-content: space-between;
 		align-items: center;
-		gap: 6px;
-		padding: 10px 4px 2px;
 		font-family: var(--apaper-font-mono);
 		font-size: 9px;
 		letter-spacing: 0.12em;
-		color: var(--apaper-muted);
-		text-transform: uppercase;
+		padding: 0 4px;
 	}
-	.caption-marker {
+	.stage-title-wrap {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
 		color: var(--apaper-accent);
 		font-weight: 700;
+		text-transform: uppercase;
+	}
+	.stage-pulse {
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: var(--apaper-accent);
+		box-shadow: 0 0 0 3px var(--apaper-accent-soft);
+		animation: pulse-glow 2.2s infinite ease-in-out;
+	}
+	@keyframes pulse-glow {
+		0%, 100% { transform: scale(1); opacity: 1; }
+		50% { transform: scale(1.3); opacity: 0.6; }
+	}
+	.stage-shift-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		padding: 3px 9px;
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 999px;
+		color: var(--apaper-ink-secondary);
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		cursor: pointer;
+		transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+	}
+	.stage-shift-btn:hover {
+		border-color: var(--apaper-accent);
+		color: var(--apaper-accent);
+		transform: translateY(-1px);
+	}
+
+	/* The Layered Stage Deck */
+	.stage-deck {
+		position: relative;
+		width: 100%;
+		height: 350px;
+		perspective: 1000px;
+	}
+	.stage-card {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 16px;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		box-shadow: 0 10px 30px rgba(32, 34, 33, 0.08);
+		transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+		            opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+		            box-shadow 0.65s ease,
+		            filter 0.65s ease;
+		will-change: transform, opacity;
+	}
+
+	/* Card Layers */
+	.stage-card.is-front {
+		z-index: 3;
+		transform: translate3d(0, 0, 0) scale(1);
+		opacity: 1;
+		pointer-events: auto;
+		box-shadow: 0 16px 36px rgba(32, 34, 33, 0.12);
+		filter: brightness(1);
+	}
+	.stage-card.is-back {
+		z-index: 1;
+		transform: translate3d(24px, -18px, 0) scale(0.92) rotate(1.2deg);
+		opacity: 0.72;
+		pointer-events: auto;
+		cursor: pointer;
+		box-shadow: 0 8px 20px rgba(32, 34, 33, 0.05);
+		filter: brightness(0.96);
+	}
+	.stage-card.is-back:hover {
+		opacity: 0.88;
+		border-color: var(--apaper-accent);
+		transform: translate3d(22px, -20px, 0) scale(0.93) rotate(0.8deg);
+	}
+	.stage-card.is-hidden {
+		z-index: 0;
+		transform: translate3d(40px, -28px, 0) scale(0.85) rotate(2.4deg);
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	/* Card Screen Container */
+	.card-screen {
+		position: relative;
+		flex: 1;
+		width: 100%;
+		overflow: hidden;
+		background: #000;
+	}
+	.card-screen-yong {
+		background: #fdfbf7;
+	}
+	.card-screen-terminal {
+		background: #090a0f;
+	}
+	.card-screen-arcade {
+		background: #111417;
+	}
+	.stage-video {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+	.card-screen-yong .stage-video {
+		object-fit: contain;
+	}
+
+	/* Screen Stamp Badges */
+	.screen-badge {
+		position: absolute;
+		top: 12px;
+		left: 12px;
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		padding: 4px 10px;
+		background: rgba(248, 246, 240, 0.92);
+		backdrop-filter: blur(8px);
+		border: 1px solid var(--apaper-line);
+		border-radius: 999px;
+		font-family: var(--apaper-font-mono);
+		font-size: 8.5px;
+		letter-spacing: 0.08em;
+		color: var(--apaper-ink);
+		font-weight: 600;
+		z-index: 2;
+	}
+	.badge-dot {
+		width: 5px;
+		height: 5px;
+		border-radius: 50%;
+		background: var(--apaper-accent);
+	}
+	.badge-terminal {
+		background: rgba(14, 17, 22, 0.88);
+		border-color: rgba(255, 255, 255, 0.15);
+		color: #4ade80;
+	}
+	.dot-terminal {
+		background: #4ade80;
+	}
+	.badge-arcade {
+		background: rgba(18, 20, 24, 0.88);
+		border-color: rgba(255, 255, 255, 0.15);
+		color: #f59e0b;
+	}
+	.dot-arcade {
+		background: #f59e0b;
+	}
+
+	/* Card Caption Bar */
+	.card-caption-bar {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 12px;
+		padding: 12px 16px;
+		background: var(--apaper-card);
+		border-top: 1px solid var(--apaper-line);
+	}
+	.caption-copy {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		min-width: 0;
+	}
+	.caption-copy strong {
+		font-family: var(--apaper-font-serif);
+		font-size: 0.98rem;
+		font-weight: 600;
+		color: var(--apaper-ink);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.caption-copy span {
+		font-family: var(--apaper-font-mono);
+		font-size: 0.72rem;
+		color: var(--apaper-muted);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.stage-card-link {
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--apaper-accent);
+		text-decoration: none;
+		font-weight: 700;
+		padding: 4px 8px;
+		border: 1px solid var(--apaper-accent-line);
+		border-radius: 6px;
+		white-space: nowrap;
+		transition: background 0.2s ease, color 0.2s ease;
+	}
+	.stage-card-link:hover {
+		background: var(--apaper-accent);
+		color: #ffffff;
+	}
+
+	/* Stage Pagination Indicator Pills */
+	.stage-pills {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 6px;
+		margin-top: 4px;
+	}
+	.stage-pill {
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
+		padding: 4px 10px;
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 999px;
+		color: var(--apaper-muted);
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		letter-spacing: 0.05em;
+		cursor: pointer;
+		transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+	}
+	.stage-pill:hover {
+		border-color: var(--apaper-accent);
+		color: var(--apaper-ink);
+	}
+	.stage-pill.active {
+		border-color: var(--apaper-ink);
+		background: var(--apaper-ink);
+		color: #ffffff;
+	}
+	.pill-dot {
+		width: 4px;
+		height: 4px;
+		border-radius: 50%;
+		background: var(--apaper-muted);
+	}
+	.stage-pill.active .pill-dot {
+		background: var(--apaper-accent);
+	}
+
+	/* Chapter 01 Native Video Player */
+	.chapter-video-wrap {
+		position: relative;
+		aspect-ratio: 16 / 9;
+		overflow: hidden;
+		border-radius: 12px;
+		background: #000;
+		border: 1px solid var(--apaper-line);
+	}
+	.chapter-native-video {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
 	}
 
 	/* Proof — Archival Exhibit Plates */
