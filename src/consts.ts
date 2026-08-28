@@ -39,26 +39,16 @@ export const GOLDENARC_LINKEDIN_URL = 'https://www.linkedin.com/company/golden-a
 export const GOLDENARC_GITHUB_URL = '';
 export const GOLDENARC_SAME_AS = [GOLDENARC_LINKEDIN_URL, GOLDENARC_GITHUB_URL].filter(Boolean);
 
+import { BLOG_COPY, SERIES_META as BLOG_SERIES_META, type SeriesMetaToken } from './data/blog';
+
 // ---------------------------------------------------------------------------
-// Blog/doc series metadata — single source of truth.
+// Blog/doc series metadata — single source of truth in src/data/blog.ts.
 // Consumed by blog index cards, the BlogPost layout, and the wtcraft hub so the
 // badge label / accent colour / subtitle never drift between pages.
 // ---------------------------------------------------------------------------
-export interface SeriesMeta {
-	icon: string;
-	name: string;
-	shortName: string;
-	subtitle: string;
-	accentColor: string;
-	badgeClass: string;
-}
-
-export const SERIES_META: Record<string, SeriesMeta> = {
-	TokenChef: { icon: '👨‍🍳', name: 'TokenChef', shortName: 'Token', subtitle: 'Git-Native Multi-Agent Coding', accentColor: '#cb3837', badgeClass: 'tokenchef' },
-	MetalSolo: { icon: '🎸', name: 'MetalSolo', shortName: 'Metal', subtitle: 'High-Performance GPU Programming', accentColor: '#8b5cf6', badgeClass: 'metalsolo' },
-	CleanSemantics: { icon: '✨', name: 'CleanSemantics', shortName: 'Semantics', subtitle: 'Domain-Driven Engineering', accentColor: '#0ea5e9', badgeClass: 'cleansemantics' },
-	ReactNativeCulprits: { icon: '⚛️', name: 'ReactNativeCulprits', shortName: 'RN', subtitle: 'React Native Core Deep Dive', accentColor: '#61dafb', badgeClass: 'reactnativeculprits' },
-};
+export type SeriesMeta = SeriesMetaToken;
+export const SERIES_META = BLOG_SERIES_META;
+export { BLOG_COPY };
 
 // Normalize a raw series value (e.g. "Clean Semantics 01") into its group key,
 // trailing part number, and metadata. Returns null for unknown/absent series.
