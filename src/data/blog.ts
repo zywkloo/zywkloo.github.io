@@ -20,10 +20,12 @@ export const BLOG_COPY = {
 	},
 	sidebar: {
 		all: {
+			icon: '✦',
 			short: 'All',
 			full: 'All Posts',
 		},
 		other: {
+			icon: '🗂️',
 			short: 'Other',
 			full: 'Other',
 		},

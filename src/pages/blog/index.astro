@@ -102,7 +102,7 @@ posts.forEach(post => {
 				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 			}
 			.filter-icon {
-				font-size: 1.4rem;
+				font-size: 1.35rem;
 				line-height: 1;
 				display: flex;
 				align-items: center;
@@ -113,14 +113,11 @@ posts.forEach(post => {
 				opacity: 1;
 				transition: opacity 0.2s;
 				color: var(--apaper-muted);
-				font-size: 0.75rem;
-				font-family: var(--apaper-font-mono);
-			}
-			/* Special case for buttons without icons (All, Other) */
-			.filter-btn:not(:has(.filter-icon)) .filter-short {
-				font-size: 0.95rem;
-				font-weight: 500;
-				padding: 0.25rem 0;
+				font-size: 0.8rem;
+				font-weight: 600;
+				font-family: var(--apaper-font-sans);
+				letter-spacing: -0.01em;
+				line-height: 1.1;
 			}
 			.filter-btn:hover .filter-short {
 				color: var(--apaper-ink);
@@ -133,13 +130,63 @@ posts.forEach(post => {
 				display: none;
 				opacity: 0;
 				transition: opacity 0.2s;
-				font-size: 0.95rem;
-				font-family: var(--apaper-font-mono);
+				font-size: 0.92rem;
+				font-weight: 600;
+				font-family: var(--apaper-font-sans);
 				color: var(--apaper-ink);
+				letter-spacing: -0.01em;
 			}
 			.filter-btn.active .filter-full {
 				color: var(--apaper-accent);
 				font-weight: 700;
+			}
+			.filter-count {
+				font-size: 0.82rem;
+				font-weight: 500;
+				color: var(--apaper-muted);
+				margin-left: 0.35rem;
+				font-variant-numeric: tabular-nums;
+			}
+			.filter-btn.active .filter-count {
+				color: var(--apaper-accent);
+				opacity: 0.85;
+			}
+			/* Series-specific brand color accents when active */
+			.filter-btn[data-series="TokenChef"].active {
+				background: rgba(239, 68, 68, 0.14);
+				border-color: rgba(239, 68, 68, 0.35);
+			}
+			.filter-btn[data-series="TokenChef"].active .filter-short,
+			.filter-btn[data-series="TokenChef"].active .filter-full,
+			.filter-btn[data-series="TokenChef"].active .filter-count {
+				color: #f87171;
+			}
+			.filter-btn[data-series="MetalSolo"].active {
+				background: rgba(168, 85, 247, 0.14);
+				border-color: rgba(168, 85, 247, 0.35);
+			}
+			.filter-btn[data-series="MetalSolo"].active .filter-short,
+			.filter-btn[data-series="MetalSolo"].active .filter-full,
+			.filter-btn[data-series="MetalSolo"].active .filter-count {
+				color: #c084fc;
+			}
+			.filter-btn[data-series="CleanSemantics"].active {
+				background: rgba(14, 165, 233, 0.14);
+				border-color: rgba(14, 165, 233, 0.35);
+			}
+			.filter-btn[data-series="CleanSemantics"].active .filter-short,
+			.filter-btn[data-series="CleanSemantics"].active .filter-full,
+			.filter-btn[data-series="CleanSemantics"].active .filter-count {
+				color: #38bdf8;
+			}
+			.filter-btn[data-series="ReactNativeCulprits"].active {
+				background: rgba(6, 182, 212, 0.14);
+				border-color: rgba(6, 182, 212, 0.35);
+			}
+			.filter-btn[data-series="ReactNativeCulprits"].active .filter-short,
+			.filter-btn[data-series="ReactNativeCulprits"].active .filter-full,
+			.filter-btn[data-series="ReactNativeCulprits"].active .filter-count {
+				color: #22d3ee;
 			}
 			.sidebar:hover .filter-btn {
 				flex-direction: row;
@@ -358,8 +405,9 @@ posts.forEach(post => {
 			<div class="blog-container">
 				<aside class="sidebar" id="blog-sidebar">
 					<button class="filter-btn active" data-series="all">
+						<span class="filter-icon">{BLOG_COPY.sidebar.all.icon}</span>
 						<span class="filter-short">{BLOG_COPY.sidebar.all.short}</span>
-						<span class="filter-full">{BLOG_COPY.sidebar.all.full} ({allCount})</span>
+						<span class="filter-full">{BLOG_COPY.sidebar.all.full} <span class="filter-count">({allCount})</span></span>
 					</button>
 					{Object.entries(BLOG_COPY.series).map(([key, meta]) => {
 						const count = seriesCounts.get(key) || 0;
@@ -368,14 +416,15 @@ posts.forEach(post => {
 							<button class="filter-btn" data-series={key}>
 								<span class="filter-icon">{meta.icon}</span>
 								<span class="filter-short">{meta.shortName}</span>
-								<span class="filter-full">{meta.name} ({count})</span>
+								<span class="filter-full">{meta.name} <span class="filter-count">({count})</span></span>
 							</button>
 						);
 					})}
 					{otherCount > 0 && (
 						<button class="filter-btn" data-series="other">
+							<span class="filter-icon">{BLOG_COPY.sidebar.other.icon}</span>
 							<span class="filter-short">{BLOG_COPY.sidebar.other.short}</span>
-							<span class="filter-full">{BLOG_COPY.sidebar.other.full} ({otherCount})</span>
+							<span class="filter-full">{BLOG_COPY.sidebar.other.full} <span class="filter-count">({otherCount})</span></span>
 						</button>
 					)}
 				</aside>
