@@ -53,7 +53,7 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 				</div>
 				<div class="hero-copy">
 					<p class="section-kicker">PROFILE // MOBILE &amp; SYSTEMS</p>
-					<h1 id="about-title">Systems that stay clear under real-world constraints.</h1>
+					<h1 id="about-title" class="system-chain">IoT <span aria-hidden="true">↔</span> Native Module <span aria-hidden="true">↔</span> Render Shell <span aria-hidden="true">↔</span> Gateway <span aria-hidden="true">↔</span> Cloud</h1>
 					<p class="hero-lead">Mobile &amp; Systems Engineer connecting device data, product behavior, and reliable software—from native clients to the services behind them.</p>
 					<div class="hero-actions">
 						<a href="/#work">Selected work ↗</a>
@@ -546,6 +546,16 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 		line-height: 0.98;
 		letter-spacing: -0.065em;
 		text-align: left;
+	}
+	.about-page .system-chain span {
+		display: inline-block;
+		margin: 0 0.08em;
+		color: var(--about-accent);
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 0.62em;
+		font-weight: 500;
+		letter-spacing: -0.08em;
+		vertical-align: 0.08em;
 	}
 	.about-page .hero-lead {
 		max-width: 650px;
