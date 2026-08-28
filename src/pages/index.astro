@@ -712,59 +712,181 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 					</div>
 
 					<div class="projects-grid">
+						<!-- Card 01: VitalMark Wellness -->
 						<article class="project-card">
 							<div class="project-card-header">
-								<span class="project-id">[APP-01]</span>
-								<span class="project-scope">HEALTHKIT &amp; SWIFTUI</span>
+								<div class="header-id-group">
+									<span class="project-id">[APP-01]</span>
+									<span class="project-scope">HEALTHKIT // SWIFTUI</span>
+								</div>
+								<div class="project-glyph" title="Biometric Telemetry">
+									<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<path d="M3 12h4l2.5-6 4 12 2.5-6h5" />
+									</svg>
+								</div>
 							</div>
 							<h3 class="project-card-title">VitalMark Wellness</h3>
-							<p class="project-card-desc">HealthKit data sync, real-time vital telemetry visualization, and responsive SwiftUI interaction architecture.</p>
-							<a href="https://apps.apple.com/us/app/vitalmark-wellness-fitness/id6745228850" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">App Store ↗</a>
+							<p class="project-card-desc">Production iOS fitness companion. End-to-end Apple HealthKit synchronization, real-time vital telemetry visualization, and low-overhead SwiftUI state hydration.</p>
+							<div class="project-card-tags">
+								<span>SwiftUI</span>
+								<span>HealthKit</span>
+								<span>Time-Series</span>
+								<span>Core Data</span>
+							</div>
+							<div class="project-card-footer">
+								<a href="https://apps.apple.com/us/app/vitalmark-wellness-fitness/id6745228850" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">App Store ↗</a>
+								<span class="project-status-stamp">PRODUCTION iOS</span>
+							</div>
 						</article>
+
+						<!-- Card 02: Ninja AI Agentic App -->
 						<article class="project-card">
 							<div class="project-card-header">
-								<span class="project-id">[AI-02]</span>
-								<span class="project-scope">LLM &amp; STREAMING</span>
+								<div class="header-id-group">
+									<span class="project-id">[AI-02]</span>
+									<span class="project-scope">LLM // TOKEN STREAM</span>
+								</div>
+								<div class="project-glyph" title="Adaptive Prompt Routing">
+									<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<circle cx="12" cy="12" r="3" />
+										<path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6l2.1-2.1" />
+									</svg>
+								</div>
 							</div>
 							<h3 class="project-card-title">Ninja AI Agentic App</h3>
-							<p class="project-card-desc">Multi-provider token streaming, adaptive prompt routing, and native iOS agentic workflow execution.</p>
-							<a href="https://apps.apple.com/us/app/ninja-ai-chat-code-create/id6702030312" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">App Store ↗</a>
-						</article>
-						<article class="project-card">
-							<div class="project-card-header">
-								<span class="project-id">[ML-03]</span>
-								<span class="project-scope">RECOMMENDER ENGINE</span>
+							<p class="project-card-desc">Mobile LLM workspace featuring multi-provider token streaming, adaptive prompt routing, local context caching, and native iOS agentic workflow execution.</p>
+							<div class="project-card-tags">
+								<span>SwiftUI</span>
+								<span>Token Streaming</span>
+								<span>Prompt Routing</span>
+								<span>Multi-Model</span>
 							</div>
-							<h3 class="project-card-title">ZZZ Movie Rec System</h3>
-							<p class="project-card-desc">Latent matrix factorization and collaborative filtering deployed for real-time interactive movie exploration.</p>
-							<a href="https://zzz-movie-rec-system.vercel.app/" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">Live Demo ↗</a>
+							<div class="project-card-footer">
+								<a href="https://apps.apple.com/us/app/ninja-ai-chat-code-create/id6702030312" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">App Store ↗</a>
+								<span class="project-status-stamp">PRODUCTION iOS</span>
+							</div>
 						</article>
+
+						<!-- Card 03: Movie Carousel Recommender (Rebranded ZZZ Movie Rec System) -->
+						<article class="project-card project-card-featured">
+							<div class="project-card-header">
+								<div class="header-id-group">
+									<span class="project-id">[ML-03]</span>
+									<span class="project-scope">ZERO-DB // LATENT SVD</span>
+								</div>
+								<div class="project-glyph" title="Latent Semantic Vector Carousel">
+									<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<rect x="2" y="4" width="20" height="16" rx="2" />
+										<path d="M7 8v8m5-8v8m5-8v8M2 8h20M2 16h20" />
+									</svg>
+								</div>
+							</div>
+							<div class="card-rebrand-row">
+								<h3 class="project-card-title">Movie Carousel Recommender</h3>
+								<span class="rebrand-tag">REBRANDED</span>
+							</div>
+							<p class="project-card-desc">In-process latent semantic engine on Next.js. Truncated SVD over TF-IDF plot embeddings fused with genre and temporal constraints — sub-100ms inference with zero external database dependencies.</p>
+							<div class="project-card-tags">
+								<span>Next.js</span>
+								<span>Truncated SVD</span>
+								<span>TF-IDF Semantics</span>
+								<span>Zero-DB</span>
+								<span>Vercel</span>
+							</div>
+							<div class="project-card-footer">
+								<div class="dual-actions">
+									<a href="https://zzz-movie-rec-system.vercel.app/" target="_blank" rel="noopener" class="btn-apaper btn-apaper-primary">Live Demo ↗</a>
+									<a href="https://github.com/ZZZ-RecSys/ZZZ-MovieRecSystem" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">GitHub ↗</a>
+								</div>
+								<span class="project-status-stamp stamp-live">LIVE VERCEL</span>
+							</div>
+						</article>
+
+						<!-- Card 04: TutorOcean iOS App -->
 						<article class="project-card">
 							<div class="project-card-header">
-								<span class="project-id">[APP-04]</span>
-								<span class="project-scope">MOBILE PLATFORM</span>
+								<div class="header-id-group">
+									<span class="project-id">[APP-04]</span>
+									<span class="project-scope">GLOBAL // EDTECH PLATFORM</span>
+								</div>
+								<div class="project-glyph" title="Collaborative Canvas & Messaging">
+									<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+										<circle cx="9" cy="7" r="4" />
+										<path d="M23 21v-2a4 4 0 0 0-3-3.87m-4-12a4 4 0 0 1 0 7.75" />
+									</svg>
+								</div>
 							</div>
 							<h3 class="project-card-title">TutorOcean iOS App</h3>
-							<p class="project-card-desc">Global peer-tutoring mobile platform with session scheduling, real-time messaging, and shared canvas sync.</p>
-							<a href="https://apps.apple.com/ca/app/tutorocean/id1480876532" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">App Store ↗</a>
+							<p class="project-card-desc">Global peer-tutoring mobile platform serving thousands of students. Session scheduling, real-time messaging, collaborative whiteboard sync, and integrated Stripe payments.</p>
+							<div class="project-card-tags">
+								<span>iOS Native</span>
+								<span>WebSockets</span>
+								<span>Shared Canvas</span>
+								<span>Stripe SDK</span>
+							</div>
+							<div class="project-card-footer">
+								<a href="https://apps.apple.com/ca/app/tutorocean/id1480876532" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">App Store ↗</a>
+								<span class="project-status-stamp">PRODUCTION iOS</span>
+							</div>
 						</article>
+
+						<!-- Card 05: Crime Scene Forensic Analyzer -->
 						<article class="project-card">
 							<div class="project-card-header">
-								<span class="project-id">[HCK-05]</span>
-								<span class="project-scope">CUHACKING 2020 WINNER</span>
+								<div class="header-id-group">
+									<span class="project-id">[HCK-05]</span>
+									<span class="project-scope">CUHACKING 2020 WINNER</span>
+								</div>
+								<div class="project-glyph" title="Spatial Computer Vision Reticle">
+									<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<circle cx="12" cy="12" r="10" />
+										<line x1="22" y1="12" x2="18" y2="12" />
+										<line x1="6" y1="12" x2="2" y2="12" />
+										<line x1="12" y1="6" x2="12" y2="2" />
+										<line x1="12" y1="22" x2="12" y2="18" />
+									</svg>
+								</div>
 							</div>
 							<h3 class="project-card-title">Crime Scene Forensic Analyzer</h3>
-							<p class="project-card-desc">Multi-modal forensic evidence analyzer combining computer vision and spatial crime-scene reconstruction.</p>
-							<a href="https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">Devpost Case ↗</a>
+							<p class="project-card-desc">1st Place Winner at CUHacking 2020. Multi-modal forensic evidence analyzer combining computer vision, spatial audio triangulation, and 3D coordinate crime-scene reconstruction.</p>
+							<div class="project-card-tags">
+								<span>Computer Vision</span>
+								<span>Spatial Audio</span>
+								<span>PyTorch</span>
+								<span>1st Place</span>
+							</div>
+							<div class="project-card-footer">
+								<a href="https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">Devpost Case ↗</a>
+								<span class="project-status-stamp stamp-award">🏆 1ST PLACE</span>
+							</div>
 						</article>
+
+						<!-- Card 06: Amazon Connect Voice Flow -->
 						<article class="project-card">
 							<div class="project-card-header">
-								<span class="project-id">[HCK-06]</span>
-								<span class="project-scope">CUHACKING 2019 WINNER</span>
+								<div class="header-id-group">
+									<span class="project-id">[HCK-06]</span>
+									<span class="project-scope">CUHACKING 2019 WINNER</span>
+								</div>
+								<div class="project-glyph" title="Telephony Contact Flow State Machine">
+									<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+									</svg>
+								</div>
 							</div>
 							<h3 class="project-card-title">Amazon Connect Voice Flow</h3>
-							<p class="project-card-desc">Automated telephony order processing state machine powered by AWS Lambda and Amazon Connect contact flows.</p>
-							<a href="https://devpost.com/software/cuhackingamazonconnect" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">Devpost Case ↗</a>
+							<p class="project-card-desc">1st Place Winner at CUHacking 2019. Automated telephony order processing state machine powered by serverless AWS Lambda and Amazon Connect contact flows with dynamic CRM dispatch.</p>
+							<div class="project-card-tags">
+								<span>AWS Lambda</span>
+								<span>Amazon Connect</span>
+								<span>Telephony IVR</span>
+								<span>State Machine</span>
+							</div>
+							<div class="project-card-footer">
+								<a href="https://devpost.com/software/cuhackingamazonconnect" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">Devpost Case ↗</a>
+								<span class="project-status-stamp stamp-award">🏆 1ST PLACE</span>
+							</div>
 						</article>
 					</div>
 				</div>
@@ -2643,27 +2765,38 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	.project-card {
 		background: var(--apaper-card);
 		border: 1px solid var(--apaper-line);
-		border-radius: 14px;
-		padding: 22px 20px 24px;
+		border-radius: 16px;
+		padding: 22px 22px 20px;
 		display: flex;
 		flex-direction: column;
-		transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+		position: relative;
+		box-shadow: 0 4px 16px rgba(32, 34, 33, 0.03);
+		transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 	}
 	.project-card:hover {
 		border-color: var(--apaper-accent);
 		transform: translateY(-3px);
-		box-shadow: 0 10px 24px rgba(32, 34, 33, 0.06);
+		box-shadow: 0 12px 28px rgba(32, 34, 33, 0.07);
+	}
+	.project-card-featured {
+		border-color: rgba(196, 94, 73, 0.28);
+		background: linear-gradient(180deg, var(--apaper-card) 0%, rgba(248, 246, 240, 0.6) 100%);
 	}
 	.project-card-header {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		font-family: var(--apaper-font-mono);
-		font-size: 9px;
-		letter-spacing: 0.12em;
 		padding-bottom: 12px;
 		margin-bottom: 14px;
 		border-bottom: 1px solid var(--apaper-line);
+	}
+	.header-id-group {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		letter-spacing: 0.12em;
 	}
 	.project-id {
 		color: var(--apaper-accent);
@@ -2672,12 +2805,51 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	.project-scope {
 		color: var(--apaper-muted);
 	}
+	.project-glyph {
+		display: grid;
+		place-items: center;
+		width: 28px;
+		height: 28px;
+		border-radius: 6px;
+		background: rgba(32, 34, 33, 0.03);
+		border: 1px solid var(--apaper-line-light);
+		color: var(--apaper-accent);
+		transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+		flex-shrink: 0;
+	}
+	.project-card:hover .project-glyph {
+		background: rgba(196, 94, 73, 0.08);
+		transform: scale(1.08);
+	}
+	.card-rebrand-row {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 8px;
+		margin-bottom: 8px;
+	}
+	.card-rebrand-row .project-card-title {
+		margin-bottom: 0;
+	}
+	.rebrand-tag {
+		font-family: var(--apaper-font-mono);
+		font-size: 7.5px;
+		letter-spacing: 0.14em;
+		font-weight: 700;
+		color: var(--apaper-accent);
+		background: rgba(196, 94, 73, 0.08);
+		border: 1px solid rgba(196, 94, 73, 0.28);
+		padding: 2px 6px;
+		border-radius: 4px;
+		text-transform: uppercase;
+		flex-shrink: 0;
+	}
 	.project-card-title {
 		font-family: var(--apaper-font-serif);
 		font-size: 1.18rem;
 		font-weight: 600;
 		color: var(--apaper-ink);
-		margin: 0 0 10px;
+		margin: 0 0 8px;
 		line-height: 1.25;
 	}
 	.project-card-desc {
@@ -2685,11 +2857,52 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		font-size: 0.88rem;
 		line-height: 1.65;
 		color: var(--apaper-ink-secondary);
-		margin: 0 0 20px;
+		margin: 0 0 14px;
 		flex-grow: 1;
 	}
-	.project-card .btn-apaper {
-		align-self: flex-start;
+	.project-card-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+		margin-bottom: 16px;
+	}
+	.project-card-tags span {
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		letter-spacing: 0.02em;
+		padding: 2.5px 8px;
+		border-radius: 999px;
+		background: rgba(32, 34, 33, 0.03);
+		border: 1px solid var(--apaper-line);
+		color: var(--apaper-muted);
+	}
+	.project-card-footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 8px;
+		margin-top: auto;
+		padding-top: 14px;
+		border-top: 1px solid var(--apaper-line-light);
+	}
+	.dual-actions {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+	}
+	.project-status-stamp {
+		font-family: var(--apaper-font-mono);
+		font-size: 8px;
+		letter-spacing: 0.12em;
+		font-weight: 700;
+		color: var(--apaper-muted);
+		text-transform: uppercase;
+	}
+	.stamp-live {
+		color: #059669;
+	}
+	.stamp-award {
+		color: var(--apaper-accent);
 	}
 
 	/* ─────────────────────────────────────────────────────────────
