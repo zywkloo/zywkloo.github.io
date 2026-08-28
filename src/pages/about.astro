@@ -673,6 +673,18 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 		text-align: center;
 		animation: none;
 	}
+	.system-diagram li:nth-child(1) > span,
+	.system-diagram li:nth-child(1) > strong,
+	.system-diagram li:nth-child(2) > span,
+	.system-diagram li:nth-child(2) > strong { text-align: right; }
+	.system-diagram li:nth-child(3) > span,
+	.system-diagram li:nth-child(3) > strong { text-align: left; }
+	.system-diagram li:nth-child(5) > span,
+	.system-diagram li:nth-child(5) > strong { text-align: right; }
+	.system-diagram li:nth-child(6) > span,
+	.system-diagram li:nth-child(6) > strong,
+	.system-diagram li:nth-child(7) > span,
+	.system-diagram li:nth-child(7) > strong { text-align: left; }
 	.system-flow {
 		position: absolute;
 		inset: 0;
@@ -1028,6 +1040,8 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 		.system-diagram li::before { width: 0.6rem; height: 0.6rem; border-width: 1.5px; }
 		.system-diagram li > span { margin-bottom: 0.18rem; font-size: 0.5rem; text-align: center; }
 		.system-diagram strong { white-space: normal; font-size: clamp(0.58rem, 2.8vw, 0.75rem); line-height: 1.12; letter-spacing: 0; text-align: center; }
+		.system-diagram li:nth-child(n) > span,
+		.system-diagram li:nth-child(n) > strong { text-align: center; }
 		.flow-arrow { width: 0.72rem; height: 0.58rem; font-size: 0.55rem; }
 		.flow-reconcile { font-size: 0.46rem; }
 		.section-heading,
