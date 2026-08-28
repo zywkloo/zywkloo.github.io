@@ -543,18 +543,18 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										/>
 										<div class="stage-map-vignette" aria-hidden="true"></div>
 
-										<!-- True Seven Bridges SVG Traversal Line (Cropped top 90px & bottom 86px for widescreen panorama) -->
-										<svg class="stage-euler-svg" viewBox="0 90 720 355" preserveAspectRatio="none" aria-hidden="true">
+										<!-- True Seven Bridges SVG Traversal Line (Cropped top 115px & bottom 86px for widescreen panorama) -->
+										<svg class="stage-euler-svg" viewBox="0 115 720 330" preserveAspectRatio="none" aria-hidden="true">
 											<!-- Faint Background Path Guide -->
 											<path
 												class="euler-track"
-												d="M 150 110 C 190 115, 245 140, 288 178 C 298 220, 250 260, 236 301 C 228 355, 312 360, 327 300 C 336 235, 380 205, 404 178 C 435 150, 495 155, 537 202 C 570 220, 545 255, 505 265 C 465 275, 495 365, 539 395 C 555 420, 440 445, 360 445"
+												d="M 150 115 C 190 118, 245 140, 288 178 C 298 220, 250 260, 236 301 C 228 355, 312 360, 327 300 C 336 235, 380 205, 404 178 C 435 150, 495 155, 537 202 C 570 220, 545 255, 505 265 C 465 275, 495 365, 539 395 C 555 420, 440 445, 360 445"
 											/>
 											<!-- Active Animated Stroke Traversing All 7 Bridges -->
 											<path
 												id="euler-active-path"
 												class="euler-stroke"
-												d="M 150 110 C 190 115, 245 140, 288 178 C 298 220, 250 260, 236 301 C 228 355, 312 360, 327 300 C 336 235, 380 205, 404 178 C 435 150, 495 155, 537 202 C 570 220, 545 255, 505 265 C 465 275, 495 365, 539 395 C 555 420, 440 445, 360 445"
+												d="M 150 115 C 190 118, 245 140, 288 178 C 298 220, 250 260, 236 301 C 228 355, 312 360, 327 300 C 336 235, 380 205, 404 178 C 435 150, 495 155, 537 202 C 570 220, 545 255, 505 265 C 465 275, 495 365, 539 395 C 555 420, 440 445, 360 445"
 											/>
 											<!-- 4 Pivotal Milestone Dots along the traversal -->
 											<g class="milestone-nodes">
@@ -586,7 +586,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										<!-- 4 Floating Milestone Callout Annotations -->
 										<div class="stage-milestone-annotations" aria-label="Four Traversal Milestones">
 											<!-- Milestone 01 Callout -->
-											<div class="milestone-callout callout-1" style="left: 40.0%; top: 24.8%;">
+											<div class="milestone-callout callout-1" style="left: 40.0%; top: 19.1%;">
 												<div class="callout-stem stem-sw" aria-hidden="true"></div>
 												<div class="callout-card">
 													<span class="callout-badge">PHASE // 01</span>
@@ -596,7 +596,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 											</div>
 
 											<!-- Milestone 02 Callout -->
-											<div class="milestone-callout callout-2" style="left: 56.1%; top: 24.8%;">
+											<div class="milestone-callout callout-2" style="left: 56.1%; top: 19.1%;">
 												<div class="callout-stem stem-se" aria-hidden="true"></div>
 												<div class="callout-card">
 													<span class="callout-badge">PHASE // 02</span>
@@ -606,7 +606,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 											</div>
 
 											<!-- Milestone 03 Callout -->
-											<div class="milestone-callout callout-3" style="left: 70.1%; top: 49.3%;">
+											<div class="milestone-callout callout-3" style="left: 70.1%; top: 45.5%;">
 												<div class="callout-stem stem-e" aria-hidden="true"></div>
 												<div class="callout-card">
 													<span class="callout-badge">PHASE // 03</span>
@@ -616,7 +616,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 											</div>
 
 											<!-- Milestone 04 Callout -->
-											<div class="milestone-callout callout-4" style="left: 74.9%; top: 85.9%;">
+											<div class="milestone-callout callout-4" style="left: 74.9%; top: 84.8%;">
 												<div class="callout-stem stem-w" aria-hidden="true"></div>
 												<div class="callout-card">
 													<span class="callout-badge">PHASE // 04</span>
@@ -2406,6 +2406,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		border-bottom: 1px solid var(--apaper-line);
 		padding: clamp(5rem, 8vw, 7.5rem) 1.5rem clamp(6rem, 10vw, 9rem);
 		position: relative;
+		overflow-x: clip;
 	}
 
 	/* Section Lead Header */
@@ -2757,23 +2758,28 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		position: relative;
 	}
 
-	/* Map Canvas Frame (Exact 720x355 widescreen crop removing empty northern & southern land) */
+	/* Map Canvas Frame (Full-width panoramic breakout with zero left/right gutters & cropped top land) */
 	.stage-canvas-frame {
 		position: relative;
-		border-radius: 18px;
+		border-radius: 0;
 		overflow: hidden;
-		border: 1px solid var(--apaper-line);
-		aspect-ratio: 720 / 355;
+		border-top: 1px solid var(--apaper-line);
+		border-bottom: 1px solid var(--apaper-line);
+		border-left: none;
+		border-right: none;
+		width: 100vw;
+		margin-left: calc(50% - 50vw);
+		margin-right: calc(50% - 50vw);
+		aspect-ratio: 720 / 330;
 		background: #e8e3d6;
 		box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
-		width: 100%;
 	}
 	.stage-map-bg {
 		position: absolute;
 		left: 0;
-		top: calc(-90 / 355 * 100%);
+		top: calc(-115 / 330 * 100%);
 		width: 100%;
-		height: calc(531 / 355 * 100%);
+		height: calc(531 / 330 * 100%);
 		object-fit: fill;
 		display: block;
 		filter: saturate(0.96) contrast(1.02);
