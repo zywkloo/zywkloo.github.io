@@ -116,8 +116,8 @@ const appLd = {
 				<div class="demo-grid">
 					<div class="demo-card">
 						<div class="video-container">
-							<video autoplay loop muted playsinline class="demo-video">
-								<source src="/videos/yong-demo-2.mp4" type="video/mp4" />
+							<video loop muted playsinline preload="none" data-deferred-video class="demo-video">
+								<source data-src="/videos/yong-demo-2.mp4" type="video/mp4" />
 								Your browser does not support the video tag.
 							</video>
 						</div>
@@ -130,8 +130,8 @@ const appLd = {
 
 					<div class="demo-card">
 						<div class="video-container">
-							<video autoplay loop muted playsinline class="demo-video shift-down" aria-label="回放评分卡演示 / Replay card demo">
-								<source src="/videos/replay-score-card.mp4" type="video/mp4" />
+							<video loop muted playsinline preload="none" data-deferred-video class="demo-video shift-down" aria-label="回放评分卡演示 / Replay card demo">
+								<source data-src="/videos/replay-score-card.mp4" type="video/mp4" />
 								Your browser does not support the video tag.
 							</video>
 						</div>
@@ -197,8 +197,8 @@ const appLd = {
 
 				<div class="practice-grid">
 					<div class="video-container practice-video">
-						<video autoplay loop muted playsinline class="demo-video demo-video-zoom" aria-label="端侧智能评分演示 / On-device scoring demo">
-							<source src="/videos/yong-demo-1.mp4" type="video/mp4" />
+						<video loop muted playsinline preload="none" data-deferred-video class="demo-video demo-video-zoom" aria-label="端侧智能评分演示 / On-device scoring demo">
+							<source data-src="/videos/yong-demo-1.mp4" type="video/mp4" />
 							Your browser does not support the video tag.
 						</video>
 					</div>
@@ -258,6 +258,40 @@ const appLd = {
 			</section>
 		</main>
 		<Footer />
+		<script>
+			const initDeferredVideos = () => {
+				const videos = document.querySelectorAll<HTMLVideoElement>('[data-deferred-video]');
+				if (!videos.length) return;
+
+				const loadAndPlay = (video: HTMLVideoElement) => {
+					if (!video.dataset.loaded) {
+						const source = video.querySelector<HTMLSourceElement>('source[data-src]');
+						if (source?.dataset.src) source.src = source.dataset.src;
+						video.dataset.loaded = 'true';
+						video.load();
+					}
+					void video.play().catch(() => undefined);
+				};
+
+				if (!('IntersectionObserver' in window)) {
+					videos.forEach(loadAndPlay);
+					return;
+				}
+
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach((entry) => {
+						const video = entry.target as HTMLVideoElement;
+						if (entry.isIntersecting) loadAndPlay(video);
+						else video.pause();
+					});
+				}, { rootMargin: '320px 0px', threshold: 0.01 });
+
+				videos.forEach((video) => observer.observe(video));
+			};
+
+			initDeferredVideos();
+			document.addEventListener('astro:after-swap', initDeferredVideos);
+		</script>
 	</body>
 </html>
 
