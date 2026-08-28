@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import ViewportVideo from '../components/ViewportVideo.astro';
 import { SITE_URL, SITE_AUTHOR_ALT } from '../consts';
 
 // App Store Live URL
@@ -66,16 +67,12 @@ const appLd = {
 				</div>
 
 				<div class="hero-preview">
-					<video
+					<ViewportVideo
 						src="/videos/edf-viewer-demo.mp4"
 						poster="/images/edfviewer/hero-preview.webp"
-						autoplay
-						loop
-						muted
-						playsinline
 						class="framed-mockup"
-						aria-label="ARC EDF & BDF Viewer on macOS — Multi-channel waveform scrolling animation"
-					></video>
+						ariaLabel="ARC EDF & BDF Viewer on macOS — Multi-channel waveform scrolling animation"
+					/>
 				</div>
 			</div>
 
@@ -104,7 +101,7 @@ const appLd = {
 					<div class="step-card">
 						<div class="step-media">
 							<div class="mac-frame">
-								<img src="/images/edfviewer/step-montage.webp" alt="All Channels Montage and Min/Max Waveform" loading="lazy" />
+								<img src="/images/edfviewer/hero-preview.webp" alt="All Channels Montage and Min/Max Waveform" loading="lazy" />
 							</div>
 						</div>
 						<div class="step-body">
