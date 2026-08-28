@@ -635,10 +635,14 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 											<span>KÖNIGSBERG SEVEN BRIDGES · EULERIAN GRAPH FOUNDATION</span>
 											<span class="caption-indicator">PROGRESSIVE REVEAL FLOW ↓</span>
 										</div>
+										<!-- Canvas Exit Pin Dot (Exact connection point at 50% bottom) -->
+										<div class="canvas-exit-pin" aria-hidden="true"></div>
 									</div>
 
-									<!-- Topological Dispersal Fork (One path branches into 4 Cards) -->
+									<!-- Topological Dispersal Fork (Seamlessly continuous from map exit to 4 Cards) -->
 									<div class="topological-fork" id="topological-fork" aria-hidden="true">
+										<!-- Continuous connecting vertical stem bridging map to fork -->
+										<div class="fork-stem-connector" aria-hidden="true"></div>
 										<div class="fork-banner">
 											<span class="fork-pulse"></span>
 											<span class="fork-label">TOPOLOGY FORKS INTO FOUR CORE DISCIPLINES</span>
@@ -823,14 +827,14 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							</div>
 						</article>
 
-						<!-- Card 03: Movie Carousel Recommender (Rebranded ZZZ Movie Rec System) -->
+						<!-- Card 03: MovieBTI - Semantic Retrieval & Movie Discovery (Rebranded ZZZ Movie Rec System) -->
 						<article class="project-card project-card-featured">
 							<div class="project-card-header">
 								<div class="header-id-group">
 									<span class="project-id">[ML-03]</span>
 									<span class="project-scope">ZERO-DB // LATENT SVD</span>
 								</div>
-								<div class="project-glyph" title="Latent Semantic Vector Carousel">
+								<div class="project-glyph" title="MovieBTI - Semantic Retrieval & Movie Discovery">
 									<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 										<rect x="2" y="4" width="20" height="16" rx="2" />
 										<path d="M7 8v8m5-8v8m5-8v8M2 8h20M2 16h20" />
@@ -838,7 +842,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 								</div>
 							</div>
 							<div class="card-rebrand-row">
-								<h3 class="project-card-title">Movie Carousel Recommender</h3>
+								<h3 class="project-card-title">MovieBTI - Semantic Retrieval &amp; Movie Discovery</h3>
 								<span class="rebrand-tag">REBRANDED</span>
 							</div>
 							<p class="project-card-desc">In-process latent semantic engine on Next.js. Truncated SVD over TF-IDF plot embeddings fused with genre and temporal constraints — sub-100ms inference with zero external database dependencies.</p>
@@ -1213,8 +1217,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						return;
 					}
 
-					// Animate path drawing across the bridges in 2.2s
-					const duration = 2200;
+					// Animate path drawing across the bridges (Slowed down 3x to 6.6s for cinematic storytelling)
+					const duration = 6600;
 					const startTime = performance.now();
 
 					if (runner) runner.style.opacity = '1';
@@ -1246,7 +1250,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							const bx = parseFloat(dot.getAttribute('cx') || '0');
 							const by = parseFloat(dot.getAttribute('cy') || '0');
 							const distSq = (bx - rx) * (bx - rx) + (by - ry) * (by - ry);
-							if (distSq < 36 * 36) {
+							if (distSq < 38 * 38) {
 								if (!group.classList.contains('is-passed')) {
 									group.classList.add('is-passed');
 									const callout = callouts[idx];
@@ -1261,26 +1265,29 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							requestAnimationFrame(step);
 						} else {
 							// Traversal completed!
-							if (runner) runner.style.opacity = '0.35';
+							if (runner) runner.style.opacity = '0.4';
 
 							// Ensure all 4 milestones are active
 							milestoneGroups.forEach((g) => g.classList.add('is-passed'));
 							callouts.forEach((c) => c.classList.add('is-active'));
 
-							// Trigger Fork branches downward animation
+							// Activate bottom exit pin and trigger Fork branches downward animation
+							const exitPin = stage.querySelector('.canvas-exit-pin');
+							if (exitPin) exitPin.classList.add('is-passed');
+
 							if (fork) fork.classList.add('is-active');
 							forkBranches.forEach((branch, idx) => {
 								setTimeout(() => {
-									branch.style.transition = 'stroke-dashoffset 0.65s cubic-bezier(0.22, 1, 0.36, 1)';
+									branch.style.transition = 'stroke-dashoffset 1.8s cubic-bezier(0.22, 1, 0.36, 1)';
 									branch.style.strokeDashoffset = '0';
-								}, idx * 60);
+								}, idx * 160);
 							});
 
-							// Reveal the 4 Skill cards with staggered entrance
+							// Reveal the 4 Skill cards with relaxed, progressive entrance
 							cards.forEach((card, idx) => {
 								setTimeout(() => {
 									card.classList.add('is-revealed');
-								}, 360 + idx * 100);
+								}, 1200 + idx * 300);
 							});
 						}
 					};
@@ -2724,15 +2731,48 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		color: var(--apaper-muted);
 	}
 
-	/* Connective Topological Fork */
+	/* Canvas Exit Pin Dot (Exact connection point at bottom center) */
+	.canvas-exit-pin {
+		position: absolute;
+		bottom: -5px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background: #fdfbf7;
+		border: 2px solid var(--apaper-accent);
+		box-shadow: 0 0 0 2px rgba(196, 94, 73, 0.15);
+		z-index: 5;
+		transition: background 0.4s ease, filter 0.4s ease, border-color 0.4s ease;
+	}
+	.pivot-stage.is-active .canvas-exit-pin {
+		background: #f59e0b;
+		border-color: #ffffff;
+		filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.9));
+	}
+
+	/* Connective Topological Fork (Continuous from map exit) */
 	.topological-fork {
 		position: relative;
 		width: 100%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		margin-top: 14px;
+		margin-top: 0;
 		margin-bottom: 6px;
+	}
+	.fork-stem-connector {
+		width: 2.5px;
+		height: 20px;
+		background: var(--apaper-accent);
+		opacity: 0.35;
+		margin-bottom: -1px;
+		transition: opacity 0.8s ease, filter 0.8s ease;
+	}
+	.topological-fork.is-active .fork-stem-connector {
+		opacity: 1;
+		filter: drop-shadow(0 0 3px rgba(196, 94, 73, 0.4));
 	}
 	.fork-banner {
 		display: inline-flex;
@@ -2749,6 +2789,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		font-weight: 700;
 		margin-bottom: 2px;
 		box-shadow: 0 2px 8px rgba(32, 34, 33, 0.04);
+		position: relative;
+		z-index: 2;
 	}
 	.fork-pulse {
 		width: 5px;
@@ -2772,10 +2814,10 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	.fork-trunk {
 		fill: none;
 		stroke: var(--apaper-accent);
-		stroke-width: 2.2;
+		stroke-width: 2.5;
 		stroke-linecap: round;
 		stroke-opacity: 0.4;
-		transition: stroke-opacity 0.5s ease;
+		transition: stroke-opacity 0.6s ease;
 	}
 	.fork-junction {
 		fill: var(--apaper-accent);
@@ -2784,10 +2826,10 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	.fork-branch {
 		fill: none;
 		stroke: var(--apaper-accent);
-		stroke-width: 2;
+		stroke-width: 2.2;
 		stroke-linecap: round;
 		stroke-opacity: 0.35;
-		transition: stroke-opacity 0.6s ease;
+		transition: stroke-opacity 0.8s ease;
 	}
 	.topological-fork.is-active .fork-trunk,
 	.topological-fork.is-active .fork-branch {
