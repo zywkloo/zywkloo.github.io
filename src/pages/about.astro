@@ -70,13 +70,16 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 				<section class="agent-harness-card" aria-labelledby="agent-harness-title">
 					<div>
 						<p class="eyebrow">Open Source · wtcraft</p>
-						<h3 id="agent-harness-title">Git-native agent governance core for worktree-based workflows.</h3>
-						<p>
-							AI agents hallucinate, over-engineer, and quietly touch files outside their task. I built and open-sourced <a href="/wtcraft"><strong>wtcraft</strong></a> (CLI alias <code>wtc</code>, published on npm/PyPI/Homebrew), a lightweight Git-native governance core for worktree-based agent workflows. Rather than unconstrained "vibe coding", each task declares a local <code>.worktree-task.md</code> contract with explicit <code>Scope</code>, <code>Off-limits</code>, and <code>Verification</code> commands. <code>wtcraft check</code> deterministically catches out-of-scope diffs across committed, staged, unstaged, and untracked files, while <code>wtcraft verify</code> records exit codes before human review.
-						</p>
+						<h3 id="agent-harness-title">Git-Native Agent Governance Core</h3>
+						<ul class="harness-bullets">
+							<li><strong>Task Contract</strong> — Declares immutable <code>Scope</code>, <code>Off-limits</code>, and <code>Verification</code> in <code>.worktree-task.md</code></li>
+							<li><strong>Worktree Isolation</strong> — Branch-isolated parallel agent execution with zero container/VM overhead</li>
+							<li><strong>Full-Surface Audit</strong> — <code>wtcraft check</code> blocks scope drift across committed, staged, and untracked files</li>
+							<li><strong>Deterministic Gate</strong> — <code>wtcraft verify</code> enforces non-zero exit codes before human sign-off</li>
+						</ul>
 						<div class="harness-links">
 							<a href="/wtcraft">wtcraft Overview</a>
-							<a href="/blog/dont-build-another-agent-codex-claude-code-wtcraft/">TokenChef 04 (Boundaries &amp; Ledgers)</a>
+							<a href="/blog/dont-build-another-agent-codex-claude-code-wtcraft/">TokenChef 04</a>
 							<a class="wtcraft-link" href="https://github.com/zywkloo/wtcraft" target="_blank" rel="noopener noreferrer">GitHub <span>wtcraft</span></a>
 						</div>
 					</div>
@@ -85,12 +88,12 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 							<span>Task Planning</span>
 							<small>Claude / Spec Author</small>
 						</div>
-						<div class="diagram-arrow">writes contract</div>
+						<div class="diagram-arrow">↓ writes contract</div>
 						<div class="diagram-node diagram-node-contract">
 							<span>.worktree-task.md</span>
 							<small>Scope · Off-limits · Verification</small>
 						</div>
-						<div class="diagram-arrow">isolated worktree</div>
+						<div class="diagram-arrow">↓ isolated worktree</div>
 						<div class="diagram-node">
 							<span>Deterministic Gate</span>
 							<small>wtcraft check &amp; verify</small>
@@ -305,6 +308,45 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 
 	.agent-harness-card p {
 		margin-bottom: 0;
+	}
+
+	.harness-bullets {
+		list-style: none;
+		padding: 0;
+		margin: 0.75rem 0 1.1rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.harness-bullets li {
+		position: relative;
+		padding-left: 1.15rem;
+		margin-bottom: 0;
+		font-size: 0.92rem;
+		line-height: 1.45;
+		color: rgb(var(--gray-dark));
+	}
+
+	.harness-bullets li::before {
+		content: "•";
+		position: absolute;
+		left: 0;
+		top: 0;
+		color: var(--accent);
+		font-weight: 700;
+		font-size: 1.1em;
+	}
+
+	.harness-bullets li strong {
+		color: rgb(var(--black));
+	}
+
+	.harness-bullets li code {
+		font-size: 0.88em;
+		padding: 0.12em 0.35em;
+		border-radius: 4px;
+		background: rgba(var(--accent-rgb), 0.08);
 	}
 
 	.harness-links {
