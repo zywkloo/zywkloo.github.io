@@ -2,7 +2,7 @@
 // You can import this data from anywhere in your site by using the `import` keyword.
 
 export const SITE_TITLE = 'Victor Zhang | Mobile & Systems Engineer | Apps from Device to Cloud';
-export const SITE_DESCRIPTION = 'Mobile and systems engineer building reliable, data-heavy product systems across iOS, React Native, device sync, backend flows, and telemetry.';
+export const SITE_DESCRIPTION = 'Systems engineer harnessing and visualizing data flow from physical devices, IoT sensors, and mobile runtimes to resilient cloud backends.';
 export const SITE_AUTHOR = 'Victor Zhang';
 export const SITE_URL = 'https://zywkloo.github.io';
 

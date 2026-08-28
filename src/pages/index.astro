@@ -4,6 +4,13 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, SITE_AUTHOR, PROFILE_IMAGE, USER_TITLE, GITHUB_URL, WTCRAFT_URL, LINKEDIN_URL, EMAIL, MEDIUM_URL, SAME_AS, SITE_AUTHOR_ALT, GOLDENARC_NAME, GOLDENARC_SAME_AS } from '../consts';
 
+// Signature-work links kept local to this page (mirrors the pattern used by
+// edfviewer.astro / yong.astro, which each define their own APP_STORE_URL).
+const WISHES_APP_STORE_URL = 'https://apps.apple.com/ca/app/wishes-by-hand/id6774579880';
+const EDF_APP_STORE_URL = 'https://apps.apple.com/app/id6801383472';
+const NINJA_GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=ai.ninjatech.mobile';
+const WILDDUNK_YT_ID = 'ysmp5vK4R_c';
+
 // Identity knowledge graph for AI/search engines: who Victor Zhang is and what
 // this site is. Person + WebSite, cross-linked by @id.
 const personLd = {
@@ -23,8 +30,10 @@ const personLd = {
 	],
 	alumniOf: [
 		{ '@type': 'CollegeOrUniversity', name: 'University of British Columbia' },
+		{ '@type': 'CollegeOrUniversity', name: 'Carleton University' },
 		{ '@type': 'CollegeOrUniversity', name: 'Peking University' },
 	],
+	award: 'University Medal in Computer Science, Carleton University (2020)',
 	worksFor: { '@id': `${SITE_URL}/#goldenarc` },
 	sameAs: SAME_AS,
 };
@@ -50,519 +59,4413 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-paper-theme="carbon">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<script is:inline>
+			(function () {
+				try {
+					var theme = localStorage.getItem('apaper-theme') || 'carbon';
+					document.documentElement.setAttribute('data-paper-theme', theme);
+				} catch (e) {
+					document.documentElement.setAttribute('data-paper-theme', 'carbon');
+				}
+			})();
+		</script>
 		<script type="application/ld+json" set:html={JSON.stringify(homeLd)} />
 	</head>
 	<body>
 		<Header />
 		<main class="homepage">
-			<!-- Hero Section -->
-			<section class="hero">
-				<div class="hero-content">
-					<img src={PROFILE_IMAGE} alt="Victor Zhang" class="profile-image" />
-					<h1 class="hero-title">Hi, I'm <span class="highlight">Victor Zhang</span></h1>
-					<p class="hero-subtitle">{USER_TITLE}</p>
-					<p class="hero-subtitle hero-subtitle-secondary">Building end-to-end data systems, from IoT to cloud</p>
-					<p class="hero-description">
-						I build mobile products where data flows cleanly between devices and backend services. My work spans iOS, React Native, BLE sync, backend data pipelines, and telemetry, with a strong focus on correctness, resilience, and the control policies that keep real systems stable.
-					</p>
-					<p class="hero-description hero-description-secondary">
-						I also spent 5 years as a lead mobile product designer. One of the products I worked on, a basketball game, reached No. 9 in Games and No. 1 in Sports on the Apple App Store (China) on May 3, 2015, where I led core gameplay and monetization design.
-					</p>
-					<div class="hero-cta">
-						<a href="/blog" class="btn btn-primary">View My Blog</a>
-						<a href="/about" class="btn btn-secondary">Learn More</a>
+			<section class="hero" aria-labelledby="home-title">
+				<div class="hero-inner container">
+					<div class="hero-copy">
+						<div class="hero-kicker-wrap">
+							<span class="hero-kicker-glyph">弧</span>
+							<span class="hero-kicker">[VICTOR ZHANG // SYSTEMS &amp; DATA CRAFT]</span>
+						</div>
+						<h1 id="home-title">I harness and visualize data flow from devices to the cloud.</h1>
+						<p class="hero-description">Bridging physical sensors, mobile runtimes, and resilient cloud backends — turning high-frequency telemetry into robust state and responsive visual experiences.</p>
+						<div class="hero-cta">
+							<a href="#work" class="btn-apaper btn-apaper-primary">See My Work ↓</a>
+							<a href="/about" class="btn-apaper btn-apaper-ghost">How I Think →</a>
+						</div>
+						<div class="hero-credibility">
+							<span class="cred-dot"></span>
+							<span>10+ YEARS IN TECH // 7 YEARS IN SOFTWARE ENGINEERING</span>
+						</div>
 					</div>
-					<div class="hero-stats">
-						<div class="stat">
-							<div class="stat-number">10+</div>
-							<div class="stat-label">Years in Tech</div>
-							<div class="stat-sub">6 in Software Engineering</div>
-						</div>
-						<div class="stat">
-							<div class="stat-number">20+</div>
-							<div class="stat-label">Projects</div>
-							<div class="stat-sub">#1 Sports in App Store<br />(May 2015, China)</div>
-						</div>
-						<div class="stat">
-							<div class="stat-number">2x</div>
-							<div class="stat-label">Hackathon Winner</div>
-							<div class="stat-sub">1x University Medal<br />Carleton Uni. 2020</div>
+					<div class="hero-visual">
+						<div class="stage-container" id="hero-stage" aria-label="Interactive Systems Showcase">
+							<div class="stage-meta-strip">
+								<div class="stage-title-wrap">
+									<span class="stage-pulse"></span>
+									<span class="stage-label" id="stage-active-label">SYS // 01 · 亲笔落墨 (WISHES BY HAND)</span>
+								</div>
+								<div class="stage-nav-cluster">
+									<button type="button" class="stage-arrow-btn" id="stage-prev-btn" title="Previous artifact (左切)" aria-label="Previous">
+										<span>‹</span>
+									</button>
+									<button type="button" class="stage-arrow-btn" id="stage-next-btn" title="Next artifact (右切)" aria-label="Next">
+										<span>›</span>
+									</button>
+								</div>
+							</div>
+
+							<!-- 3D Cover Flow Deck -->
+							<div class="stage-deck">
+								<!-- Card 0: Wishes by Hand (亲笔小卡 with yong-demo-1.mp4) -->
+								<div class="stage-card is-center" data-index="0" data-label="SYS // 01 · 亲笔落墨 (WISHES BY HAND)">
+									<div class="card-screen card-screen-yong">
+										<video
+											src="/videos/yong-demo-1.mp4"
+											autoplay
+											muted
+											playsinline
+											class="stage-video"
+											aria-label="亲笔小卡 实时墨水笔刷与书法回放演示"
+										></video>
+										<div class="screen-badge">
+											<span class="badge-dot"></span>
+											<span>01 · 亲笔落墨 · METAL BRUSH</span>
+										</div>
+									</div>
+									<div class="card-caption-bar">
+										<div class="caption-copy">
+											<strong>Wishes by Hand · 亲笔小卡</strong>
+											<span>Low-latency Metal ink engine &amp; stroke rendering</span>
+										</div>
+										<a href="/yong" class="stage-card-link">Story →</a>
+									</div>
+								</div>
+
+								<!-- Card 1: EDF & BDF Viewer (edf-viewer-demo.mp4) -->
+								<div class="stage-card is-next" data-index="1" data-label="SYS // 02 · EDF & BDF VIEWER (BIOSIGNALS)">
+									<div class="card-screen card-screen-edf">
+										<video
+											src="/videos/edf-viewer-demo.mp4"
+											muted
+											playsinline
+											class="stage-video"
+											aria-label="ARC EDF and BDF Viewer multi-channel waveform scrolling demo"
+										></video>
+										<div class="screen-badge badge-edf">
+											<span class="badge-dot dot-edf"></span>
+											<span>02 · EDF VIEWER · BIOSIGNAL WAVEFORMS</span>
+										</div>
+									</div>
+									<div class="card-caption-bar">
+										<div class="caption-copy">
+											<strong>ARC EDF &amp; BDF Viewer</strong>
+											<span>Multi-channel EEG/ECG waveform scrolling &amp; parser</span>
+										</div>
+										<a href="/edfviewer" class="stage-card-link">Full Page →</a>
+									</div>
+								</div>
+
+								<!-- Card 2: Google Foobar Challenge -->
+								<div class="stage-card is-hidden" data-index="2" data-label="LAB // 03 · GOOGLE FOOBAR CHALLENGE">
+									<div class="card-screen card-screen-terminal">
+										<video
+											src="/videos/google-foobar.mp4"
+											muted
+											playsinline
+											class="stage-video"
+											aria-label="Google Foobar challenge Level 1 animation"
+										></video>
+										<div class="screen-badge badge-terminal">
+											<span class="badge-dot dot-terminal"></span>
+											<span>03 · GOOGLE FOOBAR · SECRET LAB</span>
+										</div>
+									</div>
+									<div class="card-caption-bar">
+										<div class="caption-copy">
+											<strong>Google Foobar Challenge</strong>
+											<span>Algorithmic labyrinth &amp; terminal state animation</span>
+										</div>
+										<a href="https://www.youtube.com/watch?v=-rBEy82xzQc" target="_blank" rel="noopener" class="stage-card-link">Video ↗</a>
+									</div>
+								</div>
+
+								<!-- Card 3: Wild Dunk (2015 Genesis Mobile System) -->
+								<div class="stage-card is-prev" data-index="3" data-label="NODE // 04 · 全民大灌篮 (WILD DUNK 2015)">
+									<div class="card-screen card-screen-arcade">
+										<video
+											src="/videos/wilddunk-gameplay.mp4"
+											poster="/images/wilddunk/video-poster.webp"
+											muted
+											playsinline
+											class="stage-video"
+											aria-label="Wild Dunk gameplay archive"
+										></video>
+										<div class="screen-badge badge-arcade">
+											<span class="badge-dot dot-arcade"></span>
+											<span>04 · WILD DUNK · GENESIS ARCHIVE</span>
+										</div>
+									</div>
+									<div class="card-caption-bar">
+										<div class="caption-copy">
+											<strong>全民大灌篮 · Wild Dunk</strong>
+											<span>China App Store #1 Sports · Real-time ranking engine</span>
+										</div>
+										<a href="#wilddunk" class="stage-card-link">Archive ↓</a>
+									</div>
+								</div>
+							</div>
+
+							<!-- Stage Indicator Pills -->
+							<div class="stage-pills" role="tablist">
+								<button type="button" class="stage-pill active" data-target="0" role="tab" aria-selected="true">
+									<span class="pill-dot"></span>
+									<span>01 亲笔小卡</span>
+								</button>
+								<button type="button" class="stage-pill" data-target="1" role="tab" aria-selected="false">
+									<span class="pill-dot"></span>
+									<span>02 EDF 波形</span>
+								</button>
+								<button type="button" class="stage-pill" data-target="2" role="tab" aria-selected="false">
+									<span class="pill-dot"></span>
+									<span>03 Google Foobar</span>
+								</button>
+								<button type="button" class="stage-pill" data-target="3" role="tab" aria-selected="false">
+									<span class="pill-dot"></span>
+									<span>04 全民大灌篮</span>
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- Expertise Section -->
-			<section class="expertise">
-				<div class="container">
-					<h2 class="section-title">What I Do</h2>
-					<div class="expertise-grid">
-						<div class="expertise-card">
-							<div class="expertise-icon">📱</div>
-							<h3>Mobile Development</h3>
-							<p>Building production mobile apps across iOS native and React Native, with strong focus on maintainability, performance, and product delivery.</p>
-							<ul class="expertise-skills">
-								<li>Swift / SwiftUI</li>
-								<li>UIKit</li>
-								<li>React Native</li>
-								<li>Core Data</li>
-							</ul>
-						</div>
-						<div class="expertise-card">
-							<div class="expertise-icon">🌐</div>
-							<h3>Full Stack Development</h3>
-							<p>Building scalable web applications with modern JavaScript frameworks and robust backend services.</p>
-							<ul class="expertise-skills">
-								<li>React</li>
-								<li>Next.js</li>
-								<li>Node.js</li>
-								<li>FastAPI</li>
-							</ul>
-						</div>
-						<div class="expertise-card">
-							<div class="expertise-icon">💻</div>
-							<h3>Desktop Development</h3>
-							<p>Building and modernizing desktop applications with C#, .NET, C++, and platform-specific UI frameworks.</p>
-							<ul class="expertise-skills">
-								<li>C#</li>
-								<li>.NET Framework</li>
-								<li>C++</li>
-								<li>macOS (SwiftUI)</li>
-							</ul>
-						</div>
-						<div class="expertise-card">
-							<div class="expertise-icon">🎮</div>
-							<h3>Game Design</h3>
-							<p>Spearheaded core gameplay and monetization design for a mobile game that reached No. 9 in Games and No. 1 in Sports on the Apple App Store (China), on May 3, 2015.</p>
-							<ul class="expertise-skills">
-								<li>Gameplay Design</li>
-								<li>UI/UX</li>
-								<li>Storytelling</li>
-								<li>Ranking System</li>
-							</ul>
-						</div>
+			<section class="signature" id="work" aria-labelledby="signature-title">
+				<!-- Section Lead: apaper editorial atmosphere -->
+				<div class="sig-editorial-header container">
+					<div class="sig-meta-bar">
+						<span class="sig-wordmark">
+							<span class="sig-mark-glyph">弧</span>
+							<span>SYSTEM ARCHIVE / VOL. 01</span>
+						</span>
+						<span class="sig-timeframe">2015 — 2026 / DECADE IN CRAFT</span>
+						<span class="sig-status-tag"><span class="sig-pulse-dot"></span>05 NODES</span>
+					</div>
+
+					<div class="sig-title-block">
+						<p class="sig-eyebrow">CAREER TRAJECTORY &amp; TOPOLOGICAL ARC</p>
+						<h2 id="signature-title">Signature Work</h2>
+						<p class="sig-lead-text">
+							Five chapters. One arc: product leadership → expressive native tools → bounded agents → private data systems.
+						</p>
+					</div>
+				</div>
+
+				<!-- The Streamlined Spine Flow -->
+				<div class="editorial-flow container">
+					<!-- Milestones List -->
+					<div class="editorial-milestones">
+
+						<!-- Chapter 01: Wild Dunk -->
+						<article class="editorial-node" id="wilddunk">
+							<div class="node-rail" aria-hidden="true">
+								<div class="node-marker">
+									<span class="node-num">01</span>
+									<span class="node-dot"></span>
+								</div>
+								<span class="node-line-seg"></span>
+							</div>
+							<div class="node-content">
+								<div class="node-header">
+									<span class="node-badge">CHAPTER // 01</span>
+									<span class="node-date">2015 · PRODUCT MANAGEMENT &amp; DEV LEAD</span>
+								</div>
+								<div class="node-plate">
+									<div class="plate-media">
+										<div class="chapter-video-wrap">
+											<video
+												src="/videos/wilddunk-gameplay.mp4"
+												poster="/images/wilddunk/video-poster.webp"
+												controls
+												muted
+												preload="metadata"
+												playsinline
+												class="chapter-native-video"
+												aria-label="Wild Dunk gameplay video"
+											></video>
+											<span class="media-stamp">ARCHIVE // 2015 · LOCAL HD</span>
+										</div>
+									</div>
+									<div class="plate-story">
+										<span class="plate-kicker">PRODUCT MANAGEMENT &amp; MONETIZATION</span>
+										<h3>全民大灌篮 · Wild Dunk</h3>
+										<p class="plate-p">
+											Led the team behind a top-charting China mobile title.
+										</p>
+										<ul class="plate-highlights">
+											<li><strong>#1</strong> Sports · <strong>#9</strong> Overall, China App Store</li>
+											<li>Owned gameplay and monetization loops</li>
+											<li>Led engineering, 3D art, and QA</li>
+										</ul>
+										<div class="plate-cta">
+											<a href="https://www.youtube.com/watch?v=ysmp5vK4R_c" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">YouTube Archive ↗</a>
+										</div>
+										<div class="plate-tags">
+											<span>Game Dev Leadership</span>
+											<span>Product &amp; Monetization</span>
+											<span>Core Game Design</span>
+											<span>China App Store #1</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</article>
+
+						<!-- Chapter 02: Wishes by Hand -->
+						<article class="editorial-node" id="wishes">
+							<div class="node-rail" aria-hidden="true">
+								<div class="node-marker">
+									<span class="node-num">02</span>
+									<span class="node-dot"></span>
+								</div>
+								<span class="node-line-seg"></span>
+							</div>
+							<div class="node-content">
+								<div class="node-header">
+									<span class="node-badge">CHAPTER // 02</span>
+									<span class="node-date">APP STORE · EMOTIONAL CRAFT</span>
+								</div>
+								<div class="node-plate plate-reverse">
+									<div class="plate-media">
+										<div class="media-frame wishes-media-frame">
+											<div class="wishes-carousel" data-wishes-carousel aria-label="Wishes by Hand product showcase">
+												<div class="wishes-carousel-viewport">
+													<div class="wishes-carousel-track">
+														<figure class="wishes-slide is-active" data-wishes-slide aria-hidden="false">
+															<video
+																src="/videos/yong-demo-2.mp4"
+																poster="/images/wishes/video-poster.jpg"
+																autoplay
+																loop
+																muted
+																playsinline
+																class="wishes-demo-video"
+																aria-label="Wishes by Hand calligraphy and card-design demonstration"
+															></video>
+															<figcaption class="wishes-slide-label">01 · INK / REPLAY</figcaption>
+														</figure>
+														<figure class="wishes-slide wishes-card-slide" data-wishes-slide aria-hidden="true">
+															<img src="/images/wishes-blessing.webp" alt="Wishes by Hand greeting-card blessing preview" class="wishes-blessing-preview" loading="eager" />
+															<div class="wishes-sms-notification" data-wishes-notification role="status" aria-live="polite">
+																<span class="wishes-notification-icon" aria-hidden="true">✉</span>
+																<div>
+																	<span class="wishes-notification-meta">信息 · 现在</span>
+																	<strong>亲笔小卡</strong>
+																	<p>已为家人送出一张手写祝福卡</p>
+																</div>
+															</div>
+															<div class="wishes-message-composer">
+																<label for="wishes-blessing-input">送出祝福 · 自动演示</label>
+																<input id="wishes-blessing-input" data-wishes-input type="text" readonly tabindex="-1" placeholder="正在输入祝福…" aria-label="Simulated blessing" />
+																<div class="wishes-composer-footer">
+																	<span data-wishes-preview>正在准备祝福…</span>
+																	<button type="button" class="wishes-send-button" data-wishes-send disabled aria-disabled="true">发送祝福 <span aria-hidden="true">↑</span></button>
+																</div>
+																<span class="wishes-send-status" data-wishes-status role="status">准备中</span>
+															</div>
+															<figcaption class="wishes-slide-label">02 · CARD / BLESSING</figcaption>
+														</figure>
+													</div>
+												</div>
+												<div class="wishes-carousel-controls">
+													<button type="button" class="wishes-carousel-arrow" data-wishes-prev aria-label="Show previous Wishes preview">←</button>
+													<div class="wishes-carousel-dots" role="tablist" aria-label="Wishes previews">
+														<button type="button" class="wishes-carousel-dot active" data-wishes-dot="0" role="tab" aria-selected="true" aria-label="Show ink replay"></button>
+														<button type="button" class="wishes-carousel-dot" data-wishes-dot="1" role="tab" aria-selected="false" aria-label="Show blessing card"></button>
+													</div>
+													<button type="button" class="wishes-carousel-arrow" data-wishes-next aria-label="Show next Wishes preview">→</button>
+												</div>
+											</div>
+											<span class="media-stamp">PRODUCT // iOS</span>
+										</div>
+									</div>
+									<div class="plate-story">
+										<span class="plate-kicker">LOW-LATENCY INK ENGINE</span>
+										<h3>亲笔小卡 · Wishes by Hand</h3>
+										<p class="plate-p">
+											Turn handwriting practice into a card worth sending.
+										</p>
+										<ul class="plate-highlights">
+											<li>Finger or Apple Pencil → finished card</li>
+											<li>Low-latency Metal ink</li>
+											<li>On-device calligraphy scoring</li>
+										</ul>
+										<div class="plate-cta">
+											<a href={WISHES_APP_STORE_URL} target="_blank" rel="noopener" class="btn-apaper">App Store ↗</a>
+											<a href="/yong" class="btn-apaper btn-apaper-ghost">Full Story →</a>
+										</div>
+										<div class="plate-tags">
+											<span>SwiftUI</span>
+											<span>Apple Pencil</span>
+											<span>Metal Ink</span>
+											<span>Human Interface</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</article>
+
+						<!-- Chapter 03: wtcraft -->
+						<article class="editorial-node" id="wtcraft-sig">
+							<div class="node-rail" aria-hidden="true">
+								<div class="node-marker">
+									<span class="node-num">03</span>
+									<span class="node-dot"></span>
+								</div>
+								<span class="node-line-seg"></span>
+							</div>
+							<div class="node-content">
+								<div class="node-header">
+									<span class="node-badge">CHAPTER // 03</span>
+									<span class="node-date">OPEN SOURCE · INFRASTRUCTURE</span>
+								</div>
+								<div class="node-plate">
+									<div class="plate-media">
+										<div class="terminal-card" aria-hidden="true">
+											<div class="terminal-titlebar">
+												<span></span><span></span><span></span>
+												<div class="terminal-title">wtcraft — git task contract</div>
+											</div>
+											<pre class="terminal-body"><code><span class="t-prompt">$</span> wtcraft init
+<span class="t-prompt">$</span> wtcraft check
+<span class="t-ok">✓</span> scope respected
+<span class="t-ok">✓</span> off-limits clear
+<span class="t-prompt">$</span> wtcraft verify
+<span class="t-ok">✓</span> deterministic tests passed</code></pre>
+										</div>
+									</div>
+									<div class="plate-story">
+										<span class="plate-kicker">AGENTIC TASK SCAFFOLDING</span>
+										<h3>wtcraft</h3>
+										<p class="plate-p">
+											Keep multi-agent work inside explicit, verifiable boundaries.
+										</p>
+										<ul class="plate-highlights">
+											<li>Task contract per Git worktree</li>
+											<li>Diffs checked against declared scope</li>
+											<li>Deterministic verification</li>
+										</ul>
+										<div class="plate-cta">
+											<a href={WTCRAFT_URL} target="_blank" rel="noopener" class="btn-apaper">GitHub ↗</a>
+											<a href="/wtcraft" class="btn-apaper btn-apaper-ghost">Full Page →</a>
+										</div>
+										<div class="plate-tags">
+											<span>CLI Tooling</span>
+											<span>Multi-Agent</span>
+											<span>Git Worktrees</span>
+											<span>Verification</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</article>
+
+						<!-- Chapter 04: EDF Viewer -->
+						<article class="editorial-node" id="edfviewer-sig">
+							<div class="node-rail" aria-hidden="true">
+								<div class="node-marker">
+									<span class="node-num">04</span>
+									<span class="node-dot"></span>
+								</div>
+								<span class="node-line-seg"></span>
+							</div>
+							<div class="node-content">
+								<div class="node-header">
+									<span class="node-badge">CHAPTER // 04</span>
+									<span class="node-date">MACOS &amp; IPADOS · RESEARCH TOOL</span>
+								</div>
+								<div class="node-plate plate-reverse">
+									<div class="plate-media">
+										<div class="media-frame">
+											<video
+												src="/videos/edf-viewer-demo.mp4"
+												poster="/images/edfviewer/hero-preview.webp"
+												autoplay
+												loop
+												muted
+												playsinline
+												class="sig-frame"
+												aria-label="ARC EDF and BDF Viewer on macOS showing an all-channels montage and waveform scrolling"
+											></video>
+											<span class="media-stamp">DESKTOP // NATIVE</span>
+										</div>
+									</div>
+									<div class="plate-story">
+										<span class="plate-kicker">ZERO-DEPENDENCY BIOSIGNALS</span>
+										<h3>EDF &amp; BDF Viewer</h3>
+										<p class="plate-p">
+											Read dense biosignal recordings without sending them anywhere.
+										</p>
+										<ul class="plate-highlights">
+											<li>EDF/BDF · EEG, ECG, and sleep research</li>
+											<li>Native multichannel waveform scrubbing</li>
+											<li>Private and local-only</li>
+										</ul>
+										<div class="plate-cta">
+											<a href={EDF_APP_STORE_URL} target="_blank" rel="noopener" class="btn-apaper">Mac App Store ↗</a>
+											<a href="/edfviewer" class="btn-apaper btn-apaper-ghost">Full Page →</a>
+										</div>
+										<div class="plate-tags">
+											<span>SwiftUI Native</span>
+											<span>macOS / iPadOS</span>
+											<span>Biosignal EDF/BDF</span>
+											<span>Local-First</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</article>
+
+						<!-- Chapter 05: The Seven Bridges Inflection Point (七桥之思) -->
+						<article class="editorial-node node-pivot" id="seven-bridges">
+							<div class="node-rail" aria-hidden="true">
+								<div class="node-marker marker-pivot">
+									<span class="node-num">05</span>
+									<span class="node-dot node-dot-pivot"></span>
+								</div>
+								<span class="node-line-seg"></span>
+							</div>
+							<div class="node-content">
+								<div class="node-header">
+									<span class="node-badge badge-pivot">CHAPTER // 05 · THE TOPOLOGICAL PIVOT</span>
+									<span class="node-date">KÖNIGSBERG 1736 → PRODUCTION 2026</span>
+								</div>
+
+								<!-- Expansive Seven Bridges Stage with Overlaid Title & Accurate Bridge Traversal -->
+								<div class="pivot-stage" id="pivot-stage">
+									<div class="stage-canvas-frame">
+										<img
+											src="/images/konigsberg-bridges-simple.webp"
+											width="720"
+											height="531"
+											alt="Historical map illustration of the seven bridges of Königsberg"
+											class="stage-map-bg"
+											loading="lazy"
+										/>
+										<div class="stage-map-vignette" aria-hidden="true"></div>
+
+										<!-- True Seven Bridges SVG Traversal Line, vertically remapped to the 55% panorama -->
+										<svg class="stage-euler-svg" viewBox="0 0 720 181.5" preserveAspectRatio="none" aria-hidden="true">
+											<!-- Faint Background Path Guide -->
+											<path
+												class="euler-track"
+												d="M 150 0 C 190 1.65, 245 13.75, 288 34.65 C 298 57.75, 250 79.75, 236 102.3 C 228 132, 312 134.75, 327 101.75 C 336 66, 380 49.5, 404 34.65 C 435 19.25, 495 22, 537 47.85 C 570 57.75, 545 77, 505 82.5 C 465 88, 495 137.5, 539 154 C 555 167.75, 440 181.5, 360 181.5"
+											/>
+											<!-- Active Animated Stroke Traversing All 7 Bridges -->
+											<path
+												id="euler-active-path"
+												class="euler-stroke"
+												d="M 150 0 C 190 1.65, 245 13.75, 288 34.65 C 298 57.75, 250 79.75, 236 102.3 C 228 132, 312 134.75, 327 101.75 C 336 66, 380 49.5, 404 34.65 C 435 19.25, 495 22, 537 47.85 C 570 57.75, 545 77, 505 82.5 C 465 88, 495 137.5, 539 154 C 555 167.75, 440 181.5, 360 181.5"
+											/>
+											<!-- 4 Pivotal Milestone Dots along the traversal -->
+											<g class="milestone-nodes">
+												<!-- Milestone 01: Lead Game Designer (Bridge 1) -->
+												<g class="milestone-pin-group" data-milestone="1">
+													<circle class="milestone-halo" cx="288" cy="34.65" r="13" />
+													<circle class="milestone-dot" cx="288" cy="34.65" r="5.5" />
+												</g>
+												<!-- Milestone 02: Software Engineering (Bridge 2) -->
+												<g class="milestone-pin-group" data-milestone="2">
+													<circle class="milestone-halo" cx="404" cy="34.65" r="13" />
+													<circle class="milestone-dot" cx="404" cy="34.65" r="5.5" />
+												</g>
+												<!-- Milestone 03: Pipeline Orchestration (Bridge 4) -->
+												<g class="milestone-pin-group" data-milestone="3">
+													<circle class="milestone-halo" cx="505" cy="82.5" r="13" />
+													<circle class="milestone-dot" cx="505" cy="82.5" r="5.5" />
+												</g>
+												<!-- Milestone 04: AI Agentic Harness (Bridge 7) -->
+												<g class="milestone-pin-group" data-milestone="4">
+													<circle class="milestone-halo" cx="539" cy="154" r="13" />
+													<circle class="milestone-dot" cx="539" cy="154" r="5.5" />
+												</g>
+											</g>
+											<!-- Glowing Lead Runner Spark -->
+											<circle id="euler-runner" class="euler-runner" r="5" cx="-20" cy="-20" />
+										</svg>
+
+										<!-- 4 Floating Milestone Callout Annotations -->
+										<div class="stage-milestone-annotations" aria-label="Four Traversal Milestones">
+											<!-- Milestone 01 Callout -->
+											<div class="milestone-callout callout-1" style="left: 40.0%; top: 19.1%;">
+												<div class="callout-stem stem-sw" aria-hidden="true"></div>
+												<div class="callout-card">
+													<span class="callout-badge">PHASE // 01</span>
+													<h4 class="callout-title">Lead Game Designer</h4>
+													<span class="callout-tag">Project Management &amp; Customer Obsession</span>
+												</div>
+											</div>
+
+											<!-- Milestone 02 Callout -->
+											<div class="milestone-callout callout-2" style="left: 56.1%; top: 19.1%;">
+												<div class="callout-stem stem-se" aria-hidden="true"></div>
+												<div class="callout-card">
+													<span class="callout-badge">PHASE // 02</span>
+													<h4 class="callout-title">Software Engineering</h4>
+													<span class="callout-tag">Client Systems &amp; GPU Compute</span>
+												</div>
+											</div>
+
+											<!-- Milestone 03 Callout -->
+											<div class="milestone-callout callout-3" style="left: 70.1%; top: 45.5%;">
+												<div class="callout-stem stem-e" aria-hidden="true"></div>
+												<div class="callout-card">
+													<span class="callout-badge">PHASE // 03</span>
+													<h4 class="callout-title">Pipeline Orchestration</h4>
+													<span class="callout-tag">Telemetry &amp; BLE Streaming</span>
+												</div>
+											</div>
+
+											<!-- Milestone 04 Callout -->
+											<div class="milestone-callout callout-4" style="left: 74.9%; top: 84.8%;">
+												<div class="callout-stem stem-w" aria-hidden="true"></div>
+												<div class="callout-card">
+													<span class="callout-badge">PHASE // 04</span>
+													<h4 class="callout-title">AI Agentic Harness</h4>
+													<span class="callout-tag">wtcraft Swarms &amp; Governance</span>
+												</div>
+											</div>
+										</div>
+
+										<!-- Full-Canvas Scrim Overlay (Fades in across entire map AFTER journey completes) -->
+										<div class="stage-journey-scrim" id="journey-scrim" aria-hidden="true">
+											<div class="scrim-transition-card">
+												<div class="scrim-meta">
+													<span class="scrim-kicker">INFLECTION POINT // SEVEN BRIDGES</span>
+													<span class="scrim-stamp">1736 EULER PIVOT</span>
+												</div>
+												<h3 class="scrim-title">
+													Victor’s journey all along.
+													<span class="scrim-subtitle">Now forged into four core disciplines.</span>
+												</h3>
+												<p class="scrim-summary">
+													Every bridge crossed — from game leadership and client runtimes to telemetry pipelines and agent swarms — distilled into verifiable architectural craft.
+												</p>
+												<div class="scrim-replay-cue" aria-label="Click anywhere to replay journey">
+													<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+														<path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+													</svg>
+													<span>Click anywhere to replay journey ↺</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="stage-footer-caption">
+											<span>KÖNIGSBERG SEVEN BRIDGES · EULERIAN GRAPH FOUNDATION</span>
+											<span class="caption-indicator">PROGRESSIVE REVEAL FLOW ↓</span>
+										</div>
+										<!-- Canvas Exit Pin Dot (Exact connection point at 50% bottom) -->
+										<div class="canvas-exit-pin" aria-hidden="true"></div>
+									</div>
+
+									<!-- Topological Dispersal Fork (Seamlessly continuous from map exit to 4 Cards) -->
+									<div class="topological-fork" id="topological-fork" aria-hidden="true">
+										<!-- Continuous connecting vertical stem bridging map to fork -->
+										<div class="fork-stem-connector" id="fork-stem-connector" aria-hidden="true"></div>
+										<div class="fork-banner" id="fork-banner">
+											<span class="fork-pulse"></span>
+											<span class="fork-label">TOPOLOGY FORKS INTO FOUR CORE DISCIPLINES</span>
+										</div>
+										<!-- Desktop 4-Branch SVG -->
+										<svg class="fork-svg fork-desktop" viewBox="0 0 1000 68" preserveAspectRatio="none">
+											<path class="fork-trunk" id="fork-trunk" d="M 500 0 L 500 24" />
+											<circle class="fork-junction" id="fork-junction" cx="500" cy="24" r="4.5" />
+											<path class="fork-branch branch-1" d="M 500 24 C 500 48, 125 44, 125 68" />
+											<path class="fork-branch branch-2" d="M 500 24 C 500 48, 375 44, 375 68" />
+											<path class="fork-branch branch-3" d="M 500 24 C 500 48, 625 44, 625 68" />
+											<path class="fork-branch branch-4" d="M 500 24 C 500 48, 875 44, 875 68" />
+										</svg>
+										<!-- Tablet/Mobile 2-Branch SVG -->
+										<svg class="fork-svg fork-mobile" viewBox="0 0 1000 50" preserveAspectRatio="none">
+											<path class="fork-trunk" id="fork-trunk-mobile" d="M 500 0 L 500 20" />
+											<circle class="fork-junction" id="fork-junction-mobile" cx="500" cy="20" r="4" />
+											<path class="fork-branch branch-1" d="M 500 20 C 500 35, 250 35, 250 50" />
+											<path class="fork-branch branch-2" d="M 500 20 C 500 35, 750 35, 750 50" />
+										</svg>
+									</div>
+
+									<!-- 4 Systematic Competency Spec Cards -->
+									<div class="specs-grid" id="specs-grid" aria-label="Core Engineering Disciplines">
+										<!-- Spec Card 01 -->
+										<article class="spec-card" data-col="1">
+											<div class="card-connector-dot" aria-hidden="true"></div>
+											<div class="spec-card-header">
+												<span class="spec-id">SPEC // 01</span>
+												<span class="spec-scope">CLIENT SYSTEMS</span>
+											</div>
+											<h4 class="spec-title">Mobile Engineering</h4>
+											<p class="spec-desc">
+												Production iOS native and React Native apps. Resilient state hydration, offline-first caching, low-latency render loops, and memory correctness under real-world device constraints.
+											</p>
+											<div class="spec-tags">
+												<span>Swift / SwiftUI</span>
+												<span>UIKit</span>
+												<span>React Native</span>
+												<span>Core Data</span>
+												<span>State Machines</span>
+											</div>
+										</article>
+
+										<!-- Spec Card 02 -->
+										<article class="spec-card" data-col="2">
+											<div class="card-connector-dot" aria-hidden="true"></div>
+											<div class="spec-card-header">
+												<span class="spec-id">SPEC // 02</span>
+												<span class="spec-scope">PIPELINES &amp; IOT</span>
+											</div>
+											<h4 class="spec-title">Pipelines &amp; Telemetry</h4>
+											<p class="spec-desc">
+												End-to-end device-to-cloud data pathways: reliable Bluetooth Low Energy (BLE) packet synchronization, time-series streaming, and telemetry pipelines built for auditability.
+											</p>
+											<div class="spec-tags">
+												<span>BLE Sync</span>
+												<span>FastAPI</span>
+												<span>Node.js</span>
+												<span>Time-series</span>
+												<span>HealthKit</span>
+											</div>
+										</article>
+
+										<!-- Spec Card 03 -->
+										<article class="spec-card" data-col="3">
+											<div class="card-connector-dot" aria-hidden="true"></div>
+											<div class="spec-card-header">
+												<span class="spec-id">SPEC // 03</span>
+												<span class="spec-scope">DESKTOP &amp; COMPUTE</span>
+											</div>
+											<h4 class="spec-title">Desktop &amp; GPU Compute</h4>
+											<p class="spec-desc">
+												High-performance desktop applications with macOS SwiftUI and enterprise .NET/C#. Hardware-accelerated Metal compute shaders for real-time biosignal waveforms and brush engines.
+											</p>
+											<div class="spec-tags">
+												<span>macOS Native</span>
+												<span>Metal GPU</span>
+												<span>C# / .NET</span>
+												<span>C++</span>
+												<span>Memory-Mapped IO</span>
+											</div>
+										</article>
+
+										<!-- Spec Card 04 -->
+										<article class="spec-card" data-col="4">
+											<div class="card-connector-dot" aria-hidden="true"></div>
+											<div class="spec-card-header">
+												<span class="spec-id">SPEC // 04</span>
+												<span class="spec-scope">AI INFRASTRUCTURE</span>
+											</div>
+											<h4 class="spec-title">Agentic Governance</h4>
+											<p class="spec-desc">
+												Multi-agent coding orchestration, task-contract isolation via git worktrees (wtcraft), structured prompt pipelines, and deterministic verification gates preventing regression.
+											</p>
+											<div class="spec-tags">
+												<span>wtcraft CLI</span>
+												<span>Task Contracts</span>
+												<span>Worktree Swarms</span>
+												<span>Deterministic Gates</span>
+											</div>
+										</article>
+									</div>
+								</div>
+							</div>
+						</article>
+
 					</div>
 				</div>
 			</section>
 
-			<!-- Projects Section -->
-			<section class="projects">
+			<!-- More Work (Secondary Repertory Catalog) -->
+			<section class="projects" id="projects" aria-labelledby="projects-title">
 				<div class="container">
-					<h2 class="section-title">Featured Projects</h2>
-				<div class="projects-grid">
-					<div class="project-card">
-						<div class="project-icon">🖌️</div>
-						<h3>亲笔小卡 · Wishes by Hand</h3>
-						<p>Handwritten cards for quiet reconnection</p>
-						<a href="https://apps.apple.com/ca/app/wishes-by-hand/id6774579880" target="_blank" rel="noopener" class="project-link">View on App Store →</a>
+					<div class="projects-editorial-header">
+						<div class="projects-meta-bar">
+							<span class="projects-wordmark">
+								<span class="projects-mark-glyph">目</span>
+								<span>PRODUCTION CATALOG // VOL. 02</span>
+							</span>
+							<span class="projects-status-tag">09 NODES</span>
+						</div>
+						<h2 id="projects-title" class="projects-title">Production Works &amp; Systems</h2>
+						<p class="projects-lead">
+							Live App Store applications, cross-platform telemetry viewers, algorithmic engines, and engineering logbook.
+						</p>
 					</div>
-					<div class="project-card">
-						<div class="project-icon">🌲</div>
-						<h3>wtcraft</h3>
-						<p>Git-native Multi-Agent Worktree Scaffolding</p>
-						<a href="https://github.com/zywkloo/wtcraft" target="_blank" class="project-link">View on GitHub →</a>
+
+					<div class="projects-grid">
+						<!-- Card 01: ARC EDF & BDF Viewer -->
+						<article class="project-card">
+							<div class="project-card-header">
+								<div class="header-id-group">
+									<span class="project-id">[APP-01]</span>
+									<div class="platform-badges" aria-label="Supported Platforms">
+										<span class="platform-chip chip-macos">macOS</span>
+										<span class="platform-chip chip-ipad">iPadOS</span>
+									</div>
+								</div>
+								<div class="project-glyph" title="Biosignal Telemetry & Metal Rendering">
+									<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<path d="M2 12h3l2-7 4 14 3-10 2 6h6" />
+									</svg>
+								</div>
+							</div>
+							<h3 class="project-card-title">ARC EDF &amp; BDF Viewer</h3>
+							<p class="project-card-desc">High-throughput biosignal telemetry viewer for European Data Format (EDF/BDF+). Parses gigabyte multi-channel EEG/ECG recordings with 60 FPS Metal waveform rendering.</p>
+							<div class="project-card-tags">
+								<span>SwiftUI</span>
+								<span>Metal Compute</span>
+								<span>EDF/BDF+ Parser</span>
+								<span>Multi-Channel</span>
+								<span>Time-Series</span>
+							</div>
+							<div class="project-card-footer">
+								<a href={EDF_APP_STORE_URL} target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
+									<svg class="btn-brand-icon" viewBox="0 0 170 170" width="13" height="13" fill="currentColor" aria-hidden="true">
+										<path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.59-7.71-11.66-14.01-6.19-9.56-10.9-20.2-14.13-31.92-3.23-11.72-4.85-22.95-4.85-33.69 0-14.13 3.63-25.75 10.9-34.85 7.27-9.1 16.31-13.78 27.12-14.06 4.35 0 9.28 1.13 14.79 3.38 5.51 2.26 9.4 3.44 11.66 3.56 1.85 0 5.86-1.25 12.02-3.74 6.16-2.5 11.53-3.63 16.11-3.39 12.08.75 21.65 5.38 28.71 13.9-10.88 6.64-16.19 15.54-15.93 26.7.26 8.71 3.59 16.03 10 21.96 6.41 5.93 13.9 9.38 22.47 10.35-2.28 6.95-5.07 14.18-8.37 21.68zM119.22 31.84c0-7.38 2.65-14.28 7.95-20.7 5.3-6.42 11.83-10.45 19.59-12.09.87 7.06-1.57 14.01-7.32 20.85-5.75 6.84-12.49 10.82-20.22 11.94z" />
+									</svg>
+									<span>Mac App Store ↗</span>
+								</a>
+							</div>
+						</article>
+
+						<!-- Card 02: Wishes by Hand · 親筆 -->
+						<article class="project-card">
+							<div class="project-card-header">
+								<div class="header-id-group">
+									<span class="project-id">[APP-02]</span>
+									<div class="platform-badges" aria-label="Supported Platforms">
+										<span class="platform-chip chip-ios">iOS</span>
+										<span class="platform-chip chip-ipad">iPadOS</span>
+									</div>
+								</div>
+								<div class="project-glyph" title="Calligraphic Stroke & Metal Shader Engine">
+									<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<path d="M12 19l7-7 3 3-7 7-3-3z" />
+										<path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+										<path d="M2 2l7.586 7.586" />
+										<circle cx="11" cy="11" r="2" />
+									</svg>
+								</div>
+							</div>
+							<h3 class="project-card-title">Wishes by Hand · 親筆</h3>
+							<p class="project-card-desc">Expressive handwritten card studio on App Store. Custom Metal shader stroke engine with velocity dynamics, real-time calligraphy evaluation, and gesture-driven card composition.</p>
+							<div class="project-card-tags">
+								<span>SwiftUI</span>
+								<span>Metal Shaders</span>
+								<span>PencilKit</span>
+								<span>CoreGraphics</span>
+								<span>StoreKit</span>
+							</div>
+							<div class="project-card-footer">
+								<a href={WISHES_APP_STORE_URL} target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
+									<svg class="btn-brand-icon" viewBox="0 0 170 170" width="13" height="13" fill="currentColor" aria-hidden="true">
+										<path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.59-7.71-11.66-14.01-6.19-9.56-10.9-20.2-14.13-31.92-3.23-11.72-4.85-22.95-4.85-33.69 0-14.13 3.63-25.75 10.9-34.85 7.27-9.1 16.31-13.78 27.12-14.06 4.35 0 9.28 1.13 14.79 3.38 5.51 2.26 9.4 3.44 11.66 3.56 1.85 0 5.86-1.25 12.02-3.74 6.16-2.5 11.53-3.63 16.11-3.39 12.08.75 21.65 5.38 28.71 13.9-10.88 6.64-16.19 15.54-15.93 26.7.26 8.71 3.59 16.03 10 21.96 6.41 5.93 13.9 9.38 22.47 10.35-2.28 6.95-5.07 14.18-8.37 21.68zM119.22 31.84c0-7.38 2.65-14.28 7.95-20.7 5.3-6.42 11.83-10.45 19.59-12.09.87 7.06-1.57 14.01-7.32 20.85-5.75 6.84-12.49 10.82-20.22 11.94z" />
+									</svg>
+									<span>App Store ↗</span>
+								</a>
+							</div>
+						</article>
+
+						<!-- Card 03: VitalMark Wellness -->
+						<article class="project-card">
+							<div class="project-card-header">
+								<div class="header-id-group">
+									<span class="project-id">[APP-03]</span>
+									<div class="platform-badges" aria-label="Supported Platforms">
+										<span class="platform-chip chip-ios">iOS</span>
+									</div>
+								</div>
+								<div class="project-glyph" title="Biometric HealthKit Telemetry">
+									<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<path d="M3 12h4l2.5-6 4 12 2.5-6h5" />
+									</svg>
+								</div>
+							</div>
+							<h3 class="project-card-title">VitalMark Wellness</h3>
+							<p class="project-card-desc">Production iOS fitness companion. End-to-end Apple HealthKit synchronization, real-time vital telemetry visualization, and low-overhead SwiftUI state hydration.</p>
+							<div class="project-card-tags">
+								<span>SwiftUI</span>
+								<span>HealthKit</span>
+								<span>Time-Series</span>
+								<span>Core Data</span>
+							</div>
+							<div class="project-card-footer">
+								<a href="https://apps.apple.com/us/app/vitalmark-wellness-fitness/id6745228850" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
+									<svg class="btn-brand-icon" viewBox="0 0 170 170" width="13" height="13" fill="currentColor" aria-hidden="true">
+										<path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.59-7.71-11.66-14.01-6.19-9.56-10.9-20.2-14.13-31.92-3.23-11.72-4.85-22.95-4.85-33.69 0-14.13 3.63-25.75 10.9-34.85 7.27-9.1 16.31-13.78 27.12-14.06 4.35 0 9.28 1.13 14.79 3.38 5.51 2.26 9.4 3.44 11.66 3.56 1.85 0 5.86-1.25 12.02-3.74 6.16-2.5 11.53-3.63 16.11-3.39 12.08.75 21.65 5.38 28.71 13.9-10.88 6.64-16.19 15.54-15.93 26.7.26 8.71 3.59 16.03 10 21.96 6.41 5.93 13.9 9.38 22.47 10.35-2.28 6.95-5.07 14.18-8.37 21.68zM119.22 31.84c0-7.38 2.65-14.28 7.95-20.7 5.3-6.42 11.83-10.45 19.59-12.09.87 7.06-1.57 14.01-7.32 20.85-5.75 6.84-12.49 10.82-20.22 11.94z" />
+									</svg>
+									<span>App Store ↗</span>
+								</a>
+							</div>
+						</article>
+
+						<!-- Card 04: Ninja AI Agentic App -->
+						<article class="project-card">
+							<div class="project-card-header">
+								<div class="header-id-group">
+									<span class="project-id">[AI-04]</span>
+									<div class="platform-badges" aria-label="Supported Platforms">
+										<span class="platform-chip chip-ios">iOS</span>
+										<span class="platform-chip chip-android">Android</span>
+									</div>
+								</div>
+								<div class="project-glyph" title="Adaptive Prompt Routing">
+									<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<circle cx="12" cy="12" r="3" />
+										<path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6l2.1-2.1" />
+									</svg>
+								</div>
+							</div>
+							<h3 class="project-card-title">Ninja AI Agentic App</h3>
+							<p class="project-card-desc">Mobile LLM workspace featuring multi-provider token streaming, adaptive prompt routing, local context caching, and native iOS agentic workflow execution.</p>
+							<div class="project-card-tags">
+								<span>SwiftUI</span>
+								<span>Token Streaming</span>
+								<span>Prompt Routing</span>
+								<span>Multi-Model</span>
+							</div>
+							<div class="project-card-footer">
+								<div class="dual-actions">
+									<a href="https://apps.apple.com/us/app/ninja-ai-chat-code-create/id6702030312" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
+										<svg class="btn-brand-icon" viewBox="0 0 170 170" width="13" height="13" fill="currentColor" aria-hidden="true">
+											<path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.59-7.71-11.66-14.01-6.19-9.56-10.9-20.2-14.13-31.92-3.23-11.72-4.85-22.95-4.85-33.69 0-14.13 3.63-25.75 10.9-34.85 7.27-9.1 16.31-13.78 27.12-14.06 4.35 0 9.28 1.13 14.79 3.38 5.51 2.26 9.4 3.44 11.66 3.56 1.85 0 5.86-1.25 12.02-3.74 6.16-2.5 11.53-3.63 16.11-3.39 12.08.75 21.65 5.38 28.71 13.9-10.88 6.64-16.19 15.54-15.93 26.7.26 8.71 3.59 16.03 10 21.96 6.41 5.93 13.9 9.38 22.47 10.35-2.28 6.95-5.07 14.18-8.37 21.68zM119.22 31.84c0-7.38 2.65-14.28 7.95-20.7 5.3-6.42 11.83-10.45 19.59-12.09.87 7.06-1.57 14.01-7.32 20.85-5.75 6.84-12.49 10.82-20.22 11.94z" />
+										</svg>
+										<span>App Store ↗</span>
+									</a>
+									<a href={NINJA_GOOGLE_PLAY_URL} target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
+										<svg class="btn-brand-icon ninja-google-play-icon" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M5.2 3.3a1.25 1.25 0 0 0-1.9 1.07v15.26a1.25 1.25 0 0 0 1.9 1.07l13.02-7.63a1.25 1.25 0 0 0 0-2.16L5.2 3.3Z" /></svg>
+										<span>Google Play ↗</span>
+									</a>
+								</div>
+							</div>
+						</article>
+
+						<!-- Card 05: MovieBTI - Semantic Retrieval & Movie Discovery -->
+						<article class="project-card">
+							<div class="project-card-header">
+								<div class="header-id-group">
+									<span class="project-id">[ML-05]</span>
+									<div class="platform-badges" aria-label="Supported Platforms">
+										<span class="platform-chip chip-web">Web</span>
+									</div>
+								</div>
+								<div class="project-glyph" title="MovieBTI - Semantic Retrieval & Movie Discovery">
+									<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<rect x="2" y="4" width="20" height="16" rx="2" />
+										<path d="M7 8v8m5-8v8m5-8v8M2 8h20M2 16h20" />
+									</svg>
+								</div>
+							</div>
+							<div class="card-rebrand-row">
+								<h3 class="project-card-title">MovieBTI</h3>
+								<span class="rebrand-tag">REBRANDED</span>
+							</div>
+							<p class="project-card-desc">In-process latent semantic engine on Next.js. Truncated SVD over TF-IDF plot embeddings fused with genre and temporal constraints — sub-100ms inference with zero external database dependencies.</p>
+							<div class="project-card-tags">
+								<span>Next.js</span>
+								<span>Truncated SVD</span>
+								<span>TF-IDF Semantics</span>
+								<span>Zero-DB</span>
+							</div>
+							<div class="project-card-footer">
+								<div class="dual-actions">
+									<a href="https://zzz-movie-rec-system.vercel.app/" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
+										<svg class="btn-brand-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+											<circle cx="12" cy="12" r="10" />
+											<line x1="2" y1="12" x2="22" y2="12" />
+											<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+										</svg>
+										<span>Live Demo ↗</span>
+									</a>
+									<a href="https://github.com/ZZZ-RecSys/ZZZ-MovieRecSystem" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
+										<svg class="btn-brand-icon" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">
+											<path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+										</svg>
+										<span>GitHub ↗</span>
+									</a>
+								</div>
+								<span class="project-status-stamp stamp-live">LIVE VERCEL</span>
+							</div>
+						</article>
+
+						<!-- Card 06: TutorOcean iOS & Android -->
+						<article class="project-card">
+							<div class="project-card-header">
+								<div class="header-id-group">
+									<span class="project-id">[APP-06]</span>
+									<div class="platform-badges" aria-label="Supported Platforms">
+										<span class="platform-chip chip-ios">iOS</span>
+										<span class="platform-chip chip-android">Android</span>
+										<span class="platform-chip chip-ipad">iPadOS</span>
+									</div>
+								</div>
+								<div class="project-glyph" title="Collaborative Canvas & Messaging">
+									<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+										<circle cx="9" cy="7" r="4" />
+										<path d="M23 21v-2a4 4 0 0 0-3-3.87m-4-12a4 4 0 0 1 0 7.75" />
+									</svg>
+								</div>
+							</div>
+							<h3 class="project-card-title">TutorOcean Mobile App</h3>
+							<p class="project-card-desc">Global peer-tutoring mobile platform serving thousands of students. Session scheduling, real-time messaging, collaborative whiteboard sync, and integrated Stripe payments.</p>
+							<div class="project-card-tags">
+								<span>iOS &amp; Android</span>
+								<span>WebSockets</span>
+								<span>Shared Canvas</span>
+								<span>Stripe SDK</span>
+							</div>
+							<div class="project-card-footer">
+								<div class="dual-actions">
+									<a href="https://apps.apple.com/ca/app/tutorocean/id1480876532" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
+										<svg class="btn-brand-icon" viewBox="0 0 170 170" width="12" height="12" fill="currentColor" aria-hidden="true">
+											<path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.59-7.71-11.66-14.01-6.19-9.56-10.9-20.2-14.13-31.92-3.23-11.72-4.85-22.95-4.85-33.69 0-14.13 3.63-25.75 10.9-34.85 7.27-9.1 16.31-13.78 27.12-14.06 4.35 0 9.28 1.13 14.79 3.38 5.51 2.26 9.4 3.44 11.66 3.56 1.85 0 5.86-1.25 12.02-3.74 6.16-2.5 11.53-3.63 16.11-3.39 12.08.75 21.65 5.38 28.71 13.9-10.88 6.64-16.19 15.54-15.93 26.7.26 8.71 3.59 16.03 10 21.96 6.41 5.93 13.9 9.38 22.47 10.35-2.28 6.95-5.07 14.18-8.37 21.68zM119.22 31.84c0-7.38 2.65-14.28 7.95-20.7 5.3-6.42 11.83-10.45 19.59-12.09.87 7.06-1.57 14.01-7.32 20.85-5.75 6.84-12.49 10.82-20.22 11.94z" />
+										</svg>
+										<span>App Store ↗</span>
+									</a>
+									<a href="https://play.google.com/store/apps/details?id=com.tutorocean" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
+										<svg class="btn-brand-icon ninja-google-play-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d="M5.2 3.3a1.25 1.25 0 0 0-1.9 1.07v15.26a1.25 1.25 0 0 0 1.9 1.07l13.02-7.63a1.25 1.25 0 0 0 0-2.16L5.2 3.3Z" /></svg>
+										<span>Google Play ↗</span>
+									</a>
+								</div>
+							</div>
+						</article>
+
+						<!-- Card 07: Crime Scene Forensic Analyzer -->
+						<article class="project-card card-award">
+							<div class="project-card-header">
+								<div class="header-id-group">
+									<span class="project-id">[HCK-07]</span>
+									<div class="platform-badges" aria-label="Supported Platforms">
+										<span class="platform-chip chip-web">Web</span>
+										<span class="platform-chip chip-winner">🏆 Sponsor Winner</span>
+									</div>
+								</div>
+								<div class="project-glyph" title="Spatial Computer Vision Reticle">
+									<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<circle cx="12" cy="12" r="10" />
+										<line x1="22" y1="12" x2="18" y2="12" />
+										<line x1="6" y1="12" x2="2" y2="12" />
+										<line x1="12" y1="6" x2="12" y2="2" />
+										<line x1="12" y1="22" x2="12" y2="18" />
+									</svg>
+								</div>
+							</div>
+							<h3 class="project-card-title">Crime Scene Forensic Analyzer</h3>
+							<p class="project-card-desc">Sponsor Challenge Winner at cuHacking 2020. Multi-modal forensic evidence analyzer combining computer vision, spatial audio triangulation, and 3D coordinate crime-scene reconstruction.</p>
+							<div class="project-card-tags">
+								<span>Computer Vision</span>
+								<span>Spatial Audio</span>
+								<span>PyTorch</span>
+								<span>3D Geometry</span>
+							</div>
+							<div class="project-card-footer">
+								<a href="https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
+									<svg class="btn-brand-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<circle cx="12" cy="12" r="10" />
+										<line x1="2" y1="12" x2="22" y2="12" />
+										<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+									</svg>
+									<span>Devpost Case ↗</span>
+								</a>
+								<span class="project-status-stamp stamp-award">
+									<span class="trophy-icon">🏆</span>
+									<span>CUHACKING 2020 AWARD</span>
+								</span>
+							</div>
+						</article>
+
+						<!-- Card 08: Amazon Connect Voice Flow -->
+						<article class="project-card card-award">
+							<div class="project-card-header">
+								<div class="header-id-group">
+									<span class="project-id">[HCK-08]</span>
+									<div class="platform-badges" aria-label="Supported Platforms">
+										<span class="platform-chip chip-cloud">Cloud</span>
+										<span class="platform-chip chip-web">Web</span>
+										<span class="platform-chip chip-winner">🏆 Sponsor Winner</span>
+									</div>
+								</div>
+								<div class="project-glyph" title="Telephony Contact Flow State Machine">
+									<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+									</svg>
+								</div>
+							</div>
+							<h3 class="project-card-title">Amazon Connect Voice Flow</h3>
+							<p class="project-card-desc">Sponsor Challenge Winner at cuHacking 2019. Automated telephony order processing state machine powered by serverless AWS Lambda and Amazon Connect contact flows with dynamic CRM dispatch.</p>
+							<div class="project-card-tags">
+								<span>AWS Lambda</span>
+								<span>Amazon Connect</span>
+								<span>Telephony IVR</span>
+								<span>DynamoDB</span>
+							</div>
+							<div class="project-card-footer">
+								<a href="https://devpost.com/software/cuhackingamazonconnect" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
+									<svg class="btn-brand-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<circle cx="12" cy="12" r="10" />
+										<line x1="2" y1="12" x2="22" y2="12" />
+										<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+									</svg>
+									<span>Devpost Case ↗</span>
+								</a>
+								<span class="project-status-stamp stamp-award">
+									<span class="trophy-icon">🏆</span>
+									<span>CUHACKING 2019 AWARD</span>
+								</span>
+							</div>
+						</article>
+
+						<!-- Card 09: WealthLens · Behavioral Portfolio Companion -->
+						<article class="project-card">
+							<div class="project-card-header">
+								<div class="header-id-group">
+									<span class="project-id">[FIN-09]</span>
+									<div class="platform-badges" aria-label="Supported Platforms">
+										<span class="platform-chip chip-web">Web</span>
+									</div>
+								</div>
+								<div class="project-glyph" title="Behavioral Finance & Portfolio Analysis">
+									<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<circle cx="12" cy="12" r="10" />
+										<path d="M12 6v6l4 2" />
+										<path d="M16 16l4 4" />
+									</svg>
+								</div>
+							</div>
+							<h3 class="project-card-title">WealthLens</h3>
+							<p class="project-card-desc">Spot your behavioral patterns before you invest. A private portfolio companion on Next.js analyzing emotional reaction tendencies, concentration risk, and capital allocation on local data.</p>
+							<div class="project-card-tags">
+								<span>Next.js</span>
+								<span>Behavioral Finance</span>
+								<span>Portfolio Analytics</span>
+								<span>Local-First</span>
+								<span>Zero-Knowledge</span>
+							</div>
+							<div class="project-card-footer">
+								<div class="dual-actions">
+									<a href="https://yourlens.vercel.app/" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
+										<svg class="btn-brand-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+											<circle cx="12" cy="12" r="10" />
+											<line x1="2" y1="12" x2="22" y2="12" />
+											<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+										</svg>
+										<span>Live App ↗</span>
+									</a>
+								</div>
+								<span class="project-status-stamp stamp-live">LIVE VERCEL</span>
+							</div>
+						</article>
 					</div>
-					<div class="project-card">
-						<div class="project-icon">🏥</div>
-						<h3>VitalMark Wellness</h3>
-						<p>HealthKit Integration & SwiftUI</p>
-						<a href="https://apps.apple.com/us/app/vitalmark-wellness-fitness/id6745228850" target="_blank" class="project-link">View on App Store →</a>
-					</div>
-					<div class="project-card">
-						<div class="project-icon">🤖</div>
-						<h3>Ninja AI Agentic App</h3>
-						<p>LLM Streaming & Multi-Model AI</p>
-						<a href="https://apps.apple.com/us/app/ninja-ai-chat-code-create/id6702030312" target="_blank" class="project-link">View on App Store →</a>
-					</div>
-					<div class="project-card">
-						<div class="project-icon">🎬</div>
-						<h3>ZZZ Movie Rec System</h3>
-						<p>ML-powered Movie Recommendations</p>
-						<a href="https://zzz-movie-rec-system.vercel.app/" target="_blank" class="project-link">View Project →</a>
-					</div>
-					<div class="project-card">
-						<div class="project-icon">📚</div>
-						<h3>TutorOcean iOS App</h3>
-						<p>Professional Tutoring Platform</p>
-						<a href="https://apps.apple.com/ca/app/tutorocean/id1480876532" target="_blank" class="project-link">View on App Store →</a>
-					</div>
-					<div class="project-card">
-						<div class="project-icon">🔍</div>
-						<h3>cuHacking 2020 Winner</h3>
-						<p>Crime Scene Forensic Analyzer</p>
-						<a href="https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer" target="_blank" class="project-link">View on Devpost →</a>
-					</div>
-					<div class="project-card">
-						<div class="project-icon">🏆</div>
-						<h3>cuHacking 2019 Winner</h3>
-						<p>Amazon Connect Pizza Order System</p>
-						<a href="https://devpost.com/software/cuhackingamazonconnect" target="_blank" class="project-link">View on Devpost →</a>
-					</div>
-				</div>
 				</div>
 			</section>
 
-			<!-- Contact Section -->
-			<section class="contact">
+			<section class="proof" id="proof" aria-label="Selected proof points">
+				<div class="container proof-grid">
+					<article class="proof-card">
+						<div class="proof-card-header">
+							<span class="proof-card-id">EXHIBIT // 01</span>
+							<span class="proof-card-scope">HONOR RECORD</span>
+						</div>
+						<div class="proof-media proof-medal">
+							<img src="/images/proof/carleton-university-medal-detail.webp" alt="Carleton University Medal in Computer Science, engraved with Yiwei Zhang, 2020" />
+						</div>
+						<div class="proof-copy">
+							<strong>University Medal in Computer Science</strong>
+							<span>Carleton University · Highest Graduation Standing · 2020</span>
+						</div>
+					</article>
+					<a href="#wilddunk" class="proof-card">
+						<div class="proof-card-header">
+							<span class="proof-card-id">EXHIBIT // 02</span>
+							<span class="proof-card-scope">CHART RECORD</span>
+						</div>
+						<div class="proof-media proof-rank">
+							<img src="/images/proof/wilddunk-appannie-2015.webp" alt="App Annie Highest Ranks report showing Wild Dunk at number 1 in Sports in China" />
+						</div>
+						<div class="proof-copy">
+							<strong>#1 Sports · China App Store</strong>
+							<span>Wild Dunk · App Annie Peak Rank · May 3, 2015</span>
+						</div>
+					</a>
+					<a href="https://devpost.com/zywkloo" target="_blank" rel="noopener" class="proof-card">
+						<div class="proof-card-header">
+							<span class="proof-card-id">EXHIBIT // 03</span>
+							<span class="proof-card-scope">COMPETITION</span>
+						</div>
+						<div class="proof-media proof-devpost">
+							<img src="/images/proof/devpost-hackathon-winners.webp" alt="Victor Zhang's Devpost portfolio showing two projects marked Winner" />
+						</div>
+						<div class="proof-copy">
+							<strong>2× Hackathon Winner</strong>
+							<span>cuHacking 2019 &amp; 2020 · Devpost Verified</span>
+						</div>
+					</a>
+				</div>
+			</section>
+
+			<!-- Contact / Correspondence Section (Refined Paper Colophon) -->
+			<section class="contact" id="contact" aria-labelledby="contact-title">
 				<div class="container">
-					<h2 class="section-title">Let's Connect</h2>
-					<p class="contact-text">Interested in collaborating or just want to chat? I'd love to hear from you!</p>
-					<div class="contact-buttons">
-						<a href={`mailto:${EMAIL}`} class="btn btn-primary">Email Me</a>
-						<a href={GITHUB_URL} target="_blank" class="btn btn-secondary">GitHub</a>
-						<a href={WTCRAFT_URL} target="_blank" class="btn btn-secondary">wtcraft</a>
-						<a href={LINKEDIN_URL} target="_blank" class="btn btn-secondary">LinkedIn</a>
-						<a href={MEDIUM_URL} target="_blank" class="btn btn-secondary">Medium</a>
+					<div class="contact-plate">
+						<div class="contact-meta-header">
+							<span class="contact-wordmark">
+								<span class="contact-mark-glyph">信</span>
+								<span>COLOPHON // DIRECT DISPATCH</span>
+							</span>
+							<span class="contact-status-tag">AVAILABLE FOR CONSULTING</span>
+						</div>
+						<h2 id="contact-title" class="contact-title">
+							<span class="contact-title-en">Let's Connect</span><span class="contact-title-separator" aria-hidden="true"> · </span><span class="contact-title-fr">Au Plaisir</span>
+						</h2>
+						<p class="contact-text">
+							Available for systems consulting, mobile data layer architecture, and agentic swarms.<br class="hide-on-mobile" />
+							If you value deterministic correctness under real-world device constraints, let's talk.
+						</p>
+						<div class="contact-buttons">
+							<a href={`mailto:${EMAIL}`} class="btn-apaper btn-apaper-primary">Direct Email ✉</a>
+							<a href={GITHUB_URL} target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">GitHub ↗</a>
+							<a href={WTCRAFT_URL} target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">wtcraft ↗</a>
+							<a href={LINKEDIN_URL} target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">LinkedIn ↗</a>
+							<a href={MEDIUM_URL} target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">Medium ↗</a>
+						</div>
+						<div class="contact-colophon-sub">
+							<span>LOCATION: VANCOUVER, BC (PACIFIC TIME)</span>
+							<span>HANDSHAKE PROTOCOL: DIRECT HUMAN INBOX</span>
+						</div>
+					</div>
+
+					<!-- Color Theme Switcher Widget -->
+					<div class="theme-palette-bar" aria-label="Paper Theme Switcher">
+						<span class="theme-bar-label">PAPER TONE // 纸本色印:</span>
+						<div class="theme-pills">
+							<button type="button" class="theme-pill washi" data-theme="washi" title="和纸朱砂 · Washi &amp; Cinnabar">
+								<span class="pill-swatch" style="background: #c45e49;"></span>
+								<span class="pill-title">和纸朱砂</span>
+							</button>
+							<button type="button" class="theme-pill amber" data-theme="amber" title="古籍琥珀 · Antique Parchment &amp; Amber">
+								<span class="pill-swatch" style="background: #b86d29;"></span>
+								<span class="pill-title">古籍琥珀</span>
+							</button>
+							<button type="button" class="theme-pill blueprint" data-theme="blueprint" title="学术蓝图 · Blueprint &amp; Slate">
+								<span class="pill-swatch" style="background: #2563eb;"></span>
+								<span class="pill-title">学术蓝图</span>
+							</button>
+							<button type="button" class="theme-pill bamboo" data-theme="bamboo" title="竹简青素 · Bamboo &amp; Celadon">
+								<span class="pill-swatch" style="background: #2d6a4f;"></span>
+								<span class="pill-title">竹简青素</span>
+							</button>
+							<button type="button" class="theme-pill carbon active" data-theme="carbon" title="玄纸泥金 · Carbon Washi &amp; Gold">
+								<span class="pill-swatch" style="background: #d4a373;"></span>
+								<span class="pill-title">玄纸泥金</span>
+							</button>
+						</div>
 					</div>
 				</div>
 			</section>
 		</main>
 		<Footer />
+
+		<script>
+			// Interactive Hero Stage Deck (Layered depth shift carousel)
+			const initHeroStage = () => {
+				const stage = document.getElementById('hero-stage');
+				if (!stage) return;
+
+				const cards = Array.from(stage.querySelectorAll('.stage-card'));
+				const pills = Array.from(stage.querySelectorAll('.stage-pill'));
+				const prevBtn = document.getElementById('stage-prev-btn');
+				const nextBtn = document.getElementById('stage-next-btn');
+				const activeLabel = document.getElementById('stage-active-label');
+				let currentIndex = 0;
+				let isTransitioning = false;
+				let timer = null;
+
+				const updateCards = (nextIndex) => {
+					if (isTransitioning && nextIndex === currentIndex) return;
+					isTransitioning = true;
+					currentIndex = (nextIndex + cards.length) % cards.length;
+					const prevIndex = (currentIndex - 1 + cards.length) % cards.length;
+					const nextIdx = (currentIndex + 1) % cards.length;
+
+					cards.forEach((card, idx) => {
+						const video = card.querySelector('video');
+						card.classList.remove('is-center', 'is-prev', 'is-next', 'is-hidden');
+
+						if (idx === currentIndex) {
+							card.classList.add('is-center');
+							if (video) {
+								video.currentTime = 0;
+								video.muted = true; // Always muted so audio never blasts unexpectedly
+								video.play().catch(() => {});
+							}
+							if (activeLabel) {
+								activeLabel.textContent = card.getAttribute('data-label') || '';
+							}
+						} else if (idx === prevIndex) {
+							card.classList.add('is-prev');
+							if (video) {
+								video.pause();
+							}
+						} else if (idx === nextIdx) {
+							card.classList.add('is-next');
+							if (video) {
+								video.pause();
+							}
+						} else {
+							card.classList.add('is-hidden');
+							if (video) {
+								video.pause();
+							}
+						}
+					});
+
+					pills.forEach((pill, idx) => {
+						pill.classList.toggle('active', idx === currentIndex);
+						pill.setAttribute('aria-selected', idx === currentIndex ? 'true' : 'false');
+					});
+
+					clearTimeout(timer);
+					// Auto shift timer fallback (10s)
+					timer = setTimeout(() => {
+						updateCards(currentIndex + 1);
+					}, 10000);
+
+					setTimeout(() => {
+						isTransitioning = false;
+					}, 450);
+				};
+
+				// Listen for 'ended' event on each card's video for automatic shift
+				cards.forEach((card) => {
+					const video = card.querySelector('video');
+					if (video) {
+						video.addEventListener('ended', () => {
+							if (card.classList.contains('is-center')) {
+								updateCards(currentIndex + 1);
+							}
+						});
+					}
+
+					// Clicking left card or right card directly shifts
+					card.addEventListener('click', (e) => {
+						if (e.target && e.target.closest && e.target.closest('.stage-card-link')) return;
+
+						if (card.classList.contains('is-prev')) {
+							e.preventDefault();
+							updateCards(currentIndex - 1);
+						} else if (card.classList.contains('is-next')) {
+							e.preventDefault();
+							updateCards(currentIndex + 1);
+						}
+					});
+				});
+
+				// Prev and Next arrow buttons
+				if (prevBtn) {
+					prevBtn.addEventListener('click', () => {
+						updateCards(currentIndex - 1);
+					});
+				}
+				if (nextBtn) {
+					nextBtn.addEventListener('click', () => {
+						updateCards(currentIndex + 1);
+					});
+				}
+
+				// Indicator pills
+				pills.forEach((pill, idx) => {
+					pill.addEventListener('click', () => {
+						updateCards(idx);
+					});
+				});
+
+				// Start with card 0
+				updateCards(0);
+			};
+
+			initHeroStage();
+			document.addEventListener('astro:after-swap', initHeroStage);
+
+			// Chapter 01 Native Video Volume & Playback Setup
+			const initChapterVideo = () => {
+				const video = document.querySelector('.chapter-native-video');
+				if (!video) return;
+				// Set comfortable initial volume (40%) to ensure smooth, pleasant audio
+				video.volume = 0.4;
+			};
+
+			initChapterVideo();
+			document.addEventListener('astro:after-swap', initChapterVideo);
+
+			// Chapter 02: full-frame Wishes demo and blessing-card carousel
+			let clearWishesCarousel = () => {};
+			const initWishesCarousel = () => {
+				clearWishesCarousel();
+				const carousel = document.querySelector('[data-wishes-carousel]');
+				if (!carousel) return;
+
+				const track = carousel.querySelector('.wishes-carousel-track');
+				const slides = Array.from(carousel.querySelectorAll('[data-wishes-slide]'));
+				const dots = Array.from(carousel.querySelectorAll('[data-wishes-dot]'));
+				const prev = carousel.querySelector('[data-wishes-prev]');
+				const next = carousel.querySelector('[data-wishes-next]');
+				const input = carousel.querySelector<HTMLInputElement>('[data-wishes-input]');
+				const preview = carousel.querySelector<HTMLSpanElement>('[data-wishes-preview]');
+				const status = carousel.querySelector<HTMLSpanElement>('[data-wishes-status]');
+				const sendButton = carousel.querySelector<HTMLButtonElement>('[data-wishes-send]');
+				const composer = carousel.querySelector<HTMLElement>('.wishes-message-composer');
+				const notification = carousel.querySelector<HTMLElement>('[data-wishes-notification]');
+				const video = carousel.querySelector<HTMLVideoElement>('.wishes-demo-video');
+				if (!track || slides.length < 2) return;
+
+				let activeIndex = 0;
+				let timer = null;
+				let simulationTimers = [];
+				const blessingText = '愿你健康快乐，幸福长伴！😘';
+				const clearSimulation = () => {
+					simulationTimers.forEach((id) => window.clearTimeout(id));
+					simulationTimers = [];
+					input && (input.value = '');
+					if (preview) preview.textContent = '正在准备祝福…';
+					if (status) status.textContent = '准备中';
+					composer?.classList.remove('is-sent');
+					sendButton?.classList.remove('is-sending');
+					notification?.classList.remove('is-visible');
+				};
+				const simulateSend = () => {
+					if (status) status.textContent = '正在模拟发送…';
+					sendButton?.classList.add('is-sending');
+					simulationTimers.push(window.setTimeout(() => {
+						composer?.classList.add('is-sent');
+						sendButton?.classList.remove('is-sending');
+						if (status) status.textContent = '已发送';
+						notification?.classList.add('is-visible');
+					}, 480));
+				};
+				const startBlessingSimulation = () => {
+					clearSimulation();
+					let characterIndex = 0;
+					const typeNextCharacter = () => {
+						if (activeIndex !== 1 || !input) return;
+						input.value = blessingText.slice(0, characterIndex + 1);
+						if (preview) preview.textContent = input.value;
+						characterIndex += 1;
+						if (characterIndex < blessingText.length) {
+							simulationTimers.push(window.setTimeout(typeNextCharacter, 95));
+						} else {
+							simulationTimers.push(window.setTimeout(simulateSend, 600));
+						}
+					};
+					simulationTimers.push(window.setTimeout(typeNextCharacter, 700));
+				};
+				const stopAutoShift = () => {
+					if (timer) window.clearInterval(timer);
+					timer = null;
+				};
+				const startAutoShift = () => {
+					stopAutoShift();
+					timer = window.setInterval(() => showSlide(activeIndex + 1), 7000);
+				};
+				const showSlide = (requestedIndex) => {
+					activeIndex = (requestedIndex + slides.length) % slides.length;
+					track.style.transform = `translateX(-${activeIndex * 50}%)`;
+					slides.forEach((slide, index) => {
+						slide.classList.toggle('is-active', index === activeIndex);
+						slide.setAttribute('aria-hidden', index === activeIndex ? 'false' : 'true');
+					});
+					dots.forEach((dot, index) => {
+						dot.classList.toggle('active', index === activeIndex);
+						dot.setAttribute('aria-selected', index === activeIndex ? 'true' : 'false');
+					});
+					if (video) {
+						if (activeIndex === 0) video.play().catch(() => {});
+						else video.pause();
+					}
+					if (activeIndex === 1) startBlessingSimulation();
+					else clearSimulation();
+				};
+
+				prev?.addEventListener('click', () => {
+					showSlide(activeIndex - 1);
+					startAutoShift();
+				});
+				next?.addEventListener('click', () => {
+					showSlide(activeIndex + 1);
+					startAutoShift();
+				});
+				dots.forEach((dot, index) => dot.addEventListener('click', () => {
+					showSlide(index);
+					startAutoShift();
+				}));
+				carousel.addEventListener('mouseenter', stopAutoShift);
+				carousel.addEventListener('mouseleave', startAutoShift);
+
+				showSlide(0);
+				startAutoShift();
+				clearWishesCarousel = () => {
+					stopAutoShift();
+					clearSimulation();
+				};
+			};
+
+			initWishesCarousel();
+			document.addEventListener('astro:after-swap', initWishesCarousel);
+
+			// Paper Theme Switcher with localStorage persistence
+			const initPaperTheme = () => {
+				try {
+					const savedTheme = localStorage.getItem('apaper-theme') || 'carbon';
+					document.documentElement.setAttribute('data-paper-theme', savedTheme);
+					document.querySelectorAll('.theme-pill').forEach((btn) => {
+						btn.classList.toggle('active', btn.getAttribute('data-theme') === savedTheme);
+					});
+				} catch (_) {}
+
+				document.querySelectorAll('.theme-pill').forEach((btn) => {
+					btn.addEventListener('click', () => {
+						const theme = btn.getAttribute('data-theme');
+						if (!theme) return;
+						document.documentElement.setAttribute('data-paper-theme', theme);
+						try {
+							localStorage.setItem('apaper-theme', theme);
+						} catch (_) {}
+						document.querySelectorAll('.theme-pill').forEach((b) => b.classList.remove('active'));
+						btn.classList.add('active');
+					});
+				});
+			};
+
+			initPaperTheme();
+			document.addEventListener('astro:after-swap', initPaperTheme);
+
+			// Progressive Euler Bridges -> Skills Dispersal Flow Controller
+			const initEulerFlow = () => {
+				const stage = document.getElementById('pivot-stage');
+				const scrim = stage?.querySelector('.stage-journey-scrim');
+				const path = document.getElementById('euler-active-path');
+				const runner = document.getElementById('euler-runner');
+				const milestoneGroups = Array.from(document.querySelectorAll('.milestone-pin-group'));
+				const callouts = Array.from(document.querySelectorAll('.milestone-callout'));
+				const fork = document.getElementById('topological-fork');
+				const connector = document.getElementById('fork-stem-connector');
+				const banner = document.getElementById('fork-banner');
+				const trunks = Array.from(document.querySelectorAll('.fork-trunk'));
+				const junctions = Array.from(document.querySelectorAll('.fork-junction'));
+				const forkBranches = Array.from(document.querySelectorAll('.fork-branch'));
+				const cards = Array.from(document.querySelectorAll('#specs-grid .spec-card'));
+				const exitPin = stage?.querySelector('.canvas-exit-pin');
+
+				if (!stage || !path) return;
+
+				let isRunning = false;
+				let animFrameId = null;
+				let timers = [];
+				const clearAllTimers = () => {
+					timers.forEach((t) => clearTimeout(t));
+					timers = [];
+				};
+
+				let pathLength = 0;
+				try {
+					pathLength = path.getTotalLength();
+					path.style.strokeDasharray = `${pathLength}`;
+					path.style.strokeDashoffset = `${pathLength}`;
+				} catch (_) {
+					pathLength = 1500;
+				}
+
+				// Initialize fork branches stroke dasharray
+				forkBranches.forEach((branch) => {
+					try {
+						const len = branch.getTotalLength();
+						branch.style.strokeDasharray = `${len}`;
+						branch.style.strokeDashoffset = `${len}`;
+					} catch (_) {}
+				});
+
+				const startEulerAnimation = () => {
+					if (isRunning) return;
+					isRunning = true;
+
+					if (animFrameId) cancelAnimationFrame(animFrameId);
+					clearAllTimers();
+
+					// Reset visual states cleanly
+					if (scrim) scrim.classList.remove('is-active');
+					if (exitPin) exitPin.classList.remove('is-passed');
+					milestoneGroups.forEach((g) => g.classList.remove('is-passed'));
+					callouts.forEach((c) => c.classList.remove('is-active'));
+
+					// Reset downward topology cascade
+					if (connector) connector.classList.remove('is-drawn');
+					if (banner) banner.classList.remove('is-shown');
+					trunks.forEach((t) => {
+						t.style.transition = 'none';
+						t.style.strokeDashoffset = '24';
+					});
+					junctions.forEach((j) => j.classList.remove('is-lit'));
+					if (fork) fork.classList.remove('is-active');
+					forkBranches.forEach((branch) => {
+						branch.style.transition = 'none';
+						try {
+							branch.style.strokeDashoffset = `${branch.getTotalLength()}`;
+						} catch (_) {}
+					});
+					cards.forEach((c) => c.classList.remove('is-revealed'));
+
+					if (runner) {
+						runner.style.opacity = '1';
+						runner.setAttribute('cx', '-20');
+						runner.setAttribute('cy', '-20');
+					}
+
+					path.style.transition = 'none';
+					path.style.strokeDashoffset = `${pathLength}`;
+					void path.offsetWidth; // Force DOM reflow
+
+					// Reduced motion check
+					if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+						path.style.strokeDashoffset = '0';
+						milestoneGroups.forEach((g) => g.classList.add('is-passed'));
+						callouts.forEach((c) => c.classList.add('is-active'));
+						if (scrim) scrim.classList.add('is-active');
+						if (exitPin) exitPin.classList.add('is-passed');
+						if (connector) connector.classList.add('is-drawn');
+						if (banner) banner.classList.add('is-shown');
+						trunks.forEach((t) => (t.style.strokeDashoffset = '0'));
+						junctions.forEach((j) => j.classList.add('is-lit'));
+						forkBranches.forEach((b) => (b.style.strokeDashoffset = '0'));
+						cards.forEach((c) => c.classList.add('is-revealed'));
+						isRunning = false;
+						return;
+					}
+
+					// Animate the full Seven Bridges sequence at 1.5x its previous pace.
+					const duration = 4400;
+					const startTime = performance.now();
+
+					const step = (currentTime) => {
+						const elapsed = currentTime - startTime;
+						const progress = Math.min(elapsed / duration, 1);
+						const easeProgress = 1 - Math.pow(1 - progress, 3);
+						const currentOffset = pathLength * (1 - easeProgress);
+						path.style.strokeDashoffset = `${currentOffset}`;
+
+						// Move runner bead along path
+						let rx = -20;
+						let ry = -20;
+						if (runner && typeof path.getPointAtLength === 'function') {
+							try {
+								const pt = path.getPointAtLength(pathLength * easeProgress);
+								rx = pt.x;
+								ry = pt.y;
+								runner.setAttribute('cx', `${rx}`);
+								runner.setAttribute('cy', `${ry}`);
+							} catch (_) {}
+						}
+
+						// Illuminate 4 milestone dots and reveal callouts as runner passes near their coordinates
+						milestoneGroups.forEach((group, idx) => {
+							const dot = group.querySelector('.milestone-dot');
+							if (!dot) return;
+							const bx = parseFloat(dot.getAttribute('cx') || '0');
+							const by = parseFloat(dot.getAttribute('cy') || '0');
+							const distSq = (bx - rx) * (bx - rx) + (by - ry) * (by - ry);
+							if (distSq < 38 * 38) {
+								if (!group.classList.contains('is-passed')) {
+									group.classList.add('is-passed');
+									const callout = callouts[idx];
+									if (callout) {
+										callout.classList.add('is-active');
+									}
+								}
+							}
+						});
+
+						if (progress < 1) {
+							animFrameId = requestAnimationFrame(step);
+						} else {
+							// 1. 上面的 path 画完了 (All bridges traversed!)
+							if (runner) runner.style.opacity = '0.4';
+							milestoneGroups.forEach((g) => g.classList.add('is-passed'));
+							callouts.forEach((c) => c.classList.add('is-active'));
+
+							// Fade in the 70%-width scrim overlay across the map
+							if (scrim) scrim.classList.add('is-active');
+
+							// Activate bottom exit pin dot
+							if (exitPin) exitPin.classList.add('is-passed');
+
+							isRunning = false;
+
+							// 2. 才 画下面竖 path (Vertical stem connector draws down from exit pin)
+							timers.push(
+								setTimeout(() => {
+									if (connector) connector.classList.add('is-drawn');
+								}, 267)
+							);
+
+							// 3. 然后 topology 出现 (Topology banner badge pops in smoothly)
+							timers.push(
+								setTimeout(() => {
+									if (banner) banner.classList.add('is-shown');
+								}, 600)
+							);
+
+							// 4. Trunk line drops through banner to junction
+							timers.push(
+								setTimeout(() => {
+									trunks.forEach((t) => {
+										t.style.transition = 'stroke-dashoffset 0.4s ease-out';
+										t.style.strokeDashoffset = '0';
+									});
+									junctions.forEach((j) => j.classList.add('is-lit'));
+								}, 900)
+							);
+
+							// 5. 然后才散开 4 个 (4 branches spread outward)
+							timers.push(
+								setTimeout(() => {
+									if (fork) fork.classList.add('is-active');
+									forkBranches.forEach((branch, idx) => {
+										timers.push(
+											setTimeout(() => {
+												branch.style.transition = 'stroke-dashoffset 1.3s cubic-bezier(0.22, 1, 0.36, 1)';
+												branch.style.strokeDashoffset = '0';
+											}, idx * 100)
+										);
+									});
+								}, 1133)
+							);
+
+							// 6. 4 Systematic Competency Spec Cards reveal progressively
+							timers.push(
+								setTimeout(() => {
+									cards.forEach((card, idx) => {
+										timers.push(
+											setTimeout(() => {
+												card.classList.add('is-revealed');
+											}, idx * 200)
+										);
+									});
+								}, 1633)
+							);
+						}
+					};
+
+					animFrameId = requestAnimationFrame(step);
+				};
+
+				// Replay interaction: clicking anywhere in this area restarts the journey
+				if (scrim) {
+					scrim.addEventListener('click', (e) => {
+						e.stopPropagation();
+						startEulerAnimation();
+					});
+				}
+
+				// IntersectionObserver to start as user scrolls near Chapter 05
+				const observer = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((entry) => {
+							if (entry.isIntersecting) {
+								startEulerAnimation();
+								observer.disconnect();
+							}
+						});
+					},
+					{ threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
+				);
+
+				observer.observe(stage);
+			};
+
+			initEulerFlow();
+			document.addEventListener('astro:after-swap', initEulerFlow);
+		</script>
 	</body>
 </html>
 
 <style>
+	/* ─────────────────────────────────────────────────────────────
+	   APAPER "KAMI" EDITORIAL PUBLICATION SYSTEM & COLOR CUSTOMIZATION
+	   Paper tones, carbon ink, hairline rules, and cinnabar seal.
+	   ───────────────────────────────────────────────────────────── */
+	:root,
+	[data-paper-theme="washi"] {
+		--apaper-bg: #f8f6f0;
+		--apaper-bg-alt: #f2eee3;
+		--apaper-card: #fcfbf8;
+		--apaper-header-bg: rgba(248, 246, 240, 0.88);
+		--apaper-ink: #202221;
+		--apaper-ink-secondary: #4a4742;
+		--apaper-muted: #776f66;
+		--apaper-line: #ded6ca;
+		--apaper-line-light: #ece6dc;
+		--apaper-accent: #c45e49;
+		--apaper-accent-soft: rgba(196, 94, 73, 0.08);
+		--apaper-accent-line: rgba(196, 94, 73, 0.25);
+		--apaper-btn-text: #ffffff;
+		--apaper-tag-bg: rgba(32, 34, 33, 0.04);
+		--apaper-font-mono: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+		--apaper-font-serif: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
+	}
+
+	/* Preset 2: 古籍琥珀 · Antique Parchment & Amber */
+	[data-paper-theme="amber"] {
+		--apaper-bg: #f5f0e6;
+		--apaper-bg-alt: #ebe3d3;
+		--apaper-card: #faf7f0;
+		--apaper-header-bg: rgba(245, 240, 230, 0.88);
+		--apaper-ink: #26221c;
+		--apaper-ink-secondary: #4d4439;
+		--apaper-muted: #7d7263;
+		--apaper-line: #dbcebb;
+		--apaper-line-light: #e8ded0;
+		--apaper-accent: #b86d29;
+		--apaper-accent-soft: rgba(184, 109, 41, 0.09);
+		--apaper-accent-line: rgba(184, 109, 41, 0.28);
+		--apaper-btn-text: #ffffff;
+		--apaper-tag-bg: rgba(38, 34, 28, 0.04);
+	}
+
+	/* Preset 3: 学术蓝图 · Blueprint & Slate */
+	[data-paper-theme="blueprint"] {
+		--apaper-bg: #f6f8fa;
+		--apaper-bg-alt: #ecf1f6;
+		--apaper-card: #ffffff;
+		--apaper-header-bg: rgba(246, 248, 250, 0.88);
+		--apaper-ink: #1e2530;
+		--apaper-ink-secondary: #3e4a5b;
+		--apaper-muted: #64748b;
+		--apaper-line: #cbd5e1;
+		--apaper-line-light: #e2e8f0;
+		--apaper-accent: #2563eb;
+		--apaper-accent-soft: rgba(37, 99, 235, 0.08);
+		--apaper-accent-line: rgba(37, 99, 235, 0.25);
+		--apaper-btn-text: #ffffff;
+		--apaper-tag-bg: rgba(30, 37, 48, 0.04);
+	}
+
+	/* Preset 4: 竹简青素 · Bamboo & Celadon */
+	[data-paper-theme="bamboo"] {
+		--apaper-bg: #f3f6f3;
+		--apaper-bg-alt: #e6ede6;
+		--apaper-card: #fafcfa;
+		--apaper-header-bg: rgba(243, 246, 243, 0.88);
+		--apaper-ink: #1f2623;
+		--apaper-ink-secondary: #3f4a44;
+		--apaper-muted: #68776f;
+		--apaper-line: #c8d3cc;
+		--apaper-line-light: #dbe3de;
+		--apaper-accent: #2d6a4f;
+		--apaper-accent-soft: rgba(45, 106, 79, 0.08);
+		--apaper-accent-line: rgba(45, 106, 79, 0.25);
+		--apaper-btn-text: #ffffff;
+		--apaper-tag-bg: rgba(31, 38, 35, 0.04);
+	}
+
+	/* Preset 5: 玄纸泥金 · Carbon Washi & Gold (暗调奢雅纸本 · 解决所有看不清的对比度优化) */
+	[data-paper-theme="carbon"] {
+		--apaper-bg: #141617;
+		--apaper-bg-alt: #1a1c1e;
+		--apaper-card: #202325;
+		--apaper-header-bg: rgba(20, 22, 23, 0.92);
+		--apaper-ink: #f5f2eb;             /* 纯粹温润米白，用于大标题、卡片主标题，字字清晰锐利 */
+		--apaper-ink-secondary: #ded9cf;   /* 高对比度暖调亮宣纸白，正文说明、描述、引用清晰通透 */
+		--apaper-muted: #aba496;           /* 典雅暖沙金，元数据、钢印、副标清晰可读不再灰暗 */
+		--apaper-line: #383c3e;            /* 规整纤细发丝线 */
+		--apaper-line-light: #282c2e;
+		--apaper-accent: #e5b382;          /* 澄澈暖泥金，高光点缀与核心呼出 */
+		--apaper-accent-soft: rgba(229, 179, 130, 0.16);
+		--apaper-accent-line: rgba(229, 179, 130, 0.38);
+		--apaper-btn-text: #121415;        /* 金色或米白主按钮上的深墨黑字，对比度 10:1+ 极度清晰 */
+		--apaper-tag-bg: rgba(255, 255, 255, 0.07); /* 标签半透发光底色，消除黑底黑字 */
+	}
+
+	:global(body) {
+		background: var(--apaper-bg);
+		color: var(--apaper-ink);
+		transition: background-color 0.3s ease, color 0.3s ease;
+	}
+
 	.homepage {
 		width: 100%;
 		max-width: 100%;
 		padding: 0;
+		background: var(--apaper-bg);
+		color: var(--apaper-ink);
 	}
 
-	/* Hero */
-	.hero {
-		position: relative;
-		overflow: hidden;
-		padding: clamp(4rem, 11vw, 8rem) 1.5rem clamp(3.5rem, 8vw, 6rem);
-		background:
-			radial-gradient(720px 420px at 50% -10%, var(--accent-soft) 0%, rgba(227, 244, 239, 0) 70%);
-	}
-
-	.hero::after {
-		content: '';
-		position: absolute;
-		inset: auto 0 0 0;
-		height: 1px;
-		background: linear-gradient(90deg, transparent, var(--line), transparent);
-	}
-
-	.hero-content {
-		position: relative;
-		z-index: 2;
-		text-align: center;
-		max-width: 760px;
-		margin: 0 auto;
-	}
-
-	.profile-image {
-		width: 132px;
-		height: 132px;
-		border-radius: 50%;
-		object-fit: cover;
-		border: 4px solid var(--surface-raised);
-		box-shadow: 0 0 0 1px var(--line), var(--shadow-lg);
-		margin: 0 auto 1.75rem;
-		display: block;
-		transition: transform var(--dur) var(--ease);
-	}
-	.profile-image:hover {
-		transform: scale(1.04);
-	}
-
-	.hero-title {
-		font-size: clamp(2.5rem, 6vw, 3.6rem);
-		font-weight: 700;
-		letter-spacing: -0.02em;
-		margin-bottom: 0.6rem;
-		color: rgb(var(--black));
-	}
-	.highlight {
-		background: linear-gradient(120deg, var(--accent) 0%, var(--accent-bright) 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-	}
-
-	.hero-subtitle {
-		font-size: 1.3rem;
-		margin: 0 0 0.2rem;
-		font-weight: 700;
-		color: var(--accent-dark);
-	}
-	.hero-subtitle-secondary {
-		font-size: 1rem;
-		font-weight: 500;
-		letter-spacing: 0.01em;
-		color: rgb(var(--gray));
-		margin-bottom: 1.5rem;
-	}
-
-	.hero-description {
-		font-size: 1.075rem;
-		line-height: 1.7;
-		color: rgb(var(--gray-dark));
-		max-width: 660px;
-		margin: 0 auto 1.1rem;
-	}
-	.hero-description-secondary {
-		font-size: 1rem;
-		color: rgb(var(--gray));
-		margin-bottom: 1.75rem;
-	}
-
-	.hero-cta {
-		display: flex;
-		gap: 0.85rem;
-		justify-content: center;
-		flex-wrap: wrap;
-		margin-bottom: 3rem;
-	}
-
-	.hero-stats {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 1rem;
-		max-width: 560px;
-		margin: 0 auto;
-	}
-	.stat {
-		background: var(--surface-raised);
-		padding: 1.4rem 1rem;
-		border-radius: var(--radius);
-		border: 1px solid var(--line);
-		box-shadow: var(--shadow-sm);
-		transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
-	}
-	.stat:hover {
-		transform: translateY(-3px);
-		box-shadow: var(--shadow-md);
-	}
-	.stat-number {
-		font-size: 2rem;
-		font-weight: 700;
-		color: var(--accent-dark);
-		letter-spacing: -0.02em;
-	}
-	.stat-label {
-		font-size: 0.74rem;
-		color: rgb(var(--gray));
+	/* General apaper buttons */
+	.btn-apaper {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		padding: 7px 16px;
+		border-radius: 999px;
+		background: var(--apaper-ink);
+		color: var(--apaper-btn-text, #ffffff);
+		font-family: var(--apaper-font-mono);
+		font-size: 11px;
+		letter-spacing: 0.06em;
 		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		font-weight: 700;
-		margin-top: 0.25rem;
+		text-decoration: none;
+		border: 1px solid var(--apaper-ink);
+		transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 	}
-	.stat-sub {
-		margin-top: 0.55rem;
-		padding-top: 0.5rem;
-		border-top: 1px dashed var(--line);
-		font-size: 0.78rem;
-		color: rgb(var(--gray));
+	.btn-apaper:hover {
+		background: var(--apaper-accent);
+		border-color: var(--apaper-accent);
+		color: var(--apaper-btn-text, #ffffff);
+		transform: translateY(-1px);
+	}
+	.btn-apaper-primary {
+		background: var(--apaper-accent);
+		border-color: var(--apaper-accent);
+		color: var(--apaper-btn-text, #ffffff);
 		font-weight: 600;
 	}
+	.btn-apaper-primary:hover {
+		background: var(--apaper-ink);
+		border-color: var(--apaper-ink);
+		color: var(--apaper-btn-text, #ffffff);
+	}
+	.btn-apaper-ghost {
+		background: transparent;
+		color: var(--apaper-ink);
+		border-color: var(--apaper-line);
+	}
+	.btn-apaper-ghost:hover {
+		background: var(--apaper-accent-soft);
+		border-color: var(--apaper-accent);
+		color: var(--apaper-accent);
+	}
 
-	/* Sections */
-	section {
-		padding: var(--space-section) 0;
-	}
-	.expertise {
-		background: var(--surface-muted);
-		border-bottom: 1px solid var(--line);
-	}
-	.expertise,
-	.projects {
-		border-top: 1px solid transparent;
-	}
-	.container {
-		max-width: var(--content);
-		margin: 0 auto;
-		padding: 0 1.5rem;
-	}
-	.section-title {
-		text-align: center;
-		font-size: clamp(1.9rem, 3.6vw, 2.5rem);
-		margin: 0 0 3.25rem;
+	/* Hero — Editorial Abstract & Genesis Node */
+	.hero {
 		position: relative;
-		padding-bottom: 1rem;
+		padding: clamp(4.5rem, 8vw, 7rem) 1.5rem clamp(4rem, 7vw, 6rem);
+		background: var(--apaper-bg);
+		border-bottom: 1px solid var(--apaper-line);
 	}
-	.section-title::after {
-		content: '';
+	.hero-inner {
+		display: grid;
+		grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+		align-items: center;
+		gap: clamp(3rem, 6vw, 5.5rem);
+		max-width: 1180px;
+		margin: 0 auto;
+	}
+	.hero-copy {
+		position: relative;
+		z-index: 2;
+	}
+	.hero-kicker-wrap {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		margin-bottom: 1.6rem;
+	}
+	.hero-kicker-glyph {
+		width: 26px;
+		height: 26px;
+		border: 1px solid var(--apaper-ink);
+		border-radius: 8px;
+		display: grid;
+		place-items: center;
+		font-family: var(--apaper-font-serif);
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--apaper-ink);
+		background: var(--apaper-card);
+	}
+	.hero-kicker {
+		font-family: var(--apaper-font-mono);
+		font-size: 10px;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--apaper-accent);
+		font-weight: 700;
+	}
+	.hero h1 {
+		font-family: var(--apaper-font-serif);
+		max-width: 720px;
+		margin: 0 0 1.4rem;
+		font-size: clamp(2.8rem, 4.8vw, 4.4rem);
+		letter-spacing: -0.03em;
+		line-height: 1.08;
+		font-weight: 600;
+		color: var(--apaper-ink);
+	}
+	.hero-description {
+		font-family: var(--apaper-font-serif);
+		max-width: 600px;
+		margin: 0 0 2.2rem;
+		font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+		line-height: 1.75;
+		color: var(--apaper-ink-secondary);
+	}
+	.hero-cta {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		flex-wrap: wrap;
+		margin-bottom: 1.8rem;
+	}
+	.hero-credibility {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		font-family: var(--apaper-font-mono);
+		font-size: 10px;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--apaper-muted);
+		font-weight: 600;
+	}
+	.cred-dot {
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: var(--apaper-accent);
+	}
+	/* Hero Visual Stage — Layered Depth Cards */
+	.hero-visual {
+		position: relative;
+		justify-self: center;
+		width: min(100%, 460px);
+	}
+	.stage-container {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+	.stage-meta-strip {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		letter-spacing: 0.12em;
+		padding: 0 4px;
+	}
+	.stage-title-wrap {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		color: var(--apaper-accent);
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+	.stage-pulse {
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: var(--apaper-accent);
+		box-shadow: 0 0 0 3px var(--apaper-accent-soft);
+		animation: pulse-glow 2.2s infinite ease-in-out;
+	}
+	@keyframes pulse-glow {
+		0%, 100% { transform: scale(1); opacity: 1; }
+		50% { transform: scale(1.3); opacity: 0.6; }
+	}
+	.stage-shift-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		padding: 3px 9px;
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 999px;
+		color: var(--apaper-ink-secondary);
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		cursor: pointer;
+		transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+	}
+	.stage-shift-btn:hover {
+		border-color: var(--apaper-accent);
+		color: var(--apaper-accent);
+		transform: translateY(-1px);
+	}
+
+	/* Hero Visual Stage — 3D Left-Center-Right Cover Flow */
+	.hero-visual {
+		position: relative;
+		justify-self: center;
+		width: 100%;
+		max-width: 530px;
+	}
+	.stage-container {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		width: 100%;
+	}
+	.stage-meta-strip {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		letter-spacing: 0.12em;
+		padding: 0 6px;
+	}
+	.stage-title-wrap {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		color: var(--apaper-accent);
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+	.stage-pulse {
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: var(--apaper-accent);
+		box-shadow: 0 0 0 3px var(--apaper-accent-soft);
+		animation: pulse-glow 2.2s infinite ease-in-out;
+	}
+	.stage-nav-cluster {
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
+	}
+	.stage-arrow-btn {
+		width: 22px;
+		height: 22px;
+		border-radius: 50%;
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		display: grid;
+		place-items: center;
+		color: var(--apaper-ink-secondary);
+		font-family: var(--apaper-font-mono);
+		font-size: 14px;
+		line-height: 1;
+		cursor: pointer;
+		transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.2s;
+	}
+	.stage-arrow-btn:hover {
+		border-color: var(--apaper-accent);
+		color: var(--apaper-accent);
+		transform: scale(1.08);
+	}
+
+	/* The 3D Cover Flow Deck */
+	.stage-deck {
+		position: relative;
+		width: 100%;
+		height: 350px;
+		perspective: 1200px;
+		overflow: visible;
+	}
+	.stage-card {
 		position: absolute;
+		top: 6px;
+		bottom: 6px;
+		left: 11%;
+		right: 11%;
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 18px;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		box-shadow: 0 10px 30px rgba(32, 34, 33, 0.08);
+		transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+		            opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+		            box-shadow 0.6s ease,
+		            filter 0.6s ease,
+		            border-color 0.3s ease;
+		will-change: transform, opacity;
+	}
+
+	/* Center Focused Card */
+	.stage-card.is-center {
+		z-index: 5;
+		transform: translate3d(0, 0, 0) scale(1);
+		opacity: 1;
+		pointer-events: auto;
+		box-shadow: 0 20px 48px rgba(32, 34, 33, 0.16);
+		filter: brightness(1);
+	}
+
+	/* Left Stack / Previous Card: Prominently peeking on the left */
+	.stage-card.is-prev {
+		z-index: 2;
+		transform: translate3d(-88px, 12px, -70px) scale(0.88) rotateY(6deg);
+		opacity: 0.78;
+		pointer-events: auto;
+		cursor: pointer;
+		box-shadow: -10px 12px 28px rgba(32, 34, 33, 0.12);
+		filter: brightness(0.96);
+	}
+	.stage-card.is-prev:hover {
+		opacity: 0.96;
+		border-color: var(--apaper-accent);
+		transform: translate3d(-96px, 8px, -45px) scale(0.9) rotateY(3deg);
+	}
+
+	/* Right Stack / Next Card: Prominently peeking on the right */
+	.stage-card.is-next {
+		z-index: 2;
+		transform: translate3d(88px, 12px, -70px) scale(0.88) rotateY(-6deg);
+		opacity: 0.78;
+		pointer-events: auto;
+		cursor: pointer;
+		box-shadow: 10px 12px 28px rgba(32, 34, 33, 0.12);
+		filter: brightness(0.96);
+	}
+	.stage-card.is-next:hover {
+		opacity: 0.96;
+		border-color: var(--apaper-accent);
+		transform: translate3d(96px, 8px, -45px) scale(0.9) rotateY(-3deg);
+	}
+
+	/* Hidden Cards in Queue */
+	.stage-card.is-hidden {
+		z-index: 0;
+		transform: translate3d(0, 24px, -140px) scale(0.76);
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	/* Card Screen Container */
+	.card-screen {
+		position: relative;
+		flex: 1;
+		width: 100%;
+		overflow: hidden;
+		background: #000;
+	}
+	.card-screen-yong {
+		background: #fdfbf7;
+	}
+	.card-screen-edf {
+		background: #0d1117;
+	}
+	.card-screen-terminal {
+		background: #090a0f;
+	}
+	.card-screen-arcade {
+		background: #111417;
+	}
+	.stage-video {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+	.card-screen-yong .stage-video {
+		object-fit: contain;
+	}
+
+	/* Screen Stamp Badges */
+	.screen-badge {
+		position: absolute;
+		top: 12px;
+		left: 12px;
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		padding: 4px 10px;
+		background: rgba(248, 246, 240, 0.92);
+		backdrop-filter: blur(8px);
+		border: 1px solid var(--apaper-line);
+		border-radius: 999px;
+		font-family: var(--apaper-font-mono);
+		font-size: 8.5px;
+		letter-spacing: 0.08em;
+		color: var(--apaper-ink);
+		font-weight: 600;
+		z-index: 2;
+	}
+	.badge-dot {
+		width: 5px;
+		height: 5px;
+		border-radius: 50%;
+		background: var(--apaper-accent);
+	}
+	.badge-edf {
+		background: rgba(13, 17, 23, 0.88);
+		border-color: rgba(56, 189, 248, 0.25);
+		color: #38bdf8;
+	}
+	.dot-edf {
+		background: #38bdf8;
+	}
+	.badge-terminal {
+		background: rgba(14, 17, 22, 0.88);
+		border-color: rgba(255, 255, 255, 0.15);
+		color: #4ade80;
+	}
+	.dot-terminal {
+		background: #4ade80;
+	}
+	.badge-arcade {
+		background: rgba(18, 20, 24, 0.88);
+		border-color: rgba(255, 255, 255, 0.15);
+		color: #f59e0b;
+	}
+	.dot-arcade {
+		background: #f59e0b;
+	}
+
+	/* Card Caption Bar */
+	.card-caption-bar {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 12px;
+		padding: 12px 16px;
+		background: var(--apaper-card);
+		border-top: 1px solid var(--apaper-line);
+	}
+	.caption-copy {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		min-width: 0;
+	}
+	.caption-copy strong {
+		font-family: var(--apaper-font-serif);
+		font-size: 0.98rem;
+		font-weight: 600;
+		color: var(--apaper-ink);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.caption-copy span {
+		font-family: var(--apaper-font-mono);
+		font-size: 0.72rem;
+		color: var(--apaper-muted);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.stage-card-link {
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--apaper-accent);
+		text-decoration: none;
+		font-weight: 700;
+		padding: 4px 8px;
+		border: 1px solid var(--apaper-accent-line);
+		border-radius: 6px;
+		white-space: nowrap;
+		transition: background 0.2s ease, color 0.2s ease;
+	}
+	.stage-card-link:hover {
+		background: var(--apaper-accent);
+		color: #ffffff;
+	}
+
+	/* Stage Pagination Indicator Pills */
+	.stage-pills {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 6px;
+		margin-top: 4px;
+	}
+	.stage-pill {
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
+		padding: 4px 10px;
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 999px;
+		color: var(--apaper-muted);
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		letter-spacing: 0.05em;
+		cursor: pointer;
+		transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+	}
+	.stage-pill:hover {
+		border-color: var(--apaper-accent);
+		color: var(--apaper-ink);
+	}
+	.stage-pill.active {
+		border-color: var(--apaper-ink);
+		background: var(--apaper-ink);
+		color: #ffffff;
+	}
+	.pill-dot {
+		width: 4px;
+		height: 4px;
+		border-radius: 50%;
+		background: var(--apaper-muted);
+	}
+	.stage-pill.active .pill-dot {
+		background: var(--apaper-accent);
+	}
+
+	/* Chapter 01 Native Video Player */
+	.chapter-video-wrap {
+		position: relative;
+		aspect-ratio: 16 / 9;
+		overflow: hidden;
+		border-radius: 12px;
+		background: #000;
+		border: 1px solid var(--apaper-line);
+		box-shadow: 0 6px 20px rgba(32, 34, 33, 0.08);
+	}
+	.chapter-native-video {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+
+	/* Chapter 01 Rank Card */
+	.rank-card {
+		margin: 16px 0 0;
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 12px;
+		padding: 10px;
+		box-shadow: 0 4px 14px rgba(32, 34, 33, 0.04);
+	}
+	.rank-card img {
+		width: 100%;
+		height: auto;
+		border-radius: 8px;
+		border: 1px solid var(--apaper-line);
+		display: block;
+	}
+	.rank-card figcaption {
+		font-family: var(--apaper-font-mono);
+		font-size: 8.5px;
+		letter-spacing: 0.04em;
+		color: var(--apaper-muted);
+		line-height: 1.5;
+		margin-top: 8px;
+		padding: 0 2px;
+	}
+
+	/* Proof — Archival Exhibit Plates */
+	.proof {
+		padding: clamp(4rem, 7vw, 6rem) 1.5rem;
+		background: var(--apaper-bg);
+	}
+	.proof-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: clamp(14px, 2vw, 22px);
+		max-width: 1180px;
+		margin: 0 auto;
+	}
+	.proof-card {
+		display: flex;
+		flex-direction: column;
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 14px;
+		overflow: hidden;
+		color: inherit;
+		text-decoration: none;
+		transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+	}
+	.proof-card:hover {
+		border-color: var(--apaper-accent);
+		transform: translateY(-3px);
+		box-shadow: 0 10px 24px rgba(32, 34, 33, 0.06);
+	}
+	.proof-card-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 12px 16px;
+		border-bottom: 1px solid var(--apaper-line);
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+	.proof-card-id {
+		color: var(--apaper-accent);
+		font-weight: 700;
+	}
+	.proof-card-scope {
+		color: var(--apaper-muted);
+	}
+	.proof-media {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 200px;
+		overflow: hidden;
+		background: var(--apaper-bg-alt);
+		border-bottom: 1px solid var(--apaper-line-light);
+	}
+	.proof-media img {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+	.proof-medal {
+		background: #151515;
+	}
+	.proof-medal img {
+		object-fit: cover;
+		object-position: center;
+	}
+	.proof-rank {
+		padding: 1.2rem;
+	}
+	.proof-rank img {
+		height: auto;
+		max-height: 100%;
+		object-fit: contain;
+		border-radius: 8px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+	}
+	.proof-devpost {
+		background: #eef2f3;
+	}
+	.proof-devpost img {
+		object-fit: cover;
+		object-position: top center;
+	}
+	.proof-copy {
+		display: grid;
+		gap: 4px;
+		padding: 14px 16px 18px;
+	}
+	.proof-copy strong {
+		font-family: var(--apaper-font-serif);
+		font-size: 1.08rem;
+		font-weight: 600;
+		color: var(--apaper-ink);
+		line-height: 1.3;
+	}
+	.proof-copy span {
+		font-family: var(--apaper-font-mono);
+		color: var(--apaper-muted);
+		font-size: 0.78rem;
+		letter-spacing: 0.02em;
+	}
+
+	.signature {
+		background: var(--apaper-bg);
+		color: var(--apaper-ink);
+		border-top: 1px solid var(--apaper-line);
+		border-bottom: 1px solid var(--apaper-line);
+		padding: clamp(5rem, 8vw, 7.5rem) 1.5rem clamp(6rem, 10vw, 9rem);
+		position: relative;
+		overflow-x: clip;
+	}
+
+	/* Section Lead Header */
+	.sig-editorial-header {
+		max-width: 1180px;
+		margin: 0 auto clamp(3.5rem, 6vw, 5.5rem);
+	}
+	.sig-meta-bar {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 12px;
+		padding-bottom: 16px;
+		border-bottom: 1px solid var(--apaper-line);
+		font-family: var(--apaper-font-mono);
+		font-size: 10px;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--apaper-muted);
+	}
+	.sig-wordmark {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		color: var(--apaper-ink);
+		font-weight: 500;
+	}
+	.sig-mark-glyph {
+		width: 26px;
+		height: 26px;
+		border: 1px solid var(--apaper-ink);
+		border-radius: 8px;
+		display: grid;
+		place-items: center;
+		font-family: var(--apaper-font-serif);
+		font-size: 13px;
+		color: var(--apaper-ink);
+		background: #ffffff60;
+	}
+	.sig-timeframe {
+		color: var(--apaper-muted);
+	}
+	.sig-status-tag {
+		display: inline-flex;
+		align-items: center;
+		gap: 7px;
+		color: var(--apaper-accent);
+		font-weight: 700;
+	}
+	.sig-pulse-dot {
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: var(--apaper-accent);
+		box-shadow: 0 0 0 3px var(--apaper-accent-soft);
+	}
+	.sig-eyebrow {
+		font-family: var(--apaper-font-mono);
+		font-size: 10px;
+		font-weight: 700;
+		letter-spacing: 0.16em;
+		color: var(--apaper-accent);
+		text-transform: uppercase;
+		margin: 26px 0 10px;
+	}
+	.sig-title-block h2 {
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(2.4rem, 4.5vw, 3.4rem);
+		font-weight: 500;
+		letter-spacing: -0.04em;
+		line-height: 1.05;
+		color: var(--apaper-ink);
+		margin: 0 0 18px;
+	}
+	.sig-lead-text {
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(1.02rem, 1.5vw, 1.18rem);
+		line-height: 1.8;
+		color: var(--apaper-muted);
+		max-width: 840px;
+		border-left: 2px solid var(--apaper-accent);
+		padding-left: 18px;
+		margin: 0;
+	}
+
+	/* The Editorial Flow & Rail Spine */
+	.editorial-flow {
+		max-width: 1180px;
+		margin: 0 auto;
+		position: relative;
+	}
+	.editorial-milestones {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(4rem, 7vw, 6.5rem);
+		position: relative;
+	}
+
+	/* Individual Milestone Node */
+	.editorial-node {
+		display: grid;
+		grid-template-columns: 56px 1fr;
+		gap: clamp(18px, 3.5vw, 42px);
+		position: relative;
+	}
+	.node-rail {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.node-marker {
+		position: sticky;
+		top: 96px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 8px;
+		background: var(--apaper-bg);
+		padding: 6px 0;
+		z-index: 2;
+	}
+	.node-num {
+		font-family: var(--apaper-font-mono);
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		color: var(--apaper-muted);
+	}
+	.node-dot {
+		width: 9px;
+		height: 9px;
+		border-radius: 50%;
+		border: 1px solid var(--apaper-accent);
+		background: var(--apaper-bg);
+		box-shadow: 0 0 0 3px var(--apaper-accent-soft);
+	}
+	.node-line-seg {
+		position: absolute;
+		top: 36px;
+		bottom: -7rem;
+		width: 1px;
+		background: linear-gradient(180deg, var(--apaper-accent), var(--apaper-line) 30%, var(--apaper-line));
+		opacity: 0.65;
+		z-index: 1;
+	}
+
+	.node-content {
+		min-width: 0;
+	}
+	.node-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 12px;
+		padding-bottom: 12px;
+		margin-bottom: 16px;
+		border-bottom: 1px solid var(--apaper-line);
+		font-family: var(--apaper-font-mono);
+		font-size: 10px;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+	}
+	.node-badge {
+		color: var(--apaper-accent);
+		font-weight: 700;
+	}
+	.node-date {
+		color: var(--apaper-muted);
+	}
+
+	/* Card Plate */
+	.node-plate {
+		display: grid;
+		grid-template-columns: minmax(300px, 1fr) minmax(320px, 1.1fr);
+		gap: clamp(24px, 3.5vw, 44px);
+		align-items: start;
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 18px;
+		padding: clamp(20px, 3vw, 36px);
+		box-shadow: 0 10px 24px rgba(32, 34, 33, 0.04);
+		transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+	}
+	.node-plate:hover {
+		border-color: rgba(196, 94, 73, 0.35);
+		box-shadow: 0 16px 36px rgba(32, 34, 33, 0.07);
+		transform: translateY(-2px);
+	}
+	.node-plate.plate-reverse {
+		grid-template-columns: minmax(320px, 1.1fr) minmax(300px, 1fr);
+	}
+	.node-plate.plate-reverse .plate-media {
+		order: 2;
+	}
+	.node-plate.plate-reverse .plate-story {
+		order: 1;
+	}
+
+	.plate-media {
+		min-width: 0;
+	}
+	.media-frame {
+		position: relative;
+		overflow: hidden;
+		border-radius: 12px;
+		border: 1px solid var(--apaper-line);
+		background: #111;
+	}
+	.media-frame img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: 0;
+	}
+	.wishes-media-frame {
+		background: #111;
+	}
+	.wishes-carousel {
+		position: relative;
+		padding-bottom: 36px;
+	}
+	.wishes-carousel-viewport {
+		overflow: hidden;
+		/* Keep both portrait demos whole, but in the same compact 16:9 media slot as the other chapters. */
+		aspect-ratio: 16 / 9;
+		background: #eee4d2;
+	}
+	.wishes-carousel-track {
+		display: flex;
+		width: 200%;
+		height: 100%;
+		transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	.wishes-slide {
+		position: relative;
+		flex: 0 0 50%;
+		margin: 0;
+		background: #eee4d2;
+		overflow: hidden;
+	}
+	.wishes-media-frame .wishes-demo-video,
+	.wishes-media-frame .wishes-blessing-preview {
+		position: absolute;
+		inset: 0;
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		object-position: center top;
+		background: #eee4d2;
+	}
+	.wishes-card-slide {
+		background: #f3ead7;
+	}
+	.wishes-sms-notification {
+		position: absolute;
+		top: 4%;
+		left: 5%;
+		right: 5%;
+		z-index: 3;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 8px 10px;
+		border: 1px solid rgba(255, 255, 255, 0.78);
+		border-radius: 12px;
+		background: rgba(251, 251, 252, 0.88);
+		box-shadow: 0 7px 20px rgba(36, 30, 24, 0.22);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		opacity: 0;
+		transform: translateY(-12px) scale(0.96);
+		transition: opacity 360ms ease, transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+		pointer-events: none;
+	}
+	.wishes-sms-notification.is-visible {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+	.wishes-notification-icon {
+		display: grid;
+		place-items: center;
+		width: 23px;
+		height: 23px;
+		border-radius: 7px;
+		background: #4f8cf7;
+		color: #fff;
+		font-size: 13px;
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32);
+	}
+	.wishes-sms-notification div {
+		min-width: 0;
+		display: grid;
+		grid-template-columns: 1fr auto;
+		column-gap: 6px;
+	}
+	.wishes-notification-meta {
+		grid-column: 1 / -1;
+		font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+		font-size: 7px;
+		font-weight: 600;
+		letter-spacing: 0.03em;
+		color: #6d6d72;
+	}
+	.wishes-sms-notification strong {
+		font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+		font-size: 9px;
+		font-weight: 700;
+		color: #222225;
+	}
+	.wishes-sms-notification p {
+		grid-column: 1 / -1;
+		margin: 1px 0 0;
+		font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+		font-size: 8px;
+		line-height: 1.25;
+		color: #414146;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.wishes-slide-label {
+		position: absolute;
+		left: 12px;
+		bottom: 12px;
+		z-index: 2;
+		padding: 4px 8px;
+		border-radius: 4px;
+		background: rgba(24, 26, 27, 0.78);
+		color: #f8f5ef;
+		font-family: var(--apaper-font-mono);
+		font-size: 8px;
+		font-style: normal;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+	}
+	.wishes-message-composer {
+		position: absolute;
+		z-index: 2;
+		top: 53%;
+		/* Align with the input region inside the centered, fully-contained phone capture. */
+		left: 35.5%;
+		right: 35.5%;
+		padding: 5px;
+		background: rgba(255, 255, 255, 0.96);
+		border: 1px solid rgba(80, 65, 51, 0.26);
+		border-radius: 8px;
+		box-shadow: 0 5px 18px rgba(42, 31, 21, 0.16);
+	}
+	.wishes-message-composer label {
+		display: block;
+		margin-bottom: 3px;
+		font-family: var(--apaper-font-mono);
+		font-size: 8px;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		color: #8d3a2e;
+	}
+	.wishes-message-composer input {
+		box-sizing: border-box;
+		width: 100%;
+		border: 1px solid #d8d0c4;
+		border-radius: 5px;
+		padding: 4px 5px;
+		background: #fff;
+		color: #25211e;
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(0.7rem, 1.35vw, 0.86rem);
+		outline: none;
+	}
+	.wishes-message-composer input:focus {
+		border-color: #a4372c;
+		box-shadow: 0 0 0 2px rgba(164, 55, 44, 0.12);
+	}
+	.wishes-composer-footer {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		margin-top: 4px;
+	}
+	.wishes-message-composer [data-wishes-preview] {
+		min-width: 0;
+		flex: 1;
+		color: #7b6d60;
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(0.63rem, 1.1vw, 0.76rem);
+		line-height: 1.35;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.wishes-send-button {
+		flex-shrink: 0;
+		border: 0;
+		border-radius: 5px;
+		padding: 4px 5px;
+		background: #a4372c;
+		color: #fff;
+		font-family: var(--apaper-font-mono);
+		font-size: 8px;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		cursor: pointer;
+		transition: transform 160ms ease, background 160ms ease;
+	}
+	.wishes-send-button:hover,
+	.wishes-send-button:focus-visible {
+		background: #8d2e25;
+		transform: translateY(-1px);
+	}
+	.wishes-send-button.is-sending {
+		transform: scale(0.94);
+		background: #6f261f;
+	}
+	.wishes-send-button:disabled {
+		cursor: default;
+		opacity: 1;
+	}
+	.wishes-send-status {
+		display: block;
+		margin-top: 3px;
+		min-height: 1em;
+		color: #9a4b40;
+		font-family: var(--apaper-font-mono);
+		font-size: 7.5px;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+	}
+	.wishes-message-composer.is-sent .wishes-send-status {
+		color: #31725b;
+	}
+	.wishes-carousel-controls {
+		position: absolute;
+		left: 0;
+		right: 0;
 		bottom: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+	}
+	.wishes-carousel-arrow,
+	.wishes-carousel-dot {
+		appearance: none;
+		border: 0;
+		cursor: pointer;
+	}
+	.wishes-carousel-arrow {
+		width: 22px;
+		height: 22px;
+		border-radius: 50%;
+		background: var(--apaper-tag-bg);
+		color: var(--apaper-ink-secondary);
+		font-size: 13px;
+		line-height: 1;
+	}
+	.wishes-carousel-arrow:hover,
+	.wishes-carousel-arrow:focus-visible {
+		background: var(--apaper-accent);
+		color: var(--apaper-btn-text);
+	}
+	.wishes-carousel-dots {
+		display: flex;
+		gap: 5px;
+	}
+	.wishes-carousel-dot {
+		width: 6px;
+		height: 6px;
+		padding: 0;
+		border-radius: 50%;
+		background: var(--apaper-line);
+		transition: width 200ms ease, background 200ms ease;
+	}
+	.wishes-carousel-dot.active {
+		width: 16px;
+		border-radius: 999px;
+		background: var(--apaper-accent);
+	}
+	.media-stamp {
+		position: absolute;
+		top: 12px;
+		right: 12px;
+		z-index: 2;
+		background: rgba(27, 33, 35, 0.85);
+		color: #f8f5ef;
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		letter-spacing: 0.14em;
+		padding: 4px 8px;
+		border: 1px solid rgba(255, 255, 255, 0.25);
+		border-radius: 4px;
+		backdrop-filter: blur(8px);
+	}
+
+	.plate-story {
+		min-width: 0;
+	}
+	.plate-kicker {
+		display: inline-block;
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		color: var(--apaper-accent);
+		text-transform: uppercase;
+		margin-bottom: 6px;
+	}
+	.plate-story h3 {
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+		font-weight: 500;
+		letter-spacing: -0.025em;
+		color: var(--apaper-ink);
+		margin: 0 0 12px;
+		line-height: 1.22;
+	}
+	.plate-p {
+		font-family: var(--apaper-font-serif);
+		font-size: 0.98rem;
+		line-height: 1.8;
+		color: var(--apaper-ink-secondary);
+		margin: 0 0 14px;
+	}
+	.plate-p strong {
+		color: var(--apaper-ink);
+	}
+	.plate-highlights {
+		display: grid;
+		gap: 8px;
+		margin: 0 0 17px;
+		padding: 0;
+		list-style: none;
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(0.9rem, 1.1vw, 1rem);
+		line-height: 1.45;
+		color: var(--apaper-ink-secondary);
+	}
+	.plate-highlights li {
+		display: flex;
+		align-items: flex-start;
+		gap: 9px;
+	}
+	.plate-highlights li::before {
+		content: "✓";
+		display: grid;
+		place-items: center;
+		flex: 0 0 17px;
+		width: 17px;
+		height: 17px;
+		margin-top: 0.15em;
+		border: 1px solid var(--apaper-accent);
+		border-radius: 50%;
+		color: var(--apaper-accent);
+		font-family: var(--apaper-font-mono);
+		font-size: 10px;
+		font-weight: 700;
+		line-height: 1;
+	}
+	.plate-highlights strong {
+		color: var(--apaper-ink);
+		font-weight: 700;
+	}
+	.editorial-quote {
+		margin: 14px 0 18px;
+		padding: 10px 0 10px 14px;
+		border-left: 2px solid var(--apaper-line);
+		background: transparent;
+		font-family: var(--apaper-font-serif);
+		font-size: 0.94rem;
+		line-height: 1.75;
+		color: var(--apaper-ink-secondary);
+		font-style: normal;
+	}
+	.editorial-quote p {
+		margin: 0;
+	}
+
+	/* Buttons in apaper style */
+	.plate-cta {
+		display: flex;
+		gap: 8px;
+		flex-wrap: wrap;
+		margin-bottom: 16px;
+	}
+	/* Tags in apaper style */
+	.plate-tags, .spec-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+		margin-top: 14px;
+	}
+	.plate-tags span, .spec-tags span {
+		font-family: var(--apaper-font-mono);
+		font-size: 9.5px;
+		letter-spacing: 0.03em;
+		padding: 2.5px 8.5px;
+		border: 1px solid var(--apaper-line);
+		border-radius: 999px;
+		background: var(--apaper-tag-bg);
+		color: var(--apaper-ink-secondary);
+	}
+
+	.terminal-title {
+		font-family: var(--apaper-font-mono);
+		font-size: 10px;
+		color: rgba(255, 255, 255, 0.5);
+		margin-left: auto;
+		letter-spacing: 0.06em;
+	}
+
+	/* ─────────────────────────────────────────────────────────────
+	   Chapter 05: The Seven Bridges Inflection Point & Topological Fork
+	   ───────────────────────────────────────────────────────────── */
+	.editorial-node.node-pivot {
+		grid-column: 1 / -1;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
+	.node-pivot .node-rail {
+		display: none;
+	}
+	.node-pivot .node-content {
+		width: 100%;
+	}
+	.node-pivot .node-header {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 14px;
+		margin-bottom: 20px;
+	}
+	.node-pivot .node-dot-pivot {
+		border-color: var(--apaper-accent);
+		background: var(--apaper-accent);
+		box-shadow: 0 0 0 4px var(--apaper-accent-soft);
+	}
+	.badge-pivot {
+		color: var(--apaper-accent);
+		font-weight: 700;
+	}
+
+	.pivot-stage {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		position: relative;
+	}
+
+	/* Map Canvas Frame (Full-width panoramic breakout with zero left/right gutters & cropped top land) */
+	.stage-canvas-frame {
+		position: relative;
+		border-radius: 0;
+		overflow: hidden;
+		border-top: 1px solid var(--apaper-line);
+		border-bottom: 1px solid var(--apaper-line);
+		border-left: none;
+		border-right: none;
+		width: 100vw;
+		margin-left: calc(50% - 50vw);
+		margin-right: calc(50% - 50vw);
+		/* 55% of the original 330-unit panoramic crop (181.5 units). */
+		aspect-ratio: 720 / 181.5;
+		background: #e8e3d6;
+		box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+	}
+	.stage-map-bg {
+		position: absolute;
+		left: 0;
+		top: calc(-115 / 330 * 100%);
+		width: 100%;
+		height: calc(531 / 330 * 100%);
+		object-fit: fill;
+		display: block;
+		filter: saturate(0.96) contrast(1.02);
+	}
+	.stage-map-vignette {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		z-index: 1;
+		background: linear-gradient(180deg, rgba(248, 246, 240, 0.35) 0%, rgba(248, 246, 240, 0) 40%, rgba(248, 246, 240, 0.2) 100%);
+	}
+
+	/* Full-Canvas Scrim Overlay (Fades in across entire map AFTER journey completes) */
+	.stage-journey-scrim {
+		position: absolute;
+		inset: 0;
+		z-index: 30;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(14, 16, 18, 0.78);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+		padding: 20px;
+	}
+	.stage-journey-scrim.is-active {
+		opacity: 1;
+		pointer-events: auto;
+		cursor: pointer;
+	}
+	.stage-journey-scrim.is-active:hover .scrim-transition-card {
+		border-color: #e5b382;
+		box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 0 1.5px rgba(229, 179, 130, 0.5);
+	}
+	.scrim-transition-card {
+		position: relative;
+		z-index: 31;
+		width: 70%;
+		max-width: 660px;
+		background: rgba(22, 24, 27, 0.95);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border: 1px solid rgba(229, 179, 130, 0.45);
+		border-radius: 16px;
+		padding: clamp(18px, 3vw, 32px) clamp(22px, 3.5vw, 38px);
+		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.06);
+		text-align: center;
+		transform: scale(0.95) translateY(14px);
+		transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+	.stage-journey-scrim.is-active .scrim-transition-card {
+		transform: scale(1) translateY(0);
+	}
+	.scrim-meta {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 10px;
+		font-family: var(--apaper-font-mono);
+		font-size: 8.5px;
+		letter-spacing: 0.12em;
+	}
+	.scrim-kicker {
+		color: #e5b382;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+	.scrim-stamp {
+		color: #e5b382;
+		background: rgba(229, 179, 130, 0.14);
+		padding: 2.5px 8px;
+		border-radius: 4px;
+		border: 1px solid rgba(229, 179, 130, 0.35);
+	}
+	.scrim-title {
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(1.35rem, 2.4vw, 1.95rem);
+		font-weight: 600;
+		letter-spacing: -0.025em;
+		color: #f5f2eb;
+		margin: 0 0 8px;
+		line-height: 1.22;
+	}
+	.scrim-subtitle {
+		display: block;
+		font-weight: 400;
+		font-style: italic;
+		color: #e5b382;
+		font-size: 0.9em;
+		margin-top: 2px;
+	}
+	.scrim-summary {
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(0.86rem, 1.15vw, 0.95rem);
+		line-height: 1.68;
+		color: #ded9cf;
+		margin: 0 auto;
+		max-width: 520px;
+		text-wrap: balance;
+	}
+	.scrim-replay-cue {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 6px;
+		margin-top: 14px;
+		padding: 4px 14px;
+		border-radius: 999px;
+		background: rgba(229, 179, 130, 0.12);
+		border: 1px solid rgba(229, 179, 130, 0.35);
+		color: #e5b382;
+		font-family: var(--apaper-font-mono);
+		font-size: 8.5px;
+		letter-spacing: 0.12em;
+		font-weight: 700;
+		text-transform: uppercase;
+		transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+	}
+	.stage-journey-scrim.is-active:hover .scrim-replay-cue {
+		background: #e5b382;
+		color: #121415;
+		border-color: #e5b382;
+		transform: translateY(-1px);
+	}
+
+	/* Footer Caption inside map frame */
+	.stage-footer-caption {
+		position: absolute;
+		bottom: 10px;
+		left: 16px;
+		right: 16px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-family: var(--apaper-font-mono);
+		font-size: 8px;
+		letter-spacing: 0.1em;
+		color: rgba(32, 34, 33, 0.6);
+		z-index: 3;
+		pointer-events: none;
+	}
+	.caption-indicator {
+		color: var(--apaper-accent);
+		font-weight: 700;
+	}
+
+	/* SVG Euler Traversal Layer */
+	.stage-euler-svg {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+		z-index: 2;
+	}
+	.euler-track {
+		fill: none;
+		stroke: var(--apaper-accent);
+		stroke-width: 1.5;
+		stroke-dasharray: 4 6;
+		stroke-opacity: 0.25;
+	}
+	.euler-stroke {
+		fill: none;
+		stroke: var(--apaper-accent);
+		stroke-width: 3.5;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		filter: drop-shadow(0 0 4px rgba(196, 94, 73, 0.5));
+	}
+	.milestone-halo {
+		fill: #f59e0b;
+		fill-opacity: 0;
+		transition: fill-opacity 0.4s ease, r 0.4s ease;
+	}
+	.milestone-dot {
+		fill: #fdfbf7;
+		stroke: var(--apaper-accent);
+		stroke-width: 2.2;
+		transition: fill 0.35s ease, stroke 0.35s ease, filter 0.35s ease;
+	}
+	.milestone-pin-group.is-passed .milestone-halo {
+		fill-opacity: 0.25;
+		r: 15;
+	}
+	.milestone-pin-group.is-passed .milestone-dot {
+		fill: #f59e0b;
+		stroke: #ffffff;
+		filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.85));
+	}
+	.euler-runner {
+		fill: #f59e0b;
+		filter: drop-shadow(0 0 6px #f59e0b);
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+
+	/* 4 Floating Milestone Callout Annotations */
+	.stage-milestone-annotations {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		z-index: 3;
+	}
+	.milestone-callout {
+		position: absolute;
+		pointer-events: auto;
+		opacity: 0;
+		transform: translateY(6px);
+		transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+	.milestone-callout.is-active {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	/* Callout Stems & Card Positions */
+	.callout-1 .callout-card {
+		transform: translate(-104%, 8px);
+	}
+	.callout-1 .callout-stem {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 18px;
+		height: 14px;
+		border-top: 1.5px dashed var(--apaper-accent);
+		border-left: 1.5px dashed var(--apaper-accent);
+		transform: translate(-18px, 0);
+		opacity: 0.5;
+	}
+
+	.callout-2 .callout-card {
+		transform: translate(12px, 8px);
+	}
+	.callout-2 .callout-stem {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 14px;
+		height: 12px;
+		border-top: 1.5px dashed var(--apaper-accent);
+		border-right: 1.5px dashed var(--apaper-accent);
+		transform: translate(0, 0);
+		opacity: 0.5;
+	}
+
+	.callout-3 .callout-card {
+		transform: translate(14px, -50%);
+	}
+	.callout-3 .callout-stem {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 14px;
+		height: 1.5px;
+		background: var(--apaper-accent);
+		transform: translate(0, 0);
+		opacity: 0.5;
+	}
+
+	.callout-4 .callout-card {
+		transform: translate(-104%, -75%);
+	}
+	.callout-4 .callout-stem {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 18px;
+		height: 14px;
+		border-bottom: 1.5px dashed var(--apaper-accent);
+		border-left: 1.5px dashed var(--apaper-accent);
+		transform: translate(-18px, -14px);
+		opacity: 0.5;
+	}
+
+	.callout-card {
+		background: rgba(18, 20, 22, 0.94);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border: 1px solid rgba(229, 179, 130, 0.5);
+		border-radius: 8px;
+		padding: 6px 12px;
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+		display: flex;
+		flex-direction: column;
+		min-width: 150px;
+		white-space: nowrap;
+		cursor: default;
+		transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+	}
+	.callout-card:hover {
+		border-color: #e5b382;
+		transform: scale(1.04);
+		box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+	}
+	.callout-badge {
+		font-family: var(--apaper-font-mono);
+		font-size: 7.5px;
+		letter-spacing: 0.14em;
+		font-weight: 700;
+		color: #e5b382;
+		text-transform: uppercase;
+	}
+	.callout-title {
+		font-family: var(--apaper-font-serif);
+		font-size: 0.92rem;
+		font-weight: 600;
+		color: #f5f2eb;
+		margin: 1px 0 0;
+		line-height: 1.25;
+	}
+	.callout-tag {
+		font-family: var(--apaper-font-mono);
+		font-size: 8px;
+		letter-spacing: 0.03em;
+		color: #ded9cf;
+	}
+
+	/* Canvas Exit Pin Dot (Exact connection point at bottom center) */
+	.canvas-exit-pin {
+		position: absolute;
+		bottom: -5px;
 		left: 50%;
 		transform: translateX(-50%);
-		width: 52px;
-		height: 3px;
-		border-radius: 999px;
-		background: var(--accent);
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background: #fdfbf7;
+		border: 2px solid var(--apaper-accent);
+		box-shadow: 0 0 0 2px rgba(196, 94, 73, 0.15);
+		z-index: 5;
+		transition: background 0.4s ease, filter 0.4s ease, border-color 0.4s ease;
+	}
+	.canvas-exit-pin.is-passed {
+		background: #f59e0b;
+		border-color: #ffffff;
+		filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.9));
 	}
 
-	/* Cards */
-	.expertise-grid {
+	/* Connective Topological Fork (Continuous from map exit) */
+	.topological-fork {
+		position: relative;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 0;
+		margin-bottom: 6px;
+	}
+	.fork-stem-connector {
+		width: 2.5px;
+		height: 22px;
+		background: var(--apaper-accent);
+		transform-origin: top center;
+		transform: scaleY(0);
+		opacity: 0;
+		margin-bottom: -1px;
+		transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, filter 0.5s ease;
+	}
+	.fork-stem-connector.is-drawn {
+		transform: scaleY(1);
+		opacity: 1;
+		filter: drop-shadow(0 0 4px rgba(229, 179, 130, 0.7));
+	}
+	.fork-banner {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		padding: 3px 12px;
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 999px;
+		font-family: var(--apaper-font-mono);
+		font-size: 8.5px;
+		letter-spacing: 0.12em;
+		color: var(--apaper-accent);
+		font-weight: 700;
+		margin-bottom: 2px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+		position: relative;
+		z-index: 2;
+		opacity: 0;
+		transform: scale(0.85);
+		transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+	}
+	.fork-banner.is-shown {
+		opacity: 1;
+		transform: scale(1);
+		border-color: var(--apaper-accent);
+	}
+	.fork-pulse {
+		width: 5px;
+		height: 5px;
+		border-radius: 50%;
+		background: var(--apaper-accent);
+		animation: pulse-glow 2s infinite ease-in-out;
+	}
+	.fork-svg {
+		width: 100%;
+		overflow: visible;
+		display: block;
+	}
+	.fork-desktop {
+		height: 68px;
+	}
+	.fork-mobile {
+		display: none;
+		height: 50px;
+	}
+	.fork-trunk {
+		fill: none;
+		stroke: var(--apaper-accent);
+		stroke-width: 2.5;
+		stroke-linecap: round;
+		stroke-dasharray: 24;
+		stroke-dashoffset: 24;
+		transition: stroke-dashoffset 0.4s ease-out;
+	}
+	.fork-junction {
+		fill: var(--apaper-accent);
+		filter: drop-shadow(0 0 5px var(--apaper-accent));
+		opacity: 0;
+		transform-origin: 500px 24px;
+		transform: scale(0);
+		transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+	.fork-junction.is-lit {
+		opacity: 1;
+		transform: scale(1);
+	}
+	.fork-branch {
+		fill: none;
+		stroke: var(--apaper-accent);
+		stroke-width: 2.2;
+		stroke-linecap: round;
+		stroke-opacity: 0.9;
+		filter: drop-shadow(0 0 3px rgba(229, 179, 130, 0.4));
+	}
+
+	/* 4 Systematic Competency Spec Cards */
+	.specs-grid {
 		display: grid;
-		grid-template-columns: 1fr;
-		gap: 1.5rem;
+		grid-template-columns: repeat(4, 1fr);
+		gap: clamp(14px, 2vw, 22px);
+		margin-top: 4px;
+	}
+	.spec-card {
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 16px;
+		padding: 22px 20px;
+		display: flex;
+		flex-direction: column;
+		position: relative;
+		box-shadow: 0 6px 18px rgba(32, 34, 33, 0.03);
+		opacity: 0.4;
+		transform: translateY(14px);
+		filter: grayscale(0.35);
+		transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+		            transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+		            filter 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+		            border-color 0.25s ease,
+		            box-shadow 0.25s ease;
+	}
+	.spec-card.is-revealed {
+		opacity: 1;
+		transform: translateY(0);
+		filter: grayscale(0);
+		border-color: rgba(196, 94, 73, 0.3);
+		box-shadow: 0 10px 26px rgba(32, 34, 33, 0.06);
+	}
+	.spec-card:hover {
+		border-color: var(--apaper-accent);
+		transform: translateY(-3px);
+		box-shadow: 0 14px 30px rgba(32, 34, 33, 0.09);
+	}
+	.card-connector-dot {
+		position: absolute;
+		top: -5px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 9px;
+		height: 9px;
+		border-radius: 50%;
+		background: var(--apaper-card);
+		border: 2px solid var(--apaper-accent);
+		box-shadow: 0 0 0 2px rgba(196, 94, 73, 0.1);
+		transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+		z-index: 2;
+	}
+	.spec-card.is-revealed .card-connector-dot {
+		background: var(--apaper-accent);
+		box-shadow: 0 0 0 4px var(--apaper-accent-soft);
+	}
+	.spec-card-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		letter-spacing: 0.12em;
+		padding-bottom: 12px;
+		margin-bottom: 14px;
+		border-bottom: 1px solid var(--apaper-line);
+	}
+	.spec-id {
+		color: var(--apaper-accent);
+		font-weight: 700;
+	}
+	.spec-scope {
+		color: var(--apaper-muted);
+	}
+	.spec-title {
+		font-family: var(--apaper-font-serif);
+		font-size: 1.18rem;
+		font-weight: 600;
+		color: var(--apaper-ink);
+		margin: 0 0 10px;
+		line-height: 1.25;
+	}
+	.spec-desc {
+		font-family: var(--apaper-font-serif);
+		font-size: 0.88rem;
+		line-height: 1.65;
+		color: var(--apaper-ink-secondary);
+		margin: 0 0 16px;
+	}
+
+
+	/* ─────────────────────────────────────────────────────────────
+	   SECONDARY CATALOG // More Work (apaper archival index)
+	   ───────────────────────────────────────────────────────────── */
+	.projects {
+		background: var(--apaper-bg);
+		color: var(--apaper-ink);
+		border-bottom: 1px solid var(--apaper-line);
+		padding: clamp(4.5rem, 8vw, 7rem) 1.5rem;
+		position: relative;
+	}
+	.projects-editorial-header {
+		max-width: 1180px;
+		margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+	}
+	.projects-meta-bar {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 12px;
+		padding-bottom: 16px;
+		border-bottom: 1px solid var(--apaper-line);
+		font-family: var(--apaper-font-mono);
+		font-size: 10px;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--apaper-muted);
+	}
+	.projects-wordmark {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		color: var(--apaper-ink);
+		font-weight: 500;
+	}
+	.projects-mark-glyph {
+		width: 26px;
+		height: 26px;
+		border: 1px solid var(--apaper-ink);
+		border-radius: 8px;
+		display: grid;
+		place-items: center;
+		font-family: var(--apaper-font-serif);
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--apaper-ink);
+		background: var(--apaper-card);
+	}
+	.projects-status-tag {
+		color: var(--apaper-muted);
+	}
+	.projects-title {
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(2.2rem, 4vw, 3.2rem);
+		font-weight: 500;
+		letter-spacing: -0.03em;
+		color: var(--apaper-ink);
+		margin: 1.5rem 0 0.8rem;
+		line-height: 1.1;
+	}
+	.projects-lead {
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(1rem, 1.3vw, 1.12rem);
+		color: var(--apaper-muted);
+		max-width: 680px;
+		line-height: 1.7;
+		margin: 0;
 	}
 	.projects-grid {
 		display: grid;
-		grid-template-columns: 1fr;
-		gap: 1.5rem;
+		grid-template-columns: repeat(3, 1fr);
+		gap: clamp(14px, 2vw, 22px);
+		max-width: 1180px;
+		margin: 0 auto;
 	}
-	@media (min-width: 700px) {
-		.expertise-grid,
-		.projects-grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
-	}
-	@media (min-width: 1000px) {
-		.expertise-grid {
-			grid-template-columns: repeat(4, 1fr);
-		}
-		.projects-grid {
-			grid-template-columns: repeat(3, 1fr);
-		}
-	}
-
-	.expertise-card,
 	.project-card {
-		background: var(--surface-raised);
-		padding: 2rem 1.75rem;
-		border-radius: var(--radius-lg);
-		border: 1px solid var(--line);
-		box-shadow: var(--shadow-sm);
-		transition:
-			transform 0.3s var(--ease),
-			box-shadow 0.3s var(--ease),
-			border-color 0.3s var(--ease);
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 16px;
+		padding: 22px 22px 20px;
+		display: flex;
+		flex-direction: column;
+		position: relative;
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+		transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 	}
-	.expertise-card:hover,
 	.project-card:hover {
-		transform: translateY(-6px);
-		box-shadow: var(--shadow-lg);
-		border-color: rgba(var(--accent-rgb), 0.32);
+		border-color: var(--apaper-accent);
+		transform: translateY(-3px);
+		box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
 	}
-
-	.expertise-icon,
-	.project-icon {
+	.project-card-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-bottom: 12px;
+		margin-bottom: 14px;
+		border-bottom: 1px solid var(--apaper-line);
+	}
+	.header-id-group {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		letter-spacing: 0.12em;
+	}
+	.project-id {
+		color: var(--apaper-accent);
+		font-weight: 700;
+	}
+	.platform-badges {
 		display: inline-flex;
 		align-items: center;
-		justify-content: center;
-		width: 3.25rem;
-		height: 3.25rem;
-		font-size: 1.6rem;
-		border-radius: 14px;
-		background: var(--accent-soft);
-		margin-bottom: 1.25rem;
+		flex-wrap: wrap;
+		gap: 4px;
 	}
-
-	.expertise-card h3 {
-		font-size: 1.15rem;
-		margin-bottom: 0.6rem;
-		color: rgb(var(--black));
+	.platform-chip {
+		font-family: var(--apaper-font-mono);
+		font-size: 7.5px;
+		letter-spacing: 0.06em;
+		font-weight: 700;
+		padding: 1.5px 5.5px;
+		border-radius: 3.5px;
+		text-transform: none;
+		border: 1px solid var(--apaper-line);
+		background: var(--apaper-tag-bg);
+		color: var(--apaper-ink-secondary);
 	}
-	.expertise-card p {
-		color: rgb(var(--gray));
-		font-size: 0.96rem;
+	.platform-chip.chip-ios {
+		color: #38bdf8;
+		border-color: rgba(56, 189, 248, 0.35);
+		background: rgba(56, 189, 248, 0.1);
+	}
+	.platform-chip.chip-macos {
+		color: #c084fc;
+		border-color: rgba(192, 132, 252, 0.35);
+		background: rgba(192, 132, 252, 0.1);
+	}
+	.platform-chip.chip-ipad {
+		color: #60a5fa;
+		border-color: rgba(96, 165, 250, 0.35);
+		background: rgba(96, 165, 250, 0.1);
+	}
+	.platform-chip.chip-watch {
+		color: #f472b6;
+		border-color: rgba(244, 114, 182, 0.35);
+		background: rgba(244, 114, 182, 0.1);
+	}
+	.platform-chip.chip-web {
+		color: #34d399;
+		border-color: rgba(52, 211, 153, 0.35);
+		background: rgba(52, 211, 153, 0.1);
+	}
+	.platform-chip.chip-cloud {
+		color: #fbbf24;
+		border-color: rgba(251, 191, 36, 0.35);
+		background: rgba(251, 191, 36, 0.1);
+	}
+	.platform-chip.chip-android {
+		color: #34d399;
+		border-color: rgba(52, 211, 153, 0.35);
+		background: rgba(52, 211, 153, 0.1);
+	}
+	.platform-chip.chip-winner {
+		color: #fcd34d;
+		border-color: rgba(245, 158, 11, 0.55);
+		background: rgba(245, 158, 11, 0.18);
+		font-weight: 700;
+		box-shadow: 0 0 8px rgba(245, 158, 11, 0.2);
+	}
+	.project-scope {
+		color: var(--apaper-muted);
+	}
+	.project-glyph {
+		display: grid;
+		place-items: center;
+		width: 28px;
+		height: 28px;
+		border-radius: 6px;
+		background: var(--apaper-accent-soft);
+		border: 1px solid var(--apaper-accent-line);
+		color: var(--apaper-accent);
+		transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+		flex-shrink: 0;
+	}
+	.project-card:hover .project-glyph {
+		background: var(--apaper-accent-soft);
+		transform: scale(1.08);
+	}
+	.card-rebrand-row {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 8px;
+		margin-bottom: 8px;
+	}
+	.card-rebrand-row .project-card-title {
+		margin-bottom: 0;
+	}
+	.rebrand-tag {
+		font-family: var(--apaper-font-mono);
+		font-size: 7.5px;
+		letter-spacing: 0.14em;
+		font-weight: 700;
+		color: var(--apaper-accent);
+		background: var(--apaper-accent-soft);
+		border: 1px solid var(--apaper-accent-line);
+		padding: 2px 6px;
+		border-radius: 4px;
+		text-transform: uppercase;
+		flex-shrink: 0;
+	}
+	.project-card-title {
+		font-family: var(--apaper-font-serif);
+		font-size: 1.18rem;
+		font-weight: 600;
+		color: var(--apaper-ink);
+		margin: 0 0 8px;
+		line-height: 1.25;
+	}
+	.project-card-desc {
+		font-family: var(--apaper-font-serif);
+		font-size: 0.88rem;
 		line-height: 1.65;
-		margin-bottom: 1.35rem;
+		color: var(--apaper-ink-secondary);
+		margin: 0 0 14px;
+		flex-grow: 1;
 	}
-	.expertise-skills {
-		list-style: none;
-		padding: 0;
-		margin: 0;
+	.project-card-tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.45rem;
+		gap: 6px;
+		margin-bottom: 16px;
 	}
-	.expertise-skills li {
-		background: var(--surface-muted);
-		border: 1px solid var(--line);
-		padding: 0.28rem 0.7rem;
+	.project-card-tags span {
+		font-family: var(--apaper-font-mono);
+		font-size: 9.5px;
+		letter-spacing: 0.03em;
+		padding: 2.5px 8.5px;
 		border-radius: 999px;
-		font-size: 0.8rem;
-		color: var(--accent-dark);
-		font-weight: 700;
+		background: var(--apaper-tag-bg);
+		border: 1px solid var(--apaper-line);
+		color: var(--apaper-ink-secondary);
 	}
-
-	.project-card h3 {
-		font-size: 1.15rem;
-		margin-bottom: 0.35rem;
-		color: rgb(var(--black));
+	.project-card-footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 8px;
+		margin-top: auto;
+		padding-top: 14px;
+		border-top: 1px solid var(--apaper-line-light);
 	}
-	.project-card p {
-		color: rgb(var(--gray));
-		font-size: 0.95rem;
-		margin-bottom: 1.1rem;
-	}
-	.project-link {
+	.dual-actions {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.3rem;
-		color: var(--accent);
-		font-weight: 700;
-		font-size: 0.92rem;
-		transition: gap 0.2s var(--ease), color 0.2s var(--ease);
+		gap: 6px;
 	}
-	.project-link:hover {
-		color: var(--accent-dark);
-		gap: 0.6rem;
+	.project-card-footer .dual-actions .btn-with-brand {
+		min-height: 30px;
+		padding-right: clamp(10px, 2.8vw, 16px);
+		padding-left: clamp(10px, 2.8vw, 16px);
+		font-size: clamp(8.5px, 2.2vw, 11px);
+	}
+	.project-card-footer .btn-with-brand > span {
+		white-space: nowrap;
+	}
+	.btn-with-brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+	}
+	.btn-brand-icon {
+		display: block;
+		flex-shrink: 0;
+		transition: transform 0.2s ease;
+	}
+	.ninja-google-play-icon {
+		align-self: center;
+	}
+	.btn-apaper:hover .btn-brand-icon {
+		transform: scale(1.15);
+	}
+	.project-status-stamp {
+		font-family: var(--apaper-font-mono);
+		font-size: 8px;
+		letter-spacing: 0.12em;
+		font-weight: 700;
+		color: var(--apaper-muted);
+		text-transform: uppercase;
+	}
+	.stamp-live {
+		color: #10b981;
+	}
+	.stamp-award {
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
+		padding: 3px 9px;
+		border-radius: 4px;
+		background: rgba(245, 158, 11, 0.16);
+		border: 1px solid rgba(245, 158, 11, 0.5);
+		color: #fcd34d !important;
+		font-weight: 800 !important;
+		font-size: 8.5px !important;
+		letter-spacing: 0.1em;
+		box-shadow: 0 0 8px rgba(245, 158, 11, 0.2);
+	}
+	.stamp-award .trophy-icon {
+		font-size: 11px;
+		filter: drop-shadow(0 0 3px rgba(245, 158, 11, 0.8));
 	}
 
-	/* Contact */
+	/* Hackathon Champion Card Special Styling */
+	.project-card.card-award {
+		border-color: rgba(245, 158, 11, 0.4);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(245, 158, 11, 0.22);
+	}
+	.project-card.card-award:hover {
+		border-color: #f59e0b;
+		box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45), 0 0 0 1.5px rgba(245, 158, 11, 0.55);
+	}
+	.card-award-banner {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		margin: 6px 0 10px;
+		padding: 4px 10px;
+		border-radius: 6px;
+		background: linear-gradient(90deg, rgba(245, 158, 11, 0.22) 0%, rgba(245, 158, 11, 0.08) 100%);
+		border: 1px solid rgba(245, 158, 11, 0.5);
+		color: #fcd34d;
+		font-family: var(--apaper-font-mono);
+		font-size: 8.5px;
+		letter-spacing: 0.08em;
+		font-weight: 800;
+		box-shadow: 0 2px 8px rgba(245, 158, 11, 0.15);
+		width: fit-content;
+	}
+	.card-award-banner .award-trophy {
+		font-size: 11px;
+		filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.9));
+	}
+
+	/* ─────────────────────────────────────────────────────────────
+	   CORRESPONDENCE & COLOPHON // Contact (apaper Dispatch Plate)
+	   ───────────────────────────────────────────────────────────── */
 	.contact {
-		background:
-			radial-gradient(620px 320px at 80% 0%, var(--on-dark-glow) 0%, transparent 60%),
-			var(--surface-deep);
-		color: rgba(255, 255, 255, 0.86);
+		background: var(--apaper-bg-alt);
+		color: var(--apaper-ink);
+		padding: clamp(5rem, 8vw, 7.5rem) 1.5rem clamp(4rem, 6vw, 6rem);
+		border-bottom: 1px solid var(--apaper-line);
 		position: relative;
 	}
-	.contact .section-title {
-		color: #fff;
+	.contact-plate {
+		max-width: 920px;
+		margin: 0 auto;
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 18px;
+		padding: clamp(2.5rem, 5vw, 4.2rem) clamp(1.8rem, 4vw, 3.8rem);
+		box-shadow: 0 12px 36px rgba(32, 34, 33, 0.05);
+		text-align: center;
 	}
-	.contact .section-title::after {
-		background: var(--on-dark-accent);
+	.contact-meta-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 12px;
+		padding-bottom: 16px;
+		margin-bottom: 2rem;
+		border-bottom: 1px solid var(--apaper-line);
+		font-family: var(--apaper-font-mono);
+		font-size: 10px;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--apaper-muted);
+	}
+	.contact-wordmark {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		color: var(--apaper-ink);
+		font-weight: 500;
+	}
+	.contact-mark-glyph {
+		width: 26px;
+		height: 26px;
+		border: 1px solid var(--apaper-ink);
+		border-radius: 8px;
+		display: grid;
+		place-items: center;
+		font-family: var(--apaper-font-serif);
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--apaper-ink);
+		background: var(--apaper-bg);
+	}
+	.contact-status-tag {
+		color: var(--apaper-accent);
+		font-weight: 600;
+	}
+	.contact-title {
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(2.2rem, 4vw, 3.4rem);
+		font-weight: 600;
+		letter-spacing: -0.03em;
+		color: var(--apaper-ink);
+		margin: 0 0 1rem;
+		line-height: 1.15;
+	}
+	.contact-title-fr {
+		font-style: italic;
+		font-weight: 400;
 	}
 	.contact-text {
-		text-align: center;
-		font-size: 1.08rem;
-		max-width: 540px;
-		margin: 0 auto 2.25rem;
-		color: rgba(255, 255, 255, 0.72);
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(1rem, 1.35vw, 1.15rem);
+		line-height: 1.7;
+		color: var(--apaper-ink-secondary);
+		max-width: 760px;
+		margin: 0 auto 2.2rem;
+		text-wrap: balance;
 	}
 	.contact-buttons {
 		display: flex;
 		justify-content: center;
-		gap: 0.75rem;
+		gap: 10px;
 		flex-wrap: wrap;
+		margin-bottom: 2.5rem;
 	}
-	.contact .btn-primary {
-		background: var(--on-dark-accent);
-		color: var(--on-dark-accent-text);
-		box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+	.contact-buttons .btn-apaper {
+		padding: 9px 20px;
+		font-size: 12px;
 	}
-	.contact .btn-primary:hover {
-		background: #f4f4f5;
-		color: var(--on-dark-accent-text);
-		transform: translateY(-2px);
-	}
-	.contact .btn-secondary {
-		background: rgba(255, 255, 255, 0.06);
-		color: #fff;
-		border: 1px solid rgba(255, 255, 255, 0.22);
-		box-shadow: none;
-	}
-	.contact .btn-secondary:hover {
-		background: rgba(255, 255, 255, 0.13);
-		color: #fff;
-		border-color: rgba(255, 255, 255, 0.4);
-		transform: translateY(-2px);
+	.contact-colophon-sub {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 10px;
+		padding-top: 18px;
+		border-top: 1px solid var(--apaper-line);
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--apaper-muted);
 	}
 
-	@media (max-width: 720px) {
-		.hero-stats {
+	/* ─────────────────────────────────────────────────────────────
+	   THEME PALETTE BAR (Interactive Color Preset Switcher)
+	   ───────────────────────────────────────────────────────────── */
+	.theme-palette-bar {
+		max-width: 920px;
+		margin: 2.5rem auto 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 14px;
+		font-family: var(--apaper-font-mono);
+		font-size: 10px;
+		letter-spacing: 0.12em;
+	}
+	.theme-bar-label {
+		color: var(--apaper-muted);
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+	.theme-pills {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		flex-wrap: wrap;
+	}
+	.theme-pill {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		padding: 5px 12px;
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 999px;
+		color: var(--apaper-ink-secondary);
+		font-family: var(--apaper-font-mono);
+		font-size: 10px;
+		cursor: pointer;
+		transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+	}
+	.theme-pill:hover {
+		border-color: var(--apaper-accent);
+		color: var(--apaper-ink);
+		transform: translateY(-1px);
+	}
+	.theme-pill.active {
+		border-color: var(--apaper-accent);
+		background: var(--apaper-accent);
+		color: var(--apaper-btn-text, #ffffff);
+		font-weight: 600;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+	}
+	.pill-swatch {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		flex-shrink: 0;
+	}
+	.theme-pill.active .pill-swatch {
+		box-shadow: 0 0 0 1.5px var(--apaper-btn-text, #fff);
+	}
+
+	/* Responsive media queries */
+	@media (max-width: 1040px) {
+		.fork-desktop {
+			display: none;
+		}
+		.fork-mobile {
+			display: block;
+		}
+		.specs-grid,
+		.projects-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 980px) {
+		.hero-inner {
 			grid-template-columns: 1fr;
-			max-width: 320px;
+			gap: 2.5rem;
+		}
+		.hero h1 {
+			font-size: clamp(2.6rem, 6vw, 3.8rem);
+		}
+		.hero-visual {
+			width: min(100%, 460px);
+		}
+	}
+
+	@media (max-width: 859px) {
+		.proof-grid {
+			grid-template-columns: 1fr;
+			max-width: 560px;
+		}
+		.proof-card {
+			display: grid;
+			grid-template-columns: 42% 58%;
+		}
+		.proof-media {
+			height: 180px;
+			border-bottom: 0;
+			border-right: 1px solid var(--apaper-line-light);
+		}
+		.proof-card-header {
+			grid-column: 1 / span 2;
+		}
+		.proof-copy {
+			align-content: center;
+		}
+
+		.editorial-node {
+			grid-template-columns: 40px 1fr;
+			gap: 16px;
+		}
+		.node-plate,
+		.node-plate.plate-reverse {
+			grid-template-columns: 1fr;
+			gap: 24px;
+		}
+		.node-plate.plate-reverse .plate-media {
+			order: 1;
+		}
+		.node-plate.plate-reverse .plate-story {
+			order: 2;
+		}
+	}
+
+	@media (max-width: 680px) {
+		.hero {
+			padding: 3.5rem 1.2rem;
+		}
+		.hero h1 {
+			font-size: clamp(2.4rem, 11vw, 3.2rem);
+		}
+		.proof-card {
+			grid-template-columns: 1fr;
+		}
+		.proof-media {
+			height: 200px;
+			border-right: 0;
+			border-bottom: 1px solid var(--apaper-line-light);
+		}
+		.proof-card-header {
+			grid-column: 1;
+		}
+		.signature {
+			padding-right: 1rem;
+			padding-left: 1rem;
+		}
+		.sig-meta-bar,
+		.projects-meta-bar,
+		.contact-meta-header {
+			font-size: 9px;
+		}
+		.editorial-node {
+			grid-template-columns: 1fr;
+		}
+		.node-rail {
+			display: none;
+		}
+		.node-plate {
+			padding: 18px 16px;
+		}
+		.plate-highlights {
+			gap: 7px;
+			margin-bottom: 14px;
+			font-size: 0.94rem;
+		}
+		.contact-title {
+			font-size: clamp(2rem, 10vw, 2.6rem);
+			line-height: 1.08;
+		}
+		.contact-title-en,
+		.contact-title-fr {
+			display: block;
+			white-space: nowrap;
+		}
+		.contact-title-separator {
+			display: none;
+		}
+		.scrim-transition-card {
+			box-sizing: border-box;
+			width: 94%;
+			max-height: calc(100% - 12px);
+			padding: 7px 10px;
+			overflow: hidden;
+			border-radius: 10px;
+		}
+		.scrim-meta {
+			margin-bottom: 4px;
+			font-size: 6.5px;
+			letter-spacing: 0.08em;
+		}
+		.scrim-stamp {
+			padding: 2px 5px;
+		}
+		.scrim-title {
+			margin-bottom: 0;
+			font-size: 0.88rem;
+			line-height: 1.15;
+		}
+		.scrim-subtitle {
+			display: inline;
+			margin: 0 0 0 3px;
+		}
+		.scrim-summary,
+		.scrim-replay-cue {
+			display: none;
+		}
+		/* Center Phase 02 under its pin so it no longer collides with Phase 03. */
+		.callout-2 .callout-card {
+			transform: translate(-50%, 8px);
+		}
+		.callout-2 .callout-stem {
+			transform: translate(-7px, 0);
+		}
+		.callout-card {
+			padding: 3px 6px;
+			min-width: 95px;
+		}
+		.callout-title {
+			font-size: 0.72rem;
+		}
+		.callout-tag {
+			display: none;
+		}
+		.specs-grid,
+		.projects-grid {
+			grid-template-columns: 1fr;
+		}
+		.contact-plate {
+			padding: 2.2rem 1.2rem;
+		}
+		.contact-colophon-sub {
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+		}
+		.hide-on-mobile {
+			display: none;
 		}
 	}
 </style>
