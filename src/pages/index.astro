@@ -60,7 +60,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 ---
 
 <!doctype html>
-	<html lang="en" data-paper-theme="carbon">
+	<html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<script type="application/ld+json" set:html={JSON.stringify(homeLd)} />
@@ -1220,20 +1220,6 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						</div>
 					</div>
 
-					<!-- Color Theme Switcher Widget -->
-					<div class="theme-palette-bar" aria-label="Paper Theme Switcher">
-						<span class="theme-bar-label">SITE TONE // PAPER SYSTEM:</span>
-						<div class="theme-pills">
-							<button type="button" class="theme-pill carbon active" data-theme="carbon" title="玄纸泥金 · Carbon Washi &amp; Gold">
-								<span class="pill-swatch" style="background: #d4a373;"></span>
-								<span class="pill-title">Carbon</span>
-							</button>
-							<button type="button" class="theme-pill operator" data-theme="operator" title="Operator Blue · Deep-blue systems console">
-								<span class="pill-swatch" style="background: #69c7d5;"></span>
-								<span class="pill-title">Operator Blue</span>
-							</button>
-						</div>
-					</div>
 				</div>
 			</section>
 		</main>
@@ -1497,33 +1483,6 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 			initWishesCarousel();
 			document.addEventListener('astro:after-swap', initWishesCarousel);
 
-			// Site theme switcher with cross-page persistence.
-			const initPaperTheme = () => {
-				try {
-					const savedTheme = localStorage.getItem('site-paper-theme') === 'operator' ? 'operator' : 'carbon';
-					document.documentElement.setAttribute('data-paper-theme', savedTheme);
-					document.querySelectorAll('.theme-pill').forEach((btn) => {
-						btn.classList.toggle('active', btn.getAttribute('data-theme') === savedTheme);
-					});
-				} catch (_) {}
-
-				document.querySelectorAll('.theme-pill').forEach((btn) => {
-					btn.addEventListener('click', () => {
-						const theme = btn.getAttribute('data-theme');
-						if (!theme) return;
-						document.documentElement.setAttribute('data-paper-theme', theme);
-						try {
-							localStorage.setItem('site-paper-theme', theme);
-						} catch (_) {}
-						document.querySelectorAll('.theme-pill').forEach((b) => b.classList.remove('active'));
-						btn.classList.add('active');
-					});
-				});
-			};
-
-			initPaperTheme();
-			document.addEventListener('astro:after-swap', initPaperTheme);
-
 			// Progressive Euler Bridges -> Skills Dispersal Flow Controller
 			const initEulerFlow = () => {
 				const stage = document.getElementById('pivot-stage');
@@ -1773,101 +1732,6 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 </html>
 
 <style>
-	/* ─────────────────────────────────────────────────────────────
-	   APAPER "KAMI" EDITORIAL PUBLICATION SYSTEM & COLOR CUSTOMIZATION
-	   Paper tones, carbon ink, hairline rules, and cinnabar seal.
-	   ───────────────────────────────────────────────────────────── */
-	[data-paper-theme="washi"] {
-		--apaper-bg: #f8f6f0;
-		--apaper-bg-alt: #f2eee3;
-		--apaper-card: #fcfbf8;
-		--apaper-header-bg: rgba(248, 246, 240, 0.88);
-		--apaper-ink: #202221;
-		--apaper-ink-secondary: #4a4742;
-		--apaper-muted: #776f66;
-		--apaper-line: #ded6ca;
-		--apaper-line-light: #ece6dc;
-		--apaper-accent: #c45e49;
-		--apaper-accent-soft: rgba(196, 94, 73, 0.08);
-		--apaper-accent-line: rgba(196, 94, 73, 0.25);
-		--apaper-btn-text: #ffffff;
-		--apaper-tag-bg: rgba(32, 34, 33, 0.04);
-		--apaper-font-mono: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
-		--apaper-font-serif: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
-	}
-
-	/* Preset 2: 古籍琥珀 · Antique Parchment & Amber */
-	[data-paper-theme="amber"] {
-		--apaper-bg: #f5f0e6;
-		--apaper-bg-alt: #ebe3d3;
-		--apaper-card: #faf7f0;
-		--apaper-header-bg: rgba(245, 240, 230, 0.88);
-		--apaper-ink: #26221c;
-		--apaper-ink-secondary: #4d4439;
-		--apaper-muted: #7d7263;
-		--apaper-line: #dbcebb;
-		--apaper-line-light: #e8ded0;
-		--apaper-accent: #b86d29;
-		--apaper-accent-soft: rgba(184, 109, 41, 0.09);
-		--apaper-accent-line: rgba(184, 109, 41, 0.28);
-		--apaper-btn-text: #ffffff;
-		--apaper-tag-bg: rgba(38, 34, 28, 0.04);
-	}
-
-	/* Preset 3: 学术蓝图 · Blueprint & Slate */
-	[data-paper-theme="blueprint"] {
-		--apaper-bg: #f6f8fa;
-		--apaper-bg-alt: #ecf1f6;
-		--apaper-card: #ffffff;
-		--apaper-header-bg: rgba(246, 248, 250, 0.88);
-		--apaper-ink: #1e2530;
-		--apaper-ink-secondary: #3e4a5b;
-		--apaper-muted: #64748b;
-		--apaper-line: #cbd5e1;
-		--apaper-line-light: #e2e8f0;
-		--apaper-accent: #2563eb;
-		--apaper-accent-soft: rgba(37, 99, 235, 0.08);
-		--apaper-accent-line: rgba(37, 99, 235, 0.25);
-		--apaper-btn-text: #ffffff;
-		--apaper-tag-bg: rgba(30, 37, 48, 0.04);
-	}
-
-	/* Preset 4: 竹简青素 · Bamboo & Celadon */
-	[data-paper-theme="bamboo"] {
-		--apaper-bg: #f3f6f3;
-		--apaper-bg-alt: #e6ede6;
-		--apaper-card: #fafcfa;
-		--apaper-header-bg: rgba(243, 246, 243, 0.88);
-		--apaper-ink: #1f2623;
-		--apaper-ink-secondary: #3f4a44;
-		--apaper-muted: #68776f;
-		--apaper-line: #c8d3cc;
-		--apaper-line-light: #dbe3de;
-		--apaper-accent: #2d6a4f;
-		--apaper-accent-soft: rgba(45, 106, 79, 0.08);
-		--apaper-accent-line: rgba(45, 106, 79, 0.25);
-		--apaper-btn-text: #ffffff;
-		--apaper-tag-bg: rgba(31, 38, 35, 0.04);
-	}
-
-	/* Preset 5: 玄纸泥金 · Carbon Washi & Gold (暗调奢雅纸本 · 解决所有看不清的对比度优化) */
-	[data-paper-theme="carbon"] {
-		--apaper-bg: #141617;
-		--apaper-bg-alt: #1a1c1e;
-		--apaper-card: #202325;
-		--apaper-header-bg: rgba(20, 22, 23, 0.92);
-		--apaper-ink: #f5f2eb;             /* 纯粹温润米白，用于大标题、卡片主标题，字字清晰锐利 */
-		--apaper-ink-secondary: #ded9cf;   /* 高对比度暖调亮宣纸白，正文说明、描述、引用清晰通透 */
-		--apaper-muted: #aba496;           /* 典雅暖沙金，元数据、钢印、副标清晰可读不再灰暗 */
-		--apaper-line: #383c3e;            /* 规整纤细发丝线 */
-		--apaper-line-light: #282c2e;
-		--apaper-accent: #e5b382;          /* 澄澈暖泥金，高光点缀与核心呼出 */
-		--apaper-accent-soft: rgba(229, 179, 130, 0.16);
-		--apaper-accent-line: rgba(229, 179, 130, 0.38);
-		--apaper-btn-text: #121415;        /* 金色或米白主按钮上的深墨黑字，对比度 10:1+ 极度清晰 */
-		--apaper-tag-bg: rgba(255, 255, 255, 0.07); /* 标签半透发光底色，消除黑底黑字 */
-	}
-
 	:global(body) {
 		background: var(--apaper-bg);
 		color: var(--apaper-ink);
@@ -4206,68 +4070,6 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
 		color: var(--apaper-muted);
-	}
-
-	/* ─────────────────────────────────────────────────────────────
-	   THEME PALETTE BAR (Interactive Color Preset Switcher)
-	   ───────────────────────────────────────────────────────────── */
-	.theme-palette-bar {
-		max-width: 920px;
-		margin: 2.5rem auto 0;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-wrap: wrap;
-		gap: 14px;
-		font-family: var(--apaper-font-mono);
-		font-size: 10px;
-		letter-spacing: 0.12em;
-	}
-	.theme-bar-label {
-		color: var(--apaper-muted);
-		text-transform: uppercase;
-		font-weight: 600;
-	}
-	.theme-pills {
-		display: inline-flex;
-		align-items: center;
-		gap: 8px;
-		flex-wrap: wrap;
-	}
-	.theme-pill {
-		display: inline-flex;
-		align-items: center;
-		gap: 6px;
-		padding: 5px 12px;
-		background: var(--apaper-card);
-		border: 1px solid var(--apaper-line);
-		border-radius: 999px;
-		color: var(--apaper-ink-secondary);
-		font-family: var(--apaper-font-mono);
-		font-size: 10px;
-		cursor: pointer;
-		transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease, color 0.2s ease;
-	}
-	.theme-pill:hover {
-		border-color: var(--apaper-accent);
-		color: var(--apaper-ink);
-		transform: translateY(-1px);
-	}
-	.theme-pill.active {
-		border-color: var(--apaper-accent);
-		background: var(--apaper-accent);
-		color: var(--apaper-btn-text, #ffffff);
-		font-weight: 600;
-		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-	}
-	.pill-swatch {
-		width: 8px;
-		height: 8px;
-		border-radius: 50%;
-		flex-shrink: 0;
-	}
-	.theme-pill.active .pill-swatch {
-		box-shadow: 0 0 0 1.5px var(--apaper-btn-text, #fff);
 	}
 
 	/* Responsive media queries */

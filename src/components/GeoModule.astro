@@ -83,41 +83,48 @@ const citationText = `@misc{${citationId},
 
 <style>
 	.geo-tldr {
-		background: rgba(var(--accent), 0.05);
-		border-left: 4px solid rgb(var(--accent));
-		padding: 1.25rem 1.5rem;
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-accent-line);
+		border-left: 3px solid var(--apaper-accent);
+		padding: 1.15rem 1.25rem;
 		margin: 1.5rem 0 2.5rem 0;
-		border-radius: 0 8px 8px 0;
+		border-radius: 0 12px 12px 0;
 	}
 	.geo-tldr-header, .geo-citation-header {
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
 		margin-bottom: 0.5rem;
-		color: var(--accent-dark, #333);
+		color: var(--apaper-accent);
+		font-family: var(--apaper-font-mono);
+		font-size: 0.72rem;
+		letter-spacing: 0.07em;
+		text-transform: uppercase;
 	}
 	.geo-tldr-header strong, .geo-citation-header strong {
 		font-weight: 700;
-		letter-spacing: 0.02em;
+		letter-spacing: inherit;
 	}
 	.geo-tldr p {
 		margin: 0;
 		font-size: 0.95rem;
 		line-height: 1.6;
-		color: rgb(var(--black));
+		color: var(--apaper-ink-secondary);
+		font-family: var(--apaper-font-sans);
 	}
 	.geo-citation {
 		margin-top: 4rem;
 		padding-top: 2rem;
-		border-top: 1px dashed rgba(var(--gray), 0.3);
+		border-top: 1px dashed var(--apaper-line);
 	}
 	.geo-citation pre {
-		background: rgba(var(--gray-light), 0.3);
+		background: var(--apaper-bg-alt);
 		padding: 1rem 1.25rem;
 		border-radius: 8px;
 		font-size: 0.85rem;
 		overflow-x: auto;
-		color: rgb(var(--gray-dark));
-		border: 1px solid rgba(var(--gray), 0.1);
+		color: var(--apaper-ink-secondary);
+		border: 1px solid var(--apaper-line);
+		font-family: var(--apaper-font-mono);
 	}
 </style>

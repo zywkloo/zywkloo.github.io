@@ -44,6 +44,7 @@ posts.forEach(post => {
 				display: flex;
 				gap: 2rem;
 				align-items: flex-start;
+				font-family: var(--apaper-font-sans);
 			}
 			.sidebar {
 				width: 90px;
@@ -79,7 +80,7 @@ posts.forEach(post => {
 				text-align: center;
 				white-space: nowrap;
 				color: rgb(var(--black));
-				font-family: inherit;
+				font-family: var(--apaper-font-sans);
 				border-radius: 16px;
 			}
 			.filter-btn:hover {
@@ -104,6 +105,7 @@ posts.forEach(post => {
 				transition: opacity 0.2s;
 				color: rgb(var(--gray-dark));
 				font-size: 0.75rem;
+				font-family: var(--apaper-font-mono);
 			}
 			/* Special case for buttons without icons (All, Other) */
 			.filter-btn:not(:has(.filter-icon)) .filter-short {
@@ -116,6 +118,7 @@ posts.forEach(post => {
 				opacity: 0;
 				transition: opacity 0.2s;
 				font-size: 0.95rem;
+				font-family: var(--apaper-font-mono);
 			}
 			.sidebar:hover .filter-btn {
 				flex-direction: row;
@@ -200,6 +203,7 @@ posts.forEach(post => {
 				border-radius: 9999px;
 				text-transform: uppercase;
 				letter-spacing: 0.05em;
+				font-family: var(--apaper-font-mono);
 			}
 			.series-badge.tokenchef {
 				background-color: rgba(239, 68, 68, 0.08);
@@ -229,6 +233,7 @@ posts.forEach(post => {
 				gap: 0.45rem;
 				align-items: center;
 				font-size: 0.95rem;
+				font-family: var(--apaper-font-mono);
 				justify-content: flex-start;
 			}
 			ul li.featured-post .meta {

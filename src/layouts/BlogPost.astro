@@ -40,7 +40,6 @@ type NavPost = { id: string; navTitle: string; partNum: number };
 let seriesNavPosts: NavPost[] = [];
 let currentPartNum = 0;
 let seriesGroupName = '';
-let seriesAccentColor = '#6b7280';
 let seriesIcon = '📚';
 let seriesSubtitle = '';
 
@@ -49,7 +48,6 @@ if (series && slug) {
 	const meta = SERIES_META[groupKey];
 	seriesGroupName = groupKey;
 	if (meta) {
-		seriesAccentColor = meta.accentColor;
 		seriesIcon = meta.icon;
 		seriesSubtitle = meta.subtitle;
 	}
@@ -121,6 +119,7 @@ if (series && slug) {
 				margin: auto;
 				padding: 1em;
 				color: rgb(var(--gray-dark));
+				font-family: var(--apaper-font-sans);
 			}
 			.prose :global(h2) {
 				font-family: var(--apaper-font-serif);
@@ -178,6 +177,7 @@ if (series && slug) {
 				font-size: 0.88rem;
 				line-height: 1.5;
 				box-sizing: border-box;
+				font-family: var(--apaper-font-sans);
 			}
 			.prose :global(table th),
 			.prose :global(table td) {
@@ -201,6 +201,7 @@ if (series && slug) {
 				font-size: 0.8rem;
 				text-transform: uppercase;
 				letter-spacing: 0.04em;
+				font-family: var(--apaper-font-mono);
 				white-space: nowrap;
 			}
 			.prose :global(table tr:nth-child(even) td) {
@@ -239,42 +240,83 @@ if (series && slug) {
 				gap: 0.4em;
 				margin-bottom: 0.9em;
 				padding: 0.45em 0.85em;
-				border: 1px solid rgba(var(--accent), 0.18);
+				border: 1px solid var(--apaper-accent-line);
 				border-radius: 999px;
-				background: rgba(var(--accent), 0.08);
-				color: var(--accent-dark);
+				background: var(--apaper-tag-bg);
+				color: var(--apaper-accent);
 				font-size: 0.82rem;
 				font-weight: 700;
 				letter-spacing: 0.06em;
 				line-height: 1;
+				font-family: var(--apaper-font-mono);
 				text-transform: uppercase;
 			}
-			.series.tokenchef {
-				border-color: rgba(239, 68, 68, 0.18);
-				background: rgba(239, 68, 68, 0.08);
-				color: #ef4444;
-			}
-			.series.metalsolo {
-				border-color: rgba(139, 92, 246, 0.18);
-				background: rgba(139, 92, 246, 0.08);
-				color: #8b5cf6;
-			}
-			.series.cleansemantics {
-				border-color: rgba(14, 165, 233, 0.18);
-				background: rgba(14, 165, 233, 0.08);
-				color: #0ea5e9;
-			}
 			.series-nav {
-				background-color: rgba(36, 41, 46, 0.05);
-				border-left: 4px solid var(--series-accent, #6b7280);
-				padding: 12px 16px;
-				margin-bottom: 24px;
-				border-radius: 0 8px 8px 0;
-				font-size: 0.95em;
+				display: grid;
+				gap: 0.85rem;
+				margin: 1.8rem 0 2.4rem;
+				padding: 1.05rem;
+				background: var(--apaper-card);
+				border: 1px solid var(--apaper-line);
+				border-radius: 14px;
+				font-family: var(--apaper-font-sans);
 			}
-			.series-nav ul {
-				margin-top: 8px;
-				margin-bottom: 0;
+			.series-nav-label {
+				margin: 0;
+				font-family: var(--apaper-font-mono);
+				font-size: 0.68rem;
+				font-weight: 700;
+				letter-spacing: 0.1em;
+				line-height: 1.4;
+				color: var(--apaper-accent);
+				text-transform: uppercase;
+			}
+			.series-nav ol {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+				gap: 0.5rem;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			.series-nav li {
+				margin: 0;
+				padding: 0;
+			}
+			.series-nav a,
+			.series-nav-current {
+				display: grid;
+				grid-template-columns: auto minmax(0, 1fr);
+				gap: 0.5rem;
+				align-items: baseline;
+				min-height: 100%;
+				padding: 0.6rem 0.65rem;
+				border: 1px solid var(--apaper-line);
+				border-radius: 9px;
+				color: var(--apaper-ink-secondary);
+				font-size: 0.86rem;
+				line-height: 1.35;
+				text-decoration: none;
+			}
+			.series-nav a:hover {
+				border-color: var(--apaper-accent-line);
+				background: var(--apaper-accent-soft);
+				color: var(--apaper-ink);
+			}
+			.series-nav-current {
+				border-color: var(--apaper-accent-line);
+				background: var(--apaper-accent-soft);
+				color: var(--apaper-ink);
+			}
+			.series-nav-part {
+				font-family: var(--apaper-font-mono);
+				font-size: 0.68rem;
+				font-weight: 700;
+				letter-spacing: 0.06em;
+				color: var(--apaper-accent);
+			}
+			.series-nav-copy {
+				min-width: 0;
 			}
 			.meta-row {
 				display: flex;
@@ -290,6 +332,7 @@ if (series && slug) {
 			}
 			.title h1 {
 				margin: 0 0 0.5em 0;
+				font-family: var(--apaper-font-serif);
 				font-size: 2.1em;
 				line-height: 1.2;
 			}
@@ -300,6 +343,7 @@ if (series && slug) {
 				font-weight: 500;
 				letter-spacing: 0.01em;
 				line-height: 1.25;
+				font-family: var(--apaper-font-mono);
 			}
 			.last-updated-on {
 				margin-top: 0.18rem;
@@ -365,19 +409,19 @@ if (series && slug) {
 						<hr />
 					</div>
 					{seriesNavPosts.length > 0 && (
-						<div class="series-nav" style={`--series-accent: ${seriesAccentColor}`}>
-							<strong>{seriesIcon} Series: {seriesGroupName}{seriesSubtitle && <> ({seriesSubtitle})</>}</strong>
-							<ul>
+						<nav class="series-nav" aria-label={`${seriesGroupName} reading sequence`}>
+							<p class="series-nav-label">{seriesIcon} Series // {seriesGroupName}{seriesSubtitle && <> · {seriesSubtitle}</>}</p>
+							<ol>
 								{seriesNavPosts.map(post => (
 									<li>
 										{post.partNum === currentPartNum
-											? <span>👉 <strong>Part {post.partNum}: {post.navTitle} (Current)</strong></span>
-											: <span><strong>Part {post.partNum}</strong>: <a href={`/blog/${post.id}/`}>{post.navTitle}</a></span>
+											? <span class="series-nav-current" aria-current="page"><span class="series-nav-part">{String(post.partNum).padStart(2, '0')}</span><span class="series-nav-copy">{post.navTitle}</span></span>
+											: <a href={`/blog/${post.id}/`}><span class="series-nav-part">{String(post.partNum).padStart(2, '0')}</span><span class="series-nav-copy">{post.navTitle}</span></a>
 										}
 									</li>
 								))}
-							</ul>
-						</div>
+							</ol>
+						</nav>
 					)}
 					<GeoModule
 						title={title}
