@@ -54,14 +54,42 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 				<div class="hero-copy">
 					<p class="section-kicker">PROFILE // MOBILE &amp; SYSTEMS</p>
 					<h1 id="about-title" class="sr-only">Mobile systems, from device signal to cloud</h1>
-					<figure class="system-diagram" aria-label="IoT signals, native interop, render buffer, gateway control, and cloud">
+					<figure class="system-diagram" aria-label="IoT signals pass through a protocol handshake into native interop. Native work forks directly into the render buffer and through gateway control to cloud processing and storage. Stored state reconciles back through the gateway into the render buffer.">
+						<svg class="system-flow" viewBox="0 0 1000 260" preserveAspectRatio="none" aria-hidden="true">
+							<path class="flow-line" d="M100 7C112 32 130 52 180 70" />
+							<path class="flow-line" d="M180 70C225 83 270 101 340 115" />
+							<path class="flow-line" d="M340 115C380 150 440 177 500 199" />
+							<path class="flow-line" d="M340 115C420 80 580 80 660 115" />
+							<path class="flow-line" d="M900 7C888 32 870 52 820 70" />
+							<path class="flow-line" d="M820 70C775 83 730 101 660 115" />
+							<path class="flow-line" d="M660 115C620 150 560 177 500 199" />
+							<path id="flow-local" class="flow-return" d="M100 7C112 32 130 52 180 70C225 83 270 101 340 115C380 150 440 177 500 199" />
+							<path id="flow-outbound" class="flow-return" d="M100 7C112 32 130 52 180 70C225 83 270 101 340 115C420 80 580 80 660 115C730 101 775 83 820 70C870 52 888 32 900 7" />
+							<path id="flow-return" class="flow-return" d="M900 7C888 32 870 52 820 70C775 83 730 101 660 115C620 150 560 177 500 199" />
+							<circle class="local-pulse" r="2.4"><animateMotion dur="8s" repeatCount="indefinite"><mpath href="#flow-local" /></animateMotion></circle>
+							<circle class="outbound-pulse" r="2.4"><animateMotion dur="8s" repeatCount="indefinite"><mpath href="#flow-outbound" /></animateMotion></circle>
+							<circle class="return-pulse" r="2.6"><animateMotion dur="8s" repeatCount="indefinite"><mpath href="#flow-return" /></animateMotion></circle>
+						</svg>
 						<ol>
 							<li><span>01</span><strong>IoT Signals</strong></li>
-							<li><span>02</span><strong>Native Interop</strong></li>
-							<li><span>03</span><strong>Render Buffer</strong></li>
-							<li><span>04</span><strong>Gateway Control</strong></li>
-							<li><span>05</span><strong>Cloud</strong></li>
+							<li><span>02</span><strong>Protocol Handshake</strong></li>
+							<li><span>03</span><strong>Native Interop</strong></li>
+							<li><span>04</span><strong>Render Buffer</strong></li>
+							<li><span>05</span><strong>Gateway Control</strong></li>
+							<li><span>06</span><strong>Cloud Processing</strong></li>
+							<li><span>07</span><strong>Storage</strong></li>
 						</ol>
+						<span class="flow-arrow flow-arrow-top-one" aria-hidden="true">&gt;&gt;</span>
+						<span class="flow-arrow flow-arrow-top-two" aria-hidden="true">&gt;&gt;</span>
+						<span class="flow-arrow flow-arrow-top-three" aria-hidden="true">&gt;&gt;</span>
+						<span class="flow-arrow flow-arrow-top-four" aria-hidden="true">&gt;&gt;</span>
+						<span class="flow-arrow flow-arrow-top-five" aria-hidden="true">&gt;&gt;</span>
+						<span class="flow-arrow flow-arrow-branch-render" aria-hidden="true">&gt;&gt;</span>
+						<span class="flow-arrow flow-arrow-return-storage" aria-hidden="true">&gt;&gt;</span>
+						<span class="flow-arrow flow-arrow-return-cloud" aria-hidden="true">&gt;&gt;</span>
+						<span class="flow-arrow flow-arrow-return-gateway" aria-hidden="true">&gt;&gt;</span>
+						<span class="flow-reconcile" aria-hidden="true">RECONCILE</span>
+						<figcaption class="system-footnote">7 BRIDGES OF SYSTEMS</figcaption>
 					</figure>
 					<p class="hero-lead">I translate device capabilities and native boundaries into responsive product interfaces and reliable services—without losing the constraints that matter at each handoff.</p>
 					<div class="hero-actions">
@@ -554,31 +582,19 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 		color: var(--about-ink);
 	}
 	.system-diagram {
-		max-width: 820px;
+		position: relative;
+		max-width: 900px;
 		margin: 0;
+		height: 260px;
 	}
 	.system-diagram ol {
 		position: relative;
-		display: grid;
-		grid-template-columns: repeat(5, minmax(0, 1fr));
-		gap: 0.7rem;
 		margin: 0;
 		padding: 0;
 		list-style: none;
 	}
-	.system-diagram ol::before {
-		content: "";
-		position: absolute;
-		top: 0.42rem;
-		left: 0.42rem;
-		right: 0.42rem;
-		height: 1px;
-		background: var(--about-line);
-	}
 	.system-diagram li {
 		position: relative;
-		min-width: 0;
-		padding-top: 1.15rem;
 	}
 	.system-diagram li::before {
 		content: "";
@@ -593,32 +609,8 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 		background: var(--apaper-bg);
 	}
 	.system-diagram li:not(:last-child)::after {
-		content: "››";
 		position: absolute;
-		top: 0;
-		left: calc(100% + 0.35rem);
-		z-index: 3;
-		display: grid;
-		width: 0.86rem;
-		height: 0.78rem;
-		place-items: center;
-		padding: 0;
-		background: var(--apaper-bg);
-		font-family: "Atkinson", system-ui, sans-serif;
-		font-size: 0.98rem;
-		font-weight: 700;
-		line-height: 1;
-		letter-spacing: -0.16em;
-		color: var(--about-accent);
-		text-shadow: none;
-		transform: translateX(-50%);
-		animation: diagram-chevron-pulse 4.2s ease-in-out infinite;
 	}
-	.system-diagram li:nth-child(1)::after { animation-delay: 0.24s; }
-	.system-diagram li:nth-child(2)::after { animation-delay: 1.08s; }
-	.system-diagram li:nth-child(3)::after { animation-delay: 1.92s; }
-	.system-diagram li:nth-child(4)::after { animation-delay: 2.76s; }
-	.system-diagram li:last-child::before { background: var(--about-accent); }
 	.system-diagram li > span {
 		display: block;
 		margin-bottom: 0.35rem;
@@ -637,21 +629,180 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 		line-height: 1.2;
 		letter-spacing: -0.01em;
 		color: var(--about-ink);
-		animation: diagram-label-pulse 4.2s ease-in-out infinite;
 	}
-	.system-diagram li:nth-child(2) strong { animation-delay: 0.72s; }
-	.system-diagram li:nth-child(3) strong { animation-delay: 1.56s; }
-	.system-diagram li:nth-child(4) strong { animation-delay: 2.4s; }
-	.system-diagram li:nth-child(5) strong { animation-delay: 3.24s; }
-	@keyframes diagram-chevron-pulse {
-		0%, 14%, 100% { opacity: 0.28; text-shadow: none; filter: brightness(0.82); }
-		20%, 32% { opacity: 1; text-shadow: 0 0 0.45rem var(--about-accent), 0 0 0.9rem var(--about-accent); filter: brightness(1.25); }
-		40% { opacity: 0.42; text-shadow: none; filter: brightness(0.92); }
+	/* Client-side render is immediate; persisted cloud state returns through the reconcile loop. */
+	.system-diagram {
 	}
-	@keyframes diagram-label-pulse {
-		0%, 16%, 100% { text-shadow: none; color: var(--about-ink); }
-		22%, 34% { color: var(--about-accent); text-shadow: 0 0 0.55rem color-mix(in srgb, var(--about-accent) 60%, transparent); }
-		42% { color: var(--about-ink); text-shadow: none; }
+	.system-diagram ol {
+		display: block;
+		height: 100%;
+	}
+	.system-diagram ol::before,
+	.system-diagram li:not(:last-child)::after,
+	.signal-pair { display: none; }
+	.system-diagram li {
+		position: absolute;
+		width: 20%;
+		min-width: 0;
+		padding: 1.15rem 0 0;
+		text-align: center;
+		transform: translateX(-50%);
+	}
+	.system-diagram li:nth-child(1) { top: 0; left: 10%; }
+	.system-diagram li:nth-child(2) { top: 24%; left: 18%; }
+	.system-diagram li:nth-child(3) { top: 42%; left: 34%; }
+	.system-diagram li:nth-child(4) { top: 74%; left: 50%; }
+	.system-diagram li:nth-child(5) { top: 42%; left: 66%; }
+	.system-diagram li:nth-child(6) { top: 24%; left: 82%; }
+	.system-diagram li:nth-child(7) { top: 0; left: 90%; }
+	.system-diagram li::before {
+		display: block;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	.system-diagram li:last-child::before { background: var(--about-accent); }
+	.system-diagram li > span {
+		margin-bottom: 0.28rem;
+		font-size: 0.65rem;
+		text-align: center;
+	}
+	.system-diagram strong {
+		font-size: clamp(0.78rem, 1.25vw, 1rem);
+		line-height: 1.2;
+		text-align: center;
+		animation: none;
+	}
+	.system-flow {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		width: 100%;
+		height: 100%;
+		overflow: visible;
+		pointer-events: none;
+	}
+	.flow-line,
+	.flow-return {
+		fill: none;
+		stroke: var(--about-line);
+		stroke-width: 1.4;
+		vector-effect: non-scaling-stroke;
+	}
+	.flow-return {
+		stroke: transparent;
+	}
+	.local-pulse,
+	.outbound-pulse,
+	.return-pulse {
+		fill: color-mix(in srgb, var(--about-accent) 42%, transparent);
+		opacity: 0.45;
+	}
+	.flow-arrow {
+		position: absolute;
+		z-index: 3;
+		display: grid;
+		width: 1rem;
+		height: 0.78rem;
+		place-items: center;
+		background: var(--apaper-bg);
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 0.76rem;
+		font-weight: 700;
+		letter-spacing: -0.18em;
+		line-height: 1;
+		color: color-mix(in srgb, var(--about-muted) 50%, transparent);
+		opacity: 0.16;
+	}
+	.flow-arrow-top-one { top: 15.8%; left: 12.6%; transform: translateX(-50%) rotate(40deg); animation-name: local-arrow-one; }
+	.flow-arrow-top-two { top: 35.4%; left: 25.1%; transform: translateX(-50%) rotate(17deg); animation-name: local-arrow-two; }
+	.flow-arrow-branch-render { top: 62.3%; left: 41.25%; transform: translateX(-50%) rotate(31deg); animation-name: local-arrow-three; }
+	.flow-arrow-top-three { top: 34.1%; left: 50%; transform: translateX(-50%); animation-name: outbound-arrow-one; }
+	.flow-arrow-top-four { top: 35.4%; left: 74.94%; transform: translateX(-50%) rotate(-17deg); animation-name: outbound-arrow-two; }
+	.flow-arrow-top-five { top: 15.8%; left: 87.43%; transform: translateX(-50%) rotate(-40deg); animation-name: outbound-arrow-three; }
+	.flow-arrow-top-one,
+	.flow-arrow-top-two,
+	.flow-arrow-branch-render,
+	.flow-arrow-top-three,
+	.flow-arrow-top-four,
+	.flow-arrow-top-five {
+		animation-duration: 8s;
+		animation-timing-function: linear;
+		animation-iteration-count: infinite;
+	}
+	.flow-arrow-return-storage,
+	.flow-arrow-return-cloud,
+		.flow-arrow-return-gateway {
+		color: var(--about-accent);
+		opacity: 0.13;
+		text-shadow: none;
+		animation-duration: 8s;
+		animation-timing-function: linear;
+		animation-iteration-count: infinite;
+	}
+	.flow-arrow-return-storage { top: 15.8%; left: 87.43%; transform: translateX(-50%) rotate(140deg); animation-name: return-arrow-storage; }
+	.flow-arrow-return-cloud { top: 35.4%; left: 74.94%; transform: translateX(-50%) rotate(163deg); animation-name: return-arrow-cloud; }
+	.flow-arrow-return-gateway { top: 62.3%; left: 58.75%; transform: translateX(-50%) rotate(149deg); animation-name: return-arrow-gateway; }
+	@keyframes local-arrow-one {
+		0%, 6%, 14%, 100% { color: var(--about-muted); opacity: 0.16; text-shadow: none; }
+		8%, 12% { color: var(--about-accent); opacity: 1; text-shadow: 0 0 0.38rem var(--about-accent); }
+	}
+	@keyframes local-arrow-two {
+		0%, 30%, 39%, 100% { color: var(--about-muted); opacity: 0.16; text-shadow: none; }
+		33%, 37% { color: var(--about-accent); opacity: 1; text-shadow: 0 0 0.38rem var(--about-accent); }
+	}
+	@keyframes local-arrow-three {
+		0%, 64%, 74%, 100% { color: var(--about-muted); opacity: 0.16; text-shadow: none; }
+		67%, 72% { color: var(--about-accent); opacity: 1; text-shadow: 0 0 0.38rem var(--about-accent); }
+	}
+	@keyframes outbound-arrow-one {
+		0%, 38%, 48%, 100% { color: var(--about-muted); opacity: 0.16; text-shadow: none; }
+		41%, 46% { color: var(--about-accent); opacity: 1; text-shadow: 0 0 0.38rem var(--about-accent); }
+	}
+	@keyframes outbound-arrow-two {
+		0%, 61%, 71%, 100% { color: var(--about-muted); opacity: 0.16; text-shadow: none; }
+		64%, 69% { color: var(--about-accent); opacity: 1; text-shadow: 0 0 0.38rem var(--about-accent); }
+	}
+	@keyframes outbound-arrow-three {
+		0%, 82%, 93%, 100% { color: var(--about-muted); opacity: 0.16; text-shadow: none; }
+		86%, 91% { color: var(--about-accent); opacity: 1; text-shadow: 0 0 0.38rem var(--about-accent); }
+	}
+	@keyframes return-arrow-storage {
+		0%, 3%, 11%, 100% { opacity: 0.13; text-shadow: none; }
+		5%, 9% { opacity: 1; text-shadow: 0 0 0.38rem var(--about-accent); }
+	}
+		@keyframes return-arrow-cloud {
+		0%, 31%, 40%, 100% { opacity: 0.13; text-shadow: none; }
+			33%, 38% { opacity: 1; text-shadow: 0 0 0.38rem var(--about-accent); }
+		}
+	@keyframes return-arrow-gateway {
+		0%, 65%, 76%, 100% { opacity: 0.13; text-shadow: none; }
+		68%, 73% { opacity: 1; text-shadow: 0 0 0.38rem var(--about-accent); }
+	}
+	.flow-reconcile {
+		position: absolute;
+		top: 64%;
+		left: 50%;
+		z-index: 3;
+		padding: 0 0.42rem;
+		background: var(--apaper-bg);
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 0.58rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		color: var(--about-accent);
+		transform: translateX(-50%);
+	}
+	.system-footnote {
+		position: absolute;
+		right: 0;
+		bottom: 0.35rem;
+		z-index: 2;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 0.58rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		color: var(--about-accent);
 	}
 	.about-page .hero-lead {
 		max-width: 650px;
@@ -868,13 +1019,17 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 		.about-hero { grid-template-columns: 1fr; gap: 1.8rem; }
 		.profile-stamp { grid-template-columns: auto 1fr; column-gap: 0.9rem; align-items: center; }
 		.about-page .about-profile-image { grid-row: span 2; width: 84px; height: 84px; margin: 0; }
-		.system-diagram ol { grid-template-columns: 1fr; gap: 0.55rem; }
-		.system-diagram ol::before { top: 0.4rem; bottom: 0.4rem; left: 0.39rem; right: auto; width: 1px; height: auto; }
-		.system-diagram ol::after { top: 0; left: 0.18rem; animation-name: diagram-signal-vertical; }
-		.system-diagram li { padding: 0.08rem 0 0.08rem 1.35rem; }
-		.system-diagram li::before { top: 0.1rem; }
-		.system-diagram li:not(:last-child)::after { content: "↓"; top: auto; right: auto; bottom: -0.72rem; left: 0.04rem; padding: 0; background: transparent; animation-name: diagram-chevron-vertical; }
-		.system-diagram li > span { margin-bottom: 0.15rem; }
+		.system-diagram { height: 225px; }
+		.system-footnote { display: none; }
+		.system-diagram ol { display: block; height: 100%; }
+		.system-diagram ol::before,
+		.signal-pair { display: none; }
+		.system-diagram li { width: 28%; min-height: 0; padding-top: 0.8rem; text-align: center; }
+		.system-diagram li::before { width: 0.6rem; height: 0.6rem; border-width: 1.5px; }
+		.system-diagram li > span { margin-bottom: 0.18rem; font-size: 0.5rem; text-align: center; }
+		.system-diagram strong { white-space: normal; font-size: clamp(0.58rem, 2.8vw, 0.75rem); line-height: 1.12; letter-spacing: 0; text-align: center; }
+		.flow-arrow { width: 0.72rem; height: 0.58rem; font-size: 0.55rem; }
+		.flow-reconcile { font-size: 0.46rem; }
 		.section-heading,
 		.experience-row,
 		.governance-layout { grid-template-columns: 1fr; gap: 1rem; }
@@ -884,20 +1039,9 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 		.signal-grid div:last-child { padding-bottom: 0; border-bottom: 0; }
 		.capability-grid { grid-template-columns: 1fr; gap: 1.6rem; }
 	}
-	@keyframes diagram-signal-vertical {
-		0%, 8% { top: 0; opacity: 0; }
-		12% { opacity: 1; }
-		88% { opacity: 1; }
-		100% { top: calc(100% - 0.45rem); opacity: 0; }
-	}
-	@keyframes diagram-chevron-vertical {
-		0%, 100% { transform: translateY(-0.16rem); opacity: 0.38; }
-		50% { transform: translateY(0.18rem); opacity: 1; }
-	}
 	@media (prefers-reduced-motion: reduce) {
-		.system-diagram ol::after,
+		.signal-pair i,
 		.system-diagram li:not(:last-child)::after,
 		.system-diagram strong { animation: none; }
-		.system-diagram strong { -webkit-text-fill-color: var(--about-ink); }
 	}
 </style>

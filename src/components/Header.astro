@@ -134,6 +134,11 @@ import HeaderLink from './HeaderLink.astro';
 		display: inline-block;
 		line-height: 1;
 	}
+	:global(.arc-nav-link) .arc-tab-content > span {
+		color: #17212a;
+		font-weight: 700;
+		letter-spacing: 0.02em;
+	}
 	nav a {
 		display: inline-flex;
 		align-items: center;
@@ -248,8 +253,8 @@ import HeaderLink from './HeaderLink.astro';
 			position: sticky;
 			left: 0;
 			z-index: 2;
-			background: rgba(255, 255, 255, 0.96);
-			box-shadow: 8px 0 12px rgba(17, 24, 39, 0.05);
+			background: #f5f4ef;
+			box-shadow: 8px 0 12px rgba(0, 0, 0, 0.16);
 		}
 		.internal-links :global(.arc-nav-link.active) {
 			background: var(--apaper-accent, var(--accent));
