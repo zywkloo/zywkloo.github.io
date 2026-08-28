@@ -340,7 +340,9 @@ const organizationLd = {
 	}
 	h1 {
 		max-width: 720px;
+		font-family: var(--apaper-font-serif);
 		font-size: clamp(3rem, 8vw, 5.8rem);
+		font-weight: 600;
 		line-height: 0.98;
 		letter-spacing: -0.055em;
 	}
@@ -946,6 +948,22 @@ const organizationLd = {
 	:global(html[data-paper-theme]) .arc-page .architecture-note {
 		background: var(--apaper-bg-alt);
 		border-color: var(--apaper-line);
+	}
+	/* The principles panel must invert with the shell. Paper is a light reading
+	   surface, so the former white-on-navy copy becomes ink-on-paper. */
+	:global(html[data-paper-theme]) .arc-page .principles {
+		background: var(--apaper-bg-alt);
+		border: 1px solid var(--apaper-line);
+	}
+	:global(html[data-paper-theme]) .arc-page .principles .eyebrow {
+		color: var(--apaper-accent);
+	}
+	:global(html[data-paper-theme]) .arc-page .principles h2,
+	:global(html[data-paper-theme]) .arc-page .principle-grid strong {
+		color: var(--apaper-ink);
+	}
+	:global(html[data-paper-theme]) .arc-page .principle-grid span {
+		color: var(--apaper-ink-secondary);
 	}
 	:global(html[data-paper-theme]) .arc-page .legend-box,
 	:global(html[data-paper-theme]) .arc-page .graph-node.implemented rect,

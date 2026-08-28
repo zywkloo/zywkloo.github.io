@@ -636,12 +636,14 @@ import { SITE_DESCRIPTION, PROFILE_IMAGE } from '../consts';
 	.system-diagram ol {
 		display: block;
 		height: 100%;
+		z-index: 4;
 	}
 	.system-diagram ol::before,
 	.system-diagram li:not(:last-child)::after,
 	.signal-pair { display: none; }
 	.system-diagram li {
 		position: absolute;
+		z-index: 4;
 		width: 20%;
 		min-width: 0;
 		padding: 1.15rem 0 0;

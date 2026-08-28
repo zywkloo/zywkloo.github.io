@@ -69,6 +69,7 @@ html[data-paper-theme="carbon"] {
 	--apaper-accent-line: rgba(229, 179, 130, 0.38);
 	--apaper-btn-text: #121415;
 	--apaper-tag-bg: rgba(255, 255, 255, 0.07);
+	--apaper-font-sans: "Atkinson", system-ui, sans-serif;
 	--apaper-font-mono: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
 	--apaper-font-serif: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
 	--accent: #e5b382;
@@ -183,7 +184,7 @@ html {
 }
 
 body {
-	font-family: "Atkinson", system-ui, sans-serif;
+	font-family: var(--apaper-font-sans);
 	margin: 0;
 	padding: 0;
 	text-align: left;
