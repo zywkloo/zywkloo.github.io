@@ -114,8 +114,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 											class="stage-video"
 											ariaLabel="亲笔小卡 实时墨水笔刷与书法回放演示"
 										/>
-										<div class="screen-badge">
-											<span class="badge-dot"></span>
+										<div class="screen-badge badge-yong">
+											<span class="badge-dot dot-yong"></span>
 											<span>01 · 亲笔落墨 · METAL BRUSH</span>
 										</div>
 									</div>
@@ -2121,14 +2121,14 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		align-items: center;
 		gap: 6px;
 		padding: 4px 10px;
-		background: rgba(248, 246, 240, 0.92);
+		background: rgba(14, 17, 22, 0.88);
 		backdrop-filter: blur(8px);
-		border: 1px solid var(--apaper-line);
+		border: 1px solid rgba(255, 255, 255, 0.15);
 		border-radius: 999px;
 		font-family: var(--apaper-font-mono);
 		font-size: 8.5px;
 		letter-spacing: 0.08em;
-		color: var(--apaper-ink);
+		color: #f8f5ef;
 		font-weight: 600;
 		z-index: 2;
 	}
@@ -2137,6 +2137,14 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		height: 5px;
 		border-radius: 50%;
 		background: var(--apaper-accent);
+	}
+	.badge-yong {
+		background: rgba(22, 18, 14, 0.90);
+		border-color: rgba(245, 158, 11, 0.35);
+		color: #f59e0b;
+	}
+	.dot-yong {
+		background: #f59e0b;
 	}
 	.badge-edf {
 		background: rgba(13, 17, 23, 0.88);
