@@ -67,21 +67,36 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		<Header />
 		<main class="homepage">
 			<section class="hero" aria-labelledby="home-title">
-				<div class="hero-inner">
+				<div class="hero-inner container">
 					<div class="hero-copy">
-						<p class="hero-kicker">{USER_TITLE}</p>
+						<div class="hero-kicker-wrap">
+							<span class="hero-kicker-glyph">弧</span>
+							<span class="hero-kicker">[ARCHIVE // SYSTEMS &amp; MOBILE ARCHITECTURE]</span>
+						</div>
 						<h1 id="home-title">I build the data systems inside mobile products.</h1>
 						<p class="hero-description">iOS, React Native, BLE sync, backend pipelines, and telemetry — engineered for correctness and resilience under real-world conditions, from device to cloud.</p>
 						<div class="hero-cta">
-							<a href="#work" class="btn btn-primary">See My Work ↓</a>
-							<a href="/about" class="btn btn-secondary">How I Think →</a>
+							<a href="#work" class="btn-apaper btn-apaper-primary">See My Work ↓</a>
+							<a href="/about" class="btn-apaper btn-apaper-ghost">How I Think →</a>
 						</div>
-						<p class="hero-credibility">10+ years in tech · 7 years in software engineering</p>
+						<div class="hero-credibility">
+							<span class="cred-dot"></span>
+							<span>10+ YEARS IN TECH // 7 YEARS IN SOFTWARE ENGINEERING</span>
+						</div>
 					</div>
 					<div class="hero-visual">
-						<div class="hero-art">
-							<img src="/images/wilddunk/video-poster.webp" alt="Artwork from 全民大灌篮 / Wild Dunk, a China App Store charting basketball game" />
-							<span>Wild Dunk · 2015</span>
+						<div class="hero-art-plate">
+							<div class="hero-art">
+								<img src="/images/wilddunk/video-poster.webp" alt="Artwork from 全民大灌篮 / Wild Dunk, a China App Store charting basketball game" />
+								<div class="art-meta-stamp">
+									<span class="art-stamp-id">FIG. 00</span>
+									<span class="art-stamp-label">WILD DUNK · 2015</span>
+								</div>
+							</div>
+							<div class="art-plate-caption">
+								<span class="caption-marker">§</span>
+								<span>GENESIS NODE // FIRST PRODUCTION MOBILE SYSTEM</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -90,16 +105,43 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 			<section class="proof" id="proof" aria-label="Selected proof points">
 				<div class="container proof-grid">
 					<article class="proof-card">
-						<div class="proof-media proof-medal"><img src="/images/proof/carleton-university-medal-detail.webp" alt="Carleton University Medal in Computer Science, engraved with Yiwei Zhang, 2020" /></div>
-						<div class="proof-copy"><strong>University Medal</strong><span>Computer Science · 2020</span></div>
+						<div class="proof-card-header">
+							<span class="proof-card-id">EXHIBIT // 01</span>
+							<span class="proof-card-scope">HONOR RECORD</span>
+						</div>
+						<div class="proof-media proof-medal">
+							<img src="/images/proof/carleton-university-medal-detail.webp" alt="Carleton University Medal in Computer Science, engraved with Yiwei Zhang, 2020" />
+						</div>
+						<div class="proof-copy">
+							<strong>University Medal in Computer Science</strong>
+							<span>Carleton University · Highest Graduation Standing · 2020</span>
+						</div>
 					</article>
 					<a href="#wilddunk" class="proof-card">
-						<div class="proof-media proof-rank"><img src="/images/proof/wilddunk-appannie-2015.webp" alt="App Annie Highest Ranks report showing Wild Dunk at number 1 in Sports in China" /></div>
-						<div class="proof-copy"><strong>#1 Sports · China App Store</strong><span>Wild Dunk · May 3, 2015</span></div>
+						<div class="proof-card-header">
+							<span class="proof-card-id">EXHIBIT // 02</span>
+							<span class="proof-card-scope">CHART RECORD</span>
+						</div>
+						<div class="proof-media proof-rank">
+							<img src="/images/proof/wilddunk-appannie-2015.webp" alt="App Annie Highest Ranks report showing Wild Dunk at number 1 in Sports in China" />
+						</div>
+						<div class="proof-copy">
+							<strong>#1 Sports · China App Store</strong>
+							<span>Wild Dunk · App Annie Peak Rank · May 3, 2015</span>
+						</div>
 					</a>
 					<a href="https://devpost.com/zywkloo" target="_blank" rel="noopener" class="proof-card">
-						<div class="proof-media proof-devpost"><img src="/images/proof/devpost-hackathon-winners.webp" alt="Victor Zhang's Devpost portfolio showing two projects marked Winner" /></div>
-						<div class="proof-copy"><strong>2× Hackathon Winner</strong><span>cuHacking · 2019 &amp; 2020</span></div>
+						<div class="proof-card-header">
+							<span class="proof-card-id">EXHIBIT // 03</span>
+							<span class="proof-card-scope">COMPETITION</span>
+						</div>
+						<div class="proof-media proof-devpost">
+							<img src="/images/proof/devpost-hackathon-winners.webp" alt="Victor Zhang's Devpost portfolio showing two projects marked Winner" />
+						</div>
+						<div class="proof-copy">
+							<strong>2× Hackathon Winner</strong>
+							<span>cuHacking 2019 &amp; 2020 · Devpost Verified</span>
+						</div>
 					</a>
 				</div>
 			</section>
@@ -120,7 +162,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						<p class="sig-eyebrow">CAREER TRAJECTORY &amp; TOPOLOGICAL ARC</p>
 						<h2 id="signature-title">Signature Work</h2>
 						<p class="sig-lead-text">
-							A single continuous engineering line: from ranking state machines in a charting mobile game, to tactile brush engines, agentic boundary contracts, and zero-dependency biosignal viewers — leading to topological systems clarity.
+							A single continuous trajectory: from leading game dev teams and product economies in a top-charting mobile hit, to tactile brush engines, agentic boundary contracts, and zero-dependency biosignal viewers — culminating in topological systems clarity.
 						</p>
 					</div>
 				</div>
@@ -142,7 +184,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							<div class="node-content">
 								<div class="node-header">
 									<span class="node-badge">CHAPTER // 01</span>
-									<span class="node-date">2015 · GAME ARCHITECTURE</span>
+									<span class="node-date">2015 · PRODUCT MANAGEMENT &amp; DEV LEAD</span>
 								</div>
 								<div class="node-plate">
 									<div class="plate-media">
@@ -157,19 +199,19 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										</figure>
 									</div>
 									<div class="plate-story">
-										<span class="plate-kicker">ECONOMIC STATE MACHINES</span>
+										<span class="plate-kicker">PRODUCT MANAGEMENT &amp; MONETIZATION</span>
 										<h3>全民大灌篮 · Wild Dunk</h3>
 										<p class="plate-p">
-											As game design lead I owned core gameplay, ranking systems, and player economy for this basketball title — reaching <strong>#9 Overall</strong> and <strong>#1 in Sports</strong> on the China App Store.
+											As Lead Game Designer (主策划), I spearheaded the cross-functional mobile game development team across engineering, 3D art, and QA — owning product design, core basketball gameplay, and monetization loops for this title, reaching <strong>#1 in Sports</strong> and <strong>#9 Overall</strong> on the China App Store.
 										</p>
 										<blockquote class="editorial-quote">
-											<p>Ranking ladders and closed-loop virtual economies taught me to think in explicit state machines and invariant control policies — instincts that now underpin how I architect production mobile and distributed systems.</p>
+											<p>Leading a fast-paced mobile dev team and modeling high-stakes player economies taught me product ownership from the ground up — balancing mathematical monetization loops, UX psychology, and client-server constraints. That foundation of cross-functional leadership and end-to-end systems thinking directly shapes how I lead and architect mobile products today.</p>
 										</blockquote>
 										<div class="plate-tags">
-											<span>Core Gameplay</span>
-											<span>State Machines</span>
-											<span>Economy Balancing</span>
-											<span>App Store #1</span>
+											<span>Game Dev Leadership</span>
+											<span>Product &amp; Monetization</span>
+											<span>Core Game Design</span>
+											<span>China App Store #1</span>
 										</div>
 									</div>
 								</div>
@@ -462,62 +504,135 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 				</div>
 			</section>
 
-			<!-- More Work -->
-			<section class="projects" id="projects">
+			<!-- More Work (Secondary Repertory Catalog) -->
+			<section class="projects" id="projects" aria-labelledby="projects-title">
 				<div class="container">
-					<h2 class="section-title">More Work</h2>
+					<div class="projects-editorial-header">
+						<div class="projects-meta-bar">
+							<span class="projects-wordmark">
+								<span class="projects-mark-glyph">目</span>
+								<span>SECONDARY CATALOG // VOL. 02</span>
+							</span>
+							<span class="projects-status-tag">06 NODES</span>
+						</div>
+						<h2 id="projects-title" class="projects-title">More Work &amp; Side Systems</h2>
+						<p class="projects-lead">
+							Selected auxiliary client applications, hackathon-winning prototypes, and standalone algorithmic tools.
+						</p>
+					</div>
+
 					<div class="projects-grid">
-						<div class="project-card">
-							<div class="project-icon">🏥</div>
-							<h3>VitalMark Wellness</h3>
-							<p>HealthKit Integration &amp; SwiftUI</p>
-							<a href="https://apps.apple.com/us/app/vitalmark-wellness-fitness/id6745228850" target="_blank" class="project-link">View on App Store →</a>
-						</div>
-						<div class="project-card">
-							<div class="project-icon">🤖</div>
-							<h3>Ninja AI Agentic App</h3>
-							<p>LLM Streaming &amp; Multi-Model AI</p>
-							<a href="https://apps.apple.com/us/app/ninja-ai-chat-code-create/id6702030312" target="_blank" class="project-link">View on App Store →</a>
-						</div>
-						<div class="project-card">
-							<div class="project-icon">🎬</div>
-							<h3>ZZZ Movie Rec System</h3>
-							<p>ML-powered Movie Recommendations</p>
-							<a href="https://zzz-movie-rec-system.vercel.app/" target="_blank" class="project-link">View Project →</a>
-						</div>
-						<div class="project-card">
-							<div class="project-icon">📚</div>
-							<h3>TutorOcean iOS App</h3>
-							<p>Professional Tutoring Platform</p>
-							<a href="https://apps.apple.com/ca/app/tutorocean/id1480876532" target="_blank" class="project-link">View on App Store →</a>
-						</div>
-						<div class="project-card">
-							<div class="project-icon">🔍</div>
-							<h3>cuHacking 2020 Winner</h3>
-							<p>Crime Scene Forensic Analyzer</p>
-							<a href="https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer" target="_blank" class="project-link">View on Devpost →</a>
-						</div>
-						<div class="project-card">
-							<div class="project-icon">🏆</div>
-							<h3>cuHacking 2019 Winner</h3>
-							<p>Amazon Connect Pizza Order System</p>
-							<a href="https://devpost.com/software/cuhackingamazonconnect" target="_blank" class="project-link">View on Devpost →</a>
-						</div>
+						<article class="project-card">
+							<div class="project-card-header">
+								<span class="project-id">[APP-01]</span>
+								<span class="project-scope">HEALTHKIT &amp; SWIFTUI</span>
+							</div>
+							<h3 class="project-card-title">VitalMark Wellness</h3>
+							<p class="project-card-desc">HealthKit data sync, real-time vital telemetry visualization, and responsive SwiftUI interaction architecture.</p>
+							<a href="https://apps.apple.com/us/app/vitalmark-wellness-fitness/id6745228850" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">App Store ↗</a>
+						</article>
+						<article class="project-card">
+							<div class="project-card-header">
+								<span class="project-id">[AI-02]</span>
+								<span class="project-scope">LLM &amp; STREAMING</span>
+							</div>
+							<h3 class="project-card-title">Ninja AI Agentic App</h3>
+							<p class="project-card-desc">Multi-provider token streaming, adaptive prompt routing, and native iOS agentic workflow execution.</p>
+							<a href="https://apps.apple.com/us/app/ninja-ai-chat-code-create/id6702030312" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">App Store ↗</a>
+						</article>
+						<article class="project-card">
+							<div class="project-card-header">
+								<span class="project-id">[ML-03]</span>
+								<span class="project-scope">RECOMMENDER ENGINE</span>
+							</div>
+							<h3 class="project-card-title">ZZZ Movie Rec System</h3>
+							<p class="project-card-desc">Latent matrix factorization and collaborative filtering deployed for real-time interactive movie exploration.</p>
+							<a href="https://zzz-movie-rec-system.vercel.app/" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">Live Demo ↗</a>
+						</article>
+						<article class="project-card">
+							<div class="project-card-header">
+								<span class="project-id">[APP-04]</span>
+								<span class="project-scope">MOBILE PLATFORM</span>
+							</div>
+							<h3 class="project-card-title">TutorOcean iOS App</h3>
+							<p class="project-card-desc">Global peer-tutoring mobile platform with session scheduling, real-time messaging, and shared canvas sync.</p>
+							<a href="https://apps.apple.com/ca/app/tutorocean/id1480876532" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">App Store ↗</a>
+						</article>
+						<article class="project-card">
+							<div class="project-card-header">
+								<span class="project-id">[HCK-05]</span>
+								<span class="project-scope">CUHACKING 2020 WINNER</span>
+							</div>
+							<h3 class="project-card-title">Crime Scene Forensic Analyzer</h3>
+							<p class="project-card-desc">Multi-modal forensic evidence analyzer combining computer vision and spatial crime-scene reconstruction.</p>
+							<a href="https://devpost.com/software/murder-on-2nd-floor-web-forensic-analyzer" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">Devpost Case ↗</a>
+						</article>
+						<article class="project-card">
+							<div class="project-card-header">
+								<span class="project-id">[HCK-06]</span>
+								<span class="project-scope">CUHACKING 2019 WINNER</span>
+							</div>
+							<h3 class="project-card-title">Amazon Connect Voice Flow</h3>
+							<p class="project-card-desc">Automated telephony order processing state machine powered by AWS Lambda and Amazon Connect contact flows.</p>
+							<a href="https://devpost.com/software/cuhackingamazonconnect" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">Devpost Case ↗</a>
+						</article>
 					</div>
 				</div>
 			</section>
 
-			<!-- Contact Section -->
-			<section class="contact">
+			<!-- Contact / Correspondence Section (Refined Paper Colophon) -->
+			<section class="contact" id="contact" aria-labelledby="contact-title">
 				<div class="container">
-					<h2 class="section-title">Let's Connect</h2>
-					<p class="contact-text">Interested in collaborating or just want to chat? I'd love to hear from you!</p>
-					<div class="contact-buttons">
-						<a href={`mailto:${EMAIL}`} class="btn btn-primary">Email Me</a>
-						<a href={GITHUB_URL} target="_blank" class="btn btn-secondary">GitHub</a>
-						<a href={WTCRAFT_URL} target="_blank" class="btn btn-secondary">wtcraft</a>
-						<a href={LINKEDIN_URL} target="_blank" class="btn btn-secondary">LinkedIn</a>
-						<a href={MEDIUM_URL} target="_blank" class="btn btn-secondary">Medium</a>
+					<div class="contact-plate">
+						<div class="contact-meta-header">
+							<span class="contact-wordmark">
+								<span class="contact-mark-glyph">信</span>
+								<span>COLOPHON // DIRECT DISPATCH</span>
+							</span>
+							<span class="contact-status-tag">AVAILABLE FOR CONSULTING</span>
+						</div>
+						<h2 id="contact-title" class="contact-title">Let's Connect · 见字如面</h2>
+						<p class="contact-text">
+							Open for systems consulting, mobile data layer architecture, and agentic harness engineering. If you value correctness under real-world device conditions, let's talk.
+						</p>
+						<div class="contact-buttons">
+							<a href={`mailto:${EMAIL}`} class="btn-apaper btn-apaper-primary">Direct Email ✉</a>
+							<a href={GITHUB_URL} target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">GitHub ↗</a>
+							<a href={WTCRAFT_URL} target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">wtcraft ↗</a>
+							<a href={LINKEDIN_URL} target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">LinkedIn ↗</a>
+							<a href={MEDIUM_URL} target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">Medium ↗</a>
+						</div>
+						<div class="contact-colophon-sub">
+							<span>LOCATION: VANCOUVER, BC (PACIFIC TIME)</span>
+							<span>HANDSHAKE PROTOCOL: DIRECT HUMAN INBOX</span>
+						</div>
+					</div>
+
+					<!-- Color Theme Switcher Widget -->
+					<div class="theme-palette-bar" aria-label="Paper Theme Switcher">
+						<span class="theme-bar-label">PAPER TONE // 纸本色印:</span>
+						<div class="theme-pills">
+							<button type="button" class="theme-pill washi active" data-theme="washi" title="和纸朱砂 · Washi &amp; Cinnabar">
+								<span class="pill-swatch" style="background: #c45e49;"></span>
+								<span class="pill-title">和纸朱砂</span>
+							</button>
+							<button type="button" class="theme-pill amber" data-theme="amber" title="古籍琥珀 · Antique Parchment &amp; Amber">
+								<span class="pill-swatch" style="background: #b86d29;"></span>
+								<span class="pill-title">古籍琥珀</span>
+							</button>
+							<button type="button" class="theme-pill blueprint" data-theme="blueprint" title="学术蓝图 · Blueprint &amp; Slate">
+								<span class="pill-swatch" style="background: #2563eb;"></span>
+								<span class="pill-title">学术蓝图</span>
+							</button>
+							<button type="button" class="theme-pill bamboo" data-theme="bamboo" title="竹简青素 · Bamboo &amp; Celadon">
+								<span class="pill-swatch" style="background: #2d6a4f;"></span>
+								<span class="pill-title">竹简青素</span>
+							</button>
+							<button type="button" class="theme-pill carbon" data-theme="carbon" title="玄纸泥金 · Carbon Washi &amp; Gold">
+								<span class="pill-swatch" style="background: #d4a373;"></span>
+								<span class="pill-title">玄纸泥金</span>
+							</button>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -552,807 +667,48 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 					}
 				});
 			});
+
+			// Paper Theme Switcher with localStorage persistence
+			const initPaperTheme = () => {
+				try {
+					const savedTheme = localStorage.getItem('apaper-theme') || 'washi';
+					document.documentElement.setAttribute('data-paper-theme', savedTheme);
+					document.querySelectorAll('.theme-pill').forEach((btn) => {
+						btn.classList.toggle('active', btn.getAttribute('data-theme') === savedTheme);
+					});
+				} catch (_) {}
+
+				document.querySelectorAll('.theme-pill').forEach((btn) => {
+					btn.addEventListener('click', () => {
+						const theme = btn.getAttribute('data-theme');
+						if (!theme) return;
+						document.documentElement.setAttribute('data-paper-theme', theme);
+						try {
+							localStorage.setItem('apaper-theme', theme);
+						} catch (_) {}
+						document.querySelectorAll('.theme-pill').forEach((b) => b.classList.remove('active'));
+						btn.classList.add('active');
+					});
+				});
+			};
+
+			initPaperTheme();
+			document.addEventListener('astro:after-swap', initPaperTheme);
 		</script>
 	</body>
 </html>
 
 <style>
-	.homepage {
-		width: 100%;
-		max-width: 100%;
-		padding: 0;
-	}
-
-	/* Hero */
-	.hero {
-		position: relative;
-		overflow: hidden;
-		padding: clamp(4rem, 11vw, 8rem) 1.5rem clamp(3rem, 7vw, 5rem);
-		background:
-			radial-gradient(720px 420px at 50% -10%, var(--accent-soft) 0%, rgba(227, 244, 239, 0) 70%);
-	}
-
-	.hero::after {
-		content: '';
-		position: absolute;
-		inset: auto 0 0 0;
-		height: 1px;
-		background: linear-gradient(90deg, transparent, var(--line), transparent);
-	}
-
-	.hero-content {
-		position: relative;
-		z-index: 2;
-		text-align: center;
-		max-width: 720px;
-		margin: 0 auto;
-	}
-
-	.profile-image {
-		width: 132px;
-		height: 132px;
-		border-radius: 50%;
-		object-fit: cover;
-		border: 4px solid var(--surface-raised);
-		box-shadow: 0 0 0 1px var(--line), var(--shadow-lg);
-		margin: 0 auto 1.75rem;
-		display: block;
-		transition: transform var(--dur) var(--ease);
-	}
-	.profile-image:hover {
-		transform: scale(1.04);
-	}
-
-	.hero-title {
-		font-size: clamp(2.5rem, 6vw, 3.6rem);
-		font-weight: 700;
-		letter-spacing: -0.02em;
-		margin-bottom: 0.6rem;
-		color: rgb(var(--black));
-	}
-	.highlight {
-		background: linear-gradient(120deg, var(--accent) 0%, var(--accent-bright) 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-	}
-
-	.hero-subtitle {
-		font-size: 1.3rem;
-		margin: 0 0 0.2rem;
-		font-weight: 700;
-		color: var(--accent-dark);
-	}
-	.hero-subtitle-secondary {
-		font-size: 1rem;
-		font-weight: 500;
-		letter-spacing: 0.01em;
-		color: rgb(var(--gray));
-		margin-bottom: 1.5rem;
-	}
-
-	.hero-description {
-		font-size: 1.075rem;
-		line-height: 1.7;
-		color: rgb(var(--gray-dark));
-		max-width: 620px;
-		margin: 0 auto 2rem;
-	}
-
-	.hero-cta {
-		display: flex;
-		gap: 0.85rem;
-		justify-content: center;
-		flex-wrap: wrap;
-	}
-
-	/* Proof strip */
-	.proof {
-		padding: 0 0 clamp(3rem, 7vw, 5rem);
-	}
-	.proof-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 1rem;
-		max-width: 900px;
-		margin: 0 auto;
-	}
-	@media (min-width: 700px) {
-		.proof-grid {
-			grid-template-columns: repeat(3, 1fr);
-		}
-	}
-	.proof-tile {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-		background: var(--surface-raised);
-		padding: 1rem;
-		border-radius: var(--radius);
-		border: 1px solid var(--line);
-		box-shadow: var(--shadow-sm);
-		text-decoration: none;
-		transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
-	}
-	.proof-tile:hover {
-		transform: translateY(-3px);
-		box-shadow: var(--shadow-md);
-		border-color: rgba(var(--accent-rgb), 0.32);
-	}
-	.proof-thumb {
-		width: 52px;
-		height: 52px;
-		object-fit: cover;
-		border-radius: 10px;
-		flex-shrink: 0;
-		box-shadow: 0 0 0 1px var(--line);
-	}
-	.proof-thumb-medal {
-		object-position: center 30%;
-	}
-	.proof-icon {
-		width: 52px;
-		height: 52px;
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 1.5rem;
-		border-radius: 10px;
-		background: var(--accent-soft);
-		flex-shrink: 0;
-	}
-	.proof-title {
-		font-size: 0.9rem;
-		font-weight: 700;
-		color: rgb(var(--black));
-		line-height: 1.3;
-	}
-	.proof-sub {
-		font-size: 0.78rem;
-		color: rgb(var(--gray));
-		margin-top: 0.15rem;
-	}
-
-	/* Sections */
-	section {
-		padding: var(--space-section) 0;
-	}
-	.container {
-		max-width: var(--content);
-		margin: 0 auto;
-		padding: 0 1.5rem;
-	}
-	.section-title {
-		text-align: center;
-		font-size: clamp(1.9rem, 3.6vw, 2.5rem);
-		margin: 0 0 1rem;
-		position: relative;
-		padding-bottom: 1rem;
-	}
-	.section-title::after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 52px;
-		height: 3px;
-		border-radius: 999px;
-		background: var(--accent);
-	}
-
-	/* Signature Work */
-	.signature {
-		background: var(--surface-muted);
-		border-top: 1px solid var(--line);
-		border-bottom: 1px solid var(--line);
-	}
-	.signature-intro {
-		text-align: center;
-		max-width: 620px;
-		margin: 0 auto clamp(2.5rem, 5vw, 3.5rem);
-		color: rgb(var(--gray-dark));
-		font-size: 1.02rem;
-		line-height: 1.65;
-	}
-
-	.signature-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		row-gap: clamp(3rem, 6vw, 4.5rem);
-	}
-	.timeline-rail {
-		display: none;
-	}
-	@media (min-width: 1040px) {
-		.signature-grid {
-			grid-template-columns: 88px 1fr;
-			column-gap: 2rem;
-		}
-		.timeline-rail {
-			display: block;
-			position: relative;
-			grid-column: 1;
-			grid-row: 1 / span 4;
-		}
-	}
-	.timeline-path {
-		position: absolute;
-		inset: 0;
-		width: 100%;
-		height: 100%;
-	}
-	.timeline-path path {
-		fill: none;
-		stroke: var(--accent);
-		stroke-opacity: 0.55;
-		stroke-width: 6px;
-		stroke-linecap: round;
-		stroke-linejoin: round;
-		vector-effect: non-scaling-stroke;
-	}
-	.timeline-node {
-		position: absolute;
-		left: 0;
-		right: 0;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		transform: translateY(-50%);
-	}
-	.node-dot {
-		width: 11px;
-		height: 11px;
-		border-radius: 50%;
-		background: var(--accent);
-		box-shadow: 0 0 0 4px var(--accent-soft);
-		margin-bottom: 0.4rem;
-	}
-	.node-label {
-		font-size: 0.62rem;
-		line-height: 1.4;
-		text-align: center;
-		text-transform: uppercase;
-		letter-spacing: 0.03em;
-		font-weight: 700;
-		color: rgb(var(--gray));
-		padding: 0 0.15rem;
-	}
-
-	.sig-block {
-		display: flex;
-		flex-direction: column;
-		gap: 1.75rem;
-		background: var(--surface-raised);
-		border: 1px solid var(--line);
-		border-radius: var(--radius-lg);
-		padding: clamp(1.5rem, 3vw, 2.25rem);
-		box-shadow: var(--shadow-sm);
-	}
-	@media (min-width: 860px) {
-		.sig-block {
-			flex-direction: row;
-			align-items: center;
-			gap: 2.5rem;
-		}
-		.sig-block.sig-reverse {
-			flex-direction: row-reverse;
-		}
-		.sig-media,
-		.sig-body {
-			flex: 1 1 50%;
-			min-width: 0;
-		}
-	}
-
-	/* Fan-out: the path's end branches into the current skill set */
-	.skills-fanout {
-		margin-top: clamp(2.5rem, 5vw, 3.5rem);
-	}
-	.fanout-caption {
-		text-align: center;
-		font-size: 0.74rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.14em;
-		color: rgb(var(--gray));
-		margin: 0 0 0.5rem;
-	}
-	.fanout-svg {
-		display: block;
-		width: 100%;
-		max-width: 720px;
-		height: 56px;
-		margin: 0 auto;
-	}
-	.fanout-svg path {
-		fill: none;
-		stroke: var(--accent);
-		stroke-opacity: 0.4;
-		stroke-width: 2px;
-		stroke-linecap: round;
-	}
-	.skills-row {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 0.9rem;
-		max-width: 760px;
-		margin: 0 auto;
-	}
-	@media (min-width: 700px) {
-		.skills-row {
-			grid-template-columns: repeat(4, 1fr);
-		}
-	}
-	.skill-chip {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.5rem;
-		text-align: center;
-		background: var(--surface-raised);
-		border: 1px solid var(--line);
-		border-radius: var(--radius);
-		padding: 1.1rem 0.75rem;
-		box-shadow: var(--shadow-sm);
-		transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
-	}
-	.skill-chip:hover {
-		transform: translateY(-3px);
-		box-shadow: var(--shadow-md);
-	}
-	.skill-icon {
-		width: 2.4rem;
-		height: 2.4rem;
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 1.2rem;
-		border-radius: 10px;
-		background: var(--accent-soft);
-	}
-	.skill-label {
-		font-size: 0.82rem;
-		font-weight: 700;
-		color: rgb(var(--black));
-		line-height: 1.3;
-	}
-
-	.sig-body h3 {
-		font-size: 1.4rem;
-		margin: 0.35rem 0 0.75rem;
-		color: rgb(var(--black));
-	}
-	.sig-body p {
-		color: rgb(var(--gray-dark));
-		font-size: 0.98rem;
-		line-height: 1.7;
-		margin: 0 0 1rem;
-	}
-	.sig-cta {
-		display: flex;
-		gap: 0.6rem;
-		flex-wrap: wrap;
-	}
-	.btn-sm {
-		padding: 0.6rem 1.25rem;
-		font-size: 0.86rem;
-	}
-
-	/* Video facade (Wild Dunk) */
-	.video-facade {
-		position: relative;
-		aspect-ratio: 4 / 3;
-		border-radius: var(--radius);
-		overflow: hidden;
-		cursor: pointer;
-		box-shadow: var(--shadow-md);
-		background: #000;
-	}
-	.video-facade img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		display: block;
-		transition: transform 0.4s var(--ease);
-	}
-	.video-facade:hover img {
-		transform: scale(1.03);
-	}
-	.video-facade.is-playing iframe {
-		width: 100%;
-		height: 100%;
-		display: block;
-		border: 0;
-	}
-	.play-btn {
-		position: absolute;
-		inset: 0;
-		margin: auto;
-		width: 58px;
-		height: 58px;
-		border-radius: 50%;
-		background: rgba(17, 24, 39, 0.72);
-		color: #fff;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		transition: transform 0.25s var(--ease), background 0.25s var(--ease);
-	}
-	.video-facade:hover .play-btn {
-		transform: scale(1.08);
-		background: var(--accent);
-	}
-
-	.rank-card {
-		margin: 0.9rem 0 0;
-	}
-	.rank-card img {
-		width: 100%;
-		border-radius: 10px;
-		box-shadow: 0 0 0 1px var(--line);
-		display: block;
-	}
-	.rank-card figcaption {
-		font-size: 0.72rem;
-		line-height: 1.5;
-		color: rgb(var(--gray));
-		margin-top: 0.5rem;
-	}
-
-	/* Wishes phone frame */
-	.phone-frame {
-		max-width: 260px;
-		margin: 0 auto;
-		border-radius: 28px;
-		overflow: hidden;
-		box-shadow: var(--shadow-lg);
-		border: 6px solid var(--surface-deep);
-	}
-	.sig-video {
-		width: 100%;
-		display: block;
-	}
-
-	/* wtcraft terminal card */
-	.terminal-card {
-		background: var(--surface-deep);
-		border-radius: var(--radius);
-		overflow: hidden;
-		box-shadow: var(--shadow-md);
-	}
-	.terminal-titlebar {
-		display: flex;
-		gap: 0.4rem;
-		padding: 0.7rem 0.85rem;
-		background: rgba(255, 255, 255, 0.05);
-	}
-	.terminal-titlebar span {
-		width: 10px;
-		height: 10px;
-		border-radius: 50%;
-		background: rgba(255, 255, 255, 0.18);
-	}
-	.terminal-body {
-		margin: 0;
-		padding: 1.25rem 1.4rem 1.5rem;
-		font-family: ui-monospace, "SF Mono", Menlo, monospace;
-		font-size: 0.86rem;
-		line-height: 1.85;
-		color: rgba(255, 255, 255, 0.82);
-		overflow-x: auto;
-	}
-	.t-prompt {
-		color: var(--on-dark-accent);
-	}
-	.t-ok {
-		color: #4ade80;
-	}
-
-	/* EDF frame */
-	.sig-frame {
-		width: 100%;
-		border-radius: var(--radius);
-		box-shadow: var(--shadow-md);
-		display: block;
-	}
-
-	/* Project cards (More Work) */
-	.projects-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 1.5rem;
-	}
-	@media (min-width: 700px) {
-		.projects-grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
-	}
-	@media (min-width: 1000px) {
-		.projects-grid {
-			grid-template-columns: repeat(3, 1fr);
-		}
-	}
-
-	.project-card {
-		background: var(--surface-raised);
-		padding: 2rem 1.75rem;
-		border-radius: var(--radius-lg);
-		border: 1px solid var(--line);
-		box-shadow: var(--shadow-sm);
-		transition:
-			transform 0.3s var(--ease),
-			box-shadow 0.3s var(--ease),
-			border-color 0.3s var(--ease);
-	}
-	.project-card:hover {
-		transform: translateY(-6px);
-		box-shadow: var(--shadow-lg);
-		border-color: rgba(var(--accent-rgb), 0.32);
-	}
-
-	.project-icon {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 3.25rem;
-		height: 3.25rem;
-		font-size: 1.6rem;
-		border-radius: 14px;
-		background: var(--accent-soft);
-		margin-bottom: 1.25rem;
-	}
-
-	.project-card h3 {
-		font-size: 1.15rem;
-		margin-bottom: 0.35rem;
-		color: rgb(var(--black));
-	}
-	.project-card p {
-		color: rgb(var(--gray));
-		font-size: 0.95rem;
-		margin-bottom: 1.1rem;
-	}
-	.project-link {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.3rem;
-		color: var(--accent);
-		font-weight: 700;
-		font-size: 0.92rem;
-		transition: gap 0.2s var(--ease), color 0.2s var(--ease);
-	}
-	.project-link:hover {
-		color: var(--accent-dark);
-		gap: 0.6rem;
-	}
-
-	/* Contact */
-	.contact {
-		background:
-			radial-gradient(620px 320px at 80% 0%, var(--on-dark-glow) 0%, transparent 60%),
-			var(--surface-deep);
-		color: rgba(255, 255, 255, 0.86);
-		position: relative;
-	}
-	.contact .section-title {
-		color: #fff;
-	}
-	.contact .section-title::after {
-		background: var(--on-dark-accent);
-	}
-	.contact-text {
-		text-align: center;
-		font-size: 1.08rem;
-		max-width: 540px;
-		margin: 0 auto 2.25rem;
-		color: rgba(255, 255, 255, 0.72);
-	}
-	.contact-buttons {
-		display: flex;
-		justify-content: center;
-		gap: 0.75rem;
-		flex-wrap: wrap;
-	}
-	.contact .btn-primary {
-		background: var(--on-dark-accent);
-		color: var(--on-dark-accent-text);
-		box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
-	}
-	.contact .btn-primary:hover {
-		background: #f4f4f5;
-		color: var(--on-dark-accent-text);
-		transform: translateY(-2px);
-	}
-	.contact .btn-secondary {
-		background: rgba(255, 255, 255, 0.06);
-		color: #fff;
-		border: 1px solid rgba(255, 255, 255, 0.22);
-		box-shadow: none;
-	}
-	.contact .btn-secondary:hover {
-		background: rgba(255, 255, 255, 0.13);
-		color: #fff;
-		border-color: rgba(255, 255, 255, 0.4);
-		transform: translateY(-2px);
-	}
-
-	/* Home v2 — product-page composition */
-	.hero {
-		padding: clamp(4.5rem, 8vw, 7rem) 1.5rem clamp(4rem, 7vw, 6rem);
-		background: radial-gradient(900px 540px at 14% -8%, var(--accent-soft) 0%, rgba(238, 240, 255, 0) 68%);
-	}
-	.hero-inner {
-		display: grid;
-		grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
-		align-items: center;
-		gap: clamp(3rem, 6vw, 5.5rem);
-		max-width: 1248px;
-		margin: 0 auto;
-	}
-	.hero-copy {
-		position: relative;
-		z-index: 2;
-	}
-	.hero-kicker {
-		display: inline-flex;
-		align-items: center;
-		margin: 0 0 1.6rem;
-		padding: 0.45rem 1rem;
-		border: 1px solid var(--line);
-		border-radius: 999px;
-		background: rgba(255, 255, 255, 0.88);
-		box-shadow: var(--shadow-sm);
-		color: var(--accent);
-		font-size: 0.76rem;
-		font-weight: 700;
-		letter-spacing: 0.1em;
-		line-height: 1.35;
-		text-transform: uppercase;
-	}
-	.hero h1 {
-		max-width: 710px;
-		margin: 0 0 1.4rem;
-		font-size: clamp(3.2rem, 5.15vw, 4.65rem);
-		letter-spacing: -0.04em;
-		line-height: 1.03;
-	}
-	.hero-description {
-		max-width: 590px;
-		margin: 0 0 2rem;
-		font-size: clamp(1.05rem, 1.5vw, 1.2rem);
-		line-height: 1.65;
-	}
-	.hero-cta {
-		justify-content: flex-start;
-		margin-bottom: 1.4rem;
-	}
-	.hero-credibility {
-		margin: 0;
-		color: rgb(var(--gray));
-		font-size: 0.88rem;
-		font-weight: 700;
-		letter-spacing: 0.02em;
-	}
-	.hero-visual {
-		position: relative;
-		justify-self: center;
-		width: min(100%, 440px);
-	}
-	.hero-art {
-		position: relative;
-		aspect-ratio: 1;
-		overflow: hidden;
-		border-radius: 32px;
-		background: var(--surface-deep);
-		box-shadow: var(--shadow-lg);
-	}
-	.hero-art::after {
-		content: '';
-		position: absolute;
-		inset: 50% 0 0;
-		background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.52));
-	}
-	.hero-art img {
-		display: block;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		border-radius: 0;
-	}
-	.hero-art > span {
-		position: absolute;
-		z-index: 1;
-		left: 1.35rem;
-		bottom: 1.25rem;
-		color: rgba(255, 255, 255, 0.9);
-		font-size: 0.74rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-	}
-	.proof {
-		padding: 0 0 clamp(5rem, 9vw, 8rem);
-	}
-	.proof-grid {
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: clamp(1rem, 2.4vw, 1.75rem);
-		max-width: 1248px;
-	}
-	.proof-card {
-		display: block;
-		overflow: hidden;
-		border: 1px solid var(--line);
-		border-radius: var(--radius-lg);
-		background: var(--surface-raised);
-		box-shadow: var(--shadow-md);
-		color: inherit;
-		transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
-	}
-	.proof-card:hover {
-		transform: translateY(-6px);
-		border-color: rgba(var(--accent-rgb), 0.3);
-		box-shadow: var(--shadow-lg);
-	}
-	.proof-media {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		height: 210px;
-		overflow: hidden;
-		background: var(--accent-soft);
-	}
-	.proof-media img {
-		display: block;
-		width: 100%;
-		height: 100%;
-		border-radius: 0;
-	}
-	.proof-medal {
-		background: #151515;
-	}
-	.proof-medal img {
-		object-fit: cover;
-		object-position: center;
-	}
-	.proof-rank {
-		padding: 1.3rem;
-	}
-	.proof-rank img {
-		height: auto;
-		object-fit: contain;
-		border-radius: 9px;
-		box-shadow: 0 0 0 1px var(--line), var(--shadow-sm);
-	}
-	.proof-devpost {
-		background: #eef2f3;
-	}
-	.proof-devpost img {
-		object-fit: cover;
-		object-position: top center;
-	}
-	.proof-copy {
-		display: grid;
-		gap: 0.35rem;
-		padding: 1.4rem 1.55rem 1.65rem;
-	}
-	.proof-copy strong {
-		font-size: 1.14rem;
-		line-height: 1.3;
-	}
-	.proof-copy span {
-		color: rgb(var(--gray));
-		font-size: 0.88rem;
-	}
-
 	/* ─────────────────────────────────────────────────────────────
-	   SIGNATURE ARCHIVE // apaper "kami" editorial style system
-	   Paper, carbon ink, hairline rules, and cinnabar terracotta.
+	   APAPER "KAMI" EDITORIAL PUBLICATION SYSTEM & COLOR CUSTOMIZATION
+	   Paper tones, carbon ink, hairline rules, and cinnabar seal.
 	   ───────────────────────────────────────────────────────────── */
-	:root {
+	:root,
+	[data-paper-theme="washi"] {
 		--apaper-bg: #f8f6f0;
-		--apaper-bg-alt: #f3efe6;
+		--apaper-bg-alt: #f2eee3;
 		--apaper-card: #fcfbf8;
+		--apaper-header-bg: rgba(248, 246, 240, 0.88);
 		--apaper-ink: #202221;
 		--apaper-ink-secondary: #4a4742;
 		--apaper-muted: #776f66;
@@ -1363,6 +719,388 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		--apaper-accent-line: rgba(196, 94, 73, 0.25);
 		--apaper-font-mono: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
 		--apaper-font-serif: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
+	}
+
+	/* Preset 2: 古籍琥珀 · Antique Parchment & Amber */
+	[data-paper-theme="amber"] {
+		--apaper-bg: #f5f0e6;
+		--apaper-bg-alt: #ebe3d3;
+		--apaper-card: #faf7f0;
+		--apaper-header-bg: rgba(245, 240, 230, 0.88);
+		--apaper-ink: #26221c;
+		--apaper-ink-secondary: #4d4439;
+		--apaper-muted: #7d7263;
+		--apaper-line: #dbcebb;
+		--apaper-line-light: #e8ded0;
+		--apaper-accent: #b86d29;
+		--apaper-accent-soft: rgba(184, 109, 41, 0.09);
+		--apaper-accent-line: rgba(184, 109, 41, 0.28);
+	}
+
+	/* Preset 3: 学术蓝图 · Blueprint & Slate */
+	[data-paper-theme="blueprint"] {
+		--apaper-bg: #f6f8fa;
+		--apaper-bg-alt: #ecf1f6;
+		--apaper-card: #ffffff;
+		--apaper-header-bg: rgba(246, 248, 250, 0.88);
+		--apaper-ink: #1e2530;
+		--apaper-ink-secondary: #3e4a5b;
+		--apaper-muted: #64748b;
+		--apaper-line: #cbd5e1;
+		--apaper-line-light: #e2e8f0;
+		--apaper-accent: #2563eb;
+		--apaper-accent-soft: rgba(37, 99, 235, 0.08);
+		--apaper-accent-line: rgba(37, 99, 235, 0.25);
+	}
+
+	/* Preset 4: 竹简青素 · Bamboo & Celadon */
+	[data-paper-theme="bamboo"] {
+		--apaper-bg: #f3f6f3;
+		--apaper-bg-alt: #e6ede6;
+		--apaper-card: #fafcfa;
+		--apaper-header-bg: rgba(243, 246, 243, 0.88);
+		--apaper-ink: #1f2623;
+		--apaper-ink-secondary: #3f4a44;
+		--apaper-muted: #68776f;
+		--apaper-line: #c8d3cc;
+		--apaper-line-light: #dbe3de;
+		--apaper-accent: #2d6a4f;
+		--apaper-accent-soft: rgba(45, 106, 79, 0.08);
+		--apaper-accent-line: rgba(45, 106, 79, 0.25);
+	}
+
+	/* Preset 5: 玄纸泥金 · Carbon Washi & Gold (暗调纸本) */
+	[data-paper-theme="carbon"] {
+		--apaper-bg: #161718;
+		--apaper-bg-alt: #1c1e1f;
+		--apaper-card: #212325;
+		--apaper-header-bg: rgba(22, 23, 24, 0.88);
+		--apaper-ink: #ede9e1;
+		--apaper-ink-secondary: #c2bdaf;
+		--apaper-muted: #8c877c;
+		--apaper-line: #333638;
+		--apaper-line-light: #282a2c;
+		--apaper-accent: #d4a373;
+		--apaper-accent-soft: rgba(212, 163, 115, 0.12);
+		--apaper-accent-line: rgba(212, 163, 115, 0.3);
+	}
+
+	:global(body) {
+		background: var(--apaper-bg);
+		color: var(--apaper-ink);
+		transition: background-color 0.3s ease, color 0.3s ease;
+	}
+
+	.homepage {
+		width: 100%;
+		max-width: 100%;
+		padding: 0;
+		background: var(--apaper-bg);
+		color: var(--apaper-ink);
+	}
+
+	/* General apaper buttons */
+	.btn-apaper {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		padding: 7px 16px;
+		border-radius: 999px;
+		background: var(--apaper-ink);
+		color: #ffffff;
+		font-family: var(--apaper-font-mono);
+		font-size: 11px;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		text-decoration: none;
+		border: 1px solid var(--apaper-ink);
+		transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+	}
+	.btn-apaper:hover {
+		background: var(--apaper-accent);
+		border-color: var(--apaper-accent);
+		color: #ffffff;
+		transform: translateY(-1px);
+	}
+	.btn-apaper-primary {
+		background: var(--apaper-accent);
+		border-color: var(--apaper-accent);
+		color: #ffffff;
+	}
+	.btn-apaper-primary:hover {
+		background: var(--apaper-ink);
+		border-color: var(--apaper-ink);
+		color: #ffffff;
+	}
+	.btn-apaper-ghost {
+		background: transparent;
+		color: var(--apaper-ink);
+		border-color: var(--apaper-line);
+	}
+	.btn-apaper-ghost:hover {
+		background: var(--apaper-accent-soft);
+		border-color: var(--apaper-accent);
+		color: var(--apaper-accent);
+	}
+
+	/* Hero — Editorial Abstract & Genesis Node */
+	.hero {
+		position: relative;
+		padding: clamp(4.5rem, 8vw, 7rem) 1.5rem clamp(4rem, 7vw, 6rem);
+		background: var(--apaper-bg);
+		border-bottom: 1px solid var(--apaper-line);
+	}
+	.hero-inner {
+		display: grid;
+		grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+		align-items: center;
+		gap: clamp(3rem, 6vw, 5.5rem);
+		max-width: 1180px;
+		margin: 0 auto;
+	}
+	.hero-copy {
+		position: relative;
+		z-index: 2;
+	}
+	.hero-kicker-wrap {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		margin-bottom: 1.6rem;
+	}
+	.hero-kicker-glyph {
+		width: 26px;
+		height: 26px;
+		border: 1px solid var(--apaper-ink);
+		border-radius: 8px;
+		display: grid;
+		place-items: center;
+		font-family: var(--apaper-font-serif);
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--apaper-ink);
+		background: var(--apaper-card);
+	}
+	.hero-kicker {
+		font-family: var(--apaper-font-mono);
+		font-size: 10px;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--apaper-accent);
+		font-weight: 700;
+	}
+	.hero h1 {
+		font-family: var(--apaper-font-serif);
+		max-width: 720px;
+		margin: 0 0 1.4rem;
+		font-size: clamp(2.8rem, 4.8vw, 4.4rem);
+		letter-spacing: -0.03em;
+		line-height: 1.08;
+		font-weight: 600;
+		color: var(--apaper-ink);
+	}
+	.hero-description {
+		font-family: var(--apaper-font-serif);
+		max-width: 600px;
+		margin: 0 0 2.2rem;
+		font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+		line-height: 1.75;
+		color: var(--apaper-ink-secondary);
+	}
+	.hero-cta {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		flex-wrap: wrap;
+		margin-bottom: 1.8rem;
+	}
+	.hero-credibility {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		font-family: var(--apaper-font-mono);
+		font-size: 10px;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--apaper-muted);
+		font-weight: 600;
+	}
+	.cred-dot {
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: var(--apaper-accent);
+	}
+	.hero-visual {
+		position: relative;
+		justify-self: center;
+		width: min(100%, 440px);
+	}
+	.hero-art-plate {
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 18px;
+		padding: 12px;
+		box-shadow: 0 12px 32px rgba(32, 34, 33, 0.06);
+		transition: border-color 0.2s ease, transform 0.2s ease;
+	}
+	.hero-art-plate:hover {
+		border-color: var(--apaper-accent);
+		transform: translateY(-2px);
+	}
+	.hero-art {
+		position: relative;
+		aspect-ratio: 1;
+		overflow: hidden;
+		border-radius: 12px;
+		background: #151515;
+	}
+	.hero-art img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	.art-meta-stamp {
+		position: absolute;
+		left: 14px;
+		bottom: 14px;
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		padding: 4px 10px;
+		background: rgba(22, 23, 24, 0.82);
+		backdrop-filter: blur(8px);
+		border: 1px solid rgba(255, 255, 255, 0.18);
+		border-radius: 6px;
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		letter-spacing: 0.08em;
+	}
+	.art-stamp-id {
+		color: #ffffff;
+		font-weight: 700;
+	}
+	.art-stamp-label {
+		color: rgba(255, 255, 255, 0.78);
+	}
+	.art-plate-caption {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		padding: 10px 4px 2px;
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		letter-spacing: 0.12em;
+		color: var(--apaper-muted);
+		text-transform: uppercase;
+	}
+	.caption-marker {
+		color: var(--apaper-accent);
+		font-weight: 700;
+	}
+
+	/* Proof — Archival Exhibit Plates */
+	.proof {
+		padding: clamp(4rem, 7vw, 6rem) 1.5rem;
+		background: var(--apaper-bg);
+	}
+	.proof-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: clamp(14px, 2vw, 22px);
+		max-width: 1180px;
+		margin: 0 auto;
+	}
+	.proof-card {
+		display: flex;
+		flex-direction: column;
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 14px;
+		overflow: hidden;
+		color: inherit;
+		text-decoration: none;
+		transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+	}
+	.proof-card:hover {
+		border-color: var(--apaper-accent);
+		transform: translateY(-3px);
+		box-shadow: 0 10px 24px rgba(32, 34, 33, 0.06);
+	}
+	.proof-card-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 12px 16px;
+		border-bottom: 1px solid var(--apaper-line);
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+	.proof-card-id {
+		color: var(--apaper-accent);
+		font-weight: 700;
+	}
+	.proof-card-scope {
+		color: var(--apaper-muted);
+	}
+	.proof-media {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 200px;
+		overflow: hidden;
+		background: var(--apaper-bg-alt);
+		border-bottom: 1px solid var(--apaper-line-light);
+	}
+	.proof-media img {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+	.proof-medal {
+		background: #151515;
+	}
+	.proof-medal img {
+		object-fit: cover;
+		object-position: center;
+	}
+	.proof-rank {
+		padding: 1.2rem;
+	}
+	.proof-rank img {
+		height: auto;
+		max-height: 100%;
+		object-fit: contain;
+		border-radius: 8px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+	}
+	.proof-devpost {
+		background: #eef2f3;
+	}
+	.proof-devpost img {
+		object-fit: cover;
+		object-position: top center;
+	}
+	.proof-copy {
+		display: grid;
+		gap: 4px;
+		padding: 14px 16px 18px;
+	}
+	.proof-copy strong {
+		font-family: var(--apaper-font-serif);
+		font-size: 1.08rem;
+		font-weight: 600;
+		color: var(--apaper-ink);
+		line-height: 1.3;
+	}
+	.proof-copy span {
+		font-family: var(--apaper-font-mono);
+		color: var(--apaper-muted);
+		font-size: 0.78rem;
+		letter-spacing: 0.02em;
 	}
 
 	.signature {
@@ -1970,30 +1708,318 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		margin: 0 0 16px;
 	}
 
+	/* ─────────────────────────────────────────────────────────────
+	   SECONDARY CATALOG // More Work (apaper archival index)
+	   ───────────────────────────────────────────────────────────── */
+	.projects {
+		background: var(--apaper-bg);
+		color: var(--apaper-ink);
+		border-bottom: 1px solid var(--apaper-line);
+		padding: clamp(4.5rem, 8vw, 7rem) 1.5rem;
+		position: relative;
+	}
+	.projects-editorial-header {
+		max-width: 1180px;
+		margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+	}
+	.projects-meta-bar {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 12px;
+		padding-bottom: 16px;
+		border-bottom: 1px solid var(--apaper-line);
+		font-family: var(--apaper-font-mono);
+		font-size: 10px;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--apaper-muted);
+	}
+	.projects-wordmark {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		color: var(--apaper-ink);
+		font-weight: 500;
+	}
+	.projects-mark-glyph {
+		width: 26px;
+		height: 26px;
+		border: 1px solid var(--apaper-ink);
+		border-radius: 8px;
+		display: grid;
+		place-items: center;
+		font-family: var(--apaper-font-serif);
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--apaper-ink);
+		background: var(--apaper-card);
+	}
+	.projects-status-tag {
+		color: var(--apaper-muted);
+	}
+	.projects-title {
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(2.2rem, 4vw, 3.2rem);
+		font-weight: 500;
+		letter-spacing: -0.03em;
+		color: var(--apaper-ink);
+		margin: 1.5rem 0 0.8rem;
+		line-height: 1.1;
+	}
+	.projects-lead {
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(1rem, 1.3vw, 1.12rem);
+		color: var(--apaper-muted);
+		max-width: 680px;
+		line-height: 1.7;
+		margin: 0;
+	}
+	.projects-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: clamp(14px, 2vw, 22px);
+		max-width: 1180px;
+		margin: 0 auto;
+	}
+	.project-card {
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 14px;
+		padding: 22px 20px 24px;
+		display: flex;
+		flex-direction: column;
+		transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+	}
+	.project-card:hover {
+		border-color: var(--apaper-accent);
+		transform: translateY(-3px);
+		box-shadow: 0 10px 24px rgba(32, 34, 33, 0.06);
+	}
+	.project-card-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		letter-spacing: 0.12em;
+		padding-bottom: 12px;
+		margin-bottom: 14px;
+		border-bottom: 1px solid var(--apaper-line);
+	}
+	.project-id {
+		color: var(--apaper-accent);
+		font-weight: 700;
+	}
+	.project-scope {
+		color: var(--apaper-muted);
+	}
+	.project-card-title {
+		font-family: var(--apaper-font-serif);
+		font-size: 1.18rem;
+		font-weight: 600;
+		color: var(--apaper-ink);
+		margin: 0 0 10px;
+		line-height: 1.25;
+	}
+	.project-card-desc {
+		font-family: var(--apaper-font-serif);
+		font-size: 0.88rem;
+		line-height: 1.65;
+		color: var(--apaper-ink-secondary);
+		margin: 0 0 20px;
+		flex-grow: 1;
+	}
+	.project-card .btn-apaper {
+		align-self: flex-start;
+	}
+
+	/* ─────────────────────────────────────────────────────────────
+	   CORRESPONDENCE & COLOPHON // Contact (apaper Dispatch Plate)
+	   ───────────────────────────────────────────────────────────── */
+	.contact {
+		background: var(--apaper-bg-alt);
+		color: var(--apaper-ink);
+		padding: clamp(5rem, 8vw, 7.5rem) 1.5rem clamp(4rem, 6vw, 6rem);
+		border-bottom: 1px solid var(--apaper-line);
+		position: relative;
+	}
+	.contact-plate {
+		max-width: 920px;
+		margin: 0 auto;
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 18px;
+		padding: clamp(2.5rem, 5vw, 4.2rem) clamp(1.8rem, 4vw, 3.8rem);
+		box-shadow: 0 12px 36px rgba(32, 34, 33, 0.05);
+		text-align: center;
+	}
+	.contact-meta-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 12px;
+		padding-bottom: 16px;
+		margin-bottom: 2rem;
+		border-bottom: 1px solid var(--apaper-line);
+		font-family: var(--apaper-font-mono);
+		font-size: 10px;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--apaper-muted);
+	}
+	.contact-wordmark {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		color: var(--apaper-ink);
+		font-weight: 500;
+	}
+	.contact-mark-glyph {
+		width: 26px;
+		height: 26px;
+		border: 1px solid var(--apaper-ink);
+		border-radius: 8px;
+		display: grid;
+		place-items: center;
+		font-family: var(--apaper-font-serif);
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--apaper-ink);
+		background: var(--apaper-bg);
+	}
+	.contact-status-tag {
+		color: var(--apaper-accent);
+		font-weight: 600;
+	}
+	.contact-title {
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(2.2rem, 4vw, 3.4rem);
+		font-weight: 600;
+		letter-spacing: -0.03em;
+		color: var(--apaper-ink);
+		margin: 0 0 1rem;
+		line-height: 1.15;
+	}
+	.contact-text {
+		font-family: var(--apaper-font-serif);
+		font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+		line-height: 1.75;
+		color: var(--apaper-ink-secondary);
+		max-width: 620px;
+		margin: 0 auto 2.4rem;
+	}
+	.contact-buttons {
+		display: flex;
+		justify-content: center;
+		gap: 10px;
+		flex-wrap: wrap;
+		margin-bottom: 2.5rem;
+	}
+	.contact-buttons .btn-apaper {
+		padding: 9px 20px;
+		font-size: 12px;
+	}
+	.contact-colophon-sub {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 10px;
+		padding-top: 18px;
+		border-top: 1px solid var(--apaper-line);
+		font-family: var(--apaper-font-mono);
+		font-size: 9px;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--apaper-muted);
+	}
+
+	/* ─────────────────────────────────────────────────────────────
+	   THEME PALETTE BAR (Interactive Color Preset Switcher)
+	   ───────────────────────────────────────────────────────────── */
+	.theme-palette-bar {
+		max-width: 920px;
+		margin: 2.5rem auto 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 14px;
+		font-family: var(--apaper-font-mono);
+		font-size: 10px;
+		letter-spacing: 0.12em;
+	}
+	.theme-bar-label {
+		color: var(--apaper-muted);
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+	.theme-pills {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		flex-wrap: wrap;
+	}
+	.theme-pill {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		padding: 5px 12px;
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 999px;
+		color: var(--apaper-ink-secondary);
+		font-family: var(--apaper-font-mono);
+		font-size: 10px;
+		cursor: pointer;
+		transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+	}
+	.theme-pill:hover {
+		border-color: var(--apaper-accent);
+		color: var(--apaper-ink);
+		transform: translateY(-1px);
+	}
+	.theme-pill.active {
+		border-color: var(--apaper-ink);
+		background: var(--apaper-ink);
+		color: #ffffff;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	}
+	.pill-swatch {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		flex-shrink: 0;
+	}
+	.theme-pill.active .pill-swatch {
+		box-shadow: 0 0 0 1px #fff;
+	}
+
 	/* Responsive media queries */
 	@media (max-width: 1040px) {
-		.specs-grid {
+		.specs-grid,
+		.projects-grid {
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 
 	@media (max-width: 980px) {
 		.hero-inner {
-			grid-template-columns: 1fr 380px;
+			grid-template-columns: 1fr;
 			gap: 2.5rem;
 		}
 		.hero h1 {
-			font-size: clamp(2.75rem, 6vw, 3.7rem);
+			font-size: clamp(2.6rem, 6vw, 3.8rem);
+		}
+		.hero-visual {
+			width: min(100%, 460px);
 		}
 	}
 
 	@media (max-width: 859px) {
-		.hero-inner {
-			grid-template-columns: 1fr;
-		}
-		.hero-visual {
-			width: min(100%, 500px);
-		}
 		.proof-grid {
 			grid-template-columns: 1fr;
 			max-width: 560px;
@@ -2004,6 +2030,11 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		}
 		.proof-media {
 			height: 180px;
+			border-bottom: 0;
+			border-right: 1px solid var(--apaper-line-light);
+		}
+		.proof-card-header {
+			grid-column: 1 / span 2;
 		}
 		.proof-copy {
 			align-content: center;
@@ -2027,24 +2058,31 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		}
 	}
 
-	@media (max-width: 620px) {
+	@media (max-width: 680px) {
 		.hero {
-			padding-top: 3.5rem;
+			padding: 3.5rem 1.2rem;
 		}
 		.hero h1 {
-			font-size: clamp(2.55rem, 13vw, 3.35rem);
+			font-size: clamp(2.4rem, 11vw, 3.2rem);
 		}
 		.proof-card {
 			grid-template-columns: 1fr;
 		}
 		.proof-media {
-			height: 210px;
+			height: 200px;
+			border-right: 0;
+			border-bottom: 1px solid var(--apaper-line-light);
+		}
+		.proof-card-header {
+			grid-column: 1;
 		}
 		.signature {
 			padding-right: 1rem;
 			padding-left: 1rem;
 		}
-		.sig-meta-bar {
+		.sig-meta-bar,
+		.projects-meta-bar,
+		.contact-meta-header {
 			font-size: 9px;
 		}
 		.editorial-node {
@@ -2057,8 +2095,17 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		.pivot-plate {
 			padding: 18px 16px;
 		}
-		.specs-grid {
+		.specs-grid,
+		.projects-grid {
 			grid-template-columns: 1fr;
+		}
+		.contact-plate {
+			padding: 2.2rem 1.2rem;
+		}
+		.contact-colophon-sub {
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
 		}
 	}
 </style>

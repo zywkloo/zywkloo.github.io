@@ -45,12 +45,15 @@ const MOVIE_REC_GITHUB = 'https://github.com/ZZZ-RecSys/ZZZ-MovieRecSystem';
 </footer>
 <style>
 	footer {
-		padding: 3em 1em 4em;
-		background: var(--surface-muted);
-		border-top: 1px solid var(--line);
-		color: rgb(var(--gray));
+		padding: 3.5em 1.5em 4.5em;
+		background: var(--apaper-bg, var(--surface-muted));
+		border-top: 1px solid var(--apaper-line, var(--line));
+		color: var(--apaper-muted, rgb(var(--gray)));
 		text-align: center;
-		font-size: 0.92rem;
+		font-family: var(--apaper-font-mono, inherit);
+		font-size: 0.82rem;
+		letter-spacing: 0.05em;
+		transition: background-color 0.3s ease, border-color 0.3s ease;
 	}
 	.social-links {
 		display: flex;
@@ -62,21 +65,21 @@ const MOVIE_REC_GITHUB = 'https://github.com/ZZZ-RecSys/ZZZ-MovieRecSystem';
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		width: 2.4rem;
-		height: 2.4rem;
-		border: 1px solid var(--line);
+		width: 2.3rem;
+		height: 2.3rem;
+		border: 1px solid var(--apaper-line, var(--line));
 		border-radius: 999px;
-		background: var(--surface-raised);
+		background: var(--apaper-card, var(--surface-raised));
 		text-decoration: none;
-		color: rgb(var(--gray));
+		color: var(--apaper-muted, rgb(var(--gray)));
 		transition:
 			color 0.2s var(--ease),
 			border-color 0.2s var(--ease),
 			transform 0.2s var(--ease);
 	}
 	.social-links a:hover {
-		color: var(--accent-dark);
-		border-color: rgba(var(--accent-rgb), 0.35);
+		color: var(--apaper-accent, var(--accent-dark));
+		border-color: var(--apaper-accent, rgba(var(--accent-rgb), 0.35));
 		transform: translateY(-2px);
 	}
 	.social-links svg {
