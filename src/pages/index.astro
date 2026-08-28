@@ -306,6 +306,9 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										<blockquote class="editorial-quote">
 											<p>Leading a fast-paced mobile dev team and modeling high-stakes player economies taught me product ownership from the ground up — balancing mathematical monetization loops, UX psychology, and client-server constraints. That foundation of cross-functional leadership and end-to-end systems thinking directly shapes how I lead and architect mobile products today.</p>
 										</blockquote>
+										<div class="plate-cta">
+											<a href="https://www.youtube.com/watch?v=ysmp5vK4R_c" target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost">YouTube Archive ↗</a>
+										</div>
 										<div class="plate-tags">
 											<span>Game Dev Leadership</span>
 											<span>Product &amp; Monetization</span>
@@ -840,6 +843,17 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 
 			initHeroStage();
 			document.addEventListener('astro:after-swap', initHeroStage);
+
+			// Chapter 01 Native Video Volume & Playback Setup
+			const initChapterVideo = () => {
+				const video = document.querySelector('.chapter-native-video');
+				if (!video) return;
+				// Set comfortable initial volume (40%) to ensure smooth, pleasant audio
+				video.volume = 0.4;
+			};
+
+			initChapterVideo();
+			document.addEventListener('astro:after-swap', initChapterVideo);
 
 			// Paper Theme Switcher with localStorage persistence
 			const initPaperTheme = () => {
@@ -1392,12 +1406,39 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		border-radius: 12px;
 		background: #000;
 		border: 1px solid var(--apaper-line);
+		box-shadow: 0 6px 20px rgba(32, 34, 33, 0.08);
 	}
 	.chapter-native-video {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 		display: block;
+	}
+
+	/* Chapter 01 Rank Card */
+	.rank-card {
+		margin: 16px 0 0;
+		background: var(--apaper-card);
+		border: 1px solid var(--apaper-line);
+		border-radius: 12px;
+		padding: 10px;
+		box-shadow: 0 4px 14px rgba(32, 34, 33, 0.04);
+	}
+	.rank-card img {
+		width: 100%;
+		height: auto;
+		border-radius: 8px;
+		border: 1px solid var(--apaper-line);
+		display: block;
+	}
+	.rank-card figcaption {
+		font-family: var(--apaper-font-mono);
+		font-size: 8.5px;
+		letter-spacing: 0.04em;
+		color: var(--apaper-muted);
+		line-height: 1.5;
+		margin-top: 8px;
+		padding: 0 2px;
 	}
 
 	/* Proof — Archival Exhibit Plates */
@@ -1687,7 +1728,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		display: grid;
 		grid-template-columns: minmax(300px, 1fr) minmax(320px, 1.1fr);
 		gap: clamp(24px, 3.5vw, 44px);
-		align-items: center;
+		align-items: start;
 		background: var(--apaper-card);
 		border: 1px solid var(--apaper-line);
 		border-radius: 18px;
