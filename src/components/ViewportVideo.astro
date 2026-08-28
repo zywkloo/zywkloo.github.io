@@ -1,0 +1,77 @@
+---
+interface Props {
+	src: string;
+	poster: string;
+	ariaLabel: string;
+	class?: string;
+	initialActive?: boolean;
+}
+
+const { src, poster, ariaLabel, class: className = '', initialActive = true } = Astro.props;
+---
+
+<video
+	data-viewport-video
+	data-src={src}
+	data-viewport-active={initialActive ? 'true' : 'false'}
+	poster={poster}
+	preload="none"
+	muted
+	loop
+	playsinline
+	class={className}
+	aria-label={ariaLabel}
+></video>
+
+<script>
+	const setupViewportVideos = () => {
+		const videos = Array.from(document.querySelectorAll<HTMLVideoElement>('[data-viewport-video]'));
+		if (!videos.length) return;
+
+		const isPlayable = (video: HTMLVideoElement) =>
+			document.visibilityState === 'visible' &&
+			video.dataset.viewportVisible === 'true' &&
+			video.dataset.viewportActive !== 'false';
+
+		const syncPlayback = (video: HTMLVideoElement) => {
+			if (!isPlayable(video)) {
+				video.pause();
+				return;
+			}
+
+			if (!video.currentSrc) {
+				video.src = video.dataset.src || '';
+				video.load();
+			}
+			video.play().catch(() => {
+				// Playback can be deferred by the browser; the visible poster remains available.
+			});
+		};
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				const video = entry.target as HTMLVideoElement;
+				video.dataset.viewportVisible = entry.isIntersecting ? 'true' : 'false';
+				syncPlayback(video);
+			});
+		}, { threshold: 0.1 });
+
+		videos.forEach((video) => {
+			if (video.dataset.viewportInitialized === 'true') return;
+			video.dataset.viewportInitialized = 'true';
+			video.dataset.viewportVisible = 'false';
+			observer.observe(video);
+		});
+
+		document.addEventListener('visibilitychange', () => videos.forEach(syncPlayback));
+		document.addEventListener('viewport-video:set-active', (event) => {
+			if (!(event instanceof CustomEvent) || !(event.target instanceof HTMLVideoElement)) return;
+			const video = event.target;
+			video.dataset.viewportActive = event.detail?.active === false ? 'false' : 'true';
+			syncPlayback(video);
+		});
+	};
+
+	setupViewportVideos();
+	document.addEventListener('astro:after-swap', setupViewportVideos);
+</script>

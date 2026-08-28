@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import ViewportVideo from '../components/ViewportVideo.astro';
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, SITE_AUTHOR, PROFILE_IMAGE, USER_TITLE, GITHUB_URL, WTCRAFT_URL, LINKEDIN_URL, EMAIL, MEDIUM_URL, SAME_AS, SITE_AUTHOR_ALT, GOLDENARC_NAME, GOLDENARC_SAME_AS } from '../consts';
 
 // Signature-work links kept local to this page (mirrors the pattern used by
@@ -107,14 +108,12 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 								<!-- Card 0: Wishes by Hand (亲笔小卡 with yong-demo-1.mp4) -->
 								<div class="stage-card is-center" data-index="0" data-label="SYS // 01 · 亲笔落墨 (WISHES BY HAND)">
 									<div class="card-screen card-screen-yong">
-										<video
+										<ViewportVideo
 											src="/videos/yong-demo-1.mp4"
-											autoplay
-											muted
-											playsinline
+											poster="/images/wishes/video-poster.jpg"
 											class="stage-video"
-											aria-label="亲笔小卡 实时墨水笔刷与书法回放演示"
-										></video>
+											ariaLabel="亲笔小卡 实时墨水笔刷与书法回放演示"
+										/>
 										<div class="screen-badge">
 											<span class="badge-dot"></span>
 											<span>01 · 亲笔落墨 · METAL BRUSH</span>
@@ -132,13 +131,13 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 								<!-- Card 1: EDF & BDF Viewer (edf-viewer-demo.mp4) -->
 								<div class="stage-card is-next" data-index="1" data-label="SYS // 02 · EDF & BDF VIEWER (BIOSIGNALS)">
 									<div class="card-screen card-screen-edf">
-										<video
+										<ViewportVideo
 											src="/videos/edf-viewer-demo.mp4"
-											muted
-											playsinline
+											poster="/images/edfviewer/hero-preview.webp"
 											class="stage-video"
-											aria-label="ARC EDF and BDF Viewer multi-channel waveform scrolling demo"
-										></video>
+											ariaLabel="ARC EDF and BDF Viewer multi-channel waveform scrolling demo"
+											initialActive={false}
+										/>
 										<div class="screen-badge badge-edf">
 											<span class="badge-dot dot-edf"></span>
 											<span>02 · EDF VIEWER · BIOSIGNAL WAVEFORMS</span>
@@ -156,13 +155,13 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 								<!-- Card 2: Google Foobar Challenge -->
 								<div class="stage-card is-hidden" data-index="2" data-label="LAB // 03 · GOOGLE FOOBAR CHALLENGE">
 									<div class="card-screen card-screen-terminal">
-										<video
+										<ViewportVideo
 											src="/videos/google-foobar.mp4"
-											muted
-											playsinline
+											poster="/images/video-posters/google-foobar.webp"
 											class="stage-video"
-											aria-label="Google Foobar challenge Level 1 animation"
-										></video>
+											ariaLabel="Google Foobar challenge Level 1 animation"
+											initialActive={false}
+										/>
 										<div class="screen-badge badge-terminal">
 											<span class="badge-dot dot-terminal"></span>
 											<span>03 · GOOGLE FOOBAR · SECRET LAB</span>
@@ -180,14 +179,13 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 								<!-- Card 3: Wild Dunk (2015 Genesis Mobile System) -->
 								<div class="stage-card is-prev" data-index="3" data-label="NODE // 04 · 全民大灌篮 (WILD DUNK 2015)">
 									<div class="card-screen card-screen-arcade">
-										<video
+										<ViewportVideo
 											src="/videos/wilddunk-gameplay.mp4"
 											poster="/images/wilddunk/video-poster.webp"
-											muted
-											playsinline
 											class="stage-video"
-											aria-label="Wild Dunk gameplay archive"
-										></video>
+											ariaLabel="Wild Dunk gameplay archive"
+											initialActive={false}
+										/>
 										<div class="screen-badge badge-arcade">
 											<span class="badge-dot dot-arcade"></span>
 											<span>04 · WILD DUNK · GENESIS ARCHIVE</span>
@@ -329,16 +327,12 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 												<div class="wishes-carousel-viewport">
 													<div class="wishes-carousel-track">
 														<figure class="wishes-slide is-active" data-wishes-slide aria-hidden="false">
-															<video
+															<ViewportVideo
 																src="/videos/yong-demo-2.mp4"
 																poster="/images/wishes/video-poster.jpg"
-																autoplay
-																loop
-																muted
-																playsinline
 																class="wishes-demo-video"
-																aria-label="Wishes by Hand calligraphy and card-design demonstration"
-															></video>
+																ariaLabel="Wishes by Hand calligraphy and card-design demonstration"
+															/>
 															<figcaption class="wishes-slide-label">01 · INK / REPLAY</figcaption>
 														</figure>
 														<figure class="wishes-slide wishes-card-slide" data-wishes-slide aria-hidden="true">
@@ -474,16 +468,12 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 								<div class="node-plate plate-reverse">
 									<div class="plate-media">
 										<div class="media-frame">
-											<video
+											<ViewportVideo
 												src="/videos/edf-viewer-demo.mp4"
 												poster="/images/edfviewer/hero-preview.webp"
-												autoplay
-												loop
-												muted
-												playsinline
 												class="sig-frame"
-												aria-label="ARC EDF and BDF Viewer on macOS showing an all-channels montage and waveform scrolling"
-											></video>
+												ariaLabel="ARC EDF and BDF Viewer on macOS showing an all-channels montage and waveform scrolling"
+											/>
 											<span class="media-stamp">DESKTOP // NATIVE</span>
 										</div>
 									</div>
@@ -1278,9 +1268,10 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						if (idx === currentIndex) {
 							card.classList.add('is-center');
 							if (video) {
-								video.currentTime = 0;
-								video.muted = true; // Always muted so audio never blasts unexpectedly
-								video.play().catch(() => {});
+								video.dispatchEvent(new CustomEvent('viewport-video:set-active', {
+									bubbles: true,
+									detail: { active: true },
+								}));
 							}
 							if (activeLabel) {
 								activeLabel.textContent = card.getAttribute('data-label') || '';
@@ -1288,17 +1279,26 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						} else if (idx === prevIndex) {
 							card.classList.add('is-prev');
 							if (video) {
-								video.pause();
+								video.dispatchEvent(new CustomEvent('viewport-video:set-active', {
+									bubbles: true,
+									detail: { active: false },
+								}));
 							}
 						} else if (idx === nextIdx) {
 							card.classList.add('is-next');
 							if (video) {
-								video.pause();
+								video.dispatchEvent(new CustomEvent('viewport-video:set-active', {
+									bubbles: true,
+									detail: { active: false },
+								}));
 							}
 						} else {
 							card.classList.add('is-hidden');
 							if (video) {
-								video.pause();
+								video.dispatchEvent(new CustomEvent('viewport-video:set-active', {
+									bubbles: true,
+									detail: { active: false },
+								}));
 							}
 						}
 					});
@@ -1462,8 +1462,10 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						dot.setAttribute('aria-selected', index === activeIndex ? 'true' : 'false');
 					});
 					if (video) {
-						if (activeIndex === 0) video.play().catch(() => {});
-						else video.pause();
+						video.dispatchEvent(new CustomEvent('viewport-video:set-active', {
+							bubbles: true,
+							detail: { active: activeIndex === 0 },
+						}));
 					}
 					if (activeIndex === 1) startBlessingSimulation();
 					else clearSimulation();
