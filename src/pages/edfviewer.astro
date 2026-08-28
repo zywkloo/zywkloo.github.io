@@ -895,5 +895,56 @@ const appLd = {
 		font-size: 0.88rem;
 		margin-top: 1rem;
 	}
-</style>
 
+	/* Preserve EDF's biosignal accent while all page surfaces adopt the shared
+	   Carbon / Operator theme. The former light-poster ink was unreadable here. */
+	:global(html[data-paper-theme]) .edf-page {
+		color: var(--apaper-ink);
+		--edf-ink: var(--apaper-ink);
+		--edf-ink-2: var(--apaper-bg-alt);
+		--edf-surface: var(--apaper-card);
+		--edf-paper: var(--apaper-card);
+		--edf-mint: color-mix(in srgb, var(--apaper-accent) 70%, #2de0a8);
+		--edf-accent: var(--apaper-accent);
+		--edf-accent-dark: var(--apaper-accent);
+		--edf-muted: var(--apaper-muted);
+	}
+	:global(html[data-paper-theme]) .edf-page .subtitle,
+	:global(html[data-paper-theme]) .edf-page .step-body p,
+	:global(html[data-paper-theme]) .edf-page .showcase-info p,
+	:global(html[data-paper-theme]) .edf-page .feature-card p,
+	:global(html[data-paper-theme]) .edf-page .pro-desc,
+	:global(html[data-paper-theme]) .edf-page .faq-item p,
+	:global(html[data-paper-theme]) .edf-page .privacy-content p,
+	:global(html[data-paper-theme]) .edf-page .privacy-content li {
+		color: var(--apaper-ink-secondary);
+	}
+	:global(html[data-paper-theme]) .edf-page .btn-secondary {
+		background: var(--apaper-accent-soft);
+		border-color: var(--apaper-accent-line);
+		color: var(--apaper-accent);
+	}
+	:global(html[data-paper-theme]) .edf-page .loop-section,
+	:global(html[data-paper-theme]) .edf-page .showcase-section,
+	:global(html[data-paper-theme]) .edf-page .features-section,
+	:global(html[data-paper-theme]) .edf-page .panel-section,
+	:global(html[data-paper-theme]) .edf-page .pro-section,
+	:global(html[data-paper-theme]) .edf-page .faq-section,
+	:global(html[data-paper-theme]) .edf-page .support-section,
+	:global(html[data-paper-theme]) .edf-page .privacy-section {
+		border-color: var(--apaper-line);
+	}
+	:global(html[data-paper-theme]) .edf-page .showcase-card,
+	:global(html[data-paper-theme]) .edf-page .feature-card,
+	:global(html[data-paper-theme]) .edf-page .faq-item,
+	:global(html[data-paper-theme]) .edf-page .privacy-content,
+	:global(html[data-paper-theme]) .edf-page .contact-card {
+		background: var(--apaper-card);
+		border-color: var(--apaper-line);
+		box-shadow: none;
+	}
+	:global(html[data-paper-theme]) .edf-page .faq-item code {
+		background: var(--apaper-bg-alt);
+		color: var(--apaper-ink);
+	}
+</style>
