@@ -866,4 +866,73 @@ const organizationLd = {
 			min-height: 0;
 		}
 	}
+
+	/* ARC retains its teal product language, while its shell follows the global
+	   Carbon / Operator surface tokens instead of forcing a white canvas. */
+	:global(html[data-paper-theme]) .arc-stage {
+		background:
+			radial-gradient(42rem 26rem at 8% 8%, color-mix(in srgb, var(--apaper-accent) 18%, transparent), transparent 72%),
+			radial-gradient(38rem 24rem at 94% 26%, rgba(45, 224, 168, 0.1), transparent 74%),
+			var(--apaper-bg);
+		border-bottom-color: var(--apaper-line);
+	}
+	:global(html[data-paper-theme]) .arc-page {
+		--arc-ink: var(--apaper-ink);
+		--arc-muted: var(--apaper-muted);
+		--arc-teal: var(--apaper-accent);
+		--arc-teal-dark: var(--apaper-accent);
+		--arc-mint: color-mix(in srgb, var(--apaper-accent) 70%, #2de0a8);
+		--arc-navy: var(--apaper-bg-alt);
+	}
+	:global(html[data-paper-theme]) .arc-page h1,
+	:global(html[data-paper-theme]) .arc-page .section-heading h2 {
+		color: var(--arc-ink);
+	}
+	:global(html[data-paper-theme]) .arc-page .product-card,
+	:global(html[data-paper-theme]) .arc-page .architecture-panel,
+	:global(html[data-paper-theme]) .arc-page .evidence-grid div,
+	:global(html[data-paper-theme]) .arc-page .dependency-list div {
+		background: var(--apaper-card);
+		border-color: var(--apaper-line);
+		box-shadow: none;
+	}
+	:global(html[data-paper-theme]) .arc-page .product-card.available {
+		border-color: var(--apaper-accent-line);
+	}
+	:global(html[data-paper-theme]) .arc-page .product-card.available:hover {
+		border-color: var(--apaper-accent);
+		box-shadow: 0 18px 40px var(--apaper-accent-soft);
+	}
+	:global(html[data-paper-theme]) .arc-page .status {
+		background: var(--apaper-bg-alt);
+		color: var(--apaper-ink-secondary);
+	}
+	:global(html[data-paper-theme]) .arc-page .status.live,
+	:global(html[data-paper-theme]) .arc-page .status.review,
+	:global(html[data-paper-theme]) .arc-page .status.building,
+	:global(html[data-paper-theme]) .arc-page .status.planned {
+		background: var(--apaper-accent-soft);
+		color: var(--apaper-accent);
+	}
+	:global(html[data-paper-theme]) .arc-page .architecture-note {
+		background: var(--apaper-bg-alt);
+		border-color: var(--apaper-line);
+	}
+	:global(html[data-paper-theme]) .arc-page .legend-box,
+	:global(html[data-paper-theme]) .arc-page .graph-node.implemented rect,
+	:global(html[data-paper-theme]) .arc-page .graph-node.implemented.emphasized rect,
+	:global(html[data-paper-theme]) .arc-page .graph-node.planned rect,
+	:global(html[data-paper-theme]) .arc-page .graph-node.future rect,
+	:global(html[data-paper-theme]) .arc-page .graph-node.independent rect,
+	:global(html[data-paper-theme]) .arc-page .future-label rect {
+		fill: var(--apaper-card);
+		background: var(--apaper-card);
+		stroke: var(--apaper-line);
+		border-color: var(--apaper-line);
+	}
+	:global(html[data-paper-theme]) .arc-page .future-label text,
+	:global(html[data-paper-theme]) .arc-page .layer-label,
+	:global(html[data-paper-theme]) .arc-page .node-meta {
+		fill: var(--apaper-muted);
+	}
 </style>
