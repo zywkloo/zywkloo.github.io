@@ -1653,8 +1653,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 					const step = (currentTime) => {
 						const elapsed = currentTime - startTime;
 						const progress = Math.min(elapsed / duration, 1);
-						const easeProgress = 1 - Math.pow(1 - progress, 3);
-						const currentOffset = pathLength * (1 - easeProgress);
+						// Keep the traversal at a constant pace; easing made the final bridge drag.
+						const currentOffset = pathLength * (1 - progress);
 						path.style.strokeDashoffset = `${currentOffset}`;
 
 						// Move runner bead along path
@@ -1662,7 +1662,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						let ry = -20;
 						if (runner && typeof path.getPointAtLength === 'function') {
 							try {
-								const pt = path.getPointAtLength(pathLength * easeProgress);
+								const pt = path.getPointAtLength(pathLength * progress);
 								rx = pt.x;
 								ry = pt.y;
 								runner.setAttribute('cx', `${rx}`);
@@ -2909,35 +2909,38 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	.wishes-message-composer {
 		position: absolute;
 		z-index: 2;
-		top: 53%;
-		/* Align with the input region inside the centered, fully-contained phone capture. */
-		left: 35.5%;
-		right: 35.5%;
-		padding: 5px;
+		/* Match the native input's position inside the contained 720 × 1599 phone capture. */
+		/* The input itself—not the composer padding—sits on the captured field. */
+		top: calc(52.22% - 18px);
+		left: calc(39.15% - 5px);
+		right: calc(37.55% - 5px);
+		padding: 4px;
 		background: rgba(255, 255, 255, 0.96);
 		border: 1px solid rgba(80, 65, 51, 0.26);
-		border-radius: 8px;
+		border-radius: 6px;
 		box-shadow: 0 5px 18px rgba(42, 31, 21, 0.16);
 	}
 	.wishes-message-composer label {
 		display: block;
-		margin-bottom: 3px;
+		margin-bottom: 2px;
 		font-family: var(--apaper-font-mono);
-		font-size: 8px;
+		font-size: 6.5px;
 		font-weight: 700;
 		letter-spacing: 0.12em;
 		color: #8d3a2e;
 	}
 	.wishes-message-composer input {
+		display: block;
 		box-sizing: border-box;
 		width: 100%;
 		border: 1px solid #d8d0c4;
-		border-radius: 5px;
-		padding: 4px 5px;
+		border-radius: 4px;
+		padding: 3px 4px;
 		background: #fff;
 		color: #25211e;
 		font-family: var(--apaper-font-serif);
-		font-size: clamp(0.7rem, 1.35vw, 0.86rem);
+		font-size: 8px;
+		line-height: 1.25;
 		outline: none;
 	}
 	.wishes-message-composer input:focus {
@@ -2947,15 +2950,15 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	.wishes-composer-footer {
 		display: flex;
 		align-items: center;
-		gap: 4px;
-		margin-top: 4px;
+		gap: 3px;
+		margin-top: 3px;
 	}
 	.wishes-message-composer [data-wishes-preview] {
 		min-width: 0;
 		flex: 1;
 		color: #7b6d60;
 		font-family: var(--apaper-font-serif);
-		font-size: clamp(0.63rem, 1.1vw, 0.76rem);
+		font-size: 6.5px;
 		line-height: 1.35;
 		white-space: nowrap;
 		overflow: hidden;
@@ -2964,12 +2967,12 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	.wishes-send-button {
 		flex-shrink: 0;
 		border: 0;
-		border-radius: 5px;
-		padding: 4px 5px;
+		border-radius: 4px;
+		padding: 3px 4px;
 		background: #a4372c;
 		color: #fff;
 		font-family: var(--apaper-font-mono);
-		font-size: 8px;
+		font-size: 6.5px;
 		font-weight: 700;
 		letter-spacing: 0.08em;
 		cursor: pointer;
@@ -2990,11 +2993,11 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	}
 	.wishes-send-status {
 		display: block;
-		margin-top: 3px;
+		margin-top: 2px;
 		min-height: 1em;
 		color: #9a4b40;
 		font-family: var(--apaper-font-mono);
-		font-size: 7.5px;
+		font-size: 6px;
 		font-weight: 700;
 		letter-spacing: 0.08em;
 	}
