@@ -583,21 +583,6 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 											<circle id="euler-runner" class="euler-runner" r="5" cx="-20" cy="-20" />
 										</svg>
 
-										<!-- Overlaid Transition Title (Floating gracefully in northern bank) -->
-										<div class="pivot-overlay">
-											<div class="overlay-meta">
-												<span class="overlay-kicker">INFLECTION POINT // SEVEN BRIDGES</span>
-												<span class="overlay-stamp">1736 EULER PIVOT</span>
-											</div>
-											<h3 class="overlay-title">
-												Victor’s journey all along.
-												<span class="overlay-subtitle">Now forged into four disciplines.</span>
-											</h3>
-											<p class="overlay-summary">
-												Every bridge crossed — from game state machines to biosignals and agent swarms — distilled into verifiable architectural craft.
-											</p>
-										</div>
-
 										<!-- 4 Floating Milestone Callout Annotations -->
 										<div class="stage-milestone-annotations" aria-label="Four Traversal Milestones">
 											<!-- Milestone 01 Callout -->
@@ -606,7 +591,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 												<div class="callout-card">
 													<span class="callout-badge">PHASE // 01</span>
 													<h4 class="callout-title">Lead Game Designer</h4>
-													<span class="callout-tag">Simulation &amp; State Machines</span>
+													<span class="callout-tag">Project Management &amp; Customer Obsession</span>
 												</div>
 											</div>
 
@@ -638,6 +623,23 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 													<h4 class="callout-title">AI Agentic Harness</h4>
 													<span class="callout-tag">wtcraft Swarms &amp; Governance</span>
 												</div>
+											</div>
+										</div>
+
+										<!-- Full-Canvas Scrim Overlay (Fades in across entire map AFTER journey completes) -->
+										<div class="stage-journey-scrim" id="journey-scrim" aria-hidden="true">
+											<div class="scrim-transition-card">
+												<div class="scrim-meta">
+													<span class="scrim-kicker">INFLECTION POINT // SEVEN BRIDGES</span>
+													<span class="scrim-stamp">1736 EULER PIVOT</span>
+												</div>
+												<h3 class="scrim-title">
+													Victor’s journey all along.
+													<span class="scrim-subtitle">Now forged into four core disciplines.</span>
+												</h3>
+												<p class="scrim-summary">
+													Every bridge crossed — from game leadership and client runtimes to telemetry pipelines and agent swarms — distilled into verifiable architectural craft.
+												</p>
 											</div>
 										</div>
 
@@ -1216,13 +1218,16 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 				const triggerAnimation = () => {
 					if (hasAnimated) return;
 					hasAnimated = true;
-					stage.classList.add('is-active');
 
 					// Reduced motion check
 					if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 						path.style.strokeDashoffset = '0';
 						milestoneGroups.forEach((g) => g.classList.add('is-passed'));
 						callouts.forEach((c) => c.classList.add('is-active'));
+						const scrim = stage.querySelector('.stage-journey-scrim');
+						if (scrim) scrim.classList.add('is-active');
+						const exitPin = stage.querySelector('.canvas-exit-pin');
+						if (exitPin) exitPin.classList.add('is-passed');
 						forkBranches.forEach((b) => (b.style.strokeDashoffset = '0'));
 						cards.forEach((c) => c.classList.add('is-revealed'));
 						return;
@@ -1275,31 +1280,38 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						if (progress < 1) {
 							requestAnimationFrame(step);
 						} else {
-							// Traversal completed!
+							// 1. All bridges traversed!
 							if (runner) runner.style.opacity = '0.4';
 
 							// Ensure all 4 milestones are active
 							milestoneGroups.forEach((g) => g.classList.add('is-passed'));
 							callouts.forEach((c) => c.classList.add('is-active'));
 
-							// Activate bottom exit pin and trigger Fork branches downward animation
+							// 2. FADE IN THE 70%-WIDTH FULL-CANVAS SCRIM OVERLAY ACROSS THE SEVEN BRIDGES MAP
+							const scrim = stage.querySelector('.stage-journey-scrim');
+							if (scrim) scrim.classList.add('is-active');
+
+							// 3. Activate bottom exit pin
 							const exitPin = stage.querySelector('.canvas-exit-pin');
 							if (exitPin) exitPin.classList.add('is-passed');
 
-							if (fork) fork.classList.add('is-active');
-							forkBranches.forEach((branch, idx) => {
-								setTimeout(() => {
-									branch.style.transition = 'stroke-dashoffset 1.8s cubic-bezier(0.22, 1, 0.36, 1)';
-									branch.style.strokeDashoffset = '0';
-								}, idx * 160);
-							});
+							// 4. Pause 1s for user to absorb transition text, then guide eyes down into fork & cards
+							setTimeout(() => {
+								if (fork) fork.classList.add('is-active');
+								forkBranches.forEach((branch, idx) => {
+									setTimeout(() => {
+										branch.style.transition = 'stroke-dashoffset 1.8s cubic-bezier(0.22, 1, 0.36, 1)';
+										branch.style.strokeDashoffset = '0';
+									}, idx * 160);
+								});
 
-							// Reveal the 4 Skill cards with relaxed, progressive entrance
-							cards.forEach((card, idx) => {
-								setTimeout(() => {
-									card.classList.add('is-revealed');
-								}, 1200 + idx * 300);
-							});
+								// Reveal the 4 Skill cards with relaxed, progressive entrance
+								cards.forEach((card, idx) => {
+									setTimeout(() => {
+										card.classList.add('is-revealed');
+									}, 1000 + idx * 280);
+								});
+							}, 1000);
 						}
 					};
 
@@ -2460,71 +2472,89 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		background: linear-gradient(180deg, rgba(248, 246, 240, 0.35) 0%, rgba(248, 246, 240, 0) 40%, rgba(248, 246, 240, 0.2) 100%);
 	}
 
-	/* Overlaid Transition Title (Compact in northern bank) */
-	.pivot-overlay {
+	/* Full-Canvas Scrim Overlay (Fades in across entire map AFTER journey completes) */
+	.stage-journey-scrim {
 		position: absolute;
-		top: clamp(10px, 1.8vw, 18px);
-		left: clamp(10px, 1.8vw, 18px);
-		max-width: 440px;
-		background: var(--apaper-header-bg);
-		backdrop-filter: blur(12px);
-		-webkit-backdrop-filter: blur(12px);
-		border: 1px solid var(--apaper-line);
-		border-radius: 12px;
-		padding: 12px 18px;
-		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-		z-index: 4;
+		inset: 0;
+		z-index: 10;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(14, 16, 18, 0.78);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
 		opacity: 0;
-		transform: translateY(14px);
-		transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+		pointer-events: none;
+		transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+		padding: 20px;
 	}
-	.pivot-stage.is-active .pivot-overlay {
+	.stage-journey-scrim.is-active {
 		opacity: 1;
-		transform: translateY(0);
+		pointer-events: auto;
 	}
-	.overlay-meta {
+	.scrim-transition-card {
+		width: 70%;
+		max-width: 660px;
+		background: rgba(22, 24, 27, 0.95);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border: 1px solid rgba(229, 179, 130, 0.45);
+		border-radius: 16px;
+		padding: clamp(18px, 3vw, 32px) clamp(22px, 3.5vw, 38px);
+		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.06);
+		text-align: center;
+		transform: scale(0.95) translateY(14px);
+		transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+	.stage-journey-scrim.is-active .scrim-transition-card {
+		transform: scale(1) translateY(0);
+	}
+	.scrim-meta {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-bottom: 6px;
+		margin-bottom: 10px;
 		font-family: var(--apaper-font-mono);
 		font-size: 8.5px;
 		letter-spacing: 0.12em;
 	}
-	.overlay-kicker {
-		color: var(--apaper-accent);
+	.scrim-kicker {
+		color: #e5b382;
 		font-weight: 700;
 		text-transform: uppercase;
 	}
-	.overlay-stamp {
-		color: var(--apaper-accent);
-		background: var(--apaper-accent-soft);
-		padding: 2px 7px;
+	.scrim-stamp {
+		color: #e5b382;
+		background: rgba(229, 179, 130, 0.14);
+		padding: 2.5px 8px;
 		border-radius: 4px;
-		border: 1px solid var(--apaper-accent-line);
+		border: 1px solid rgba(229, 179, 130, 0.35);
 	}
-	.overlay-title {
+	.scrim-title {
 		font-family: var(--apaper-font-serif);
-		font-size: clamp(1.2rem, 2vw, 1.55rem);
+		font-size: clamp(1.35rem, 2.4vw, 1.95rem);
 		font-weight: 600;
 		letter-spacing: -0.025em;
-		color: var(--apaper-ink);
-		margin: 0 0 4px;
+		color: #f5f2eb;
+		margin: 0 0 8px;
 		line-height: 1.22;
 	}
-	.overlay-subtitle {
+	.scrim-subtitle {
 		display: block;
 		font-weight: 400;
 		font-style: italic;
-		color: var(--apaper-ink-secondary);
-		font-size: 0.88em;
+		color: #e5b382;
+		font-size: 0.9em;
+		margin-top: 2px;
 	}
-	.overlay-summary {
+	.scrim-summary {
 		font-family: var(--apaper-font-serif);
-		font-size: 0.84rem;
-		line-height: 1.55;
-		color: var(--apaper-ink-secondary);
-		margin: 0;
+		font-size: clamp(0.86rem, 1.15vw, 0.95rem);
+		line-height: 1.68;
+		color: #ded9cf;
+		margin: 0 auto;
+		max-width: 520px;
+		text-wrap: balance;
 	}
 
 	/* Footer Caption inside map frame */
@@ -2678,46 +2708,46 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	}
 
 	.callout-card {
-		background: var(--apaper-header-bg);
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
-		border: 1px solid var(--apaper-line);
+		background: rgba(18, 20, 22, 0.94);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border: 1px solid rgba(229, 179, 130, 0.5);
 		border-radius: 8px;
-		padding: 5px 10px;
-		box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+		padding: 6px 12px;
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 		display: flex;
 		flex-direction: column;
-		min-width: 135px;
+		min-width: 150px;
 		white-space: nowrap;
 		cursor: default;
 		transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 	}
 	.callout-card:hover {
-		border-color: var(--apaper-accent);
+		border-color: #e5b382;
 		transform: scale(1.04);
-		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+		box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
 	}
 	.callout-badge {
 		font-family: var(--apaper-font-mono);
 		font-size: 7.5px;
-		letter-spacing: 0.12em;
+		letter-spacing: 0.14em;
 		font-weight: 700;
-		color: var(--apaper-accent);
+		color: #e5b382;
 		text-transform: uppercase;
 	}
 	.callout-title {
 		font-family: var(--apaper-font-serif);
-		font-size: 0.86rem;
+		font-size: 0.92rem;
 		font-weight: 600;
-		color: var(--apaper-ink);
+		color: #f5f2eb;
 		margin: 1px 0 0;
-		line-height: 1.2;
+		line-height: 1.25;
 	}
 	.callout-tag {
 		font-family: var(--apaper-font-mono);
-		font-size: 7.5px;
+		font-size: 8px;
 		letter-spacing: 0.03em;
-		color: var(--apaper-ink-secondary);
+		color: #ded9cf;
 	}
 
 	/* Canvas Exit Pin Dot (Exact connection point at bottom center) */
@@ -3403,15 +3433,15 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		.stage-canvas-frame {
 			aspect-ratio: 720 / 531;
 		}
-		.pivot-overlay {
-			padding: 8px 12px;
-			max-width: 270px;
+		.scrim-transition-card {
+			width: 92%;
+			padding: 16px 18px;
 		}
-		.overlay-title {
-			font-size: 1.02rem;
+		.scrim-title {
+			font-size: 1.15rem;
 		}
-		.overlay-summary {
-			display: none;
+		.scrim-summary {
+			font-size: 0.82rem;
 		}
 		.callout-card {
 			padding: 3px 6px;
