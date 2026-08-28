@@ -135,7 +135,7 @@ import HeaderLink from './HeaderLink.astro';
 		line-height: 1;
 	}
 	:global(.arc-nav-link) .arc-tab-content > span {
-		color: #17212a;
+		color: var(--apaper-ink, rgb(var(--black)));
 		font-weight: 700;
 		letter-spacing: 0.02em;
 	}
@@ -253,7 +253,7 @@ import HeaderLink from './HeaderLink.astro';
 			position: sticky;
 			left: 0;
 			z-index: 2;
-			background: #f5f4ef;
+			background: var(--apaper-card, #f5f4ef);
 			box-shadow: 8px 0 12px rgba(0, 0, 0, 0.16);
 		}
 		.internal-links :global(.arc-nav-link.active) {
