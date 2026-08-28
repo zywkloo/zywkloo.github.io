@@ -23,6 +23,19 @@ const ogImage = ogImageUrl ? new URL(ogImageUrl, Astro.site) : new URL(image.src
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<!-- Set the shared apaper theme before first paint. Carbon is the default; Operator Blue is opt-in. -->
+<script is:inline>
+	(() => {
+		try {
+			const saved = localStorage.getItem('site-paper-theme');
+			const theme = saved === 'operator' ? 'operator' : 'carbon';
+			document.documentElement.setAttribute('data-paper-theme', theme);
+		} catch (_) {
+			document.documentElement.setAttribute('data-paper-theme', 'carbon');
+		}
+	})();
+</script>
 <link rel="icon" type="image/png" href="/images/wtcraft-icon.PNG" />
 <link rel="apple-touch-icon" href="/images/wtcraft-icon.PNG" />
 <link rel="sitemap" href="/sitemap-index.xml" />

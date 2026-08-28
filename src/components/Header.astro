@@ -43,8 +43,31 @@ import HeaderLink from './HeaderLink.astro';
 				>
 			</a>
 		</div>
+		<div class="site-theme-switcher" role="group" aria-label="Site appearance">
+			<button type="button" data-site-theme="carbon" aria-label="Use Carbon theme" title="Carbon">☾</button>
+			<button type="button" data-site-theme="operator" aria-label="Use Operator Blue theme" title="Operator Blue">☀</button>
+		</div>
 	</nav>
 </header>
+<script>
+	const initSiteThemeSwitcher = () => {
+		const buttons = document.querySelectorAll<HTMLButtonElement>('[data-site-theme]');
+		const currentTheme = () => document.documentElement.getAttribute('data-paper-theme') === 'operator' ? 'operator' : 'carbon';
+		const sync = () => buttons.forEach((button) => {
+			button.classList.toggle('active', button.dataset.siteTheme === currentTheme());
+		});
+		sync();
+		buttons.forEach((button) => button.addEventListener('click', () => {
+			const theme = button.dataset.siteTheme;
+			if (!theme) return;
+			document.documentElement.setAttribute('data-paper-theme', theme);
+			try { localStorage.setItem('site-paper-theme', theme); } catch (_) {}
+			sync();
+		}));
+	};
+	initSiteThemeSwitcher();
+	document.addEventListener('astro:after-swap', initSiteThemeSwitcher);
+</script>
 <style>
 	header {
 		position: sticky;
@@ -169,6 +192,33 @@ import HeaderLink from './HeaderLink.astro';
 		object-fit: cover;
 		display: block;
 	}
+	.site-theme-switcher {
+		display: inline-flex;
+		gap: 2px;
+		padding: 3px;
+		border: 1px solid var(--apaper-line, var(--line));
+		border-radius: 999px;
+		background: var(--apaper-card, var(--surface-raised));
+	}
+	.site-theme-switcher button {
+		width: 1.45rem;
+		height: 1.45rem;
+		padding: 0;
+		border: 0;
+		border-radius: 50%;
+		background: transparent;
+		color: var(--apaper-muted, rgb(var(--gray)));
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 0.9rem;
+		font-weight: 700;
+		cursor: pointer;
+	}
+	.site-theme-switcher button[data-site-theme="carbon"] { color: #e5b382; }
+	.site-theme-switcher button[data-site-theme="operator"] { color: #69c7d5; }
+	.site-theme-switcher button.active {
+		background: var(--apaper-accent, var(--accent));
+		color: var(--apaper-btn-text, #fff);
+	}
 	@media (max-width: 720px) {
 		header {
 			padding: 0.55rem 0;
@@ -206,6 +256,10 @@ import HeaderLink from './HeaderLink.astro';
 		}
 		.social-links {
 			display: none;
+		}
+		.site-theme-switcher {
+			display: inline-flex;
+			margin: 0.4rem 0 0 0.8rem;
 		}
 	}
 	@media (min-width: 721px) and (max-width: 1040px) {
