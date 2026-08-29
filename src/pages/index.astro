@@ -109,8 +109,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 								<div class="stage-card is-center" data-index="0" data-label="SYS // 01 · 亲笔落墨 (WISHES BY HAND)">
 									<div class="card-screen card-screen-yong">
 										<ViewportVideo
-											src="/videos/yong-demo-1.mp4"
-											poster="/images/wishes/video-poster.jpg"
+											src="/videos/yong-demo-hero.mp4"
+											poster="/images/wishes/video-poster-hero.jpg"
 											class="stage-video"
 											ariaLabel="亲笔小卡 实时墨水笔刷与书法回放演示"
 										/>
@@ -328,8 +328,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 													<div class="wishes-carousel-track">
 														<figure class="wishes-slide is-active" data-wishes-slide aria-hidden="false">
 															<ViewportVideo
-																src="/videos/yong-demo-2.mp4"
-																poster="/images/wishes/video-poster.jpg"
+																src="/videos/replay-score-card.mp4"
+																poster="/images/wishes/replay-poster.jpg"
 																class="wishes-demo-video"
 																ariaLabel="Wishes by Hand calligraphy and card-design demonstration"
 															/>
@@ -2102,14 +2102,15 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	.card-screen-arcade {
 		background: #111417;
 	}
-	.stage-video {
+	:global(.stage-video) {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 		display: block;
 	}
-	.card-screen-yong .stage-video {
-		object-fit: contain;
+	.card-screen-yong :global(.stage-video) {
+		object-fit: cover;
+		object-position: center center;
 	}
 
 	/* Screen Stamp Badges */
