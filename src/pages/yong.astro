@@ -45,8 +45,26 @@ const appLd = {
 				<div class="hero-content">
 					<div class="app-tag">🖌️ App Store · iPhone &amp; iPad · Now Available</div>
 					<h1>亲笔小卡 · Wishes by Hand</h1>
-					<p class="subtitle">手写一点心意，给在乎的人。</p>
-					<p class="tagline">亲手写下几句话，做成一张小卡片，寄给父母、家人，或那个你一直想联系却迟迟没开口的人。<br /><span class="en-sub">Write a few words by hand, turn them into a small card, and send it to someone you care about.</span></p>
+					<div class="hero-slogan-carousel" id="taglineCarousel" aria-live="polite">
+						<div class="slogan-slide active" data-lang="en">
+							<p class="subtitle">A gentle thought by hand, for someone you care about.</p>
+							<p class="tagline-text">
+								A few words, a little note.<br />
+								For family, and maybe... <img src="/images/art-them.png" alt="them" class="art-word art-them" />
+							</p>
+						</div>
+						<div class="slogan-slide" data-lang="zh">
+							<p class="subtitle">手写一点心意，给在乎的人。</p>
+							<p class="tagline-text">
+								轻轻几笔，一张小卡。<br />
+								寄给家人，也许还有那个<img src="/images/art-ta.png" alt="ta" class="art-word art-ta" />。
+							</p>
+						</div>
+						<div class="carousel-indicators">
+							<button class="indicator-dot active" aria-label="English slogan" data-index="0"></button>
+							<button class="indicator-dot" aria-label="中文标语" data-index="1"></button>
+						</div>
+					</div>
 
 					<div class="cta-group">
 						<a href={APP_STORE_URL} target="_blank" rel="noopener" class="btn btn-primary">App Store 下载 / Download</a>
@@ -258,6 +276,49 @@ const appLd = {
 			</section>
 		</main>
 		<Footer />
+		<script is:inline>
+			(() => {
+				const carousel = document.getElementById('taglineCarousel');
+				if (!carousel) return;
+				const slides = carousel.querySelectorAll('.slogan-slide');
+				const dots = carousel.querySelectorAll('.indicator-dot');
+				let currentIndex = 0;
+				let timer = null;
+
+				const showSlide = (index) => {
+					currentIndex = (index + slides.length) % slides.length;
+					slides.forEach((s, i) => s.classList.toggle('active', i === currentIndex));
+					dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+				};
+
+				const startAutoplay = () => {
+					stopAutoplay();
+					// English gets 3.8s, Chinese gets 4.2s
+					const duration = currentIndex === 0 ? 3800 : 4200;
+					timer = setTimeout(() => {
+						showSlide(currentIndex + 1);
+						startAutoplay();
+					}, duration);
+				};
+
+				const stopAutoplay = () => {
+					if (timer) clearTimeout(timer);
+				};
+
+				dots.forEach((dot, idx) => {
+					dot.addEventListener('click', () => {
+						showSlide(idx);
+						startAutoplay();
+					});
+				});
+
+				carousel.addEventListener('mouseenter', stopAutoplay);
+				carousel.addEventListener('mouseleave', startAutoplay);
+
+				// Start with English (index 0)
+				startAutoplay();
+			})();
+		</script>
 	</body>
 </html>
 
@@ -295,6 +356,10 @@ const appLd = {
 		.cta-group {
 			justify-content: center;
 		}
+
+		.carousel-indicators {
+			justify-content: center;
+		}
 	}
 
 	.app-tag {
@@ -325,11 +390,91 @@ const appLd = {
 		margin-bottom: 0.75rem;
 	}
 
-	.tagline {
-		font-size: 1.05rem;
-		line-height: 1.6;
-		color: #8b837e;
+	.hero-slogan-carousel {
+		position: relative;
+		min-height: 8.5rem;
 		margin-bottom: 2.25rem;
+	}
+
+	.slogan-slide {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(8px);
+		transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.7s;
+		pointer-events: none;
+	}
+
+	.slogan-slide.active {
+		position: relative;
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+		pointer-events: auto;
+	}
+
+	.tagline-text {
+		font-size: 1.12rem;
+		line-height: 1.8;
+		color: #726b66;
+		margin: 0;
+		display: inline-block;
+		font-family: inherit;
+		letter-spacing: 0.02em;
+	}
+
+	.slogan-slide[data-lang="en"] .tagline-text {
+		font-style: normal;
+		letter-spacing: 0.015em;
+	}
+
+	.art-word {
+		display: inline-block;
+		vertical-align: middle;
+		object-fit: contain;
+		filter: drop-shadow(0 1px 2px rgba(180, 50, 40, 0.15));
+		transition: transform 0.3s ease;
+	}
+
+	.art-word:hover {
+		transform: scale(1.06) rotate(-2deg);
+	}
+
+	.art-them {
+		height: 2.35rem;
+		margin-left: 0.2rem;
+		margin-top: -0.35rem;
+	}
+
+	.art-ta {
+		height: 2.15rem;
+		margin-left: 0.1rem;
+		margin-top: -0.3rem;
+	}
+
+	.carousel-indicators {
+		display: flex;
+		gap: 6px;
+		margin-top: 0.65rem;
+	}
+
+	.indicator-dot {
+		width: 18px;
+		height: 4px;
+		border-radius: 99px;
+		border: none;
+		background: rgba(139, 115, 85, 0.25);
+		padding: 0;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.indicator-dot.active {
+		width: 32px;
+		background: #c24d42;
 	}
 
 	.cta-group {
