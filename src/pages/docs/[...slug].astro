@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
+import { hasMath } from '../../lib/has-math';
 
 export async function getStaticPaths() {
 	const entries = await getCollection('docs');
@@ -15,6 +16,6 @@ const entry = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<BlogPost {...entry.data} slug={entry.id}>
+<BlogPost {...entry.data} slug={entry.id} hasMath={hasMath(entry.body)}>
 	<Content />
 </BlogPost>

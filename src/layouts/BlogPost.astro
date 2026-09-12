@@ -21,9 +21,10 @@ interface Props {
 	updatedDate?: Date;
 	heroImage?: ImageMetadata;
 	tldr?: string;
+	hasMath?: boolean;
 }
 
-const { title, description, series, category, slug, lang = 'en', tags, pubDate, updatedDate, heroImage, tldr } = Astro.props;
+const { title, description, series, category, slug, lang = 'en', tags, pubDate, updatedDate, heroImage, tldr, hasMath = false } = Astro.props;
 const plainTitle = title.replace(/<[^>]+>/g, '');
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
@@ -76,7 +77,10 @@ if (series && slug) {
 <html lang={lang}>
 	<head>
 		<BaseHead title={plainTitle} description={description} />
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+		{/* Only 3 posts carry formulas, so this render-blocking sheet is loaded
+		    per-post rather than site-wide. Vendored by scripts/sync-katex.mjs so
+		    the CSS version tracks the KaTeX that rehype-katex renders with. */}
+		{hasMath && <link rel="stylesheet" href="/vendor/katex/katex.min.css" />}
 		<style>
 			main {
 				width: calc(100% - 2em);
@@ -382,7 +386,19 @@ if (series && slug) {
 		<main>
 			<article>
 				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
+					{/* The hero is the LCP element; <Image> defaults to loading="lazy",
+					    which held its decode back behind the rest of the page. */}
+					{heroImage && (
+						<Image
+							width={1020}
+							height={510}
+							src={heroImage}
+							alt=""
+							loading="eager"
+							fetchpriority="high"
+							decoding="async"
+						/>
+					)}
 					<div class="hero-overlay"></div>
 				</div>
 				<div class="prose">
@@ -433,6 +449,7 @@ if (series && slug) {
 						series={series}
 						heroImage={articleImage}
 						url={canonicalURL}
+						slug={slug}
 						tldr={tldr}
 					>
 						<slot />

@@ -32,10 +32,10 @@ To fix the CSR performance and indexing problems, the real choice is React CSR v
 | SEO friendliness | ❌ Poor (crawler must run JS) | 🚀 **Perfect** (full HTML up front) | 🚀 **Perfect** (full HTML up front) |
 | GEO (AI engine) friendliness | ❌ Awful (bots get the shell) | 🚀 **Excellent** (clean structured HTML to slice) | 🚀 **Excellent** (clean structured HTML to slice) |
 | Client JS size | ❌ Large (whole React runtime) | 🚀 **~0 KB** (JS only on interactive islands) | ⚠️ Large (React + Next runtime) |
-| Hosting (commercial use) | 🚀 $0/mo (free static tiers) | 🚀 **$0/mo** (free static tiers) | ⚠️ $20/mo per seat (Vercel commercial terms) |
+| Hosting (commercial use) | 🚀 \$0/mo (free static tiers) | 🚀 **\$0/mo** (free static tiers) | ⚠️ \$20/mo per seat (Vercel commercial terms) |
 | Dev complexity | Lowest | ⚠️ Medium (islands model) | ⚠️ Medium (Server Components) |
 
-**Verdict:** Astro. A marketing landing page is content with a few interactive bits — exactly the islands sweet spot. You keep React components where you need them, ship almost no client JS, get top-tier SEO/GEO, and host for $0.
+**Verdict:** Astro. A marketing landing page is content with a few interactive bits — exactly the islands sweet spot. You keep React components where you need them, ship almost no client JS, get top-tier SEO/GEO, and host for \$0.
 
 ## Archetype B: migrating without burning SEO equity
 
@@ -57,15 +57,15 @@ For a commercial owner, the real questions are long-term cost and stability — 
 
 | Host / Dimension | **Vercel Pro** | **Cloudflare Pages / Netlify** | **DigitalOcean VPS** | **Shared host** |
 | :--- | :--- | :--- | :--- | :--- |
-| Est. monthly | ⚠️ $20/seat/mo | 🚀 **$0/mo** | 🚀 $5–12/mo | ⚠️ $10–30/mo |
+| Est. monthly | ⚠️ \$20/seat/mo | 🚀 **\$0/mo** | 🚀 \$5–12/mo | ⚠️ \$10–30/mo |
 | Commercial use | ❌ Pro required (Hobby forbids it) | 🚀 **Unrestricted** | 🚀 Unrestricted | 🚀 Unrestricted |
-| DevOps cost | 🚀 $0/yr (fully managed) | 🚀 $0/yr (fully managed) | ❌ High (Nginx/SSL/patching/DDoS) | ⚠️ Low but slow support |
+| DevOps cost | 🚀 \$0/yr (fully managed) | 🚀 \$0/yr (fully managed) | ❌ High (Nginx/SSL/patching/DDoS) | ⚠️ Low but slow support |
 | Global latency (TTFB) | 🚀 Very low (edge) | 🚀 Very low (CDN edge) | ⚠️ Depends on region | ❌ High (no edge) |
 | Deploy speed | 🚀 ~1 min on push | 🚀 ~1 min on push | ❌ Slow (DIY CI) | ❌ Slowest (manual FTP) |
 
 > **老板的账本 (the owner's math)**：
-> - **Static landing page (Archetype A):** Astro compiled to static files on **Cloudflare Pages** — fully legal for commercial use, free, globally fast. Monthly TCO **$0**.
-> - **Hybrid site (Archetype B):** Next.js Rewrites needs a dynamic Node runtime, so **Vercel Pro ($20/mo)** is the honest answer. Don't "save" $20 by self-hosting a $6 VPS — the hours you'd sink into Nginx, Let's Encrypt renewals, and downtime cost far more than the difference. A developer's hourly rate dwarfs the Pro delta.
+> - **Static landing page (Archetype A):** Astro compiled to static files on **Cloudflare Pages** — fully legal for commercial use, free, globally fast. Monthly TCO **\$0**.
+> - **Hybrid site (Archetype B):** Next.js Rewrites needs a dynamic Node runtime, so **Vercel Pro (\$20/mo)** is the honest answer. Don't "save" \$20 by self-hosting a \$6 VPS — the hours you'd sink into Nginx, Let's Encrypt renewals, and downtime cost far more than the difference. A developer's hourly rate dwarfs the Pro delta.
 
 ## Next.js vs TanStack Start
 
