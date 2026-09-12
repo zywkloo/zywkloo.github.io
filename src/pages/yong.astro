@@ -50,14 +50,14 @@ const appLd = {
 							<p class="subtitle">A gentle thought by hand, for someone you care about.</p>
 							<p class="tagline-text">
 								A few words, a little note.<br />
-								For family, and maybe... <img src="/images/art-them.png" alt="them" class="art-word art-them" />
+								For family, and maybe... <img src="/images/art-them.png" alt="them" class="art-word art-them" width="280" height="167" />
 							</p>
 						</div>
 						<div class="slogan-slide" data-lang="zh">
 							<p class="subtitle">手写一点心意，给在乎的人。</p>
 							<p class="tagline-text">
 								轻轻几笔，一张小卡。<br />
-								寄给家人，也许还有那个<img src="/images/art-ta.png" alt="ta" class="art-word art-ta" />。
+								寄给家人，也许还有那个<img src="/images/art-ta.png" alt="ta" class="art-word art-ta" width="240" height="172" />。
 							</p>
 						</div>
 						<div class="carousel-indicators">
@@ -221,11 +221,11 @@ const appLd = {
 						</video>
 					</div>
 					<figure class="practice-shot">
-						<img src="/images/wishes-practice-score.png" alt="永字八法练习房 · 四维评分 / Practice room four-dimension scoring" loading="lazy" />
+						<img src="/images/wishes-practice-score.png" alt="永字八法练习房 · 四维评分 / Practice room four-dimension scoring" loading="lazy" width="480" height="1039" />
 						<figcaption>四维评分：笔法 / 字形 / 平衡 / 流势<br /><span class="en-sub">Scored on Stroke / Shape / Balance / Flow</span></figcaption>
 					</figure>
 					<figure class="practice-shot">
-						<img src="/images/wishes-practice-levels.png" alt="永字八法练习房 · 关卡与祝福短句 / Practice room levels and blessing phrases" loading="lazy" />
+						<img src="/images/wishes-practice-levels.png" alt="永字八法练习房 · 关卡与祝福短句 / Practice room levels and blessing phrases" loading="lazy" width="480" height="1039" />
 						<figcaption>关卡循序渐进，练成一句祝福短句<br /><span class="en-sub">Levels build up to a whole blessing phrase</span></figcaption>
 					</figure>
 				</div>
@@ -434,6 +434,9 @@ const appLd = {
 	.art-word {
 		display: inline-block;
 		vertical-align: middle;
+		/* The width/height attributes exist to give the browser an aspect ratio
+		   up front; each .art-* rule drives the real size off height alone. */
+		width: auto;
 		object-fit: contain;
 		filter: drop-shadow(0 1px 2px rgba(180, 50, 40, 0.15));
 		transition: transform 0.3s ease;
