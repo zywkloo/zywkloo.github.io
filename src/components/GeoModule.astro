@@ -11,11 +11,12 @@ interface Props {
 	series?: string;
 	heroImage?: string;
 	url: string;
+	slug?: string;
 	tldr?: string;
 	showCitation?: boolean;
 }
 
-const { title, description, pubDate, updatedDate, lang = 'en', tags, series, heroImage, url, tldr, showCitation = true } = Astro.props;
+const { title, description, pubDate, updatedDate, lang = 'en', tags, series, heroImage, url, slug, tldr, showCitation = true } = Astro.props;
 
 const plainTitle = title.replace(/<[^>]+>/g, '');
 
@@ -43,13 +44,87 @@ const blogPostingLd = {
 	mainEntityOfPage: { '@type': 'WebPage', '@id': url },
 };
 
-// Generate BibTeX citation for academic and AI reference extraction
-const citationId = `${SITE_AUTHOR.split(' ').pop()?.toLowerCase() || 'author'}${pubDate.getFullYear()}`;
+/* ---------- BibTeX generation ---------------------------------------------
+ * Titles are authored as HTML (they may carry <em>) and are bilingual
+ * ("English / 中文"), so the raw string is not safe to drop into a .bib file:
+ * a bare `&` aborts the LaTeX run, and CJK needs XeLaTeX. Normalise first.
+ * ------------------------------------------------------------------------ */
+
+const HTML_ENTITIES: Record<string, string> = {
+	'&amp;': '&',
+	'&lt;': '<',
+	'&gt;': '>',
+	'&quot;': '"',
+	'&#39;': "'",
+	'&apos;': "'",
+	'&nbsp;': ' ',
+};
+
+function decodeEntities(value: string) {
+	return value.replace(/&(?:amp|lt|gt|quot|#39|apos|nbsp);/g, (entity) => HTML_ENTITIES[entity] ?? entity);
+}
+
+// Backslash must map to a macro, so a single left-to-right pass over the class
+// is required — a naive chain would re-escape the backslashes it just emitted.
+const LATEX_ESCAPES: Record<string, string> = {
+	'\\': '\\textbackslash{}',
+	'&': '\\&',
+	'%': '\\%',
+	$: '\\$',
+	'#': '\\#',
+	_: '\\_',
+	'{': '\\{',
+	'}': '\\}',
+	'~': '\\textasciitilde{}',
+	'^': '\\textasciicircum{}',
+};
+
+function escapeLatex(value: string) {
+	return value.replace(/[\\&%$#_{}~^]/g, (ch) => LATEX_ESCAPES[ch] ?? ch);
+}
+
+const CJK = /[㐀-䶿一-鿿぀-ヿ　-〿＀-￯]/;
+
+// pdflatex cannot typeset the Chinese half of a bilingual title, so keep only
+// the Latin segment(s). A title with no CJK at all is passed through untouched
+// so that a legitimate "A / B" title never loses half of itself.
+function preferLatinTitle(value: string) {
+	if (!CJK.test(value)) return value;
+	const segments = value.split(/\s+\/\s+/).map((part) => part.trim()).filter(Boolean);
+	if (segments.length < 2) return value;
+	const latin = segments.filter((part) => !CJK.test(part));
+	return latin.length ? latin.join(' / ') : value;
+}
+
+const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+
+const authorSurname = SITE_AUTHOR.trim().split(/\s+/).pop()?.toLowerCase().replace(/[^a-z0-9]/g, '') || 'author';
+
+// The key used to be `${surname}${year}`, which collided for every post sharing
+// a year — citing two of them raised "Repeated entry". Fold in the slug.
+const keyToken = (slug || plainTitle)
+	.toLowerCase()
+	.replace(/[^a-z0-9]+/g, ' ')
+	.trim()
+	.split(/\s+/)
+	.slice(0, 3)
+	.join('');
+
+const citationId = `${authorSurname}${pubDate.getFullYear()}${keyToken}`;
+// Double braces stop `plain`/`unsrt`/`ieeetr` from lowercasing the title.
+const citationTitle = escapeLatex(preferLatinTitle(decodeEntities(plainTitle)));
+const citationNote =
+	updatedDate && updatedDate.getTime() !== pubDate.getTime()
+		? `\n  note         = {Last updated ${updatedDate.toISOString().slice(0, 10)}},`
+		: '';
+
 const citationText = `@misc{${citationId},
-  title = {${plainTitle}},
-  author = {${SITE_AUTHOR}},
-  year = {${pubDate.getFullYear()}},
-  howpublished = {\\url{${url}}}
+  title        = {{${citationTitle}}},
+  author       = {${escapeLatex(SITE_AUTHOR)}},
+  year         = {${pubDate.getFullYear()}},
+  month        = ${MONTHS[pubDate.getMonth()]},
+  howpublished = {\\url{${url}}},
+  url          = {${url}},${citationNote}
 }`;
 ---
 
@@ -76,8 +151,9 @@ const citationText = `@misc{${citationId},
 		<div class="geo-citation-header">
 			<span class="geo-icon">🔗</span>
 			<strong>Citation (BibTeX)</strong>
+			<button type="button" class="geo-citation-copy" data-citation-copy aria-label="Copy BibTeX citation">Copy</button>
 		</div>
-		<pre><code>{citationText}</code></pre>
+		<pre data-citation-text><code>{citationText}</code></pre>
 	</div>
 )}
 
@@ -117,14 +193,67 @@ const citationText = `@misc{${citationId},
 		padding-top: 2rem;
 		border-top: 1px dashed var(--apaper-line);
 	}
+	.geo-citation-copy {
+		margin-left: auto;
+		border: 1px solid var(--apaper-line);
+		border-radius: 6px;
+		background: transparent;
+		color: inherit;
+		font: inherit;
+		letter-spacing: inherit;
+		text-transform: inherit;
+		padding: 0.2rem 0.6rem;
+		cursor: pointer;
+		transition: background 0.18s ease, border-color 0.18s ease;
+	}
+	.geo-citation-copy:hover {
+		background: var(--apaper-bg-alt);
+		border-color: var(--apaper-accent-line);
+	}
 	.geo-citation pre {
 		background: var(--apaper-bg-alt);
 		padding: 1rem 1.25rem;
 		border-radius: 8px;
 		font-size: 0.85rem;
-		overflow-x: auto;
 		color: var(--apaper-ink-secondary);
 		border: 1px solid var(--apaper-line);
 		font-family: var(--apaper-font-mono);
 	}
+	/* The block exists to be copied, so the long URL line must wrap rather than
+	   hide behind an overlay scrollbar macOS never draws. global.css pins
+	   `pre > code { white-space: pre }`, so the child needs it spelled out too. */
+	.geo-citation pre,
+	.geo-citation pre > code {
+		white-space: pre-wrap;
+		overflow-wrap: anywhere;
+	}
 </style>
+
+<script>
+	document.querySelectorAll<HTMLButtonElement>('[data-citation-copy]').forEach((button) => {
+		const block = button.closest('.geo-citation')?.querySelector<HTMLElement>('[data-citation-text]');
+		if (!block) return;
+
+		button.addEventListener('click', async () => {
+			const text = block.textContent ?? '';
+			let copied = false;
+			try {
+				await navigator.clipboard.writeText(text);
+				copied = true;
+			} catch {
+				// Safari denies the async clipboard outside a secure context; fall
+				// back to selecting the block so ⌘C still works.
+				const selection = window.getSelection();
+				const range = document.createRange();
+				range.selectNodeContents(block);
+				selection?.removeAllRanges();
+				selection?.addRange(range);
+			}
+
+			button.textContent = copied ? 'Copied' : 'Press ⌘C';
+			window.setTimeout(() => {
+				button.textContent = 'Copy';
+			}, 2000);
+		});
+	});
+</script>
