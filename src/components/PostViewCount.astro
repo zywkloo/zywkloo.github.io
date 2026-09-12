@@ -76,8 +76,7 @@ const { slug } = Astro.props;
 
 <script>
 	import {
-		fetchViewCount,
-		fetchLikeCount,
+		fetchPostStat,
 		hasPostStatsConfig,
 		hasLikedPost,
 		markLikedPost,
@@ -114,18 +113,20 @@ const { slug } = Astro.props;
 			return;
 		}
 
-		let nextViewCount = null;
-		let nextLikeCount = await fetchLikeCount(slug);
+		// Views and likes are two columns of one row, so one select covers both;
+		// the view RPC runs alongside it rather than after it, and its
+		// post-increment count wins over whatever the select happened to read.
+		const [stats, recordedViews] = await Promise.all([
+			fetchPostStat(slug),
+			shouldRecordView(slug) ? recordView(slug) : Promise.resolve(null),
+		]);
 
-		if (shouldRecordView(slug)) {
-			nextViewCount = await recordView(slug);
-			if (nextViewCount !== null) {
-				markViewRecorded(slug);
-			}
-		}
+		let nextViewCount = stats ? stats.viewCount : null;
+		let nextLikeCount = stats ? stats.likeCount : null;
 
-		if (nextViewCount === null) {
-			nextViewCount = await fetchViewCount(slug);
+		if (recordedViews !== null) {
+			markViewRecorded(slug);
+			nextViewCount = recordedViews;
 		}
 
 		if (nextViewCount === null && nextLikeCount === null) {

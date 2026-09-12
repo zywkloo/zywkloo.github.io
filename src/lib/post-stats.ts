@@ -1,4 +1,4 @@
-import { getSupabaseBrowserClient, hasSupabaseConfig } from './supabase';
+import { callRpc, hasSupabaseConfig, inFilter, selectRows } from './supabase';
 
 const VISITOR_ID_KEY = 'semantic-systems:visitor-id';
 const VIEW_GATE_PREFIX = 'semantic-systems:viewed';
@@ -80,36 +80,47 @@ export function markLikedPost(slug: string) {
 	window.localStorage.setItem(getLikeGateKey(slug), '1');
 }
 
-export async function fetchPostStats(slugs: string[]) {
-	const client = getSupabaseBrowserClient();
-	if (!client) {
-		return null;
-	}
+interface PostStatRow {
+	slug: string;
+	view_count: number | null;
+	like_count: number | null;
+}
 
+export async function fetchPostStats(slugs: string[]) {
 	const normalizedSlugs = [...new Set(slugs.filter(Boolean))];
 	if (normalizedSlugs.length === 0) {
-		return new Map<string, number>();
+		return new Map<string, PostStat>();
 	}
 
-	const { data, error } = await client
-		.from('post_stats')
-		.select('slug, view_count, like_count')
-		.in('slug', normalizedSlugs);
+	const rows = await selectRows<PostStatRow>('post_stats', {
+		select: 'slug,view_count,like_count',
+		slug: inFilter(normalizedSlugs),
+	});
 
-	if (error) {
-		console.warn('Unable to load post stats from Supabase.', error.message);
+	if (!rows) {
 		return null;
 	}
 
 	return new Map(
-		(data ?? []).map((row) => [
-			row.slug as string,
+		rows.map((row) => [
+			row.slug,
 			{
 				viewCount: Number(row.view_count ?? 0),
 				likeCount: Number(row.like_count ?? 0),
 			} satisfies PostStat,
 		]),
 	);
+}
+
+/** Single-post variant. The view and like counts live in the same row, so
+ *  reading them separately meant two identical round trips per page load. */
+export async function fetchPostStat(slug: string) {
+	const stats = await fetchPostStats([slug]);
+	if (!stats) {
+		return null;
+	}
+
+	return stats.get(slug) ?? { viewCount: 0, likeCount: 0 };
 }
 
 export async function fetchViewCounts(slugs: string[]) {
@@ -121,58 +132,20 @@ export async function fetchViewCounts(slugs: string[]) {
 	return new Map([...stats.entries()].map(([slug, value]) => [slug, value.viewCount]));
 }
 
-export async function fetchViewCount(slug: string) {
-	const stats = await fetchPostStats([slug]);
-	if (!stats) {
-		return null;
-	}
-
-	return stats.get(slug)?.viewCount ?? 0;
-}
-
-export async function fetchLikeCount(slug: string) {
-	const stats = await fetchPostStats([slug]);
-	if (!stats) {
-		return null;
-	}
-
-	return stats.get(slug)?.likeCount ?? 0;
-}
-
 export async function recordView(slug: string) {
-	const client = getSupabaseBrowserClient();
-	if (!client) {
-		return null;
-	}
-
-	const { data, error } = await client.rpc('record_post_view', {
+	const count = await callRpc<number>('record_post_view', {
 		p_slug: slug,
 		p_visitor_id: getOrCreateVisitorId(),
 	});
 
-	if (error) {
-		console.warn('Unable to record post view in Supabase.', error.message);
-		return null;
-	}
-
-	return Number(data ?? 0);
+	return count === null ? null : Number(count ?? 0);
 }
 
 export async function recordLike(slug: string) {
-	const client = getSupabaseBrowserClient();
-	if (!client) {
-		return null;
-	}
-
-	const { data, error } = await client.rpc('record_post_like', {
+	const count = await callRpc<number>('record_post_like', {
 		p_slug: slug,
 		p_visitor_id: getOrCreateVisitorId(),
 	});
 
-	if (error) {
-		console.warn('Unable to record post like in Supabase.', error.message);
-		return null;
-	}
-
-	return Number(data ?? 0);
+	return count === null ? null : Number(count ?? 0);
 }
