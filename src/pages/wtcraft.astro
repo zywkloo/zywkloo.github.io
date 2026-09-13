@@ -4,6 +4,8 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { WTCRAFT_URL, WTCRAFT_NPM_URL, WTCRAFT_PYPI_URL, SITE_URL, SITE_AUTHOR_ALT } from '../consts';
 
+const WTEVAL_URL = 'https://github.com/zywkloo/wteval';
+
 const pageTitle = 'wtcraft — Task Contracts and Deterministic Checks for Git Worktrees | Victor Zhang';
 const pageDescription =
 	'wtcraft is a lightweight CLI for worktree-based agent workflows. It scaffolds task contracts, creates worktrees, checks changed files against declared scope, runs verification commands, and exposes machine-readable status.';
@@ -26,6 +28,10 @@ const faqs = [
 	{
 		q: 'Is the task contract a security boundary?',
 		a: 'No. The current .worktree-task.md is mutable local state. wtcraft check is a deterministic, on-demand signal, not protected authorization or an automatic pull-request gate.',
+	},
+	{
+		q: 'Who writes and grades the verification checks?',
+		a: 'A human or Planner agent proposes task-specific Verification commands after inspecting the repository. wtcraft does not ask the implementing model to judge its own work: it runs the declared commands and records their exit codes. The separate wteval lab uses mutation and property-based testing to examine whether those checks can detect defects.',
 	},
 	{
 		q: 'How do I install wtcraft?',
@@ -89,6 +95,29 @@ const faqLd = {
 					<a href={WTCRAFT_NPM_URL} target="_blank" class="btn btn-primary">npm</a>
 					<a href={WTCRAFT_PYPI_URL} target="_blank" class="btn btn-secondary">PyPI</a>
 					<a href={WTCRAFT_URL} target="_blank" class="btn btn-secondary">GitHub</a>
+				</div>
+			</section>
+
+			<!-- Design principle -->
+			<section class="block">
+				<h2 class="section-title">Let the model write the exam, not grade it</h2>
+				<div class="capability-grid">
+					<article>
+						<code>1 · Plan</code>
+						<p>A human or Planner agent inspects the repository and proposes task-specific boundaries and acceptance commands.</p>
+					</article>
+					<article>
+						<code>2 · Grade externally</code>
+						<p><code>wtcraft check</code> inspects the Git changeset; <code>wtcraft verify</code> runs the exact declared commands and records their exit codes without an LLM judge.</p>
+					</article>
+					<article>
+						<code>3 · Test the tests</code>
+						<p>A mechanical runner cannot prove that its test plan is strong. The separate <a href={WTEVAL_URL}>wteval</a> lab uses mutation and property-based testing to probe that acceptance layer.</p>
+					</article>
+				</div>
+				<div class="boundary-note">
+					<strong>Two different questions</strong>
+					<p><code>wtcraft verify</code> asks whether the declared checks passed. <code>wteval</code> asks whether those checks can detect defects.</p>
 				</div>
 			</section>
 

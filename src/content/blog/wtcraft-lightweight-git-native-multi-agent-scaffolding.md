@@ -18,6 +18,7 @@ tldr: 'Introduces wtcraft, a lightweight CLI that uses Git-native workflows to s
 ## Contents
 
 - [Introduction](#introduction)
+- [Let the model write the exam, not grade it](#let-the-model-write-the-exam-not-grade-it)
 - [When wtcraft earns its keep (and when to skip it)](#when-wtcraft-earns-its-keep-and-when-to-skip-it)
 - [What is Harness Engineering?](#what-is-harness-engineering)
 - [The Competitive Landscape](#the-competitive-landscape)
@@ -37,6 +38,26 @@ But design philosophies are useless without a mechanism to enforce them.
 If you tell a coding agent to *"fix this issue,"* but don't give it a strict sandbox and a verifiable boundary, it will wander off, touch files it shouldn't, write unnecessary code, and blow through your API quota.
 
 To prevent this, we need **Harness Engineering**. This article explores the tactical tools, the competitive task landscape, and how the lightweight, git-native CLI [**wtcraft**](https://github.com/zywkloo/wtcraft) implements bounded contracts on your local machine.
+
+---
+
+## Let the model write the exam, not grade it
+
+A human or Planner agent can inspect the repository and propose task-specific
+Scope, Off-limits, and Verification entries. That is where an LLM's contextual
+judgment helps: the right checks for a Go service are different from those for a
+Swift app or a Python package.
+
+Grading is mechanical and language-agnostic. `wtcraft check` compares the Git
+changeset with the declared boundaries; `wtcraft verify` runs the exact commands
+in the contract and records their exit codes without asking a judge model whether
+the work looks correct.
+
+But external execution cannot rescue a weak exam. The separate
+[wteval](https://github.com/zywkloo/wteval) lab uses mutation and property-based
+testing to probe the acceptance layer. In short: **`wtcraft verify` asks whether
+the declared checks passed; `wteval` asks whether those checks can detect
+defects.**
 
 ---
 
