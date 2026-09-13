@@ -57,7 +57,9 @@ But external execution cannot rescue a weak exam. The separate
 [wteval](https://github.com/zywkloo/wteval) lab uses mutation and property-based
 testing to probe the acceptance layer. In short: **`wtcraft verify` asks whether
 the declared checks passed; `wteval` asks whether those checks can detect
-defects.**
+defects.** When a finding is ambiguous, a human distinguishes a real test gap
+from an equivalent mutant or underspecified behavior, then decides whether to
+harden the tests or clarify the specification.
 
 ---
 

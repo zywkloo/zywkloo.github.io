@@ -31,7 +31,7 @@ const faqs = [
 	},
 	{
 		q: 'Who writes and grades the verification checks?',
-		a: 'A human or Planner agent proposes task-specific Verification commands after inspecting the repository. wtcraft does not ask the implementing model to judge its own work: it runs the declared commands and records their exit codes. The separate wteval lab uses mutation and property-based testing to examine whether those checks can detect defects.',
+		a: 'A human or Planner agent proposes task-specific Verification commands after inspecting the repository. wtcraft does not ask the implementing model to judge its own work: it runs the declared commands and records their exit codes. The separate wteval lab examines whether those checks can detect defects, and a human reviews findings whose semantics remain ambiguous.',
 	},
 	{
 		q: 'How do I install wtcraft?',
@@ -113,6 +113,10 @@ const faqLd = {
 					<article>
 						<code>3 · Test the tests</code>
 						<p>A mechanical runner cannot prove that its test plan is strong. The separate <a href={WTEVAL_URL}>wteval</a> lab uses mutation and property-based testing to probe that acceptance layer.</p>
+					</article>
+					<article>
+						<code>4 · Review ambiguous findings</code>
+						<p>A human reviews evidence that tools cannot resolve—such as a real test gap versus an equivalent mutant—and decides whether to harden the tests, clarify the specification, or accept the behavior.</p>
 					</article>
 				</div>
 				<div class="boundary-note">
