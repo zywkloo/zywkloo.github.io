@@ -92,7 +92,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							<div class="stage-meta-strip">
 								<div class="stage-title-wrap">
 									<span class="stage-pulse"></span>
-									<span class="stage-label" id="stage-active-label">SYS // 01 · 亲笔落墨 (WISHES BY HAND)</span>
+									<span class="stage-label" id="stage-active-label">SYS // 01 · ARC SCANNER (TOP CHARTS #14 🇨🇦)</span>
 								</div>
 								<div class="stage-nav-cluster">
 									<button type="button" class="stage-arrow-btn" id="stage-prev-btn" title="Previous artifact (左切)" aria-label="Previous">
@@ -106,18 +106,42 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 
 							<!-- 3D Cover Flow Deck -->
 							<div class="stage-deck">
-								<!-- Card 0: Wishes by Hand (亲笔小卡 with yong-demo-1.mp4) -->
-								<div class="stage-card is-center" data-index="0" data-label="SYS // 01 · 亲笔落墨 (WISHES BY HAND)">
+								<!-- Card 0: ARC Scanner (Canada Top 14 App Store) -->
+								<div class="stage-card is-center" data-index="0" data-label="SYS // 01 · ARC SCANNER (TOP CHARTS #14 🇨🇦)">
+									<div class="card-screen card-screen-scanner">
+										<ViewportVideo
+											src="/videos/arc-scanner-rank.mp4"
+											poster="/images/goldenarc/arc-scanner-rank-poster.jpg"
+											class="stage-video"
+											ariaLabel="ARC Scanner App Store Canada Top 14 milestone showcase"
+										/>
+										<div class="screen-badge badge-scanner">
+											<span class="badge-dot dot-scanner"></span>
+											<span>01 · ARC SCANNER · 🇨🇦 #14 PRODUCTIVITY</span>
+										</div>
+									</div>
+									<div class="card-caption-bar">
+										<div class="caption-copy">
+											<strong>ARC Scanner: Scan to Text</strong>
+											<span>🇨🇦 #14 Productivity · On-device OCR &amp; PDF pipeline</span>
+										</div>
+										<a href="/goldenarc" class="stage-card-link">GoldenARC →</a>
+									</div>
+								</div>
+
+								<!-- Card 1: Wishes by Hand (亲笔小卡 with yong-demo-hero.mp4) -->
+								<div class="stage-card is-next" data-index="1" data-label="SYS // 02 · 亲笔落墨 (WISHES BY HAND)">
 									<div class="card-screen card-screen-yong">
 										<ViewportVideo
 											src="/videos/yong-demo-hero.mp4"
 											poster="/images/wishes/video-poster-hero.jpg"
 											class="stage-video"
 											ariaLabel="亲笔小卡 实时墨水笔刷与书法回放演示"
+											initialActive={false}
 										/>
 										<div class="screen-badge badge-yong">
 											<span class="badge-dot dot-yong"></span>
-											<span>01 · 亲笔落墨 · METAL BRUSH</span>
+											<span>02 · 亲笔落墨 · METAL BRUSH</span>
 										</div>
 									</div>
 									<div class="card-caption-bar">
@@ -129,8 +153,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 									</div>
 								</div>
 
-								<!-- Card 1: EDF & BDF Viewer (edf-viewer-demo.mp4) -->
-								<div class="stage-card is-next" data-index="1" data-label="SYS // 02 · EDF & BDF VIEWER (BIOSIGNALS)">
+								<!-- Card 2: EDF & BDF Viewer (edf-viewer-demo.mp4) -->
+								<div class="stage-card is-hidden" data-index="2" data-label="SYS // 03 · EDF & BDF VIEWER (BIOSIGNALS)">
 									<div class="card-screen card-screen-edf">
 										<ViewportVideo
 											src="/videos/edf-viewer-demo.mp4"
@@ -141,7 +165,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										/>
 										<div class="screen-badge badge-edf">
 											<span class="badge-dot dot-edf"></span>
-											<span>02 · EDF VIEWER · BIOSIGNAL WAVEFORMS</span>
+											<span>03 · EDF VIEWER · BIOSIGNAL WAVEFORMS</span>
 										</div>
 									</div>
 									<div class="card-caption-bar">
@@ -153,8 +177,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 									</div>
 								</div>
 
-								<!-- Card 2: Google Foobar Challenge -->
-								<div class="stage-card is-hidden" data-index="2" data-label="LAB // 03 · GOOGLE FOOBAR CHALLENGE">
+								<!-- Card 3: Google Foobar Challenge -->
+								<div class="stage-card is-hidden" data-index="3" data-label="LAB // 04 · GOOGLE FOOBAR CHALLENGE">
 									<div class="card-screen card-screen-terminal">
 										<ViewportVideo
 											src="/videos/google-foobar.mp4"
@@ -165,7 +189,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										/>
 										<div class="screen-badge badge-terminal">
 											<span class="badge-dot dot-terminal"></span>
-											<span>03 · GOOGLE FOOBAR · SECRET LAB</span>
+											<span>04 · GOOGLE FOOBAR · SECRET LAB</span>
 										</div>
 									</div>
 									<div class="card-caption-bar">
@@ -177,8 +201,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 									</div>
 								</div>
 
-								<!-- Card 3: Wild Dunk (2015 Genesis Mobile System) -->
-								<div class="stage-card is-prev" data-index="3" data-label="NODE // 04 · 全民大灌篮 (WILD DUNK 2015)">
+								<!-- Card 4: Wild Dunk (2015 Genesis Mobile System) -->
+								<div class="stage-card is-prev" data-index="4" data-label="NODE // 05 · 全民大灌篮 (WILD DUNK 2015)">
 									<div class="card-screen card-screen-arcade">
 										<ViewportVideo
 											src="/videos/wilddunk-gameplay.mp4"
@@ -189,7 +213,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										/>
 										<div class="screen-badge badge-arcade">
 											<span class="badge-dot dot-arcade"></span>
-											<span>04 · WILD DUNK · GENESIS ARCHIVE</span>
+											<span>05 · WILD DUNK · GENESIS ARCHIVE</span>
 										</div>
 									</div>
 									<div class="card-caption-bar">
@@ -206,19 +230,23 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							<div class="stage-pills" role="tablist">
 								<button type="button" class="stage-pill active" data-target="0" role="tab" aria-selected="true">
 									<span class="pill-dot"></span>
-									<span>01 亲笔小卡</span>
+									<span>01 ARC Scanner</span>
 								</button>
 								<button type="button" class="stage-pill" data-target="1" role="tab" aria-selected="false">
 									<span class="pill-dot"></span>
-									<span>02 EDF 波形</span>
+									<span>02 亲笔小卡</span>
 								</button>
 								<button type="button" class="stage-pill" data-target="2" role="tab" aria-selected="false">
 									<span class="pill-dot"></span>
-									<span>03 Google Foobar</span>
+									<span>03 EDF 波形</span>
 								</button>
 								<button type="button" class="stage-pill" data-target="3" role="tab" aria-selected="false">
 									<span class="pill-dot"></span>
-									<span>04 全民大灌篮</span>
+									<span>04 Google Foobar</span>
+								</button>
+								<button type="button" class="stage-pill" data-target="4" role="tab" aria-selected="false">
+									<span class="pill-dot"></span>
+									<span>05 全民大灌篮</span>
 								</button>
 							</div>
 						</div>
@@ -2153,6 +2181,13 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		overflow: hidden;
 		background: #000;
 	}
+	.card-screen-scanner {
+		background: #f8fafc;
+	}
+	.card-screen-scanner :global(.stage-video) {
+		object-fit: cover;
+		object-position: center center;
+	}
 	.card-screen-yong {
 		background: #fdfbf7;
 	}
@@ -2201,6 +2236,14 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		height: 5px;
 		border-radius: 50%;
 		background: var(--apaper-accent);
+	}
+	.badge-scanner {
+		background: rgba(14, 18, 24, 0.90);
+		border-color: rgba(239, 68, 68, 0.35);
+		color: #f87171;
+	}
+	.dot-scanner {
+		background: #ef4444;
 	}
 	.badge-yong {
 		background: rgba(22, 18, 14, 0.90);
@@ -2290,6 +2333,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	/* Stage Pagination Indicator Pills */
 	.stage-pills {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
 		justify-content: center;
 		gap: 6px;
