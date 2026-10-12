@@ -30,14 +30,13 @@ export const SAME_AS = [GITHUB_URL, LINKEDIN_URL, MEDIUM_URL];
 // as alternateName lets engines merge the identities into one entity.
 export const SITE_AUTHOR_ALT = ['Yiwei Zhang', 'zywkloo'];
 
-// GoldenARC Digital — Victor's company (pre-launch). Planted in the identity
-// graph now so the "founded by Victor Zhang" link is already indexed by the
-// time it launches. Fill the two URLs once the pages are live; `sameAs` is
-// omitted while they're empty, so no broken links ever ship.
+// GoldenARC Digital — Independent digital studio founded by Victor Zhang.
+// Builds local-first Apple platform engineering and document tools.
 export const GOLDENARC_NAME = 'GoldenARC Digital';
 export const GOLDENARC_LINKEDIN_URL = 'https://www.linkedin.com/company/golden-arc-digital';
 export const GOLDENARC_GITHUB_URL = '';
 export const GOLDENARC_SAME_AS = [GOLDENARC_LINKEDIN_URL, GOLDENARC_GITHUB_URL].filter(Boolean);
+export const ARC_SCANNER_APP_STORE_URL = 'https://apps.apple.com/us/app/arc-scanner-scan-to-text/id6817884165';
 
 import { BLOG_COPY, SERIES_META as BLOG_SERIES_META, type SeriesMetaToken } from './data/blog';
 

@@ -2,7 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { GOLDENARC_LINKEDIN_URL, GOLDENARC_NAME, SITE_URL } from '../consts';
+import { ARC_SCANNER_APP_STORE_URL, GOLDENARC_LINKEDIN_URL, GOLDENARC_NAME, SITE_URL } from '../consts';
 import { GOLDENARC_COPY } from '../data/goldenarc';
 
 const products = [
@@ -18,10 +18,12 @@ const products = [
 	{
 		name: 'ARC Scanner',
 		platform: 'iPhone + iPad',
-		description: 'Scan or import pages, review them, and export useful document formats with on-device processing.',
-		status: 'In development',
-		statusTone: 'building',
+		description: 'Scan or import pages with automatic edge detection, recognize text on-device, and export searchable PDFs, plain text, or structured JSON.',
+		status: 'Now on App Store',
+		statusTone: 'live',
+		href: ARC_SCANNER_APP_STORE_URL,
 		icon: '/images/goldenarc/arc-scanner.png',
+		rankBadge: '🇨🇦 #14 · 🇨🇳 #38 in Productivity',
 	},
 	{
 		name: 'ARC Markdown',
@@ -85,11 +87,14 @@ const organizationLd = {
 				<div class="product-grid">
 					{products.map((product) => {
 						const CardTag = product.href ? 'a' : 'article';
+						const isExternal = product.href?.startsWith('http');
 						return (
 							<CardTag
 								href={product.href}
 								class:list={['product-card', { available: product.href }]}
 								aria-label={product.href ? `Explore ${product.name}` : undefined}
+								target={isExternal ? '_blank' : undefined}
+								rel={isExternal ? 'noopener' : undefined}
 							>
 								<div class="product-visual">
 									{product.icon ? (
@@ -115,9 +120,13 @@ const organizationLd = {
 								</div>
 								<h3>{product.name}</h3>
 								<p>{product.description}</p>
+								{product.rankBadge && (
+									<span class="product-rank-badge">{product.rankBadge}</span>
+								)}
 								{product.href ? (
 									<span class="product-link">
-										Explore the app <span class="arrow" aria-hidden="true">→</span>
+										{isExternal ? 'App Store' : 'Explore the app'}{' '}
+										<span class="arrow" aria-hidden="true">{isExternal ? '↗' : '→'}</span>
 									</span>
 								) : (
 									<span class="product-link muted">Details will follow</span>
@@ -202,7 +211,7 @@ const organizationLd = {
 						<g class="graph-node implemented">
 							<rect x="380" y="65" width="200" height="89" rx="18" />
 							<text class="node-title" x="400" y="101">ARC Scanner</text>
-							<text class="node-meta" x="400" y="128">App path integrated</text>
+							<text class="node-meta" x="400" y="128">App Store live · iOS</text>
 						</g>
 						<g class="graph-node independent">
 							<rect x="610" y="65" width="200" height="89" rx="18" />
@@ -272,7 +281,7 @@ const organizationLd = {
 					<div><strong>12</strong><span>selectable SPM library products across the implemented shared packages</span></div>
 					<div><strong>66</strong><span>passing package tests at the documented Scanner integration baseline</span></div>
 					<div><strong>iOS 16 → 26+</strong><span>baseline OCR with capability-gated structured document recognition</span></div>
-					<div><strong>Local first</strong><span>core intake, scan, OCR, export, and file work require no account or cloud service</span></div>
+					<div><strong>#14 &amp; #38</strong><span>App Store peak charts in Canada (#14) and China (#38) for Productivity</span></div>
 				</div>
 			</section>
 
@@ -570,6 +579,21 @@ const organizationLd = {
 		color: var(--arc-muted);
 		font-size: 0.94rem;
 		line-height: 1.55;
+	}
+	.product-rank-badge {
+		display: inline-flex;
+		align-items: center;
+		margin-top: 0.85rem;
+		font-family: var(--arc-font-mono, monospace);
+		font-size: 0.76rem;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		color: var(--arc-teal-dark);
+		background: rgba(8, 122, 97, 0.08);
+		border: 1px solid rgba(8, 122, 97, 0.22);
+		padding: 0.22rem 0.6rem;
+		border-radius: 999px;
+		width: fit-content;
 	}
 	.product-link {
 		margin-top: auto;
@@ -939,6 +963,11 @@ const organizationLd = {
 	:global(html[data-paper-theme]) .arc-page .product-card.available:hover {
 		border-color: var(--apaper-accent);
 		box-shadow: 0 18px 40px var(--apaper-accent-soft);
+	}
+	:global(html[data-paper-theme]) .arc-page .product-rank-badge {
+		color: var(--apaper-accent);
+		background: var(--apaper-accent-soft);
+		border-color: var(--apaper-accent-line);
 	}
 	:global(html[data-paper-theme]) .arc-page .status {
 		background: var(--apaper-bg-alt);
