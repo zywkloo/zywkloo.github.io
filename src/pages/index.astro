@@ -2182,10 +2182,13 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		background: #000;
 	}
 	.card-screen-scanner {
-		background: #f8fafc;
+		background: #f6f7f6;
 	}
+	/* Square 1:1 source in a wide frame: contain (no crop) and push below the badge */
 	.card-screen-scanner :global(.stage-video) {
-		object-fit: cover;
+		box-sizing: border-box;
+		padding-top: 44px;
+		object-fit: contain;
 		object-position: center center;
 	}
 	.card-screen-yong {
@@ -2361,7 +2364,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	.stage-pill.active {
 		border-color: var(--apaper-ink);
 		background: var(--apaper-ink);
-		color: #ffffff;
+		color: var(--apaper-bg);
 	}
 	.pill-dot {
 		width: 4px;
