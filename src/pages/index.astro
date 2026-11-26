@@ -3,8 +3,10 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import ViewportVideo from '../components/ViewportVideo.astro';
-import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, SITE_AUTHOR, PROFILE_IMAGE, USER_TITLE, GITHUB_URL, WTCRAFT_URL, LINKEDIN_URL, EMAIL, MEDIUM_URL, SAME_AS, SITE_AUTHOR_ALT, GOLDENARC_NAME, GOLDENARC_SAME_AS, GOLDENARC_URL } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, SITE_AUTHOR, PROFILE_IMAGE, USER_TITLE, GITHUB_URL, WTCRAFT_URL, LINKEDIN_URL, EMAIL, MEDIUM_URL, SAME_AS, SITE_AUTHOR_ALT, ARC_SCANNER_APP_STORE_URL } from '../consts';
 
+// App Store links for shipped apps featured on this page.
+const EDF_APP_STORE_URL = 'https://apps.apple.com/app/id6801383472';
 const NINJA_GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=ai.ninjatech.mobile';
 const WILDDUNK_YT_ID = 'ysmp5vK4R_c';
 
@@ -32,17 +34,7 @@ const personLd = {
 		{ '@type': 'CollegeOrUniversity', name: 'Peking University' },
 	],
 	award: 'University Medal in Computer Science, Carleton University (2020)',
-	worksFor: { '@id': `${GOLDENARC_URL}/#organization` },
 	sameAs: SAME_AS,
-};
-const organizationLd = {
-	'@type': 'Organization',
-	'@id': `${GOLDENARC_URL}/#organization`,
-	name: GOLDENARC_NAME,
-	url: GOLDENARC_URL,
-	description: 'Independent digital studio founded by Victor Zhang, building native Apple platform tools.',
-	founder: { '@id': `${SITE_URL}/#person` },
-	...(GOLDENARC_SAME_AS.length ? { sameAs: GOLDENARC_SAME_AS } : {}),
 };
 const websiteLd = {
 	'@type': 'WebSite',
@@ -54,7 +46,7 @@ const websiteLd = {
 	author: { '@id': `${SITE_URL}/#person` },
 	publisher: { '@id': `${SITE_URL}/#person` },
 };
-const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personLd, organizationLd] };
+const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personLd] };
 ---
 
 <!doctype html>
@@ -89,7 +81,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							<div class="stage-meta-strip">
 								<div class="stage-title-wrap">
 									<span class="stage-pulse"></span>
-									<span class="stage-label" id="stage-active-label">SYS // 01 · WTCRAFT (AGENT TASK CONTRACTS)</span>
+									<span class="stage-label" id="stage-active-label">SYS // 01 · ARC SCANNER (TOP CHARTS #14 🇨🇦)</span>
 								</div>
 								<div class="stage-nav-cluster">
 									<button type="button" class="stage-arrow-btn" id="stage-prev-btn" title="Previous artifact (左切)" aria-label="Previous">
@@ -103,31 +95,55 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 
 							<!-- 3D Cover Flow Deck -->
 							<div class="stage-deck">
-								<!-- Card 0: wtcraft (git task contracts) -->
-								<div class="stage-card is-center" data-index="0" data-label="SYS // 01 · WTCRAFT (AGENT TASK CONTRACTS)">
-									<div class="card-screen card-screen-terminal">
-										<pre class="stage-terminal" aria-label="wtcraft terminal session"><code><span class="t-prompt">$</span> wtcraft init
-<span class="t-prompt">$</span> wtcraft check
-<span class="t-ok">✓</span> scope respected
-<span class="t-ok">✓</span> off-limits clear
-<span class="t-prompt">$</span> wtcraft verify
-<span class="t-ok">✓</span> declared checks passed</code></pre>
-										<div class="screen-badge badge-terminal">
-											<span class="badge-dot dot-terminal"></span>
-											<span>01 · WTCRAFT · GIT WORKTREE CONTRACTS</span>
+								<!-- Card 0: ARC Scanner (Canada Top 14 App Store) -->
+								<div class="stage-card is-center" data-index="0" data-label="SYS // 01 · ARC SCANNER (TOP CHARTS #14 🇨🇦)">
+									<div class="card-screen card-screen-scanner">
+										<ViewportVideo
+											src="/videos/arc-scanner-rank.mp4"
+											poster="/images/goldenarc/arc-scanner-rank-poster.jpg"
+											class="stage-video"
+											ariaLabel="ARC Scanner App Store Canada Top 14 milestone showcase"
+										/>
+										<div class="screen-badge badge-scanner">
+											<span class="badge-dot dot-scanner"></span>
+											<span>01 · ARC SCANNER · 🇨🇦 #14 PRODUCTIVITY</span>
 										</div>
 									</div>
 									<div class="card-caption-bar">
 										<div class="caption-copy">
-											<strong>wtcraft</strong>
-											<span>Scoped, verifiable agent work in plain Git worktrees</span>
+											<strong>ARC Scanner: Scan to Text</strong>
+											<span>🇨🇦 #14 Productivity · On-device OCR &amp; PDF pipeline</span>
 										</div>
-										<a href="/wtcraft" class="stage-card-link">Full Page →</a>
+										<a href={ARC_SCANNER_APP_STORE_URL} target="_blank" rel="noopener" class="stage-card-link">App Store ↗</a>
 									</div>
 								</div>
 
-								<!-- Card 1: Google Foobar Challenge -->
-								<div class="stage-card is-hidden" data-index="1" data-label="LAB // 02 · GOOGLE FOOBAR CHALLENGE">
+								<!-- Card 1: EDF & BDF Viewer (edf-viewer-demo.mp4) -->
+								<div class="stage-card is-next" data-index="1" data-label="SYS // 02 · EDF & BDF VIEWER (BIOSIGNALS)">
+									<div class="card-screen card-screen-edf">
+										<ViewportVideo
+											src="/videos/edf-viewer-demo.mp4"
+											poster="/images/edfviewer/hero-preview.webp"
+											class="stage-video"
+											ariaLabel="ARC EDF and BDF Viewer multi-channel waveform scrolling demo"
+											initialActive={false}
+										/>
+										<div class="screen-badge badge-edf">
+											<span class="badge-dot dot-edf"></span>
+											<span>02 · EDF VIEWER · BIOSIGNAL WAVEFORMS</span>
+										</div>
+									</div>
+									<div class="card-caption-bar">
+										<div class="caption-copy">
+											<strong>ARC EDF &amp; BDF Viewer</strong>
+											<span>Multi-channel EEG/ECG waveform scrolling &amp; parser</span>
+										</div>
+										<a href={EDF_APP_STORE_URL} target="_blank" rel="noopener" class="stage-card-link">Mac App Store ↗</a>
+									</div>
+								</div>
+
+								<!-- Card 2: Google Foobar Challenge -->
+								<div class="stage-card is-hidden" data-index="2" data-label="LAB // 03 · GOOGLE FOOBAR CHALLENGE">
 									<div class="card-screen card-screen-terminal">
 										<ViewportVideo
 											src="/videos/google-foobar.mp4"
@@ -138,7 +154,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										/>
 										<div class="screen-badge badge-terminal">
 											<span class="badge-dot dot-terminal"></span>
-											<span>02 · GOOGLE FOOBAR · SECRET LAB</span>
+											<span>03 · GOOGLE FOOBAR · SECRET LAB</span>
 										</div>
 									</div>
 									<div class="card-caption-bar">
@@ -150,8 +166,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 									</div>
 								</div>
 
-								<!-- Card 2: Wild Dunk (2015 Genesis Mobile System) -->
-								<div class="stage-card is-prev" data-index="2" data-label="NODE // 03 · 全民大灌篮 (WILD DUNK 2015)">
+								<!-- Card 3: Wild Dunk (2015 Genesis Mobile System) -->
+								<div class="stage-card is-prev" data-index="3" data-label="NODE // 04 · 全民大灌篮 (WILD DUNK 2015)">
 									<div class="card-screen card-screen-arcade">
 										<ViewportVideo
 											src="/videos/wilddunk-gameplay.mp4"
@@ -162,7 +178,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 										/>
 										<div class="screen-badge badge-arcade">
 											<span class="badge-dot dot-arcade"></span>
-											<span>03 · WILD DUNK · GENESIS ARCHIVE</span>
+											<span>04 · WILD DUNK · GENESIS ARCHIVE</span>
 										</div>
 									</div>
 									<div class="card-caption-bar">
@@ -179,15 +195,19 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							<div class="stage-pills" role="tablist">
 								<button type="button" class="stage-pill active" data-target="0" role="tab" aria-selected="true">
 									<span class="pill-dot"></span>
-									<span>01 wtcraft</span>
+									<span>01 ARC Scanner</span>
 								</button>
 								<button type="button" class="stage-pill" data-target="1" role="tab" aria-selected="false">
 									<span class="pill-dot"></span>
-									<span>02 Google Foobar</span>
+									<span>02 EDF 波形</span>
 								</button>
 								<button type="button" class="stage-pill" data-target="2" role="tab" aria-selected="false">
 									<span class="pill-dot"></span>
-									<span>03 全民大灌篮</span>
+									<span>03 Google Foobar</span>
+								</button>
+								<button type="button" class="stage-pill" data-target="3" role="tab" aria-selected="false">
+									<span class="pill-dot"></span>
+									<span>04 全民大灌篮</span>
 								</button>
 							</div>
 						</div>
@@ -204,14 +224,14 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							<span>SYSTEM ARCHIVE / VOL. 01</span>
 						</span>
 						<span class="sig-timeframe">2015 — 2026 / DECADE IN CRAFT</span>
-						<span class="sig-status-tag"><span class="sig-pulse-dot"></span>03 NODES</span>
+						<span class="sig-status-tag"><span class="sig-pulse-dot"></span>04 NODES</span>
 					</div>
 
 					<div class="sig-title-block">
 						<p class="sig-eyebrow">CAREER TRAJECTORY &amp; TOPOLOGICAL ARC</p>
 						<h2 id="signature-title">Signature Work</h2>
 						<p class="sig-lead-text">
-							Three chapters. One arc: product leadership → bounded agents → systems craft.
+							Four chapters. One arc: product leadership → bounded agents → private data systems.
 						</p>
 					</div>
 				</div>
@@ -332,18 +352,69 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							</div>
 						</article>
 
-						<!-- Chapter 03: The Seven Bridges Inflection Point (七桥之思) -->
+						<!-- Chapter 03: EDF Viewer -->
+						<article class="editorial-node" id="edfviewer-sig">
+							<div class="node-rail" aria-hidden="true">
+								<div class="node-marker">
+									<span class="node-num">03</span>
+									<span class="node-dot"></span>
+								</div>
+								<span class="node-line-seg"></span>
+							</div>
+							<div class="node-content">
+								<div class="node-header">
+									<span class="node-badge">CHAPTER // 03</span>
+									<span class="node-date">MACOS &amp; IPADOS · RESEARCH TOOL</span>
+								</div>
+								<div class="node-plate">
+									<div class="plate-media">
+										<div class="media-frame">
+											<ViewportVideo
+												src="/videos/edf-viewer-demo.mp4"
+												poster="/images/edfviewer/hero-preview.webp"
+												class="sig-frame"
+												ariaLabel="ARC EDF and BDF Viewer on macOS showing an all-channels montage and waveform scrolling"
+											/>
+											<span class="media-stamp">DESKTOP // NATIVE</span>
+										</div>
+									</div>
+									<div class="plate-story">
+										<span class="plate-kicker">ZERO-DEPENDENCY BIOSIGNALS</span>
+										<h3>EDF &amp; BDF Viewer</h3>
+										<p class="plate-p">
+											Read dense biosignal recordings without sending them anywhere.
+										</p>
+										<ul class="plate-highlights">
+											<li>EDF/BDF · EEG, ECG, and sleep research</li>
+											<li>Native multichannel waveform scrubbing</li>
+											<li>Private and local-only</li>
+										</ul>
+										<div class="plate-cta">
+											<a href={EDF_APP_STORE_URL} target="_blank" rel="noopener" class="btn-apaper">Mac App Store ↗</a>
+										</div>
+										<div class="plate-tags">
+											<span>SwiftUI Native</span>
+											<span>macOS / iPadOS</span>
+											<span>Biosignal EDF/BDF</span>
+											<span>Local-First</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</article>
+
+						<!-- Chapter 04: The Seven Bridges Inflection Point (七桥之思) -->
 						<article class="editorial-node node-pivot" id="seven-bridges">
 							<div class="node-rail" aria-hidden="true">
 								<div class="node-marker marker-pivot">
-									<span class="node-num">03</span>
+									<span class="node-num">04</span>
 									<span class="node-dot node-dot-pivot"></span>
 								</div>
 								<span class="node-line-seg"></span>
 							</div>
 							<div class="node-content">
 								<div class="node-header">
-									<span class="node-badge badge-pivot">CHAPTER // 03 · THE TOPOLOGICAL PIVOT</span>
+									<span class="node-badge badge-pivot">CHAPTER // 04 · THE TOPOLOGICAL PIVOT</span>
 									<span class="node-date">KÖNIGSBERG 1736 → PRODUCTION 2026</span>
 								</div>
 
@@ -598,20 +669,96 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 								<span class="projects-mark-glyph">目</span>
 								<span>PRODUCTION CATALOG // VOL. 02</span>
 							</span>
-							<span class="projects-status-tag">07 NODES</span>
+							<span class="projects-status-tag">09 NODES</span>
 						</div>
 						<h2 id="projects-title" class="projects-title">Production Works &amp; Systems</h2>
 						<p class="projects-lead">
-							Shipped mobile apps, data systems, hackathon builds, and engineering experiments.
+							Live App Store applications, cross-platform telemetry viewers, algorithmic engines, and engineering logbook.
 						</p>
 					</div>
 
 					<div class="projects-grid">
-						<!-- Card 01: VitalMark Wellness -->
+						<!-- Card 01: ARC EDF & BDF Viewer -->
 						<article class="project-card">
 							<div class="project-card-header">
 								<div class="header-id-group">
 									<span class="project-id">[APP-01]</span>
+									<div class="platform-badges" aria-label="Supported Platforms">
+										<span class="platform-chip chip-macos">macOS</span>
+										<span class="platform-chip chip-ipad">iPadOS</span>
+									</div>
+								</div>
+								<div class="project-glyph" title="Biosignal Telemetry & Metal Rendering">
+									<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<path d="M2 12h3l2-7 4 14 3-10 2 6h6" />
+									</svg>
+								</div>
+							</div>
+							<h3 class="project-card-title">ARC EDF &amp; BDF Viewer</h3>
+							<p class="project-card-desc">High-throughput biosignal telemetry viewer for European Data Format (EDF/BDF+). Parses gigabyte multi-channel EEG/ECG recordings with 60 FPS Metal waveform rendering.</p>
+							<div class="project-card-tags">
+								<span>SwiftUI</span>
+								<span>Metal Compute</span>
+								<span>EDF/BDF+ Parser</span>
+								<span>Multi-Channel</span>
+								<span>Time-Series</span>
+							</div>
+							<div class="project-card-footer">
+								<a href={EDF_APP_STORE_URL} target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
+									<svg class="btn-brand-icon" viewBox="0 0 170 170" width="13" height="13" fill="currentColor" aria-hidden="true">
+										<path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.59-7.71-11.66-14.01-6.19-9.56-10.9-20.2-14.13-31.92-3.23-11.72-4.85-22.95-4.85-33.69 0-14.13 3.63-25.75 10.9-34.85 7.27-9.1 16.31-13.78 27.12-14.06 4.35 0 9.28 1.13 14.79 3.38 5.51 2.26 9.4 3.44 11.66 3.56 1.85 0 5.86-1.25 12.02-3.74 6.16-2.5 11.53-3.63 16.11-3.39 12.08.75 21.65 5.38 28.71 13.9-10.88 6.64-16.19 15.54-15.93 26.7.26 8.71 3.59 16.03 10 21.96 6.41 5.93 13.9 9.38 22.47 10.35-2.28 6.95-5.07 14.18-8.37 21.68zM119.22 31.84c0-7.38 2.65-14.28 7.95-20.7 5.3-6.42 11.83-10.45 19.59-12.09.87 7.06-1.57 14.01-7.32 20.85-5.75 6.84-12.49 10.82-20.22 11.94z" />
+									</svg>
+									<span>Mac App Store ↗</span>
+								</a>
+							</div>
+						</article>
+
+						<!-- Card 02: ARC Scanner: Scan to Text -->
+						<article class="project-card">
+							<div class="project-card-header">
+								<div class="header-id-group">
+									<span class="project-id">[APP-02]</span>
+									<div class="platform-badges" aria-label="Supported Platforms">
+										<span class="platform-chip chip-ios">iOS</span>
+										<span class="platform-chip chip-ipad">iPadOS</span>
+									</div>
+								</div>
+								<div class="project-glyph" title="Document Scanning & On-Device OCR Pipeline">
+									<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<path d="M4 7V4h3m10 0h3v3M4 17v3h3m10 0h3v-3" />
+										<line x1="4" y1="12" x2="20" y2="12" />
+										<rect x="7" y="7" width="10" height="10" rx="1" />
+									</svg>
+								</div>
+							</div>
+							<h3 class="project-card-title">ARC Scanner: Scan to Text</h3>
+							<p class="project-card-desc">Privacy-first document scanner and text extraction pipeline on iOS. Recognizes text entirely on-device, producing searchable PDFs, page-separated plain text, and structured JSON with zero cloud dependency.</p>
+							<div class="project-card-tags">
+								<span>SwiftUI</span>
+								<span>Vision OCR</span>
+								<span>PDFKit</span>
+								<span>DocumentPipelineKit</span>
+								<span>Local-First</span>
+								<span>🇨🇦 #14 · 🇨🇳 #38</span>
+							</div>
+							<div class="project-card-footer">
+								<div class="dual-actions">
+									<a href={ARC_SCANNER_APP_STORE_URL} target="_blank" rel="noopener" class="btn-apaper btn-apaper-ghost btn-with-brand">
+										<svg class="btn-brand-icon" viewBox="0 0 170 170" width="13" height="13" fill="currentColor" aria-hidden="true">
+											<path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.59-7.71-11.66-14.01-6.19-9.56-10.9-20.2-14.13-31.92-3.23-11.72-4.85-22.95-4.85-33.69 0-14.13 3.63-25.75 10.9-34.85 7.27-9.1 16.31-13.78 27.12-14.06 4.35 0 9.28 1.13 14.79 3.38 5.51 2.26 9.4 3.44 11.66 3.56 1.85 0 5.86-1.25 12.02-3.74 6.16-2.5 11.53-3.63 16.11-3.39 12.08.75 21.65 5.38 28.71 13.9-10.88 6.64-16.19 15.54-15.93 26.7.26 8.71 3.59 16.03 10 21.96 6.41 5.93 13.9 9.38 22.47 10.35-2.28 6.95-5.07 14.18-8.37 21.68zM119.22 31.84c0-7.38 2.65-14.28 7.95-20.7 5.3-6.42 11.83-10.45 19.59-12.09.87 7.06-1.57 14.01-7.32 20.85-5.75 6.84-12.49 10.82-20.22 11.94z" />
+										</svg>
+										<span>App Store ↗</span>
+									</a>
+								</div>
+								<span class="project-status-stamp stamp-live">APP STORE</span>
+							</div>
+						</article>
+
+						<!-- Card 03: VitalMark Wellness -->
+						<article class="project-card">
+							<div class="project-card-header">
+								<div class="header-id-group">
+									<span class="project-id">[APP-03]</span>
 									<div class="platform-badges" aria-label="Supported Platforms">
 										<span class="platform-chip chip-ios">iOS</span>
 									</div>
@@ -640,11 +787,11 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							</div>
 						</article>
 
-						<!-- Card 02: Ninja AI Agentic App -->
+						<!-- Card 04: Ninja AI Agentic App -->
 						<article class="project-card">
 							<div class="project-card-header">
 								<div class="header-id-group">
-									<span class="project-id">[AI-02]</span>
+									<span class="project-id">[AI-04]</span>
 									<div class="platform-badges" aria-label="Supported Platforms">
 										<span class="platform-chip chip-ios">iOS</span>
 										<span class="platform-chip chip-android">Android</span>
@@ -681,11 +828,11 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							</div>
 						</article>
 
-						<!-- Card 03: MovieBTI - Movie Personality & Semantic Discovery -->
+						<!-- Card 05: MovieBTI - Movie Personality & Semantic Discovery -->
 						<article class="project-card">
 							<div class="project-card-header">
 								<div class="header-id-group">
-									<span class="project-id">[ML-03]</span>
+									<span class="project-id">[ML-05]</span>
 									<div class="platform-badges" aria-label="Supported Platforms">
 										<span class="platform-chip chip-web">Web</span>
 									</div>
@@ -730,11 +877,11 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							</div>
 						</article>
 
-						<!-- Card 04: TutorOcean Mobile App -->
+						<!-- Card 06: TutorOcean Mobile App -->
 						<article class="project-card">
 							<div class="project-card-header">
 								<div class="header-id-group">
-									<span class="project-id">[APP-04]</span>
+									<span class="project-id">[APP-06]</span>
 									<div class="platform-badges" aria-label="Supported Platforms">
 										<span class="platform-chip chip-ios">iOS</span>
 										<span class="platform-chip chip-android">Android</span>
@@ -773,11 +920,11 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							</div>
 						</article>
 
-						<!-- Card 05: Crime Scene Forensic Analyzer -->
+						<!-- Card 07: Crime Scene Forensic Analyzer -->
 						<article class="project-card card-award">
 							<div class="project-card-header">
 								<div class="header-id-group">
-									<span class="project-id">[HCK-05]</span>
+									<span class="project-id">[HCK-07]</span>
 									<div class="platform-badges" aria-label="Supported Platforms">
 										<span class="platform-chip chip-web">Web</span>
 										<span class="platform-chip chip-winner">🏆 Sponsor Winner</span>
@@ -817,11 +964,11 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							</div>
 						</article>
 
-						<!-- Card 06: Amazon Connect Voice Flow -->
+						<!-- Card 08: Amazon Connect Voice Flow -->
 						<article class="project-card card-award">
 							<div class="project-card-header">
 								<div class="header-id-group">
-									<span class="project-id">[HCK-06]</span>
+									<span class="project-id">[HCK-08]</span>
 									<div class="platform-badges" aria-label="Supported Platforms">
 										<span class="platform-chip chip-cloud">Cloud</span>
 										<span class="platform-chip chip-web">Web</span>
@@ -858,11 +1005,11 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 							</div>
 						</article>
 
-						<!-- Card 07: WealthLens · Behavioral Portfolio Companion -->
+						<!-- Card 09: WealthLens · Behavioral Portfolio Companion -->
 						<article class="project-card">
 							<div class="project-card-header">
 								<div class="header-id-group">
-									<span class="project-id">[FIN-07]</span>
+									<span class="project-id">[FIN-09]</span>
 									<div class="platform-badges" aria-label="Supported Platforms">
 										<span class="platform-chip chip-web">Web</span>
 									</div>
@@ -941,6 +1088,22 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 						<div class="proof-copy">
 							<strong>2× Hackathon Winner</strong>
 							<span>cuHacking 2019 &amp; 2020 · Devpost Verified</span>
+						</div>
+					</a>
+					<a href={ARC_SCANNER_APP_STORE_URL} target="_blank" rel="noopener" class="proof-card">
+						<div class="proof-card-header">
+							<span class="proof-card-id">EXHIBIT // 04</span>
+							<span class="proof-card-scope">CHART RECORD</span>
+						</div>
+						<div class="proof-media proof-rank proof-rank-arc">
+							<div class="proof-double-chart">
+								<img src="/images/proof/arc-scanner-chart-canada.webp" alt="ARC Scanner ranked #14 in Productivity in Canada on Apple App Store" />
+								<img src="/images/proof/arc-scanner-chart-china.webp" alt="ARC Scanner ranked #38 in Productivity in China on Apple App Store" />
+							</div>
+						</div>
+						<div class="proof-copy">
+							<strong>#14 Canada · #38 China</strong>
+							<span>ARC Scanner · Top Charts Productivity · Oct 2026</span>
 						</div>
 					</a>
 				</div>
@@ -1731,23 +1894,22 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		overflow: hidden;
 		background: #000;
 	}
+	.card-screen-scanner {
+		background: #f6f7f6;
+	}
+	/* Square 1:1 source in a wide frame: contain (no crop) and push below the badge */
+	.card-screen-scanner :global(.stage-video) {
+		box-sizing: border-box;
+		padding-top: 44px;
+		object-fit: contain;
+		object-position: center center;
+	}
+	.card-screen-edf {
+		background: #0d1117;
+	}
 	.card-screen-terminal {
 		background: #090a0f;
 	}
-	.stage-terminal {
-		margin: 0;
-		height: 100%;
-		box-sizing: border-box;
-		padding: 56px 22px 18px;
-		font-family: var(--apaper-font-mono);
-		font-size: clamp(11px, 1.2vw, 13px);
-		line-height: 1.75;
-		color: #e6e6e6;
-		background: transparent;
-		overflow: hidden;
-	}
-	.stage-terminal .t-prompt { color: #4ade80; }
-	.stage-terminal .t-ok { color: #4ade80; }
 	.card-screen-arcade {
 		background: #111417;
 	}
@@ -1782,6 +1944,22 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 		height: 5px;
 		border-radius: 50%;
 		background: var(--apaper-accent);
+	}
+	.badge-scanner {
+		background: rgba(14, 18, 24, 0.90);
+		border-color: rgba(239, 68, 68, 0.35);
+		color: #f87171;
+	}
+	.dot-scanner {
+		background: #ef4444;
+	}
+	.badge-edf {
+		background: rgba(13, 17, 23, 0.88);
+		border-color: rgba(56, 189, 248, 0.25);
+		color: #38bdf8;
+	}
+	.dot-edf {
+		background: #38bdf8;
 	}
 	.badge-terminal {
 		background: rgba(14, 17, 22, 0.88);
@@ -1945,7 +2123,7 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 	}
 	.proof-grid {
 		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-template-columns: repeat(4, minmax(0, 1fr));
 		gap: clamp(12px, 1.8vw, 20px);
 		max-width: 1180px;
 		margin: 0 auto;
@@ -3477,7 +3655,8 @@ const homeLd = { '@context': 'https://schema.org', '@graph': [websiteLd, personL
 			display: block;
 		}
 		.specs-grid,
-		.projects-grid {
+		.projects-grid,
+		.proof-grid {
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}
