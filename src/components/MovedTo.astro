@@ -1,0 +1,33 @@
+---
+// Redirect stub for pages that moved to the GoldenARC company site.
+// GitHub Pages has no server redirects, so this uses JS (keeps #privacy → privacy page)
+// with a meta-refresh fallback. Kept because App Store listings may still link here.
+interface Props {
+	title: string;
+	to: string;
+	privacyTo?: string;
+}
+const { title, to, privacyTo } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title} | GoldenARC Digital</title>
+		<meta name="robots" content="noindex" />
+		<link rel="canonical" href={to} />
+		<script is:inline define:vars={{ to, privacyTo }}>
+			location.replace(privacyTo && /privacy/i.test(location.hash) ? privacyTo : to);
+		</script>
+		<meta http-equiv="refresh" content={`0; url=${to}`} />
+		<style>
+			body { margin: 0; min-height: 100vh; display: grid; place-items: center; font: 16px/1.5 system-ui, sans-serif; background: #f5f4ef; color: #1a1a1a; }
+			@media (prefers-color-scheme: dark) { body { background: #111; color: #eee; } a { color: #9cc3ff; } }
+		</style>
+	</head>
+	<body>
+		<p>{title} has moved to <a href={to}>{to.replace(/^https:\/\//, '')}</a>.</p>
+	</body>
+</html>

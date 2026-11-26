@@ -12,7 +12,11 @@ export default defineConfig({
 	site: 'https://zywkloo.github.io',
 	base: '/',
 	output: 'static',
-	integrations: [mdx(), sitemap()],
+	integrations: [
+		mdx(),
+		// Product/company pages live on goldenarc.digital; their old URLs here are redirect stubs.
+		sitemap({ filter: (page) => !/\/(goldenarc|edfviewer|yong)\/?$/.test(page) }),
+	],
 	markdown: {
 		remarkPlugins: [remarkMath],
 		rehypePlugins: [rehypeKatex],

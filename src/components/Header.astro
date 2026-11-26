@@ -7,16 +7,9 @@ import HeaderLink from './HeaderLink.astro';
 	<nav>
 		<h2><a href="/">{SITE_TITLE}</a></h2>
 		<div class="internal-links">
-			<HeaderLink href="/goldenarc" class="arc-nav-link">
-				<span class="arc-tab-content">
-					<img src="/images/goldenarc/brand-mark-tight.png" alt="" width="20" height="14" />
-					<span>ARC</span>
-				</span>
-			</HeaderLink>
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/wtcraft">wtcraft</HeaderLink>
-			<HeaderLink href="/yong">亲笔</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
 		<div class="social-links">
@@ -118,30 +111,6 @@ import HeaderLink from './HeaderLink.astro';
 		border: 1px solid var(--apaper-line, var(--line));
 		border-radius: 999px;
 		box-shadow: var(--shadow-sm);
-	}
-	.arc-tab-content {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.35rem;
-		line-height: 1;
-	}
-	.arc-tab-content img {
-		width: 1.15rem;
-		height: auto;
-		max-height: 0.82rem;
-		border-radius: 0;
-		object-fit: contain;
-		display: block;
-		flex-shrink: 0;
-	}
-	.arc-tab-content span {
-		display: inline-block;
-		line-height: 1;
-	}
-	:global(.arc-nav-link) .arc-tab-content > span {
-		color: var(--apaper-ink, rgb(var(--black)));
-		font-weight: 700;
-		letter-spacing: 0.02em;
 	}
 	nav a {
 		display: inline-flex;
@@ -253,16 +222,6 @@ import HeaderLink from './HeaderLink.astro';
 		}
 		.internal-links a {
 			flex: 0 0 auto;
-		}
-		.internal-links :global(.arc-nav-link) {
-			position: sticky;
-			left: 0;
-			z-index: 2;
-			background: var(--apaper-card, #f5f4ef);
-			box-shadow: 8px 0 12px rgba(0, 0, 0, 0.16);
-		}
-		.internal-links :global(.arc-nav-link.active) {
-			background: var(--apaper-accent, var(--accent));
 		}
 		.social-links {
 			display: none;

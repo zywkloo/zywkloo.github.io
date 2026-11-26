@@ -33,6 +33,8 @@ export const SITE_AUTHOR_ALT = ['Yiwei Zhang', 'zywkloo'];
 // GoldenARC Digital — Independent digital studio founded by Victor Zhang.
 // Builds local-first Apple platform engineering and document tools.
 export const GOLDENARC_NAME = 'GoldenARC Digital';
+// Company site — products, support, and privacy pages live there, not here.
+export const GOLDENARC_URL = 'https://www.goldenarc.digital';
 export const GOLDENARC_LINKEDIN_URL = 'https://www.linkedin.com/company/golden-arc-digital';
 export const GOLDENARC_GITHUB_URL = '';
 export const GOLDENARC_SAME_AS = [GOLDENARC_LINKEDIN_URL, GOLDENARC_GITHUB_URL].filter(Boolean);
